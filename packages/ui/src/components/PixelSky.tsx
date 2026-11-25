@@ -5,12 +5,6 @@ import { glowTones, pixelOf, spriteTone } from "../sky/tones";
 import type { AgentColor } from "./AgentLook";
 
 /**
- * Whether the pixel skies draw: off. xquads' surfaces are flat petrol (DESIGN.md: no scenery, no background
- * gradients), so every sky's canvas stays empty and its place in the layout holds.
- */
-export const PIXEL_SKIES = false;
-
-/**
  * The pixel sky on a canvas that fills its parent (give the parent
  * `position: relative` and `overflow: hidden`). The options are read on every
  * frame, so changing them (a color, how many agents work) needs no restart.
@@ -22,7 +16,7 @@ export function PixelSky({ options, className }: { options: SkyOptions; classNam
   opts.current = options;
   useEffect(() => {
     const canvas = ref.current;
-    return canvas && PIXEL_SKIES ? startSky(canvas, () => opts.current) : undefined;
+    return canvas ? startSky(canvas, () => opts.current) : undefined;
   }, []);
   // With reduced motion a sky only redraws when asked: new options are a reason.
   useEffect(() => redrawSkies());

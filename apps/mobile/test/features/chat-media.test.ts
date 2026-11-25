@@ -141,12 +141,12 @@ describe("stickers on Skia", () => {
     expect(stickerFrame(look, "love", 110)).toEqual(stickerFrame(look, "love", 110));
   });
 
-  test("the loop moves: another moment draws another frame", () => {
+  test("xquads' stickers are the agent's still face: every moment draws the same frame", () => {
     const look = { color: "sky", eyes: "round" };
     for (const mood of STICKER_MOODS) {
       const still = JSON.stringify(stickerFrame(look, mood, 110));
       const moments = [0.85, 1.7, 2.9].map((t) => JSON.stringify(stickerFrame(look, mood, 110, t)));
-      expect(moments.some((frame) => frame !== still)).toBe(true);
+      expect(moments.every((frame) => frame === still)).toBe(true);
     }
   });
 });
