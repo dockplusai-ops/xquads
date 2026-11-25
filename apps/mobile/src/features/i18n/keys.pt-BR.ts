@@ -1205,7 +1205,7 @@ export const featureKeysPtBR = {
     liveActivity: "Agentes na ilha",
     liveActivityHint:
       "Quando um agente trabalha no que você pediu, ele aparece em cima da tela, em qualquer app, e na tela bloqueada. Com o app fechado, precisa do iOS 17.2 ou mais novo.",
-    version: "agentes.chat · versão {{version}}",
+    version: "xquads · versão {{version}}",
     edit: "Editar",
     status: "Status",
     workspace: "Workspace",
@@ -1225,11 +1225,11 @@ export const featureKeysPtBR = {
     workspacesUnreachable: "Sem resposta agora",
     addWorkspace: "Adicionar workspace",
     addWorkspaceCreate: "Criar um workspace novo",
-    addWorkspaceCreateSub: "No agentes.chat",
+    addWorkspaceCreateSub: "No xquads",
     addWorkspaceTeam: "Entrar no servidor da sua equipe",
     addWorkspaceTeamSub: "Pelo endereço ou pelo QR code que aparece no computador",
     teamServer: "Servidor da equipe",
-    teamServerLead: "O endereço do agentes.chat da sua equipe, o mesmo que aparece no navegador.",
+    teamServerLead: "O endereço do xquads da sua equipe, o mesmo que aparece no navegador.",
     teamServerFoot: "Você não sai de nenhum workspace: o servidor da sua equipe entra na lista, com a sua conta de lá.",
     /** The sheet from holding the workspace's mark in the bar, and its shorter words (ADR 0154). */
     workspacesHoldHint: "Segure para trocar de workspace",
@@ -1296,7 +1296,7 @@ export const featureKeysPtBR = {
       "Você é a única pessoa dona de {{names}}. No site, em Pessoas, torne outra pessoa dona e depois volte aqui.",
     addPasswordFirst: "Adicione uma senha à sua conta no site antes, e digite ela aqui.",
     addPasswordWeb: "Adicionar senha no site",
-    onThisComputer: "Apague pelo app do agentes.chat no computador onde este servidor roda.",
+    onThisComputer: "Apague pelo app do xquads no computador onde este servidor roda.",
     otherAccount: "Você entrou em outra conta. Nada foi apagado.",
     hold: "Segure para apagar",
   },
@@ -2022,8 +2022,8 @@ export const featureKeysPtBR = {
       serverText: "Uma linha para colar no terminal dele",
       computer: "Outro computador",
       computerText: "Instale o app nele",
-      appNote: "Num Mac ou PC que você usa, o app de desktop do agentes.chat também conecta.",
-      appStep1: "Instale o app do agentes.chat nele",
+      appNote: "Num Mac ou PC que você usa, o app de desktop do xquads também conecta.",
+      appStep1: "Instale o app do xquads nele",
       appStep2: "Abra e entre com a sua conta",
       appStep3: "Clique em Permitir quando ele perguntar se os agentes de {{org}} podem usá-lo",
       appShows: "Ele aparece aqui sozinho, só para você até você compartilhar.",
@@ -2046,7 +2046,7 @@ export const featureKeysPtBR = {
       connecting: "Conectando ao {{host}}",
       computer: "Computador",
       noHost: "Este celular funciona por um computador seu. Conecte um primeiro.",
-      hostOffline: "O {{host}} está desligado. Ligue e abra o agentes.chat nele.",
+      hostOffline: "O {{host}} está desligado. Ligue e abra o xquads nele.",
       step1: "Ative as Opções do desenvolvedor",
       step1Text:
         "Toque em Número da versão 7 vezes e digite seu PIN. Num Samsung: Informações do software\u00a0›\u00a0Número de compilação.",
@@ -2074,10 +2074,10 @@ export const featureKeysPtBR = {
       wifi2Text:
         "Em Depuração por Wi-Fi\u00a0›\u00a0Parear o dispositivo com um código QR. Não use a câmera: ela lê o código como uma rede Wi-Fi e tira o celular do seu Wi-Fi.",
       wifi2Hint:
-        "No agentes.chat num computador, abra Conectar um dispositivo\u00a0›\u00a0Celular Android\u00a0›\u00a0Por Wi-Fi e escolha {{host}}.",
+        "No xquads num computador, abra Conectar um dispositivo\u00a0›\u00a0Celular Android\u00a0›\u00a0Por Wi-Fi e escolha {{host}}.",
       codeHead: "Parear com um código de pareamento",
       codeNote:
-        "Em Depuração por Wi-Fi\u00a0›\u00a0Parear o dispositivo com um código de pareamento. Abra as Configurações e o agentes.chat lado a lado para o código continuar na tela.",
+        "Em Depuração por Wi-Fi\u00a0›\u00a0Parear o dispositivo com um código de pareamento. Abra as Configurações e o xquads lado a lado para o código continuar na tela.",
       wifiNote: "O Wi-Fi pode cair depois de reiniciar. Um cabo é mais confiável.",
       done: "{{name}} está conectado",
       openFailed: "Este celular não abriu essa tela. Procure em Configurações.",
@@ -2136,7 +2136,7 @@ export const featureKeysPtBR = {
         openXcode: "Abrir o Xcode",
         opened: "O Xcode abriu no {{host}}. Veja de novo nos Ajustes e feche o Xcode lá depois.",
         unlock: "Já ativou e ele reiniciou? O aviso com Ativar aparece quando este iPhone está desbloqueado.",
-        outdated: "O app agentes.chat no {{host}} está desatualizado. Atualize nesse Mac.",
+        outdated: "O app xquads no {{host}} está desatualizado. Atualize nesse Mac.",
       },
     },
     notice: {
@@ -2256,9 +2256,9 @@ export const featureKeysPtBR = {
       more: "Mais em {{category}}",
     },
     fromAgent: "Conectar um serviço",
-    /** O GitHub com o app agentes.chat (ADR 0156): o app primeiro, uma conta como o outro jeito. */
+    /** O GitHub com o app xquads (ADR 0156): o app primeiro, uma conta como o outro jeito. */
     githubApp: {
-      useApp: "Usar o app agentes.chat",
+      useApp: "Usar o app xquads",
       useAccount: "Usar uma conta do GitHub",
       /** O dono do servidor cria o app na web (o fluxo de manifesto do GitHub precisa da sessão do navegador). */
       createInBrowser: "Criar no navegador",
@@ -2357,13 +2357,13 @@ export const featureKeysPtBR = {
     /** A second workspace from Adicionar workspace (ADR 0154): where it lives, and that nothing is left. */
     anotherTitle: "Como se chama o workspace novo?",
     anotherPurpose: "Para que é o workspace novo?",
-    anotherLead: "No agentes.chat. Você continua na {{org}} e pode trocar a qualquer hora.",
+    anotherLead: "No xquads. Você continua na {{org}} e pode trocar a qualquer hora.",
     /** O nome do primeiro uso, sugerido pelo domínio de um e-mail de trabalho. */
     suggested: "Pelo seu e-mail da {{domain}}, sugeri {{org}}.",
     create: "Criar",
     /** O passo do plano no celular, que não vende o plano: entra no workspace, o time dormindo. */
     enter: "Entrar no workspace",
-    shareMessage: "Entre na {{org}} no agentes.chat: {{url}}",
+    shareMessage: "Entre na {{org}} no xquads: {{url}}",
     failed: "Não deu para salvar. Tente de novo.",
   },
   ai: {

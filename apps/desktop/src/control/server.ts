@@ -59,7 +59,7 @@ export function serverKind(server: string): ServerKind {
 export const appServer = (input: string) => normalizeServer(input, { allowHttp: "loopback" });
 
 /** How a server reads in the app: "agentes.chat" for the Cloud, its host otherwise. */
-export const serverName = (server: string) => (server === CLOUD_SERVER ? "agentes.chat" : serverHost(server));
+export const serverName = (server: string) => (server === CLOUD_SERVER ? "xquads" : serverHost(server));
 
 /** The server a home is paired with, as an origin. */
 export const homeServer = (h: Home) => (h.status?.server ? appServer(h.status.server) : null);

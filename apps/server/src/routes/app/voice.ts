@@ -233,7 +233,7 @@ const SaveKey = z.object({
   model: z.string().trim().max(100).optional().openapi({ description: "`local`: the model it loads." }),
 });
 
-const notFound = "404 for everyone but the installation's pinned owner (ADR 0073), and on agentes.chat itself.";
+const notFound = "404 for everyone but the installation's pinned owner (ADR 0073), and on xquads itself.";
 
 /** Who turns voice into text on this server (ADR 0100): only its pinned owner, and never on agentes.chat's servers. */
 export function speechKeyRoutes(deps: AppDeps) {

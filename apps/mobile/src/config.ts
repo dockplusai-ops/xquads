@@ -1,7 +1,7 @@
 import { CLOUD_SERVER } from "@agenteschat/client/lib/server";
 import Constants from "expo-constants";
 
-/** Removes trailing slashes: "https://app.agentes.chat/" → "https://app.agentes.chat". */
+/** Removes trailing slashes: "https://agents.xquads.com/" → "https://agents.xquads.com". */
 export const trimBase = (url: string) => url.replace(/\/+$/, "");
 
 const extra = (Constants.expoConfig?.extra ?? {}) as { apiUrl?: string; variant?: string };

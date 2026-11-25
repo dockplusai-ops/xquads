@@ -72,7 +72,7 @@ const reply = (req: ModelRequest) => {
   const last = lastText(req);
   if (last.includes("tool_result")) return { chunks: ["Ok."] };
   if (last.includes("start over")) {
-    const instructions = "Entre no agentes.chat com a conta administradora; deixe o painel aberto para eu continuar.";
+    const instructions = "Entre no xquads com a conta administradora; deixe o painel aberto para eu continuar.";
     return { chunks: [], toolUses: [{ name: "browser_ask_person", input: { instructions } }] };
   }
   if (last.includes("guess the field"))
@@ -622,7 +622,7 @@ describe("browser_ask_person", () => {
     expect(refused).toContain("propose_remove_agents");
     expect(refused).toContain(`/org/${f.org.id}/team`);
 
-    pageUrl = "https://app.agentes.chat/org/x/settings/members";
+    pageUrl = "https://agents.xquads.com/org/x/settings/members";
     await post("@dev sign in please");
     await drainOutbox(f.db, f.handlers);
     expect(await handoffs()).toEqual([]);
@@ -633,13 +633,13 @@ describe("browser_ask_person", () => {
   });
 
   test("what names our own app: its domains and this server's address, never a mailbox there", () => {
-    expect(namesOwnApp("Entre no agentes.chat com a conta administradora")).toBe(true);
-    expect(namesOwnApp("https://app.agentes.chat/org/1/settings")).toBe(true);
-    expect(namesOwnApp("Abra https://admin@app.agentes.chat/login")).toBe(true);
-    expect(namesOwnApp("Abra app.agentes。chat e entre")).toBe(true);
-    expect(namesOwnApp("Abra APP.AGENTES.CHAT. e entre")).toBe(true);
-    expect(namesOwnApp("Type the code sent to theo@acme.agentes.chat")).toBe(false);
-    expect(namesOwnApp("Sign in to agentes.chatbot.com")).toBe(false);
+    expect(namesOwnApp("Entre no xquads.com com a conta administradora")).toBe(true);
+    expect(namesOwnApp("https://agents.xquads.com/org/1/settings")).toBe(true);
+    expect(namesOwnApp("Abra https://admin@agents.xquads.com/login")).toBe(true);
+    expect(namesOwnApp("Abra app.xquads。com e entre")).toBe(true);
+    expect(namesOwnApp("Abra APP.XQUADS.COM. e entre")).toBe(true);
+    expect(namesOwnApp("Type the code sent to theo@acme.xquads.com")).toBe(false);
+    expect(namesOwnApp("Sign in to xquads.company.com")).toBe(false);
     expect(namesOwnApp("Sign in to Stripe")).toBe(false);
     // A loopback PUBLIC_URL (the default here) is another app on the agent's computer.
     expect(namesOwnApp("Open http://localhost:3000/org/1 and sign in")).toBe(false);

@@ -240,7 +240,7 @@ describe("Configurações → Auditoria", () => {
     const { r } = await go(seedState({ audit: [asked, fault] }));
     expect(titles()).toEqual([
       "Quem cuida deste servidor leu uma etapa do trabalho de um agente",
-      "O suporte do agentes.chat leu algo em uma conversa privada",
+      "O suporte do xquads leu algo em uma conversa privada",
     ]);
     const subs = [...section().querySelectorAll(".audit-row__sub")].map((e) => e.textContent);
     expect(subs).toEqual([
@@ -296,7 +296,7 @@ describe("Configurações → Auditoria", () => {
     );
     expect(titles()).toEqual([
       "Quem cuida deste servidor respondeu por e-mail",
-      "O suporte do agentes.chat respondeu por e-mail",
+      "O suporte do xquads respondeu por e-mail",
       "Quem cuida deste servidor respondeu por e-mail",
     ]);
     expect([...section().querySelectorAll(".audit-row__sub")].map((e) => e.textContent)).toEqual([
@@ -381,7 +381,7 @@ describe("Configurações → Auditoria", () => {
     );
     const subs = () => [...document.querySelectorAll(".audit-row__sub")].map((e) => e.textContent);
     const own = "Quem cuida deste servidor analisou conteúdo por segurança";
-    expect(titles()).toEqual([own, "O suporte do agentes.chat analisou conteúdo por segurança", own, own, own]);
+    expect(titles()).toEqual([own, "O suporte do xquads analisou conteúdo por segurança", own, own, own]);
     expect(subs()).toEqual([
       `10.000 itens · 28 dez ${year - 1} a 3 jan ${year}`,
       "1 item · 9 mar",
@@ -398,7 +398,7 @@ describe("Configurações → Auditoria", () => {
       de: {
         who: [
           "Die Person, die diesen Server betreibt, hat Inhalte aus Sicherheitsgründen geprüft",
-          "Der Support von agentes.chat hat Inhalte aus Sicherheitsgründen geprüft",
+          "Der Support von xquads hat Inhalte aus Sicherheitsgründen geprüft",
         ],
         under: (d, n) => [
           `${n} Elemente · ${d(years.from, true)} bis ${d(years.to, true)}`,
@@ -409,7 +409,7 @@ describe("Configurações → Auditoria", () => {
       pl: {
         who: [
           "Osoba zarządzająca tym serwerem: sprawdzono treści ze względów bezpieczeństwa",
-          "Wsparcie agentes.chat: sprawdzono treści ze względów bezpieczeństwa",
+          "Wsparcie xquads: sprawdzono treści ze względów bezpieczeństwa",
         ],
         under: (d, n) => [
           `${n} elementów · od ${d(years.from, true)} do ${d(years.to, true)}`,
@@ -422,7 +422,7 @@ describe("Configurações → Auditoria", () => {
       ru: {
         who: [
           "Администратор этого сервера: проверка содержимого в целях безопасности",
-          "Поддержка agentes.chat: проверка содержимого в целях безопасности",
+          "Поддержка xquads: проверка содержимого в целях безопасности",
         ],
         under: (d, n) => [
           `${n} элементов · с ${d(years.from, true)} по ${d(years.to, true)}`,

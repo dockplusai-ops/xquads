@@ -72,7 +72,7 @@ describe("/autorizar: an AI app asks to act as this person (ADR 0119)", () => {
       "Ler as respostas e o que os agentes estão fazendo.",
     ]);
     const never = page().querySelector(".consent__list--never") as HTMLElement;
-    expect(never.textContent).toContain("Aprovar ações dos agentes. Aprovações ficam com pessoas no agentes.chat.");
+    expect(never.textContent).toContain("Aprovar ações dos agentes. Aprovações ficam com pessoas no xquads.");
     expect(page().textContent).toContain("Volta para claude.ai");
     expect(page().textContent).toContain("Continue só se você começou esta conexão agora.");
     expect(within(page()).queryByRole("alert")).toBeNull();
@@ -336,7 +336,7 @@ describe("/autorizar: an AI app asks to act as this person (ADR 0119)", () => {
   test("a request unknown, already answered or expired: back to the app; it never revokes anything", async () => {
     const { state } = await open();
     expect(page().textContent).toContain("Este pedido expirou");
-    expect(within(page()).getByRole("link", { name: "Ir para o agentes.chat" }).getAttribute("href")).toBe("/");
+    expect(within(page()).getByRole("link", { name: "Ir para o xquads" }).getAttribute("href")).toBe("/");
     expect(page().querySelector(".ac-empty:not(.consent__state)")).toBeNull();
     expect(page().textContent).toContain("Volte ao app e conecte de novo.");
     expect(calls(state, "apps.decide")).toEqual([]);
@@ -361,7 +361,7 @@ describe("/autorizar: an AI app asks to act as this person (ADR 0119)", () => {
 
   test("the server's own refusals before a request: shown without signing in, nothing of the request echoed", async () => {
     const cases: [string, string][] = [
-      ["app_desconhecido", "No Claude Code, digite /mcp, escolha agentes e Clear authentication."],
+      ["app_desconhecido", "No Claude Code, digite /mcp, escolha xquads e Clear authentication."],
       ["pedido_invalido", "O app mandou um pedido de conexão incompleto."],
       [
         "endereco_de_retorno",

@@ -3,7 +3,7 @@ import { setupDom } from "@agenteschat/ui/testing/dom";
 
 setupDom();
 
-import { accentPalette, accentSky, ditherUrl } from "@agenteschat/ui";
+import { accentPalette, accentSky } from "@agenteschat/ui";
 import { gradientOf } from "@agenteschat/ui/agent/engine";
 import { act, cleanup, fireEvent, render, within } from "@testing-library/react";
 import { ThemeProvider, useTheme, useWorkspaceAccent } from "@/lib/theme";
@@ -75,14 +75,15 @@ describe("the workspace shell paints its accent", () => {
     await renderApp(`/org/${ORG_ID}/home`, { api: createFakeApi(state) });
     await settle(6);
     await click(screen().getByRole("button", { name: "Menu do workspace Acme" }));
-    const dither = (name: string) =>
+    // A workspace without a logo of its own wears the xquads symbol, its accent on the person.
+    const person = (name: string) =>
       screen()
         .getByRole("menuitem", { name: new RegExp(name) })
-        .querySelector(".ac-logo__dither")
-        ?.getAttribute("href");
-    expect(dither("Acme")).toBe(ditherUrl(accentSky(PURPLE), 12));
-    expect(dither("Globex")).toBe(ditherUrl(DEFAULT_SKY, 12));
-    expect(dither("Initech")).toBe(ditherUrl(accentSky("#f97316"), 12));
+        .querySelector(".ac-logo__person")
+        ?.getAttribute("style") ?? "";
+    expect(person("Acme")).toContain(accentSky(PURPLE)[1]);
+    expect(person("Initech")).toContain(accentSky("#f97316")[1]);
+    expect(person("Globex")).not.toContain(accentSky(PURPLE)[1]);
   });
 
   test("it follows the theme as it switches", async () => {

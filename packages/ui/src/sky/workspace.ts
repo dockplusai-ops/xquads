@@ -11,10 +11,10 @@ import { bayerAt, mix, parseColor } from "./math";
 
 export type SkyHour = "day" | "dusk";
 
-/** agentes.chat and its subdomains are the Cloud (as the server's `isAgentesCloud`); any other host is one's own. */
+/** xquads.com and its subdomains are the Cloud (as the server's `isAgentesCloud`); any other host is one's own. */
 export function skyHourOf(host: string): SkyHour {
   const name = host.toLowerCase().replace(/:\d+$/, "");
-  return name === "agentes.chat" || name.endsWith(".agentes.chat") ? "day" : "dusk";
+  return name === "xquads.com" || name.endsWith(".xquads.com") ? "day" : "dusk";
 }
 
 /** The hour's light end, three steps each: pale on a light surface, deeper on a dark one. */

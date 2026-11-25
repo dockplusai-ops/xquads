@@ -62,14 +62,14 @@ const DAY_MS = 24 * 3600_000;
 const ARCHES = new Set(["x64", "arm64", "arm", "ia32", "ppc64", "s390x", "riscv64", "loong64"]);
 /** Ids, not text: anything else is reported as `other`. */
 const PROVIDER_ID = /^[a-z0-9][a-z0-9._-]{0,39}$/;
-/** Both lists capped, so a report stays well under the 32 KB telemetry.agentes.chat takes. */
+/** Both lists capped, so a report stays well under the 32 KB telemetry.xquads.com takes. */
 const MAX_MODELS = 50;
 const MAX_COMPUTERS = 50;
 
-/** agentes.chat's own servers: their report always goes out, and nobody there has the switch. */
+/** xquads' own servers (the fork's Cloud): their report always goes out, and nobody there has the switch. */
 export function isAgentesCloud(publicUrl: string) {
   const host = new URL(publicUrl).hostname;
-  return host === "agentes.chat" || host.endsWith(".agentes.chat");
+  return host === "xquads.com" || host.endsWith(".xquads.com");
 }
 
 /** Whether the report goes out: always on agentes.chat's own servers; elsewhere unless `TELEMETRY=off` or the switch is off. */

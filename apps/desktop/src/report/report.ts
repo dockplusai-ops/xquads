@@ -152,5 +152,5 @@ export function computerReport(
 /** The report as shown and copied, with the note and address as typed. */
 export function reportText(report: DesktopReport, note: string, replyTo: string) {
   const sent = { ...report, note: note.trim() || null, replyTo: replyTo.trim() || null };
-  return `agentes.chat problem report (format 1)\n\n${JSON.stringify(sent, null, 2)}`;
+  return `xquads problem report (format 1)\n\n${JSON.stringify(sent, null, 2)}`;
 }

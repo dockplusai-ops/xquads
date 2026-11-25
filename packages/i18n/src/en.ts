@@ -4,13 +4,13 @@ import type { Widen } from "./widen";
  * English: the source language and every other language's fallback (ADR 0122). A key exists here first; the other
  * languages are checked against it (`test/locales.test.ts`).
  * Rules (docs/design/design-system/README.md): short sentences, active voice,
- * no exclamation marks, buttons start with a verb, "agentes" in lower case.
+ * no exclamation marks, buttons start with a verb, "xquads" in lower case.
  */
 export const en = {
   app: {
-    name: "agentes",
+    name: "xquads",
     /** The browser tab's title on every screen that doesn't set its own. */
-    tabTitle: "agentes.chat · Your team and your agents, in the same conversation",
+    tabTitle: "xquads · Your team and your agents, in the same conversation",
   },
   common: {
     close: "Close",
@@ -41,7 +41,7 @@ export const en = {
     /** A server error (a 5xx of its own): nothing the person did, and nothing they can fix. */
     ourSide: "Something went wrong on our side. Try again in a little while.",
     signedOut: "Your session ended. Sign in again to continue.",
-    newVersion: "A new version of agentes.chat is out.",
+    newVersion: "A new version of xquads is out.",
     reload: "Reload",
     copy: "Copy",
     copied: "Copied",
@@ -66,7 +66,7 @@ export const en = {
     notAllowed: "You don't have permission for this.",
     tooMany: "Too many tries. Try again later.",
     offline: "You're offline. Check your connection and try again.",
-    unreachable: "Can't reach agentes.chat right now. Try again in a moment.",
+    unreachable: "Can't reach xquads right now. Try again in a moment.",
   },
   /** The pill a dropped live connection shows after two quiet minutes: its cause and one way out. */
   reconnect: {
@@ -573,7 +573,7 @@ export const en = {
     recommended: "Recommended",
     free: "Free · open source",
     cloud: {
-      name: "agentes.chat Cloud",
+      name: "xquads Cloud",
       short: "Always on, nothing to install.",
       on: "The agents' computer always on",
       care: "Updates and backups are on us",
@@ -593,7 +593,7 @@ export const en = {
       address: "Server address",
       connect: "Connect",
       invalid: "That isn't an address. Write it as in the browser, for example agentes.example.com.",
-      unreachable: "We didn't find agentes.chat at {{host}}. Check the address and that the server is on.",
+      unreachable: "We didn't find xquads at {{host}}. Check the address and that the server is on.",
       none: "Don't have one yet?",
       noneLink: "See how to get yours, free",
     },
@@ -668,8 +668,8 @@ export const en = {
     termsMiddle: " and the ",
     privacy: "Privacy policy",
     termsAfter: ".",
-    // Under the sign-in on a registered host (ADR 0194): "agentes.chat" is the product's name, never translated.
-    poweredBy: "Powered by agentes.chat",
+    // Under the sign-in on a registered host (ADR 0194): "xquads" is the product's name, never translated.
+    poweredBy: "Powered by xquads",
     signOut: "Sign out",
     earlyAccess: {
       otherEmail: "This invitation is for another address. Sign up with the address it was sent to.",
@@ -718,13 +718,13 @@ export const en = {
       openMail: "Open {{app}}",
       ownerWaits: "This server waits for its owner.",
       ownerWaitsLead: "Open this server's owner link (it ends in /owner#claim=…), on this computer or on your phone.",
-      noPassword: "This account signs in from the agentes.chat app.",
+      noPassword: "This account signs in from the xquads app.",
       noPasswordLead:
         "On the computer that runs this server, open the app and choose Add a password in Settings\u00a0›\u00a0Your account.",
       backToSignIn: "Back to sign in",
       /** Under the sign-in opened by "Add account": back to the account still signed in. */
       backToAccount: "Back to {{name}}",
-      toAuthorizeApp: "To connect an app to agentes.chat.",
+      toAuthorizeApp: "To connect an app to xquads.",
     },
     desktop: {
       browser: "Continue in your browser",
@@ -735,11 +735,11 @@ export const en = {
       otherServer: "Use another server",
       opening: "Opening {{provider}}…",
       confirm: "Is this your app?",
-      confirmLead: "This code should match the one shown by the agentes.chat app on your computer.",
+      confirmLead: "This code should match the one shown by the xquads app on your computer.",
       confirmYes: "Yes, sign the app in",
       confirmNo: "This wasn't me",
       done: "All set.",
-      doneLead: "You're signed in to the agentes app. You can close this tab.",
+      doneLead: "You're signed in to the xquads app. You can close this tab.",
       expired: "This request expired.",
       expiredLead: "Go back to the app and choose {{provider}} again.",
       handover: "Signing in with your account from the other device…",
@@ -759,24 +759,24 @@ export const en = {
     },
     desktopOwner: {
       continue: "Continue on this {{device}}",
-      text: "You set up agentes.chat on this {{device}}: no password needed.",
+      text: "You set up xquads on this {{device}}: no password needed.",
       /** Continue on this Mac refused: the server's owner deleted their account, while others still have one. */
       gone: "This server's owner deleted their account, so Continue on this {{device}} can't sign anyone in. Sign in with your own email instead.",
       /** Continue on this Mac refused: no account is left, and the app opened its window to make the new owner. */
-      none: "No account is left on the agentes.chat on this {{device}}. Make its new owner in the window that opened.",
+      none: "No account is left on the xquads on this {{device}}. Make its new owner in the window that opened.",
     },
     /** The line under every sign-in: which server it signs in to (ADR 0158). */
     server: {
       into: "Signing in to <b>{{server}}</b>",
-      intoHere: "Signing in to the agentes.chat <b>on this {{device}}</b>",
-      intoCloud: "Signing in to <b>agentes.chat Cloud</b>",
+      intoHere: "Signing in to the xquads <b>on this {{device}}</b>",
+      intoCloud: "Signing in to <b>xquads Cloud</b>",
       /** Change's name for screen readers: the email's Change sits on the same screen. */
       change: "Change server",
     },
     /** "Forgot password" on a server that sends no email (ADR 0158). */
     forgotHere: {
       ownerTitle: "You don't need a password here.",
-      ownerLead: "You set up agentes.chat on this {{device}}. Sign in here, then create a new password.",
+      ownerLead: "You set up xquads on this {{device}}. Sign in here, then create a new password.",
       notOwner: "Not the account of whoever set it up? Ask an owner of your workspace for a new-password link.",
       title: "This server doesn't send email.",
       lead: "Ask an owner of your workspace for a new-password link. They make it in Members, and it works for 1 hour.",
@@ -1066,7 +1066,7 @@ export const en = {
         edit: "Edit avatar",
         upload: "Upload a photo",
         area: "What do you work on?",
-        areaHint: "Optional. Just so we know who uses agentes.chat.",
+        areaHint: "Optional. Just so we know who uses xquads.",
       },
       area: {
         options: {
@@ -1166,7 +1166,7 @@ export const en = {
         asleep: "Asleep until the plan",
         price: "<b>{{name}} plan</b> · {{price}} a month",
         name: "<b>{{name}} plan</b>",
-        generic: "An agentes.chat plan",
+        generic: "A xquads plan",
         cancel: "Cancel anytime",
         cta: "Turn the team on",
         all: "See all plans",
@@ -1247,10 +1247,10 @@ export const en = {
     yourCompany: "your company",
     /** The first question (ADR 0159): who the workspace is for. "For me" makes a personal one at once. */
     purpose: {
-      title: "What will you use agentes.chat for?",
+      title: "What will you use xquads for?",
       lead: "You can switch the workspace mode anytime in Settings, without losing anything.",
       /** The web's lead, short: the note under the answers says the choice can change (`switchTitle`, `switchText`). */
-      pick: "Choose how you want to see agentes.chat.",
+      pick: "Choose how you want to see xquads.",
       switchTitle: "Switch anytime.",
       switchText: "The workspace mode changes in Settings, and nothing is lost.",
       personal: "For me",
@@ -1335,7 +1335,7 @@ export const en = {
         howTo: "How to connect, app by app",
         paste: "Paste this request into the app:",
         prompt:
-          "Use the agentes.chat MCP server you just connected ({{url}}) to move what you have to agentes.chat. First call import_summary to see what is already there, so nothing is duplicated. Then, for every agent, instruction, skill and routine you have, create the equivalent with create_agent, create_skill and create_routine, and save what each agent should remember with add_memory.",
+          "Use the xquads MCP server you just connected ({{url}}) to move what you have to xquads. First call import_summary to see what is already there, so nothing is duplicated. Then, for every agent, instruction, skill and routine you have, create the equivalent with create_agent, create_skill and create_routine, and save what each agent should remember with add_memory.",
         promptLabel: "Request for your AI app",
         copy: "Copy the request",
         copied: "Now paste it into your AI app.",
@@ -1831,9 +1831,9 @@ export const en = {
     keyStep: {
       title: "Which AI will they use?",
       lead: "Sign in with your AI plan: no\u00a0API\u00a0key needed.",
-      paid: "Your agentes.chat plan is active. Their computer is on its way.",
+      paid: "Your xquads plan is active. Their computer is on its way.",
       /** Back from paying, for a minute at most, until the billing service lifts the workspace's hold (ADR 0079). */
-      confirming: "Confirming the payment for this workspace's agentes.chat plan.",
+      confirming: "Confirming the payment for this workspace's xquads plan.",
       leadNoComputer: "Your agents think with an API\u00a0key, or with your AI plan on a computer you connect.",
     },
     jev: {
@@ -1845,7 +1845,7 @@ export const en = {
       label: "Monthly limit per agent, in dollars",
       perMonth: "/month",
       noteKey:
-        "Only for API usage, charged by the key's provider, not by agentes.chat. When an agent reaches it, it stops and tells you. Plans don't count here.",
+        "Only for API usage, charged by the key's provider, not by xquads. When an agent reaches it, it stops and tells you. Plans don't count here.",
       notePlatform: "Only for API usage. When an agent reaches it, it stops and tells you.",
     },
     keySite: "Create the key at {{site}}.",
@@ -1903,7 +1903,7 @@ export const en = {
     },
     team: {
       title: "Who else works with you?",
-      payment: "You can invite your team once you choose an agentes.chat plan.",
+      payment: "You can invite your team once you choose a xquads plan.",
       lead: "Invite them by email, or share the link.",
       leadLink: "Share the invitation link with them.",
       emails: "Emails",
@@ -2022,7 +2022,7 @@ export const en = {
     reload: "Reload",
     search: "Search or ask…",
     look: "Right click",
-    lookOurs: "agentes.chat",
+    lookOurs: "xquads",
     lookSystem: "System",
     markRead: "Mark as read",
     muteChannel: "Mute channel",
@@ -2048,8 +2048,8 @@ export const en = {
     copied: "Copied. Paste it in the terminal.",
     mac: {
       why: "<b>The app is in beta.</b> So the first time, your Mac asks you to confirm:",
-      drag: "Drag agentes.chat to Applications.",
-      dragLong: "Open the downloaded file and drag agentes.chat to Applications.",
+      drag: "Drag xquads to Applications.",
+      dragLong: "Open the downloaded file and drag xquads to Applications.",
       blocked: "Open the app and click Done.",
       blockedSub: "Don't click Move to Trash.",
       settings: "In Settings\u00a0›\u00a0Privacy & Security, click Open Anyway.",
@@ -2078,7 +2078,7 @@ export const en = {
       why: "For Ubuntu, Debian and similar systems (x64). Linux doesn't ask for anything extra:",
       apt: "Install the .deb with a double-click, or from the terminal.",
       aptLong: "Double-click the downloaded file and click Install, or paste this in the terminal:",
-      open: "Open agentes.chat from your apps.",
+      open: "Open xquads from your apps.",
       /** Under the steps: the AppImage, for a distribution without .deb packages. */
       otherTitle: "On Arch, Fedora or another system that doesn't take a .deb?",
       otherText:
@@ -2086,11 +2086,11 @@ export const en = {
       appImage: "Download the AppImage",
     },
     page: {
-      docTitle: "Download the app · agentes.chat",
-      title: "Download the agentes.chat app",
+      docTitle: "Download the app · xquads",
+      title: "Download the xquads app",
       beta: "Beta",
       text: "Your workspace in a window of its own, with your system's notifications. With one click, agents work on this computer, in folders of their own.",
-      open: "Open agentes.chat",
+      open: "Open xquads",
       version: "Version {{version}}",
       versionSize: "Version {{version}} · {{size}}",
       soon: "There's no version for {{system}} yet.",
@@ -2101,7 +2101,7 @@ export const en = {
       system: "System",
       whyTitle: "Why does my computer ask to confirm?",
       whyText:
-        "agentes.chat is in beta: the Mac version isn't notarized by Apple yet, and the Windows installer doesn't carry a Microsoft certificate yet. Without them, your computer asks once before it opens an app downloaded from the internet. After that, it opens straight away and updates itself. Before the beta ends, this step goes away.",
+        "xquads is in beta: the Mac version isn't notarized by Apple yet, and the Windows installer doesn't carry a Microsoft certificate yet. Without them, your computer asks once before it opens an app downloaded from the internet. After that, it opens straight away and updates itself. Before the beta ends, this step goes away.",
       openSource: "Open source",
       onlyHere: "Published only here and in the project's releases",
       signedUpdates: "Signed updates",
@@ -2409,16 +2409,16 @@ export const en = {
     /** Beside a workspace's name, only when another of the person's has the same name. */
     createdOn: "Created on {{date}}",
     newWorkspace: "New workspace",
-    /** The desktop app's window to add one (ADR 0154): in place of New workspace on agentes.chat, after it elsewhere. */
+    /** The desktop app's window to add one (ADR 0154): in place of New workspace on xquads, after it elsewhere. */
     addWorkspace: "Add workspace",
     addWorkspaceHint: "Join one you already have, create one, or use your team's server",
     /** Another account on this server, signed in beside the one open (ADR 0183). */
     addAccount: "Add account",
     addAccountHint: "Sign in to another account without leaving this one",
-    /** Beside a server's name above its workspaces, when it isn't agentes.chat. */
+    /** Beside a server's name above its workspaces, when it isn't xquads. */
     yourServer: "Your server",
     /** A server's line in "Your workspaces" in the desktop app: the one on this computer, and its state (ADR 0158). */
-    serverHere: "The agentes.chat on this {{device}}",
+    serverHere: "The xquads on this {{device}}",
     serverStopped: "stopped",
     serverOffline: "offline since {{time}}",
     serverSignedOut: "not signed in",
@@ -2567,7 +2567,7 @@ export const en = {
       people: "You already pinned 5 people. Unpin one to pin this one.",
     },
   },
-  /** Settings › agentes.chat apps (`AppsDownload.tsx`): the desktop app for this computer and the phone apps. */
+  /** Settings › xquads apps (`AppsDownload.tsx`): the desktop app for this computer and the phone apps. */
   appsDownload: {
     computer: "Computer",
     computerText: "Your workspace in a window of its own, with the system's notifications.",
@@ -2575,15 +2575,15 @@ export const en = {
     howTo: "How to install",
     phone: "Phone",
     phoneText: "Notifications in your pocket, to answer from anywhere.",
-    /** The iPhone app's public beta, only on agentes.chat's own servers. */
+    /** The iPhone app's public beta, only on xquads's own servers. */
     testFlight: "TestFlight",
     googlePlay: "Google Play",
   },
   openOnPhone: {
-    qr: "QR code to sign in to the agentes app",
+    qr: "QR code to sign in to the xquads app",
     making: "Making the code…",
     /** Followed by where to get the app (`usePhoneStores`); the App Store marked Soon where the iPhone app is not offered. */
-    stepApp: "Install the agentes app on your phone.",
+    stepApp: "Install the xquads app on your phone.",
     stepTailscale: "Install Tailscale on your phone and sign in with the same Tailscale account as this server.",
     /** The links to Tailscale in each store, after the step: the store's own name. */
     appStore: "App Store",
@@ -2595,7 +2595,7 @@ export const en = {
     /** The desktop app's server with access from other devices off: no phone reaches it. */
     localOnly: "This server only opens on the computer it runs on, so your phone can't reach it.",
     localOnlyHow:
-      "In the agentes.chat app on that computer, turn on Reach it from your phone and teammates in Preferences › Servers. Then come back here.",
+      "In the xquads app on that computer, turn on Reach it from your phone and teammates in Preferences › Servers. Then come back here.",
     localOnlyHere: "Turn on Reach it from your phone and teammates. Then come back here.",
   },
   /** An outside chat app linked to a person's account (ADR 0187). {{surface}} is that app's name, as the server sets it. */
@@ -2607,7 +2607,7 @@ export const en = {
        * recognises it (and "parar" in Portuguese).
        */
       consent:
-        "{{assistant}} by agentes.chat may message you on {{surface}} about your workspaces, and call you only when something is urgent and you allow it. Write stop to turn this off.",
+        "{{assistant}} by xquads may message you on {{surface}} about your workspaces, and call you only when something is urgent and you allow it. Write stop to turn this off.",
       /** The link dialog's title. {{assistant}} is the workspace's built-in assistant by name. */
       title: "Talk to {{assistant}} on {{surface}}",
       qr: "QR code that opens {{surface}} with your code typed in",
@@ -3181,9 +3181,9 @@ export const en = {
       leadPersonal: "I create your agents and connect your apps. Nothing changes unless you ask.",
       /** In place of `lead` on a billing hold: the team costs no model call, and the plan is said up front. */
       heldLead:
-        "Pick what your business does and the team shows up here. The agents start working once the workspace has an agentes.chat plan.",
+        "Pick what your business does and the team shows up here. The agents start working once the workspace has a xquads plan.",
       heldLeadPersonal:
-        "Pick what you want help with and your agents show up here. They start working once you have an agentes.chat plan.",
+        "Pick what you want help with and your agents show up here. They start working once you have a xquads plan.",
       connect: {
         title: "Connect an AI for the team",
         titlePersonal: "Connect an AI for your agents",
@@ -3705,7 +3705,7 @@ export const en = {
         "{{name}} didn't answer: the request didn't come from a person, and the workspace's plan serves only its owner.",
       runner_outdated: "{{name}} can't answer now: the program on the plan's computer needs an update.",
       plan_tools:
-        "{{name}} stopped before answering: the plan's AI on that computer didn't stay within agentes.chat's tools.",
+        "{{name}} stopped before answering: the plan's AI on that computer didn't stay within xquads's tools.",
       /** `model`: the model whose own limit it is (not the plan's); the plan's other models still work. */
       model_limit:
         "{{name}} can't answer now: {{model}} reached its own limit on the plan. The plan's other models still work.",
@@ -3727,12 +3727,12 @@ export const en = {
       title: "I kept your message",
       /** The card's one sentence, by the hold's code. */
       wait: {
-        payment: "I'll answer here once the workspace has an agentes.chat plan.",
-        unpaid: "I'll answer here once the agentes.chat plan's payment goes through.",
-        ended: "I'll answer here once the workspace subscribes to agentes.chat again.",
+        payment: "I'll answer here once the workspace has a xquads plan.",
+        unpaid: "I'll answer here once the xquads plan's payment goes through.",
+        ended: "I'll answer here once the workspace subscribes to xquads again.",
       },
       /** The same for whoever can't pay. */
-      askAdmin: "I'll answer here once an admin sorts out the agentes.chat plan.",
+      askAdmin: "I'll answer here once an admin sorts out the xquads plan.",
       /** Behind the card's ⓘ on a first plan. */
       plan: "The plan brings the agents' computer. The AI is the one you already pay for: Claude, ChatGPT and more, or an API key.",
       /** The hold lifted: the plan is paid, an AI is what's left. */
@@ -3741,7 +3741,7 @@ export const en = {
       /** A second message's receipt, where it would say no AI. */
       receipt: "Kept",
       /** The receipt of a channel message nobody mentioned. */
-      channel: "Kept. The agents answer once the workspace has an agentes.chat plan.",
+      channel: "Kept. The agents answer once the workspace has a xquads plan.",
     },
     receipt: "Nobody will answer: no\u00a0AI connected",
     notYours: { receipt: "Nobody will answer: the {{plan}} is only {{owner}}'s" },
@@ -3776,7 +3776,7 @@ export const en = {
       getGit: "Download Git for Windows",
       /** It is there and its own check of its version fails: `message` is its error. */
       cantStart: "{{program}} is on {{computer}}, but it won't start: {{message}}",
-      outdated: "Update the agentes.chat app on {{computer}} to install from here.",
+      outdated: "Update the xquads app on {{computer}} to install from here.",
       asked: "Request sent. {{name}} gets a button to install it.",
       /** A CLI the apps don't install: the line to run follows, after `missing`. */
       runThis: "Run this command there to install it.",
@@ -3878,9 +3878,9 @@ export const en = {
       },
     },
     /** The Cloud's workspace on a billing hold, where a plan would sign in. */
-    billing: "A plan signs in on the workspace's computer, and the computer comes with an active agentes.chat plan.",
+    billing: "A plan signs in on the workspace's computer, and the computer comes with an active xquads plan.",
     /** After `billing`, on the phone, where paying isn't offered. */
-    billingWeb: "Choose one on the web, at agentes.chat.",
+    billingWeb: "Choose one on the web, at xquads.",
     orPayGo: "Or pay as you go",
     /** The two ways to pay, on a control the width of a phone: keep them short. */
     pay: {
@@ -3942,7 +3942,7 @@ export const en = {
       savedUnchecked:
         "Saved, but {{provider}} didn't answer, so we couldn't check the key. If it fails, the chat says why.",
       /** On a billing hold, in place of any way to add a key. */
-      closed: "API keys open with the workspace's agentes.chat plan.",
+      closed: "API keys open with the workspace's xquads plan.",
       notPlan: "A coding plan's key goes in its own option above.",
       billing: "Turn on billing for the key's project. Without billing, Google may use what your agents send.",
       /** Under the key field or in the step's ⓘ, for a provider that passes calls on (OpenRouter, Command Code). */
@@ -4726,7 +4726,7 @@ export const en = {
     clearsAt: "Clears at {{time}}",
     clearsOn: "Clears {{when}}",
     help: {
-      auto: "Online while agentes.chat is open.",
+      auto: "Online while xquads is open.",
       away: "Out for a while: people know answers may take time.",
       busy: "Everyone sees it's better not to interrupt right now.",
       out: "Away from work (vacation, a day off): everyone sees it until your status clears.",
@@ -5302,7 +5302,7 @@ export const en = {
         "Its {{count}} items leave the Vault and your agents stop using them. Nothing changes in {{name}}.",
       removed: "{{name}} disconnected",
       listOf: "Connections to {{name}}",
-      note: "Your agents read what is there when they need it. Nothing is copied into agentes.chat but names and addresses.",
+      note: "Your agents read what is there when they need it. Nothing is copied into xquads but names and addresses.",
       error: {
         auth_failed: "Sign-in refused",
         locked: "Wrong password",
@@ -6109,7 +6109,7 @@ export const en = {
       eyebrow: "Approval request",
       close: "Close",
       exact: "The exact action",
-      builtIn: "agentes.chat tool",
+      builtIn: "xquads tool",
       orgConnector: "Your workspace's connector",
       bound: "Only for these values: any change needs a new approval.",
       why: "Why",
@@ -6205,7 +6205,7 @@ export const en = {
     noInstructions: "{{name}} has no instructions yet. Say how he should work.",
     noInstructions_female: "{{name}} has no instructions yet. Say how she should work.",
     savedToast: "{{name}}'s changes saved.",
-    builtinName: "agentes",
+    builtinName: "xquads",
     builtinNote: "built-in permissions",
     connectHint: "Connect services",
     subtitle: "{{role}} · owned by <b>{{owner}}</b> · {{model}} {{key}}",
@@ -6603,11 +6603,11 @@ export const en = {
       steps: {
         title: "One step left, on {{computer}} itself",
         waiting: "Waiting",
-        one: "Click the agentes.chat icon by the clock",
+        one: "Click the xquads icon by the clock",
         two: "Preferences",
         three: "Turn on Browser",
         done: "That's it. This page notices on its own, no reload needed.",
-        menuOpen: "Open agentes",
+        menuOpen: "Open xquads",
         menuPrefs: "Preferences…",
         menuPause: "Pause",
         menuQuit: "Quit",
@@ -6813,7 +6813,7 @@ export const en = {
       setAll: "Change all",
       connectors: "{{org}}'s connectors",
       connectorsPersonal: "Your connectors",
-      builtin: "Built into agentes",
+      builtin: "Built into xquads",
       noMatch: "Nothing matching “{{q}}”",
       noneHere: "Nothing in this filter",
       library: "Skills library",
@@ -7341,10 +7341,10 @@ export const en = {
       /** The first row while the workspace waits for its first plan (ADR 0162), its button opening the billing page. */
       plan: {
         todo: "Turn the team on.",
-        todoDesc: "With an agentes.chat plan, the agents start working.",
+        todoDesc: "With a xquads plan, the agents start working.",
         action: "See plans",
         todoPersonal: "Turn your agents on.",
-        todoDescPersonal: "With an agentes.chat plan, your agents start working.",
+        todoDescPersonal: "With a xquads plan, your agents start working.",
       },
       about: {
         /** A personal workspace's row 1, its button (ADR 0159). */
@@ -8484,7 +8484,7 @@ export const en = {
     crashTitle: "Something went wrong",
     crashText: "Reload the page to carry on.",
     crashCode: "If you ask for help, give the code {{id}}.",
-    unreachableTitle: "Can't reach agentes.chat",
+    unreachableTitle: "Can't reach xquads",
     unreachableText: "It may be restarting. This page opens by itself as soon as it's back.",
     offlineTitle: "You're offline",
     offlineText: "This page opens by itself when you're back online.",
@@ -8492,7 +8492,7 @@ export const en = {
     unknownHostTitle: "This address isn't set up yet",
     unknownHostText: "If it was just connected, try again in a few minutes.",
     /** That page's browser tab title. */
-    unknownHostTab: "Address not set up · agentes.chat",
+    unknownHostTab: "Address not set up · xquads",
   },
   scopes: {
     context_read: {
@@ -9559,7 +9559,7 @@ export const en = {
     event: {
       "sentry.issue_created": "New Sentry error",
       "github.pr_opened": "PR opened on GitHub",
-      "issue.created": "Task created in agentes",
+      "issue.created": "Task created in xquads",
       "deploy.succeeded": "Deploy finished",
       "telegram.message": "Message to the Telegram bot",
       "sms.received": "Text to the Twilio number",
@@ -10178,7 +10178,7 @@ export const en = {
       title: "Mission files",
       folder: "folder",
       tabs: "File",
-      missionSub: "Plan and rules · updated by agentes.chat",
+      missionSub: "Plan and rules · updated by xquads",
       decisionsSub: "Approved decisions",
       notesSub: "{{executor}}'s notes",
       synced: "synced {{when}}",
@@ -10249,7 +10249,7 @@ export const en = {
       title: "New mission",
       text: "A long project for an agent. It proposes a plan, works on its computer and asks for decisions and reviews in the thread.",
       goal: "Goal",
-      goalPlaceholder: "E.g. build the agentes.chat mobile app in Expo, based on the current web app.",
+      goalPlaceholder: "E.g. build the xquads mobile app in Expo, based on the current web app.",
       agent: "Agent",
       computer: "Computer",
       noMachine: "None connected",
@@ -11122,7 +11122,7 @@ export const en = {
   jev: {
     title: "Jev",
     about:
-      "A fast model by TypeSafe, made for quick decisions. agentes.chat asks it small questions, like who should answer. You pay TypeSafe directly, or through OpenRouter at the same price.",
+      "A fast model by TypeSafe, made for quick decisions. xquads asks it small questions, like who should answer. You pay TypeSafe directly, or through OpenRouter at the same price.",
     lead: "Helps your agents work as a team.",
     how: "How Jev works",
     why: {
@@ -11351,7 +11351,7 @@ export const en = {
       antigravity: "Gemini",
       opencode: "OpenCode",
       needs: {
-        keys: "Update agentes on the computer to use a plan's key",
+        keys: "Update xquads on the computer to use a plan's key",
       },
       noComputer: "Accounts stay on a connected computer. Connect one of yours first.",
       addComputer: "Connect a computer",
@@ -11363,7 +11363,7 @@ export const en = {
         online: "{{computer}} is restarting or reconnecting. This changes by itself once it's back.",
         installing: "{{program}} is being installed on {{computer}}. This changes by itself when it's done.",
         runnerOld:
-          "The agentes.chat program on {{computer}} is out of date and an update is on its way. This changes by itself when it's done.",
+          "The xquads program on {{computer}} is out of date and an update is on its way. This changes by itself when it's done.",
         execOff: "{{computer}} can't run {{program}} yet. We're on it, and this changes by itself.",
         toolOff: "{{program}} isn't allowed on {{computer}} yet. That's on our side: try again later.",
         preparing: "{{computer}} is getting ready. This changes by itself when it's done.",
@@ -11379,7 +11379,7 @@ export const en = {
     },
     page: {
       title: "Your plans",
-      hint: "Each plan stays on the computer it was connected on, and whoever runs that computer can reach it. agentes.chat keeps only its name, email and usage.",
+      hint: "Each plan stays on the computer it was connected on, and whoever runs that computer can reach it. xquads keeps only its name, email and usage.",
       emptyTitle: "Use the AI plan you already pay for",
       emptyViewer: "Whoever looks after the workspace's AI connects a plan, and it shows up here.",
       connect: "Connect an AI",
@@ -12907,7 +12907,7 @@ export const en = {
     reasons: {
       no_computer: "Choose a connected computer under Computer to use it.",
       exec_off: "The computer was connected without permission to run programs.",
-      runner_old: "Update the agentes.chat program on the computer to use it.",
+      runner_old: "Update the xquads program on the computer to use it.",
       /** The button that turns it on follows. */
       tool_offOne: "{{program}} is turned off on {{computer}}.",
       not_installed: "{{program}} isn't installed on {{computer}}.",
@@ -12960,7 +12960,7 @@ export const en = {
     opencodeFreeHint: "Other free models run through OpenCode on the agent's computer.",
     /** Under the Gemini plan's models: why its newest model isn't there (`BrainOption.missing`). */
     missingModel: {
-      app_old: "Update the agentes.chat app on the agent's computer to use {{model}}.",
+      app_old: "Update the xquads app on the agent's computer to use {{model}}.",
       cli_old: "{{model}} needs a newer Antigravity CLI on the agent's computer. Run agy update there.",
       plan: "{{model}} comes with Google AI Pro and Ultra. No Gemini account on the agent's computer has that plan.",
     },
@@ -13499,7 +13499,7 @@ export const en = {
   storage: {
     title: "Storage",
     options: "Where to keep files",
-    agentes: "agentes.chat storage",
+    agentes: "xquads storage",
     agentesText: "Your files stay in our storage, kept apart per workspace.",
     server: "This server",
     serverText: {
@@ -13510,7 +13510,7 @@ export const en = {
     },
     showFolder: "Show the folder",
     place: {
-      agentes: "agentes.chat storage",
+      agentes: "xquads storage",
       server: "this server",
     },
     s3: "Your own storage",
@@ -13624,7 +13624,7 @@ export const en = {
       step: {
         bucketTitle: "Create a bucket",
         keyTitle: "Create the access key",
-        userTitle: "Create a user just for agentes.chat",
+        userTitle: "Create a user just for xquads",
         r2Bucket: "In Cloudflare's dashboard, open <b>R2</b> and click <b>Create bucket</b>. Any name works.",
         r2Key:
           "On the R2 page, under <b>API Tokens</b>, click <b>Manage</b> and then <b>Create API Token</b>. Pick the <b>Object Read & Write</b> permission and your bucket. At the end, Cloudflare shows the three values below only once.",
@@ -13710,13 +13710,12 @@ export const en = {
   },
   githubApp: {
     title: "GitHub repositories",
-    text: "Where the agentes.chat app is installed, agents open pull requests, issues, comments and commits as the app, with the agent's name and who asked.",
-    install: "Install the agentes.chat app",
+    text: "Where the xquads app is installed, agents open pull requests, issues, comments and commits as the app, with the agent's name and who asked.",
+    install: "Install the xquads app",
     installMore: "Install on another account",
     none: "No GitHub account yet.",
     /** Nothing installed yet, and agents use the workspace's GitHub account: who they show up as today. */
-    usingAccount:
-      "Today agents show up on GitHub as {{account}}. Install the app so they show up as the agentes.chat app.",
+    usingAccount: "Today agents show up on GitHub as {{account}}. Install the app so they show up as the xquads app.",
     allRepos: "All repositories",
     someRepos: "Selected repositories",
     suspended: "Suspended on GitHub",
@@ -13727,7 +13726,7 @@ export const en = {
     removeName: "Remove {{account}}",
     removeTitle: "Remove the app from {{account}}?",
     removeText:
-      "The agentes.chat app is uninstalled from {{account}} on GitHub, and agents stop using that account's repositories through it.",
+      "The xquads app is uninstalled from {{account}} on GitHub, and agents stop using that account's repositories through it.",
     /** After removeText when it's the app's last account and no GitHub account is connected. */
     removeLast: "It's the last one, so agents lose GitHub until someone installs the app or connects an account.",
     removed: "App removed from {{account}} and uninstalled on GitHub.",
@@ -13735,16 +13734,16 @@ export const en = {
     notUninstalled: "App removed here, but GitHub didn't confirm the uninstall from {{account}}. Uninstall it there.",
     /** That toast's button, short enough to leave its words room beside it on a phone. */
     openPage: "Open",
-    installed: "agentes.chat app installed.",
-    /** An installation approved on GitHub never links here: the account's owner installs it from agentes.chat. */
+    installed: "xquads app installed.",
+    /** An installation approved on GitHub never links here: the account's owner installs it from xquads. */
     requested:
       "Only the GitHub account's owner can install the app. Ask them to install it from Connectors › GitHub in this workspace.",
     notVisible: "Your GitHub account can't see that installation. Install it with an account that has access to it.",
     otherWorkspace:
       "That GitHub account is already linked to another workspace. Remove the app there before installing it here.",
-    /** The app was installed on GitHub itself, not from agentes.chat (`github_app_error=installed_outside`). */
+    /** The app was installed on GitHub itself, not from xquads (`github_app_error=installed_outside`). */
     installedOutside:
-      "The app was installed on that GitHub account outside agentes.chat. Remove it on GitHub and install it again from Connectors › GitHub.",
+      "The app was installed on that GitHub account outside xquads. Remove it on GitHub and install it again from Connectors › GitHub.",
     /**
      * GitHub refused to say whether the person owns the organization (`github_app_error=owner_unknown`, a 403): most
      * likely this server's own GitHub App was made without the organization permission Members, which only whoever
@@ -13760,24 +13759,24 @@ export const en = {
       "The GitHub app has the wrong secret key on the server, so the install can't finish. Whoever runs the server needs to replace the key in the app's settings.",
     /** GitHub is the app alone: an account too (agents use it where the app isn't installed, and for a person's own GitHub Projects). */
     connectAccount: "Connect a GitHub account",
-    /** For admins who aren't the server's owner, on a server without the app (never on agentes.chat). */
+    /** For admins who aren't the server's owner, on a server without the app (never on xquads). */
     ownerHint: "This server's owner can create its GitHub app here in Connectors.",
     /** A connected row of GitHub through the app alone: the accounts it is installed on. */
-    viaApp: "Through the agentes.chat app on {{accounts}}",
-    disconnectApp: "The agentes.chat app is also uninstalled from {{accounts}} on GitHub.",
-    disconnectKeepsApp: "Agents stay on GitHub through the agentes.chat app on {{accounts}}.",
-    keptApp: "GitHub account disconnected. Agents stay on GitHub through the agentes.chat app.",
+    viaApp: "Through the xquads app on {{accounts}}",
+    disconnectApp: "The xquads app is also uninstalled from {{accounts}} on GitHub.",
+    disconnectKeepsApp: "Agents stay on GitHub through the xquads app on {{accounts}}.",
+    keptApp: "GitHub account disconnected. Agents stay on GitHub through the xquads app.",
     /** The line under what an agent writes on GitHub (pull requests, issues, comments), in the workspace's language. */
     signature: {
-      forPerson: "{{agent}}, agent for {{person}} on agentes.chat",
-      alone: "{{agent}}, an agent on agentes.chat",
+      forPerson: "{{agent}}, agent for {{person}} on xquads",
+      alone: "{{agent}}, an agent on xquads",
     },
     /** The server's page that sends its owner to GitHub to create the app (it goes on by itself). */
     manifestPage: {
       title: "Creating the GitHub app",
       continue: "Continue on GitHub",
     },
-    /** Settings › Connectors for the server's owner (never on agentes.chat): the app every workspace here installs. */
+    /** Settings › Connectors for the server's owner (never on xquads): the app every workspace here installs. */
     server: {
       title: "This server's GitHub app",
       lead: "With it, agents show up on GitHub as the app, not as someone's account.",
@@ -15132,7 +15131,7 @@ export const en = {
       left_click: "Click",
       mouse_move: "Move the mouse",
       screenshot: "Take a screenshot",
-      // agentes.chat's own tools
+      // xquads's own tools
       send_dm: "Send direct message",
       read_conversation: "Read conversation",
       add_agent_to_channel: "Add agent to a channel",
@@ -15366,10 +15365,10 @@ export const en = {
     continueIn: "Continue on {{name}}",
     continueInComposio: "Continue on Composio",
     /** On Reconnect GitHub: its sign-in asks about organizations only the first time. */
-    /** Connecting GitHub where the server has the agentes.chat app: the app first, an account second. */
+    /** Connecting GitHub where the server has the xquads app: the app first, an account second. */
     github: {
       how: "How agents reach GitHub",
-      app: "The agentes.chat app",
+      app: "The xquads app",
       recommended: "Recommended",
       appText: "Agents show up as the app, and you pick the repositories on GitHub.",
       account: "A GitHub account",
@@ -15394,7 +15393,7 @@ export const en = {
     withKey: "Connect with an API key",
     needsKey: "This server doesn't support OAuth. Connect with an API key.",
     notApproved:
-      "{{name}} only lets apps it approved sign in, and agentes.chat isn't approved yet. If it gives you an API key, you can connect with that.",
+      "{{name}} only lets apps it approved sign in, and xquads isn't approved yet. If it gives you an API key, you can connect with that.",
     serverSaid: "The server answered: {{detail}}",
     /**
      * A server that lets in only OAuth apps it approved (Meta Ads): an admin registers an app of the workspace's own
@@ -15404,7 +15403,7 @@ export const en = {
     ownClient: {
       title: "Use your own OAuth app",
       notApproved:
-        "{{name}} only lets in apps it approved, and agentes.chat isn't one yet. You can connect it with your own app there.",
+        "{{name}} only lets in apps it approved, and xquads isn't one yet. You can connect it with your own app there.",
       askAdmin: "An admin can connect it with the workspace's own app.",
       help: "Create an app at the provider, register this redirect URI in it and paste its client ID. Every sign-in there from the workspace then uses your app.",
       guide: {
@@ -15714,7 +15713,7 @@ export const en = {
       "A password just for the agents. You create it on your email's site and can delete it anytime, without changing your own password.",
     step: {
       "1": "Open your account's security page.",
-      "2": "Create an app password named “agentes”.",
+      "2": "Create an app password named “xquads”.",
       "3": "Copy the password and paste it here.",
     },
     openPage: "Open the {{name}} page",
@@ -16079,7 +16078,7 @@ export const en = {
       noWorkspace: "You're no longer in this workspace. Pick another workspace to link.",
       linkGone:
         "This link isn't waiting anymore: it ran out after 10 minutes or was canceled. Make a new code to start again.",
-      taken: "That sender is linked to another agentes.chat account. Unlink it there, then send a new code.",
+      taken: "That sender is linked to another xquads account. Unlink it there, then send a new code.",
       undoGone: "This undo link was already used or ran out. Unlink in your notification settings instead.",
       codeGone: "This code is wrong, used or ran out after 10 minutes. Make a new code and send it again.",
     },
@@ -16137,7 +16136,7 @@ export const en = {
       leadChannelOnly: "Only channels have a responsible agent.",
       leadNotMember: "The responsible agent has to be in the channel.",
       mcpUnreachable: "Couldn't connect to the MCP server. Check its address and try again.",
-      notApproved: "This service hasn't approved agentes.chat yet.",
+      notApproved: "This service hasn't approved xquads yet.",
       alreadyInvited: "This person already has an invitation.",
       alreadyAsked: "Someone already asked for this person.",
       mailboxConnected: "This mailbox is already connected.",
@@ -16349,7 +16348,7 @@ export const en = {
       computerOffline: "The agent's computer is offline.",
       execDisabled: "Commands are turned off on that computer.",
       runnerOutdated:
-        "The program on the computer is too old for missions: update the agentes.chat app there, or run its install command again.",
+        "The program on the computer is too old for missions: update the xquads app there, or run its install command again.",
       exists: "This thread already has a mission.",
       closed: "This mission is closed.",
       wrongStatus: "The mission isn't in a state that allows this.",
@@ -16495,7 +16494,7 @@ export const en = {
       /** "Pedir a um admin" from someone who may do it themselves. */
       adminAskSelf: "You can do this here yourself.",
       accountMethodUnsupported:
-        "This computer can't connect Claude this way yet. Update the agentes.chat program on it, or use an API key.",
+        "This computer can't connect Claude this way yet. Update the xquads program on it, or use an API key.",
       brainUnavailable: "This AI isn't set up on {{computer}} yet. Set it up there, or choose another one.",
       offline: "{{name}} is offline right now. Try again once it's back.",
       paused: "{{name}} is paused: nothing new starts on it until it's resumed.",
@@ -16676,7 +16675,7 @@ export const en = {
       ask: "Ask {{name}}",
       asked: "Asked. {{name}} gets a button to turn it on.",
       done: "On at {{machine}}.",
-      outdated: "Update the agentes.chat app on {{machine}} to turn it on from here.",
+      outdated: "Update the xquads app on {{machine}} to turn it on from here.",
       /** Its computer is offline: the button turns it on once the computer is back, and waits until then. */
       offline: "{{machine}} is offline. Once it's back, the button turns on {{tool}}.",
     },
@@ -16691,7 +16690,7 @@ export const en = {
       byYouUntil: "Paused by you until {{time}}.",
       byName: "Paused by {{name}}.",
       byNameUntil: "Paused by {{name}} until {{time}}.",
-      outdated: "Update the agentes.chat app on this computer to pause it from here.",
+      outdated: "Update the xquads app on this computer to pause it from here.",
       paused: "{{name}} is paused",
       resumed: "{{name}} is back to work",
     },
@@ -16740,12 +16739,12 @@ export const en = {
       noReport: "This {{device}} hasn't reported what it allows yet. Update the app.",
       update: "Update the app",
     },
-    // The server's own computer (`HOST_COMPUTER_TOKEN`): the machine agentes.chat is installed on.
+    // The server's own computer (`HOST_COMPUTER_TOKEN`): the machine xquads is installed on.
     host: {
       label: "This server's computer",
-      desc: "Where agentes.chat is installed.",
-      descUsers: "Where agentes.chat is installed, one user per agent.",
-      descShared: "The computer agentes.chat is installed on. Agents work as the person who installed it.",
+      desc: "Where xquads is installed.",
+      descUsers: "Where xquads is installed, one user per agent.",
+      descShared: "The computer xquads is installed on. Agents work as the person who installed it.",
       stop: "Stop using it in this workspace",
       stopTitle: "Stop using this server's computer?",
       stopText: "This workspace's agents stop using this computer now. You can use it again whenever you want.",
@@ -16756,7 +16755,7 @@ export const en = {
     },
     download: {
       title: "Connect another computer",
-      text: "Install the agentes.chat app on the computer.",
+      text: "Install the xquads app on the computer.",
       mac: "Download the app for {{system}}",
       version: "Version {{version}}",
       versionSize: "Version {{version}} · {{size}}",
@@ -16767,7 +16766,7 @@ export const en = {
       unavailable: "The app isn't available yet.",
       unavailableCommand: "The app isn't available yet. For now, use the command below.",
       firstTime: "The first time",
-      step1: "Open the downloaded file and drag agentes.chat to Applications.",
+      step1: "Open the downloaded file and drag xquads to Applications.",
       step1Install: "Open the downloaded file to install it.",
       otherText: "Run this in the computer's terminal, then confirm the code it shows.",
       waiting: "Waiting for the computer to connect…",
@@ -16799,7 +16798,7 @@ export const en = {
       ownFolder: "Each agent's folder",
       ownFolderText: "Always. An agent doesn't see another's.",
       noFolders: "No extra folders. Each agent only uses its own folder.",
-      noReport: "This computer hasn't said what it allows yet. Update agentes.chat on it.",
+      noReport: "This computer hasn't said what it allows yet. Update xquads on it.",
       hidden: "Only admins and whoever connected it see this computer's folders and tools.",
       nobody: "No agent uses it yet",
       usedBy: "Who uses {{folder}}",
@@ -16845,7 +16844,7 @@ export const en = {
         "Agents stop using {{tool}} on this computer. To turn it back on: on the computer itself, or here by whoever connected it.",
       disabled: "{{tool}} turned off.",
       grantTitle: "To allow more",
-      grantText: "Allowing happens on the computer itself: open the agentes.chat app there (Preferences → Folders).",
+      grantText: "Allowing happens on the computer itself: open the xquads app there (Preferences → Folders).",
       grantTextTerminal: "Allowing happens on the computer itself, in its Terminal:",
       grantTextAdmin: "Allowing happens on the computer itself, in its Terminal, as its administrator:",
       grantTerminal: "No app? In the computer's terminal:",
@@ -16952,7 +16951,7 @@ export const en = {
       forbidden: "You can't see this screen",
       forbiddenText: "Its owner chooses who can use {{name}}.",
       outdated: "The app on {{host}} is too old for this",
-      outdatedText: "Update agentes.chat on {{host}}, then try again.",
+      outdatedText: "Update xquads on {{host}}, then try again.",
       unavailable: "This screen can't be shown",
       unavailableText: "Check that {{host}} has adb or Xcode installed, then try again.",
       needsHelper: "Finish the iPhone setup on the Mac to add the test helper it needs.",
@@ -17139,7 +17138,7 @@ export const en = {
       thisMac: "This Mac",
       thisPc: "This PC",
       thisComputer: "This computer",
-      thisLine: "Through the agentes.chat app",
+      thisLine: "Through the xquads app",
       openApp: "Open the app",
       server: "A server or VPS",
       serverLine: "One line to paste in its terminal",
@@ -17155,7 +17154,7 @@ export const en = {
     },
     computer: {
       title: "Connect another computer",
-      step1: "Get the agentes.chat app on it:",
+      step1: "Get the xquads app on it:",
       step2: "Open it and sign in as yourself.",
       step3: "Click Allow when it asks to let {{org}}'s agents use it.",
       shows: "It shows up here by itself, only for you until you share it.",
@@ -17166,11 +17165,11 @@ export const en = {
     },
     /** This computer, from a browser: the desktop app on it opens a link, asks the person, then asks to join. */
     thisApp: {
-      text: "The agentes.chat app connects it in one click, and asks you first.",
-      open: "Open the agentes.chat app",
+      text: "The xquads app connects it in one click, and asks you first.",
+      open: "Open the xquads app",
       browserAsks: "Your browser asks to open it: choose Open, and Always allow if it offers.",
       noApp: "Don't have the app?",
-      afterInstall: "After installing, press Open the agentes.chat app again. The link works once, for 10 minutes.",
+      afterInstall: "After installing, press Open the xquads app again. The link works once, for 10 minutes.",
       waiting: "Waiting for the app on this computer…",
       expired: "This link expired.",
       again: "Make a new link",
@@ -17254,7 +17253,7 @@ export const en = {
       },
       qrLabel: "QR code that opens these steps on the phone",
       qrLine: "Do it from your phone",
-      qrCaption: "Scan to open these steps in the agentes.chat app, with buttons for each setting.",
+      qrCaption: "Scan to open these steps in the xquads app, with buttons for each setting.",
       /** Android's own words for these settings rows, as the phone shows them in this language. */
       buildNumber: "Build number",
       buildNumberSub: "BP2A.250605.031",
@@ -17306,30 +17305,30 @@ export const en = {
           "{{computer}} can't look for phones on the Wi-Fi. Update Android platform-tools there, or use a cable.",
         /** On a Mac: macOS's own names for its Local Network privacy setting, as System Settings shows them in this language. */
         mdns_offMac:
-          "{{computer}} can't look for phones on the Wi-Fi. On that Mac, turn on agentes.chat in System Settings\u00a0›\u00a0Privacy & Security\u00a0›\u00a0Local Network, then try again.",
+          "{{computer}} can't look for phones on the Wi-Fi. On that Mac, turn on xquads in System Settings\u00a0›\u00a0Privacy & Security\u00a0›\u00a0Local Network, then try again.",
         same_wifi:
           "Couldn't reach the phone. It's not on the same network as {{computer}}. Put it on the same Wi-Fi and try again.",
         /** On a Mac: macOS's own names for its Local Network privacy setting, as System Settings shows them in this language. */
         same_wifiMac:
-          "Couldn't reach the phone. Put it on the same Wi-Fi as {{computer}}. On that Mac, also turn on agentes.chat in System Settings\u00a0›\u00a0Privacy & Security\u00a0›\u00a0Local Network.",
+          "Couldn't reach the phone. Put it on the same Wi-Fi as {{computer}}. On that Mac, also turn on xquads in System Settings\u00a0›\u00a0Privacy & Security\u00a0›\u00a0Local Network.",
         refused: "The phone stopped the pairing. Keep its pairing screen open and try again.",
         refusedCode: "The phone didn't take that code. Check the code and the address, then pair again.",
         timed_out:
           "No phone paired in 2 minutes. If the camera scanned the code or the phone left the Wi-Fi, put it on the same Wi-Fi as {{computer}} and scan from Wireless debugging.",
         /** On a Mac: macOS's own names for its Local Network privacy setting, as System Settings shows them in this language. */
         timed_outMac:
-          "No phone paired in 2 minutes. If the camera scanned the code or the phone left the Wi-Fi, put it on the same Wi-Fi as {{computer}} and scan from Wireless debugging. On that Mac, also turn on agentes.chat in System Settings\u00a0›\u00a0Privacy & Security\u00a0›\u00a0Local Network.",
+          "No phone paired in 2 minutes. If the camera scanned the code or the phone left the Wi-Fi, put it on the same Wi-Fi as {{computer}} and scan from Wireless debugging. On that Mac, also turn on xquads in System Settings\u00a0›\u00a0Privacy & Security\u00a0›\u00a0Local Network.",
         outdated:
           "Wi-Fi pairing needs Android 14 or newer with the May 2026 security update. Update the phone, or use a cable.",
         adb_missing: "{{computer}} has no Android platform-tools. Install Android Studio there, then try again.",
-        update: "Wi-Fi pairing needs a newer agentes.chat on {{computer}}. Update it, then try again.",
+        update: "Wi-Fi pairing needs a newer xquads on {{computer}}. Update it, then try again.",
         canceled: "The pairing stopped. Try again.",
         failed: "The pairing didn't work. Try again, or use a cable.",
       },
     },
     iphone: {
       title: "Connect an iPhone",
-      lead: "iPhones connect through a Mac, where the agentes.chat app does the setup.",
+      lead: "iPhones connect through a Mac, where the xquads app does the setup.",
       mac: "Mac",
       noMac: "Agents can use an iPhone only through a Mac, and none is connected yet.",
       noMacNote: "No Mac? Ask a teammate to connect theirs.",
@@ -17382,10 +17381,10 @@ export const en = {
         stillLicense:
           "The fix ran, but Xcode on {{mac}} still waits for its license to be accepted. Try again, or run this in Terminal, it asks for the Mac's password.",
         outdated:
-          "Update the agentes.chat app on {{mac}} to fix it with one click. Or run this in its Terminal, it asks for the Mac's password.",
+          "Update the xquads app on {{mac}} to fix it with one click. Or run this in its Terminal, it asks for the Mac's password.",
         follows: "This window moves on by itself once the Mac is done.",
         /** The line macOS's password window shows on the Mac (the runner's own prompt), in its picture here. */
-        window: "agentes.chat wants to put Xcode in use to connect iPhones.",
+        window: "xquads wants to put Xcode in use to connect iPhones.",
         /** macOS's default button in that window. */
         ok: "OK",
       },
@@ -17423,7 +17422,7 @@ export const en = {
         unlock: "Turned it on and the iPhone restarted? Unlock it. The alert with Turn On shows only after that.",
         /** A Terminal command (`agentes-runner update`) shows under it. */
         outdated:
-          "The agentes.chat app on {{mac}} is out of date. Update the app, or run this in Terminal if you installed it there.",
+          "The xquads app on {{mac}} is out of date. Update the app, or run this in Terminal if you installed it there.",
       },
       uiAutomationText: "In Settings\u00a0›\u00a0Developer, after the restart.",
       helperText: "Built and renewed by the Mac every 7 days. A free Apple Account in Xcode is enough.",
@@ -17666,7 +17665,7 @@ export const en = {
     reconnectDoneText: "{{name}} is back in {{org}}.",
     deniedTitle: "Not connected",
     denied: "The computer wasn't connected. If it wasn't you who opened it, nobody got access.",
-    home: "Go to agentes",
+    home: "Go to xquads",
   },
   apps: {
     connect: "Connect an app",
@@ -17773,7 +17772,7 @@ export const en = {
       claude: {
         lead: "claude.ai, Claude Desktop and phone: one connector works everywhere.",
         step1: "Open Customize\u00a0›\u00a0Connectors on claude.ai or Claude Desktop.",
-        step2: "Click + Add, then Add custom connector, name it agentes.chat, paste the address and click Continue.",
+        step2: "Click + Add, then Add custom connector, name it xquads, paste the address and click Continue.",
         step3: "Choose Sign in now, click Add and authorize on the page that opens.",
         phone: "It shows on your phone once added on the computer.",
         team: "On Team and Enterprise plans, the Claude organization's Owner adds the connector in Organization settings\u00a0›\u00a0Connectors. Then each person clicks Connect in Customize\u00a0›\u00a0Connectors.",
@@ -17781,7 +17780,7 @@ export const en = {
       },
       claudeCode: {
         step1: "Run in the terminal:",
-        step2: "In Claude Code, type <code>/mcp</code>, pick agentes and Authenticate.",
+        step2: "In Claude Code, type <code>/mcp</code>, pick xquads and Authenticate.",
         scope: "It works in every folder. For the current folder only, drop <code>--scope user</code>.",
       },
       cursor: {
@@ -17813,9 +17812,9 @@ export const en = {
         open: "Open {{place}}.",
         click: "Click {{button}}.",
         clickThen: "Click {{button}}, then {{next}}.",
-        name: "Name it agentes.chat and paste the address.",
-        nameDescribe: "Name it agentes.chat and add a description.",
-        nameConnect: "Name it agentes.chat and click {{button}}.",
+        name: "Name it xquads and paste the address.",
+        nameDescribe: "Name it xquads and add a description.",
+        nameConnect: "Name it xquads and click {{button}}.",
         paste: "Paste the address.",
         pasteIn: "Paste the address into {{field}}.",
         choosePaste: "Choose {{option}} and paste the address.",
@@ -17839,9 +17838,9 @@ export const en = {
         reload: "Then type <code>{{command}}</code> in the chat.",
         loginRun: "To sign in, run <code>{{command}}</code>.",
         loginType: "To sign in, type <code>{{command}}</code> in the app.",
-        signIn: "Sign in with your agentes.chat account on the page that opens.",
+        signIn: "Sign in with your xquads account on the page that opens.",
         /** {{access}}: the consent page's option, as it reads there. */
-        signInManage: "Sign in with your agentes.chat account on the page that opens, and pick {{access}}.",
+        signInManage: "Sign in with your xquads account on the page that opens, and pick {{access}}.",
         /** Grok Bot uses a connected server only once it is attached to the message. */
         mention: "In the chat, type <code>@</code> and pick <code>{{name}}</code>.",
         signInFirst: "The app asks you to sign in the first time you use it.",
@@ -17902,7 +17901,7 @@ export const en = {
       canManage:
         "Create and edit agents, routines and skills as you, with a notice of what it creates. Write wiki pages and move them to the trash as you.",
       never: "Never",
-      neverApprove: "Approve agents' actions. Approvals stay with people in agentes.chat.",
+      neverApprove: "Approve agents' actions. Approvals stay with people in xquads.",
       neverSettings: "Change settings, members or permissions.",
       neverHidden: "See what you can't see.",
       loopbackWarning:
@@ -17917,12 +17916,12 @@ export const en = {
       done: "You can go back to {{app}}.",
       cancelledTitle: "Connection cancelled",
       cancelled: "Nothing was shared.",
-      goHome: "Go to agentes.chat",
+      goHome: "Go to xquads",
       language: "Language",
       error: {
         app_desconhecido: "We don't recognize this app",
         app_desconhecidoText:
-          "The app kept a registration that's no longer valid. Clear its saved connection and connect again. In Claude Code, type /mcp, pick agentes and Clear authentication. In Cursor, log out of the agentes server in Settings\u00a0›\u00a0MCP.",
+          "The app kept a registration that's no longer valid. Clear its saved connection and connect again. In Claude Code, type /mcp, pick xquads and Clear authentication. In Cursor, log out of the xquads server in Settings\u00a0›\u00a0MCP.",
         endereco_de_retorno: "Return address not registered",
         endereco_de_retornoText:
           "This app asked to return to an address it didn't register. For safety, we stopped here.",
@@ -17997,7 +17996,7 @@ export const en = {
       sentence: "{{who}} read {{what}}",
       who: {
         server: "Whoever runs this server",
-        cloud: "agentes.chat support",
+        cloud: "xquads support",
       },
       what: {
         message: "a message",
@@ -18215,7 +18214,7 @@ export const en = {
     section: {
       account: "Your account",
       notifications: "Notifications",
-      download: "agentes.chat apps",
+      download: "xquads apps",
       general: "General",
       right_hand: "Right hand",
       members: "Members",
@@ -18237,7 +18236,7 @@ export const en = {
       voice: "Voice",
       apps: "AI apps",
       approvals: "Approvals",
-      about: "About agentes.chat",
+      about: "About xquads",
       // A personal workspace's names (ADR 0159): General and Members in their own words.
       generalPersonal: "About you",
       /** The phone's AI accounts screen. */
@@ -18444,11 +18443,11 @@ export const en = {
     },
     telemetry: {
       title: "Usage statistics",
-      label: "Send anonymous usage statistics to agentes.chat",
+      label: "Send anonymous usage statistics to xquads",
       help: "Counts such as people, agents, machine sizes, AI tokens used and how much data the agents' browsers send and receive. Never messages, files, names or sites.",
       envOff: "Turned off in this server's settings (TELEMETRY=off).",
-      envOffDesktop: "Turned off in the agentes.chat app on this server's computer (Preferences\u00a0›\u00a0Servers).",
-      envOffHere: "Turned off in the agentes.chat app on this computer.",
+      envOffDesktop: "Turned off in the xquads app on this server's computer (Preferences\u00a0›\u00a0Servers).",
+      envOffHere: "Turned off in the xquads app on this computer.",
       see: "See what is sent",
       dialogTitle: "What is sent",
       dialogText: "Sent once a day. This is exactly the next report.",
@@ -19158,7 +19157,7 @@ export const en = {
         commentIssue: "{{who}} commented on issue #{{number}} ({{repo}}) on GitHub",
         commentDiscussion: "{{who}} commented on discussion #{{number}} ({{repo}}) on GitHub",
         /** A new pull request, issue or discussion that names the app. */
-        opened: "{{who}} called the agentes.chat app in #{{number}} ({{repo}}) on GitHub",
+        opened: "{{who}} called the xquads app in #{{number}} ({{repo}}) on GitHub",
         reviewed: "{{who}} reviewed PR #{{number}} ({{repo}}) on GitHub",
         approved: "{{who}} approved PR #{{number}} ({{repo}}) on GitHub",
         changes: "{{who}} asked for changes on PR #{{number}} ({{repo}}) on GitHub",
@@ -19650,8 +19649,7 @@ export const en = {
       no_ai_plan_unattended:
         "I didn't answer: the request didn't come from a person, and the workspace's plan serves only its owner.",
       no_ai_runner_outdated: "I can't answer now: the program on my plan's computer needs an update.",
-      no_ai_plan_tools:
-        "I stopped before answering: my plan's AI on that computer didn't stay within agentes.chat's tools.",
+      no_ai_plan_tools: "I stopped before answering: my plan's AI on that computer didn't stay within xquads's tools.",
       no_ai_model_limit: "I can't answer now: {{model}} reached its own limit on my plan.",
       no_ai_model_region:
         "I can't answer: {{model}} needs the Global region on in OpenCode (Settings\u00a0›\u00a0Privacy).",
@@ -19662,7 +19660,7 @@ export const en = {
       no_ai_commands_off: "I can't answer now: commands are turned off on my plan's computer.",
       no_ai_cli_missing: "I can't answer yet: my AI's program isn't installed on my computer.",
       no_ai_plan_hold:
-        "I kept your message. I'll answer here once the workspace has an agentes.chat plan and an AI connected.",
+        "I kept your message. I'll answer here once the workspace has a xquads plan and an AI connected.",
       no_ai_no_computer: "I can't answer yet: my AI needs a computer and I have none.",
       /** Where the server took a sign-in or a key out of the team's right hand's reply, in place of it. */
       redacted: "[removed: it looked like a sign-in or a key]",
@@ -20232,7 +20230,7 @@ export const en = {
     machine: {
       ready: "Ready",
       off: "Off",
-      offHelp: "Whoever connected the computer turns it on here or in the agentes.chat app on it: Preferences → Tools.",
+      offHelp: "Whoever connected the computer turns it on here or in the xquads app on it: Preferences → Tools.",
       needsCommand: "Needs a command",
       notReady: "Not ready yet",
       turnOff: "Turn off",
@@ -20471,8 +20469,7 @@ export const en = {
     paused: "Agents in this workspace are paused for review.",
     suspended: "This workspace is unavailable for now.",
     createRefused: "You can't create a workspace right now.",
-    createUnpaid:
-      "You already have a workspace waiting for an agentes.chat plan. Choose its plan before creating another.",
+    createUnpaid: "You already have a workspace waiting for a xquads plan. Choose its plan before creating another.",
     /** The button under it: into the workspace they already have. */
     createUnpaidOpen: "Open {{name}}",
     /** The same refusal with no call to pay, for the phone app: the stores allow paying only in their own flow. */
@@ -20498,32 +20495,32 @@ export const en = {
       agentHold: "{{name}} is paused",
       /** A hold the billing service set (ADR 0079): its code, never shown as it comes. */
       billing: {
-        payment: "The workspace needs an agentes.chat plan",
-        unpaid: "The agentes.chat plan payment didn't go through",
-        ended: "The workspace's agentes.chat plan ended",
+        payment: "The workspace needs a xquads plan",
+        unpaid: "The xquads plan payment didn't go through",
+        ended: "The workspace's xquads plan ended",
       },
     },
     /** A hold the billing service set (ADR 0079), said in place of its code. */
     billing: {
-      payment: "This workspace doesn't have an agentes.chat plan yet. Its agents start working once it does.",
-      unpaid: "This workspace's agentes.chat plan payment didn't go through, and its agents stopped.",
+      payment: "This workspace doesn't have a xquads plan yet. Its agents start working once it does.",
+      unpaid: "This workspace's xquads plan payment didn't go through, and its agents stopped.",
       ended:
-        "This workspace's agentes.chat plan ended, and its agents stopped. Its conversations and files are still here to read and download.",
-      sub: "You can still read and write here. The agents come back once the agentes.chat plan is in order.",
+        "This workspace's xquads plan ended, and its agents stopped. Its conversations and files are still here to read and download.",
+      sub: "You can still read and write here. The agents come back once the xquads plan is in order.",
       cta: {
-        payment: "See agentes.chat plans",
+        payment: "See xquads plans",
         unpaid: "Update payment",
         ended: "Subscribe again",
       },
       askAdmin: "Whoever runs this workspace can sort this out.",
       /** In place of the hold's words, back from paying until the billing service lifts it. */
-      paid: "Payment received. The agentes.chat plan starts in a moment.",
+      paid: "Payment received. The xquads plan starts in a moment.",
       /** The banner's one line on a `payment` hold once there is a team. */
-      teamReady: "Your team is ready. It needs an agentes.chat plan to start.",
+      teamReady: "Your team is ready. It needs a xquads plan to start.",
       /** In place of the invite form. */
-      invites: "Invitations open with the agentes.chat plan.",
+      invites: "Invitations open with the xquads plan.",
     },
-    /** agentes.chat Cloud only: what the restriction is, the Terms section and how to contest it (`restrictionLine`). */
+    /** xquads Cloud only: what the restriction is, the Terms section and how to contest it (`restrictionLine`). */
     cloud: {
       review:
         "Paused for a safety review, until our team looks at it. Our automated checks flagged activity that may break our Terms (section 5). To contest it, write to {{email}}.",
@@ -20730,7 +20727,7 @@ export const en = {
     open: "Open plan and billing",
     opening: "Opening…",
     failed: "Couldn't open it now. Try again in a moment.",
-    adminsOnly: "Only the workspace's owners and admins manage its agentes.chat plan.",
+    adminsOnly: "Only the workspace's owners and admins manage its xquads plan.",
     seeOptions: "See options",
     people: "People",
     files: "Files",
@@ -20755,8 +20752,8 @@ export const en = {
   limits: {
     members: {
       full: "This workspace has {{members}} of {{limit}} people.",
-      fullOne: "This workspace's agentes.chat plan fits 1 person.",
-      fullAdmin: "To bring more people in, see the agentes.chat plan's options.",
+      fullOne: "This workspace's xquads plan fits 1 person.",
+      fullAdmin: "To bring more people in, see the xquads plan's options.",
       fullMember: "Ask whoever runs the workspace to make room.",
       /** To whoever manages billing, below the plan's top. "Plan and billing" is the section in Settings. */
       fullAddSeat: "Every paid seat is taken. Add a seat in Plan and billing.",
@@ -20779,7 +20776,7 @@ export const en = {
       meter: "You've used {{used}} of {{limit}}.",
       near: "You've used {{used}} of {{limit}}. Uploads pause at the limit, and nothing is deleted.",
       full: "Uploads paused at {{limit}}. Nothing was deleted.",
-      fullAdmin: "Change the agentes.chat plan, delete files you no longer use, or connect your own bucket.",
+      fullAdmin: "Change the xquads plan, delete files you no longer use, or connect your own bucket.",
       dailyFull: "Today's uploads reached {{limit}}. You can upload again in a few hours.",
       connectBucket: "Connect a bucket",
     },
@@ -20963,7 +20960,7 @@ export const en = {
     control: {
       notice: "Programs on {{name}}'s computer can see the screen and what you type or paste.",
     },
-    /** The ⓘ beside the control line, on agentes.chat Cloud only (ADR 0076). */
+    /** The ⓘ beside the control line, on xquads Cloud only (ADR 0076). */
     session: {
       check: "Safety checks",
       screening:
@@ -21164,7 +21161,7 @@ export const en = {
       /** The buttons that turn them on follow. */
       screensOffOne: "Screens are off on {{computer}}.",
       screensMissing: "{{computer}} can't show screens yet. On it:",
-      outdated: "Update agentes on {{computer}} to see {{name}}'s screen.",
+      outdated: "Update xquads on {{computer}} to see {{name}}'s screen.",
       noScreen: "{{name}} has no screen to show here",
       noScreenHelp: "Allow the screen or the browser in Tools and access.",
       noComputer: "Choose a computer for {{name}}.",
@@ -21339,7 +21336,7 @@ export const en = {
       browser: "Browser",
       screen: "Computer screen",
       terminal: "Terminal",
-      agentes: "agentes",
+      agentes: "xquads",
       thinking: "Thinking",
       inside: "{{program}} · {{detail}}",
     },
@@ -22140,7 +22137,7 @@ export const en = {
     },
     action: {
       signIn: "Sign in",
-      open: "Open agentes.chat",
+      open: "Open xquads",
       latest: "Open the latest version",
       file: "Open the file",
       retry: "Try again",
@@ -22383,7 +22380,7 @@ export const en = {
       /** Drawn large over the sky: the word itself, in capitals. */
       word: "BETA",
       title: "You're early. We're glad.",
-      text: "agentes.chat is in beta: you can already do real work with it, and we're still polishing.",
+      text: "xquads is in beta: you can already do real work with it, and we're still polishing.",
       weekly: {
         title: "It gets better every week",
         text: "New things and fixes come out all the time.",
@@ -22425,7 +22422,7 @@ export const en = {
     mark: "Beta",
     open: "Send feedback",
     ask: "What was missing, broke or got in your way?",
-    goesCloud: "What you write goes by email to the agentes.chat team, who may use an AI assistant to look into it.",
+    goesCloud: "What you write goes by email to the xquads team, who may use an AI assistant to look into it.",
     goesServer: "What you write goes by email to whoever runs this server.",
     placeholder: "Write it your way",
     /** The last entry of a right-click menu: it opens this form about what was clicked. */
@@ -22460,7 +22457,7 @@ export const en = {
       /** The row's name for screen readers. */
       group: "Report about the app",
       ready: "<b>Report ready</b>: {{summary}}",
-      goesCloud: "Goes in your name to the agentes.chat team",
+      goesCloud: "Goes in your name to the xquads team",
       goesServer: "Goes in your name to whoever runs this server",
       see: "See the report",
       hide: "Close the report",
@@ -22468,7 +22465,7 @@ export const en = {
       notNow: "Not now",
       /** Under the opened report. */
       answer: "The answer comes to your email.",
-      sentCloud: "<b>Report sent</b> to the agentes.chat team",
+      sentCloud: "<b>Report sent</b> to the xquads team",
       sentServer: "<b>Report sent</b> to whoever runs this server",
       /** It went with the reply: the person chose Always send. */
       sentAuto: "<b>Report sent without asking</b>: {{summary}}",
@@ -22478,11 +22475,11 @@ export const en = {
       askFirst: "Ask before sending",
     },
   },
-  /** "Send a report" on a self-hosted server: what the agentes.chat team gets, shown in full before it goes. */
+  /** "Send a report" on a self-hosted server: what the xquads team gets, shown in full before it goes. */
   problemReport: {
     button: "Send a report",
-    title: "Send a report to agentes.chat",
-    lead: "The agentes.chat team gets: versions, which settings are set (never their values), what failed, and the last lines of the logs. No messages, pages, names or keys.",
+    title: "Send a report to xquads",
+    lead: "The xquads team gets: versions, which settings are set (never their values), what failed, and the last lines of the logs. No messages, pages, names or keys.",
     noteLabel: "What happened? (optional)",
     notePlaceholder: "What you were doing when it stopped",
     emailLabel: "Email for a reply (optional)",
@@ -22500,16 +22497,16 @@ export const en = {
     copyCode: "Copy code",
     done: "Done",
     noLogComputer: "{{computer}} didn't answer, so its log isn't included.",
-    oldRunner: "The agentes.chat app on {{computer}} is too old to include its log. Update it there to include it.",
+    oldRunner: "The xquads app on {{computer}} is too old to include its log. Update it there to include it.",
     noServerLines: "The server's log lines are included only when the installation's owner sends a report.",
     off: "Sending is off on this server (`PROBLEM_REPORT_URL=off`). Copy the report to share it.",
     errorRate: "Too many reports in a short time. Try again in {{minutes}} min, or copy the report.",
-    errorUnreachable: "agentes.chat didn't answer. Try again, or copy the report.",
-    errorRefused: "agentes.chat didn't accept this report (it may be from an older version). Copy the report instead.",
+    errorUnreachable: "xquads didn't answer. Try again, or copy the report.",
+    errorRefused: "xquads didn't accept this report (it may be from an older version). Copy the report instead.",
     errorPreview: "Couldn't gather the details: {{reason}}",
     emailInvalid: "That email doesn't look right. Fix it or leave it empty.",
     settingsTitle: "Something not working?",
-    settingsText: "Send the technical details to the agentes.chat team.",
+    settingsText: "Send the technical details to the xquads team.",
   },
   /** Live files: spreadsheets, presentations and canvases people and agents edit together (ADR 0196). */
   live: {

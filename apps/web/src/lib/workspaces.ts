@@ -82,7 +82,7 @@ export interface WorkspaceGroup {
 }
 
 /** How a server reads in the menu: agentes.chat for the Cloud, its host otherwise. */
-export const serverLabel = (server: string) => (server === CLOUD_SERVER ? "agentes.chat" : serverHost(server));
+export const serverLabel = (server: string) => (server === CLOUD_SERVER ? "xquads" : serverHost(server));
 
 /**
  * Whether the workspace menus offer New workspace, made on the server open now: when the person may make one there (on

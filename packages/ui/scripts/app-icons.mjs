@@ -36,7 +36,23 @@ import {
 } from "./app-icons/scenes.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../../..");
+/**
+ * The icons the apps ship with are xquads', drawn from its brand kit, not from these scenes: the web's defaults
+ * (favicon.ico, apple-touch-icon.png, icon-512.png and the default pick's app-icons/night.*) and the phone's shipped
+ * icon (its `PHONE_APP_ICON_ID` folder). This script leaves them as they are and draws only the others.
+ */
+const BRAND_FILES = new Set([
+  "apps/web/public/favicon.ico",
+  "apps/web/public/apple-touch-icon.png",
+  "apps/web/public/icon-512.png",
+  "apps/web/public/app-icons/night.ico",
+  "apps/web/public/app-icons/night.png",
+]);
+const isBrand = (path) =>
+  BRAND_FILES.has(path) || path.startsWith(`apps/mobile/assets/app-icons/${PHONE_APP_ICON_ID}/`);
+
 function write(path, data) {
+  if (isBrand(path)) return;
   const full = join(ROOT, path);
   mkdirSync(dirname(full), { recursive: true });
   writeFileSync(full, data);

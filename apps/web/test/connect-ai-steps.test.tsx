@@ -904,7 +904,7 @@ describe("Conectar uma IA: one picker, plans first", () => {
     await choose("ChatGPT");
     expect(dialog.textContent).toContain("O Codex ainda não está no MacBook.");
     await choose("Kimi Code");
-    expect(dialog.textContent).toContain("Atualize o agentes no computador para usar a chave de um plano");
+    expect(dialog.textContent).toContain("Atualize o xquads no computador para usar a chave de um plano");
     await click(within(dialog).getByRole("button", { name: "Usar uma chave de API agora" }));
     expect(payWith(dialog, "Com chave de API").getAttribute("aria-checked")).toBe("true");
   });
@@ -1051,7 +1051,7 @@ describe("Conectar uma IA: one picker, plans first", () => {
     expect(calls(p.state, "machines.askTool")).toHaveLength(1);
     // An app too old to switch from afar: update it there. On a server, the command too, behind "Prefiro no Terminal".
     p = await panel({ os: "linux", mode: "system" }, "Servidor");
-    expect(p.dialog.textContent).toContain("Atualize o app do agentes.chat no Servidor para ligar daqui.");
+    expect(p.dialog.textContent).toContain("Atualize o app do xquads no Servidor para ligar daqui.");
     expect(p.dialog.textContent).toContain("Prefiro no Terminal");
     expect(p.dialog.textContent).toContain("sudo agentes-runner tools enable codex");
     expect(p.button("Ligar o Codex")).toBeNull();

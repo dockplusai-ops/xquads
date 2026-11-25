@@ -1,7 +1,7 @@
 {
   "app": {
-    "name": "agentes",
-    "tabTitle": "agentes.chat · Twój zespół i twoi agenci w jednej rozmowie"
+    "name": "xquads",
+    "tabTitle": "xquads · Twój zespół i twoi agenci w jednej rozmowie"
   },
   "common": {
     "close": "Zamknij",
@@ -29,7 +29,7 @@
     "overLimit": "Tekst ma {{length}} znaków, a limit to {{max}}. Skróć go.",
     "ourSide": "Coś poszło nie tak po naszej stronie. Spróbuj ponownie za chwilę.",
     "signedOut": "Twoja sesja wygasła. Zaloguj się ponownie, aby kontynuować.",
-    "newVersion": "Jest nowa wersja agentes.chat.",
+    "newVersion": "Jest nowa wersja xquads.",
     "reload": "Odśwież",
     "copy": "Kopiuj",
     "copied": "Skopiowano",
@@ -52,7 +52,7 @@
     "notAllowed": "Nie masz do tego uprawnień.",
     "tooMany": "Zbyt wiele prób. Spróbuj później.",
     "offline": "Jesteś offline. Sprawdź połączenie i spróbuj ponownie.",
-    "unreachable": "Nie można teraz połączyć się z agentes.chat. Spróbuj za chwilę."
+    "unreachable": "Nie można teraz połączyć się z xquads. Spróbuj za chwilę."
   },
   "reconnect": {
     "device": "Ponowne łączenie… Brak internetu na tym urządzeniu.",
@@ -570,7 +570,7 @@
     "recommended": "Polecane",
     "free": "Za darmo · open source",
     "cloud": {
-      "name": "agentes.chat Cloud",
+      "name": "xquads Cloud",
       "short": "Zawsze włączony, nic do instalowania.",
       "on": "Komputer agentów zawsze włączony",
       "care": "Aktualizacje i kopie zapasowe po naszej stronie",
@@ -590,7 +590,7 @@
       "address": "Adres serwera",
       "connect": "Połącz",
       "invalid": "To nie jest adres. Wpisz go jak w przeglądarce, na przykład agentes.example.com.",
-      "unreachable": "Nie znaleźliśmy agentes.chat pod {{host}}. Sprawdź adres i czy serwer jest włączony.",
+      "unreachable": "Nie znaleźliśmy xquads pod {{host}}. Sprawdź adres i czy serwer jest włączony.",
       "none": "Nie masz jeszcze?",
       "noneLink": "Zobacz, jak mieć własny, za darmo"
     },
@@ -667,7 +667,7 @@
     "termsMiddle": " i ",
     "privacy": "Polityka prywatności",
     "termsAfter": ".",
-    "poweredBy": "Działa dzięki agentes.chat",
+    "poweredBy": "Działa dzięki xquads",
     "signOut": "Wyloguj się",
     "earlyAccess": {
       "otherEmail": "To zaproszenie jest dla innego adresu. Zarejestruj się adresem, na który zostało wysłane.",
@@ -714,11 +714,11 @@
       "openMail": "Otwórz {{app}}",
       "ownerWaits": "Ten serwer czeka na swojego właściciela.",
       "ownerWaitsLead": "Otwórz link właściciela tego serwera (kończy się na /owner#claim=…), na tym komputerze lub na telefonie.",
-      "noPassword": "To konto loguje się z aplikacji agentes.chat.",
+      "noPassword": "To konto loguje się z aplikacji xquads.",
       "noPasswordLead": "Na komputerze, na którym działa ten serwer, otwórz aplikację i wybierz Dodaj hasło w Ustawienia › Twoje konto.",
       "backToSignIn": "Wróć do logowania",
       "backToAccount": "Wróć do {{name}}",
-      "toAuthorizeApp": "Żeby połączyć aplikację z agentes.chat."
+      "toAuthorizeApp": "Żeby połączyć aplikację z xquads."
     },
     "desktop": {
       "browser": "Kontynuuj w przeglądarce",
@@ -729,11 +729,11 @@
       "otherServer": "Użyj innego serwera",
       "opening": "Otwieranie {{provider}}…",
       "confirm": "To twoja aplikacja?",
-      "confirmLead": "Ten kod powinien zgadzać się z kodem pokazanym przez aplikację agentes.chat na twoim komputerze.",
+      "confirmLead": "Ten kod powinien zgadzać się z kodem pokazanym przez aplikację xquads na twoim komputerze.",
       "confirmYes": "Tak, zaloguj aplikację",
       "confirmNo": "To nie ja",
       "done": "Wszystko gotowe.",
-      "doneLead": "Zalogowano w aplikacji agentes. Możesz zamknąć tę kartę.",
+      "doneLead": "Zalogowano w aplikacji xquads. Możesz zamknąć tę kartę.",
       "expired": "Ta prośba wygasła.",
       "expiredLead": "Wróć do aplikacji i ponownie wybierz {{provider}}.",
       "handover": "Logowanie twoim kontem z drugiego urządzenia…",
@@ -753,19 +753,19 @@
     },
     "desktopOwner": {
       "continue": "Kontynuuj tutaj ({{device}})",
-      "text": "agentes.chat zostało skonfigurowane na tym urządzeniu ({{device}}): hasło nie jest potrzebne.",
+      "text": "xquads zostało skonfigurowane na tym urządzeniu ({{device}}): hasło nie jest potrzebne.",
       "gone": "Właściciel tego serwera usunął swoje konto, więc „Kontynuuj tutaj ({{device}})” nie może nikogo zalogować. Zaloguj się zamiast tego własnym e-mailem.",
-      "none": "W agentes.chat na tym urządzeniu ({{device}}) nie zostało żadne konto. Utwórz nowego właściciela w oknie, które się otworzyło."
+      "none": "W xquads na tym urządzeniu ({{device}}) nie zostało żadne konto. Utwórz nowego właściciela w oknie, które się otworzyło."
     },
     "server": {
       "into": "Logowanie do <b>{{server}}</b>",
-      "intoHere": "Logowanie do agentes.chat <b>na tym urządzeniu ({{device}})</b>",
-      "intoCloud": "Logowanie do <b>agentes.chat Cloud</b>",
+      "intoHere": "Logowanie do xquads <b>na tym urządzeniu ({{device}})</b>",
+      "intoCloud": "Logowanie do <b>xquads Cloud</b>",
       "change": "Zmień serwer"
     },
     "forgotHere": {
       "ownerTitle": "Tutaj nie potrzebujesz hasła.",
-      "ownerLead": "agentes.chat jest zainstalowany na tym urządzeniu ({{device}}). Wejdź tutaj, a potem ustaw nowe hasło.",
+      "ownerLead": "xquads jest zainstalowany na tym urządzeniu ({{device}}). Wejdź tutaj, a potem ustaw nowe hasło.",
       "notOwner": "To nie konto osoby, która go zainstalowała? Poproś właściciela swojego workspace o link do nowego hasła.",
       "title": "Ten serwer nie wysyła e-maili.",
       "lead": "Poproś właściciela swojego workspace o link do nowego hasła. Tworzy go w Członkach, a link działa 1 godzinę.",
@@ -1025,7 +1025,7 @@
         "edit": "Edytuj awatar",
         "upload": "Prześlij zdjęcie",
         "area": "Czym się zajmujesz?",
-        "areaHint": "Opcjonalnie. Tylko po to, żebyśmy wiedzieli, kto używa agentes.chat."
+        "areaHint": "Opcjonalnie. Tylko po to, żebyśmy wiedzieli, kto używa xquads."
       },
       "area": {
         "options": {
@@ -1105,7 +1105,7 @@
         "asleep": "Śpi do czasu planu",
         "price": "<b>Plan {{name}}</b> · {{price}} miesięcznie",
         "name": "<b>Plan {{name}}</b>",
-        "generic": "Plan agentes.chat",
+        "generic": "Plan xquads",
         "cancel": "Zrezygnuj w dowolnej chwili",
         "cta": "Włącz zespół",
         "all": "Zobacz wszystkie plany",
@@ -1176,9 +1176,9 @@
     },
     "yourCompany": "twoja firma",
     "purpose": {
-      "title": "Do czego będziesz używać agentes.chat?",
+      "title": "Do czego będziesz używać xquads?",
       "lead": "Tryb przestrzeni roboczej możesz zmienić w każdej chwili w Ustawieniach, nic nie tracąc.",
-      "pick": "Wybierz, jak chcesz widzieć agentes.chat.",
+      "pick": "Wybierz, jak chcesz widzieć xquads.",
       "switchTitle": "Zmień, kiedy chcesz.",
       "switchText": "Tryb przestrzeni roboczej zmienisz w Ustawieniach i nic nie przepadnie.",
       "personal": "Dla mnie",
@@ -1262,7 +1262,7 @@
         "leadDots": "Dzięki MCP twoja kropka ma dostęp do tej przestrzeni roboczej przez wtyczkę dodaną w ChatGPT i sama utworzy tu agentów.",
         "howTo": "Jak połączyć, aplikacja po aplikacji",
         "paste": "Wklej tę prośbę do aplikacji:",
-        "prompt": "Użyj serwera MCP agentes.chat, który właśnie połączyłeś ({{url}}), aby przenieść to, co masz, do agentes.chat. Najpierw wywołaj import_summary, aby zobaczyć, co już tam jest, i niczego nie zduplikować. Potem dla każdego agenta, instrukcji, umiejętności i rutyny, które masz, utwórz odpowiednik za pomocą create_agent, create_skill i create_routine, a to, co każdy agent ma zapamiętać, zapisz za pomocą add_memory.",
+        "prompt": "Użyj serwera MCP xquads, który właśnie połączyłeś ({{url}}), aby przenieść to, co masz, do xquads. Najpierw wywołaj import_summary, aby zobaczyć, co już tam jest, i niczego nie zduplikować. Potem dla każdego agenta, instrukcji, umiejętności i rutyny, które masz, utwórz odpowiednik za pomocą create_agent, create_skill i create_routine, a to, co każdy agent ma zapamiętać, zapisz za pomocą add_memory.",
         "promptLabel": "Prośba do twojej aplikacji AI",
         "copy": "Kopiuj prośbę",
         "copied": "Teraz wklej ją do swojej aplikacji AI.",
@@ -1835,8 +1835,8 @@
     "keyStep": {
       "title": "Z jakiego AI będą korzystać?",
       "lead": "Zaloguj się swoim planem AI: bez klucza API.",
-      "paid": "Twój plan agentes.chat jest aktywny. Ich komputer jest w drodze.",
-      "confirming": "Potwierdzamy płatność za plan agentes.chat tej przestrzeni roboczej.",
+      "paid": "Twój plan xquads jest aktywny. Ich komputer jest w drodze.",
+      "confirming": "Potwierdzamy płatność za plan xquads tej przestrzeni roboczej.",
       "leadNoComputer": "Twoi agenci myślą z kluczem API albo z twoim planem AI na komputerze, który podłączysz."
     },
     "jev": {
@@ -1847,7 +1847,7 @@
       "title": "Limit wydatków na agenta",
       "label": "Miesięczny limit na agenta, w dolarach",
       "perMonth": "/mies.",
-      "noteKey": "Tylko za użycie API, rozliczane przez dostawcę klucza, a nie przez agentes.chat. Gdy agent go osiągnie, zatrzymuje się i daje ci znać. Plany się tu nie liczą.",
+      "noteKey": "Tylko za użycie API, rozliczane przez dostawcę klucza, a nie przez xquads. Gdy agent go osiągnie, zatrzymuje się i daje ci znać. Plany się tu nie liczą.",
       "notePlatform": "Tylko za użycie API. Gdy agent go osiągnie, zatrzymuje się i daje ci znać."
     },
     "keySite": "Utwórz klucz na {{site}}.",
@@ -1906,7 +1906,7 @@
     },
     "team": {
       "title": "Kto jeszcze z tobą pracuje?",
-      "payment": "Możesz zaprosić zespół, gdy wybierzesz plan agentes.chat.",
+      "payment": "Możesz zaprosić zespół, gdy wybierzesz plan xquads.",
       "lead": "Zaproś ich e-mailem albo udostępnij link.",
       "leadLink": "Udostępnij im link z zaproszeniem.",
       "emails": "Adresy e-mail",
@@ -2025,7 +2025,7 @@
     "reload": "Odśwież",
     "search": "Szukaj lub zapytaj…",
     "look": "Prawy przycisk myszy",
-    "lookOurs": "agentes.chat",
+    "lookOurs": "xquads",
     "lookSystem": "Systemowe",
     "markRead": "Oznacz jako przeczytane",
     "muteChannel": "Wycisz kanał",
@@ -2050,8 +2050,8 @@
     "copied": "Skopiowano. Wklej to w terminalu.",
     "mac": {
       "why": "<b>Aplikacja jest w wersji beta.</b> Dlatego za pierwszym razem Mac prosi o potwierdzenie:",
-      "drag": "Przeciągnij agentes.chat do folderu Aplikacje.",
-      "dragLong": "Otwórz pobrany plik i przeciągnij agentes.chat do folderu Aplikacje.",
+      "drag": "Przeciągnij xquads do folderu Aplikacje.",
+      "dragLong": "Otwórz pobrany plik i przeciągnij xquads do folderu Aplikacje.",
       "blocked": "Otwórz aplikację i kliknij Gotowe.",
       "blockedSub": "Nie klikaj Przenieś do kosza.",
       "settings": "W Ustawieniach systemowych › Prywatność i ochrona kliknij Otwórz mimo to.",
@@ -2078,17 +2078,17 @@
       "why": "Dla Ubuntu, Debiana i podobnych systemów (x64). Linux o nic więcej nie pyta:",
       "apt": "Zainstaluj plik .deb dwukrotnym kliknięciem albo z terminala.",
       "aptLong": "Kliknij dwukrotnie pobrany plik i kliknij Zainstaluj albo wklej to w terminalu:",
-      "open": "Otwórz agentes.chat z listy aplikacji.",
+      "open": "Otwórz xquads z listy aplikacji.",
       "otherTitle": "Używasz Archa, Fedory lub innego systemu, który nie obsługuje .deb?",
       "otherText": "Pobierz AppImage: działa w każdej dystrybucji i sam się aktualizuje. Potem wklej to w terminalu, w folderze, w którym go zapisano:",
       "appImage": "Pobierz AppImage"
     },
     "page": {
-      "docTitle": "Pobierz aplikację · agentes.chat",
-      "title": "Pobierz aplikację agentes.chat",
+      "docTitle": "Pobierz aplikację · xquads",
+      "title": "Pobierz aplikację xquads",
       "beta": "Beta",
       "text": "Twoja przestrzeń robocza we własnym oknie, z powiadomieniami systemu. Jednym kliknięciem agenci pracują na tym komputerze, we własnych folderach.",
-      "open": "Otwórz agentes.chat",
+      "open": "Otwórz xquads",
       "version": "Wersja {{version}}",
       "versionSize": "Wersja {{version}} · {{size}}",
       "soon": "Nie ma jeszcze wersji na {{system}}.",
@@ -2098,7 +2098,7 @@
       "installOn": "Zainstaluj na {{system}}",
       "system": "System",
       "whyTitle": "Dlaczego komputer prosi o potwierdzenie?",
-      "whyText": "agentes.chat jest w wersji beta: wersja na Maca nie jest jeszcze notaryzowana przez Apple, a instalator na Windows nie ma jeszcze certyfikatu Microsoft. Bez nich komputer raz pyta, zanim otworzy aplikację pobraną z internetu. Potem otwiera się od razu i sama się aktualizuje. Przed końcem bety ten krok zniknie.",
+      "whyText": "xquads jest w wersji beta: wersja na Maca nie jest jeszcze notaryzowana przez Apple, a instalator na Windows nie ma jeszcze certyfikatu Microsoft. Bez nich komputer raz pyta, zanim otworzy aplikację pobraną z internetu. Potem otwiera się od razu i sama się aktualizuje. Przed końcem bety ten krok zniknie.",
       "openSource": "Otwarty kod źródłowy",
       "onlyHere": "Publikowana tylko tutaj i w wydaniach projektu",
       "signedUpdates": "Podpisane aktualizacje"
@@ -2415,7 +2415,7 @@
     "addAccount": "Dodaj konto",
     "addAccountHint": "Zaloguj się na inne konto bez wylogowywania z tego",
     "yourServer": "Twój serwer",
-    "serverHere": "agentes.chat na tym urządzeniu ({{device}})",
+    "serverHere": "xquads na tym urządzeniu ({{device}})",
     "serverStopped": "zatrzymany",
     "serverOffline": "offline od {{time}}",
     "serverSignedOut": "niezalogowano",
@@ -2592,9 +2592,9 @@
     "googlePlay": "Google Play"
   },
   "openOnPhone": {
-    "qr": "Kod QR do logowania w aplikacji agentes",
+    "qr": "Kod QR do logowania w aplikacji xquads",
     "making": "Tworzę kod…",
-    "stepApp": "Zainstaluj aplikację agentes na telefonie.",
+    "stepApp": "Zainstaluj aplikację xquads na telefonie.",
     "stepTailscale": "Zainstaluj Tailscale na telefonie i zaloguj się tym samym kontem Tailscale co ten serwer.",
     "appStore": "App Store",
     "googlePlay": "Google Play",
@@ -2603,12 +2603,12 @@
     "private": "Kto zeskanuje ten kod, zaloguje się jako ty.",
     "failed": "Nie udało się utworzyć kodu.",
     "localOnly": "Ten serwer otwiera się tylko na komputerze, na którym działa, więc telefon się do niego nie dostanie.",
-    "localOnlyHow": "W aplikacji agentes.chat na tamtym komputerze włącz Dostęp z telefonu i dla zespołu w Preferencje › Serwery. Potem wróć tutaj.",
+    "localOnlyHow": "W aplikacji xquads na tamtym komputerze włącz Dostęp z telefonu i dla zespołu w Preferencje › Serwery. Potem wróć tutaj.",
     "localOnlyHere": "Włącz Dostęp z telefonu i dla zespołu. Potem wróć tutaj."
   },
   "surface": {
     "link": {
-      "consent": "{{assistant}} od agentes.chat może pisać do ciebie na {{surface}} w sprawie twoich przestrzeni roboczych i dzwonić tylko wtedy, gdy coś jest pilne i na to pozwolisz. Napisz stop, aby to wyłączyć.",
+      "consent": "{{assistant}} od xquads może pisać do ciebie na {{surface}} w sprawie twoich przestrzeni roboczych i dzwonić tylko wtedy, gdy coś jest pilne i na to pozwolisz. Napisz stop, aby to wyłączyć.",
       "title": "Rozmawiaj z {{assistant}} w {{surface}}",
       "qr": "Kod QR, który otwiera {{surface}} z wpisanym kodem",
       "making": "Tworzenie kodu",
@@ -3194,8 +3194,8 @@
       "greetingPersonal": "Cześć, tu {{name}}. Skonfiguruję z tobą twoich agentów.",
       "lead": "Tworzę agentów, podłączam aplikacje i zapraszam ludzi. Nic się nie zmienia bez twojej prośby i robię tylko to, co ty możesz zrobić.",
       "leadPersonal": "Tworzę twoich agentów i podłączam twoje aplikacje. Nic się nie zmienia bez twojej prośby.",
-      "heldLead": "Wybierz, czym zajmuje się twoja firma, a zespół pojawi się tutaj. Agenci zaczną pracować, gdy workspace będzie mieć plan agentes.chat.",
-      "heldLeadPersonal": "Wybierz, w czym chcesz pomocy, a twoi agenci pojawią się tutaj. Zaczną pracować, gdy będziesz mieć plan agentes.chat.",
+      "heldLead": "Wybierz, czym zajmuje się twoja firma, a zespół pojawi się tutaj. Agenci zaczną pracować, gdy workspace będzie mieć plan xquads.",
+      "heldLeadPersonal": "Wybierz, w czym chcesz pomocy, a twoi agenci pojawią się tutaj. Zaczną pracować, gdy będziesz mieć plan xquads.",
       "connect": {
         "title": "Podłącz AI dla zespołu",
         "titlePersonal": "Podłącz AI dla swoich agentów",
@@ -3689,7 +3689,7 @@
       "plans_not_yours": "{{plan}} tutaj jest tylko dla {{owner}}. Połącz własny, a odpowiem.",
       "plan_unattended": "{{name}} nie odpowie: prośba nie pochodzi od osoby, a plan workspace'u odpowiada tylko swojemu właścicielowi.",
       "runner_outdated": "{{name}} nie może teraz odpowiedzieć: program na komputerze planu wymaga aktualizacji.",
-      "plan_tools": "{{name}} zatrzymał się przed odpowiedzią: AI planu na tym komputerze nie pozostała przy narzędziach agentes.chat.",
+      "plan_tools": "{{name}} zatrzymał się przed odpowiedzią: AI planu na tym komputerze nie pozostała przy narzędziach xquads.",
       "model_limit": "{{name}} nie może teraz odpowiedzieć: {{model}} osiągnął własny limit w planie. Pozostałe modele planu nadal działają.",
       "model_region": "{{name}} nie może odpowiedzieć: {{model}} wymaga włączonego regionu Global w OpenCode (Settings › Privacy).",
       "model_off": "{{name}} nie może odpowiedzieć: OpenCode odrzucił {{model}} z tym kluczem. Włącz model albo konto w OpenCode albo wybierz inny model.",
@@ -3700,16 +3700,16 @@
     "kept": {
       "title": "Zachowałem twoją wiadomość",
       "wait": {
-        "payment": "Odpowiem tutaj, gdy workspace będzie mieć plan agentes.chat.",
-        "unpaid": "Odpowiem tutaj, gdy płatność za plan agentes.chat przejdzie.",
-        "ended": "Odpowiem tutaj, gdy workspace znów zasubskrybuje agentes.chat."
+        "payment": "Odpowiem tutaj, gdy workspace będzie mieć plan xquads.",
+        "unpaid": "Odpowiem tutaj, gdy płatność za plan xquads przejdzie.",
+        "ended": "Odpowiem tutaj, gdy workspace znów zasubskrybuje xquads."
       },
-      "askAdmin": "Odpowiem tutaj, gdy administrator załatwi plan agentes.chat.",
+      "askAdmin": "Odpowiem tutaj, gdy administrator załatwi plan xquads.",
       "plan": "Plan daje komputer agentów. AI to to, za które już płacisz: Claude, ChatGPT i inne albo klucz API.",
       "activeTitle": "Plan aktywny",
       "activeLine": "Podłącz AI, a {{name}} odpowie tutaj.",
       "receipt": "Zachowano",
-      "channel": "Zachowano. Agenci odpowiedzą, gdy workspace będzie mieć plan agentes.chat."
+      "channel": "Zachowano. Agenci odpowiedzą, gdy workspace będzie mieć plan xquads."
     },
     "receipt": "Nikt nie odpowie: brak podłączonego AI",
     "notYours": {
@@ -3740,7 +3740,7 @@
       "gitMissing": "{{program}} potrzebuje Git for Windows na {{computer}}.",
       "getGit": "Pobierz Git for Windows",
       "cantStart": "{{program}} jest na {{computer}}, ale się nie uruchamia: {{message}}",
-      "outdated": "Zaktualizuj aplikację agentes.chat na {{computer}}, żeby instalować stąd.",
+      "outdated": "Zaktualizuj aplikację xquads na {{computer}}, żeby instalować stąd.",
       "asked": "Prośba wysłana. {{name}} dostanie przycisk do instalacji.",
       "runThis": "Uruchom tam to polecenie, aby go zainstalować.",
       "missingSystem": "{{program}} nie ma jeszcze na {{computer}} dla agentów, z których każdy pracuje jako osobny użytkownik. Uruchom tam to polecenie, aby zainstalować go dla wszystkich.",
@@ -3827,8 +3827,8 @@
         "unshare": "Tylko dla mnie"
       }
     },
-    "billing": "Plan loguje się na komputerze workspace'u, a komputer jest dostępny z aktywnym planem agentes.chat.",
-    "billingWeb": "Wybierz plan w przeglądarce, na agentes.chat.",
+    "billing": "Plan loguje się na komputerze workspace'u, a komputer jest dostępny z aktywnym planem xquads.",
+    "billingWeb": "Wybierz plan w przeglądarce, na xquads.",
     "orPayGo": "Albo płać za użycie",
     "pay": {
       "label": "Jak płacisz?",
@@ -3899,7 +3899,7 @@
       "untested": "Żaden model {{name}} nie przeszedł jeszcze testu.",
       "testModels": "Przetestuj modele",
       "savedUnchecked": "Zapisano, ale {{provider}} nie odpowiedział, więc nie mogliśmy sprawdzić klucza. Jeśli zawiedzie, rozmowa powie dlaczego.",
-      "closed": "Klucze API otwierają się z planem agentes.chat workspace'u.",
+      "closed": "Klucze API otwierają się z planem xquads workspace'u.",
       "notPlan": "Klucz planu do kodowania wpisz w jego własnej opcji powyżej.",
       "billing": "Włącz rozliczenia dla projektu tego klucza. Bez rozliczeń Google może wykorzystywać to, co wysyłają twoi agenci.",
       "privacy": "{{provider}} przekazuje to, co wysyłają twoi agenci, firmie, która tworzy lub hostuje model, zgodnie z warunkami i ustawieniami prywatności {{provider}}."
@@ -4650,7 +4650,7 @@
     "clearsAt": "Zniknie o {{time}}",
     "clearsOn": "Zniknie {{when}}",
     "help": {
-      "auto": "Online, gdy agentes.chat jest otwarte.",
+      "auto": "Online, gdy xquads jest otwarte.",
       "away": "Nie ma cię przez chwilę: inni wiedzą, że odpowiedź może potrwać.",
       "busy": "Wszyscy widzą, że lepiej teraz nie przeszkadzać.",
       "out": "Poza pracą (urlop, dzień wolny): wszyscy to widzą, dopóki twój status nie zniknie.",
@@ -5225,7 +5225,7 @@
       "removeText_other": "Jego {{count}} elementu zniknie z Vault, a twoi agenci przestaną ich używać. W {{name}} nic się nie zmieni.",
       "removed": "Rozłączono {{name}}",
       "listOf": "Połączenia z {{name}}",
-      "note": "Twoi agenci czytają to, co tam jest, gdy tego potrzebują. Do agentes.chat nic nie jest kopiowane poza nazwami i adresami.",
+      "note": "Twoi agenci czytają to, co tam jest, gdy tego potrzebują. Do xquads nic nie jest kopiowane poza nazwami i adresami.",
       "error": {
         "auth_failed": "Odmowa logowania",
         "locked": "Złe hasło",
@@ -6076,7 +6076,7 @@
       "eyebrow": "Prośba o zatwierdzenie",
       "close": "Zamknij",
       "exact": "Dokładna akcja",
-      "builtIn": "Narzędzie agentes.chat",
+      "builtIn": "Narzędzie xquads",
       "orgConnector": "Konektor twojej przestrzeni roboczej",
       "bound": "Tylko dla tych wartości: każda zmiana wymaga nowego zatwierdzenia.",
       "why": "Dlaczego",
@@ -6169,7 +6169,7 @@
     "noInstructions_female": "{{name}} nie ma jeszcze instrukcji. Napisz, jak ma pracować.",
     "savedToast": "Zapisano zmiany agenta {{name}}.",
     "savedToast_female": "Zapisano zmiany agenta {{name}}.",
-    "builtinName": "agentes",
+    "builtinName": "xquads",
     "builtinNote": "wbudowane uprawnienia",
     "connectHint": "Połącz usługi",
     "subtitle": "{{role}} · właściciel: <b>{{owner}}</b> · {{model}} {{key}}",
@@ -6559,11 +6559,11 @@
       "steps": {
         "title": "Został jeden krok, na samym komputerze {{computer}}",
         "waiting": "Czekanie",
-        "one": "Kliknij ikonę agentes.chat obok zegara",
+        "one": "Kliknij ikonę xquads obok zegara",
         "two": "Preferencje",
         "three": "Włącz Przeglądarkę",
         "done": "To wszystko. Ta strona zauważy to sama, bez odświeżania.",
-        "menuOpen": "Otwórz agentes",
+        "menuOpen": "Otwórz xquads",
         "menuPrefs": "Preferencje…",
         "menuPause": "Wstrzymaj",
         "menuQuit": "Zakończ",
@@ -6785,7 +6785,7 @@
       "setAll": "Zmień wszystkie",
       "connectors": "Konektory {{org}}",
       "connectorsPersonal": "Twoje konektory",
-      "builtin": "Wbudowane w agentes",
+      "builtin": "Wbudowane w xquads",
       "noMatch": "Nic nie pasuje do „{{q}}”",
       "noneHere": "Nic w tym filtrze",
       "library": "Biblioteka umiejętności",
@@ -7320,10 +7320,10 @@
       "afterPlanNext": "To kolejny krok po planie.",
       "plan": {
         "todo": "Włącz zespół.",
-        "todoDesc": "Z planem agentes.chat agenci zaczynają pracować.",
+        "todoDesc": "Z planem xquads agenci zaczynają pracować.",
         "action": "Zobacz plany",
         "todoPersonal": "Włącz swoich agentów.",
-        "todoDescPersonal": "Z planem agentes.chat twoi agenci zaczynają pracować."
+        "todoDescPersonal": "Z planem xquads twoi agenci zaczynają pracować."
       },
       "about": {
         "action": "Opowiedz",
@@ -8485,13 +8485,13 @@
     "crashTitle": "Coś poszło nie tak",
     "crashText": "Odśwież stronę, żeby kontynuować.",
     "crashCode": "Jeśli poprosisz o pomoc, podaj kod {{id}}.",
-    "unreachableTitle": "Brak połączenia z agentes.chat",
+    "unreachableTitle": "Brak połączenia z xquads",
     "unreachableText": "Może trwa ponowne uruchamianie. Ta strona otworzy się sama, gdy tylko wszystko wróci.",
     "offlineTitle": "Jesteś offline",
     "offlineText": "Ta strona otworzy się sama, gdy wrócisz do sieci.",
     "unknownHostTitle": "Ten adres nie jest jeszcze skonfigurowany",
     "unknownHostText": "Jeśli został właśnie podłączony, spróbuj ponownie za kilka minut.",
-    "unknownHostTab": "Adres nieskonfigurowany · agentes.chat"
+    "unknownHostTab": "Adres nieskonfigurowany · xquads"
   },
   "scopes": {
     "context_read": {
@@ -9628,7 +9628,7 @@
         "pr_opened": "Otwarty PR na GitHubie"
       },
       "issue": {
-        "created": "Zadanie utworzone w agentes"
+        "created": "Zadanie utworzone w xquads"
       },
       "deploy": {
         "succeeded": "Wdrożenie zakończone"
@@ -10360,7 +10360,7 @@
       "title": "Pliki misji",
       "folder": "folder",
       "tabs": "Plik",
-      "missionSub": "Plan i zasady · aktualizowane przez agentes.chat",
+      "missionSub": "Plan i zasady · aktualizowane przez xquads",
       "decisionsSub": "Zatwierdzone decyzje",
       "notesSub": "Notatki: {{executor}}",
       "synced": "zsynchronizowano {{when}}",
@@ -10439,7 +10439,7 @@
       "title": "Nowa misja",
       "text": "Długi projekt dla agenta. Proponuje plan, pracuje na swoim komputerze i prosi w wątku o decyzje i przeglądy.",
       "goal": "Cel",
-      "goalPlaceholder": "Np. zbuduj aplikację mobilną agentes.chat w Expo, na bazie obecnej aplikacji webowej.",
+      "goalPlaceholder": "Np. zbuduj aplikację mobilną xquads w Expo, na bazie obecnej aplikacji webowej.",
       "agent": "Agent",
       "computer": "Komputer",
       "noMachine": "Brak podłączonych",
@@ -11454,7 +11454,7 @@
   },
   "jev": {
     "title": "Jev",
-    "about": "Szybki model od TypeSafe, stworzony do szybkich decyzji. agentes.chat zadaje mu drobne pytania, na przykład kto ma odpowiedzieć. Płacisz bezpośrednio TypeSafe albo przez OpenRouter w tej samej cenie.",
+    "about": "Szybki model od TypeSafe, stworzony do szybkich decyzji. xquads zadaje mu drobne pytania, na przykład kto ma odpowiedzieć. Płacisz bezpośrednio TypeSafe albo przez OpenRouter w tej samej cenie.",
     "lead": "Pomaga twoim agentom działać jak zespół.",
     "how": "Jak działa Jev",
     "why": {
@@ -11681,14 +11681,14 @@
       "antigravity": "Gemini",
       "opencode": "OpenCode",
       "needs": {
-        "keys": "Zaktualizuj agentes na komputerze, żeby używać klucza planu"
+        "keys": "Zaktualizuj xquads na komputerze, żeby używać klucza planu"
       },
       "noComputer": "Konta zostają na połączonym komputerze. Najpierw połącz jeden ze swoich.",
       "addComputer": "Połącz komputer",
       "needsCloud": {
         "online": "{{computer}} uruchamia się ponownie albo łączy się od nowa. To zmieni się samo, gdy wróci.",
         "installing": "{{program}} jest instalowany na komputerze {{computer}}. To zmieni się samo, gdy skończy.",
-        "runnerOld": "Program agentes.chat na komputerze {{computer}} jest nieaktualny, a aktualizacja jest w drodze. To zmieni się samo, gdy się skończy.",
+        "runnerOld": "Program xquads na komputerze {{computer}} jest nieaktualny, a aktualizacja jest w drodze. To zmieni się samo, gdy się skończy.",
         "execOff": "{{computer}} nie może jeszcze uruchomić programu {{program}}. Zajmujemy się tym, a to zmieni się samo.",
         "toolOff": "{{program}} nie jest jeszcze dozwolony na {{computer}}. To po naszej stronie: spróbuj ponownie później.",
         "preparing": "{{computer}} się przygotowuje. To zmieni się samo, gdy skończy.",
@@ -11702,7 +11702,7 @@
     },
     "page": {
       "title": "Twoje plany",
-      "hint": "Każdy plan zostaje na komputerze, na którym go połączono, i ma do niego dostęp każdy, kto obsługuje ten komputer. agentes.chat przechowuje tylko jego nazwę, e-mail i użycie.",
+      "hint": "Każdy plan zostaje na komputerze, na którym go połączono, i ma do niego dostęp każdy, kto obsługuje ten komputer. xquads przechowuje tylko jego nazwę, e-mail i użycie.",
       "emptyTitle": "Korzystaj z planu AI, za który już płacisz",
       "emptyViewer": "Osoba odpowiedzialna za AI w przestrzeni roboczej łączy plan, a on pojawi się tutaj.",
       "connect": "Połącz AI",
@@ -13366,7 +13366,7 @@
     "reasons": {
       "no_computer": "Wybierz połączony komputer w sekcji Komputer, żeby z tego korzystać.",
       "exec_off": "Komputer połączono bez uprawnienia do uruchamiania programów.",
-      "runner_old": "Zaktualizuj program agentes.chat na komputerze, żeby z tego korzystać.",
+      "runner_old": "Zaktualizuj program xquads na komputerze, żeby z tego korzystać.",
       "tool_offOne": "{{program}} jest wyłączony na {{computer}}.",
       "not_installed": "{{program}} nie jest zainstalowany na komputerze {{computer}}.",
       "cant_start": "{{program}} jest na {{computer}}, ale się nie uruchamia.",
@@ -13403,7 +13403,7 @@
     "free": "Darmowy",
     "opencodeFreeHint": "Inne darmowe modele działają przez OpenCode na komputerze agenta.",
     "missingModel": {
-      "app_old": "Zaktualizuj aplikację agentes.chat na komputerze agenta, aby używać {{model}}.",
+      "app_old": "Zaktualizuj aplikację xquads na komputerze agenta, aby używać {{model}}.",
       "cli_old": "{{model}} wymaga nowszej wersji Antigravity CLI na komputerze agenta. Uruchom tam agy update.",
       "plan": "{{model}} jest w planach Google AI Pro i Ultra. Żadne konto Gemini na komputerze agenta nie ma tego planu."
     },
@@ -13997,7 +13997,7 @@
   "storage": {
     "title": "Miejsce na dane",
     "options": "Gdzie przechowywać pliki",
-    "agentes": "Przestrzeń dyskowa agentes.chat",
+    "agentes": "Przestrzeń dyskowa xquads",
     "agentesText": "Twoje pliki zostają w naszej przestrzeni dyskowej, oddzielnie dla każdej przestrzeni roboczej.",
     "server": "Ten serwer",
     "serverText": {
@@ -14008,7 +14008,7 @@
     },
     "showFolder": "Pokaż folder",
     "place": {
-      "agentes": "przestrzeń dyskowa agentes.chat",
+      "agentes": "przestrzeń dyskowa xquads",
       "server": "ten serwer"
     },
     "s3": "Własne miejsce na dane",
@@ -14120,7 +14120,7 @@
       "step": {
         "bucketTitle": "Utwórz bucket",
         "keyTitle": "Utwórz klucz dostępu",
-        "userTitle": "Utwórz użytkownika tylko dla agentes.chat",
+        "userTitle": "Utwórz użytkownika tylko dla xquads",
         "r2Bucket": "W panelu Cloudflare otwórz <b>R2</b> i kliknij <b>Create bucket</b>. Nazwa może być dowolna.",
         "r2Key": "Na stronie R2, w sekcji <b>API Tokens</b>, kliknij <b>Manage</b>, a potem <b>Create API Token</b>. Wybierz uprawnienie <b>Object Read & Write</b> i swój bucket. Na koniec Cloudflare pokaże trzy poniższe wartości tylko raz.",
         "s3Bucket": "W konsoli AWS otwórz <b>S3</b> i kliknij <b>Create bucket</b>. Zapisz sobie wybrany region.",
@@ -14198,11 +14198,11 @@
   },
   "githubApp": {
     "title": "Repozytoria GitHub",
-    "text": "Tam, gdzie zainstalowano aplikację agentes.chat, agenci otwierają pull requesty, issues, komentarze i commity jako aplikacja, z nazwą agenta i osoby, która o to poprosiła.",
-    "install": "Zainstaluj aplikację agentes.chat",
+    "text": "Tam, gdzie zainstalowano aplikację xquads, agenci otwierają pull requesty, issues, komentarze i commity jako aplikacja, z nazwą agenta i osoby, która o to poprosiła.",
+    "install": "Zainstaluj aplikację xquads",
     "installMore": "Zainstaluj na innym koncie",
     "none": "Nie ma jeszcze konta GitHub.",
-    "usingAccount": "Dziś agenci widnieją w GitHub jako {{account}}. Zainstaluj aplikację, aby widnieli jako aplikacja agentes.chat.",
+    "usingAccount": "Dziś agenci widnieją w GitHub jako {{account}}. Zainstaluj aplikację, aby widnieli jako aplikacja xquads.",
     "allRepos": "Wszystkie repozytoria",
     "someRepos": "Wybrane repozytoria",
     "suspended": "Zawieszona na GitHub",
@@ -14211,27 +14211,27 @@
     "remove": "Usuń",
     "removeName": "Usuń {{account}}",
     "removeTitle": "Usunąć aplikację z konta {{account}}?",
-    "removeText": "Aplikacja agentes.chat zostanie odinstalowana z konta {{account}} w GitHub, a agenci przestaną przez nią korzystać z repozytoriów tego konta.",
+    "removeText": "Aplikacja xquads zostanie odinstalowana z konta {{account}} w GitHub, a agenci przestaną przez nią korzystać z repozytoriów tego konta.",
     "removeLast": "To ostatnie konto, więc agenci stracą GitHub, dopóki ktoś nie zainstaluje aplikacji albo nie połączy konta.",
     "removed": "Usunięto aplikację z konta {{account}} i odinstalowano ją w GitHub.",
     "notUninstalled": "Usunięto aplikację tutaj, ale GitHub nie potwierdził odinstalowania z konta {{account}}. Odinstaluj ją tam.",
     "openPage": "Otwórz",
-    "installed": "Aplikacja agentes.chat zainstalowana.",
+    "installed": "Aplikacja xquads zainstalowana.",
     "requested": "Tylko właściciel konta GitHub może zainstalować aplikację. Poproś go, aby zainstalował ją w Konektory › GitHub w tej przestrzeni roboczej.",
     "notVisible": "Twoje konto GitHub nie widzi tej instalacji. Zainstaluj ją z konta, które ma do niej dostęp.",
     "otherWorkspace": "To konto GitHub jest już połączone z inną przestrzenią roboczą. Usuń tam aplikację, zanim zainstalujesz ją tutaj.",
-    "installedOutside": "Aplikacja została zainstalowana na tym koncie GitHub poza agentes.chat. Usuń ją w GitHub i zainstaluj ponownie w Konektory › GitHub.",
+    "installedOutside": "Aplikacja została zainstalowana na tym koncie GitHub poza xquads. Usuń ją w GitHub i zainstaluj ponownie w Konektory › GitHub.",
     "ownerUnknown": "GitHub nie podał, kto jest właścicielem tej organizacji. Osoba zarządzająca serwerem musi dodać do aplikacji GitHub uprawnienie organizacji Members (tylko odczyt), a potem instalujesz ją ponownie.",
     "misconfigured": "Aplikacja GitHub ma na serwerze zły klucz tajny, więc instalacja nie może się zakończyć. Osoba zarządzająca serwerem musi zmienić klucz w ustawieniach aplikacji.",
     "connectAccount": "Połącz konto GitHub",
     "ownerHint": "Właściciel tego serwera może utworzyć aplikację GitHub tutaj, w Konektorach.",
-    "viaApp": "Przez aplikację agentes.chat na kontach {{accounts}}",
-    "disconnectApp": "Aplikacja agentes.chat zostanie też odinstalowana z kont {{accounts}} w GitHub.",
-    "disconnectKeepsApp": "Agenci zostają w GitHub przez aplikację agentes.chat na kontach {{accounts}}.",
-    "keptApp": "Odłączono konto GitHub. Agenci zostają w GitHub przez aplikację agentes.chat.",
+    "viaApp": "Przez aplikację xquads na kontach {{accounts}}",
+    "disconnectApp": "Aplikacja xquads zostanie też odinstalowana z kont {{accounts}} w GitHub.",
+    "disconnectKeepsApp": "Agenci zostają w GitHub przez aplikację xquads na kontach {{accounts}}.",
+    "keptApp": "Odłączono konto GitHub. Agenci zostają w GitHub przez aplikację xquads.",
     "signature": {
-      "forPerson": "{{agent}}, agent pracujący dla {{person}} w agentes.chat",
-      "alone": "{{agent}}, agent w agentes.chat"
+      "forPerson": "{{agent}}, agent pracujący dla {{person}} w xquads",
+      "alone": "{{agent}}, agent w xquads"
     },
     "manifestPage": {
       "title": "Tworzenie aplikacji GitHub",
@@ -16034,7 +16034,7 @@
     "continueInComposio": "Kontynuuj w Composio",
     "github": {
       "how": "Jak agenci docierają do GitHub",
-      "app": "Aplikacja agentes.chat",
+      "app": "Aplikacja xquads",
       "recommended": "Zalecane",
       "appText": "Agenci widnieją jako aplikacja, a repozytoria wybierasz w GitHub.",
       "account": "Konto GitHub",
@@ -16056,11 +16056,11 @@
     "or": "lub",
     "withKey": "Połącz kluczem API",
     "needsKey": "Ten serwer nie obsługuje OAuth. Połącz go kluczem API.",
-    "notApproved": "{{name}} pozwala logować się tylko zatwierdzonym aplikacjom, a agentes.chat jeszcze nie jest zatwierdzony. Jeśli dostaniesz tam klucz API, możesz połączyć się nim.",
+    "notApproved": "{{name}} pozwala logować się tylko zatwierdzonym aplikacjom, a xquads jeszcze nie jest zatwierdzony. Jeśli dostaniesz tam klucz API, możesz połączyć się nim.",
     "serverSaid": "Odpowiedź serwera: {{detail}}",
     "ownClient": {
       "title": "Użyj własnej aplikacji OAuth",
-      "notApproved": "{{name}} wpuszcza tylko zatwierdzone przez siebie aplikacje, a agentes.chat jeszcze do nich nie należy. Możesz połączyć się własną aplikacją.",
+      "notApproved": "{{name}} wpuszcza tylko zatwierdzone przez siebie aplikacje, a xquads jeszcze do nich nie należy. Możesz połączyć się własną aplikacją.",
       "askAdmin": "Administrator może połączyć to aplikacją własną workspace'u.",
       "help": "Utwórz aplikację u dostawcy, zarejestruj w niej ten URI przekierowania i wklej jej identyfikator klienta. Od tej pory każde logowanie tam z workspace'u używa Twojej aplikacji.",
       "guide": {
@@ -16392,7 +16392,7 @@
     "whatIsText": "Hasło tylko dla agentów. Tworzysz je na stronie swojej poczty i możesz je usunąć w dowolnej chwili, bez zmiany własnego hasła.",
     "step": {
       "1": "Otwórz stronę zabezpieczeń swojego konta.",
-      "2": "Utwórz hasło aplikacji o nazwie „agentes”.",
+      "2": "Utwórz hasło aplikacji o nazwie „xquads”.",
       "3": "Skopiuj hasło i wklej je tutaj."
     },
     "openPage": "Otwórz stronę {{name}}",
@@ -16818,7 +16818,7 @@
       "noAssistant": "Asystent w tej przestrzeni roboczej nie ma ustawionej rozmowy z tobą. Wybierz inną przestrzeń roboczą do połączenia.",
       "noWorkspace": "Nie należysz już do tej przestrzeni roboczej. Wybierz inną przestrzeń roboczą do połączenia.",
       "linkGone": "To połączenie już nie czeka: wygasło po 10 minutach albo zostało anulowane. Utwórz nowy kod, aby zacząć od nowa.",
-      "taken": "Ten nadawca jest połączony z innym kontem agentes.chat. Odłącz go tam, a potem wyślij nowy kod.",
+      "taken": "Ten nadawca jest połączony z innym kontem xquads. Odłącz go tam, a potem wyślij nowy kod.",
       "undoGone": "Ten link do cofnięcia został już użyty albo wygasł. Odłącz zamiast tego w ustawieniach powiadomień.",
       "codeGone": "Ten kod jest błędny, już użyty albo wygasł po 10 minutach. Utwórz nowy kod i wyślij go ponownie."
     },
@@ -16870,7 +16870,7 @@
       "leadChannelOnly": "Tylko kanały mają odpowiedzialnego agenta.",
       "leadNotMember": "Odpowiedzialny agent musi być na kanale.",
       "mcpUnreachable": "Nie udało się połączyć z serwerem MCP. Sprawdź jego adres i spróbuj ponownie.",
-      "notApproved": "Ta usługa nie zatwierdziła jeszcze agentes.chat.",
+      "notApproved": "Ta usługa nie zatwierdziła jeszcze xquads.",
       "alreadyInvited": "Ta osoba ma już zaproszenie.",
       "alreadyAsked": "Ktoś już poprosił o tę osobę.",
       "mailboxConnected": "Ta skrzynka jest już połączona.",
@@ -17049,7 +17049,7 @@
       "noComputer": "Ten agent nie ma jeszcze komputera do misji.",
       "computerOffline": "Komputer agenta jest offline.",
       "execDisabled": "Polecenia są wyłączone na tym komputerze.",
-      "runnerOutdated": "Program na komputerze jest zbyt stary do misji: zaktualizuj tam aplikację agentes.chat albo ponownie uruchom jej polecenie instalacji.",
+      "runnerOutdated": "Program na komputerze jest zbyt stary do misji: zaktualizuj tam aplikację xquads albo ponownie uruchom jej polecenie instalacji.",
       "exists": "Ten wątek ma już misję.",
       "closed": "Ta misja jest zamknięta.",
       "wrongStatus": "Misja nie jest w stanie, który na to pozwala.",
@@ -17183,7 +17183,7 @@
       "notOwner": "Narzędzia tego komputera włącza tylko osoba, która go podłączyła. Poproś ją.",
       "askSelf": "To Twój komputer: włącz to przyciskiem.",
       "adminAskSelf": "Możesz to zrobić tutaj sam.",
-      "accountMethodUnsupported": "Ten komputer nie może jeszcze połączyć Claude w ten sposób. Zaktualizuj na nim program agentes.chat albo użyj klucza API.",
+      "accountMethodUnsupported": "Ten komputer nie może jeszcze połączyć Claude w ten sposób. Zaktualizuj na nim program xquads albo użyj klucza API.",
       "brainUnavailable": "Ta AI nie jest jeszcze skonfigurowana na {{computer}}. Skonfiguruj ją tam albo wybierz inną.",
       "offline": "{{name}} jest teraz offline. Spróbuj ponownie, gdy wróci.",
       "paused": "{{name}} jest wstrzymany: nic nowego na nim nie ruszy, dopóki nie zostanie wznowiony.",
@@ -17345,7 +17345,7 @@
       "ask": "Poproś: {{name}}",
       "asked": "Poproszono. {{name}} dostaje przycisk, żeby to włączyć.",
       "done": "Włączone na {{machine}}.",
-      "outdated": "Zaktualizuj aplikację agentes.chat na {{machine}}, żeby włączyć to stąd.",
+      "outdated": "Zaktualizuj aplikację xquads na {{machine}}, żeby włączyć to stąd.",
       "offline": "{{machine}} jest offline. Gdy wróci, przycisk włączy {{tool}}."
     },
     "remotePause": {
@@ -17359,7 +17359,7 @@
       "byYouUntil": "Wstrzymany przez ciebie do {{time}}.",
       "byName": "Wstrzymany przez {{name}}.",
       "byNameUntil": "Wstrzymany przez {{name}} do {{time}}.",
-      "outdated": "Zaktualizuj aplikację agentes.chat na tym komputerze, aby wstrzymać go stąd.",
+      "outdated": "Zaktualizuj aplikację xquads na tym komputerze, aby wstrzymać go stąd.",
       "paused": "{{name}} jest wstrzymany",
       "resumed": "{{name}} znów pracuje"
     },
@@ -17417,9 +17417,9 @@
     },
     "host": {
       "label": "Komputer tego serwera",
-      "desc": "Tam, gdzie zainstalowano agentes.chat.",
-      "descUsers": "Tam, gdzie zainstalowano agentes.chat, jeden użytkownik na agenta.",
-      "descShared": "Komputer, na którym zainstalowano agentes.chat. Agenci działają jako osoba, która go zainstalowała.",
+      "desc": "Tam, gdzie zainstalowano xquads.",
+      "descUsers": "Tam, gdzie zainstalowano xquads, jeden użytkownik na agenta.",
+      "descShared": "Komputer, na którym zainstalowano xquads. Agenci działają jako osoba, która go zainstalowała.",
       "stop": "Przestań go używać w tej przestrzeni roboczej",
       "stopTitle": "Przestać używać komputera tego serwera?",
       "stopText": "Agenci tej przestrzeni roboczej od teraz przestają używać tego komputera. Możesz do niego wrócić, kiedy zechcesz.",
@@ -17430,7 +17430,7 @@
     },
     "download": {
       "title": "Podłącz inny komputer",
-      "text": "Zainstaluj aplikację agentes.chat na tym komputerze.",
+      "text": "Zainstaluj aplikację xquads na tym komputerze.",
       "mac": "Pobierz aplikację na {{system}}",
       "version": "Wersja {{version}}",
       "versionSize": "Wersja {{version}} · {{size}}",
@@ -17441,7 +17441,7 @@
       "unavailable": "Aplikacja nie jest jeszcze dostępna.",
       "unavailableCommand": "Aplikacja nie jest jeszcze dostępna. Na razie użyj polecenia poniżej.",
       "firstTime": "Za pierwszym razem",
-      "step1": "Otwórz pobrany plik i przeciągnij agentes.chat do folderu Aplikacje.",
+      "step1": "Otwórz pobrany plik i przeciągnij xquads do folderu Aplikacje.",
       "step1Install": "Otwórz pobrany plik, aby go zainstalować.",
       "otherText": "Uruchom to w terminalu komputera, a potem potwierdź pokazany kod.",
       "waiting": "Czekam, aż komputer się połączy…"
@@ -17472,7 +17472,7 @@
       "ownFolder": "Folder każdego agenta",
       "ownFolderText": "Zawsze. Agent nie widzi folderu innego agenta.",
       "noFolders": "Brak dodatkowych folderów. Każdy agent używa tylko własnego folderu.",
-      "noReport": "Ten komputer jeszcze nie zgłosił, na co pozwala. Zaktualizuj na nim agentes.chat.",
+      "noReport": "Ten komputer jeszcze nie zgłosił, na co pozwala. Zaktualizuj na nim xquads.",
       "hidden": "Foldery i narzędzia tego komputera widzą tylko administratorzy i osoba, która go podłączyła.",
       "nobody": "Żaden agent jeszcze go nie używa",
       "usedBy": "Kto używa {{folder}}",
@@ -17517,7 +17517,7 @@
       "disableText": "Agenci przestają używać: {{tool}} na tym komputerze. Żeby włączyć ponownie: na samym komputerze albo tutaj przez osobę, która go podłączyła.",
       "disabled": "Wyłączono {{tool}}.",
       "grantTitle": "Aby zezwolić na więcej",
-      "grantText": "Zezwolenia nadaje się na samym komputerze: otwórz tam aplikację agentes.chat (Preferencje → Foldery).",
+      "grantText": "Zezwolenia nadaje się na samym komputerze: otwórz tam aplikację xquads (Preferencje → Foldery).",
       "grantTextTerminal": "Zezwolenia nadaje się na samym komputerze, w jego Terminalu:",
       "grantTextAdmin": "Zezwolenia nadaje się na samym komputerze, w jego Terminalu, jako administrator:",
       "grantTerminal": "Nie ma aplikacji? W terminalu komputera:",
@@ -17632,7 +17632,7 @@
       "forbidden": "Nie możesz zobaczyć tego ekranu",
       "forbiddenText": "Właściciel decyduje, kto może używać urządzenia {{name}}.",
       "outdated": "Aplikacja na urządzeniu {{host}} jest na to za stara",
-      "outdatedText": "Zaktualizuj agentes.chat na urządzeniu {{host}} i spróbuj ponownie.",
+      "outdatedText": "Zaktualizuj xquads na urządzeniu {{host}} i spróbuj ponownie.",
       "unavailable": "Nie można pokazać tego ekranu",
       "unavailableText": "Sprawdź, czy na urządzeniu {{host}} jest zainstalowany adb lub Xcode, i spróbuj ponownie.",
       "needsHelper": "Dokończ konfigurację iPhone’a na Macu, aby dodać potrzebnego pomocnika testowego.",
@@ -17811,7 +17811,7 @@
       "thisMac": "Ten Mac",
       "thisPc": "Ten PC",
       "thisComputer": "Ten komputer",
-      "thisLine": "Przez aplikację agentes.chat",
+      "thisLine": "Przez aplikację xquads",
       "openApp": "Otwórz aplikację",
       "server": "Serwer lub VPS",
       "serverLine": "Jedno polecenie do wklejenia w jego terminalu",
@@ -17826,7 +17826,7 @@
     },
     "computer": {
       "title": "Podłącz inny komputer",
-      "step1": "Zainstaluj na nim aplikację agentes.chat:",
+      "step1": "Zainstaluj na nim aplikację xquads:",
       "step2": "Otwórz ją i zaloguj się na swoje konto.",
       "step3": "Kliknij Zezwól, gdy zapyta, czy agenci {{org}} mogą go używać.",
       "shows": "Pojawi się tu sam, widoczny tylko dla ciebie, dopóki go nie udostępnisz.",
@@ -17836,11 +17836,11 @@
       "noApp": "Nie możesz zainstalować na nim aplikacji? Użyj polecenia w terminalu"
     },
     "thisApp": {
-      "text": "Aplikacja agentes.chat połączy go jednym kliknięciem i najpierw zapyta.",
-      "open": "Otwórz aplikację agentes.chat",
+      "text": "Aplikacja xquads połączy go jednym kliknięciem i najpierw zapyta.",
+      "open": "Otwórz aplikację xquads",
       "browserAsks": "Przeglądarka zapyta, czy może ją otworzyć: wybierz Otwórz, a jeśli zaproponuje, także Zawsze zezwalaj.",
       "noApp": "Nie masz aplikacji?",
-      "afterInstall": "Po instalacji kliknij jeszcze raz Otwórz aplikację agentes.chat. Link działa raz, przez 10 minut.",
+      "afterInstall": "Po instalacji kliknij jeszcze raz Otwórz aplikację xquads. Link działa raz, przez 10 minut.",
       "waiting": "Czekam na aplikację na tym komputerze…",
       "expired": "Ten link wygasł.",
       "again": "Utwórz nowy link",
@@ -17917,7 +17917,7 @@
       },
       "qrLabel": "Kod QR, który otwiera te kroki na telefonie",
       "qrLine": "Zrób to z telefonu",
-      "qrCaption": "Zeskanuj, żeby otworzyć te kroki w aplikacji agentes.chat, z przyciskiem do każdego ustawienia.",
+      "qrCaption": "Zeskanuj, żeby otworzyć te kroki w aplikacji xquads, z przyciskiem do każdego ustawienia.",
       "buildNumber": "Numer kompilacji",
       "buildNumberSub": "BP2A.250605.031",
       "usbRow": "Debugowanie USB",
@@ -17961,23 +17961,23 @@
       "qrCaption": "Aparat pokaże sieć Wi-Fi o nazwie agentes-…, która nie istnieje. Zostaw telefon w sieci Wi-Fi komputera.",
       "fail": {
         "mdns_off": "{{computer}} nie może szukać telefonów w sieci Wi-Fi. Zaktualizuj tam Android platform-tools albo użyj kabla.",
-        "mdns_offMac": "{{computer}} nie może szukać telefonów w sieci Wi-Fi. Na tym Macu włącz agentes.chat w Ustawienia systemowe › Prywatność i ochrona › Sieć lokalna i spróbuj ponownie.",
+        "mdns_offMac": "{{computer}} nie może szukać telefonów w sieci Wi-Fi. Na tym Macu włącz xquads w Ustawienia systemowe › Prywatność i ochrona › Sieć lokalna i spróbuj ponownie.",
         "same_wifi": "Nie udało się połączyć z telefonem. Nie jest w tej samej sieci co {{computer}}. Podłącz go do tej samej sieci Wi-Fi i spróbuj ponownie.",
-        "same_wifiMac": "Nie udało się połączyć z telefonem. Podłącz go do tej samej sieci Wi-Fi co {{computer}}. Na tym Macu włącz też agentes.chat w Ustawienia systemowe › Prywatność i ochrona › Sieć lokalna.",
+        "same_wifiMac": "Nie udało się połączyć z telefonem. Podłącz go do tej samej sieci Wi-Fi co {{computer}}. Na tym Macu włącz też xquads w Ustawienia systemowe › Prywatność i ochrona › Sieć lokalna.",
         "refused": "Telefon przerwał parowanie. Zostaw otwarty ekran parowania i spróbuj ponownie.",
         "refusedCode": "Telefon nie przyjął tego kodu. Sprawdź kod i adres, a potem sparuj ponownie.",
         "timed_out": "Przez 2 minuty żaden telefon się nie sparował. Jeśli kod zeskanował aparat albo telefon odłączył się od Wi-Fi, podłącz go do tej samej sieci Wi-Fi co {{computer}} i zeskanuj kod z ekranu Debugowanie bezprzewodowe.",
-        "timed_outMac": "Przez 2 minuty żaden telefon się nie sparował. Jeśli kod zeskanował aparat albo telefon odłączył się od Wi-Fi, podłącz go do tej samej sieci Wi-Fi co {{computer}} i zeskanuj kod z ekranu Debugowanie bezprzewodowe. Na tym Macu włącz też agentes.chat w Ustawienia systemowe › Prywatność i ochrona › Sieć lokalna.",
+        "timed_outMac": "Przez 2 minuty żaden telefon się nie sparował. Jeśli kod zeskanował aparat albo telefon odłączył się od Wi-Fi, podłącz go do tej samej sieci Wi-Fi co {{computer}} i zeskanuj kod z ekranu Debugowanie bezprzewodowe. Na tym Macu włącz też xquads w Ustawienia systemowe › Prywatność i ochrona › Sieć lokalna.",
         "outdated": "Parowanie przez Wi-Fi wymaga Androida 14 lub nowszego z aktualizacją zabezpieczeń z maja 2026. Zaktualizuj telefon albo użyj kabla.",
         "adb_missing": "{{computer}} nie ma Android platform-tools. Zainstaluj tam Android Studio i spróbuj ponownie.",
-        "update": "Parowanie przez Wi-Fi wymaga nowszego agentes.chat na {{computer}}. Zaktualizuj i spróbuj ponownie.",
+        "update": "Parowanie przez Wi-Fi wymaga nowszego xquads na {{computer}}. Zaktualizuj i spróbuj ponownie.",
         "canceled": "Parowanie zostało zatrzymane. Spróbuj ponownie.",
         "failed": "Parowanie się nie udało. Spróbuj ponownie albo użyj kabla."
       }
     },
     "iphone": {
       "title": "Podłącz iPhone'a",
-      "lead": "iPhone łączy się przez Maca, na którym konfigurację robi aplikacja agentes.chat.",
+      "lead": "iPhone łączy się przez Maca, na którym konfigurację robi aplikacja xquads.",
       "mac": "Mac",
       "noMac": "Agenci mogą używać iPhone'a tylko przez Maca, a żaden nie jest jeszcze podłączony.",
       "noMacNote": "Nie masz Maca? Poproś kogoś z zespołu, żeby podłączył swój.",
@@ -18016,9 +18016,9 @@
         "failedAny": "Nie udało się naprawić na {{mac}}.",
         "stillCommandLineTools": "Naprawa się zakończyła, ale Mac nadal używa Command Line Tools. Spróbuj ponownie albo uruchom to w Terminalu, poprosi o hasło do Maca.",
         "stillLicense": "Naprawa się zakończyła, ale Xcode na {{mac}} nadal czeka na zaakceptowanie licencji. Spróbuj ponownie albo uruchom to w Terminalu, poprosi o hasło do Maca.",
-        "outdated": "Zaktualizuj aplikację agentes.chat na {{mac}}, by naprawić to jednym kliknięciem. Albo uruchom to w jego Terminalu, poprosi o hasło Maca.",
+        "outdated": "Zaktualizuj aplikację xquads na {{mac}}, by naprawić to jednym kliknięciem. Albo uruchom to w jego Terminalu, poprosi o hasło Maca.",
         "follows": "To okno samo przejdzie dalej, gdy Mac skończy.",
-        "window": "agentes.chat chce użyć Xcode, aby połączyć iPhone'y.",
+        "window": "xquads chce użyć Xcode, aby połączyć iPhone'y.",
         "ok": "OK"
       },
       "getXcode": "Pobierz Xcode",
@@ -18044,7 +18044,7 @@
         "openXcode": "Otwórz Xcode",
         "opened": "Xcode otworzył się na {{mac}}. Zajrzyj jeszcze raz do Ustawień iPhone'a, a potem zamknij Xcode.",
         "unlock": "Włączone, a iPhone uruchomił się ponownie? Odblokuj go. Alert z Włącz pojawia się dopiero potem.",
-        "outdated": "Aplikacja agentes.chat na {{mac}} jest nieaktualna. Zaktualizuj aplikację albo uruchom to w Terminalu, jeśli była instalowana stamtąd."
+        "outdated": "Aplikacja xquads na {{mac}} jest nieaktualna. Zaktualizuj aplikację albo uruchom to w Terminalu, jeśli była instalowana stamtąd."
       },
       "uiAutomationText": "W Ustawienia › Deweloper, po ponownym uruchomieniu.",
       "helperText": "Mac go buduje i odnawia co 7 dni. Wystarczy bezpłatne konto Apple Account w Xcode.",
@@ -18285,7 +18285,7 @@
     "reconnectDoneText": "Komputer {{name}} wrócił do {{org}}.",
     "deniedTitle": "Nie połączono",
     "denied": "Komputer nie został podłączony. Jeśli to nie ty, nikt nie uzyskał dostępu.",
-    "home": "Przejdź do agentes"
+    "home": "Przejdź do xquads"
   },
   "apps": {
     "connect": "Połącz aplikację",
@@ -18403,7 +18403,7 @@
       "claude": {
         "lead": "claude.ai, Claude Desktop i telefon: jeden konektor działa wszędzie.",
         "step1": "Otwórz Customize › Connectors w claude.ai lub Claude Desktop.",
-        "step2": "Kliknij + Add, potem Add custom connector, nazwij go agentes.chat, wklej adres i kliknij Continue.",
+        "step2": "Kliknij + Add, potem Add custom connector, nazwij go xquads, wklej adres i kliknij Continue.",
         "step3": "Wybierz Sign in now, kliknij Add i autoryzuj na stronie, która się otworzy.",
         "phone": "Po dodaniu na komputerze pojawi się też na telefonie.",
         "team": "W planach Team i Enterprise konektor dodaje Owner organizacji Claude w Organization settings › Connectors. Potem każda osoba klika Connect w Customize › Connectors.",
@@ -18411,7 +18411,7 @@
       },
       "claudeCode": {
         "step1": "Uruchom w terminalu:",
-        "step2": "W Claude Code wpisz <code>/mcp</code>, wybierz agentes i Authenticate.",
+        "step2": "W Claude Code wpisz <code>/mcp</code>, wybierz xquads i Authenticate.",
         "scope": "Działa w każdym folderze. Tylko dla bieżącego folderu usuń <code>--scope user</code>."
       },
       "cursor": {
@@ -18438,9 +18438,9 @@
         "open": "Otwórz {{place}}.",
         "click": "Kliknij {{button}}.",
         "clickThen": "Kliknij {{button}}, a potem {{next}}.",
-        "name": "Nazwij go agentes.chat i wklej adres.",
-        "nameDescribe": "Nazwij go agentes.chat i dodaj opis.",
-        "nameConnect": "Nazwij go agentes.chat i kliknij {{button}}.",
+        "name": "Nazwij go xquads i wklej adres.",
+        "nameDescribe": "Nazwij go xquads i dodaj opis.",
+        "nameConnect": "Nazwij go xquads i kliknij {{button}}.",
         "paste": "Wklej adres.",
         "pasteIn": "Wklej adres w polu {{field}}.",
         "choosePaste": "Wybierz {{option}} i wklej adres.",
@@ -18461,8 +18461,8 @@
         "reload": "Potem wpisz <code>{{command}}</code> na czacie.",
         "loginRun": "Aby się zalogować, uruchom <code>{{command}}</code>.",
         "loginType": "Aby się zalogować, wpisz w aplikacji <code>{{command}}</code>.",
-        "signIn": "Zaloguj się kontem agentes.chat na stronie, która się otworzy.",
-        "signInManage": "Zaloguj się kontem agentes.chat na stronie, która się otworzy, i wybierz {{access}}.",
+        "signIn": "Zaloguj się kontem xquads na stronie, która się otworzy.",
+        "signInManage": "Zaloguj się kontem xquads na stronie, która się otworzy, i wybierz {{access}}.",
         "mention": "Na czacie wpisz <code>@</code> i wybierz <code>{{name}}</code>.",
         "signInFirst": "Przy pierwszym użyciu aplikacja poprosi cię o zalogowanie.",
         "token": "Utwórz token osobisty i wstaw go w miejsce {{placeholder}}.",
@@ -18515,7 +18515,7 @@
       "canRead": "Czytać odpowiedzi i to, co robią agenci.",
       "canManage": "Tworzyć i edytować agentów, rutyny i umiejętności w twoim imieniu, z powiadomieniem o tym, co utworzy. Pisać strony wiki i przenosić je do kosza w twoim imieniu.",
       "never": "Nigdy",
-      "neverApprove": "Zatwierdzać akcji agentów. Zatwierdzenia zostają w rękach ludzi w agentes.chat.",
+      "neverApprove": "Zatwierdzać akcji agentów. Zatwierdzenia zostają w rękach ludzi w xquads.",
       "neverSettings": "Zmieniać ustawień, członków ani uprawnień.",
       "neverHidden": "Widzieć tego, czego ty nie widzisz.",
       "loopbackWarning": "Każdy program na tym komputerze może otrzymać ten dostęp. Kontynuuj tylko, jeśli przed chwilą uruchomiłeś(-aś) to w Claude Code lub innej aplikacji na tym komputerze.",
@@ -18529,11 +18529,11 @@
       "done": "Możesz wrócić do {{app}}.",
       "cancelledTitle": "Połączenie anulowane",
       "cancelled": "Nic nie zostało udostępnione.",
-      "goHome": "Przejdź do agentes.chat",
+      "goHome": "Przejdź do xquads",
       "language": "Język",
       "error": {
         "app_desconhecido": "Nie rozpoznajemy tej aplikacji",
-        "app_desconhecidoText": "Aplikacja zachowała rejestrację, która nie jest już ważna. Wyczyść jej zapisane połączenie i połącz ponownie. W Claude Code wpisz /mcp, wybierz agentes i Clear authentication. W Cursor wyloguj się z serwera agentes w Settings › MCP.",
+        "app_desconhecidoText": "Aplikacja zachowała rejestrację, która nie jest już ważna. Wyczyść jej zapisane połączenie i połącz ponownie. W Claude Code wpisz /mcp, wybierz xquads i Clear authentication. W Cursor wyloguj się z serwera xquads w Settings › MCP.",
         "endereco_de_retorno": "Adres powrotu niezarejestrowany",
         "endereco_de_retornoText": "Ta aplikacja chciała wrócić pod adres, którego nie zarejestrowała. Dla bezpieczeństwa zatrzymaliśmy się tutaj.",
         "pedido_invalido": "Nie mogliśmy użyć tej prośby",
@@ -18604,7 +18604,7 @@
       "sentence": "{{who}}: odczytano {{what}}",
       "who": {
         "server": "Osoba zarządzająca tym serwerem",
-        "cloud": "Wsparcie agentes.chat"
+        "cloud": "Wsparcie xquads"
       },
       "what": {
         "message": "jedną wiadomość",
@@ -18806,7 +18806,7 @@
     "section": {
       "account": "Twoje konto",
       "notifications": "Powiadomienia",
-      "download": "Aplikacje agentes.chat",
+      "download": "Aplikacje xquads",
       "general": "Ogólne",
       "right_hand": "Prawa ręka",
       "members": "Członkowie",
@@ -18827,7 +18827,7 @@
       "voice": "Głos",
       "apps": "Aplikacje AI",
       "approvals": "Zatwierdzenia",
-      "about": "O agentes.chat",
+      "about": "O xquads",
       "generalPersonal": "O tobie",
       "keysPersonal": "AI i aplikacje",
       "membersPersonal": "Osoby"
@@ -19014,11 +19014,11 @@
     },
     "telemetry": {
       "title": "Statystyki użycia",
-      "label": "Wysyłaj anonimowe statystyki użycia do agentes.chat",
+      "label": "Wysyłaj anonimowe statystyki użycia do xquads",
       "help": "Liczby, takie jak osoby, agenci, rozmiary maszyn, zużyte tokeny AI i ile danych wysyłają i odbierają przeglądarki agentów. Nigdy wiadomości, pliki, nazwy ani strony.",
       "envOff": "Wyłączone w ustawieniach tego serwera (TELEMETRY=off).",
-      "envOffDesktop": "Wyłączone w aplikacji agentes.chat na komputerze tego serwera (Preferencje › Serwery).",
-      "envOffHere": "Wyłączone w aplikacji agentes.chat na tym komputerze.",
+      "envOffDesktop": "Wyłączone w aplikacji xquads na komputerze tego serwera (Preferencje › Serwery).",
+      "envOffHere": "Wyłączone w aplikacji xquads na tym komputerze.",
       "see": "Zobacz, co jest wysyłane",
       "dialogTitle": "Co jest wysyłane",
       "dialogText": "Wysyłany raz dziennie. Dokładnie tak wygląda następny raport."
@@ -19730,7 +19730,7 @@
         "comment": "{{who}} skomentował(a) PR #{{number}} ({{repo}}) w GitHub",
         "commentIssue": "{{who}} skomentował(a) issue #{{number}} ({{repo}}) w GitHub",
         "commentDiscussion": "{{who}} skomentował(a) dyskusję #{{number}} ({{repo}}) w GitHub",
-        "opened": "{{who}} wywołał(a) aplikację agentes.chat w #{{number}} ({{repo}}) w GitHub",
+        "opened": "{{who}} wywołał(a) aplikację xquads w #{{number}} ({{repo}}) w GitHub",
         "reviewed": "{{who}} zrecenzował(a) PR #{{number}} ({{repo}}) w GitHub",
         "approved": "{{who}} zatwierdził(a) PR #{{number}} ({{repo}}) w GitHub",
         "changes": "{{who}} poprosił(a) o zmiany w PR #{{number}} ({{repo}}) w GitHub",
@@ -20176,14 +20176,14 @@
       "no_ai_plans_not_yours": "{{plan}} tutaj jest tylko dla {{owner}}. Połącz własny, a odpowiem.",
       "no_ai_plan_unattended": "Nie odpowiem: prośba nie pochodzi od osoby, a plan workspace'u odpowiada tylko swojemu właścicielowi.",
       "no_ai_runner_outdated": "Nie mogę teraz odpowiedzieć: program na komputerze mojego planu wymaga aktualizacji.",
-      "no_ai_plan_tools": "Zatrzymałem się przed odpowiedzią: AI mojego planu na tym komputerze nie pozostała przy narzędziach agentes.chat.",
+      "no_ai_plan_tools": "Zatrzymałem się przed odpowiedzią: AI mojego planu na tym komputerze nie pozostała przy narzędziach xquads.",
       "no_ai_model_limit": "Nie mogę teraz odpowiedzieć: {{model}} osiągnął własny limit w moim planie.",
       "no_ai_model_region": "Nie mogę odpowiedzieć: {{model}} wymaga włączonego regionu Global w OpenCode (Settings › Privacy).",
       "no_ai_model_off": "Nie mogę odpowiedzieć: OpenCode odrzucił {{model}} z moim kluczem. Włącz model albo konto w OpenCode albo zmień mój model.",
       "no_ai_plan_inactive": "Nie mogę odpowiedzieć: OpenCode Go nie jest aktywny na koncie OpenCode mojego klucza. Sprawdź subskrypcję Go w OpenCode albo podłącz klucz z konta, które ma Go.",
       "no_ai_commands_off": "Nie mogę teraz odpowiedzieć: polecenia są wyłączone na komputerze mojego planu.",
       "no_ai_cli_missing": "Jeszcze nie mogę odpowiedzieć: program mojego AI nie jest zainstalowany na moim komputerze.",
-      "no_ai_plan_hold": "Zachowałem twoją wiadomość. Odpowiem tutaj, gdy workspace będzie mieć plan agentes.chat i podłączone AI.",
+      "no_ai_plan_hold": "Zachowałem twoją wiadomość. Odpowiem tutaj, gdy workspace będzie mieć plan xquads i podłączone AI.",
       "no_ai_no_computer": "Jeszcze nie mogę odpowiedzieć: moje AI potrzebuje komputera, a nie mam żadnego.",
       "redacted": "[usunięto: wyglądało na dane logowania lub klucz]",
       "action_connect_ai": "Połącz AI",
@@ -20748,7 +20748,7 @@
     "machine": {
       "ready": "Gotowa",
       "off": "Wyłączona",
-      "offHelp": "Osoba, która podłączyła komputer, włącza to tutaj albo w aplikacji agentes.chat na nim: Preferencje → Narzędzia.",
+      "offHelp": "Osoba, która podłączyła komputer, włącza to tutaj albo w aplikacji xquads na nim: Preferencje → Narzędzia.",
       "needsCommand": "Wymaga polecenia",
       "notReady": "Jeszcze niegotowa",
       "turnOff": "Wyłącz",
@@ -21030,7 +21030,7 @@
     "paused": "Agenci w tej przestrzeni roboczej są wstrzymani do przeglądu.",
     "suspended": "Ta przestrzeń robocza jest na razie niedostępna.",
     "createRefused": "Nie możesz teraz utworzyć przestrzeni roboczej.",
-    "createUnpaid": "Masz już przestrzeń roboczą, która czeka na plan agentes.chat. Wybierz dla niej plan, zanim utworzysz kolejną.",
+    "createUnpaid": "Masz już przestrzeń roboczą, która czeka na plan xquads. Wybierz dla niej plan, zanim utworzysz kolejną.",
     "createUnpaidOpen": "Otwórz {{name}}",
     "createInactive": "Masz już przestrzeń roboczą, która nie jest jeszcze aktywna, więc na razie nie możesz utworzyć kolejnej.",
     "agentPaused": "Ten agent jest na razie wstrzymany.",
@@ -21051,25 +21051,25 @@
       "active": "Przestrzeń robocza znowu działa",
       "agentHold": "{{name}}: wstrzymano",
       "billing": {
-        "payment": "Przestrzeń robocza potrzebuje planu agentes.chat",
-        "unpaid": "Płatność za plan agentes.chat nie przeszła",
-        "ended": "Plan agentes.chat przestrzeni roboczej się skończył"
+        "payment": "Przestrzeń robocza potrzebuje planu xquads",
+        "unpaid": "Płatność za plan xquads nie przeszła",
+        "ended": "Plan xquads przestrzeni roboczej się skończył"
       }
     },
     "billing": {
-      "payment": "Ta przestrzeń robocza nie ma jeszcze planu agentes.chat. Jej agenci zaczną pracować, gdy go dostanie.",
-      "unpaid": "Płatność za plan agentes.chat tej przestrzeni roboczej nie przeszła, a jej agenci się zatrzymali.",
-      "ended": "Plan agentes.chat tej przestrzeni roboczej się skończył, a jej agenci się zatrzymali. Rozmowy i pliki wciąż są tu do przeczytania i pobrania.",
-      "sub": "Nadal możesz tu czytać i pisać. Agenci wrócą, gdy plan agentes.chat będzie w porządku.",
+      "payment": "Ta przestrzeń robocza nie ma jeszcze planu xquads. Jej agenci zaczną pracować, gdy go dostanie.",
+      "unpaid": "Płatność za plan xquads tej przestrzeni roboczej nie przeszła, a jej agenci się zatrzymali.",
+      "ended": "Plan xquads tej przestrzeni roboczej się skończył, a jej agenci się zatrzymali. Rozmowy i pliki wciąż są tu do przeczytania i pobrania.",
+      "sub": "Nadal możesz tu czytać i pisać. Agenci wrócą, gdy plan xquads będzie w porządku.",
       "cta": {
-        "payment": "Zobacz plany agentes.chat",
+        "payment": "Zobacz plany xquads",
         "unpaid": "Zaktualizuj płatność",
         "ended": "Subskrybuj ponownie"
       },
       "askAdmin": "Osoba, która prowadzi tę przestrzeń roboczą, może to załatwić.",
-      "paid": "Płatność otrzymana. Plan agentes.chat zacznie działać za chwilę.",
-      "teamReady": "Twój zespół jest gotowy. Do startu potrzebny jest plan agentes.chat.",
-      "invites": "Zaproszenia otwierają się z planem agentes.chat."
+      "paid": "Płatność otrzymana. Plan xquads zacznie działać za chwilę.",
+      "teamReady": "Twój zespół jest gotowy. Do startu potrzebny jest plan xquads.",
+      "invites": "Zaproszenia otwierają się z planem xquads."
     },
     "cloud": {
       "review": "Wstrzymano do kontroli bezpieczeństwa, dopóki nasz zespół tego nie sprawdzi. Nasze automatyczne kontrole wykryły aktywność, która może naruszać nasz Regulamin (punkt 5). Aby to zakwestionować, napisz na {{email}}.",
@@ -21230,7 +21230,7 @@
     "open": "Otwórz plan i płatności",
     "opening": "Otwieranie…",
     "failed": "Nie udało się teraz otworzyć. Spróbuj ponownie za chwilę.",
-    "adminsOnly": "Planem agentes.chat zarządzają tylko właściciele i administratorzy przestrzeni roboczej.",
+    "adminsOnly": "Planem xquads zarządzają tylko właściciele i administratorzy przestrzeni roboczej.",
     "seeOptions": "Zobacz opcje",
     "people": "Osoby",
     "files": "Pliki",
@@ -21251,8 +21251,8 @@
   "limits": {
     "members": {
       "full": "Ta przestrzeń robocza ma {{members}} z {{limit}} osób.",
-      "fullOne": "Plan agentes.chat tej przestrzeni roboczej obejmuje 1 osobę.",
-      "fullAdmin": "Aby dodać więcej osób, zobacz opcje planu agentes.chat.",
+      "fullOne": "Plan xquads tej przestrzeni roboczej obejmuje 1 osobę.",
+      "fullAdmin": "Aby dodać więcej osób, zobacz opcje planu xquads.",
       "fullMember": "Poproś osobę, która zarządza przestrzenią roboczą, o zwolnienie miejsca.",
       "fullAddSeat": "Wszystkie opłacone miejsca są zajęte. Dodaj miejsce w sekcji Plan i płatności.",
       "fullTop": "Ten plan nie mieści więcej osób. Zmień plan w sekcji Plan i płatności.",
@@ -21268,7 +21268,7 @@
       "meter": "Wykorzystano {{used}} z {{limit}}.",
       "near": "Wykorzystano {{used}} z {{limit}}. Po osiągnięciu limitu przesyłanie zostanie wstrzymane, ale nic nie zostanie usunięte.",
       "full": "Przesyłanie wstrzymane przy {{limit}}. Nic nie zostało usunięte.",
-      "fullAdmin": "Zmień plan agentes.chat, usuń pliki, których już nie używasz, albo podłącz własny bucket.",
+      "fullAdmin": "Zmień plan xquads, usuń pliki, których już nie używasz, albo podłącz własny bucket.",
       "dailyFull": "Dzisiejsze przesyłanie osiągnęło {{limit}}. Możesz znów przesyłać za kilka godzin.",
       "connectBucket": "Podłącz bucket"
     }
@@ -21645,7 +21645,7 @@
       "screensOff": "Ekrany są wyłączone na komputerze {{computer}}. Włącz je tam:",
       "screensOffOne": "Ekrany są wyłączone na {{computer}}.",
       "screensMissing": "{{computer}} nie może jeszcze pokazywać ekranów. Na tym komputerze:",
-      "outdated": "Zaktualizuj agentes na komputerze {{computer}}, żeby zobaczyć ekran agenta {{name}}.",
+      "outdated": "Zaktualizuj xquads na komputerze {{computer}}, żeby zobaczyć ekran agenta {{name}}.",
       "outdated_female": "Zaktualizuj agentes na komputerze {{computer}}, żeby zobaczyć ekran agentki {{name}}.",
       "noScreen": "{{name}} nie ma tu ekranu do pokazania",
       "noScreen_female": "{{name}} nie ma tu ekranu do pokazania",
@@ -21833,7 +21833,7 @@
       "browser": "Przeglądarka",
       "screen": "Ekran komputera",
       "terminal": "Terminal",
-      "agentes": "agentes",
+      "agentes": "xquads",
       "thinking": "Myśli",
       "inside": "{{program}} · {{detail}}"
     },
@@ -22637,7 +22637,7 @@
     },
     "action": {
       "signIn": "Zaloguj się",
-      "open": "Otwórz agentes.chat",
+      "open": "Otwórz xquads",
       "latest": "Otwórz najnowszą wersję",
       "file": "Otwórz plik",
       "retry": "Spróbuj ponownie"
@@ -22874,7 +22874,7 @@
     "beta": {
       "word": "BETA",
       "title": "Jesteś tu wcześnie. Cieszymy się.",
-      "text": "agentes.chat jest w wersji beta: już da się z nim naprawdę pracować, a my wciąż go dopracowujemy.",
+      "text": "xquads jest w wersji beta: już da się z nim naprawdę pracować, a my wciąż go dopracowujemy.",
       "weekly": {
         "title": "Co tydzień jest lepiej",
         "text": "Nowości i poprawki wychodzą cały czas."
@@ -22910,7 +22910,7 @@
     "mark": "Beta",
     "open": "Wyślij opinię",
     "ask": "Czego zabrakło, co się zepsuło albo przeszkadzało?",
-    "goesCloud": "To, co napiszesz, trafi e-mailem do zespołu agentes.chat, który może skorzystać z asystenta AI, żeby się temu przyjrzeć.",
+    "goesCloud": "To, co napiszesz, trafi e-mailem do zespołu xquads, który może skorzystać z asystenta AI, żeby się temu przyjrzeć.",
     "goesServer": "To, co napiszesz, trafi e-mailem do osoby, która prowadzi ten serwer.",
     "placeholder": "Napisz po swojemu",
     "report": "Zgłoś problem tutaj",
@@ -22936,14 +22936,14 @@
     "offer": {
       "group": "Zgłoszenie dotyczące aplikacji",
       "ready": "<b>Zgłoszenie gotowe</b>: {{summary}}",
-      "goesCloud": "Trafi w twoim imieniu do zespołu agentes.chat",
+      "goesCloud": "Trafi w twoim imieniu do zespołu xquads",
       "goesServer": "Trafi w twoim imieniu do osoby, która prowadzi ten serwer",
       "see": "Zobacz zgłoszenie",
       "hide": "Zamknij zgłoszenie",
       "send": "Wyślij",
       "notNow": "Nie teraz",
       "answer": "Odpowiedź przyjdzie na twój e-mail.",
-      "sentCloud": "<b>Zgłoszenie wysłane</b> do zespołu agentes.chat",
+      "sentCloud": "<b>Zgłoszenie wysłane</b> do zespołu xquads",
       "sentServer": "<b>Zgłoszenie wysłane</b> do osoby, która prowadzi ten serwer",
       "sentAuto": "<b>Zgłoszenie wysłane bez pytania</b>: {{summary}}",
       "view": "Zobacz",
@@ -22954,8 +22954,8 @@
   },
   "problemReport": {
     "button": "Wyślij raport",
-    "title": "Wyślij raport do agentes.chat",
-    "lead": "Zespół agentes.chat dostaje: wersje, które ustawienia są ustawione (nigdy ich wartości), co się nie udało i ostatnie wiersze logów. Bez wiadomości, stron, nazw i kluczy.",
+    "title": "Wyślij raport do xquads",
+    "lead": "Zespół xquads dostaje: wersje, które ustawienia są ustawione (nigdy ich wartości), co się nie udało i ostatnie wiersze logów. Bez wiadomości, stron, nazw i kluczy.",
     "noteLabel": "Co się stało? (opcjonalnie)",
     "notePlaceholder": "Co robiłeś, gdy przestało działać",
     "emailLabel": "E-mail do odpowiedzi (opcjonalnie)",
@@ -22973,16 +22973,16 @@
     "copyCode": "Kopiuj kod",
     "done": "Gotowe",
     "noLogComputer": "{{computer}} nie odpowiedział, więc jego log nie jest dołączony.",
-    "oldRunner": "Aplikacja agentes.chat na {{computer}} jest za stara, by dołączyć log. Zaktualizuj ją tam, aby go dołączyć.",
+    "oldRunner": "Aplikacja xquads na {{computer}} jest za stara, by dołączyć log. Zaktualizuj ją tam, aby go dołączyć.",
     "noServerLines": "Wiersze logu serwera są dołączane tylko wtedy, gdy raport wysyła właściciel instalacji.",
     "off": "Wysyłanie jest wyłączone na tym serwerze (`PROBLEM_REPORT_URL=off`). Skopiuj raport, aby go udostępnić.",
     "errorRate": "Za dużo raportów w krótkim czasie. Spróbuj ponownie za {{minutes}} min albo skopiuj raport.",
-    "errorUnreachable": "agentes.chat nie odpowiedział. Spróbuj ponownie albo skopiuj raport.",
-    "errorRefused": "agentes.chat nie przyjął tego raportu (może pochodzić ze starszej wersji). Zamiast tego skopiuj raport.",
+    "errorUnreachable": "xquads nie odpowiedział. Spróbuj ponownie albo skopiuj raport.",
+    "errorRefused": "xquads nie przyjął tego raportu (może pochodzić ze starszej wersji). Zamiast tego skopiuj raport.",
     "errorPreview": "Nie udało się zebrać szczegółów: {{reason}}",
     "emailInvalid": "Ten e-mail wygląda na niepoprawny. Popraw go albo zostaw puste.",
     "settingsTitle": "Coś nie działa?",
-    "settingsText": "Wyślij szczegóły techniczne zespołowi agentes.chat."
+    "settingsText": "Wyślij szczegóły techniczne zespołowi xquads."
   },
   "live": {
     "slides": {

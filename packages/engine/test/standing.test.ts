@@ -658,7 +658,7 @@ describe("billing hold", () => {
   });
 });
 
-describe("on agentes.chat Cloud: a restriction's kind and how to contest it, never its reason", () => {
+describe("on xquads Cloud: a restriction's kind and how to contest it, never its reason", () => {
   afterEach(() => setRestrictionNotices("http://localhost:3000"));
 
   test("the kinds come from the stored reasons", () => {
@@ -677,19 +677,19 @@ describe("on agentes.chat Cloud: a restriction's kind and how to contest it, nev
     ]);
   });
 
-  test("only on an agentes.chat address", () => {
-    for (const url of ["https://agentes.chat", "https://app.agentes.chat"]) {
+  test("only on a xquads address", () => {
+    for (const url of ["https://xquads.com", "https://agents.xquads.com"]) {
       setRestrictionNotices(url);
       expect(cloudNotice()).toEqual({ cloud: true });
     }
-    for (const url of ["https://chat.acme.com", "https://agentes.chat.example.com", "http://localhost:3000"]) {
+    for (const url of ["https://chat.acme.com", "https://xquads.com.example.com", "http://localhost:3000"]) {
       setRestrictionNotices(url);
       expect(cloudNotice()).toBeUndefined();
     }
   });
 
   test("a held agent: its refusal and its runs say the kind, its people hear it, letting it go closes that", async () => {
-    setRestrictionNotices("https://agentes.chat");
+    setRestrictionNotices("https://xquads.com");
     f = await setup({ reply: () => ({ chunks: ["On it."] }) });
     const bia = await addMember(f.db, f.org.id, "admin", "bia");
     const cid = await addMember(f.db, f.org.id, "member", "cid");
@@ -745,7 +745,7 @@ describe("on agentes.chat Cloud: a restriction's kind and how to contest it, nev
   });
 
   test("a blocked account's kind, a refused workspace, the workspace's standing and its runs say cloud", async () => {
-    setRestrictionNotices("https://agentes.chat");
+    setRestrictionNotices("https://xquads.com");
     f = await setup();
     const bia = await addUser(f.db, "bia");
     for (const [reason, kind] of [
@@ -792,7 +792,7 @@ describe("on agentes.chat Cloud: a restriction's kind and how to contest it, nev
   });
 
   test("the automatic hold's category: its text says it in words, the apps get the code", async () => {
-    setRestrictionNotices("https://agentes.chat");
+    setRestrictionNotices("https://xquads.com");
     f = await setup({ reply: () => ({ chunks: ["On it."] }) });
     const flagged = "automated checks flagged activity that seems to involve";
     const reason = "review.phishing_impersonation";

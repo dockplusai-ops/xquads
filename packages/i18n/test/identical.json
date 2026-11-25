@@ -1,6 +1,8 @@
 {
   "app": {
     "pt-BR": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "live.kinds.slideCount",
       "live.shell.formats.xlsx",
       "live.shell.formats.pptx",
@@ -346,6 +348,8 @@
       "codeSessions.tabs.terminalN"
     ],
     "es": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "aiHub.modes.roles",
       "devices.iphone.path.general",
       "devices.cpus",
@@ -638,6 +642,8 @@
       "codeSessions.tabs.terminalN"
     ],
     "fr": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "agentPage.facts.budget",
       "usage.kinds.routines",
       "channel.tooLong.fileName",
@@ -1166,6 +1172,8 @@
       "connectors.store.agents"
     ],
     "de": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "agentPage.facts.budget",
       "aiHub.detail.limits",
       "live.sheet.args.k",
@@ -1668,6 +1676,8 @@
       "codeSessions.tabs.terminalN"
     ],
     "it": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "agentPage.facts.budget",
       "live.sheet.args.a1",
       "live.sheet.args.k",
@@ -2072,6 +2082,8 @@
       "connectors.store.account"
     ],
     "nl": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "agentPage.facts.budget",
       "aiHub.accounts",
       "usage.kinds.routines",
@@ -2756,6 +2768,8 @@
       "connectors.store.account"
     ],
     "ja": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "live.sheet.args.k",
       "live.sheet.args.x",
       "live.slides.link.placeholder",
@@ -2938,6 +2952,8 @@
       "codeSessions.gitTab.label"
     ],
     "ko": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "live.sheet.args.k",
       "live.sheet.args.x",
       "live.slides.link.placeholder",
@@ -3114,6 +3130,8 @@
       "codeSessions.gitTab.label"
     ],
     "zh-Hans": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "channel.tooLong.fileName",
       "devices.system.android",
       "devices.system.ios",
@@ -3278,6 +3296,8 @@
       "codeSessions.gitTab.label"
     ],
     "id": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "drive.folder",
       "drive.folders",
       "drive.moveTo",
@@ -3618,6 +3638,8 @@
       "codeSessions.tabs.terminalN"
     ],
     "tr": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "live.canvas.inspector.model",
       "live.canvas.sizes.short.s",
       "live.canvas.sizes.short.m",
@@ -3836,6 +3858,8 @@
       "codeSessions.tabs.terminalN"
     ],
     "pl": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "drive.folder",
       "devices.cpus",
       "devices.memory",
@@ -4175,6 +4199,8 @@
       "connectors.store.agents"
     ],
     "ru": [
+      "hosting.cloud.name",
+      "contextMenu.lookOurs",
       "live.canvas.sizes.short.s",
       "live.canvas.sizes.short.m",
       "live.canvas.sizes.short.l",
@@ -4945,6 +4971,9 @@
   },
   "desktop": {
     "pt-BR": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "common.hours",
       "common.minutes",
       "device.mac",
@@ -4968,6 +4997,9 @@
       "tools.opencodeName"
     ],
     "es": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "common.hours",
       "common.minutes",
       "device.mac",
@@ -4987,6 +5019,9 @@
       "tools.opencodeName"
     ],
     "fr": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "common.hours",
       "common.minutes",
       "device.mac",
@@ -5009,6 +5044,9 @@
       "tools.opencodeName"
     ],
     "de": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "device.mac",
       "device.windows",
       "iphone.account",
@@ -5035,6 +5073,9 @@
       "tools.opencodeName"
     ],
     "it": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "common.hours",
       "common.minutes",
       "device.linux",
@@ -5057,6 +5098,9 @@
       "tools.opencodeName"
     ],
     "nl": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "common.minutes",
       "device.linux",
       "device.mac",
@@ -5087,6 +5131,9 @@
       "tools.opencodeName"
     ],
     "ja": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "connect.placeholder",
       "device.mac",
       "device.windows",
@@ -5102,6 +5149,9 @@
       "tools.opencodeName"
     ],
     "ko": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "connect.placeholder",
       "device.mac",
       "device.windows",
@@ -5116,6 +5166,9 @@
       "tools.opencodeName"
     ],
     "zh-Hans": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "connect.placeholder",
       "device.mac",
       "device.windows",
@@ -5130,6 +5183,9 @@
       "tools.opencodeName"
     ],
     "id": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "device.mac",
       "device.windows",
       "link.chipTailnet",
@@ -5149,6 +5205,9 @@
       "tools.opencodeName"
     ],
     "tr": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "device.mac",
       "device.windows",
       "link.chipTailnet",
@@ -5162,6 +5221,9 @@
       "tools.opencodeName"
     ],
     "pl": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "common.minutes",
       "device.mac",
       "device.windows",
@@ -5178,6 +5240,9 @@
       "tools.opencodeName"
     ],
     "ru": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "connect.placeholder",
       "device.mac",
       "link.chipTailnet",

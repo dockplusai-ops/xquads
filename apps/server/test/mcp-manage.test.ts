@@ -99,8 +99,8 @@ describe("scopes", () => {
     // The test server is http://localhost:3000.
     expect(list.serverPublic).toBe(false);
     const dns = (address: string) => async () => [address];
-    expect(await reachableFromInternet("https://app.agentes.chat", dns("203.0.113.7"))).toBe(true);
-    expect(await reachableFromInternet("http://app.agentes.chat", dns("203.0.113.7"))).toBe(false);
+    expect(await reachableFromInternet("https://agents.xquads.com", dns("203.0.113.7"))).toBe(true);
+    expect(await reachableFromInternet("http://agents.xquads.com", dns("203.0.113.7"))).toBe(false);
     expect(await reachableFromInternet("https://agentes.lan", dns("203.0.113.7"))).toBe(false);
     expect(await reachableFromInternet("https://192.168.1.20", dns("203.0.113.7"))).toBe(false);
     // Split DNS: a public-looking name that resolves only to an office address.

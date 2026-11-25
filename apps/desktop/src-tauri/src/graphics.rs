@@ -139,7 +139,7 @@ fn config_dir() -> Option<std::path::PathBuf> {
 
 /// tauri.conf.json's `identifier`, the config folder's name.
 #[cfg_attr(not(target_os = "linux"), allow(dead_code))]
-const IDENTIFIER: &str = "chat.agentes.desktop";
+const IDENTIFIER: &str = "com.xquads.desktop";
 
 /// Before any thread starts (main.rs): sets or clears the variable WebKitGTK draws by, as decided.
 #[cfg(target_os = "linux")]
@@ -247,7 +247,7 @@ pub fn details_line(version: &str, os: &str, system_version: Option<&str>, linux
         Some(v) if !v.is_empty() => format!("{name} {v}"),
         _ => name.to_owned(),
     };
-    let mut line = format!("agentes.chat {version} · {system}");
+    let mut line = format!("xquads {version} · {system}");
     if let Some(linux) = linux.map(System::line).filter(|l| !l.is_empty()) {
         line.push_str(" · ");
         line.push_str(&linux);
@@ -475,10 +475,10 @@ mod tests {
         assert_eq!(blank.line(), "wayland (GNOME) · WebKitGTK 2.50.4 · CPU (chosen) · AppImage");
         assert_eq!(
             details_line("0.8.9", "linux", None, Some(&blank)),
-            "agentes.chat 0.8.9 · Linux · wayland (GNOME) · WebKitGTK 2.50.4 · CPU (chosen) · AppImage"
+            "xquads 0.8.9 · Linux · wayland (GNOME) · WebKitGTK 2.50.4 · CPU (chosen) · AppImage"
         );
-        assert_eq!(details_line("0.8.9", "macos", Some("15.1"), None), "agentes.chat 0.8.9 · macOS 15.1");
-        assert_eq!(details_line("0.8.9", "windows", None, None), "agentes.chat 0.8.9 · Windows");
+        assert_eq!(details_line("0.8.9", "macos", Some("15.1"), None), "xquads 0.8.9 · macOS 15.1");
+        assert_eq!(details_line("0.8.9", "windows", None, None), "xquads 0.8.9 · Windows");
     }
 
     #[test]

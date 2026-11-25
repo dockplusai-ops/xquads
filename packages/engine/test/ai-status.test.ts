@@ -322,7 +322,7 @@ describe("who picks the agents (ADR 0074)", () => {
     const cloud = routingOf({
       plans: {
         hub: { status: async () => null, call: async () => null } as never,
-        publicUrl: "https://app.agentes.chat",
+        publicUrl: "https://agents.xquads.com",
       },
     });
     expect((await who(cloud)).routing.by).toBe("rules");

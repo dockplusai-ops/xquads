@@ -251,9 +251,9 @@ export async function missingGitHubAppEvents(app: GitHubAppConfig, http: GitHubH
 export function githubAppManifest(publicUrl: string) {
   const base = publicUrl.replace(/\/$/, "");
   const host = new URL(base).host;
-  const room = APP_NAME_MAX - "agentes.chat ()".length;
+  const room = APP_NAME_MAX - "xquads ()".length;
   return {
-    name: `agentes.chat (${host.slice(0, room)})`,
+    name: `xquads (${host.slice(0, room)})`,
     url: base,
     redirect_url: githubAppManifestCallbackUri(base),
     callback_urls: [githubAppCallbackUri(base)],
@@ -305,7 +305,7 @@ export async function convertGitHubAppManifest(http: GitHubHttp, code: string): 
   const res = await http
     .fetch(`${http.apiUrl}/app-manifests/${encodeURIComponent(code)}/conversions`, {
       method: "POST",
-      headers: { accept: "application/vnd.github+json", "user-agent": "agentes.chat" },
+      headers: { accept: "application/vnd.github+json", "user-agent": "xquads" },
     })
     .catch(() => null);
   const body = (res?.ok ? await res.json().catch(() => null) : null) as {

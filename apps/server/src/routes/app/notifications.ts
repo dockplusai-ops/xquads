@@ -139,8 +139,7 @@ const Notification = z
         .optional()
         .openapi({ description: "`org_standing` to `agent_hold`: `network` or `operator`, never the hold's reason." }),
       cloud: z.boolean().optional().openapi({
-        description:
-          "`org_standing` on agentes.chat Cloud: the apps read `text` as the restriction, with how to contest it.",
+        description: "`org_standing` on xquads Cloud: the apps read `text` as the restriction, with how to contest it.",
       }),
       still: z.number().optional().openapi({
         description:

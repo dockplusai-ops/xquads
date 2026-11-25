@@ -14,8 +14,8 @@ run by hand), so check it locally (`cargo check` in `src-tauri`) before a pull r
 
 Measure before changing anything bigger than a small fix.
 
-1. **Read `window.log`** (macOS `~/Library/Logs/chat.agentes.desktop/`, Windows `%LOCALAPPDATA%\chat.agentes.desktop\logs\`,
-   Linux `~/.local/share/chat.agentes.desktop/logs/`; the cover's Copy details ends with it). The app writes there:
+1. **Read `window.log`** (macOS `~/Library/Logs/com.xquads.desktop/`, Windows `%LOCALAPPDATA%\com.xquads.desktop\logs\`,
+   Linux `~/.local/share/com.xquads.desktop/logs/`; the cover's Copy details ends with it). The app writes there:
    - `main thread stalled 1840 ms (last: local_server_status)`: the main thread answered nothing for over a second.
      `last` is the app command or the window event it was last given. A stall that is still going after 5 s gets a
      `still stalled` line at once, so a main thread that never comes back leaves one too.

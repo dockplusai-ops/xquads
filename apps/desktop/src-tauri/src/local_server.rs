@@ -226,7 +226,7 @@ fn write_env(folder: &Folder, entries: &[(&str, String)]) -> io::Result<()> {
     write_private(&folder.env(), next.as_bytes(), true)
 }
 
-const ENV_HEADER: &str = "# agentes.chat on this computer, run by the agentes.chat app. Help:\n\
+const ENV_HEADER: &str = "# xquads on this computer, run by the xquads app. Help:\n\
 # https://agentes.chat/docs/run-on-your-computer. AGENTES_SECRET encrypts the keys stored in the database: it\n\
 # travels with the folder in a backup, and changing it makes them unreadable.\n";
 
@@ -2486,7 +2486,7 @@ fn diagnostics(app: &AppHandle) -> String {
         })
         .unwrap_or_default();
     format!(
-        "agentes.chat app {} ({} {})\nserver here: {:?}, installed package version {}, internal server version {}, at {}, reach {}, usage statistics {}\n\n{}\n\n{}",
+        "xquads app {} ({} {})\nserver here: {:?}, installed package version {}, internal server version {}, at {}, reach {}, usage statistics {}\n\n{}\n\n{}",
         app.package_info().version,
         std::env::consts::OS,
         std::env::consts::ARCH,
@@ -2530,8 +2530,8 @@ pub fn files_moving(launching: bool, pid: Option<u32>, phase: Option<Phase>) -> 
 pub fn erased_folder(home: &Path, date: &str, taken: impl Fn(&Path) -> bool) -> Option<PathBuf> {
     (1..100)
         .map(|n| match n {
-            1 => home.join(format!("agentes.chat erased {date}")),
-            n => home.join(format!("agentes.chat erased {date} {n}")),
+            1 => home.join(format!("xquads erased {date}")),
+            n => home.join(format!("xquads erased {date} {n}")),
         })
         .find(|p| !taken(p))
 }
@@ -3257,13 +3257,13 @@ mod tests {
     #[test]
     fn an_erased_folder_is_named_with_the_day_and_a_number_when_that_name_is_taken() {
         let home = Path::new("/home/ana");
-        let first = home.join("agentes.chat erased 2026-11-14");
+        let first = home.join("xquads erased 2026-11-14");
         assert_eq!(erased_folder(home, "2026-11-14", |_| false), Some(first.clone()));
-        let second = home.join("agentes.chat erased 2026-11-14 2");
+        let second = home.join("xquads erased 2026-11-14 2");
         assert_eq!(erased_folder(home, "2026-11-14", |p| p == first), Some(second.clone()));
         assert_eq!(
             erased_folder(home, "2026-11-14", |p| p == first || p == second),
-            Some(home.join("agentes.chat erased 2026-11-14 3"))
+            Some(home.join("xquads erased 2026-11-14 3"))
         );
         assert_eq!(erased_folder(home, "2026-11-14", |_| true), None);
     }
@@ -3275,7 +3275,7 @@ mod tests {
         fs::create_dir_all(data.join("db")).unwrap();
         fs::write(data.join("owner-key"), "k").unwrap();
         let to = move_away(&data, &home, "2026-11-14").unwrap();
-        assert_eq!(to, home.join("agentes.chat erased 2026-11-14"));
+        assert_eq!(to, home.join("xquads erased 2026-11-14"));
         assert!(!data.exists());
         assert_eq!(fs::read_to_string(to.join("owner-key")).unwrap(), "k");
         assert!(to.join("db").is_dir());
@@ -3283,11 +3283,11 @@ mod tests {
         fs::create_dir_all(&data).unwrap();
         fs::write(data.join("owner-key"), "k2").unwrap();
         let again = move_away(&data, &home, "2026-11-14").unwrap();
-        assert_eq!(again, home.join("agentes.chat erased 2026-11-14 2"));
+        assert_eq!(again, home.join("xquads erased 2026-11-14 2"));
         assert_eq!(fs::read_to_string(to.join("owner-key")).unwrap(), "k");
         // No folder to move: an error, and nothing made.
         assert!(move_away(&data, &home, "2026-11-15").is_err());
-        assert!(!home.join("agentes.chat erased 2026-11-15").exists());
+        assert!(!home.join("xquads erased 2026-11-15").exists());
         let _ = fs::remove_dir_all(&home);
     }
 
@@ -3598,7 +3598,7 @@ mod tests {
             moved_page(page("http://127.0.0.1:4310/org/o1/c/c2?m=1#x"), local, public).as_str(),
             "https://ana-mac.tail1234.ts.net/org/o1/c/c2?m=1#x"
         );
-        assert_eq!(moved_page(page("https://app.agentes.chat/org/o1"), local, public).as_str(), "https://app.agentes.chat/org/o1");
+        assert_eq!(moved_page(page("https://agents.xquads.com/org/o1"), local, public).as_str(), "https://agents.xquads.com/org/o1");
         assert_eq!(moved_page(page("http://127.0.0.1:4310/x"), local, local).as_str(), "http://127.0.0.1:4310/x");
     }
 

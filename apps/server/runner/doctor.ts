@@ -94,7 +94,7 @@ function connectionChecks(s: DoctorSources): Check[] {
         status: "needs",
         title: `This ${word} isn't connected to a workspace`,
         detail: [s.system],
-        fix: "Connect it in agentes.chat, under Settings › Devices.",
+        fix: "Connect it in xquads, under Settings › Devices.",
       },
     ];
   }
@@ -115,7 +115,7 @@ function connectionChecks(s: DoctorSources): Check[] {
       detail: facts,
       waitFor: `${c.name} to start`,
       ...(c.managedBy === "desktop"
-        ? { fix: "Open the agentes.chat app." }
+        ? { fix: "Open the xquads app." }
         : c.managedBy === "host"
           ? { fix: "This server's own computer keeps it: check that its service runs." }
           : { fix: "Run it in the background:", command: "agentes-runner service install" }),

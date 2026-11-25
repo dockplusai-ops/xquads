@@ -18,7 +18,7 @@ import { ZipWriter } from "./zip";
 
 export const MIGRATE_HELP = `Usage: agentes-runner migrate [--from APP] [--out FOLDER] [--json] [--no-files]
 
-Reads the agents another app keeps on this computer and writes one .zip to drop on agentes.chat.
+Reads the agents another app keeps on this computer and writes one .zip to drop on xquads.
 It only reads, and it sends nothing.
 
   --from APP       ${SOURCES.join(", ")} (asked, or the only one found, when left out)
@@ -232,7 +232,7 @@ export async function migrate(args: MigrateArgs, io: Io): Promise<number> {
     } else {
       say("");
       say(`Written to ${tilde(file, io.home)}`);
-      say("Drop that file on agentes.chat, on the import screen. Nothing was sent.");
+      say("Drop that file on xquads, on the import screen. Nothing was sent.");
       if (io.interactive) io.reveal?.(file);
     }
     return 0;

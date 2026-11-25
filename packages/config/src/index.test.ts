@@ -74,21 +74,25 @@ describe("loadConfig", () => {
     );
   });
 
-  test("agentes.chat's own servers have their legal links without extra settings", () => {
-    const app = loadConfig({ ...valid, PUBLIC_URL: "https://app.agentes.chat" });
-    expect(app.TERMS_URL).toBe("https://app.agentes.chat/terms");
-    expect(app.PRIVACY_URL).toBe("https://app.agentes.chat/privacy");
-    expect(loadConfig({ ...valid, PUBLIC_URL: "https://agentes.chat" }).TERMS_URL).toBe("https://agentes.chat/terms");
+  test("xquads' own servers get no legal links by themselves: the bundled Terms and Privacy are the original's", () => {
+    const app = loadConfig({ ...valid, PUBLIC_URL: "https://agents.xquads.com" });
+    expect([app.TERMS_URL, app.PRIVACY_URL]).toEqual([undefined, undefined]);
+    const set = loadConfig({
+      ...valid,
+      PUBLIC_URL: "https://agents.xquads.com",
+      TERMS_URL: "https://xquads.com/terms",
+    });
+    expect(set.TERMS_URL).toBe("https://xquads.com/terms");
     const selfHosted = loadConfig({ ...valid, PUBLIC_URL: "https://chat.example.com" });
     expect([selfHosted.TERMS_URL, selfHosted.PRIVACY_URL]).toEqual([undefined, undefined]);
   });
 
-  test("agentes.chat's own servers send from ping@agentes.chat, whichever of its addresses they are at", () => {
-    for (const site of ["https://app.agentes.chat", "https://agentes.chat"]) {
-      expect(loadConfig({ ...valid, PUBLIC_URL: site }).EMAIL_FROM).toBe("agentes.chat <ping@agentes.chat>");
+  test("xquads' own servers send from ping@xquads.com, whichever of its addresses they are at", () => {
+    for (const site of ["https://agents.xquads.com", "https://xquads.com"]) {
+      expect(loadConfig({ ...valid, PUBLIC_URL: site }).EMAIL_FROM).toBe("xquads <ping@xquads.com>");
     }
-    const set = loadConfig({ ...valid, PUBLIC_URL: "https://app.agentes.chat", EMAIL_FROM: "ops@agentes.chat" });
-    expect(set.EMAIL_FROM).toBe("ops@agentes.chat");
+    const set = loadConfig({ ...valid, PUBLIC_URL: "https://agents.xquads.com", EMAIL_FROM: "ops@xquads.com" });
+    expect(set.EMAIL_FROM).toBe("ops@xquads.com");
     // Elsewhere it stays unset: the sender is ping@ on the host of PUBLIC_URL.
     expect(loadConfig({ ...valid, PUBLIC_URL: "https://chat.example.com" }).EMAIL_FROM).toBeUndefined();
   });
@@ -336,7 +340,7 @@ describe("loadConfig", () => {
 
   test("the usage report is on unless TELEMETRY says off (on/off, or any yes/no word)", () => {
     expect(loadConfig(valid).TELEMETRY).toBe("on");
-    expect(loadConfig(valid).TELEMETRY_URL).toBe("https://telemetry.agentes.chat/v1/report");
+    expect(loadConfig(valid).TELEMETRY_URL).toBe("https://telemetry.xquads.com/v1/report");
     expect(loadConfig({ ...valid, TELEMETRY: "off" }).TELEMETRY).toBe("off");
     expect(loadConfig({ ...valid, TELEMETRY: "false" }).TELEMETRY).toBe("off");
     expect(loadConfig({ ...valid, TELEMETRY: "on" }).TELEMETRY).toBe("on");
@@ -462,10 +466,10 @@ describe("GITHUB_APP_PRIVATE_KEY", () => {
 });
 
 describe("phone push settings", () => {
-  test("auto by default, through agentes.chat's relay unless told otherwise; the relay only over https", () => {
+  test("auto by default, through xquads's relay unless told otherwise; the relay only over https", () => {
     const config = loadConfig(valid);
     expect(config.PUSH_SENDER).toBe("auto");
-    expect(config.PUSH_RELAY_URL).toBe("https://app.agentes.chat/api/push-relay/v1");
+    expect(config.PUSH_RELAY_URL).toBe("https://agents.xquads.com/api/push-relay/v1");
     expect(config.PUSH_RELAY_SERVE).toBe("off");
     expect(loadConfig({ ...valid, PUSH_SENDER: "off", PUSH_RELAY_SERVE: "on" })).toMatchObject({
       PUSH_SENDER: "off",
@@ -487,11 +491,7 @@ describe("APNs key", () => {
     expect(config.APNS_KEY).toBe(p8.trim());
     expect(config.APNS_KEY_ID).toBe("ABC123DEFG");
     expect(config.APNS_TEAM_ID).toBe("XYZ987WVUT");
-    expect(config.APNS_APP_IDS).toEqual([
-      "chat.agentes.app",
-      "chat.agentes.app.preview",
-      "chat.agentes.app.development",
-    ]);
+    expect(config.APNS_APP_IDS).toEqual(["com.xquads.app", "com.xquads.app.preview", "com.xquads.app.development"]);
     expect(redactConfig(config).APNS_KEY).toBe("********");
     expect(loadConfig({ ...valid, APNS_KEY: Buffer.from(p8).toString("base64") }).APNS_KEY).toBe(p8.trim());
     expect(loadConfig({ ...valid, APNS_APP_IDS: " com.example.app , com.example.app.beta " }).APNS_APP_IDS).toEqual([

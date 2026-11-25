@@ -789,10 +789,7 @@ export class RunnerDaemon implements RequestObserver {
   async openBrowser(agent: AgentScope, installing: () => void): Promise<void> {
     const session = this.session;
     if (!session) {
-      throw new RunnerError(
-        "internal",
-        "This computer isn't connected to agentes.chat right now. Try again in a minute.",
-      );
+      throw new RunnerError("internal", "This computer isn't connected to xquads right now. Try again in a minute.");
     }
     const { tools } = this.access();
     if (tools.browser !== true || tools.desktop !== true) {
@@ -2874,7 +2871,7 @@ export class RunnerDaemon implements RequestObserver {
       const byName = (typeof req.byName === "string" ? req.byName : "").slice(0, 80);
       this.emit({ kind: "access.allowed", tool, byName });
       this.opts.print?.(
-        `${byName || "Its owner"} turned on ${tool} from agentes.chat. To turn it off: agentes-runner tools disable ${tool}`,
+        `${byName || "Its owner"} turned on ${tool} from xquads. To turn it off: agentes-runner tools disable ${tool}`,
       );
     }
     return { access: this.access() };

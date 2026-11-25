@@ -192,32 +192,32 @@ describe("shared copies", () => {
   });
 
   test("download links: signed links as they are, ours with the session", () => {
-    expect(resolveDownloadUrl("https://app.agentes.chat", "https://bucket.s3/x?sig=1")).toEqual({
+    expect(resolveDownloadUrl("https://agents.xquads.com", "https://bucket.s3/x?sig=1")).toEqual({
       uri: "https://bucket.s3/x?sig=1",
       needsSession: false,
     });
-    expect(resolveDownloadUrl("https://app.agentes.chat", "https://app.agentes.chat.attacker.test/file")).toEqual({
-      uri: "https://app.agentes.chat.attacker.test/file",
+    expect(resolveDownloadUrl("https://agents.xquads.com", "https://agents.xquads.com.attacker.test/file")).toEqual({
+      uri: "https://agents.xquads.com.attacker.test/file",
       needsSession: false,
     });
-    expect(resolveDownloadUrl("https://app.agentes.chat", "https://app.agentes.chat/file")).toEqual({
-      uri: "https://app.agentes.chat/file",
+    expect(resolveDownloadUrl("https://agents.xquads.com", "https://agents.xquads.com/file")).toEqual({
+      uri: "https://agents.xquads.com/file",
       needsSession: true,
     });
     expect(
-      resolveDownloadUrl("https://app.agentes.chat/", "/api/app/organizations/o/artifacts/a/file?version=2"),
+      resolveDownloadUrl("https://agents.xquads.com/", "/api/app/organizations/o/artifacts/a/file?version=2"),
     ).toEqual({
-      uri: "https://app.agentes.chat/api/app/organizations/o/artifacts/a/file?version=2",
+      uri: "https://agents.xquads.com/api/app/organizations/o/artifacts/a/file?version=2",
       needsSession: true,
     });
   });
 
   test("the web Drive at the file", () => {
-    expect(driveWebUrl("https://app.agentes.chat/", "org1", "a1")).toBe(
-      "https://app.agentes.chat/org/org1/drive?artifact=a1",
+    expect(driveWebUrl("https://agents.xquads.com/", "org1", "a1")).toBe(
+      "https://agents.xquads.com/org/org1/drive?artifact=a1",
     );
-    expect(driveWebUrl("https://app.agentes.chat", "org1", "a1", 3)).toBe(
-      "https://app.agentes.chat/org/org1/drive?artifact=a1&v=3",
+    expect(driveWebUrl("https://agents.xquads.com", "org1", "a1", 3)).toBe(
+      "https://agents.xquads.com/org/org1/drive?artifact=a1&v=3",
     );
   });
 });

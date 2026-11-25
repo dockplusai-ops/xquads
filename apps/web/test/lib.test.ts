@@ -503,7 +503,7 @@ describe("the confirmation email", () => {
       );
     }
     expect(shown).toEqual([
-      "Sem conexão com o agentes.chat agora. Tente de novo em instantes.",
+      "Sem conexão com o xquads agora. Tente de novo em instantes.",
       "Muitas tentativas. Espere alguns minutos e tente de novo.",
       "Não deu certo. Confira o que preencheu e tente de novo.",
     ]);

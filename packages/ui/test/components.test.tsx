@@ -24,6 +24,7 @@ import {
   initialsOf,
   ListRow,
   Logo,
+  LogoMark,
   Menu,
   MenuCheckboxItem,
   MenuFace,
@@ -924,16 +925,24 @@ describe("Menu", () => {
 });
 
 describe("Logo, Icon, Meter", () => {
-  test("logo has an accessible name; the mark uses the agent token classes", () => {
+  test("logo has an accessible name; the symbol's person and agents and the name are drawn, never typed", () => {
+    const { container } = render(<Logo />);
+    const logo = body().getByRole("img", { name: "xquads" });
+    expect(logo.textContent).toBe("");
+    expect(container.querySelector(".ac-logo__person")).not.toBeNull();
+    expect(container.querySelector(".ac-logo__agents")).not.toBeNull();
+    expect(container.querySelector(".ac-logo__name")).not.toBeNull();
+  });
+
+  test("the symbol takes the kit's small cut at 24 px or less", () => {
     const { container } = render(
       <>
-        <Logo />
-        <Logo variant="expanded" />
+        <LogoMark size={24} />
+        <LogoMark size={48} />
       </>,
     );
-    expect(body().getByRole("img", { name: "agentes" })).toBeTruthy();
-    expect(body().getByRole("img", { name: "agentes.chat" }).textContent).toBe("agentes.chat");
-    expect(container.querySelector(".ac-logo__body")).not.toBeNull();
+    const [small, large] = [...container.querySelectorAll(".ac-logo__person")].map((p) => p.getAttribute("d"));
+    expect(small).not.toBe(large);
   });
 
   test("every icon renders a stroke-only 20px glyph, decorative unless labelled", () => {

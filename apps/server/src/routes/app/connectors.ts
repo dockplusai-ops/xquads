@@ -131,7 +131,7 @@ const CatalogEntry = z
       .openapi({ description: "Signs in with OAuth here: our OAuth app, the vendor's MCP OAuth, or Composio's." }),
     available: z.boolean().openapi({ description: "Can be connected on this server." }),
     soon: z.boolean().openapi({
-      description: "A one-click server whose vendor hasn't approved agentes.chat yet: listed, not connectable.",
+      description: "A one-click server whose vendor hasn't approved xquads yet: listed, not connectable.",
     }),
     needsApp: z.boolean().optional().openapi({
       description:
@@ -192,8 +192,7 @@ export function connectorRoutes(deps: AppDeps) {
       path: "/connectors/catalog",
       tags,
       security,
-      summary:
-        "Connectors agentes.chat knows (ours and one-click MCP servers), their scopes and tools; plus built-in scopes",
+      summary: "Connectors xquads knows (ours and one-click MCP servers), their scopes and tools; plus built-in scopes",
       responses: {
         200: json(z.object({ connectors: z.array(CatalogEntry), builtinScopes: z.array(ScopeInfo) })),
         401: errors[401],

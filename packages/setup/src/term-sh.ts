@@ -120,12 +120,12 @@ t_end() {
 # t_intro TITLE: the logo where it fits, then ┌ and the badge, and the line from here on. A log gets the title.
 t_intro() {
   if [ "$T_FRAME" = 0 ]; then
-    printf 'agentes.chat %s\\n' "$1" >&"$T_FD"
+    printf 'xquads %s\\n' "$1" >&"$T_FD"
     return 0
   fi
   if [ "$T_UNI" = 1 ] && [ "$T_COLS" -ge 64 ]; then t_logo; fi
-  t_b=agentes.chat
-  if [ "$T_DEPTH" != 0 ]; then t_b="$C_BADGE agentes.chat $C_OFF"; fi
+  t_b=xquads
+  if [ "$T_DEPTH" != 0 ]; then t_b="$C_BADGE xquads $C_OFF"; fi
   T_OPEN=1
   t_style
   # The title beside the badge's columns, its wrap under the line.

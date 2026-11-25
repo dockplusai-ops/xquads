@@ -545,7 +545,7 @@ test("the keeper: its source, its settings and its autostart entry, so it starts
     [
       "[Desktop Entry]",
       "Type=Application",
-      "Name=agentes.chat",
+      "Name=xquads",
       "Comment=Lists the windows open on this desktop, to open them again after its computer restarted or moved",
       `Exec=python3 -I ${home}/.local/share/agentes/keeper.py ${home}/.local/share/agentes/keeper.json`,
       "NoDisplay=true",
@@ -604,8 +604,8 @@ test("files that change come with a new LOOK_VERSION: desktops that have the loo
   }
   // Changed the look on purpose? Bump LOOK_VERSION and put the new hash here.
   expect({ version: LOOK_VERSION, files: hash.digest("hex").slice(0, 16) }).toEqual({
-    version: 8,
-    files: "dfde5d80b93e502a",
+    version: 9,
+    files: "8bcbcfff48584644",
   });
 });
 

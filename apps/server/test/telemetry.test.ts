@@ -112,7 +112,7 @@ describe("sending", () => {
     expect(http.calls).toHaveLength(1);
     const [call] = http.calls;
     expect(call?.url).toBe(config.TELEMETRY_URL);
-    expect(call?.url).toBe("https://telemetry.agentes.chat/v1/report");
+    expect(call?.url).toBe("https://telemetry.xquads.com/v1/report");
     expect(call?.init.method).toBe("POST");
     expect(call?.init.signal).toBeInstanceOf(AbortSignal);
     expect(Object.keys(call?.body ?? {})).toEqual([
@@ -223,8 +223,8 @@ describe("sending", () => {
     expect(http.calls).toEqual([]);
   });
 
-  test("agentes.chat's own server always sends, whatever TELEMETRY and the switch say", async () => {
-    const { clock, http } = await start({ PUBLIC_URL: "https://agentes.chat", TELEMETRY: "off" });
+  test("xquads's own server always sends, whatever TELEMETRY and the switch say", async () => {
+    const { clock, http } = await start({ PUBLIC_URL: "https://xquads.com", TELEMETRY: "off" });
     await setTelemetryEnabled(db, false);
     await clock.fire(FIRST_REPORT_MS);
     expect(http.calls).toHaveLength(1);
@@ -279,7 +279,7 @@ test("agentes telemetry prints exactly the next report, on or off, and sends not
   expect(JSON.parse(out.join("")).computers).toEqual([
     expect.objectContaining({ count: 1, browserTraffic: { upMb: 5, downMb: 81, hours: 1.5, computers: 1 } }),
   ]);
-  expect(err.join("")).toContain("On: sent once a day to https://telemetry.agentes.chat/v1/report");
+  expect(err.join("")).toContain("On: sent once a day to https://telemetry.xquads.com/v1/report");
 
   await setTelemetryEnabled(db, false);
   out.length = 0;
@@ -345,8 +345,8 @@ describe("the switch in Settings", () => {
     expect(view).toMatchObject({ enabled: true, envOff: true });
   });
 
-  test("on agentes.chat itself nobody has it", async () => {
-    const origin = "https://agentes.chat";
+  test("on xquads itself nobody has it", async () => {
+    const origin = "https://xquads.com";
     t = await createTestServer({ env: { ALLOW_SIGNUP: "true", PUBLIC_URL: origin } });
     const first = browser(t);
     const signedUp = await first("/api/auth/sign-up/email", {

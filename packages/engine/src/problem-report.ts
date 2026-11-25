@@ -167,7 +167,7 @@ function lineTime(line: string): number | null {
 
 /** The plain text shown in the preview and copied by Copy report: exactly what's sent, as JSON. */
 export function problemReportText(report: ProblemReport): string {
-  return `agentes.chat problem report (format ${report.format})\n\n${JSON.stringify(report, null, 2)}`;
+  return `xquads problem report (format ${report.format})\n\n${JSON.stringify(report, null, 2)}`;
 }
 
 /** The facts kept from a computer's answer, which comes from the person's computer and is checked here. */

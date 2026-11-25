@@ -100,7 +100,7 @@ describe("Configurações do workspace", () => {
       seedState({ telemetry: { enabled: true, envOff: false, report: { report: 1, people: { total: 3 } } } }),
     );
     const card = screen().getByRole("region", { name: "Estatísticas de uso" });
-    const toggle = within(card).getByRole("switch", { name: "Enviar estatísticas de uso anônimas ao agentes.chat" });
+    const toggle = within(card).getByRole("switch", { name: "Enviar estatísticas de uso anônimas ao xquads" });
     expect(toggle.getAttribute("aria-checked")).toBe("true");
     // What is counted is the ⓘ's; no line under the switch while it can be changed.
     expect(describedBy(toggle)).toEqual([
@@ -119,7 +119,7 @@ describe("Configurações do workspace", () => {
   test("usage statistics: with TELEMETRY=off the switch is off and the card says why; others never see it", async () => {
     await go(seedState({ telemetry: { enabled: true, envOff: true, report: { report: 1 } } }));
     const card = screen().getByRole("region", { name: "Estatísticas de uso" });
-    const toggle = within(card).getByRole("switch", { name: "Enviar estatísticas de uso anônimas ao agentes.chat" });
+    const toggle = within(card).getByRole("switch", { name: "Enviar estatísticas de uso anônimas ao xquads" });
     expect(toggle.getAttribute("aria-checked")).toBe("false");
     expect(toggle.hasAttribute("disabled")).toBe(true);
     // Locked: one line says where it was turned off.
@@ -135,7 +135,7 @@ describe("Configurações do workspace", () => {
     await go(seedState({ telemetry: { enabled: true, envOff: true, report: { report: 1, install: "desktop" } } }));
     const desktop = screen().getByRole("region", { name: "Estatísticas de uso" });
     expect(desktop.querySelector(".settings-row__status")?.textContent).toBe(
-      "Desligado no app do agentes.chat no computador deste servidor (Preferências\u00a0›\u00a0Servidores).",
+      "Desligado no app do xquads no computador deste servidor (Preferências\u00a0›\u00a0Servidores).",
     );
     expect(desktop.textContent).not.toContain("TELEMETRY=off");
     cleanup();
@@ -154,7 +154,7 @@ describe("Configurações do workspace", () => {
       await go(seedState({ telemetry: { enabled: true, envOff: true, report: { report: 1, install: "desktop" } } }));
       const here = screen().getByRole("region", { name: "Estatísticas de uso" });
       expect(here.querySelector(".settings-row__status")?.textContent).toBe(
-        "Desligado no app do agentes.chat deste computador.Abrir Servidores",
+        "Desligado no app do xquads deste computador.Abrir Servidores",
       );
       await click(within(here).getByRole("button", { name: "Abrir Servidores" }));
       expect(asked).toContainEqual({ kind: "prefs", tab: "servers" });
@@ -195,11 +195,11 @@ describe("Configurações do workspace", () => {
     ).toBeTruthy();
     const github = screen().getByRole("region", { name: "Repositórios do GitHub" });
     expect(hintOf("Repositórios do GitHub", github).text).toBe(
-      "Onde o app agentes.chat está instalado, os agentes abrem pull requests, issues, comentários e commits como o app, com o nome do agente e de quem pediu.",
+      "Onde o app xquads está instalado, os agentes abrem pull requests, issues, comentários e commits como o app, com o nome do agente e de quem pediu.",
     );
     expect(
       within(github)
-        .getAllByText(/^Onde o app agentes.chat está instalado/)
+        .getAllByText(/^Onde o app xquads está instalado/)
         .map((el) => el.hidden),
     ).toEqual([true]);
     // A connected service is one line (its name, under it the account and its tools, who uses it) that opens its page.
@@ -680,7 +680,7 @@ describe("Configurações do workspace", () => {
         .getAllByRole("link")
         .slice(4)
         .map((l) => l.lastChild?.textContent),
-    ).toEqual(["Dispositivos", "Sobre o agentes.chat"]);
+    ).toEqual(["Dispositivos", "Sobre o xquads"]);
     // Settings opens on their account: what the agents know of the workspace is not theirs to read.
     expect(screen().queryByLabelText("O que os agentes sabem da Acme")).toBeNull();
     expect(document.body.textContent).not.toContain("Acme builds rockets");

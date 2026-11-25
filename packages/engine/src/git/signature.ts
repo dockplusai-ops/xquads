@@ -123,7 +123,7 @@ async function githubLogin(http: GitHubHttp, id: string, token?: string | null) 
     .fetch(`${http.apiUrl}/user/${id}`, {
       headers: {
         accept: "application/vnd.github+json",
-        "user-agent": "agentes.chat",
+        "user-agent": "xquads",
         ...(token ? { authorization: `Bearer ${token}` } : {}),
       },
     })

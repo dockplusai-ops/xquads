@@ -150,7 +150,7 @@ export function problemReportRoutes(deps: AppDeps) {
       method: "post",
       path: "/problem-reports/send",
       tags,
-      summary: "Send a previewed problem report to agentes.chat",
+      summary: "Send a previewed problem report to xquads",
       description:
         "Posts the report the preview returned, with the person's note and reply address, to `PROBLEM_REPORT_URL`. 409 `off` when that's empty, 429 with `retryAfterS` when too many went, 502 `unreachable` or `refused` when the receiver didn't take it.",
       security,
@@ -192,7 +192,7 @@ export function problemReportRoutes(deps: AppDeps) {
           signal: AbortSignal.timeout(SEND_TIMEOUT_MS),
         });
       } catch {
-        return apiError(c, 502, "unreachable", "agentes.chat didn't answer");
+        return apiError(c, 502, "unreachable", "xquads didn't answer");
       }
       if (res.status === 429) {
         const retryAfterS = Math.max(1, Number(res.headers.get("retry-after")) || 60);
@@ -200,7 +200,7 @@ export function problemReportRoutes(deps: AppDeps) {
       }
       const answer = res.ok ? ((await res.json().catch(() => null)) as { id?: unknown } | null) : null;
       if (!res.ok || typeof answer?.id !== "string") {
-        return apiError(c, 502, res.status >= 500 ? "unreachable" : "refused", "agentes.chat didn't accept the report");
+        return apiError(c, 502, res.status >= 500 ? "unreachable" : "refused", "xquads didn't accept the report");
       }
       deps.log?.info("problem report sent", { id: answer.id, place: report.place });
       return c.json({ id: answer.id }, 200);

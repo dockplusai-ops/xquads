@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useApi } from "@/api/context";
 
 /** The Android app's page on Google Play, open to everyone: the app signs in to any server. */
-const GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=chat.agentes.app";
+const GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=com.xquads.app";
 
 /** The iPhone app's public beta on TestFlight. */
 const TESTFLIGHT = "https://testflight.apple.com/join/f5QtGMkg";

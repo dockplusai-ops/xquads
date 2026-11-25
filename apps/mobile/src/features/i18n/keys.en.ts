@@ -1241,7 +1241,7 @@ export const featureKeysEn = {
     liveActivity: "Agents in the Dynamic Island",
     liveActivityHint:
       "When an agent works on something you asked for, it shows at the top of the screen, in any app, and on the Lock Screen. With the app closed, it needs iOS 17.2 or later.",
-    version: "agentes.chat · version {{version}}",
+    version: "xquads · version {{version}}",
     /** The bar's word on Você: it opens Conta. */
     edit: "Edit",
     status: "Status",
@@ -1267,11 +1267,11 @@ export const featureKeysEn = {
     workspacesUnreachable: "No answer right now",
     addWorkspace: "Add workspace",
     addWorkspaceCreate: "Create a new workspace",
-    addWorkspaceCreateSub: "On agentes.chat",
+    addWorkspaceCreateSub: "On xquads",
     addWorkspaceTeam: "Join your team's server",
     addWorkspaceTeamSub: "By its address or the QR code shown on the computer",
     teamServer: "Team server",
-    teamServerLead: "Your team's agentes.chat address, the same one shown in the browser.",
+    teamServerLead: "Your team's xquads address, the same one shown in the browser.",
     teamServerFoot: "You don't leave any workspace: your team's server joins your list, with your account there.",
     /** The sheet from holding the workspace's mark in the bar, and its shorter words (ADR 0154). */
     workspacesHoldHint: "Hold to switch workspace",
@@ -1342,7 +1342,7 @@ export const featureKeysEn = {
     addPasswordFirst: "Add a password to your account on the website first, then type it here.",
     addPasswordWeb: "Add a password on the website",
     /** The owner of a server the desktop app runs, with no password: that app's sign-in is their proof. */
-    onThisComputer: "Delete it in the agentes.chat app on the computer that runs this server.",
+    onThisComputer: "Delete it in the xquads app on the computer that runs this server.",
     otherAccount: "You signed in to another account. Nothing was deleted.",
     hold: "Hold to delete",
   },
@@ -2109,8 +2109,8 @@ export const featureKeysEn = {
       serverText: "One line to paste in its terminal",
       computer: "Another computer",
       computerText: "Install the app on it",
-      appNote: "On a Mac or a PC you use, the agentes.chat desktop app connects it too.",
-      appStep1: "Get the agentes.chat app on it",
+      appNote: "On a Mac or a PC you use, the xquads desktop app connects it too.",
+      appStep1: "Get the xquads app on it",
       appStep2: "Open it and sign in as yourself",
       appStep3: "Click Allow when it asks to let {{org}}'s agents use it",
       appShows: "It shows up here by itself, only for you until you share it.",
@@ -2133,7 +2133,7 @@ export const featureKeysEn = {
       connecting: "Connecting to {{host}}",
       computer: "Computer",
       noHost: "This phone works through a computer of yours. Connect one first.",
-      hostOffline: "{{host}} is offline. Turn it on and open agentes.chat there.",
+      hostOffline: "{{host}} is offline. Turn it on and open xquads there.",
       step1: "Turn on Developer options",
       /** Android's own setting names; Samsung's own where its path differs. */
       step1Text:
@@ -2163,10 +2163,10 @@ export const featureKeysEn = {
       wifi2Text:
         "From Wireless debugging\u00a0›\u00a0Pair device with QR code. Don't use the camera: it reads the code as a Wi-Fi network and takes the phone off your Wi-Fi.",
       wifi2Hint:
-        "In agentes.chat on a computer, open Connect a device\u00a0›\u00a0Android phone\u00a0›\u00a0Over Wi-Fi and pick {{host}}.",
+        "In xquads on a computer, open Connect a device\u00a0›\u00a0Android phone\u00a0›\u00a0Over Wi-Fi and pick {{host}}.",
       codeHead: "Pair with a pairing code",
       codeNote:
-        "From Wireless debugging\u00a0›\u00a0Pair device with pairing code. Open Settings and agentes.chat side by side so the code stays on screen.",
+        "From Wireless debugging\u00a0›\u00a0Pair device with pairing code. Open Settings and xquads side by side so the code stays on screen.",
       wifiNote: "Wi-Fi can drop after a restart. A cable is more reliable.",
       done: "{{name}} is connected",
       openFailed: "This phone didn't open that screen. Find it in Settings.",
@@ -2237,7 +2237,7 @@ export const featureKeysEn = {
         openXcode: "Open Xcode",
         opened: "Xcode opened on {{host}}. Look in Settings again, then close Xcode there.",
         unlock: "Turned it on and it restarted? The alert with Turn On shows once this iPhone is unlocked.",
-        outdated: "The agentes.chat app on {{host}} is out of date. Update it on that Mac.",
+        outdated: "The xquads app on {{host}} is out of date. Update it on that Mac.",
       },
     },
     /**
@@ -2375,9 +2375,9 @@ export const featureKeysEn = {
       more: "More in {{category}}",
     },
     fromAgent: "Connect a service",
-    /** GitHub with the agentes.chat app (ADR 0156): the app first, an account as the other way. */
+    /** GitHub with the xquads app (ADR 0156): the app first, an account as the other way. */
     githubApp: {
-      useApp: "Use the agentes.chat app",
+      useApp: "Use the xquads app",
       useAccount: "Use a GitHub account",
       /** The server's owner makes the app on the web (GitHub's manifest flow needs the browser's session). */
       createInBrowser: "Create in the browser",
@@ -2477,13 +2477,13 @@ export const featureKeysEn = {
     anotherTitle: "What's the new workspace called?",
     /** Its first question (ADR 0159), before the name: "For me" or "For my team". */
     anotherPurpose: "What's the new workspace for?",
-    anotherLead: "On agentes.chat. You stay in {{org}} and can switch any time.",
+    anotherLead: "On xquads. You stay in {{org}} and can switch any time.",
     /** The first run's name, suggested from a work address's domain. */
     suggested: "From your {{domain}} e-mail, I suggested {{org}}.",
     create: "Create",
     /** The onboarding's plan step on the phone, which can't take the plan: into the workspace, the team asleep. */
     enter: "Go to the workspace",
-    shareMessage: "Join {{org}} on agentes.chat: {{url}}",
+    shareMessage: "Join {{org}} on xquads: {{url}}",
     failed: "Couldn't save. Try again.",
   },
   ai: {

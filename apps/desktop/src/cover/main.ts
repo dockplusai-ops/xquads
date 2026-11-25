@@ -254,7 +254,7 @@ async function otherServer(status: LocalServerStatus | null): Promise<string | n
   if (!list) return null;
   return list.servers.find((s) => s !== list.current && !(status && isHereServer(status, s))) ?? null;
 }
-const serverName = (server: string) => (server === CLOUD_SERVER ? "agentes.chat" : serverHost(server));
+const serverName = (server: string) => (server === CLOUD_SERVER ? "xquads" : serverHost(server));
 const openServer = (server: string) => void invoke("server_choose", { server }).catch(() => {});
 
 /** "Use only on this Mac": reach off, said while it takes and when it didn't work. */

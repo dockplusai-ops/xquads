@@ -104,7 +104,7 @@ export async function probeMcpServer(
         jsonrpc: "2.0",
         id: 1,
         method: "initialize",
-        params: { protocolVersion: "2025-06-18", capabilities: {}, clientInfo: { name: "agentes.chat", version: "1" } },
+        params: { protocolVersion: "2025-06-18", capabilities: {}, clientInfo: { name: "xquads", version: "1" } },
       }),
     });
   } catch {
@@ -267,10 +267,9 @@ export async function ensureOAuthClient(
     }).catch(() => null);
     return { res, refusal: res && !res.ok ? await res.text().catch(() => "") : "" };
   };
-  let { res, refusal } = await register("agentes.chat");
-  // Calendly takes only letters, digits, hyphens and spaces in a client's name. The others keep the brand's,
-  // the name people see on the consent screen.
-  if (res?.status === 400 && /\b(client_)?name\b/i.test(refusal)) ({ res, refusal } = await register("agentes chat"));
+  // The name people see on the consent screen: letters only, which even Calendly (letters, digits, hyphens and
+  // spaces) takes as it is.
+  const { res, refusal } = await register("xquads");
   // RFC 7591: 400 for a redirect URI or metadata it won't take, 401 or 403 for a registration closed to us.
   if (res && [400, 401, 403].includes(res.status)) return { notApproved: true, ...refusalDetail(refusal) };
   if (!res?.ok) return null;

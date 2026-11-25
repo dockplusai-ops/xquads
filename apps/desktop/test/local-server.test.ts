@@ -197,7 +197,7 @@ describe("what the popover, the cover and Preferences say", () => {
     expect(isHereServer(running, LOCAL)).toBe(true);
     expect(isHereServer(reached, TAILNET)).toBe(true);
     expect(isHereServer(reached, LOCAL)).toBe(true);
-    expect(isHereServer(running, "https://app.agentes.chat")).toBe(false);
+    expect(isHereServer(running, "https://agents.xquads.com")).toBe(false);
     expect(isHereServer({ ...running, run: false }, LOCAL)).toBe(false);
   });
 
@@ -211,26 +211,26 @@ describe("what the popover, the cover and Preferences say", () => {
     expect(coverHere(reached, TAILNET, false)).toBe("tailnetOff");
     expect(coverHere(reached, TAILNET, true)).toBeNull();
     // Another server: the cover's own reachability words, not these.
-    expect(coverHere({ ...running, phase: "stopped" }, "https://app.agentes.chat", false)).toBeNull();
+    expect(coverHere({ ...running, phase: "stopped" }, "https://agents.xquads.com", false)).toBeNull();
   });
 
   test("Rust's labels for the tray line and the notifications, with {version} left for Rust", () => {
     const labels = menuLabels(createDesktopI18n("en", "linux").t);
-    expect(labels.serverTitle).toBe("agentes.chat on this computer");
+    expect(labels.serverTitle).toBe("xquads on this computer");
     expect(labels.serverStop).toBe("Stop");
-    expect(labels.hereBack).toBe("The update didn't start. agentes.chat is back on {version}.");
+    expect(labels.hereBack).toBe("The update didn't start. xquads is back on {version}.");
   });
 
   test("Rust's notification for a setup that failed while its window was closed, in both languages", () => {
     const en = menuLabels(createDesktopI18n("en", "mac").t);
     expect([en.setupFailed, en.setupFailedBody]).toEqual([
-      "Setting up agentes.chat on this Mac didn't finish",
-      "Open agentes.chat to see what happened.",
+      "Setting up xquads on this Mac didn't finish",
+      "Open xquads to see what happened.",
     ]);
     const pt = menuLabels(createDesktopI18n("pt-BR", "windows").t);
     expect([pt.setupFailed, pt.setupFailedBody]).toEqual([
-      "A preparação do agentes.chat neste PC não terminou",
-      "Abra o agentes.chat para ver o que aconteceu.",
+      "A preparação do xquads neste PC não terminou",
+      "Abra o xquads para ver o que aconteceu.",
     ]);
   });
 });

@@ -590,7 +590,7 @@ computer and opens agentes.chat, signed in.
   and **Stop running it here…**, which keeps its data and stops its agents here; **Start it here** there
   brings both back.
 - **Erase and start over…**, beside it: stops it, moves `~/.agentes` whole to
-  `~/agentes.chat erased <YYYY-MM-DD>` (a number after it when that name is taken), deletes its agents'
+  `~/xquads erased <YYYY-MM-DD>` (a number after it when that name is taken), deletes its agents'
   homes for this computer in `~/.agentes-runner/orgs`, forgets its addresses and their sign-ins in the
   app, and opens the welcome window for a new setup with a new owner. Its workspaces go for everyone; the
   agents' files in `~/agentes` stay. Only for the folder the app made, never a terminal install's.
@@ -603,13 +603,13 @@ computer and opens agentes.chat, signed in.
   ⌘Q, on Windows and Linux from its icon by the clock; **Quit** if it asks; closing the window only hides
   it), delete the app, stop a server you installed in `~/.agentes` from the terminal with its own
   `~/.agentes/app/<version>/bin/agentes-server service uninstall` (quitting the app doesn't stop it), then
-  delete your data, `~/.agentes`, every `~/agentes.chat erased …`, `~/.agentes-runner`
+  delete your data, `~/.agentes`, every `~/xquads erased …`, `~/.agentes-runner`
   (the agents' homes: their browsers and sign-ins) and `~/agentes` (the agents' files), and the app's own
-  settings, window sign-ins and logs: on a Mac every `chat.agentes.desktop*` in
+  settings, window sign-ins and logs: on a Mac every `com.xquads.desktop*` in
   `~/Library/Application Support`, `Caches`, `HTTPStorages`, `Logs`, `Preferences` and `WebKit`, and
-  `~/Library/LaunchAgents/agentes.chat.plist`; on Windows `%APPDATA%\chat.agentes.desktop` and
-  `%LOCALAPPDATA%\chat.agentes.desktop`; on Linux `~/.config/chat.agentes.desktop` and
-  `~/.local/share/chat.agentes.desktop`.
+  `~/Library/LaunchAgents/xquads.plist`; on Windows `%APPDATA%\com.xquads.desktop` and
+  `%LOCALAPPDATA%\com.xquads.desktop`; on Linux `~/.config/com.xquads.desktop` and
+  `~/.local/share/com.xquads.desktop`.
 - **Something went wrong?** **Copy details** copies what the app knows, the setup's steps and the end of
   `~/.agentes/logs/server.log`.
 - A server you installed in `~/.agentes` from the terminal stays the terminal's: while it runs, the app
@@ -617,7 +617,7 @@ computer and opens agentes.chat, signed in.
   running, start it the way you installed it.
 - **Moving it to a server:** quit the app, dump the database with the app's own copy of the server,
   then follow Moving to Docker (below) from step 2. On a Mac:
-  `BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql`
+  `BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql`
   (on Linux, the deb's `/usr/bin/agentes-runner` in its place).
 
 **Usage statistics.** Like any self-hosted install, it sends agentes.chat an anonymous usage report

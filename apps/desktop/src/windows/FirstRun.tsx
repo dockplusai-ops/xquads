@@ -357,7 +357,7 @@ function Choose({
         <PlaceScene place={shown} computer={host.platform} shape="tall" />
         <span className="dk-choose__brand" aria-hidden="true">
           <BrandFace size="sm" />
-          agentes.chat
+          xquads
         </span>
       </div>
       <div className="dk-choose__main">
@@ -975,14 +975,7 @@ function RunHere({
           />
         </div>
         <p className="dk-fr__rest">
-          <Avatar
-            kind="agent"
-            name="agentes.chat"
-            appearance={{ color: "sky" }}
-            size="md"
-            framed={false}
-            state="sleeping"
-          />
+          <Avatar kind="agent" name="xquads" appearance={{ color: "sky" }} size="md" framed={false} state="sleeping" />
           <span>{t("desktop.here.rest")}</span>
         </p>
         <div className="dk-fr__end">

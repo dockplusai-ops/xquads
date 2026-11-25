@@ -27,7 +27,7 @@ const variant = process.env.APP_VARIANT ?? "production";
 const platform = process.env.APP_PLATFORM ?? process.env.EAS_BUILD_PLATFORM;
 const version = platform === "android" ? versions.android : versions.ios;
 const suffix = variant === "production" ? "" : `.${variant}`;
-const apiUrl = process.env.EXPO_PUBLIC_API_URL ?? "https://app.agentes.chat";
+const apiUrl = process.env.EXPO_PUBLIC_API_URL ?? "https://agents.xquads.com";
 // Links to this host open the app (universal links / App Links); the server publishes the matching /.well-known
 // files (apps/server/src/app-links.ts).
 const linkHost = new URL(apiUrl).host;
@@ -92,8 +92,8 @@ export const APP_LINK_PATTERNS = [
 ];
 /** The app icons (ADR 0179), one folder each: packages/ui/scripts/app-icons.mjs writes them. */
 const ICONS = "./assets/app-icons";
-// Our EAS project on expo.dev (not a secret: it only names the project).
-const projectId = process.env.EAS_PROJECT_ID ?? "8514d5b3-87e0-4980-89a0-4c692f6f4702";
+// xquads' own Expo project, from the environment: the original's id belongs to its own Expo account.
+const projectId = process.env.EAS_PROJECT_ID;
 // expo-image-picker and expo-camera both set iOS's camera text: one text for both uses.
 const CAMERA_USE = "To take pictures for your conversations and scan QR codes.";
 
@@ -109,19 +109,19 @@ export const LEGACY_REDIRECTS = [
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: variant === "production" ? "agentes" : `agentes ${variant}`,
-  slug: "agentes",
+  name: variant === "production" ? "xquads" : `xquads ${variant}`,
+  slug: "xquads",
   scheme: "agenteschat",
   version,
   // Upright everywhere (the plugin below); only the agent's screen, in control, lies down (`useSideways`).
   orientation: "default",
-  // The icon the app ships with (ADR 0179): the agent leaning in, Espiando, on the night sky (packages/client's
-  // `PHONE_APP_ICON`); the others a person may pick are added by ./plugins/with-app-icons. All of them come from
+  // The icon the app ships with (ADR 0179) is xquads' symbol on its petrol ground, from the brand kit, in the folder of
+  // packages/client's `PHONE_APP_ICON`; the others a person may pick are added by ./plugins/with-app-icons, from
   // packages/ui/scripts/app-icons.mjs.
   icon: `${ICONS}/peekNight/ios.png`,
   userInterfaceStyle: "automatic",
   ios: {
-    bundleIdentifier: `chat.agentes.app${suffix}`,
+    bundleIdentifier: `com.xquads.app${suffix}`,
     ...(process.env.APPLE_TEAM_ID ? { appleTeamId: process.env.APPLE_TEAM_ID } : {}),
     ...(process.env.IOS_BUILD_NUMBER ? { buildNumber: process.env.IOS_BUILD_NUMBER } : {}),
     // Light, dark and tinted (iOS 18).
@@ -136,18 +136,18 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     config: { usesNonExemptEncryption: false },
   },
   android: {
-    package: `chat.agentes.app${suffix}`,
+    package: `com.xquads.app${suffix}`,
     // Firebase's config comes from the build's environment, so the public repo carries none and a self-built app
     // brings its own Firebase project.
     ...(process.env.GOOGLE_SERVICES_JSON ? { googleServicesFile: process.env.GOOGLE_SERVICES_JSON } : {}),
     ...(process.env.ANDROID_VERSION_CODE ? { versionCode: Number(process.env.ANDROID_VERSION_CODE) } : {}),
-    // Two layers (the night sky, the agent), so the launcher's mask and motion cut them like the iOS icon, and the
-    // agent alone in one color for Android 13's themed icons.
+    // Two layers (the petrol ground, the symbol), so the launcher's mask and motion cut them like the iOS icon, and
+    // the symbol alone in one color for Android 13's themed icons.
     adaptiveIcon: {
       foregroundImage: `${ICONS}/peekNight/android-foreground.png`,
       backgroundImage: `${ICONS}/peekNight/android-background.png`,
       monochromeImage: `${ICONS}/peekNight/android-monochrome.png`,
-      backgroundColor: "#03101f",
+      backgroundColor: "#0E1C22",
     },
     predictiveBackGestureEnabled: false,
     // Never read the phone's photos or play in the background: the image picker is Android's photo picker, Salvar em

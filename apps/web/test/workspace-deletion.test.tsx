@@ -463,7 +463,7 @@ describe("the desktop app lists every server's workspaces (ADR 0154)", () => {
     if (home) domWindow().happyDOM.setURL(home);
   });
 
-  test("by server with unread counts; another server's opens there; on agentes.chat, Adicionar workspace alone opens the app's window", async () => {
+  test("by server with unread counts; another server's opens there; on xquads, Adicionar workspace alone opens the app's window", async () => {
     const asked = inDesktop(CLOUD_SERVER, OWN);
     await open(`/org/${ORG_ID}/issues`);
     const menu = await menuRows();
@@ -493,7 +493,7 @@ describe("the desktop app lists every server's workspaces (ADR 0154)", () => {
       expect.stringContaining("Acme"),
       expect.stringContaining("Beta"),
       "Novo workspace",
-      "agentes.chat",
+      "xquads",
       expect.stringMatching(/Oficina.*4/),
       expect.stringContaining("Adicionar workspace"),
       expect.stringContaining("Adicionar conta"),
@@ -503,12 +503,12 @@ describe("the desktop app lists every server's workspaces (ADR 0154)", () => {
     expect(router.state.location.pathname).toBe("/onboarding");
   });
 
-  test("a personal workspace's account menu the same: Novo workspace under one's own server, not on agentes.chat", async () => {
+  test("a personal workspace's account menu the same: Novo workspace under one's own server, not on xquads", async () => {
     const own = "agentes.exemplo.com.br · Seu servidor";
     const oficina = expect.stringMatching(/Oficina.*4/);
     for (const [here, other, servers] of [
-      [CLOUD_SERVER, OWN, ["agentes.chat", expect.anything(), "Beta", own, oficina]],
-      [OWN, CLOUD_SERVER, [own, expect.anything(), "Beta", "Novo workspace", "agentes.chat", oficina]],
+      [CLOUD_SERVER, OWN, ["xquads", expect.anything(), "Beta", own, oficina]],
+      [OWN, CLOUD_SERVER, [own, expect.anything(), "Beta", "Novo workspace", "xquads", oficina]],
     ] as const) {
       inDesktop(here, other);
       const { router } = await open(`/org/${ORG_ID}/issues`, { mode: "personal" });

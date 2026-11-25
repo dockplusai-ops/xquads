@@ -122,7 +122,7 @@ const TIMEOUT_MS = 15_000;
 const CLIENT_TTL_MS = 10 * 60_000;
 /** Service accounts' limits are counted per hour: the next sync (10 minutes on) is the earliest worth trying. */
 const RATE_LIMIT_RETRY_MS = 10 * 60_000;
-const INTEGRATION_NAME = "agentes.chat";
+const INTEGRATION_NAME = "xquads";
 const INTEGRATION_VERSION = "v1.0.0";
 const READ_BATCH = 50;
 const ACTIVE_ONLY: OnePasswordItemFilter = { type: "ByState", content: { active: true, archived: false } };

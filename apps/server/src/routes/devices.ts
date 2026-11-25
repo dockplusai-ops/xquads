@@ -139,7 +139,7 @@ const Computer = z
       }),
     toolchains: z.record(z.string(), z.string()),
     opensXcode: z.boolean().openapi({
-      description: "A Mac whose agentes.chat opens Xcode and looks at its iPhone again for the iPhone guide.",
+      description: "A Mac whose xquads opens Xcode and looks at its iPhone again for the iPhone guide.",
     }),
     lastSeenAt: z.string().nullable(),
     mayUse: z.boolean(),
@@ -230,7 +230,7 @@ const XcodeFixView = z
   })
   .openapi("XcodeFix", {
     description:
-      "A fix of the Mac's Xcode: `asking` (macOS's password window is open on the Mac), `running` (`step` of 3 done), `done`, `canceled`, `no_answer` (nobody typed the password in 3 minutes), `failed` (`message`), `unsupported` (this Mac can't: a system-mode runner, no Xcode in /Applications). `update`: the Mac's agentes.chat is too old for it.",
+      "A fix of the Mac's Xcode: `asking` (macOS's password window is open on the Mac), `running` (`step` of 3 done), `done`, `canceled`, `no_answer` (nobody typed the password in 3 minutes), `failed` (`message`), `unsupported` (this Mac can't: a system-mode runner, no Xcode in /Applications). `update`: the Mac's xquads is too old for it.",
   });
 
 const MachineParams = OrgParams.extend({ machineId: z.uuid() });
@@ -534,7 +534,7 @@ export function deviceAppRoutes(deps: AppDeps) {
       security,
       summary: "Open Xcode on this Mac (its owner or an admin)",
       description:
-        "Xcode, open with an iPhone plugged in, shows the Developer Mode switch in the iPhone's Settings when it is hidden. `opened: false`: the Mac's agentes.chat is too old for it, or Xcode didn't open.",
+        "Xcode, open with an iPhone plugged in, shows the Developer Mode switch in the iPhone's Settings when it is hidden. `opened: false`: the Mac's xquads is too old for it, or Xcode didn't open.",
       request: { params: MachineParams },
       responses: {
         200: json(z.object({ opened: z.boolean() }).openapi("XcodeOpened")),
@@ -559,7 +559,7 @@ export function deviceAppRoutes(deps: AppDeps) {
       security,
       summary: "Repair a real iPhone's test helper (its Mac's owner or an admin)",
       description:
-        "The Mac stops the iPhone's test helper and whatever is left of it, builds it again with the Xcode installed there now and checks it on the iPhone, in a few minutes; the phone's state shows it. What runs on the phone stops. `update`: the Mac's agentes.chat is too old for it.",
+        "The Mac stops the iPhone's test helper and whatever is left of it, builds it again with the Xcode installed there now and checks it on the iPhone, in a few minutes; the phone's state shows it. What runs on the phone stops. `update`: the Mac's xquads is too old for it.",
       request: { params: PhoneParams, body: body(z.object({}).strict()) },
       responses: {
         200: json(z.object({ repairing: z.boolean(), update: z.literal(true).optional() }).openapi("IphoneRepair")),
@@ -584,7 +584,7 @@ export function deviceAppRoutes(deps: AppDeps) {
       security,
       summary: "iPhones on this Mac's Wi-Fi it could use (its owner or an admin)",
       description:
-        "The iPhones on the Mac's network that already trust it (they did over a cable once) and aren't used yet. None is used until picked with `PUT`. `update`: the Mac's agentes.chat is too old for this. An offline Mac lists none.",
+        "The iPhones on the Mac's network that already trust it (they did over a cable once) and aren't used yet. None is used until picked with `PUT`. `update`: the Mac's xquads is too old for this. An offline Mac lists none.",
       request: { params: MachineParams },
       responses: { 200: json(WifiIphones), ...errors },
     }),

@@ -76,7 +76,7 @@ const levels = (inside: HTMLElement, groups: string[]) =>
         .queryAllByRole("radio")
         .find((r) => r.getAttribute("aria-checked") === "true")?.textContent ?? null,
   );
-/** A backend whose catalog also lists Asana as the server does today: its vendor hasn't approved agentes.chat yet. */
+/** A backend whose catalog also lists Asana as the server does today: its vendor hasn't approved xquads yet. */
 const withSoonAsana = (state: FakeState) => {
   const api = createFakeApi(state);
   const asana: ConnectorDef = {
@@ -243,7 +243,7 @@ describe("the connectors store: one page", () => {
     expect(names(store).length).toBeGreaterThan(0);
   });
 
-  test("a vendor that hasn't approved agentes.chat yet: greyed, a lock and 'Coming soon', last, and its line opens nothing", async () => {
+  test("a vendor that hasn't approved xquads yet: greyed, a lock and 'Coming soon', last, and its line opens nothing", async () => {
     const state = seedState({ connections: [] });
     const { store } = await open(state, withSoonAsana(state));
     await click(tab(store, "Produto"));
@@ -576,7 +576,7 @@ describe("the connect flow: conectar → conectado; Ajustar → o que faz → qu
     await settle(4);
     // An admin: their own app is the way in, opened with the refusal on top.
     expect(flow.textContent).toContain(
-      "Linear só deixa entrar apps que aprovou, e o agentes.chat ainda não foi aprovado. Dá para conectar com um app seu lá.",
+      "Linear só deixa entrar apps que aprovou, e o xquads ainda não foi aprovado. Dá para conectar com um app seu lá.",
     );
     // Under our words, the server's: which one refused and why.
     expect(flow.querySelector(".cflow__said")?.textContent).toBe(

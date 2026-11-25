@@ -135,7 +135,7 @@ export function createPostgresDatabaseDriver(
         prepare: false,
         fetch_types: false,
         onnotice: () => {},
-        connection: { application_name: "agentes.chat" },
+        connection: { application_name: "xquads" },
       });
       return {
         async readOnly(limits, fn) {

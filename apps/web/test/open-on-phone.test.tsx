@@ -15,10 +15,10 @@ afterEach(() => {
 });
 
 const click = (el: Element) => act(async () => fireEvent.click(el));
-/** On agentes.chat's own servers: the iPhone beta and Google Play. */
-const APP_STEP = "Instale o app agentes no celular.TestFlightGoogle Play";
+/** On xquads's own servers: the iPhone beta and Google Play. */
+const APP_STEP = "Instale o app xquads no celular.TestFlightGoogle Play";
 /** On any other server: Google Play, and the App Store still to come. */
-const APP_STEP_OWN_SERVER = "Instale o app agentes no celular.App StoreEm breveGoogle Play";
+const APP_STEP_OWN_SERVER = "Instale o app xquads no celular.App StoreEm breveGoogle Play";
 
 /** Configurações › Sua conta → Abrir no celular. */
 async function openPhoneDialog(state: ReturnType<typeof seedState>) {
@@ -35,8 +35,8 @@ describe("Abrir no celular", () => {
     const dialog = await openPhoneDialog(state);
     expect(state.calls.filter((c) => c.method === "account.phoneSignIn")).toHaveLength(1);
 
-    const qr = within(dialog).getByRole("img", { name: "QR code para entrar no app agentes" });
-    const expected = encode(connectLink("https://app.agentes.chat", { token: "tok-1" }), { ecc: "M", border: 2 });
+    const qr = within(dialog).getByRole("img", { name: "QR code para entrar no app xquads" });
+    const expected = encode(connectLink("https://agents.xquads.com", { token: "tok-1" }), { ecc: "M", border: 2 });
     expect(qr.getAttribute("viewBox")).toBe(`0 0 ${expected.size} ${expected.size}`);
     const modules = qr.querySelector("path")?.getAttribute("d")?.match(/M/g)?.length;
     expect(modules).toBe(expected.data.flat().filter(Boolean).length);
@@ -55,7 +55,7 @@ describe("Abrir no celular", () => {
         .map((a) => [a.textContent, a.getAttribute("href")]),
     ).toEqual([
       ["TestFlight", "https://testflight.apple.com/join/f5QtGMkg"],
-      ["Google Play", "https://play.google.com/store/apps/details?id=chat.agentes.app"],
+      ["Google Play", "https://play.google.com/store/apps/details?id=com.xquads.app"],
     ]);
     expect(within(app).queryAllByRole("button")).toEqual([]);
     expect(dialog.textContent).toContain("Quem escanear este código entra na sua conta.");
@@ -75,7 +75,7 @@ describe("Abrir no celular", () => {
       "Instale o Tailscale no celular e entre com a mesma conta do Tailscale deste servidor. App Store · Google Play",
       "Aponte a câmera do celular para o código.",
     ]);
-    // No iPhone beta outside agentes.chat's own servers: the App Store disabled, Google Play a link.
+    // No iPhone beta outside xquads's own servers: the App Store disabled, Google Play a link.
     const [app, tailscale] = within(dialog).getAllByRole("listitem") as [HTMLElement, HTMLElement];
     expect(
       within(app)
@@ -83,7 +83,7 @@ describe("Abrir no celular", () => {
         .map((b) => [b.textContent, (b as HTMLButtonElement).disabled]),
     ).toEqual([["App StoreEm breve", true]]);
     expect(within(app).getByRole("link", { name: "Google Play" }).getAttribute("href")).toBe(
-      "https://play.google.com/store/apps/details?id=chat.agentes.app",
+      "https://play.google.com/store/apps/details?id=com.xquads.app",
     );
     expect(within(tailscale).getByRole("link", { name: "Google Play" }).getAttribute("href")).toBe(
       "https://play.google.com/store/apps/details?id=com.tailscale.ipn",
@@ -106,7 +106,7 @@ describe("Abrir no celular", () => {
     const state = seedState();
     state.phoneServer = "http://127.0.0.1:4310";
     const dialog = await openPhoneDialog(state);
-    expect(within(dialog).queryByRole("img", { name: "QR code para entrar no app agentes" })).toBeNull();
+    expect(within(dialog).queryByRole("img", { name: "QR code para entrar no app xquads" })).toBeNull();
     expect(dialog.textContent).toContain("o celular não chega a ele");
     expect(dialog.textContent).toContain("Acessar pelo celular e pela equipe");
     expect(within(dialog).queryByRole("button", { name: "Abrir Servidores" })).toBeNull();

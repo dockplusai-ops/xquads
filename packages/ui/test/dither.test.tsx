@@ -47,7 +47,7 @@ describe("agent dither", () => {
     expect(liveAgentCount()).toBe(before + 1);
     expect(agent?.querySelector("canvas.ac-avatar__canvas")).not.toBeNull();
     expect(person?.querySelector("canvas")).toBeNull();
-    expect(container.querySelectorAll(".ac-logo__dither")).toHaveLength(2);
+    expect(container.querySelectorAll(".ac-logo__mark")).toHaveLength(2);
   });
 });
 

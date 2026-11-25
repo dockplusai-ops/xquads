@@ -279,7 +279,7 @@ export function httpUrlProblem(url: string): string | null {
 }
 
 /** The name every email is sent under: the server's own default sender's (`SENDER_NAME` in packages/engine/src/email.ts). */
-const SENDER_NAME = "agentes.chat";
+const SENDER_NAME = "xquads";
 
 /** A sender at `domain`, as the server's default one reads. */
 export const senderAt = (domain: string) => `${SENDER_NAME} <ping@${domain}>`;
@@ -701,7 +701,7 @@ export function diagnoseAppLogs(logs: string): Problem | null {
 
 /** The question's words are the web app's switch's (Settings → General), so every place says the same. */
 export const TELEMETRY_TEXT = [
-  "Send anonymous usage statistics to agentes.chat: counts such as people, agents,",
+  "Send anonymous usage statistics to xquads: counts such as people, agents,",
   "machine sizes, AI tokens used and how much data the agents' browsers send and",
   "receive. Never messages, files, names or sites.",
 ];

@@ -167,7 +167,7 @@ function releaseReader<T, K extends string>(
     authorization: `Bearer ${options.token}`,
     accept: "application/vnd.github+json",
     "x-github-api-version": "2022-11-28",
-    "user-agent": "agentes.chat",
+    "user-agent": "xquads",
   });
 
   async function getJson<R>(path: string): Promise<R | null> {
@@ -506,7 +506,7 @@ export function registerNativeRoutes(api: OpenAPIHono, deps: AppDeps, releases: 
       method: "get",
       path: "/native/latest",
       tags: ["Native install"],
-      summary: "The newest agentes.chat packages that run without Docker, and their signature",
+      summary: "The newest xquads packages that run without Docker, and their signature",
       responses: {
         200: json(NativeLatest),
         404: errorResponse("No packages yet (or releases are not configured)"),

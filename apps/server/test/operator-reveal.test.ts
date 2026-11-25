@@ -1115,7 +1115,7 @@ test("the record first: an event with the reason, an audit entry with what was r
 
   // On agentes.chat's own servers the entry says so, for the apps to name who read it.
   await forget();
-  setRestrictionNotices("https://app.agentes.chat");
+  setRestrictionNotices("https://agents.xquads.com");
   try {
     expect(await outcome(ask("message", messages.asked, "text", { requestId: requests.owner }))).toBe(200);
   } finally {
@@ -1545,7 +1545,7 @@ test("the disclosure writes one entry with the period and the count, and nothing
 
   // On agentes.chat's own servers the entry says so, for the apps to name who read.
   await undisclose();
-  setRestrictionNotices("https://app.agentes.chat");
+  setRestrictionNotices("https://agents.xquads.com");
   try {
     expect(await disclosed(period)).toBe(200);
   } finally {

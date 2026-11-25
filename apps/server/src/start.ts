@@ -218,7 +218,7 @@ async function boot(
   release: string,
   errors: ErrorReporter,
 ) {
-  log.info("starting agentes.chat", { version: release, edition, config: redactConfig(config) });
+  log.info("starting xquads", { version: release, edition, config: redactConfig(config) });
   log.info(
     "error reports",
     config.SENTRY_DSN
@@ -421,7 +421,7 @@ async function boot(
   const outboundLists = { hosts: config.OUTBOUND_ALLOW_HOSTS, cidrs: config.OUTBOUND_ALLOW_CIDRS };
   if (!isAgentesCloud(config.PUBLIC_URL)) allowOutbound(outboundLists);
   else if (outboundLists.hosts.length || outboundLists.cidrs.length)
-    log.warn("OUTBOUND_ALLOW_HOSTS and OUTBOUND_ALLOW_CIDRS are ignored on agentes.chat Cloud");
+    log.warn("OUTBOUND_ALLOW_HOSTS and OUTBOUND_ALLOW_CIDRS are ignored on xquads Cloud");
   // Per-process caches for agent/org/channel config, scopes, connections, credential rows (30 s TTL).
   enableCaches();
   // A write in any process (the app, a worker) clears what every process cached of it.
