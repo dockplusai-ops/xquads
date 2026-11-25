@@ -50,6 +50,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, TextInput, View } from "react-native";
 import Animated, { Easing, FadeIn, ZoomIn } from "react-native-reanimated";
+import { useServer } from "@/lib/server";
 import { useOrg } from "@/providers/org";
 import {
   Button,
@@ -759,9 +760,19 @@ function ConnectStep({
   const busy = start.isPending || complete.isPending || withKey.isPending || connect.isPending || installer.busy;
   const serverUrl = fixed ?? (def?.kind === "remote_mcp" ? def.serverUrl : url.trim());
   const shownName = name || serverUrl.replace(/^https:\/\//, "").split("/")[0] || "";
-  // A Telegram bot connects with the token @BotFather gives, not an API key.
+  // A Telegram bot connects with the token @BotFather gives, Twilio with its SID and token: not an API key.
   const telegram = def?.id === "telegram";
-  const keyLabel = telegram ? t("connectFlow.telegram.token") : t("mobile.connectors.keyLabel", { name: shownName });
+  const twilio = def?.id === "twilio";
+  const datafy = def?.id === "datafy";
+  // Datafy's steps carry the address to paste in its panel: this server's one webhook for every Datafy number.
+  const server = useServer();
+  const keyLabel = telegram
+    ? t("connectFlow.telegram.token")
+    : twilio
+      ? t("connectFlow.twilio.token")
+      : datafy
+        ? t("connectFlow.datafy.token")
+        : t("mobile.connectors.keyLabel", { name: shownName });
   // The service's name: the server names another account after it ("Stripe 2"). A catalog entry's goes in English,
   // so each viewer reads a name nobody changed in their own language.
   const first = fixed ? (servers.data ?? []).find((s) => sameServer(s.serverUrl, fixed)) : undefined;
@@ -1013,7 +1024,15 @@ function ConnectStep({
           <Locked when={busy} style={styles.fieldBox}>
             <InfoHint
               name={t("common.about", { label: keyLabel })}
-              text={telegram ? t("connectFlow.telegram.steps") : t("mobile.connectors.keyHelp")}
+              text={
+                telegram
+                  ? t("connectFlow.telegram.steps")
+                  : twilio
+                    ? t("connectFlow.twilio.steps")
+                    : datafy
+                      ? t("connectFlow.datafy.steps", { url: `${server.replace(/\/$/, "")}/api/webhooks/datafy` })
+                      : t("mobile.connectors.keyHelp")
+              }
               variant="footnote"
             >
               <Text variant="footnote" tone="faint">

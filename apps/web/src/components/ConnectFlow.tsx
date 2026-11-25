@@ -446,10 +446,26 @@ function ConnectStep({
     }
   };
 
-  // A Telegram bot connects with the token @BotFather gives, not an API key.
-  const telegram = def?.id === "telegram";
-  const keyLabel = telegram ? t("connectFlow.telegram.token") : t("connectors.apiKey");
-  const keyHelp = telegram ? t("connectFlow.telegram.steps") : t("connectors.apiKeyHelp");
+  // A Telegram bot connects with the token @BotFather gives, Twilio with its SID and token: not an API key.
+  // Telegram, Twilio and Datafy connect with what their own consoles give, not a generic API key. Datafy's steps carry
+  // the address to paste in its panel: the one webhook of this server for every Datafy number.
+  const keyKind = def?.id;
+  const keyLabel =
+    keyKind === "telegram"
+      ? t("connectFlow.telegram.token")
+      : keyKind === "twilio"
+        ? t("connectFlow.twilio.token")
+        : keyKind === "datafy"
+          ? t("connectFlow.datafy.token")
+          : t("connectors.apiKey");
+  const keyHelp =
+    keyKind === "telegram"
+      ? t("connectFlow.telegram.steps")
+      : keyKind === "twilio"
+        ? t("connectFlow.twilio.steps")
+        : keyKind === "datafy"
+          ? t("connectFlow.datafy.steps", { url: `${window.location.origin}/api/webhooks/datafy` })
+          : t("connectors.apiKeyHelp");
   const notApproved = needsKey?.reason === "not_approved";
   const needsKeyAlert = needsKey && (
     <Alert tone="neutral">

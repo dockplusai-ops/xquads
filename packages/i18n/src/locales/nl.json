@@ -8150,6 +8150,22 @@
       "label": "Berichten sturen",
       "description": "Berichten en bestanden als de bot sturen, bewerken en vastzetten. Berichten verwijderen, mensen verbannen en uitnodigingslinks vragen om goedkeuring."
     },
+    "twilio_messages_read": {
+      "label": "Sms’jes lezen",
+      "description": "De sms’jes naar en van het Twilio-nummer lezen."
+    },
+    "twilio_messages_write": {
+      "label": "Sms’jes sturen",
+      "description": "Sms’jes sturen vanaf het Twilio-nummer. Elke sms vraagt eerst om goedkeuring."
+    },
+    "datafy_templates_read": {
+      "label": "Sjablonen bekijken",
+      "description": "De WhatsApp-sjablonen van het nummer die Meta goedkeurde tonen."
+    },
+    "datafy_messages_write": {
+      "label": "Berichten sturen",
+      "description": "WhatsApp-berichten en -sjablonen sturen vanaf het nummer. Elk bericht vraagt eerst om goedkeuring."
+    },
     "x_posts_read": {
       "label": "Posts lezen",
       "description": "De posts en vermeldingen van het account lezen, posts op id en recente posts via zoeken."
@@ -9068,6 +9084,12 @@
       },
       "telegram": {
         "message": "Bericht aan de Telegram-bot"
+      },
+      "sms": {
+        "received": "Sms naar het Twilio-nummer"
+      },
+      "whatsapp": {
+        "received": "WhatsApp-bericht naar het Datafy-nummer"
       }
     },
     "when": {
@@ -13854,6 +13876,16 @@
         "2": "De data bevragen om te antwoorden",
         "3": "Wijzigt nooit iets"
       },
+      "twilio": {
+        "1": "De sms’jes van klanten lezen",
+        "2": "Per sms antwoorden vanaf je nummer",
+        "ask": "Elke verstuurde sms vraagt om je goedkeuring"
+      },
+      "datafy": {
+        "1": "Klanten antwoorden op de WhatsApp van je nummer",
+        "2": "Door Meta goedgekeurde sjablonen sturen",
+        "ask": "Elk verstuurd bericht vraagt om je goedkeuring"
+      },
       "telegram": {
         "1": "Lezen wat mensen de bot schrijven",
         "2": "Berichten en bestanden als de bot sturen",
@@ -14022,6 +14054,8 @@
       "reddit": "Posts, reacties en community's op Reddit.",
       "whatsapp": "Berichten en sjablonen van WhatsApp Business.",
       "telegram": "Een eigen Telegram-bot: zijn chats, groepen en kanalen.",
+      "twilio": "Sms op een eigen Twilio-nummer: lees de sms’jes van klanten en beantwoord ze.",
+      "datafy": "De officiële WhatsApp op een eigen nummer, via Datafy: beantwoord klanten en stuur sjablonen.",
       "x": "Posts op je X-account: schrijven, vermeldingen lezen en zoeken.",
       "threads": "Posts en reacties op je Threads-account.",
       "tiktok": "Je TikTok-profiel en video's, en video's naar je concepten."
@@ -15112,6 +15146,14 @@
       "asks_other": "{{count}} acties vragen om goedkeuring in de chat.",
       "adjust": "Aanpassen",
       "ok": "Klaar"
+    },
+    "twilio": {
+      "token": "Account SID en Auth Token",
+      "steps": "Kopieer in de Twilio-console de Account SID en de Auth Token van de startpagina en plak ze hier met een dubbele punt ertussen: AC…:token. Heeft het account meer dan één nummer, zet het nummer dan aan het eind: AC…:token:+15551234567."
+    },
+    "datafy": {
+      "token": "Token van het nummer en webhook-secret",
+      "steps": "Open in het Datafy-paneel het nummer en kopieer de token (sk_live_…) en, op het tabblad Webhooks, het secret (whsec_…). Plak ze hier met een dubbele punt ertussen: sk_live_…:whsec_…. Voeg op hetzelfde tabblad dit adres toe als webhook: {{url}}"
     },
     "telegram": {
       "token": "Bottoken",

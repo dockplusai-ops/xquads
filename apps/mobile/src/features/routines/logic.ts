@@ -30,6 +30,8 @@ export const ROUTINE_EVENTS: RoutineEvent[] = [
   "issue.created",
   "deploy.succeeded",
   "telegram.message",
+  "sms.received",
+  "whatsapp.received",
 ];
 
 /** Started by something happening (an event, an email, a webhook call), not by the clock. */

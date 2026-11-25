@@ -8670,6 +8670,22 @@
       "label": "Wysyłanie wiadomości",
       "description": "Wysyłanie, edytowanie i przypinanie wiadomości i plików jako bot. Usuwanie wiadomości, banowanie osób i linki zaproszeń wymagają zatwierdzenia."
     },
+    "twilio_messages_read": {
+      "label": "Czytanie SMS-ów",
+      "description": "Czytanie SMS-ów wysłanych na numer Twilio i z niego."
+    },
+    "twilio_messages_write": {
+      "label": "Wysyłanie SMS-ów",
+      "description": "Wysyłanie SMS-ów z numeru Twilio. Każda wysyłka najpierw prosi o zgodę."
+    },
+    "datafy_templates_read": {
+      "label": "Podgląd szablonów",
+      "description": "Lista szablonów WhatsApp numeru zatwierdzonych przez Metę."
+    },
+    "datafy_messages_write": {
+      "label": "Wysyłanie wiadomości",
+      "description": "Wysyłanie wiadomości i szablonów WhatsApp z numeru. Każda wiadomość najpierw prosi o zgodę."
+    },
     "x_posts_read": {
       "label": "Czytanie postów",
       "description": "Czytanie postów i wzmianek konta, postów po id i najnowszych postów z wyszukiwania."
@@ -9619,6 +9635,12 @@
       },
       "telegram": {
         "message": "Wiadomość do bota w Telegramie"
+      },
+      "sms": {
+        "received": "SMS na numer Twilio"
+      },
+      "whatsapp": {
+        "received": "Wiadomość WhatsApp na numer Datafy"
       }
     },
     "when": {
@@ -14795,6 +14817,16 @@
         "2": "Zapytania do danych, żeby odpowiedzieć",
         "3": "Nigdy niczego nie zmienia"
       },
+      "twilio": {
+        "1": "Czytanie SMS-ów od klientów",
+        "2": "Odpowiadanie SMS-em z Twojego numeru",
+        "ask": "Każdy wysłany SMS prosi o Twoją zgodę"
+      },
+      "datafy": {
+        "1": "Odpowiadanie klientom na WhatsAppie Twojego numeru",
+        "2": "Wysyłanie szablonów zatwierdzonych przez Metę",
+        "ask": "Każda wysłana wiadomość prosi o Twoją zgodę"
+      },
       "telegram": {
         "1": "Czytanie tego, co ludzie piszą do bota",
         "2": "Wysyłanie wiadomości i plików jako bot",
@@ -14973,6 +15005,8 @@
       "reddit": "Posty, komentarze i społeczności na Reddicie.",
       "whatsapp": "Wiadomości i szablony WhatsApp Business.",
       "telegram": "Twój bot w Telegramie: jego czaty, grupy i kanały.",
+      "twilio": "SMS-y na Twoim numerze Twilio: czytaj SMS-y od klientów i odpowiadaj na nie.",
+      "datafy": "Oficjalny WhatsApp na Twoim numerze, przez Datafy: odpowiadaj klientom i wysyłaj szablony.",
       "x": "Posty na Twoim koncie X: pisanie, czytanie wzmianek i wyszukiwanie.",
       "threads": "Posty i odpowiedzi na Twoim koncie Threads.",
       "tiktok": "Twój profil i filmy w TikToku oraz filmy wysłane do wersji roboczych."
@@ -16105,6 +16139,14 @@
       "asks_other": "{{count}} akcji prosi o zatwierdzenie na czacie.",
       "adjust": "Dostosuj",
       "ok": "Gotowe"
+    },
+    "twilio": {
+      "token": "Account SID i Auth Token",
+      "steps": "W konsoli Twilio skopiuj Account SID i Auth Token ze strony głównej i wklej je tutaj, połączone dwukropkiem: AC…:token. Jeśli konto ma więcej niż jeden numer, dodaj numer na końcu: AC…:token:+15551234567."
+    },
+    "datafy": {
+      "token": "Token numeru i secret webhooka",
+      "steps": "W panelu Datafy otwórz numer i skopiuj jego token (sk_live_…) oraz, na karcie Webhooks, secret (whsec_…). Wklej oba tutaj, połączone dwukropkiem: sk_live_…:whsec_…. Na tej samej karcie dodaj ten adres jako webhook: {{url}}"
     },
     "telegram": {
       "token": "Token bota",

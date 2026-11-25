@@ -20,8 +20,10 @@ import {
 } from "../connections";
 import { exposedToolName } from "../mcp";
 import { auditLabel, personalTool, usableConnections } from "../personal";
+import { datafySecret, datafySigned } from "./datafy";
 import { NATIVE_SERVICES } from "./services";
 import { ingestTelegramUpdates, pollTelegram, type TgUpdate } from "./telegram";
+import { twilioSigned, twilioToken, twilioWebhookPath } from "./twilio";
 import { type NativeCall, NativeError } from "./types";
 
 /** The answer an agent reads for a vendor's refusal: its words and one way out (`data.code`). */
@@ -237,6 +239,158 @@ export async function handleTelegramWebhook(
   const update = JSON.parse(raw) as TgUpdate;
   const heard = await ingestTelegramUpdates(deps.db, connection, [update]);
   return { fired: await fireTelegramRoutines(deps.db, connection, heard) };
+}
+
+/**
+ * `POST /api/webhooks/twilio/{connectionId}`: a text to the connected number, form-encoded, signed by Twilio with the
+ * account's Auth Token over this exact address (`X-Twilio-Signature`). A text fires the routines listening to
+ * `sms.received`, each once by its MessageSid. Unknown connection or bad signature: `NotFoundError`.
+ */
+export async function handleTwilioWebhook(
+  deps: Pick<ConnectorDeps, "db" | "keyWrappers" | "publicUrl">,
+  connectionId: string,
+  signature: string | null,
+  raw: string,
+): Promise<{ fired: number }> {
+  const [connection] = UUID.test(connectionId)
+    ? await deps.db
+        .select()
+        .from(connectorConnections)
+        .where(
+          and(
+            eq(connectorConnections.id, connectionId),
+            eq(connectorConnections.connector, "twilio"),
+            isNull(connectorConnections.revokedAt),
+          ),
+        )
+    : [];
+  const secret = connection ? await openConnectionSecret(deps.keyWrappers, connection).catch(() => null) : null;
+  const params = new URLSearchParams(raw);
+  const url = `${deps.publicUrl.replace(/\/$/, "")}${twilioWebhookPath(connectionId)}`;
+  const token = secret ? twilioToken(secret) : null;
+  if (!connection || !token || !twilioSigned(token, url, params, signature)) {
+    throw new NotFoundError("No Twilio number is listening here");
+  }
+  const sid = params.get("MessageSid") ?? params.get("SmsSid");
+  if (!sid) return { fired: 0 };
+  const from = params.get("From") ?? "";
+  const text = params.get("Body") ?? "";
+  const media = Number(params.get("NumMedia") ?? 0);
+  const fired = await fireRoutineEvent(
+    { db: deps.db },
+    connection.orgId,
+    "sms.received",
+    {
+      summary: `${from || "Someone"} texted ${connection.accountLabel ?? "the Twilio number"}: ${text.slice(0, 200)}${media > 0 ? ` [${media} picture${media > 1 ? "s" : ""}]` : ""}`,
+      from,
+      to: params.get("To"),
+      text,
+      media,
+      message_id: sid,
+    },
+    { dedupeKey: `twilio:${connection.id}:${sid}` },
+  );
+  return { fired };
+}
+
+interface WaChange {
+  field?: string;
+  value?: {
+    metadata?: { phone_number_id?: string };
+    contacts?: { wa_id?: string; profile?: { name?: string } }[];
+    messages?: {
+      id: string;
+      from: string;
+      type: string;
+      text?: { body?: string };
+      button?: { text?: string };
+      interactive?: { button_reply?: { title?: string }; list_reply?: { title?: string } };
+      image?: { caption?: string };
+      video?: { caption?: string };
+      document?: { caption?: string; filename?: string };
+      location?: { name?: string; address?: string };
+    }[];
+  };
+}
+
+/** What a WhatsApp message says, in words: its text, a button's title, or what it holds ("[photo] caption"). */
+function waBody(m: NonNullable<NonNullable<WaChange["value"]>["messages"]>[number]) {
+  const said =
+    m.text?.body ??
+    m.button?.text ??
+    m.interactive?.button_reply?.title ??
+    m.interactive?.list_reply?.title ??
+    m.image?.caption ??
+    m.video?.caption ??
+    m.document?.caption ??
+    (m.location ? [m.location.name, m.location.address].filter(Boolean).join(", ") : "");
+  const kind: Record<string, string> = {
+    image: "[photo]",
+    video: "[video]",
+    audio: "[voice message]",
+    document: `[file ${m.document?.filename ?? ""}]`.replace(" ]", "]"),
+    sticker: "[sticker]",
+    location: "[location]",
+  };
+  return [kind[m.type], said].filter(Boolean).join(" ");
+}
+
+/**
+ * `POST /api/webhooks/datafy`: the events of every Datafy number connected on this server, with Meta's payload. The
+ * number's `phone_number_id` names the connection, whose secret checks `x-datafy-signature-256` over the raw body.
+ * A message people sent fires the routines listening to `whatsapp.received`, each once by its id; statuses and the
+ * number's own echoes fire nothing. Unknown number or bad signature: `NotFoundError`.
+ */
+export async function handleDatafyWebhook(
+  deps: Pick<ConnectorDeps, "db" | "keyWrappers">,
+  headers: { timestamp: string | null; signature: string | null },
+  raw: string,
+): Promise<{ fired: number }> {
+  const payload = JSON.parse(raw) as { entry?: { changes?: WaChange[] }[] };
+  const changes = (payload.entry ?? []).flatMap((e) => e.changes ?? []);
+  const phoneId = changes.find((c) => c.value?.metadata?.phone_number_id)?.value?.metadata?.phone_number_id;
+  const [connection] = phoneId
+    ? await deps.db
+        .select()
+        .from(connectorConnections)
+        .where(
+          and(
+            eq(connectorConnections.connector, "datafy"),
+            eq(connectorConnections.accountId, phoneId),
+            isNull(connectorConnections.revokedAt),
+          ),
+        )
+    : [];
+  const secret = connection ? await openConnectionSecret(deps.keyWrappers, connection).catch(() => null) : null;
+  const key = secret ? datafySecret(secret) : null;
+  if (!connection || !key || !datafySigned(key, raw, headers.timestamp, headers.signature)) {
+    throw new NotFoundError("No Datafy number is listening here");
+  }
+  let fired = 0;
+  for (const change of changes) {
+    const value = change.value;
+    if (change.field !== "messages" || !value || value.metadata?.phone_number_id !== phoneId) continue;
+    const names = new Map((value.contacts ?? []).map((c) => [c.wa_id, c.profile?.name]));
+    for (const m of value.messages ?? []) {
+      const text = waBody(m).slice(0, 4096);
+      const from = `+${m.from}`;
+      const name = names.get(m.from) ?? null;
+      fired += await fireRoutineEvent(
+        { db: deps.db },
+        connection.orgId,
+        "whatsapp.received",
+        {
+          summary: `${name ? `${name} (${from})` : from} wrote on WhatsApp to ${connection.accountLabel ?? "the number"}: ${text.slice(0, 200)}`,
+          from,
+          name,
+          text,
+          message_id: m.id,
+        },
+        { dedupeKey: `datafy:${connection.id}:${m.id}` },
+      );
+    }
+  }
+  return { fired };
 }
 
 /** Bots on a server the internet doesn't reach: their updates by `getUpdates`, on the worker loop. */

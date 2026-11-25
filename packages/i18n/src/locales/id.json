@@ -7840,6 +7840,22 @@
       "label": "Kirim pesan",
       "description": "Kirim, ubah, dan sematkan pesan dan file sebagai bot. Menghapus pesan, memblokir orang, dan tautan undangan meminta persetujuan."
     },
+    "twilio_messages_read": {
+      "label": "Baca SMS",
+      "description": "Baca SMS yang dikirim ke dan dari nomor Twilio."
+    },
+    "twilio_messages_write": {
+      "label": "Kirim SMS",
+      "description": "Kirim SMS dari nomor Twilio. Setiap pengiriman meminta persetujuan dulu."
+    },
+    "datafy_templates_read": {
+      "label": "Lihat template",
+      "description": "Daftar template WhatsApp nomor ini yang disetujui Meta."
+    },
+    "datafy_messages_write": {
+      "label": "Kirim pesan",
+      "description": "Kirim pesan dan template WhatsApp dari nomor ini. Setiap pesan meminta persetujuan dulu."
+    },
     "x_posts_read": {
       "label": "Baca postingan",
       "description": "Baca postingan dan sebutan akun, postingan menurut id, dan postingan terbaru lewat pencarian."
@@ -8742,6 +8758,12 @@
       },
       "telegram": {
         "message": "Pesan ke bot Telegram"
+      },
+      "sms": {
+        "received": "SMS ke nomor Twilio"
+      },
+      "whatsapp": {
+        "received": "Pesan WhatsApp ke nomor Datafy"
       }
     },
     "when": {
@@ -13303,6 +13325,16 @@
         "2": "Menjalankan query ke data untuk menjawab",
         "3": "Tidak pernah mengubah apa pun"
       },
+      "twilio": {
+        "1": "Baca SMS yang dikirim pelanggan",
+        "2": "Balas lewat SMS dari nomor Anda",
+        "ask": "Setiap SMS yang dikirim meminta persetujuan Anda"
+      },
+      "datafy": {
+        "1": "Balas pelanggan di WhatsApp nomor Anda",
+        "2": "Kirim template yang disetujui Meta",
+        "ask": "Setiap pesan yang dikirim meminta persetujuan Anda"
+      },
       "telegram": {
         "1": "Baca apa yang orang tulis ke bot",
         "2": "Kirim pesan dan file sebagai bot",
@@ -13466,6 +13498,8 @@
       "reddit": "Postingan, komentar, dan komunitas Reddit.",
       "whatsapp": "Pesan dan template WhatsApp Business.",
       "telegram": "Bot Telegram milik Anda: obrolan, grup, dan kanalnya.",
+      "twilio": "SMS di nomor Twilio milik Anda: baca SMS dari pelanggan dan balas.",
+      "datafy": "WhatsApp resmi di nomor milik Anda, lewat Datafy: balas pelanggan dan kirim template.",
       "x": "Postingan di akun X Anda: menulis, membaca sebutan, dan mencari.",
       "threads": "Postingan dan balasan di akun Threads Anda.",
       "tiktok": "Profil dan video TikTok Anda, serta video yang dikirim ke draf Anda."
@@ -14535,6 +14569,14 @@
       "asks_other": "{{count}} tindakan meminta persetujuan di chat.",
       "adjust": "Sesuaikan",
       "ok": "Selesai"
+    },
+    "twilio": {
+      "token": "Account SID dan Auth Token",
+      "steps": "Di Twilio Console, salin Account SID dan Auth Token dari halaman utama lalu tempel di sini, dipisahkan titik dua: AC…:token. Jika akun punya lebih dari satu nomor, tambahkan nomornya di akhir: AC…:token:+15551234567."
+    },
+    "datafy": {
+      "token": "Token nomor dan secret webhook",
+      "steps": "Di panel Datafy, buka nomornya lalu salin token (sk_live_…) dan, di tab Webhooks, secret-nya (whsec_…). Tempel keduanya di sini, dipisahkan titik dua: sk_live_…:whsec_…. Di tab yang sama, daftarkan alamat ini sebagai webhook: {{url}}"
     },
     "telegram": {
       "token": "Token bot",

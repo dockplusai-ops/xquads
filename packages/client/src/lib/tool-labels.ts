@@ -47,6 +47,8 @@ const APPS: Record<string, string> = {
   reddit: "Reddit",
   whatsapp: "WhatsApp",
   telegram: "Telegram",
+  twilio: "Twilio",
+  datafy: "Datafy",
   x: "X",
   tiktok: "TikTok",
   metaads: "Meta Ads",

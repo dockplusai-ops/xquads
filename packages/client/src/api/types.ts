@@ -4496,7 +4496,9 @@ export type RoutineEvent =
   | "github.pr_opened"
   | "issue.created"
   | "deploy.succeeded"
-  | "telegram.message";
+  | "telegram.message"
+  | "sms.received"
+  | "whatsapp.received";
 
 /**
  * The rule as the API sends it: monthly/yearly positions are in `byWeekday`

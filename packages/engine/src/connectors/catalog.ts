@@ -477,6 +477,51 @@ export const CONNECTOR_CATALOG: Record<string, ConnectorDefinition> = {
       },
     },
   },
+  twilio: {
+    id: "twilio",
+    category: "support",
+    label: "Twilio",
+    description: "SMS on a Twilio number of yours: read the texts customers send and answer them.",
+    serverUrl: "https://api.twilio.com",
+    auth: ["api_key"],
+    native: true,
+    scopes: {
+      "messages.read": s("Read texts", "Read the texts sent to and from the Twilio number."),
+      "messages.write": s("Send texts", "Text people from the Twilio number. Every text asks for approval first."),
+    },
+    tools: {
+      read_messages: { scope: "messages.read", ours: true },
+      // Texts reach the business's customers: a person approves them, or lets them go with "Aprovar sempre".
+      send_sms: { scope: "messages.write", ours: true, sensitive: true, title: "Text {to} by SMS" },
+    },
+  },
+  datafy: {
+    id: "datafy",
+    category: "support",
+    label: "WhatsApp (Datafy)",
+    description: "The official WhatsApp on a number of yours, through Datafy: answer customers and send templates.",
+    serverUrl: "https://cloud.datafyapi.com.br",
+    auth: ["api_key"],
+    native: true,
+    scopes: {
+      "templates.read": s("See templates", "List the number's WhatsApp templates Meta approved."),
+      "messages.write": s(
+        "Send messages",
+        "Send WhatsApp messages and templates from the number. Every message asks for approval first.",
+      ),
+    },
+    tools: {
+      list_templates: { scope: "templates.read", ours: true },
+      // Messages reach the business's customers: a person approves them, or lets them go with "Aprovar sempre".
+      send_message: { scope: "messages.write", ours: true, sensitive: true, title: "Send a WhatsApp message to {to}" },
+      send_template: {
+        scope: "messages.write",
+        ours: true,
+        sensitive: true,
+        title: "Send the WhatsApp template {name} to {to}",
+      },
+    },
+  },
 };
 
 /** Our scope string for a connector scope, as stored in `agent_scopes`: `github:pr.merge`. */

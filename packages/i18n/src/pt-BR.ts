@@ -8595,6 +8595,22 @@ export const ptBR = {
       description:
         "Enviar, editar e fixar mensagens e arquivos como o bot. Apagar mensagens, banir pessoas e links de convite pedem aprovação.",
     },
+    twilio_messages_read: {
+      label: "Ler SMS",
+      description: "Ler os SMS enviados para o número da Twilio e a partir dele.",
+    },
+    twilio_messages_write: {
+      label: "Enviar SMS",
+      description: "Mandar SMS do número da Twilio. Cada envio pede aprovação antes.",
+    },
+    datafy_templates_read: {
+      label: "Ver templates",
+      description: "Listar os templates de WhatsApp do número que a Meta aprovou.",
+    },
+    datafy_messages_write: {
+      label: "Enviar mensagens",
+      description: "Enviar mensagens e templates de WhatsApp pelo número. Cada mensagem pede aprovação antes.",
+    },
     x_posts_read: {
       label: "Ler posts",
       description: "Ler os posts e as menções da conta, posts pelo id e posts recentes por busca.",
@@ -9500,6 +9516,8 @@ export const ptBR = {
       "issue.created": "Tarefa criada no agentes",
       "deploy.succeeded": "Deploy concluído",
       "telegram.message": "Mensagem para o bot do Telegram",
+      "sms.received": "SMS recebido no número da Twilio",
+      "whatsapp.received": "Mensagem no WhatsApp da Datafy",
     },
     when: { event: "Quando: {{event}}" },
     form: {
@@ -14158,6 +14176,16 @@ export const ptBR = {
         ask: "Enviar mensagens sempre pede sua aprovação",
       },
       database: { "1": "Ver as tabelas", "2": "Consultar os dados para responder", "3": "Nunca altera nada" },
+      twilio: {
+        "1": "Ler os SMS que os clientes mandam",
+        "2": "Responder por SMS do seu número",
+        ask: "Cada SMS enviado pede sua aprovação",
+      },
+      datafy: {
+        "1": "Responder clientes no WhatsApp do seu número",
+        "2": "Enviar templates aprovados pela Meta",
+        ask: "Cada mensagem enviada pede sua aprovação",
+      },
       telegram: {
         "1": "Ler o que as pessoas escrevem para o bot",
         "2": "Enviar mensagens e arquivos como o bot",
@@ -14329,6 +14357,8 @@ export const ptBR = {
       reddit: "Posts, comentários e comunidades do Reddit.",
       whatsapp: "Mensagens e modelos do WhatsApp Business.",
       telegram: "Um bot seu do Telegram: suas conversas, grupos e canais.",
+      twilio: "SMS num número seu da Twilio: leia o que os clientes mandam e responda.",
+      datafy: "O WhatsApp oficial num número seu, pela Datafy: atenda clientes e envie templates.",
       x: "Posts na sua conta do X: escrever, ler menções e buscar.",
       threads: "Posts e respostas na sua conta do Threads.",
       tiktok: "Seu perfil e vídeos do TikTok, e vídeos enviados aos seus rascunhos.",
@@ -15410,6 +15440,16 @@ export const ptBR = {
       asks_other: "{{count}} ações pedem aprovação no chat.",
       adjust: "Ajustar",
       ok: "Pronto",
+    },
+    twilio: {
+      token: "Account SID e Auth Token",
+      steps:
+        "No Console da Twilio, copie o Account SID e o Auth Token da página inicial e cole aqui, separados por dois-pontos: AC…:token. Se a conta tiver mais de um número, acrescente o número no fim: AC…:token:+15551234567.",
+    },
+    datafy: {
+      token: "Token do número e secret do webhook",
+      steps:
+        "No painel da Datafy, abra o número e copie o token (sk_live_…) e, na aba Webhooks, o secret (whsec_…). Cole os dois aqui, separados por dois-pontos: sk_live_…:whsec_…. Na mesma aba, cadastre este endereço como webhook: {{url}}",
     },
     telegram: {
       token: "Token do bot",

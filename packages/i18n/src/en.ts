@@ -8641,6 +8641,22 @@ export const en = {
       description:
         "Send, edit and pin messages and files as the bot. Deleting messages, banning people and invite links ask for approval.",
     },
+    twilio_messages_read: {
+      label: "Read texts",
+      description: "Read the texts sent to and from the Twilio number.",
+    },
+    twilio_messages_write: {
+      label: "Send texts",
+      description: "Text people from the Twilio number. Every text asks for approval first.",
+    },
+    datafy_templates_read: {
+      label: "See templates",
+      description: "List the number's WhatsApp templates Meta approved.",
+    },
+    datafy_messages_write: {
+      label: "Send messages",
+      description: "Send WhatsApp messages and templates from the number. Every message asks for approval first.",
+    },
     x_posts_read: {
       label: "Read posts",
       description: "Read the account's posts and mentions, posts by id and recent posts by search.",
@@ -9546,6 +9562,8 @@ export const en = {
       "issue.created": "Task created in agentes",
       "deploy.succeeded": "Deploy finished",
       "telegram.message": "Message to the Telegram bot",
+      "sms.received": "Text to the Twilio number",
+      "whatsapp.received": "WhatsApp message to the Datafy number",
     },
     when: { event: "When: {{event}}" },
     form: {
@@ -14152,6 +14170,16 @@ export const en = {
         ask: "Sending messages always asks for your approval",
       },
       database: { "1": "See the tables", "2": "Query the data to answer", "3": "Never changes anything" },
+      twilio: {
+        "1": "Read the texts customers send",
+        "2": "Answer by text from your number",
+        ask: "Every text sent asks for your approval",
+      },
+      datafy: {
+        "1": "Answer customers on your number's WhatsApp",
+        "2": "Send templates Meta approved",
+        ask: "Every message sent asks for your approval",
+      },
       telegram: {
         "1": "Read what people write to the bot",
         "2": "Send messages and files as the bot",
@@ -14327,6 +14355,8 @@ export const en = {
       reddit: "Reddit posts, comments and communities.",
       whatsapp: "WhatsApp Business messages and templates.",
       telegram: "A Telegram bot of yours: its chats, groups and channels.",
+      twilio: "SMS on a Twilio number of yours: read the texts customers send and answer them.",
+      datafy: "The official WhatsApp on a number of yours, through Datafy: answer customers and send templates.",
       x: "Posts on your X account: write, read mentions and search.",
       threads: "Posts and replies on your Threads account.",
       tiktok: "Your TikTok profile and videos, and videos sent to your drafts.",
@@ -15451,6 +15481,16 @@ export const en = {
       asks_other: "{{count}} actions ask for approval in the chat.",
       adjust: "Adjust",
       ok: "Done",
+    },
+    twilio: {
+      token: "Account SID and Auth Token",
+      steps:
+        "In the Twilio Console, copy the Account SID and the Auth Token from the home page and paste them here joined by a colon: AC…:token. If the account has more than one number, add the number at the end: AC…:token:+15551234567.",
+    },
+    datafy: {
+      token: "Number token and webhook secret",
+      steps:
+        "In the Datafy panel, open the number and copy its token (sk_live_…) and, on the Webhooks tab, its secret (whsec_…). Paste both here joined by a colon: sk_live_…:whsec_…. On the same tab, add this address as a webhook: {{url}}",
     },
     telegram: {
       token: "Bot token",

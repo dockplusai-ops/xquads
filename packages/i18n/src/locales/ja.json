@@ -7807,6 +7807,22 @@
       "label": "メッセージを送る",
       "description": "ボットとしてメッセージやファイルを送信・編集・ピン留めします。メッセージの削除、メンバーのBAN、招待リンクは承認が必要です。"
     },
+    "twilio_messages_read": {
+      "label": "SMS を読む",
+      "description": "Twilio の番号で送受信した SMS を読みます。"
+    },
+    "twilio_messages_write": {
+      "label": "SMS を送る",
+      "description": "Twilio の番号から SMS を送ります。送信のたびに先に承認を求めます。"
+    },
+    "datafy_templates_read": {
+      "label": "テンプレートを見る",
+      "description": "Meta が承認したこの番号の WhatsApp テンプレートを一覧にします。"
+    },
+    "datafy_messages_write": {
+      "label": "メッセージを送る",
+      "description": "この番号から WhatsApp のメッセージとテンプレートを送ります。送信のたびに先に承認を求めます。"
+    },
     "x_posts_read": {
       "label": "ポストを読む",
       "description": "アカウントのポストとメンション、IDによるポスト、検索による最近のポストを読みます。"
@@ -8700,6 +8716,12 @@
       },
       "telegram": {
         "message": "Telegramボットへのメッセージ"
+      },
+      "sms": {
+        "received": "Twilio の番号への SMS"
+      },
+      "whatsapp": {
+        "received": "Datafy の番号への WhatsApp メッセージ"
       }
     },
     "when": {
@@ -13244,6 +13266,16 @@
         "2": "データにクエリして答える",
         "3": "何も変更しません"
       },
+      "twilio": {
+        "1": "顧客から届いた SMS を読む",
+        "2": "自分の番号から SMS で返信する",
+        "ask": "SMS を送るたびに承認を求めます"
+      },
+      "datafy": {
+        "1": "自分の番号の WhatsApp で顧客に返信する",
+        "2": "Meta が承認したテンプレートを送る",
+        "ask": "メッセージを送るたびに承認を求めます"
+      },
       "telegram": {
         "1": "ボット宛てのメッセージを読む",
         "2": "ボットとしてメッセージやファイルを送る",
@@ -13407,6 +13439,8 @@
       "reddit": "Redditの投稿、コメント、コミュニティ。",
       "whatsapp": "WhatsApp Businessのメッセージとテンプレート。",
       "telegram": "あなたのTelegramボット：そのチャット、グループ、チャンネル。",
+      "twilio": "あなたの Twilio 番号の SMS:顧客からの SMS を読んで返信します。",
+      "datafy": "Datafy 経由の、あなたの番号での公式 WhatsApp:顧客に返信し、テンプレートを送ります。",
       "x": "Xアカウントのポスト：投稿、メンションの確認、検索。",
       "threads": "Threadsアカウントの投稿と返信。",
       "tiktok": "TikTokのプロフィールと動画、下書きに送られた動画。"
@@ -14476,6 +14510,14 @@
       "asks_other": "{{count}}件の操作は、チャットで承認を求めます。",
       "adjust": "調整",
       "ok": "完了"
+    },
+    "twilio": {
+      "token": "Account SID と Auth Token",
+      "steps": "Twilio コンソールのホームから Account SID と Auth Token をコピーし、コロンでつないでここに貼り付けてください:AC…:token。番号が複数あるアカウントでは、最後に番号を付けます:AC…:token:+15551234567。"
+    },
+    "datafy": {
+      "token": "番号のトークンと Webhook の secret",
+      "steps": "Datafy のパネルで番号を開き、トークン(sk_live_…)と、Webhooks タブの secret(whsec_…)をコピーしてください。両方をコロンでつないでここに貼り付けます:sk_live_…:whsec_…。同じタブで、このアドレスを Webhook として登録してください:{{url}}"
     },
     "telegram": {
       "token": "ボットのトークン",

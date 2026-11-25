@@ -183,6 +183,8 @@ const EVENT_WORDS: Record<RoutineEvent, string> = {
   "webhook.received": "its webhook address is called",
   "telegram.message":
     "someone writes to the workspace's Telegram bot (a private chat, or a mention or reply in a group)",
+  "sms.received": "someone texts the workspace's Twilio number",
+  "whatsapp.received": "someone writes on WhatsApp to the workspace's Datafy number",
 };
 
 /** The zone a routine's times are read in (schedules and one-offs have their own). */

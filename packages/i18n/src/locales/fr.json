@@ -8393,6 +8393,22 @@
       "label": "Envoyer des messages",
       "description": "Envoyer, modifier et épingler des messages et des fichiers en tant que bot. Supprimer des messages, bannir des personnes et les liens d'invitation demandent une approbation."
     },
+    "twilio_messages_read": {
+      "label": "Lire les SMS",
+      "description": "Lire les SMS envoyés vers le numéro Twilio et depuis celui-ci."
+    },
+    "twilio_messages_write": {
+      "label": "Envoyer des SMS",
+      "description": "Envoyer des SMS depuis le numéro Twilio. Chaque envoi demande une approbation avant."
+    },
+    "datafy_templates_read": {
+      "label": "Voir les modèles",
+      "description": "Lister les modèles WhatsApp du numéro approuvés par Meta."
+    },
+    "datafy_messages_write": {
+      "label": "Envoyer des messages",
+      "description": "Envoyer des messages et des modèles WhatsApp depuis le numéro. Chaque message demande une approbation avant."
+    },
     "x_posts_read": {
       "label": "Lire les posts",
       "description": "Lire les posts et mentions du compte, des posts par identifiant et les posts récents par recherche."
@@ -9333,6 +9349,12 @@
       },
       "telegram": {
         "message": "Message au bot Telegram"
+      },
+      "sms": {
+        "received": "SMS reçu sur le numéro Twilio"
+      },
+      "whatsapp": {
+        "received": "Message WhatsApp au numéro Datafy"
       }
     },
     "when": {
@@ -14285,6 +14307,16 @@
         "2": "Interroger les données pour répondre",
         "3": "Ne modifie jamais rien"
       },
+      "twilio": {
+        "1": "Lire les SMS envoyés par les clients",
+        "2": "Répondre par SMS depuis votre numéro",
+        "ask": "Chaque SMS envoyé demande votre approbation"
+      },
+      "datafy": {
+        "1": "Répondre aux clients sur le WhatsApp de votre numéro",
+        "2": "Envoyer des modèles approuvés par Meta",
+        "ask": "Chaque message envoyé demande votre approbation"
+      },
       "telegram": {
         "1": "Lire ce qu'on écrit au bot",
         "2": "Envoyer des messages et des fichiers en tant que bot",
@@ -14458,6 +14490,8 @@
       "reddit": "Publications, commentaires et communautés Reddit.",
       "whatsapp": "Messages et modèles WhatsApp Business.",
       "telegram": "Un bot Telegram à vous : ses discussions, groupes et canaux.",
+      "twilio": "Les SMS d’un de vos numéros Twilio : lisez les SMS des clients et répondez-y.",
+      "datafy": "Le WhatsApp officiel sur un de vos numéros, via Datafy : répondez aux clients et envoyez des modèles.",
       "x": "Les posts de votre compte X : écrire, lire les mentions et chercher.",
       "threads": "Les posts et réponses de votre compte Threads.",
       "tiktok": "Votre profil et vos vidéos TikTok, et des vidéos envoyées à vos brouillons."
@@ -15567,6 +15601,14 @@
       "asks_other": "{{count}} actions demandent une approbation dans le chat.",
       "adjust": "Ajuster",
       "ok": "Terminé"
+    },
+    "twilio": {
+      "token": "Account SID et Auth Token",
+      "steps": "Dans la console Twilio, copiez l’Account SID et l’Auth Token de la page d’accueil et collez-les ici, séparés par deux-points : AC…:token. Si le compte a plusieurs numéros, ajoutez le numéro à la fin : AC…:token:+15551234567."
+    },
+    "datafy": {
+      "token": "Jeton du numéro et secret du webhook",
+      "steps": "Dans le panneau Datafy, ouvrez le numéro et copiez son jeton (sk_live_…) et, dans l’onglet Webhooks, son secret (whsec_…). Collez les deux ici, séparés par deux-points : sk_live_…:whsec_…. Dans le même onglet, ajoutez cette adresse comme webhook : {{url}}"
     },
     "telegram": {
       "token": "Jeton du bot",

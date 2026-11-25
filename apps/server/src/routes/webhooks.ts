@@ -7,8 +7,10 @@ import {
   ForbiddenSignatureError,
   HOOK_LIMIT_PER_IP,
   handleComposioWebhook,
+  handleDatafyWebhook,
   handleMetaCallback,
   handleTelegramWebhook,
+  handleTwilioWebhook,
   handleWebhook,
   NotFoundError,
   openConnectorMedia,
@@ -49,6 +51,12 @@ const HOOK_REFUSALS = {
  * Incoming webhooks: `POST /api/webhooks/{provider}/{endpointId}` (public,
  * signature-checked; no session), and the admin endpoint that creates one.
  */
+/**
+ * Twilio and Datafy deliver every workspace's messages from their own few addresses, so one address carries many
+ * customers: a ceiling well above `HOOK_LIMIT_PER_IP`. Datafy drops a delivery after three refused attempts.
+ */
+const SHARED_SENDER_LIMIT_PER_IP = { limit: 3000, windowMs: 60_000 };
+
 export function registerWebhookReceiver(api: OpenAPIHono, deps: AppDeps) {
   const webhookDeps = { db: deps.db, keyWrappers: [deps.adapters.keyWrapper, ...deps.adapters.legacyKeyWrappers] };
   // Composio (ADR 0038): new mail for routines, expired accounts. One endpoint for the whole server,
@@ -123,6 +131,56 @@ export function registerWebhookReceiver(api: OpenAPIHono, deps: AppDeps) {
     } catch (error) {
       if (error instanceof NotFoundError) return c.json({ error: "not found" }, 404);
       if (error instanceof SyntaxError) return c.json({ error: "invalid body" }, 400);
+      throw error;
+    }
+  });
+  // Every Datafy number on this server (WhatsApp): its events, checked by the number's own signing secret.
+  api.post("/webhooks/datafy", async (c) => {
+    const ip = requestLimitIp(c.req.raw.headers, deps.config.TRUSTED_PROXIES);
+    if (!(await deps.adapters.rateLimiter.consume(`datafy-hook-ip:${ip}`, SHARED_SENDER_LIMIT_PER_IP)).allowed) {
+      c.header("retry-after", "60");
+      return c.json({ error: "rate limited" }, 429);
+    }
+    const raw = await readWebhookText(c.req.raw, 1_000_000);
+    if (raw === null) return c.json({ error: "too large" }, 413);
+    try {
+      const result = await handleDatafyWebhook(
+        webhookDeps,
+        {
+          timestamp: c.req.header("x-datafy-timestamp") ?? null,
+          signature: c.req.header("x-datafy-signature-256") ?? null,
+        },
+        raw,
+      );
+      if (result.fired > 0) deps.wakeWorkers?.();
+      return c.json({ ok: true }, 200);
+    } catch (error) {
+      if (error instanceof NotFoundError) return c.json({ error: "not found" }, 404);
+      if (error instanceof SyntaxError) return c.json({ error: "invalid body" }, 400);
+      throw error;
+    }
+  });
+  // A workspace's Twilio number: incoming texts, checked by Twilio's signature with the account's Auth Token.
+  api.post("/webhooks/twilio/:connectionId", async (c) => {
+    const ip = requestLimitIp(c.req.raw.headers, deps.config.TRUSTED_PROXIES);
+    if (!(await deps.adapters.rateLimiter.consume(`twilio-hook-ip:${ip}`, SHARED_SENDER_LIMIT_PER_IP)).allowed) {
+      c.header("retry-after", "60");
+      return c.json({ error: "rate limited" }, 429);
+    }
+    const raw = await readWebhookText(c.req.raw, 1_000_000);
+    if (raw === null) return c.json({ error: "too large" }, 413);
+    try {
+      const result = await handleTwilioWebhook(
+        { ...webhookDeps, publicUrl: deps.config.PUBLIC_URL },
+        c.req.param("connectionId"),
+        c.req.header("x-twilio-signature") ?? null,
+        raw,
+      );
+      if (result.fired > 0) deps.wakeWorkers?.();
+      // An empty TwiML answer: Twilio texts nothing back on its own, the agents answer.
+      return c.body("<Response></Response>", 200, { "content-type": "text/xml" });
+    } catch (error) {
+      if (error instanceof NotFoundError) return c.json({ error: "not found" }, 404);
       throw error;
     }
   });

@@ -164,6 +164,10 @@ export const ROUTINE_EVENTS = [
   "webhook.received",
   /** A message to the workspace's Telegram bot: a private chat with it, or one that mentions or answers it (ADR 0170). */
   "telegram.message",
+  /** A text to the workspace's Twilio number (its SMS webhook). */
+  "sms.received",
+  /** A WhatsApp message to the workspace's Datafy number (Datafy's webhook). */
+  "whatsapp.received",
 ] as const;
 export type RoutineEvent = (typeof ROUTINE_EVENTS)[number];
 /**

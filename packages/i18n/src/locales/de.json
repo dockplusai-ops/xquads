@@ -8112,6 +8112,22 @@
       "label": "Nachrichten senden",
       "description": "Nachrichten und Dateien als Bot senden, bearbeiten und anheften. Nachrichten löschen, Leute sperren und Einladungslinks fragen nach Freigabe."
     },
+    "twilio_messages_read": {
+      "label": "SMS lesen",
+      "description": "Die SMS an die Twilio-Nummer und von ihr lesen."
+    },
+    "twilio_messages_write": {
+      "label": "SMS senden",
+      "description": "SMS von der Twilio-Nummer senden. Jede SMS braucht vorher eine Freigabe."
+    },
+    "datafy_templates_read": {
+      "label": "Vorlagen ansehen",
+      "description": "Die von Meta freigegebenen WhatsApp-Vorlagen der Nummer auflisten."
+    },
+    "datafy_messages_write": {
+      "label": "Nachrichten senden",
+      "description": "WhatsApp-Nachrichten und -Vorlagen von der Nummer senden. Jede Nachricht braucht vorher eine Freigabe."
+    },
     "x_posts_read": {
       "label": "Beiträge lesen",
       "description": "Die Beiträge und Erwähnungen des Kontos lesen, Beiträge per ID und neue Beiträge per Suche."
@@ -9024,6 +9040,12 @@
       },
       "telegram": {
         "message": "Nachricht an den Telegram-Bot"
+      },
+      "sms": {
+        "received": "SMS an die Twilio-Nummer"
+      },
+      "whatsapp": {
+        "received": "WhatsApp-Nachricht an die Datafy-Nummer"
       }
     },
     "when": {
@@ -13786,6 +13808,16 @@
         "2": "Daten abfragen, um zu antworten",
         "3": "Ändert nie etwas"
       },
+      "twilio": {
+        "1": "Die SMS der Kunden lesen",
+        "2": "Per SMS von deiner Nummer antworten",
+        "ask": "Jede gesendete SMS braucht deine Freigabe"
+      },
+      "datafy": {
+        "1": "Kunden auf dem WhatsApp deiner Nummer antworten",
+        "2": "Von Meta freigegebene Vorlagen senden",
+        "ask": "Jede gesendete Nachricht braucht deine Freigabe"
+      },
       "telegram": {
         "1": "Lesen, was Leute dem Bot schreiben",
         "2": "Nachrichten und Dateien als Bot senden",
@@ -13954,6 +13986,8 @@
       "reddit": "Beiträge, Kommentare und Communitys auf Reddit.",
       "whatsapp": "Nachrichten und Vorlagen von WhatsApp Business.",
       "telegram": "Ein eigener Telegram-Bot: seine Chats, Gruppen und Kanäle.",
+      "twilio": "SMS über eine eigene Twilio-Nummer: die SMS der Kunden lesen und beantworten.",
+      "datafy": "Das offizielle WhatsApp auf einer eigenen Nummer, über Datafy: Kunden antworten und Vorlagen senden.",
       "x": "Beiträge auf deinem X-Konto: schreiben, Erwähnungen lesen und suchen.",
       "threads": "Beiträge und Antworten auf deinem Threads-Konto.",
       "tiktok": "Dein TikTok-Profil und deine Videos, und Videos in deinen Entwürfen."
@@ -15044,6 +15078,14 @@
       "asks_other": "{{count}} Aktionen fragen im Chat nach Freigabe.",
       "adjust": "Anpassen",
       "ok": "Fertig"
+    },
+    "twilio": {
+      "token": "Account SID und Auth Token",
+      "steps": "Kopiere in der Twilio-Konsole die Account SID und den Auth Token von der Startseite und füge sie hier mit einem Doppelpunkt verbunden ein: AC…:token. Hat das Konto mehrere Nummern, hänge die Nummer an: AC…:token:+15551234567."
+    },
+    "datafy": {
+      "token": "Token der Nummer und Webhook-Secret",
+      "steps": "Öffne im Datafy-Panel die Nummer und kopiere ihren Token (sk_live_…) und im Tab Webhooks ihr Secret (whsec_…). Füge beides hier mit einem Doppelpunkt verbunden ein: sk_live_…:whsec_…. Trage im selben Tab diese Adresse als Webhook ein: {{url}}"
     },
     "telegram": {
       "token": "Bot-Token",

@@ -8066,6 +8066,22 @@
       "label": "Mesaj gönderme",
       "description": "Bot olarak mesaj ve dosya gönderir, düzenler ve sabitler. Mesaj silme, kişi yasaklama ve davet bağlantıları onay ister."
     },
+    "twilio_messages_read": {
+      "label": "SMS'leri oku",
+      "description": "Twilio numarasına gelen ve ondan giden SMS'leri okur."
+    },
+    "twilio_messages_write": {
+      "label": "SMS gönder",
+      "description": "Twilio numarasından SMS gönderir. Her gönderim önce onay ister."
+    },
+    "datafy_templates_read": {
+      "label": "Şablonları gör",
+      "description": "Numaranın Meta tarafından onaylanan WhatsApp şablonlarını listeler."
+    },
+    "datafy_messages_write": {
+      "label": "Mesaj gönder",
+      "description": "Numaradan WhatsApp mesajları ve şablonları gönderir. Her mesaj önce onay ister."
+    },
     "x_posts_read": {
       "label": "Gönderileri okuma",
       "description": "Hesabın gönderilerini ve bahsetmelerini, kimliğe göre gönderileri ve aramayla son gönderileri okur."
@@ -8975,6 +8991,12 @@
       },
       "telegram": {
         "message": "Telegram botuna mesaj"
+      },
+      "sms": {
+        "received": "Twilio numarasına SMS"
+      },
+      "whatsapp": {
+        "received": "Datafy numarasına WhatsApp mesajı"
       }
     },
     "when": {
@@ -13716,6 +13738,16 @@
         "2": "Yanıt vermek için verileri sorgular",
         "3": "Hiçbir şeyi değiştirmez"
       },
+      "twilio": {
+        "1": "Müşterilerin gönderdiği SMS'leri oku",
+        "2": "Numaranızdan SMS ile yanıt ver",
+        "ask": "Gönderilen her SMS onayınızı ister"
+      },
+      "datafy": {
+        "1": "Numaranızın WhatsApp'ından müşterilere yanıt verin",
+        "2": "Meta'nın onayladığı şablonları gönderin",
+        "ask": "Gönderilen her mesaj onayınızı ister"
+      },
       "telegram": {
         "1": "İnsanların bota yazdıklarını okuma",
         "2": "Bot olarak mesaj ve dosya gönderme",
@@ -13884,6 +13916,8 @@
       "reddit": "Reddit gönderileri, yorumları ve toplulukları.",
       "whatsapp": "WhatsApp Business mesajları ve şablonları.",
       "telegram": "Size ait bir Telegram botu: sohbetleri, grupları ve kanalları.",
+      "twilio": "Size ait bir Twilio numarasındaki SMS'ler: müşterilerin SMS'lerini okuyun ve yanıtlayın.",
+      "datafy": "Datafy üzerinden size ait bir numarada resmi WhatsApp: müşterilere yanıt verin ve şablon gönderin.",
       "x": "X hesabınızdaki gönderiler: yazma, bahsetmeleri okuma ve arama.",
       "threads": "Threads hesabınızdaki gönderiler ve yanıtlar.",
       "tiktok": "TikTok profiliniz ve videolarınız, taslaklarınıza gönderilen videolar."
@@ -14974,6 +15008,14 @@
       "asks_other": "{{count}} işlem sohbette onay ister.",
       "adjust": "Ayarla",
       "ok": "Tamam"
+    },
+    "twilio": {
+      "token": "Account SID ve Auth Token",
+      "steps": "Twilio Console'un ana sayfasından Account SID ve Auth Token'ı kopyalayıp aralarına iki nokta koyarak buraya yapıştırın: AC…:token. Hesapta birden fazla numara varsa numarayı sona ekleyin: AC…:token:+15551234567."
+    },
+    "datafy": {
+      "token": "Numara token'ı ve webhook secret'ı",
+      "steps": "Datafy panelinde numarayı açın, token'ı (sk_live_…) ve Webhooks sekmesindeki secret'ı (whsec_…) kopyalayın. İkisini aralarına iki nokta koyarak buraya yapıştırın: sk_live_…:whsec_…. Aynı sekmede bu adresi webhook olarak ekleyin: {{url}}"
     },
     "telegram": {
       "token": "Bot token'ı",

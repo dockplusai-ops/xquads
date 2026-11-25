@@ -19680,6 +19680,30 @@
   "scopes.telegram_messages_write.description": {
     "value": "Send, edit and pin messages and files as the bot. Deleting messages, banning people and invite links ask for approval."
   },
+  "scopes.twilio_messages_read.label": {
+    "value": "Read texts"
+  },
+  "scopes.twilio_messages_read.description": {
+    "value": "Read the texts sent to and from the Twilio number."
+  },
+  "scopes.twilio_messages_write.label": {
+    "value": "Send texts"
+  },
+  "scopes.twilio_messages_write.description": {
+    "value": "Text people from the Twilio number. Every text asks for approval first."
+  },
+  "scopes.datafy_templates_read.label": {
+    "value": "See templates"
+  },
+  "scopes.datafy_templates_read.description": {
+    "value": "List the number's WhatsApp templates Meta approved."
+  },
+  "scopes.datafy_messages_write.label": {
+    "value": "Send messages"
+  },
+  "scopes.datafy_messages_write.description": {
+    "value": "Send WhatsApp messages and templates from the number. Every message asks for approval first."
+  },
   "scopes.x_posts_read.label": {
     "value": "Read posts"
   },
@@ -21838,6 +21862,12 @@
   },
   "routines.event.telegram.message": {
     "value": "Message to the Telegram bot"
+  },
+  "routines.event.sms.received": {
+    "value": "Text to the Twilio number"
+  },
+  "routines.event.whatsapp.received": {
+    "value": "WhatsApp message to the Datafy number"
   },
   "routines.when.event": {
     "value": "When: {{event}}"
@@ -33409,6 +33439,24 @@
   "connectors.can.database.3": {
     "value": "Never changes anything"
   },
+  "connectors.can.twilio.1": {
+    "value": "Read the texts customers send"
+  },
+  "connectors.can.twilio.2": {
+    "value": "Answer by text from your number"
+  },
+  "connectors.can.twilio.ask": {
+    "value": "Every text sent asks for your approval"
+  },
+  "connectors.can.datafy.1": {
+    "value": "Answer customers on your number's WhatsApp"
+  },
+  "connectors.can.datafy.2": {
+    "value": "Send templates Meta approved"
+  },
+  "connectors.can.datafy.ask": {
+    "value": "Every message sent asks for your approval"
+  },
   "connectors.can.telegram.1": {
     "value": "Read what people write to the bot"
   },
@@ -33858,6 +33906,12 @@
   },
   "connectors.descriptions.telegram": {
     "value": "A Telegram bot of yours: its chats, groups and channels."
+  },
+  "connectors.descriptions.twilio": {
+    "value": "SMS on a Twilio number of yours: read the texts customers send and answer them."
+  },
+  "connectors.descriptions.datafy": {
+    "value": "The official WhatsApp on a number of yours, through Datafy: answer customers and send templates."
   },
   "connectors.descriptions.x": {
     "value": "Posts on your X account: write, read mentions and search."
@@ -37008,6 +37062,18 @@
   },
   "connectFlow.done.ok": {
     "value": "Done"
+  },
+  "connectFlow.twilio.token": {
+    "value": "Account SID and Auth Token"
+  },
+  "connectFlow.twilio.steps": {
+    "value": "In the Twilio Console, copy the Account SID and the Auth Token from the home page and paste them here joined by a colon: AC…:token. If the account has more than one number, add the number at the end: AC…:token:+15551234567."
+  },
+  "connectFlow.datafy.token": {
+    "value": "Number token and webhook secret"
+  },
+  "connectFlow.datafy.steps": {
+    "value": "In the Datafy panel, open the number and copy its token (sk_live_…) and, on the Webhooks tab, its secret (whsec_…). Paste both here joined by a colon: sk_live_…:whsec_…. On the same tab, add this address as a webhook: {{url}}"
   },
   "connectFlow.telegram.token": {
     "value": "Bot token"

@@ -7844,6 +7844,22 @@
       "label": "发送消息",
       "description": "以机器人身份发送、编辑和置顶消息与文件。删除消息、封禁成员和邀请链接需要审批。"
     },
+    "twilio_messages_read": {
+      "label": "读取短信",
+      "description": "读取 Twilio 号码收发的短信。"
+    },
+    "twilio_messages_write": {
+      "label": "发送短信",
+      "description": "用 Twilio 号码发送短信。每次发送前都会先请求批准。"
+    },
+    "datafy_templates_read": {
+      "label": "查看模板",
+      "description": "列出该号码已获 Meta 批准的 WhatsApp 模板。"
+    },
+    "datafy_messages_write": {
+      "label": "发送消息",
+      "description": "用该号码发送 WhatsApp 消息和模板。每条消息发送前都会先请求批准。"
+    },
     "x_posts_read": {
       "label": "读取帖子",
       "description": "读取账号的帖子和提及、按 id 查看帖子，以及搜索最近的帖子。"
@@ -8743,6 +8759,12 @@
       },
       "telegram": {
         "message": "发给 Telegram 机器人的消息"
+      },
+      "sms": {
+        "received": "发给 Twilio 号码的短信"
+      },
+      "whatsapp": {
+        "received": "发给 Datafy 号码的 WhatsApp 消息"
       }
     },
     "when": {
@@ -13313,6 +13335,16 @@
         "2": "查询数据来回答问题",
         "3": "从不更改任何内容"
       },
+      "twilio": {
+        "1": "读取客户发来的短信",
+        "2": "用你的号码回复短信",
+        "ask": "每条发出的短信都会请你批准"
+      },
+      "datafy": {
+        "1": "在你号码的 WhatsApp 上回复客户",
+        "2": "发送 Meta 批准的模板",
+        "ask": "每条发出的消息都会请你批准"
+      },
       "telegram": {
         "1": "读取别人发给机器人的内容",
         "2": "以机器人身份发送消息和文件",
@@ -13476,6 +13508,8 @@
       "reddit": "Reddit 的帖子、评论和社区。",
       "whatsapp": "WhatsApp Business 消息和模板。",
       "telegram": "你自己的 Telegram 机器人：它的聊天、群组和频道。",
+      "twilio": "你的 Twilio 号码上的短信：读取客户发来的短信并回复。",
+      "datafy": "通过 Datafy 在你的号码上使用官方 WhatsApp：回复客户并发送模板。",
       "x": "你的 X 账号上的帖子：发帖、查看提及和搜索。",
       "threads": "你的 Threads 账号上的帖子和回复。",
       "tiktok": "你的 TikTok 资料和视频，以及发到草稿的视频。"
@@ -14545,6 +14579,14 @@
       "asks_other": "{{count}} 项操作会在聊天中请求审批。",
       "adjust": "调整",
       "ok": "完成"
+    },
+    "twilio": {
+      "token": "Account SID 和 Auth Token",
+      "steps": "在 Twilio 控制台首页复制 Account SID 和 Auth Token，用冒号连接后粘贴到这里：AC…:token。如果账户有多个号码，在末尾加上号码：AC…:token:+15551234567。"
+    },
+    "datafy": {
+      "token": "号码令牌和 Webhook secret",
+      "steps": "在 Datafy 面板中打开号码，复制其令牌（sk_live_…）以及 Webhooks 标签页中的 secret（whsec_…）。用冒号连接后粘贴到这里：sk_live_…:whsec_…。在同一标签页中，把这个地址添加为 Webhook：{{url}}"
     },
     "telegram": {
       "token": "机器人令牌",
