@@ -1004,17 +1004,17 @@
         "build": "Crear un avatar",
         "edit": "Editar avatar",
         "upload": "Subir una foto",
-        "area": "¿En qué trabajas?",
+        "area": "¿Cuál es tu función?",
         "areaHint": "Opcional. Solo para saber quién usa xquads."
       },
       "area": {
         "options": {
-          "dev": "Desarrollo",
+          "owner": "Dueño o gerente",
+          "sales": "Ventas y presupuestos",
+          "office": "Oficina y agenda",
+          "field": "Campo y cuadrillas",
+          "finance": "Cobros y finanzas",
           "marketing": "Marketing",
-          "sales": "Ventas",
-          "finance": "Finanzas",
-          "ops": "Operaciones",
-          "support": "Atención al cliente",
           "other": "Otra cosa"
         }
       },
@@ -3057,7 +3057,7 @@
       "connect": {
         "title": "Conectar una IA para el equipo",
         "titlePersonal": "Conectar una IA para tus agentes",
-        "text": "Inicia sesión con tu plan de Claude o de ChatGPT, sin clave de API.",
+        "text": "Inicia sesión con tu plan de ChatGPT o usa una clave de API.",
         "hint": "Los agentes piensan con la IA del workspace.",
         "hintPersonal": "Tus agentes piensan con esta IA.",
         "action": "Conectar"
@@ -3480,7 +3480,7 @@
   "noAi": {
     "banner": {
       "org": "Tus agentes todavía no tienen una IA.",
-      "orgHint": "También puedes pedirlo en el chat, como “usa mi plan de Claude”.",
+      "orgHint": "También puedes pedirlo en el chat, como “usar mi plan de ChatGPT”.",
       "orgAction": "Conectar una IA"
     },
     "agent": "{{name}} no responderá porque no tiene una IA conectada.",
@@ -3541,7 +3541,7 @@
         "ended": "Responderé aquí cuando el workspace vuelva a suscribirse a xquads."
       },
       "askAdmin": "Responderé aquí cuando un admin resuelva el plan de xquads.",
-      "plan": "El plan trae el ordenador de los agentes. La IA es la que ya pagas: Claude, ChatGPT y otras, o una clave de API.",
+      "plan": "El plan trae el ordenador de los agentes. La IA es la que ya pagas: ChatGPT, Gemini y otras, o una clave de API.",
       "activeTitle": "Plan activo",
       "activeLine": "Conecta una IA y {{name}} responde aquí.",
       "receipt": "Guardado",
@@ -11169,7 +11169,7 @@
       "noModel": "Ningún modelo coincide.",
       "empty": "Todavía no hay ninguna cuenta.",
       "add": "Agregar cuenta",
-      "addLine": "Claude, ChatGPT, Gemini y otras, o una clave de API",
+      "addLine": "ChatGPT, Gemini y otras, o una clave de API",
       "manage": "Gestionar cuentas",
       "groups": {
         "yours": "Tus cuentas",
@@ -20635,16 +20635,16 @@
         "gil_female": "{{name}} está comprobando que sea toda nuestra"
       },
       "ordering": {
-        "helena": "{{name}} pidió {{gb}} GB de memoria",
-        "helena_female": "{{name}} pidió {{gb}} GB de memoria",
+        "davi": "{{name}} pidió {{gb}} GB de memoria",
+        "davi_female": "{{name}} pidió {{gb}} GB de memoria",
         "rui": "{{name}} encargó una nuevecita",
         "rui_female": "{{name}} encargó una nuevecita",
         "ana": "{{name}} está pendiente del pedido",
         "ana_female": "{{name}} está pendiente del pedido"
       },
       "wiping": {
-        "helena": "{{name}} le está dando una buena limpieza",
-        "helena_female": "{{name}} le está dando una buena limpieza",
+        "davi": "{{name}} le está dando una buena limpieza",
+        "davi_female": "{{name}} le está dando una buena limpieza",
         "rui": "{{name}} está sacando la basura",
         "rui_female": "{{name}} está sacando la basura",
         "gil": "{{name}} está comprobando que no quede nada viejo",
@@ -20653,14 +20653,14 @@
       "starting": {
         "rui": "{{name}} la está poniendo de pie",
         "rui_female": "{{name}} la está poniendo de pie",
-        "helena": "{{name}} está calentando motores",
-        "helena_female": "{{name}} está calentando motores",
+        "davi": "{{name}} está calentando motores",
+        "davi_female": "{{name}} está calentando motores",
         "ana": "{{name}} dio la señal de salida",
         "ana_female": "{{name}} dio la señal de salida"
       },
       "booting": {
-        "helena": "{{name}} está contando los {{gb}} GB de memoria",
-        "helena_female": "{{name}} está contando los {{gb}} GB de memoria",
+        "davi": "{{name}} está contando los {{gb}} GB de memoria",
+        "davi_female": "{{name}} está contando los {{gb}} GB de memoria",
         "rui": "{{name}} está comprobando que no falte ninguna pieza",
         "rui_female": "{{name}} está comprobando que no falte ninguna pieza",
         "ana": "{{name}} la deja cargar en paz",
@@ -20669,14 +20669,14 @@
       "updating": {
         "gil": "{{name}} está trayendo las últimas actualizaciones",
         "gil_female": "{{name}} está trayendo las últimas actualizaciones",
-        "helena": "{{name}} está ajustando cada tornillo",
-        "helena_female": "{{name}} está ajustando cada tornillo",
+        "davi": "{{name}} está ajustando cada tornillo",
+        "davi_female": "{{name}} está ajustando cada tornillo",
         "ana": "{{name}} está tachando cada actualización de la lista",
         "ana_female": "{{name}} está tachando cada actualización de la lista"
       },
       "restarting": {
-        "helena": "{{name}} dice que este reinicio es normal",
-        "helena_female": "{{name}} dice que este reinicio es normal",
+        "davi": "{{name}} dice que este reinicio es normal",
+        "davi_female": "{{name}} dice que este reinicio es normal",
         "rui": "{{name}} se asegura de que la actualización quede",
         "rui_female": "{{name}} se asegura de que la actualización quede",
         "ana": "{{name}} está contando hasta diez",
@@ -20703,12 +20703,12 @@
         "ana_female": "{{name}} está buscando las apps",
         "gil": "{{name}} está desempacando las apps",
         "gil_female": "{{name}} está desempacando las apps",
-        "helena": "{{name}} está acomodando las herramientas",
-        "helena_female": "{{name}} está acomodando las herramientas"
+        "davi": "{{name}} está acomodando las herramientas",
+        "davi_female": "{{name}} está acomodando las herramientas"
       },
       "connecting": {
-        "helena": "{{name}} está esperando su primer saludo",
-        "helena_female": "{{name}} está esperando su primer saludo",
+        "davi": "{{name}} está esperando su primer saludo",
+        "davi_female": "{{name}} está esperando su primer saludo",
         "rui": "{{name}} está entregando las llaves",
         "rui_female": "{{name}} está entregando las llaves",
         "gil": "{{name}} la está presentando al equipo",
@@ -21734,12 +21734,11 @@
       "templatesPersonal": "Ver agentes listos"
     },
     "business": {
-      "agency": "Agencia",
-      "store": "Tienda online",
-      "clinic": "Clínica o consultorio",
-      "software": "Software y apps",
-      "support": "Atención al cliente",
-      "services": "Despacho de servicios",
+      "cleaning": "Limpieza de casas",
+      "painting": "Pintura",
+      "roofing": "Techos",
+      "landscaping": "Jardinería y césped",
+      "remodeling": "Remodelación y reparaciones",
       "other": "Otra cosa"
     },
     "step": "Pregunta {{step}} de {{of}}",
@@ -21982,35 +21981,30 @@
       "sub": "Clientes, facturas y agenda",
       "desc": "Para quienes trabajan por su cuenta y se ocupan de sus propios clientes y su dinero."
     },
-    "agency": {
-      "name": "Agencia de marketing",
-      "sub": "Contenido, anuncios y atención",
-      "desc": "Para una agencia que lleva el contenido y las campañas de sus clientes."
+    "cleaning": {
+      "name": "Limpieza de casas",
+      "sub": "Visitas recurrentes, cuadrillas y reseñas",
+      "desc": "Para una empresa de limpieza con clientes fijos y cuadrillas en la calle."
     },
-    "store": {
-      "name": "Tienda online",
-      "sub": "Pedidos, inventario y redes sociales",
-      "desc": "Para una tienda que vende online y atiende a quien compra."
+    "painting": {
+      "name": "Pintura",
+      "sub": "Presupuestos, cuadrillas y facturas",
+      "desc": "Para una empresa de pintura que presupuesta cada trabajo y manda una cuadrilla a hacerlo."
     },
-    "clinic": {
-      "name": "Clínica o consultorio",
-      "sub": "Citas por WhatsApp, cobros y seguimiento",
-      "desc": "Para una clínica o consultorio que agenda pacientes y hace el seguimiento."
+    "roofing": {
+      "name": "Techos",
+      "sub": "Inspecciones, presupuestos y pagos",
+      "desc": "Para una empresa de techos que inspecciona, presupuesta y cobra cada trabajo."
     },
-    "software": {
-      "name": "Software y apps",
-      "sub": "Atención al cliente, cobros y código",
-      "desc": "Para quien vende un sistema y cuida de sus propios clientes."
+    "landscaping": {
+      "name": "Jardinería y césped",
+      "sub": "Rutas semanales, facturas y reseñas",
+      "desc": "Para una empresa de jardinería o césped con visitas cada semana."
     },
-    "support": {
-      "name": "Atención y soporte",
-      "sub": "Cola de clientes y base de respuestas",
-      "desc": "Para un equipo que atiende a muchos clientes cada día."
-    },
-    "services": {
-      "name": "Despacho de servicios",
-      "sub": "Contabilidad, abogacía, consultoría",
-      "desc": "Para un despacho que agenda clientes, envía propuestas y cobra."
+    "remodeling": {
+      "name": "Remodelación y reparaciones",
+      "sub": "Presupuestos, clientes en inglés y facturas",
+      "desc": "Para una empresa de remodelación o reparaciones que presupuesta, habla con el cliente y cobra cada etapa."
     },
     "hello": {
       "lodi": {
@@ -22025,61 +22019,47 @@
       }
     },
     "agents": {
-      "luana": {
-        "role": "Atención",
-        "line": "Responde a los clientes por WhatsApp y por correo. Te llama cuando no sabe algo.",
-        "routine": "Resumir lo que quedó sin respuesta",
-        "task": "Escribe una respuesta a este mensaje de cliente:",
-        "hello": "Hola, {{first}}. Déjame a mí a quien escriba por WhatsApp."
-      },
-      "teo": {
-        "role": "Cobros",
-        "line": "Recuerda a quien se atrasó en el pago y envía el cobro después de tu ok.",
-        "routine": "Listar quién tiene el pago atrasado",
-        "task": "Escribe un recordatorio amable de pago para:",
-        "hello": "Hola. Me encargo de los cobros y solo envío recordatorios después de tu ok."
-      },
-      "helena": {
-        "role": "Dev",
-        "line": "Corrige los bugs que reportan los clientes y abre el PR.",
-        "routine": "Listar los bugs nuevos",
-        "task": "Dime por dónde empezar a investigar este bug:",
-        "hello": "Hola. Pásenme los bugs que lleguen, yo investigo y abro el PR."
-      },
-      "gil": {
-        "role": "Contenido",
-        "line": "Escribe posts y guiones en el tono de la empresa y los programa después de tu ok.",
-        "routine": "Proponer los posts de la semana",
-        "task": "Propón tres publicaciones para esta semana sobre:",
-        "hello": "Hola a todos. Las publicaciones de la semana corren por mi cuenta."
-      },
       "ana": {
-        "role": "Ventas",
-        "line": "Hace seguimiento a quien pidió presupuesto y escribe las propuestas.",
-        "routine": "Listar quién pidió presupuesto y se quedó sin respuesta",
-        "task": "Escribe un presupuesto corto para este pedido:",
-        "hello": "Hola, {{first}}. Nadie que pida un presupuesto se quedará sin respuesta."
+        "role": "Presupuestos",
+        "line": "Escribe presupuestos a partir de fotos y medidas y retoma los que quedaron sin respuesta.",
+        "routine": "Listar los presupuestos sin respuesta",
+        "task": "Escribe un presupuesto con estas fotos y medidas:",
+        "hello": "Hola, {{first}}. Mándame las fotos y las medidas, y yo escribo el presupuesto."
       },
       "rui": {
         "role": "Agenda",
-        "line": "Agenda, confirma y cambia citas, y recuerda a los clientes el día anterior.",
-        "routine": "Confirmar las citas de mañana",
-        "task": "Organiza estos horarios de mañana:",
-        "hello": "Hola. La agenda es cosa mía, y les recuerdo a los clientes la víspera."
+        "line": "Agenda las visitas, las confirma el día anterior y las cambia cuando el cliente lo pide.",
+        "routine": "Confirmar las visitas de mañana",
+        "task": "Busca un horario para esta visita:",
+        "hello": "Hola. La agenda es cosa mía, y confirmo cada visita el día anterior."
       },
-      "tiago": {
-        "role": "Pedidos",
-        "line": "Sigue pedidos e inventario y avisa lo que se está acabando.",
-        "routine": "Avisar lo que se acaba en el inventario",
-        "task": "Enumera lo que falta hacer en estos pedidos:",
-        "hello": "Ya llegué. Vigilo los pedidos y aviso si falta algo en el inventario."
+      "lia": {
+        "role": "Inglés",
+        "line": "Te ayuda a escribir a los clientes en un inglés claro y te explica lo que escribieron.",
+        "routine": "Listar los mensajes de clientes sin respuesta",
+        "task": "Escribe esta respuesta al cliente en inglés:",
+        "hello": "Hola, {{first}}. Dime lo que quieres decir, y yo lo escribo en inglés."
       },
-      "sofia": {
-        "role": "Base de respuestas",
-        "line": "Mantiene la base de respuestas al día con lo que responde el equipo.",
-        "routine": "Actualizar la base con las respuestas de la semana",
-        "task": "Escribe las respuestas a estas preguntas de clientes:",
-        "hello": "Hola. Voy a mantener la base de respuestas al día con lo que responda el equipo."
+      "teo": {
+        "role": "Cobros",
+        "line": "Envía la factura cuando termina un trabajo y recuerda a quien se atrasó, después de tu ok.",
+        "routine": "Listar las facturas vencidas",
+        "task": "Escribe la factura de este trabajo:",
+        "hello": "Hola. Las facturas son cosa mía, y solo envío recordatorios después de tu ok."
+      },
+      "gil": {
+        "role": "Reseñas",
+        "line": "Pide una reseña en Google a los clientes satisfechos y redacta respuestas a las reseñas nuevas.",
+        "routine": "Listar los trabajos terminados hoy para pedir una reseña",
+        "task": "Escribe una solicitud de reseña para este cliente:",
+        "hello": "Hola a todos. Voy a pedir una reseña en Google a cada cliente satisfecho."
+      },
+      "davi": {
+        "role": "Cuadrillas",
+        "line": "Envía a cada cuadrilla sus trabajos, direcciones y horarios del día y te avisa cuando alguien se atrasa.",
+        "routine": "Enviar a cada cuadrilla sus trabajos del día",
+        "task": "Reparte estos trabajos entre las cuadrillas:",
+        "hello": "Hola, {{first}}. Cada cuadrilla recibe de mí sus trabajos y direcciones antes de que empiece el día."
       },
       "marina": {
         "role": "Agenda y recordatorios",
@@ -22137,14 +22117,12 @@
       }
     },
     "channels": {
-      "luana": "atencion",
-      "teo": "finanzas",
-      "helena": "eng",
-      "gil": "contenido",
-      "ana": "ventas",
+      "ana": "presupuestos",
       "rui": "agenda",
-      "tiago": "pedidos",
-      "sofia": "atencion"
+      "lia": "clientes",
+      "teo": "finanzas",
+      "gil": "resenas",
+      "davi": "cuadrillas"
     },
     "skills": {
       "voice": {

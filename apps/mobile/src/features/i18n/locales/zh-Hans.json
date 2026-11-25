@@ -2193,7 +2193,7 @@
   },
   "ai": {
     "yourPlan": "你的 AI 套餐",
-    "plansSub": "Claude、ChatGPT、Gemini、GLM 等",
+    "plansSub": "ChatGPT、Gemini、GLM 等",
     "plansFoot": "智能体使用你的套餐思考，无需 API 密钥。套餐会在智能体的电脑上登录。",
     "change": "更改",
     "how": "如何连接",

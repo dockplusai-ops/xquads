@@ -2300,7 +2300,7 @@
   },
   "ai": {
     "yourPlan": "Dein KI-Abo",
-    "plansSub": "Claude, ChatGPT, Gemini, GLM und andere",
+    "plansSub": "ChatGPT, Gemini, GLM und andere",
     "plansFoot": "Agenten denken mit deinem Abo, ohne API-Schlüssel. Es meldet sich auf dem Computer des Agenten an.",
     "change": "Ändern",
     "how": "So verbindest du",

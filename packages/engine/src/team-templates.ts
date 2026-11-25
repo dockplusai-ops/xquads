@@ -26,11 +26,11 @@ import {
 import { isPersonalWorkspace } from "./workspace-mode";
 
 /**
- * "See team templates" (ADR 0137 §10): six business types, each a team of the same few agents, kept in code with its
- * words in `@agenteschat/i18n` (`teamTemplates.*`, every language). "Create the team" makes it at once, as the right
- * hand's team card in its created state.
+ * "See team templates" (ADR 0137 §10): one per home-services trade (the client's `BUSINESS_TYPES` but `other`), each a
+ * team of xquads' six agents, kept in code with its words in `@agenteschat/i18n` (`teamTemplates.*`, every language).
+ * "Create the team" makes it at once, as the right hand's team card in its created state.
  */
-export const BUSINESS_TEMPLATES = ["agency", "store", "clinic", "software", "support", "services"] as const;
+export const BUSINESS_TEMPLATES = ["cleaning", "painting", "roofing", "landscaping", "remodeling"] as const;
 /**
  * A personal workspace's templates (ADR 0159): areas of one person's life, each a few agents that work in their DM with
  * the person, so they make no channel.
@@ -42,7 +42,7 @@ export type TeamTemplateId = (typeof TEAM_TEMPLATES)[number];
 export const isTeamTemplate = (v: unknown): v is TeamTemplateId => TEAM_TEMPLATES.includes(v as TeamTemplateId);
 const isPersonalTemplate = (id: TeamTemplateId) => (PERSONAL_TEMPLATES as readonly string[]).includes(id);
 
-type BusinessMember = "luana" | "teo" | "helena" | "gil" | "ana" | "rui" | "tiago" | "sofia";
+type BusinessMember = "ana" | "rui" | "lia" | "teo" | "gil" | "davi";
 type PersonalMember = "marina" | "cecilia" | "lucas" | "julia" | "bruna" | "lorena" | "tereza" | "renato" | "fabio";
 type Member = BusinessMember | PersonalMember;
 type SkillKey = "voice" | "dunning" | "answers" | "proposal" | "schedule" | "review";
@@ -52,17 +52,22 @@ const face = (color: AgentAppearance["color"]): AgentAppearance => ({ color, eye
 
 /**
  * Each agent of the templates: its fixed name (its id is the handle that name gives) and look, its routine's schedule
- * (cron, read as a rule) and skill. Ana, Rui, Téo and Gil are xquads' own agents for those jobs, in their colours.
+ * (cron, read as a rule) and skill. The business ones are xquads' six agents, in the colours of their roles in Criar
+ * agente (`ROLE_DEFAULTS` in packages/client/src/lib/new-agent.ts).
  */
 const MEMBERS: Record<Member, { name: string; look: AgentAppearance; cron: string; skill: SkillKey | null }> = {
-  luana: { name: "Luana", look: face("amber"), cron: "0 9 * * *", skill: "voice" },
+  // Quotes. Late afternoon, Monday to Saturday: the day's estimate requests with no answer yet.
+  ana: { name: "Ana", look: face("sky"), cron: "0 17 * * 1-6", skill: "proposal" },
+  // Scheduling. Every afternoon: tomorrow's visits, confirmed while there is time to move one.
+  rui: { name: "Rui", look: face("indigo"), cron: "0 16 * * *", skill: "schedule" },
+  // English. Morning, Monday to Saturday: the customer messages waiting for an answer.
+  lia: { name: "Lia", look: face("amber"), cron: "0 9 * * 1-6", skill: "voice" },
+  // Billing. Monday morning: who is late on payment.
   teo: { name: "Téo", look: face("green"), cron: "0 8 * * 1", skill: "dunning" },
-  helena: { name: "Helena", look: face("violet"), cron: "0 9 * * *", skill: "review" },
-  gil: { name: "Gil", look: face("rose"), cron: "0 10 * * 1", skill: "voice" },
-  ana: { name: "Ana", look: face("sky"), cron: "0 17 * * *", skill: "proposal" },
-  rui: { name: "Rui", look: face("indigo"), cron: "0 18 * * *", skill: "schedule" },
-  tiago: { name: "Tiago", look: face("graphite"), cron: "0 8 * * *", skill: null },
-  sofia: { name: "Sofia", look: face("teal"), cron: "0 16 * * 5", skill: "answers" },
+  // Reviews. Early evening, Monday to Saturday: the jobs finished today, for a review request.
+  gil: { name: "Gil", look: face("rose"), cron: "0 18 * * 1-6", skill: "voice" },
+  // Crew. Early morning, Monday to Saturday: each crew's jobs and addresses for the day.
+  davi: { name: "Davi", look: face("violet"), cron: "0 6 * * 1-6", skill: null },
   // A personal workspace's agents (ADR 0159): routines on one person's clock.
   // Every morning, before the day starts.
   marina: { name: "Marina", look: face("indigo"), cron: "0 7 * * *", skill: null },
@@ -83,12 +88,11 @@ const MEMBERS: Record<Member, { name: string; look: AgentAppearance; cron: strin
 };
 
 const TEAMS: Record<TeamTemplateId, Member[]> = {
-  agency: ["gil", "ana", "luana"],
-  store: ["luana", "tiago", "gil"],
-  clinic: ["rui", "teo", "luana"],
-  software: ["luana", "teo", "helena"],
-  support: ["luana", "sofia"],
-  services: ["rui", "ana", "teo"],
+  cleaning: ["rui", "ana", "gil", "davi"],
+  painting: ["ana", "lia", "davi", "teo"],
+  roofing: ["ana", "rui", "teo", "davi"],
+  landscaping: ["rui", "davi", "teo", "gil"],
+  remodeling: ["ana", "lia", "teo", "davi"],
   life: ["marina", "cecilia"],
   health: ["lucas", "julia"],
   studies: ["bruna", "lorena"],
@@ -126,8 +130,8 @@ async function blockedChannels(db: Database, orgId: string, userId: string, loca
 }
 
 /**
- * The tool's input for a template, in `locale`, with a free handle for each agent (`luana-2` when Luana is taken) and a
- * usable channel name (`financeiro-2` when #financeiro is a private channel this person isn't in). A personal
+ * The tool's input for a template, in `locale`, with a free handle for each agent (`ana-2` when Ana is taken) and a
+ * usable channel name (`cobrancas-2` when #cobrancas is a private channel this person isn't in). A personal
  * template's agents get no channel: each lives in its DM with the person (ADR 0159).
  */
 function templateInput(id: TeamTemplateId, locale: AppLocale, org: string, taken: Set<string>, blocked: Set<string>) {
@@ -269,7 +273,7 @@ export async function useTeamTemplate(
 /** Between two lines in #general: one after the other, as people type. */
 export const HELLO_GAP_MS = 1100;
 
-/** The template agent an agent is, by its handle (`luana-2` is Luana's), or null for any other. */
+/** The template agent an agent is, by its handle (`ana-2` is Ana's), or null for any other. */
 const memberOf = (handle: string): Member | null => {
   const m = handle.replace(/-\d+$/, "");
   return m in MEMBERS ? (m as Member) : null;

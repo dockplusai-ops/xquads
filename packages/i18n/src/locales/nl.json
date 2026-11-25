@@ -984,17 +984,17 @@
         "build": "Avatar maken",
         "edit": "Avatar bewerken",
         "upload": "Foto uploaden",
-        "area": "Waar werk je aan?",
+        "area": "Wat is je rol?",
         "areaHint": "Optioneel. Alleen zodat we weten wie xquads gebruikt."
       },
       "area": {
         "options": {
-          "dev": "Ontwikkeling",
+          "owner": "Eigenaar of manager",
+          "sales": "Verkoop en offertes",
+          "office": "Kantoor en planning",
+          "field": "Buitendienst en ploegen",
+          "finance": "Facturen en financiën",
           "marketing": "Marketing",
-          "sales": "Verkoop",
-          "finance": "Financiën",
-          "ops": "Bedrijfsvoering",
-          "support": "Klantenservice",
           "other": "Iets anders"
         }
       },
@@ -2941,7 +2941,7 @@
       "connect": {
         "title": "Een AI voor het team koppelen",
         "titlePersonal": "Een AI voor je agents koppelen",
-        "text": "Log in met je Claude- of ChatGPT-abonnement, zonder API-sleutel.",
+        "text": "Meld je aan met je ChatGPT-abonnement of gebruik een API-sleutel.",
         "hint": "De agents denken met de AI van de workspace.",
         "hintPersonal": "Je agents denken met deze AI.",
         "action": "Koppelen"
@@ -3342,7 +3342,7 @@
   "noAi": {
     "banner": {
       "org": "Je agents hebben nog geen AI.",
-      "orgHint": "Je kunt het ook in de chat vragen, zoals „gebruik mijn Claude-abonnement”.",
+      "orgHint": "Je kunt het ook in de chat vragen, zoals ‘gebruik mijn ChatGPT-abonnement’.",
       "orgAction": "Een AI koppelen"
     },
     "agent": "{{name}} antwoordt niet omdat hij geen AI gekoppeld heeft.",
@@ -3415,7 +3415,7 @@
         "ended": "Ik antwoord hier zodra de workspace zich opnieuw op xquads abonneert."
       },
       "askAdmin": "Ik antwoord hier zodra een beheerder het xquads-abonnement heeft geregeld.",
-      "plan": "Het abonnement brengt de computer van de agents. De AI is die waarvoor je al betaalt: Claude, ChatGPT en andere, of een API-sleutel.",
+      "plan": "Het abonnement levert de computer van de agents. De AI is die waarvoor je al betaalt: ChatGPT, Gemini en meer, of een API-sleutel.",
       "activeTitle": "Abonnement actief",
       "activeLine": "Koppel een AI en {{name}} antwoordt hier.",
       "receipt": "Bewaard",
@@ -10868,7 +10868,7 @@
       "noModel": "Geen model gevonden.",
       "empty": "Nog geen account.",
       "add": "Account toevoegen",
-      "addLine": "Claude, ChatGPT, Gemini en meer, of een API-sleutel",
+      "addLine": "ChatGPT, Gemini en meer, of een API-sleutel",
       "manage": "Accounts beheren",
       "groups": {
         "yours": "Jouw accounts",
@@ -20238,16 +20238,16 @@
         "gil_female": "{{name}} checkt of hij helemaal van ons is"
       },
       "ordering": {
-        "helena": "{{name}} heeft om {{gb}} GB geheugen gevraagd",
-        "helena_female": "{{name}} heeft om {{gb}} GB geheugen gevraagd",
+        "davi": "{{name}} heeft om {{gb}} GB geheugen gevraagd",
+        "davi_female": "{{name}} heeft om {{gb}} GB geheugen gevraagd",
         "rui": "{{name}} heeft een gloednieuwe besteld",
         "rui_female": "{{name}} heeft een gloednieuwe besteld",
         "ana": "{{name}} houdt de bestelling in de gaten",
         "ana_female": "{{name}} houdt de bestelling in de gaten"
       },
       "wiping": {
-        "helena": "{{name}} geeft hem een flinke poetsbeurt",
-        "helena_female": "{{name}} geeft hem een flinke poetsbeurt",
+        "davi": "{{name}} geeft hem een flinke poetsbeurt",
+        "davi_female": "{{name}} geeft hem een flinke poetsbeurt",
         "rui": "{{name}} brengt het afval buiten",
         "rui_female": "{{name}} brengt het afval buiten",
         "gil": "{{name}} checkt of er niets ouds is achtergebleven",
@@ -20256,14 +20256,14 @@
       "starting": {
         "rui": "{{name}} helpt hem op de been",
         "rui_female": "{{name}} helpt hem op de been",
-        "helena": "{{name}} laat de motoren warmdraaien",
-        "helena_female": "{{name}} laat de motoren warmdraaien",
+        "davi": "{{name}} laat de motoren warmdraaien",
+        "davi_female": "{{name}} laat de motoren warmdraaien",
         "ana": "{{name}} heeft de startvlag gezwaaid",
         "ana_female": "{{name}} heeft de startvlag gezwaaid"
       },
       "booting": {
-        "helena": "{{name}} telt alle {{gb}} GB geheugen",
-        "helena_female": "{{name}} telt alle {{gb}} GB geheugen",
+        "davi": "{{name}} telt alle {{gb}} GB geheugen",
+        "davi_female": "{{name}} telt alle {{gb}} GB geheugen",
         "rui": "{{name}} checkt of elk onderdeel er is",
         "rui_female": "{{name}} checkt of elk onderdeel er is",
         "ana": "{{name}} laat hem rustig laden",
@@ -20272,14 +20272,14 @@
       "updating": {
         "gil": "{{name}} haalt de nieuwste updates op",
         "gil_female": "{{name}} haalt de nieuwste updates op",
-        "helena": "{{name}} draait elke schroef aan",
-        "helena_female": "{{name}} draait elke schroef aan",
+        "davi": "{{name}} draait elke schroef aan",
+        "davi_female": "{{name}} draait elke schroef aan",
         "ana": "{{name}} vinkt elke update af",
         "ana_female": "{{name}} vinkt elke update af"
       },
       "restarting": {
-        "helena": "{{name}} zegt dat deze herstart normaal is",
-        "helena_female": "{{name}} zegt dat deze herstart normaal is",
+        "davi": "{{name}} zegt dat deze herstart normaal is",
+        "davi_female": "{{name}} zegt dat deze herstart normaal is",
         "rui": "{{name}} zorgt dat de update blijft hangen",
         "rui_female": "{{name}} zorgt dat de update blijft hangen",
         "ana": "{{name}} telt tot tien",
@@ -20306,12 +20306,12 @@
         "ana_female": "{{name}} zoekt de apps op",
         "gil": "{{name}} pakt de apps uit",
         "gil_female": "{{name}} pakt de apps uit",
-        "helena": "{{name}} legt het gereedschap klaar",
-        "helena_female": "{{name}} legt het gereedschap klaar"
+        "davi": "{{name}} legt het gereedschap klaar",
+        "davi_female": "{{name}} legt het gereedschap klaar"
       },
       "connecting": {
-        "helena": "{{name}} wacht op zijn eerste hallo",
-        "helena_female": "{{name}} wacht op zijn eerste hallo",
+        "davi": "{{name}} wacht op zijn eerste hallo",
+        "davi_female": "{{name}} wacht op zijn eerste hallo",
         "rui": "{{name}} geeft de sleutels af",
         "rui_female": "{{name}} geeft de sleutels af",
         "gil": "{{name}} stelt hem voor aan het team",
@@ -21320,12 +21320,11 @@
       "templatesPersonal": "Kant-en-klare agents bekijken"
     },
     "business": {
-      "agency": "Bureau",
-      "store": "Webwinkel",
-      "clinic": "Kliniek of praktijk",
-      "software": "Software en apps",
-      "support": "Klantenservice",
-      "services": "Dienstverlenend kantoor",
+      "cleaning": "Huisschoonmaak",
+      "painting": "Schilderwerk",
+      "roofing": "Dakwerk",
+      "landscaping": "Tuin en gazon",
+      "remodeling": "Verbouwing en klussen",
       "other": "Iets anders"
     },
     "step": "Vraag {{step}} van {{of}}",
@@ -21567,35 +21566,30 @@
       "sub": "Klanten, facturen en agenda",
       "desc": "Voor freelancers die zelf hun klanten en hun geld beheren."
     },
-    "agency": {
-      "name": "Marketingbureau",
-      "sub": "Content, advertenties en klantenservice",
-      "desc": "Voor een bureau dat de content en campagnes van klanten verzorgt."
+    "cleaning": {
+      "name": "Huisschoonmaak",
+      "sub": "Vaste bezoeken, ploegen en beoordelingen",
+      "desc": "Voor een schoonmaakbedrijf met vaste klanten en ploegen op pad."
     },
-    "store": {
-      "name": "Webwinkel",
-      "sub": "Bestellingen, voorraad en sociale media",
-      "desc": "Voor een winkel die online verkoopt en kopers antwoordt."
+    "painting": {
+      "name": "Schilderwerk",
+      "sub": "Offertes, ploegen en facturen",
+      "desc": "Voor een schildersbedrijf dat elke klus begroot en er een ploeg op afstuurt."
     },
-    "clinic": {
-      "name": "Kliniek of praktijk",
-      "sub": "Afspraken via WhatsApp, facturen en nazorg",
-      "desc": "Voor een kliniek of praktijk die patiënten inplant en opvolgt."
+    "roofing": {
+      "name": "Dakwerk",
+      "sub": "Inspecties, offertes en betalingen",
+      "desc": "Voor een dakdekkersbedrijf dat elke klus inspecteert, begroot en int."
     },
-    "software": {
-      "name": "Software en apps",
-      "sub": "Klantenservice, betalingen en code",
-      "desc": "Voor een bedrijf dat software verkoopt en zijn eigen klanten helpt."
+    "landscaping": {
+      "name": "Tuin en gazon",
+      "sub": "Wekelijkse routes, facturen en beoordelingen",
+      "desc": "Voor een tuin- of gazonbedrijf met wekelijkse bezoeken."
     },
-    "support": {
-      "name": "Klantenservice",
-      "sub": "Klantenwachtrij en antwoordenbank",
-      "desc": "Voor een team dat elke dag veel klanten antwoordt."
-    },
-    "services": {
-      "name": "Dienstverlenend kantoor",
-      "sub": "Boekhouding, advocatuur, advies",
-      "desc": "Voor een kantoor dat klanten inplant, voorstellen stuurt en factureert."
+    "remodeling": {
+      "name": "Verbouwing en klussen",
+      "sub": "Offertes, Engelstalige klanten en facturen",
+      "desc": "Voor een verbouw- of klusbedrijf dat begroot, met klanten praat en elke fase factureert."
     },
     "hello": {
       "lodi": {
@@ -21610,61 +21604,47 @@
       }
     },
     "agents": {
-      "luana": {
-        "role": "Klantenservice",
-        "line": "Beantwoordt klanten via WhatsApp en e-mail. Roept je als ze het niet weet.",
-        "routine": "Samenvatten wat onbeantwoord bleef",
-        "task": "Schrijf een antwoord op dit klantbericht:",
-        "hello": "Hoi {{first}}. Wie via WhatsApp schrijft, laat je aan mij over."
-      },
-      "teo": {
-        "role": "Facturen",
-        "line": "Herinnert wie te laat betaalt en stuurt de herinnering na jouw ok.",
-        "routine": "Opsommen wie te laat betaalt",
-        "task": "Schrijf een vriendelijke betalingsherinnering voor:",
-        "hello": "Hallo. Ik doe de betalingen en stuur pas een herinnering na jouw oké."
-      },
-      "helena": {
-        "role": "Dev",
-        "line": "Lost de bugs op die klanten melden en opent de PR.",
-        "routine": "De nieuwe bugs opsommen",
-        "task": "Vertel me waar ik moet beginnen met deze bug:",
-        "hello": "Hoi. Stuur me de bugs die binnenkomen, ik zoek het uit en open de PR."
-      },
-      "gil": {
-        "role": "Content",
-        "line": "Schrijft posts en scripts in de toon van het bedrijf en plant ze na jouw ok.",
-        "routine": "De posts van de week voorstellen",
-        "task": "Stel drie posts voor deze week voor over:",
-        "hello": "Hoi allemaal. De posts van deze week zijn voor mij."
-      },
       "ana": {
-        "role": "Verkoop",
-        "line": "Volgt iedereen op die een offerte vroeg en schrijft de voorstellen.",
-        "routine": "Opsommen wie een offerte vroeg en geen antwoord kreeg",
-        "task": "Schrijf een korte offerte voor deze aanvraag:",
-        "hello": "Hoi {{first}}. Niemand die om een offerte vraagt, blijft zonder antwoord."
+        "role": "Offertes",
+        "line": "Schrijft offertes op basis van foto's en maten en volgt op wat onbeantwoord bleef.",
+        "routine": "De offertes zonder antwoord opsommen",
+        "task": "Schrijf een offerte op basis van deze foto's en maten:",
+        "hello": "Hoi {{first}}. Stuur me de foto's en maten, dan schrijf ik de offerte."
       },
       "rui": {
         "role": "Agenda",
-        "line": "Plant, bevestigt en verzet afspraken en herinnert klanten de dag ervoor.",
-        "routine": "De afspraken van morgen bevestigen",
-        "task": "Orden deze tijden van morgen:",
-        "hello": "Hallo. De agenda is van mij, en ik herinner klanten de dag ervoor."
+        "line": "Plant bezoeken, bevestigt ze de dag ervoor en verzet ze als een klant dat vraagt.",
+        "routine": "De bezoeken van morgen bevestigen",
+        "task": "Zoek een tijd voor dit bezoek:",
+        "hello": "Hallo. De planning is van mij, en ik bevestig elk bezoek de dag ervoor."
       },
-      "tiago": {
-        "role": "Bestellingen",
-        "line": "Volgt bestellingen en voorraad en waarschuwt wat opraakt.",
-        "routine": "Waarschuwen wat opraakt in de voorraad",
-        "task": "Noem wat er nog moet gebeuren bij deze bestellingen:",
-        "hello": "Ik ben er. Ik hou de bestellingen in de gaten en meld het als de voorraad opraakt."
+      "lia": {
+        "role": "Engels",
+        "line": "Helpt je klanten te schrijven in helder Engels en legt uit wat ze geschreven hebben.",
+        "routine": "De klantberichten zonder antwoord opsommen",
+        "task": "Schrijf dit antwoord aan de klant in het Engels:",
+        "hello": "Hoi {{first}}. Zeg me wat je wilt zeggen, dan schrijf ik het in het Engels."
       },
-      "sofia": {
-        "role": "Antwoordenbank",
-        "line": "Houdt de antwoordenbank bij met wat het team antwoordt.",
-        "routine": "De bank bijwerken met de antwoorden van de week",
-        "task": "Schrijf de antwoorden op deze klantvragen:",
-        "hello": "Hoi. Ik hou de antwoordbank bij met wat het team antwoordt."
+      "teo": {
+        "role": "Facturen",
+        "line": "Stuurt de factuur als een klus klaar is en herinnert wie te laat betaalt, na jouw ok.",
+        "routine": "De achterstallige facturen opsommen",
+        "task": "Schrijf de factuur voor deze klus:",
+        "hello": "Hallo. De facturen zijn van mij, en ik stuur pas een herinnering na jouw oké."
+      },
+      "gil": {
+        "role": "Beoordelingen",
+        "line": "Vraagt tevreden klanten om een Google-beoordeling en schrijft antwoorden op nieuwe beoordelingen.",
+        "routine": "De klussen die vandaag klaar zijn opsommen voor een beoordeling",
+        "task": "Schrijf een verzoek om een beoordeling voor deze klant:",
+        "hello": "Hoi allemaal. Ik vraag elke tevreden klant om een Google-beoordeling."
+      },
+      "davi": {
+        "role": "Ploegen",
+        "line": "Stuurt elke ploeg de klussen, adressen en tijden van de dag en laat je weten als iemand te laat is.",
+        "routine": "Elke ploeg de klussen van de dag sturen",
+        "task": "Verdeel deze klussen over de ploegen:",
+        "hello": "Hoi {{first}}. Elke ploeg krijgt van mij de klussen en adressen voordat de dag begint."
       },
       "marina": {
         "role": "Agenda en herinneringen",
@@ -21722,14 +21702,12 @@
       }
     },
     "channels": {
-      "luana": "support",
-      "teo": "financien",
-      "helena": "eng",
-      "gil": "content",
-      "ana": "verkoop",
+      "ana": "offertes",
       "rui": "agenda",
-      "tiago": "bestellingen",
-      "sofia": "support"
+      "lia": "klanten",
+      "teo": "financien",
+      "gil": "beoordelingen",
+      "davi": "ploegen"
     },
     "skills": {
       "voice": {

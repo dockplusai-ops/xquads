@@ -53,12 +53,12 @@ async function readyWorkspace(path: string, patch: Partial<Machine> = {}) {
 }
 
 /** The app at `path` where the workspace gets its own computer (`setup`), or where people pair theirs (null). */
-/** The seed with the agents the setup's lines name (xquads' handles): Ada as Helena, Atlas as Rui. */
+/** The seed with the agents the setup's lines name (xquads' handles): Ada as Davi, Atlas as Rui. */
 const crewState = () => {
   const state = seedState();
   state.agents = state.agents.map((a) =>
     a.name === "Ada"
-      ? { ...a, name: "Helena", handle: "helena" }
+      ? { ...a, name: "Davi", handle: "davi" }
       : a.name === "Atlas"
         ? { ...a, name: "Rui", handle: "rui" }
         : a,
@@ -279,7 +279,7 @@ describe("no AI yet while the workspace's computer is on its way", () => {
     });
     const { push } = await open(`/org/${ORG_ID}/c/${ENG_ID}`, { step: "installing", secondsLeft: 330 }, state);
     const banner = () => document.querySelector(".noai-banner") as HTMLElement;
-    const ask = "Você também pode pedir no chat, como “usar meu plano do Claude”.";
+    const ask = "Você também pode pedir no chat, como “usar meu plano do ChatGPT”.";
     expect(shownText(banner())).toBe("Os agentes ainda não têm uma\u00a0IA.Conectar uma IA");
     expect(hintOf("Conectar uma IA", banner()).text).toBe(ask);
     await push({ state: "ready", machineId: "00000000-0000-4000-8000-000000000999" });
@@ -500,7 +500,7 @@ describe("Configurações → Computadores: the workspace's own computer", () =>
     expect(shown()).toBe("O Rui está colocando ele de pé");
     expect(card().querySelector(".setup-says")?.getAttribute("aria-hidden")).toBe("true");
     await push({ step: "installing", stage: "booting" });
-    expect(shown()).toBe("A Helena está contando os 8 GB de memória");
+    expect(shown()).toBe("O Davi está contando os 8 GB de memória");
     cleanup();
 
     // Its size said only now, within the same stage: the line shown stays, and the memory's waits for its turn.
@@ -511,7 +511,7 @@ describe("Configurações → Computadores: the workspace's own computer", () =>
     );
     expect(shown()).toBe("O Rui encomendou um novinho");
     await sized.push({ step: "reserving", stage: "ordering" });
-    expect(card().textContent).toContain("A Helena pediu 8 GB de memória");
+    expect(card().textContent).toContain("O Davi pediu 8 GB de memória");
     expect(shown()).toBe("O Rui encomendou um novinho");
     cleanup();
 
@@ -527,7 +527,7 @@ describe("Configurações → Computadores: the workspace's own computer", () =>
       await open(`/org/${ORG_ID}/settings/computers`, { state: "preparing", step: "starting" }, crewState());
       expect(shown()).toBe("O Rui está colocando ele de pé");
       await act(async () => ticks.at(-1)?.());
-      expect(shown()).toBe("A Helena está esquentando os motores");
+      expect(shown()).toBe("O Davi está esquentando os motores");
       await act(async () => ticks.at(-1)?.());
       expect(shown()).toBe("O Rui está colocando ele de pé");
     } finally {

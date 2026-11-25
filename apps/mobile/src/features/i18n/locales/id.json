@@ -2193,7 +2193,7 @@
   },
   "ai": {
     "yourPlan": "Paket AI-mu",
-    "plansSub": "Claude, ChatGPT, Gemini, GLM, dan lainnya",
+    "plansSub": "ChatGPT, Gemini, GLM, dan lainnya",
     "plansFoot": "Agen berpikir dengan paketmu, tanpa perlu kunci API. Paket masuk di komputer agen.",
     "change": "Ganti",
     "how": "Cara menghubungkan",

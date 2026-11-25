@@ -2514,7 +2514,7 @@
   },
   "ai": {
     "yourPlan": "Twój plan AI",
-    "plansSub": "Claude, ChatGPT, Gemini, GLM i inne",
+    "plansSub": "ChatGPT, Gemini, GLM i inne",
     "plansFoot": "Agenci myślą za pomocą twojego planu, bez klucza API. Logowanie odbywa się na komputerze agenta.",
     "change": "Zmień",
     "how": "Jak połączyć",

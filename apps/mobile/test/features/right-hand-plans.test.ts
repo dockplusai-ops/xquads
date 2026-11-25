@@ -19,7 +19,7 @@ test("Connect for it offers every plan the phone offers, ChatGPT's too, and its 
   expect(sheet).not.toContain("claudeCodeOnly");
   expect(sheet).toContain("rightHandOnKey(api, orgId, one, key");
   const steps = source("ConnectAiSteps.tsx");
-  expect(steps).toContain("options={PLAN_CHOICES.map((c) => ({");
+  expect(steps).toContain("options={offeredPlans().map((c) => ({");
 });
 
 test("Sua IA is the one choice, or the call to connect a plan; Doki's settings open with it", () => {

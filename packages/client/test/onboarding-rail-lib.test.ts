@@ -344,32 +344,37 @@ describe("the onboarding's rail (ADR 0162)", () => {
 
   test("step 2's type and sentence are saved together and read back, on any device", () => {
     const words: Record<string, string> = {
-      "teamPlan.business.store": "Loja online",
-      "teamPlan.business.clinic": "Clínica ou consultório",
+      "teamPlan.business.cleaning": "Limpeza de casas",
+      "teamPlan.business.roofing": "Telhados",
     };
     const t = ((key: string) => words[key] ?? key) as TFunction;
-    expect(aboutContext(t, "clinic", " Atendemos com hora marcada ")).toBe(
-      "Clínica ou consultório · Atendemos com hora marcada",
+    expect(aboutContext(t, "roofing", " Atendemos a região de Boston ")).toBe(
+      "Telhados · Atendemos a região de Boston",
     );
-    expect(aboutContext(t, "store", "")).toBe("Loja online");
-    expect(aboutContext(t, "other", "Roupas sob medida")).toBe("Roupas sob medida");
+    expect(aboutContext(t, "cleaning", "")).toBe("Limpeza de casas");
+    expect(aboutContext(t, "other", "Limpeza de piscinas")).toBe("Limpeza de piscinas");
     expect(aboutContext(t, null, "")).toBe("");
-    expect(aboutOf(t, "Clínica ou consultório · Atendemos com hora marcada")).toEqual({
-      business: "clinic",
-      line: "Atendemos com hora marcada",
+    expect(aboutOf(t, "Telhados · Atendemos a região de Boston")).toEqual({
+      business: "roofing",
+      line: "Atendemos a região de Boston",
     });
-    expect(aboutOf(t, "Loja online")).toEqual({ business: "store", line: "" });
+    expect(aboutOf(t, "Limpeza de casas")).toEqual({ business: "cleaning", line: "" });
     // A sentence alone (Outra coisa, or written in Configurações): no type, the whole sentence.
-    expect(aboutOf(t, "Lojas online de roupas")).toEqual({ business: null, line: "Lojas online de roupas" });
+    expect(aboutOf(t, "Limpeza de escritórios")).toEqual({ business: null, line: "Limpeza de escritórios" });
+    // The words of a type an older list had: the whole sentence, with no type picked.
+    expect(aboutOf(t, "Loja online · Vendemos cerâmica")).toEqual({
+      business: null,
+      line: "Loja online · Vendemos cerâmica",
+    });
   });
 
   test("the team step's template: the one picked, else the business's, else the first", () => {
-    const list = [{ id: "agency" }, { id: "store" }];
-    expect(templateFor(list, null, "store")?.id).toBe("store");
-    expect(templateFor(list, "agency", "store")?.id).toBe("agency");
-    expect(templateFor(list, null, "other")?.id).toBe("agency");
-    expect(templateFor(list, null, null)?.id).toBe("agency");
-    expect(templateFor([], null, "store")).toBeUndefined();
+    const list = [{ id: "cleaning" }, { id: "roofing" }];
+    expect(templateFor(list, null, "roofing")?.id).toBe("roofing");
+    expect(templateFor(list, "cleaning", "roofing")?.id).toBe("cleaning");
+    expect(templateFor(list, null, "other")?.id).toBe("cleaning");
+    expect(templateFor(list, null, null)?.id).toBe("cleaning");
+    expect(templateFor([], null, "roofing")).toBeUndefined();
   });
 
   test("where it opens: #general once paid or done, its right hand's DM when the plan was left", () => {

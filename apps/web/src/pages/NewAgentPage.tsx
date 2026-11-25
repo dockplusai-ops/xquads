@@ -2,6 +2,7 @@ import type { Agent, AgentAudience } from "@agenteschat/client";
 import {
   useAiAccounts,
   useAllAgents,
+  useAuthConfig,
   useBrainMachines,
   useCatalog,
   useChannels,
@@ -376,6 +377,7 @@ function NewAgentFlow({ channelId = null }: { channelId?: string | null }) {
   );
   const usable = useMemo(() => usableModels(choices), [choices]);
   const held = usePlanHold() !== null;
+  const plans = useAuthConfig().data?.planSignIns;
   // "Quem pensa": what the agent's page offers, every plan on every computer that runs it, in one list.
   const brainOptions = useMemo(
     () =>
@@ -385,8 +387,9 @@ function NewAgentFlow({ channelId = null }: { channelId?: string | null }) {
         accounts: aiAccounts.data?.accounts ?? [],
         ownerIsMe: owner === me.user.id,
         held,
+        plans,
       }),
-    [t, locale, choices, brainMachines.data, aiAccounts.data, owner, me.user.id, held],
+    [t, locale, choices, brainMachines.data, aiAccounts.data, owner, me.user.id, held, plans],
   );
   const taken = useMemo(() => takenHandles(agents.data ?? [], members.data ?? []), [agents.data, members.data]);
 

@@ -13,7 +13,7 @@ import { brainTool, cliCommandWayOut, installableCli } from "@agenteschat/client
 import {
   type AiChoice,
   kindOf,
-  PLAN_CHOICES,
+  offeredPlans,
   type PlanChoice,
   planLabel,
   planMark,
@@ -117,9 +117,11 @@ interface Adding {
   also?: MachineAccount;
 }
 
-/** "Adicionar conta": the three most used AIs first, the other plans folded under one line, an API key last. */
-const ADD_FIRST: readonly PlanChoice[] = ["claude", "chatgpt", "gemini"];
-const ADD_MORE = PLAN_CHOICES.filter((c) => !ADD_FIRST.includes(c));
+/** "Adicionar conta": the three most used AIs offered first, the other plans folded under one line, an API key last. */
+const addPlans = () => {
+  const offered = offeredPlans();
+  return { first: offered.slice(0, 3), more: offered.slice(3) };
+};
 /** The accounts that sign in on their maker's page in the browser (a key's plan takes the key pasted instead). */
 const BROWSER_SIGN_IN: readonly MachineAccountKind[] = ["claude_code", "codex", "antigravity", "cursor", "grok"];
 
@@ -864,7 +866,7 @@ function BrainFlow({
             </SettingNote>
           )}
           <div className="bd-lines bd-lines--add">
-            {plansAdd && ADD_FIRST.map((c) => line(c))}
+            {plansAdd && addPlans().first.map((c) => line(c))}
             {plansAdd && (
               <BrainLine
                 label={t("agentPage.work.brain.add.others")}
@@ -874,7 +876,7 @@ function BrainFlow({
                     ? undefined
                     : namesText(
                         t,
-                        ADD_MORE.map((c) => planLabel(t, c)),
+                        addPlans().more.map((c) => planLabel(t, c)),
                         2,
                       )
                 }
@@ -886,7 +888,7 @@ function BrainFlow({
             )}
             {plansAdd && (
               <div id="bd-add-more" className="bd-lines__group">
-                {othersOpen && ADD_MORE.map((c) => line(c, true))}
+                {othersOpen && addPlans().more.map((c) => line(c, true))}
               </div>
             )}
             {keysAdd && (

@@ -42,12 +42,13 @@ import {
   catchUp,
   dimmedLine,
   type ExistingSignIn,
+  firstPlan,
   freePlanAccount,
   gateDims,
   gateLine,
   kindOf,
+  offeredPlans,
   ownSignInFor,
-  PLAN_CHOICES,
   type PlanChoice,
   type PlanGate,
   planGate,
@@ -225,7 +226,7 @@ export function AiPicker({
 }) {
   const { t } = useTranslation();
   // Back from the key, the plan it left.
-  const lastPlan = useRef<PlanChoice>("claude");
+  const lastPlan = useRef<PlanChoice>(firstPlan());
   if (choice && choice !== "key") lastPlan.current = choice;
   return (
     // biome-ignore lint/a11y/useSemanticElements: rows and selects, not a native fieldset
@@ -251,7 +252,7 @@ export function AiPicker({
           value={choice ?? undefined}
           onValueChange={onPick}
           matches={(o, q) => matchesWords(planPickText(t, o.value), q)}
-          options={PLAN_CHOICES.map((c) => ({
+          options={offeredPlans().map((c) => ({
             value: c,
             label: planLabel(t, c),
             leading: <ProviderLogo id={planMark(c)} size="xs" off={dims?.(c)} />,

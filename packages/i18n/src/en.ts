@@ -1065,17 +1065,17 @@ export const en = {
         build: "Build an avatar",
         edit: "Edit avatar",
         upload: "Upload a photo",
-        area: "What do you work on?",
+        area: "What's your role?",
         areaHint: "Optional. Just so we know who uses xquads.",
       },
       area: {
         options: {
-          dev: "Development",
+          owner: "Owner or manager",
+          sales: "Sales and estimates",
+          office: "Office and scheduling",
+          field: "Field and crews",
+          finance: "Billing and finance",
           marketing: "Marketing",
-          sales: "Sales",
-          finance: "Finance",
-          ops: "Operations",
-          support: "Customer support",
           other: "Something else",
         },
       },
@@ -3175,7 +3175,7 @@ export const en = {
       connect: {
         title: "Connect an AI for the team",
         titlePersonal: "Connect an AI for your agents",
-        text: "Sign in with your Claude or ChatGPT plan, no API key needed.",
+        text: "Sign in with your ChatGPT plan, or use an API key.",
         /** Behind the card's ⓘ. */
         hint: "The agents think with the workspace's AI.",
         hintPersonal: "Your agents think with this AI.",
@@ -3638,7 +3638,7 @@ export const en = {
   noAi: {
     banner: {
       org: "Your agents don't have an AI\u00a0yet.",
-      orgHint: "You can also ask in the chat, like “use my Claude plan”.",
+      orgHint: "You can also ask in the chat, like “use my ChatGPT plan”.",
       orgAction: "Connect an AI",
     },
     agent: "{{name}} won't reply because he has no AI\u00a0connected.",
@@ -3722,7 +3722,7 @@ export const en = {
       /** The same for whoever can't pay. */
       askAdmin: "I'll answer here once an admin sorts out the xquads plan.",
       /** Behind the card's ⓘ on a first plan. */
-      plan: "The plan brings the agents' computer. The AI is the one you already pay for: Claude, ChatGPT and more, or an API key.",
+      plan: "The plan brings the agents' computer. The AI is the one you already pay for: ChatGPT, Gemini and more, or an API key.",
       /** The hold lifted: the plan is paid, an AI is what's left. */
       activeTitle: "Plan active",
       activeLine: "Connect an AI and {{name}} answers here.",
@@ -11291,7 +11291,7 @@ export const en = {
       empty: "No account yet.",
       /** The account list's foot, under every row. */
       add: "Add account",
-      addLine: "Claude, ChatGPT, Gemini and more, or an API key",
+      addLine: "ChatGPT, Gemini and more, or an API key",
       manage: "Manage accounts",
       groups: {
         yours: "Your accounts",
@@ -20899,32 +20899,32 @@ export const en = {
         gil: "{{name}} is checking it's all ours",
       },
       ordering: {
-        helena: "{{name}} asked for {{gb}} GB of memory",
+        davi: "{{name}} asked for {{gb}} GB of memory",
         rui: "{{name}} ordered a brand new one",
         ana: "{{name}} is keeping an eye on the order",
       },
       wiping: {
-        helena: "{{name}} is giving it a good scrub",
+        davi: "{{name}} is giving it a good scrub",
         rui: "{{name}} is taking out the trash",
         gil: "{{name}} is checking nothing old is left",
       },
       starting: {
         rui: "{{name}} is getting it on its feet",
-        helena: "{{name}} is warming up the engines",
+        davi: "{{name}} is warming up the engines",
         ana: "{{name}} waved the starting flag",
       },
       booting: {
-        helena: "{{name}} is counting all {{gb}} GB of memory",
+        davi: "{{name}} is counting all {{gb}} GB of memory",
         rui: "{{name}} is checking every part is there",
         ana: "{{name}} is letting it load in peace",
       },
       updating: {
         gil: "{{name}} is fetching the latest updates",
-        helena: "{{name}} is tightening every screw",
+        davi: "{{name}} is tightening every screw",
         ana: "{{name}} is ticking off each update",
       },
       restarting: {
-        helena: "{{name}} says this restart is normal",
+        davi: "{{name}} says this restart is normal",
         rui: "{{name}} is making the update stick",
         ana: "{{name}} is counting to ten",
       },
@@ -20941,10 +20941,10 @@ export const en = {
       installing: {
         ana: "{{name}} is looking for the apps",
         gil: "{{name}} is unpacking the apps",
-        helena: "{{name}} is laying out the tools",
+        davi: "{{name}} is laying out the tools",
       },
       connecting: {
-        helena: "{{name}} is waiting for its first hello",
+        davi: "{{name}} is waiting for its first hello",
         rui: "{{name}} is handing over the keys",
         gil: "{{name}} is introducing it to the team",
       },
@@ -21972,12 +21972,11 @@ export const en = {
       templatesPersonal: "See ready agents",
     },
     business: {
-      agency: "Agency",
-      store: "Online store",
-      clinic: "Clinic or practice",
-      software: "Software and apps",
-      support: "Customer service",
-      services: "Services office",
+      cleaning: "House cleaning",
+      painting: "Painting",
+      roofing: "Roofing",
+      landscaping: "Landscaping and lawn care",
+      remodeling: "Remodeling and handyman",
       other: "Something else",
     },
     step: "Question {{step}} of {{of}}",
@@ -22245,35 +22244,30 @@ export const en = {
       sub: "Clients, invoices and calendar",
       desc: "For freelancers who look after their own clients and money.",
     },
-    agency: {
-      name: "Marketing agency",
-      sub: "Content, ads and customer service",
-      desc: "For an agency that runs its clients' content and campaigns.",
+    cleaning: {
+      name: "House cleaning",
+      sub: "Recurring visits, crews and reviews",
+      desc: "For a cleaning company with recurring customers and crews on the road.",
     },
-    store: {
-      name: "Online store",
-      sub: "Orders, stock and social media",
-      desc: "For a store that sells online and answers its buyers.",
+    painting: {
+      name: "Painting",
+      sub: "Estimates, crews and invoices",
+      desc: "For a painting company that quotes each job and sends a crew to do it.",
     },
-    clinic: {
-      name: "Clinic or practice",
-      sub: "Bookings on WhatsApp, billing and follow-ups",
-      desc: "For a clinic or practice that books patients and follows up with them.",
+    roofing: {
+      name: "Roofing",
+      sub: "Inspections, estimates and payments",
+      desc: "For a roofing company that inspects, quotes and collects on each job.",
     },
-    software: {
-      name: "Software and apps",
-      sub: "Customer care, billing and code",
-      desc: "For a company that sells software and looks after its own customers.",
+    landscaping: {
+      name: "Landscaping and lawn care",
+      sub: "Weekly routes, invoices and reviews",
+      desc: "For a landscaping or lawn care company with weekly visits.",
     },
-    support: {
-      name: "Customer service",
-      sub: "Customer queue and answer base",
-      desc: "For a team that answers many customers every day.",
-    },
-    services: {
-      name: "Services office",
-      sub: "Accounting, law, consulting",
-      desc: "For an office that books clients, sends proposals and bills them.",
+    remodeling: {
+      name: "Remodeling and handyman",
+      sub: "Estimates, customers in English and invoices",
+      desc: "For a remodeling or handyman company that quotes, talks to customers and bills each stage.",
     },
     /** The team's hello in #general once it can work (ADR 0162): Doki's line, then each agent's. */
     hello: {
@@ -22290,61 +22284,47 @@ export const en = {
       },
     },
     agents: {
-      luana: {
-        role: "Customer service",
-        line: "Answers customers on WhatsApp and email. Calls you when she doesn't know.",
-        routine: "Sum up what was left unanswered",
-        task: "Write a reply to this customer message:",
-        hello: "Hi, {{first}}. Leave whoever writes on WhatsApp to me.",
-      },
-      teo: {
-        role: "Billing",
-        line: "Reminds whoever is late on payment and sends the reminder after your ok.",
-        routine: "List who is late on payment",
-        task: "Write a friendly payment reminder for:",
-        hello: "Hello. I'll handle billing and only send reminders after your ok.",
-      },
-      helena: {
-        role: "Dev",
-        line: "Fixes the bugs customers report and opens the PR.",
-        routine: "List the new bugs",
-        task: "Tell me where to start looking at this bug:",
-        hello: "Hi. Send me the bugs that come in, I'll dig in and open the PR.",
-      },
-      gil: {
-        role: "Content",
-        line: "Writes posts and scripts in the company's voice and schedules them after your ok.",
-        routine: "Propose the week's posts",
-        task: "Suggest three posts for this week about:",
-        hello: "Hi, everyone. This week's posts are on me.",
-      },
       ana: {
-        role: "Sales",
-        line: "Follows up on everyone who asked for a quote and writes the proposals.",
-        routine: "List who asked for a quote and got no answer",
-        task: "Write a short quote for this request:",
-        hello: "Hi, {{first}}. Nobody who asks for a quote will go unanswered.",
+        role: "Quotes",
+        line: "Writes estimates from photos and measurements and follows up on the ones with no answer.",
+        routine: "List the estimates with no answer",
+        task: "Write an estimate from these photos and measurements:",
+        hello: "Hi, {{first}}. Send me the photos and measurements, and I'll write the estimate.",
       },
       rui: {
         role: "Scheduling",
-        line: "Books, confirms and moves appointments, and reminds clients the day before.",
-        routine: "Confirm tomorrow's appointments",
-        task: "Organize tomorrow's schedule:",
-        hello: "Hello. The calendar is mine, and I'll remind clients the day before.",
+        line: "Books visits, confirms them the day before and moves them when a customer asks.",
+        routine: "Confirm tomorrow's visits",
+        task: "Find a time for this visit:",
+        hello: "Hello. The schedule is mine, and I'll confirm every visit the day before.",
       },
-      tiago: {
-        role: "Orders",
-        line: "Follows orders and stock and warns what is running out.",
-        routine: "Warn what is running out in stock",
-        task: "List what's left to do on these orders:",
-        hello: "I'm here. I'll watch the orders and tell you if stock runs low.",
+      lia: {
+        role: "English",
+        line: "Helps you write to customers in clear English and explains what they wrote.",
+        routine: "List the customer messages waiting for an answer",
+        task: "Write this reply to the customer in English:",
+        hello: "Hi, {{first}}. Tell me what you want to say, and I'll write it in English.",
       },
-      sofia: {
-        role: "Answer base",
-        line: "Keeps the answer base up to date with what the team answers.",
-        routine: "Update the base with the week's answers",
-        task: "Write answers to these customer questions:",
-        hello: "Hi. I'll keep the answer base up to date with what the team says.",
+      teo: {
+        role: "Billing",
+        line: "Sends the invoice when a job is done and reminds whoever is late, after your ok.",
+        routine: "List the overdue invoices",
+        task: "Write the invoice for this job:",
+        hello: "Hello. Invoices are mine, and I only send reminders after your ok.",
+      },
+      gil: {
+        role: "Reviews",
+        line: "Asks happy customers for a Google review and drafts replies to new reviews.",
+        routine: "List today's finished jobs to ask for a review",
+        task: "Write a review request for this customer:",
+        hello: "Hi, everyone. I'll ask every happy customer for a Google review.",
+      },
+      davi: {
+        role: "Crew",
+        line: "Sends each crew its jobs, addresses and times for the day and tells you when someone is running late.",
+        routine: "Send each crew its jobs for the day",
+        task: "Split these jobs among the crews:",
+        hello: "Hi, {{first}}. Each crew gets its jobs and addresses from me before the day starts.",
       },
       marina: {
         role: "Calendar and reminders",
@@ -22402,14 +22382,12 @@ export const en = {
       },
     },
     channels: {
-      luana: "support",
-      teo: "billing",
-      helena: "eng",
-      gil: "content",
-      ana: "sales",
+      ana: "quotes",
       rui: "schedule",
-      tiago: "orders",
-      sofia: "support",
+      lia: "customers",
+      teo: "billing",
+      gil: "reviews",
+      davi: "crew",
     },
     skills: {
       voice: {

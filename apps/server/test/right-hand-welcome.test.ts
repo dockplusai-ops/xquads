@@ -41,7 +41,9 @@ test("who joins finds one greeting in their own conversation with the right hand
     body: "Você acabou de entrar na Acme. **Do que você cuida por aqui?** Me conta e eu monto seu primeiro agente com você.",
     meta: { bodyCode: "welcome_member", bodyParams: { org: "Acme" } },
   });
-  expect(messages[0]?.meta?.replyChips).toMatchObject({ choices: expect.arrayContaining(["Marketing", "Vendas"]) });
+  expect(messages[0]?.meta?.replyChips).toMatchObject({
+    choices: expect.arrayContaining(["Marketing", "Vendas e orçamentos"]),
+  });
   // The owner was told nothing and cannot open that conversation.
   expect(await dmsOf(owner, orgId)).toEqual([]);
   expect((await owner(`${org}/channels/${dm?.channelId}/messages`)).status).not.toBe(200);

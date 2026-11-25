@@ -437,20 +437,18 @@ export function firstRunRow(
  * for the apps a team just made would use (`firstRunApps`).
  */
 const TEMPLATE_ROLES: Record<string, RoleId> = {
-  luana: "support",
-  teo: "billing",
-  helena: "dev",
-  gil: "reviews",
   ana: "quotes",
   rui: "schedule",
-  tiago: "ops",
-  sofia: "support",
+  lia: "english",
+  teo: "billing",
+  gil: "reviews",
+  davi: "crew",
 };
 
-/** A template handle without its taken-name suffix (`luana-2` is Luana's). */
+/** A template handle without its taken-name suffix (`ana-2` is Ana's). */
 const templateHandle = (handle: string) => handle.replace(/-\d+$/, "");
 
-/** A team agent's role, by its own role or its template handle (`luana-2` is Luana's). */
+/** A team agent's role, by its own role or its template handle (`ana-2` is Ana's). */
 export const teamRole = (a: Pick<Agent, "handle" | "setup">): RoleId | null =>
   setupRole(a.setup) ?? TEMPLATE_ROLES[templateHandle(a.handle)] ?? null;
 

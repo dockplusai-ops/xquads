@@ -461,12 +461,18 @@ describe("the team card", () => {
       visibility: "private",
       createdByUserId: f.owner.id,
     });
+    await f.db.insert(schema.channels).values({
+      orgId: f.org.id,
+      name: "cobrancas",
+      visibility: "private",
+      createdByUserId: f.owner.id,
+    });
     const ctx = await lodiRun(f, member.id, "monta o time");
     const out = await call(f, ctx, PROPOSE_TEAM_TOOL, { ...TEAM, weekly_check: false });
     expect(out.isError).toBe(true);
     expect(out.content).toContain("#financeiro");
     const templates = await listTeamTemplates({ db: f.db }, member.id, f.org.id, "pt-BR");
-    expect(templates.find((t) => t.id === "software")?.team.agents[1]?.channel).toBe("financeiro-2");
+    expect(templates.find((t) => t.id === "roofing")?.team.agents[2]?.channel).toBe("cobrancas-2");
   });
 
   test("Descartar closes it for good", async () => {
@@ -486,39 +492,42 @@ describe("the team card", () => {
 });
 
 describe("team templates", () => {
-  test("six, in the person's language, each a team its card would propose", async () => {
+  test("five trades, in the person's language, each a team its card would propose", async () => {
     f = await setup({ rightHand: true });
     const list = await listTeamTemplates({ db: f.db }, f.owner.id, f.org.id, "pt-BR");
     expect(list.map((t) => t.id)).toEqual([...BUSINESS_TEMPLATES]);
     expect(TEAM_TEMPLATES).toEqual([...BUSINESS_TEMPLATES, ...PERSONAL_TEMPLATES]);
-    const software = list.find((t) => t.id === "software");
-    expect(software?.name).toBe("Software e apps");
-    expect(software?.team.agents.map((a) => [a.name, a.channel])).toEqual([
-      ["Luana", "atendimento"],
-      ["Téo", "financeiro"],
-      ["Helena", "eng"],
+    const roofing = list.find((t) => t.id === "roofing");
+    expect(roofing?.name).toBe("Telhados");
+    expect(roofing?.team.agents.map((a) => [a.name, a.channel])).toEqual([
+      ["Ana", "orcamentos"],
+      ["Rui", "agenda"],
+      ["Téo", "cobrancas"],
+      ["Davi", "equipe"],
     ]);
-    expect(software?.team.weekly).not.toBeNull();
-    expect(software?.team.skills.map((s) => s.title)).toEqual(["Tom de voz", "Régua de cobrança"]);
+    expect(roofing?.team.weekly).not.toBeNull();
+    expect(roofing?.team.skills.map((s) => s.title)).toEqual(["Roteiro de proposta", "Regras da agenda"]);
     const en = await listTeamTemplates({ db: f.db }, f.owner.id, f.org.id, "en");
-    expect(en.find((t) => t.id === "software")?.team.agents[0]?.channel).toBe("support");
+    expect(en.find((t) => t.id === "roofing")?.team.agents[0]?.channel).toBe("quotes");
   });
 
   test("Criar o time makes the template's team in one call: its card reads created, with no question after", async () => {
     f = await setup({ rightHand: true });
     // What the conversation hears: the card once, already made, so no other device shows it open for a moment.
-    const heard: { type: string; message?: { meta: Record<string, unknown> } }[] = [];
+    const heard: { type: string; messageId?: string; message?: { meta: Record<string, unknown> } }[] = [];
     const pubsub = { ...f.pubsub, publish: async (_topic: string, e: unknown) => void heard.push(e as never) };
-    const used = await useTeamTemplate({ db: f.db, pubsub }, f.owner.id, f.org.id, "clinic", "pt-BR");
+    const used = await useTeamTemplate({ db: f.db, pubsub }, f.owner.id, f.org.id, "cleaning", "pt-BR");
     expect(used).toMatchObject({ state: "created", error: null });
     const announced = heard.filter((e) => e.type === "message.created");
     expect(announced).toHaveLength(1);
-    expect(announced[0]?.message?.meta.actionCard).toMatchObject({ state: "created" });
+    // A card of four agents is too large to ride along: it goes by its id, read once it is already made.
+    expect(announced[0]?.messageId).toBe(used.messageId);
+    if (announced[0]?.message) expect(announced[0].message.meta.actionCard).toMatchObject({ state: "created" });
     const card = await cardOf(f, used.messageId);
-    expect(card.params.template).toBe("clinic");
+    expect(card.params.template).toBe("cleaning");
     expect(card.state).toBe("created");
-    expect(card.params.agents.map((a) => a.name)).toEqual(["Rui", "Téo", "Luana"]);
-    expect(card.created?.agentIds).toHaveLength(3);
+    expect(card.params.agents.map((a) => a.name)).toEqual(["Rui", "Ana", "Gil", "Davi"]);
+    expect(card.created?.agentIds).toHaveLength(4);
     const rows = await f.db.select().from(schema.messages).where(eq(schema.messages.channelId, used.channelId));
     expect(rows.some((m) => m.meta.replyChips)).toBe(false);
     expect(rows.filter((m) => m.authorType === "agent")).toHaveLength(1);

@@ -55,22 +55,23 @@ const hellos = async () => {
     .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())
     .map((m) => ({ name: names.get(m.agentId ?? ""), body: m.body }));
 };
-const makeStore = () => useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "store", "pt-BR");
+const makeCleaning = () => useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "cleaning", "pt-BR");
 
 describe("after the first plan", () => {
   test("Doki, then each template agent in order, one line each in #general, with no run and no notification", async () => {
     f = await setup({ rightHand: true });
     await hold("payment");
-    await makeStore();
+    await makeCleaning();
     // On the hold nobody greets yet.
     expect(await helloJobs()).toHaveLength(0);
     await hold(null);
     await drainInTime();
     expect(await hellos()).toEqual([
       { name: "Doki", body: "Plano ativo. Vamos começar o trabalho." },
-      { name: "Luana", body: "Oi, ana. Deixa comigo quem escrever no WhatsApp." },
-      { name: "Tiago", body: "Cheguei. Fico de olho nos pedidos e aviso se faltar algo no estoque." },
-      { name: "Gil", body: "Oi, pessoal. Os posts da semana ficam comigo." },
+      { name: "Rui", body: "Olá. A agenda fica comigo, e confirmo cada visita na véspera." },
+      { name: "Ana", body: "Oi, ana. Me mande as fotos e as medidas que eu escrevo o orçamento." },
+      { name: "Gil", body: "Oi, pessoal. Vou pedir uma avaliação no Google a cada cliente satisfeito." },
+      { name: "Davi", body: "Oi, ana. Cada equipe recebe de mim os serviços e endereços antes do dia começar." },
     ]);
     // The team is in #general, answering there only when called; the right hand stays in no channel.
     const seats = await f.db
@@ -82,7 +83,7 @@ describe("after the first plan", () => {
       .from(schema.agents)
       .where(eq(schema.agents.orgId, f.org.id));
     const seat = (name: string) => seats.find((s) => s.agentId === team.find((a) => a.name === name)?.id);
-    expect(seat("Luana")?.autoReply).toBe(false);
+    expect(seat("Rui")?.autoReply).toBe(false);
     expect(seat("Gil")?.autoReply).toBe(false);
     expect(seat("Doki")).toBeUndefined();
     expect(await f.db.select().from(schema.agentRuns)).toHaveLength(0);
@@ -101,22 +102,24 @@ describe("after the first plan", () => {
       .set({ revokedAt: new Date() })
       .where(eq(schema.providerCredentials.orgId, f.org.id));
     await hold("payment");
-    await makeStore();
+    await makeCleaning();
     await hold(null);
     await drainInTime();
     expect((await hellos()).map((h) => h.body)).toEqual([
       "Plano ativo. Conecte uma IA e a gente começa o trabalho.",
-      "Oi, ana. Deixa comigo quem escrever no WhatsApp.",
-      "Cheguei. Fico de olho nos pedidos e aviso se faltar algo no estoque.",
-      "Oi, pessoal. Os posts da semana ficam comigo.",
+      "Olá. A agenda fica comigo, e confirmo cada visita na véspera.",
+      "Oi, ana. Me mande as fotos e as medidas que eu escrevo o orçamento.",
+      "Oi, pessoal. Vou pedir uma avaliação no Google a cada cliente satisfeito.",
+      "Oi, ana. Cada equipe recebe de mim os serviços e endereços antes do dia começar.",
     ]);
   });
 
   test("the team made at once keeps its template's order in the agents' list, as every screen lists it", async () => {
     f = await setup({ rightHand: true });
-    await makeStore();
+    await makeCleaning();
     const names = (await listAgents(f.db, f.owner.id, f.org.id)).map((a) => a.name);
-    expect(names.filter((n) => ["Luana", "Tiago", "Gil"].includes(n))).toEqual(["Luana", "Tiago", "Gil"]);
+    const team = ["Rui", "Ana", "Gil", "Davi"];
+    expect(names.filter((n) => team.includes(n))).toEqual(team);
     expect(names[0]).toBe("Doki");
   });
 
@@ -139,20 +142,20 @@ describe("after the first plan", () => {
   test("an agent someone already put in #general keeps the auto-reply they gave it", async () => {
     f = await setup({ rightHand: true });
     await hold("payment");
-    await makeStore();
-    const [iara] = await f.db
+    await makeCleaning();
+    const [rui] = await f.db
       .select({ id: schema.agents.id })
       .from(schema.agents)
-      .where(and(eq(schema.agents.orgId, f.org.id), eq(schema.agents.handle, "luana")));
-    if (!iara) throw new Error("no Luana");
-    await addChannelMember(f.db, f.owner.id, f.org.id, f.general.id, { agentId: iara.id, autoReply: true });
+      .where(and(eq(schema.agents.orgId, f.org.id), eq(schema.agents.handle, "rui")));
+    if (!rui) throw new Error("no Rui");
+    await addChannelMember(f.db, f.owner.id, f.org.id, f.general.id, { agentId: rui.id, autoReply: true });
     await hold(null);
     await drainInTime();
-    expect((await hellos()).map((h) => h.name)).toEqual(["Doki", "Luana", "Tiago", "Gil"]);
+    expect((await hellos()).map((h) => h.name)).toEqual(["Doki", "Rui", "Ana", "Gil", "Davi"]);
     const [seat] = await f.db
       .select({ autoReply: schema.channelMembers.autoReply })
       .from(schema.channelMembers)
-      .where(and(eq(schema.channelMembers.channelId, f.general.id), eq(schema.channelMembers.agentId, iara.id)));
+      .where(and(eq(schema.channelMembers.channelId, f.general.id), eq(schema.channelMembers.agentId, rui.id)));
     expect(seat?.autoReply).toBe(true);
   });
 
@@ -168,17 +171,19 @@ describe("with no plan to wait for", () => {
   test("a template team says hi as it is made, once, in its maker's language", async () => {
     f = await setup({ rightHand: true });
     await f.db.update(schema.users).set({ locale: "en" }).where(eq(schema.users.id, f.owner.id));
-    await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "support", "en");
+    await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "painting", "en");
     await drainInTime();
     expect(await hellos()).toEqual([
       { name: "Doki", body: "The team is here. Let's get to work." },
-      { name: "Luana", body: "Hi, ana. Leave whoever writes on WhatsApp to me." },
-      { name: "Sofia", body: "Hi. I'll keep the answer base up to date with what the team says." },
+      { name: "Ana", body: "Hi, ana. Send me the photos and measurements, and I'll write the estimate." },
+      { name: "Lia", body: "Hi, ana. Tell me what you want to say, and I'll write it in English." },
+      { name: "Davi", body: "Hi, ana. Each crew gets its jobs and addresses from me before the day starts." },
+      { name: "Téo", body: "Hello. Invoices are mine, and I only send reminders after your ok." },
     ]);
     // A second template team later: the hello was the workspace's start, not each team's.
-    await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "store", "en");
+    await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "roofing", "en");
     await drainLater();
-    expect(await hellos()).toHaveLength(3);
+    expect(await hellos()).toHaveLength(5);
   });
 
   test("an agent made by hand says nothing", async () => {
@@ -189,7 +194,7 @@ describe("with no plan to wait for", () => {
 
   test("a workspace deleted before its lines went out says none", async () => {
     f = await setup({ rightHand: true });
-    await makeStore();
+    await makeCleaning();
     await f.db
       .update(schema.organizations)
       .set({ deletionDueAt: new Date(Date.now() + 7 * 86_400_000) })

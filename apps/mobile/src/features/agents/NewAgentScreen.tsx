@@ -5,6 +5,7 @@ import {
   useAiAccounts,
   useAiHub,
   useApi,
+  useAuthConfig,
   useBrainMachines,
   useCatalog,
   useChannels,
@@ -821,12 +822,14 @@ function ReviewStep({ d }: StepProps) {
   // Or anything else "Quem pensa" offers (the one AI choice), picked in place.
   const aiAccounts = useAiAccounts(orgId, !proposed);
   const held = usePlanHold(orgId, org) !== null;
+  const authConfig = useAuthConfig();
   const brainOptions = brainPickOptions(t, i18n.language, {
     api: choices,
     machines: brainMachines.data ?? [],
     accounts: aiAccounts.data?.accounts ?? [],
     ownerIsMe: true,
     held,
+    plans: authConfig.data?.planSignIns,
   });
   // "Conectar uma IA" from this step (the same screens as Settings, for the agents I create): a plan account that
   // wasn't among the choices when it opened is what the agent thinks with, over a pick made before; nothing new keeps

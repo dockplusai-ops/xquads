@@ -964,17 +964,17 @@
         "build": "Buat avatar",
         "edit": "Ubah avatar",
         "upload": "Unggah foto",
-        "area": "Kamu mengurus bidang apa?",
+        "area": "Apa peranmu?",
         "areaHint": "Opsional. Hanya supaya kami tahu siapa yang memakai xquads."
       },
       "area": {
         "options": {
-          "dev": "Pengembangan",
+          "owner": "Pemilik atau manajer",
+          "sales": "Penjualan dan penawaran harga",
+          "office": "Kantor dan jadwal",
+          "field": "Lapangan dan kru",
+          "finance": "Tagihan dan keuangan",
           "marketing": "Marketing",
-          "sales": "Penjualan",
-          "finance": "Keuangan",
-          "ops": "Operasional",
-          "support": "Layanan pelanggan",
           "other": "Lainnya"
         }
       },
@@ -2827,7 +2827,7 @@
       "connect": {
         "title": "Hubungkan AI untuk tim",
         "titlePersonal": "Hubungkan AI untuk agenmu",
-        "text": "Masuk dengan paket Claude atau ChatGPT Anda, tanpa kunci API.",
+        "text": "Masuk dengan paket ChatGPT Anda, atau gunakan kunci API.",
         "hint": "Agen berpikir dengan AI workspace.",
         "hintPersonal": "Agenmu berpikir dengan AI ini.",
         "action": "Hubungkan"
@@ -3206,7 +3206,7 @@
   "noAi": {
     "banner": {
       "org": "Agenmu belum punya AI.",
-      "orgHint": "Kamu juga bisa meminta di chat, seperti “pakai paket Claude-ku”.",
+      "orgHint": "Anda juga bisa meminta di chat, seperti “pakai paket ChatGPT saya”.",
       "orgAction": "Hubungkan AI"
     },
     "agent": "{{name}} tidak akan membalas karena belum terhubung ke AI.",
@@ -3279,7 +3279,7 @@
         "ended": "Saya akan menjawab di sini setelah workspace berlangganan xquads lagi."
       },
       "askAdmin": "Saya akan menjawab di sini setelah admin membereskan paket xquads.",
-      "plan": "Paket ini membawa komputer agen. AI-nya yang sudah kamu bayar: Claude, ChatGPT dan lainnya, atau kunci API.",
+      "plan": "Paket ini menyediakan komputer agen. AI-nya adalah yang sudah Anda bayar: ChatGPT, Gemini, dan lainnya, atau kunci API.",
       "activeTitle": "Paket aktif",
       "activeLine": "Hubungkan AI dan {{name}} menjawab di sini.",
       "receipt": "Disimpan",
@@ -10444,7 +10444,7 @@
       "noModel": "Tidak ada model yang cocok.",
       "empty": "Belum ada akun.",
       "add": "Tambah akun",
-      "addLine": "Claude, ChatGPT, Gemini, dan lainnya, atau kunci API",
+      "addLine": "ChatGPT, Gemini, dan lainnya, atau kunci API",
       "manage": "Kelola akun",
       "groups": {
         "yours": "Akunmu",
@@ -19539,16 +19539,16 @@
         "gil_female": "{{name}} sedang memastikan semuanya milik kita"
       },
       "ordering": {
-        "helena": "{{name}} meminta memori {{gb}} GB",
-        "helena_female": "{{name}} meminta memori {{gb}} GB",
+        "davi": "{{name}} meminta memori {{gb}} GB",
+        "davi_female": "{{name}} meminta memori {{gb}} GB",
         "rui": "{{name}} memesan yang baru gres",
         "rui_female": "{{name}} memesan yang baru gres",
         "ana": "{{name}} sedang memantau pesanannya",
         "ana_female": "{{name}} sedang memantau pesanannya"
       },
       "wiping": {
-        "helena": "{{name}} sedang menggosoknya sampai bersih",
-        "helena_female": "{{name}} sedang menggosoknya sampai bersih",
+        "davi": "{{name}} sedang menggosoknya sampai bersih",
+        "davi_female": "{{name}} sedang menggosoknya sampai bersih",
         "rui": "{{name}} sedang membuang sampah",
         "rui_female": "{{name}} sedang membuang sampah",
         "gil": "{{name}} sedang memastikan tidak ada sisa yang lama",
@@ -19557,14 +19557,14 @@
       "starting": {
         "rui": "{{name}} sedang membantunya berdiri",
         "rui_female": "{{name}} sedang membantunya berdiri",
-        "helena": "{{name}} sedang memanaskan mesin",
-        "helena_female": "{{name}} sedang memanaskan mesin",
+        "davi": "{{name}} sedang memanaskan mesin",
+        "davi_female": "{{name}} sedang memanaskan mesin",
         "ana": "{{name}} mengibarkan bendera start",
         "ana_female": "{{name}} mengibarkan bendera start"
       },
       "booting": {
-        "helena": "{{name}} sedang menghitung semua {{gb}} GB memori",
-        "helena_female": "{{name}} sedang menghitung semua {{gb}} GB memori",
+        "davi": "{{name}} sedang menghitung semua {{gb}} GB memori",
+        "davi_female": "{{name}} sedang menghitung semua {{gb}} GB memori",
         "rui": "{{name}} sedang memastikan semua bagiannya lengkap",
         "rui_female": "{{name}} sedang memastikan semua bagiannya lengkap",
         "ana": "{{name}} membiarkannya memuat dengan tenang",
@@ -19573,14 +19573,14 @@
       "updating": {
         "gil": "{{name}} sedang mengambil pembaruan terbaru",
         "gil_female": "{{name}} sedang mengambil pembaruan terbaru",
-        "helena": "{{name}} sedang mengencangkan setiap baut",
-        "helena_female": "{{name}} sedang mengencangkan setiap baut",
+        "davi": "{{name}} sedang mengencangkan setiap baut",
+        "davi_female": "{{name}} sedang mengencangkan setiap baut",
         "ana": "{{name}} sedang mencentang setiap pembaruan",
         "ana_female": "{{name}} sedang mencentang setiap pembaruan"
       },
       "restarting": {
-        "helena": "Kata {{name}}, mulai ulang ini normal",
-        "helena_female": "Kata {{name}}, mulai ulang ini normal",
+        "davi": "Kata {{name}}, mulai ulang ini normal",
+        "davi_female": "Kata {{name}}, mulai ulang ini normal",
         "rui": "{{name}} sedang memastikan pembaruannya menempel",
         "rui_female": "{{name}} sedang memastikan pembaruannya menempel",
         "ana": "{{name}} sedang menghitung sampai sepuluh",
@@ -19607,12 +19607,12 @@
         "ana_female": "{{name}} sedang mencari aplikasinya",
         "gil": "{{name}} sedang membongkar aplikasinya",
         "gil_female": "{{name}} sedang membongkar aplikasinya",
-        "helena": "{{name}} sedang menata peralatannya",
-        "helena_female": "{{name}} sedang menata peralatannya"
+        "davi": "{{name}} sedang menata peralatannya",
+        "davi_female": "{{name}} sedang menata peralatannya"
       },
       "connecting": {
-        "helena": "{{name}} sedang menunggu sapaan pertamanya",
-        "helena_female": "{{name}} sedang menunggu sapaan pertamanya",
+        "davi": "{{name}} sedang menunggu sapaan pertamanya",
+        "davi_female": "{{name}} sedang menunggu sapaan pertamanya",
         "rui": "{{name}} sedang menyerahkan kuncinya",
         "rui_female": "{{name}} sedang menyerahkan kuncinya",
         "gil": "{{name}} sedang memperkenalkannya ke tim",
@@ -20576,12 +20576,11 @@
       "templatesPersonal": "Lihat agen siap pakai"
     },
     "business": {
-      "agency": "Agensi",
-      "store": "Toko online",
-      "clinic": "Klinik atau praktik",
-      "software": "Software dan aplikasi",
-      "support": "Layanan pelanggan",
-      "services": "Kantor jasa",
+      "cleaning": "Bersih-bersih rumah",
+      "painting": "Pengecatan",
+      "roofing": "Atap",
+      "landscaping": "Pertamanan dan rumput",
+      "remodeling": "Renovasi dan perbaikan",
       "other": "Lainnya"
     },
     "step": "Pertanyaan {{step}} dari {{of}}",
@@ -20819,35 +20818,30 @@
       "sub": "Klien, tagihan, dan jadwal",
       "desc": "Untuk pekerja lepas yang mengurus klien dan uangnya sendiri."
     },
-    "agency": {
-      "name": "Agensi pemasaran",
-      "sub": "Konten, iklan, dan layanan pelanggan",
-      "desc": "Untuk agensi yang mengelola konten dan kampanye kliennya."
+    "cleaning": {
+      "name": "Bersih-bersih rumah",
+      "sub": "Kunjungan rutin, kru, dan ulasan",
+      "desc": "Untuk usaha bersih-bersih dengan pelanggan tetap dan kru di jalan."
     },
-    "store": {
-      "name": "Toko online",
-      "sub": "Pesanan, stok, dan media sosial",
-      "desc": "Untuk toko yang berjualan online dan melayani pembelinya."
+    "painting": {
+      "name": "Pengecatan",
+      "sub": "Penawaran harga, kru, dan tagihan",
+      "desc": "Untuk usaha pengecatan yang menghitung harga tiap pekerjaan dan mengirim kru untuk mengerjakannya."
     },
-    "clinic": {
-      "name": "Klinik atau praktik",
-      "sub": "Janji temu lewat WhatsApp, tagihan, dan kontrol",
-      "desc": "Untuk klinik atau praktik yang menjadwalkan pasien dan menindaklanjutinya."
+    "roofing": {
+      "name": "Atap",
+      "sub": "Pemeriksaan, penawaran harga, dan pembayaran",
+      "desc": "Untuk usaha atap yang memeriksa, menghitung harga, dan menagih tiap pekerjaan."
     },
-    "software": {
-      "name": "Software dan aplikasi",
-      "sub": "Layanan pelanggan, tagihan, dan kode",
-      "desc": "Untuk perusahaan yang menjual software dan mengurus pelanggannya sendiri."
+    "landscaping": {
+      "name": "Pertamanan dan rumput",
+      "sub": "Rute mingguan, tagihan, dan ulasan",
+      "desc": "Untuk usaha pertamanan atau perawatan rumput dengan kunjungan tiap minggu."
     },
-    "support": {
-      "name": "Layanan dan dukungan",
-      "sub": "Antrean pelanggan dan basis jawaban",
-      "desc": "Untuk tim yang menjawab banyak pelanggan setiap hari."
-    },
-    "services": {
-      "name": "Kantor jasa",
-      "sub": "Akuntansi, hukum, konsultasi",
-      "desc": "Untuk kantor yang menjadwalkan klien, mengirim proposal, dan menagih."
+    "remodeling": {
+      "name": "Renovasi dan perbaikan",
+      "sub": "Penawaran harga, pelanggan berbahasa Inggris, dan tagihan",
+      "desc": "Untuk usaha renovasi atau perbaikan yang menghitung harga, bicara dengan pelanggan, dan menagih tiap tahap."
     },
     "hello": {
       "lodi": {
@@ -20862,61 +20856,47 @@
       }
     },
     "agents": {
-      "luana": {
-        "role": "Layanan pelanggan",
-        "line": "Menjawab pelanggan di WhatsApp dan email. Memanggilmu saat tidak tahu.",
-        "routine": "Merangkum yang belum dijawab",
-        "task": "Tulis balasan untuk pesan pelanggan ini:",
-        "hello": "Hai, {{first}}. Serahkan padaku siapa pun yang menulis lewat WhatsApp."
-      },
-      "teo": {
-        "role": "Penagihan",
-        "line": "Mengingatkan yang terlambat bayar dan mengirim tagihan setelah kamu setuju.",
-        "routine": "Mendaftar siapa yang terlambat bayar",
-        "task": "Tulis pengingat pembayaran yang ramah untuk:",
-        "hello": "Halo. Aku mengurus tagihan dan hanya mengirim pengingat setelah kamu setuju."
-      },
-      "helena": {
-        "role": "Dev",
-        "line": "Memperbaiki bug yang dilaporkan pelanggan dan membuka PR.",
-        "routine": "Mendaftar bug baru",
-        "task": "Beri tahu saya harus mulai dari mana menyelidiki bug ini:",
-        "hello": "Hai. Kirim bug yang masuk ke aku, aku selidiki dan buka PR-nya."
-      },
-      "gil": {
-        "role": "Konten",
-        "line": "Menulis posting dan naskah dengan gaya perusahaan dan menjadwalkannya setelah kamu setuju.",
-        "routine": "Mengusulkan posting minggu ini",
-        "task": "Usulkan tiga posting minggu ini tentang:",
-        "hello": "Hai, semuanya. Postingan minggu ini urusanku."
-      },
       "ana": {
-        "role": "Penjualan",
-        "line": "Menindaklanjuti semua yang meminta penawaran dan menulis proposalnya.",
-        "routine": "Mendaftar siapa yang meminta penawaran dan belum dijawab",
-        "task": "Tulis penawaran singkat untuk permintaan ini:",
-        "hello": "Hai, {{first}}. Tidak ada yang minta penawaran harga dibiarkan tanpa jawaban."
+        "role": "Penawaran harga",
+        "line": "Menulis penawaran harga dari foto dan ukuran, lalu menindaklanjuti yang belum dijawab.",
+        "routine": "Mendaftar penawaran harga yang belum dijawab",
+        "task": "Tulis penawaran harga dari foto dan ukuran ini:",
+        "hello": "Hai, {{first}}. Kirim foto dan ukurannya, nanti aku tulis penawaran harganya."
       },
       "rui": {
         "role": "Jadwal",
-        "line": "Membuat, mengonfirmasi, dan memindahkan janji, dan mengingatkan klien sehari sebelumnya.",
-        "routine": "Mengonfirmasi janji besok",
-        "task": "Atur jadwal besok ini:",
-        "hello": "Halo. Jadwal aku yang pegang, dan aku ingatkan klien sehari sebelumnya."
+        "line": "Membuat jadwal kunjungan, mengonfirmasinya sehari sebelumnya, dan memindahkannya kalau pelanggan minta.",
+        "routine": "Mengonfirmasi kunjungan besok",
+        "task": "Cari waktu untuk kunjungan ini:",
+        "hello": "Halo. Jadwal aku yang pegang, dan aku konfirmasi tiap kunjungan sehari sebelumnya."
       },
-      "tiago": {
-        "role": "Pesanan",
-        "line": "Memantau pesanan dan stok dan memberi tahu yang hampir habis.",
-        "routine": "Memberi tahu stok yang hampir habis",
-        "task": "Daftar yang masih harus dikerjakan pada pesanan ini:",
-        "hello": "Aku datang. Aku pantau pesanan dan memberi tahu kalau stok menipis."
+      "lia": {
+        "role": "Bahasa Inggris",
+        "line": "Membantumu menulis ke pelanggan dalam bahasa Inggris yang jelas dan menjelaskan apa yang mereka tulis.",
+        "routine": "Mendaftar pesan pelanggan yang belum dijawab",
+        "task": "Tulis balasan ini untuk pelanggan dalam bahasa Inggris:",
+        "hello": "Hai, {{first}}. Bilang saja apa yang mau kamu sampaikan, nanti aku tulis dalam bahasa Inggris."
       },
-      "sofia": {
-        "role": "Basis jawaban",
-        "line": "Menjaga basis jawaban tetap sesuai dengan jawaban tim.",
-        "routine": "Memperbarui basis dengan jawaban minggu ini",
-        "task": "Tulis jawaban untuk pertanyaan pelanggan ini:",
-        "hello": "Hai. Aku jaga basis jawaban tetap terbaru dengan jawaban tim."
+      "teo": {
+        "role": "Penagihan",
+        "line": "Mengirim tagihan saat pekerjaan selesai dan mengingatkan yang terlambat bayar, setelah kamu setuju.",
+        "routine": "Mendaftar tagihan yang lewat jatuh tempo",
+        "task": "Tulis tagihan untuk pekerjaan ini:",
+        "hello": "Halo. Tagihan aku yang urus, dan aku hanya mengirim pengingat setelah kamu setuju."
+      },
+      "gil": {
+        "role": "Ulasan",
+        "line": "Meminta ulasan Google dari pelanggan yang puas dan menyiapkan balasan untuk ulasan baru.",
+        "routine": "Mendaftar pekerjaan yang selesai hari ini untuk minta ulasan",
+        "task": "Tulis permintaan ulasan untuk pelanggan ini:",
+        "hello": "Hai, semuanya. Aku akan minta ulasan Google dari setiap pelanggan yang puas."
+      },
+      "davi": {
+        "role": "Kru",
+        "line": "Mengirim ke tiap kru pekerjaan, alamat, dan jam hari itu, dan memberi tahu kamu kalau ada yang terlambat.",
+        "routine": "Mengirim ke tiap kru pekerjaan hari ini",
+        "task": "Bagi pekerjaan ini ke kru-kru:",
+        "hello": "Hai, {{first}}. Tiap kru dapat pekerjaan dan alamatnya dariku sebelum hari dimulai."
       },
       "marina": {
         "role": "Jadwal dan pengingat",
@@ -20974,14 +20954,12 @@
       }
     },
     "channels": {
-      "luana": "layanan",
-      "teo": "keuangan",
-      "helena": "eng",
-      "gil": "konten",
-      "ana": "penjualan",
+      "ana": "penawaran",
       "rui": "jadwal",
-      "tiago": "pesanan",
-      "sofia": "layanan"
+      "lia": "pelanggan",
+      "teo": "keuangan",
+      "gil": "ulasan",
+      "davi": "kru"
     },
     "skills": {
       "voice": {

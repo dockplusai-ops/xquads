@@ -49,8 +49,8 @@ import {
   gateDims,
   gateLine,
   kindOf,
+  offeredPlans,
   ownSignInFor,
-  PLAN_CHOICES,
   type PlanChoice,
   type PlanGate,
   planGate,
@@ -560,7 +560,7 @@ function Home({
   const dimmed = have.flatMap((r) =>
     r.row.kind === "account" && dims(planOfAccount(r.row.choice.login)) ? [planOfAccount(r.row.choice.login)] : [],
   )[0];
-  const noPlan = PLAN_CHOICES.every(dims);
+  const noPlan = offeredPlans().every(dims);
   const layout = haveLayout(have, haveNotes);
   const row = (r: (typeof have)[number]) => (
     <AiRow
@@ -695,7 +695,7 @@ function Plans({ onPlan, dims }: { onPlan: (choice: PlanChoice) => void; dims: (
   const { t } = useTranslation();
   return (
     <PickList
-      options={PLAN_CHOICES.map((c) => ({
+      options={offeredPlans().map((c) => ({
         value: c,
         label: planLabel(t, c),
         description: t(`connectAi.plan.${c}.tiers`),

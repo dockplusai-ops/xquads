@@ -11,6 +11,10 @@ import { createFakeApi, type FakeState, GENERAL_ID, ORG_ID, seedState, withRight
 import { renderApp, screen, settle } from "./render";
 // The step's views load on their own (`TeamSource`'s lazy import): loaded here first, so each test sees them at once.
 import "@/pages/onboarding/TeamSourceBody";
+import { setImportOffered } from "@/pages/onboarding/TeamSource";
+
+// The import in the team step, which xquads hides (`IMPORT_OFFERED`): its tests turn it back on.
+setImportOffered(true);
 
 /*
  * The onboarding's team step asking first whether the agents already live in another app, and bringing them inside the
@@ -41,8 +45,8 @@ const text = () => document.body.textContent ?? "";
 
 const TEMPLATES: TeamTemplate[] = [
   {
-    id: "store",
-    name: "Loja online",
+    id: "cleaning",
+    name: "Limpeza de casas",
     sub: "Pedidos, estoque e redes sociais",
     description: "Para uma loja que vende online.",
     team: {
@@ -86,7 +90,7 @@ const settingUp = (o: { cloud?: boolean; personal?: boolean } = {}) => {
         ...(o.cloud ? { standing: { state: "hold" as const, reason: "payment" } } : {}),
       },
     ];
-  state.context = "Loja online";
+  state.context = "Limpeza de casas";
   state.teamTemplates = TEMPLATES;
   if (o.cloud) {
     state.authConfig = { billingUrl: "https://billing.example.com" };

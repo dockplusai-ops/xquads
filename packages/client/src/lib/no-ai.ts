@@ -349,8 +349,23 @@ export const PLAN_CHOICES: readonly PlanChoice[] = [
   "zen",
   ...PLAN_IDS,
 ];
-/** The plans whose marks stand on the scene over "Conectar uma IA": the three most used. */
-export const SCENE_PLANS = ["claude", "chatgpt", "gemini"] as const satisfies readonly PlanChoice[];
+/**
+ * xquads offers no Claude subscription sign-in: the server keeps `CLAUDE_PLAN_SIGN_INS` off (Anthropic's terms let no
+ * third-party product route agents through those plans), so no picker lists it. An account already signed in still
+ * shows where accounts are listed (`PLAN_CHOICES`).
+ */
+let claudePlanOffered = false;
+/** Tests of the Claude plan's own steps turn it back on. */
+export const setClaudePlanOffered = (on: boolean) => {
+  claudePlanOffered = on;
+};
+/** The plans a picker offers to sign in with, in `PLAN_CHOICES` order. */
+export const offeredPlans = (): readonly PlanChoice[] =>
+  PLAN_CHOICES.filter((c) => claudePlanOffered || c !== "claude");
+/** The plan a picker starts on. */
+export const firstPlan = (): PlanChoice => offeredPlans()[0] ?? "chatgpt";
+/** The plans whose marks stand on the scene over "Conectar uma IA": the three most used that are offered. */
+export const SCENE_PLANS = ["chatgpt", "gemini", "grok"] as const satisfies readonly PlanChoice[];
 /** The account a plan signs in as: ChatGPT's through Codex, Cursor's and OpenCode's through their CLIs; the rest through Claude Code. */
 export const kindOf = (choice: PlanChoice): MachineAccountKind =>
   choice === "chatgpt" || choice === "cursor" || choice === "zen" || choice === "grok" || choice === "gemini"
@@ -766,7 +781,8 @@ export const choiceOfIntent = (intent: ConnectIntent | undefined): AiChoice | nu
 /**
  * The option chosen when the picker opens: what was asked for; the API key for someone who owns no agent but may
  * add keys, or where Claude can't sign in at all (no computer); else the plan the agent it's for thinks
- * with (`plan`, `agentPlan`), else Claude.
+ * with (`plan`, `agentPlan`), else the first plan offered. A Claude plan xquads doesn't offer opens on the key instead
+ * (asked for: Claude thinks with an Anthropic API key) or the first plan offered (an agent on it).
  */
 export function defaultChoice({
   intent,
@@ -782,9 +798,9 @@ export function defaultChoice({
   plan?: PlanChoice | null;
 }): AiChoice {
   const asked = choiceOfIntent(intent);
-  if (asked) return asked;
+  if (asked) return asked === "claude" && !offeredPlans().includes(asked) ? "key" : asked;
   if (!ownsAgents && mayAddKey) return "key";
-  return claudeGate.state === "missing" ? "key" : (plan ?? "claude");
+  return claudeGate.state === "missing" ? "key" : plan && offeredPlans().includes(plan) ? plan : firstPlan();
 }
 
 /** "For which agent": the one asked for, else the first with no AI, else the first. */

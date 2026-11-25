@@ -9,8 +9,12 @@ import { can } from "./permissions";
  * under its questions (each one the person's own message), and what the team card counts and lists.
  */
 
-/** What the business does, the first run's row 1 (ADR 0155 §6): `other` asks for a sentence. */
-export const BUSINESS_TYPES = ["agency", "store", "clinic", "software", "support", "services", "other"] as const;
+/**
+ * What the business does, the first run's row 1 (ADR 0155 §6): the home-services trades, `other` asks for a sentence.
+ * A workspace's context keeps a type's words, not its id (`aboutContext`), so the words of a type no longer listed
+ * read back as the sentence alone (`aboutOf`).
+ */
+export const BUSINESS_TYPES = ["cleaning", "painting", "roofing", "landscaping", "remodeling", "other"] as const;
 export type BusinessType = (typeof BUSINESS_TYPES)[number];
 /** Every business type but `other` is a team template's id too (the server's `BUSINESS_TEMPLATES`). */
 export const isTemplateBusiness = (b: BusinessType): b is Exclude<BusinessType, "other"> => b !== "other";
