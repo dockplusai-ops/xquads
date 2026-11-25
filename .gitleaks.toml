@@ -23,6 +23,15 @@ condition = "AND"
 paths = ['''(^|/)test/''']
 regexes = ['''^(abc123def456ghi789|9f8e7d6c5b4a3210|sk-ant-api03-abcdefghijklmnop)$''']
 
+# Datafy's channel tokens start with sk_live_, as Stripe's secret keys do, so the Stripe rule reads the Datafy
+# connector test's made-up tokens as keys. Only those exact values in that test are let through.
+[[allowlists]]
+description = "Made-up Datafy channel tokens of the Datafy connector test"
+targetRules = ["stripe-access-token"]
+condition = "AND"
+paths = ['''(^|/)test/native-datafy\.test\.ts$''']
+regexes = ['''^sk_live_(fixture0000000001|wrong000000000)$''']
+
 # A Himetrica site key only names the site to the analytics tracker, which sends it from every page.
 [[allowlists]]
 description = "Himetrica site keys (public by design)"
