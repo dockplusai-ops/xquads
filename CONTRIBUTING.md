@@ -5,7 +5,7 @@ pass, the conventions that matter, and how contributions are licensed.
 
 ## Where things happen
 
-- **Questions and ideas:** [GitHub Discussions](https://github.com/agentes-chat/agentes-chat/discussions).
+- **Questions and ideas:** [GitHub issues](https://github.com/dockplusai-ops/xquads/issues).
 - **Bugs and concrete feature requests:** issues (please use the issue forms).
 - **Security problems:** never a public issue. See [SECURITY.md](SECURITY.md).
 

@@ -1,8 +1,6 @@
-blank_issues_enabled: false
+# Questions and ideas come in as blank issues: the repository has no Discussions.
+blank_issues_enabled: true
 contact_links:
-  - name: Question or idea
-    url: https://github.com/dockplusai-ops/xquads/discussions
-    about: Questions, setup help and open-ended ideas belong in Discussions.
   - name: Security vulnerability
     url: https://github.com/dockplusai-ops/xquads/security/advisories/new
     about: Report it privately, never in a public issue.

@@ -11,14 +11,14 @@
   <a href="https://xquads.com">Cloud</a> ·
   <a href="SELF_HOSTING.md">Self-hosting</a> ·
   <a href="#features">Features</a> ·
-  <a href="https://github.com/agentes-chat/agentes-chat/discussions">Discussions</a>
+  <a href="https://github.com/dockplusai-ops/xquads/issues">Issues</a>
 </p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0-blue" alt="License: AGPL-3.0"></a>
-  <a href="https://github.com/agentes-chat/agentes-chat/actions/workflows/ci.yml"><img src="https://github.com/agentes-chat/agentes-chat/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/agentes-chat/agentes-chat/pkgs/container/agentes"><img src="https://img.shields.io/badge/docker-ghcr.io%2Fagentes--chat%2Fagentes-2496ED?logo=docker&logoColor=white" alt="Docker image"></a>
-  <a href="https://github.com/agentes-chat/agentes-chat/stargazers"><img src="https://img.shields.io/github/stars/agentes-chat/agentes-chat?style=social" alt="GitHub stars"></a>
+  <a href="https://github.com/dockplusai-ops/xquads/actions/workflows/ci.yml"><img src="https://github.com/dockplusai-ops/xquads/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/dockplusai-ops/xquads/pkgs/container/xquads"><img src="https://img.shields.io/badge/docker-ghcr.io%2Fdockplusai--ops%2Fxquads-2496ED?logo=docker&logoColor=white" alt="Docker image"></a>
+  <a href="https://github.com/dockplusai-ops/xquads/stargazers"><img src="https://img.shields.io/github/stars/dockplusai-ops/xquads?style=social" alt="GitHub stars"></a>
 </p>
 
 <p align="center">
@@ -115,7 +115,6 @@ The xquads name, logo and icons are trademarks and are not licensed under the AG
 
 ## Community
 
-Questions, ideas and roadmap talk live in the
-[Discussions](https://github.com/agentes-chat/agentes-chat/discussions). Bugs and feature requests
-go in [issues](https://github.com/dockplusai-ops/xquads/issues), and security reports through
+Questions, ideas, bugs and feature requests go in
+[issues](https://github.com/dockplusai-ops/xquads/issues), and security reports through
 [SECURITY.md](SECURITY.md). Everyone follows the [Code of Conduct](CODE_OF_CONDUCT.md).

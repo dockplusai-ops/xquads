@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.homepage       = 'https://xquads.com'
   s.platforms      = { :ios => '16.4' }
   s.swift_version  = '5.9'
-  s.source         = { git: 'https://github.com/agentes-chat/agentes-chat.git' }
+  s.source         = { git: 'https://github.com/dockplusai-ops/xquads.git' }
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'

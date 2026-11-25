@@ -24,7 +24,7 @@ const InstanceResponse = z
       .openapi({ description: "This server's own address (`PUBLIC_URL`).", example: "https://chat.example.com" }),
     sourceUrl: z.string().openapi({
       description: "Where to get this server's source code (`SOURCE_URL`, AGPL-3.0 section 13).",
-      example: "https://github.com/agentes-chat/agentes-chat",
+      example: "https://github.com/dockplusai-ops/xquads",
     }),
     signIn: z.object({ email: z.boolean(), google: z.boolean(), github: z.boolean(), apple: z.boolean() }),
     signup: z.enum(["open", "invite"]).openapi({ description: "`invite`: only people with an invitation sign up." }),
