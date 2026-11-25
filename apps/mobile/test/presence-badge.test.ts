@@ -44,7 +44,7 @@ describe("the presence badge on the phone (ADR 0084)", () => {
     expect(paths.some((p) => p.tone === "ring")).toBe(false);
     const drawn = covered(layer(paths, "base"));
     expect(drawn).not.toContain("4,4");
-    expect(drawn).toContain("1,0");
+    expect(drawn).toContain("2,0");
     // Hidden is dotted: fewer cells than offline's outline.
     expect(covered(layer(badgePaths("hidden", false).paths, "base")).length).toBeLessThan(drawn.length);
   });
@@ -66,14 +66,14 @@ describe("the presence badge on the phone (ADR 0084)", () => {
     }
   });
 
-  test("colors: the mark is white, the ring is the surface's, light and dark themes differ", () => {
+  test("colors: the mark is petrol, the ring is the surface's, one flat tone in both themes", () => {
     const light = badgeFills("busy", false, "#ffffff");
-    const dark = badgeFills("busy", true, "#0f0f0e");
-    expect(light.mark).toBe("#ffffff");
+    const dark = badgeFills("busy", true, "#0e1c22");
+    expect(light.mark).toBe("#0e1c22");
     expect(light.ring).toBe("#ffffff");
-    expect(dark.ring).toBe("#0f0f0e");
-    expect(light.base).not.toBe(dark.base);
-    expect(new Set([light.base, light.light, light.deep]).size).toBe(3);
+    expect(dark.ring).toBe("#0e1c22");
+    expect(light.base).toBe(dark.base);
+    expect(new Set([light.base, light.light, light.deep]).size).toBe(1);
   });
 
   test("small faces get small cells, profiles big ones", () => {

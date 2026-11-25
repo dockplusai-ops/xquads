@@ -14,7 +14,8 @@ afterEach(() => cleanup());
 
 const OTHER_ID = "00000000-0000-4000-8000-0000000000aa";
 const PURPLE = "#7c3aed";
-const DEFAULT_SKY: [string, string] = ["#8cc3ff", "#0063d1"];
+// The agents' default pair: xquads' camelo.
+const DEFAULT_SKY: [string, string] = ["#ddbe9c", "#c79d70"];
 const accentAttr = () => document.documentElement.getAttribute("data-accent");
 const agentVar = () => document.documentElement.style.getPropertyValue("--agent");
 const vars = () =>
@@ -139,21 +140,21 @@ describe("Configurações › Workspace › Cor de destaque", () => {
     expect(screen().queryByRole("button", { name: "Usar a padrão" })).toBeNull();
     await click(screen().getByRole("button", { name: "Trocar cor" }));
     const save = () => within(popover()).getByRole("button", { name: "Salvar cor" }) as HTMLButtonElement;
-    // The default blue is the first suggestion, picked; nothing to save yet.
+    // The default (camelo, still named Céu) is the first suggestion, picked; nothing to save yet.
     const suggestions = within(popover()).getAllByRole("button", { pressed: true });
     expect(suggestions.map((b) => b.getAttribute("aria-label"))).toEqual(["Céu"]);
     expect(save().disabled).toBe(true);
 
     await click(within(popover()).getByRole("button", { name: "Violeta" }));
     const sample = popover().querySelector<HTMLElement>("[data-testid=accent-sample]");
-    expect(sample?.style.getPropertyValue("--agent")).toBe(accentPalette("#6e45d1").light.agent);
+    expect(sample?.style.getPropertyValue("--agent")).toBe(accentPalette("#a9b3ce").light.agent);
     expect(sample?.textContent).toContain("@Agente");
     expect(agentVar()).toBe("");
 
     await click(save());
-    expect(state.calls).toContainEqual({ method: "orgs.setAccent", args: [ORG_ID, "#6e45d1"] });
+    expect(state.calls).toContainEqual({ method: "orgs.setAccent", args: [ORG_ID, "#a9b3ce"] });
     expect(document.body.textContent).toContain("Cor de destaque atualizada.");
-    expect(agentVar()).toBe(accentPalette("#6e45d1").light.agent);
+    expect(agentVar()).toBe(accentPalette("#a9b3ce").light.agent);
     expect(screen().getByRole("button", { name: "Usar a padrão" })).toBeTruthy();
   });
 

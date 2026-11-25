@@ -22,7 +22,8 @@ describe("the app icon in a browser (ADR 0179)", () => {
     expect(faviconOf("night")).toBe("/favicon.ico");
     expect(faviconOf("peekSky")).toBe("/app-icons/peekSky.ico");
     expect(APP_ICONS.map(appIconPicture)).toContain("/app-icons/moon.png");
-    expect(picksAppIcon()).toBe(true);
+    // xquads ships its own icon alone: no picker (`APP_ICON_CHOICE`).
+    expect(picksAppIcon()).toBe(false);
   });
 
   test("a pick changes the tab's icon and stays in this browser", async () => {
