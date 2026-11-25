@@ -115,8 +115,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   version,
   // Upright everywhere (the plugin below); only the agent's screen, in control, lies down (`useSideways`).
   orientation: "default",
-  // The icon the app ships with (ADR 0179): the agent leaning in, Espiando, on the night sky (packages/client's
-  // `PHONE_APP_ICON`); the others a person may pick are added by ./plugins/with-app-icons. All of them come from
+  // The icon the app ships with (ADR 0179) is xquads' symbol on its petrol ground, from the brand kit, in the folder of
+  // packages/client's `PHONE_APP_ICON`; the others a person may pick are added by ./plugins/with-app-icons, from
   // packages/ui/scripts/app-icons.mjs.
   icon: `${ICONS}/peekNight/ios.png`,
   userInterfaceStyle: "automatic",
@@ -141,13 +141,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     // brings its own Firebase project.
     ...(process.env.GOOGLE_SERVICES_JSON ? { googleServicesFile: process.env.GOOGLE_SERVICES_JSON } : {}),
     ...(process.env.ANDROID_VERSION_CODE ? { versionCode: Number(process.env.ANDROID_VERSION_CODE) } : {}),
-    // Two layers (the night sky, the agent), so the launcher's mask and motion cut them like the iOS icon, and the
-    // agent alone in one color for Android 13's themed icons.
+    // Two layers (the petrol ground, the symbol), so the launcher's mask and motion cut them like the iOS icon, and
+    // the symbol alone in one color for Android 13's themed icons.
     adaptiveIcon: {
       foregroundImage: `${ICONS}/peekNight/android-foreground.png`,
       backgroundImage: `${ICONS}/peekNight/android-background.png`,
       monochromeImage: `${ICONS}/peekNight/android-monochrome.png`,
-      backgroundColor: "#03101f",
+      backgroundColor: "#0E1C22",
     },
     predictiveBackGestureEnabled: false,
     // Never read the phone's photos or play in the background: the image picker is Android's photo picker, Salvar em
