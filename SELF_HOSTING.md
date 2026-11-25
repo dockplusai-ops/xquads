@@ -1833,10 +1833,10 @@ computer's backups: they hold sign-ins. The server's database never has them.
 
 Download the compose file again with each release, since a release can change it, then pull and
 restart. Take it from the release's tag (here `v1.2.3`, the newest on the
-[releases page](https://github.com/agentes-chat/agentes-chat/releases)), so it matches the image:
+[releases page](https://github.com/dockplusai-ops/xquads/releases)), so it matches the image:
 
 ```sh
-curl -fsSLO https://raw.githubusercontent.com/agentes-chat/agentes-chat/v1.2.3/docker-compose.yml
+curl -fsSLO https://raw.githubusercontent.com/dockplusai-ops/xquads/v1.2.3/docker-compose.yml
 docker compose pull
 docker compose up -d
 ```
@@ -1999,8 +1999,8 @@ setup from a checkout. You need Git, Docker and [Bun](https://bun.sh) (`packageM
 package.json names the version):
 
 ```sh
-git clone https://github.com/agentes-chat/agentes-chat.git
-cd agentes-chat
+git clone https://github.com/dockplusai-ops/xquads.git
+cd xquads
 bun install
 bun run --filter '@agenteschat/setup' build
 docker build -t ghcr.io/dockplusai-ops/xquads:latest .
