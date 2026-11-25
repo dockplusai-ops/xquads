@@ -383,11 +383,10 @@ export function PlanStep({
 
 /** Each business type's chip leads with its icon, chosen or not (the chip darkens when chosen). */
 const BUSINESS_ICONS: Record<BusinessType, IconName> = {
-  agency: "bulb",
-  store: "archiveBox",
-  clinic: "calendar",
-  software: "code",
-  support: "message",
-  services: "document",
+  cleaning: "sparkle",
+  painting: "fillColor",
+  roofing: "home",
+  landscaping: "flag",
+  remodeling: "cog",
   other: "more",
 };

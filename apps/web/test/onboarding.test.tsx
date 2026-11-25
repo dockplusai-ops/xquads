@@ -96,8 +96,8 @@ const draft = (name: string, handle: string, role: string, channel: string) => (
 });
 const TEMPLATES: TeamTemplate[] = [
   {
-    id: "store",
-    name: "Loja online",
+    id: "cleaning",
+    name: "Limpeza de casas",
     sub: "Pedidos, estoque e redes sociais",
     description: "Para uma loja que vende online.",
     team: {
@@ -115,8 +115,8 @@ const TEMPLATES: TeamTemplate[] = [
     },
   },
   {
-    id: "clinic",
-    name: "Clínica ou consultório",
+    id: "roofing",
+    name: "Telhados",
     sub: "Agenda no WhatsApp",
     description: "Para uma clínica.",
     team: {
@@ -217,7 +217,7 @@ const landings = (router: Awaited<ReturnType<typeof renderApp>>["router"]) => {
   return seen;
 };
 
-/** Steps 1 to 3 as a person goes through them: the name, "Loja online", no agents yet, the store's team made. */
+/** Steps 1 to 3 as a person goes through them: the name, "Limpeza de casas", no agents yet, the store's team made. */
 async function throughTheTeam(state: FakeState) {
   const r = await renderApp("/onboarding", { api: createFakeApi(state) });
   const landed = landings(r.router);
@@ -225,7 +225,7 @@ async function throughTheTeam(state: FakeState) {
   await forATeam();
   await type("Nome", "Ateliê Couto");
   await click(button("Continuar"), 14);
-  await click(button("Loja online"), 4);
+  await click(button("Limpeza de casas"), 4);
   await click(button("Continuar"), 14);
   await noneYet();
   await readyMade();
@@ -255,10 +255,10 @@ describe("the steps", () => {
     expect(eyebrow()).toBe("Passo 2 de 6");
     // A type alone is enough; its words are the context.
     expect((button("Continuar") as HTMLButtonElement).disabled).toBe(true);
-    await click(button("Loja online"), 4);
+    await click(button("Limpeza de casas"), 4);
     await click(button("Continuar"), 14);
     const orgId = state.me?.organizations[0]?.id;
-    expect(calls(state, "orgs.updateSettings").at(-1)?.args).toEqual([orgId, { context: "Loja online" }]);
+    expect(calls(state, "orgs.updateSettings").at(-1)?.args).toEqual([orgId, { context: "Limpeza de casas" }]);
     // Its team: first whether its agents come from another app.
     expect(heading()).toBe(ASK);
     expect(calls(state, "orgs.saveOnboarding")).toEqual([]);
@@ -271,7 +271,7 @@ describe("the steps", () => {
     expect(heading()).toBe("Seu time");
     // The store's team, picked for its business.
     expect(document.querySelector(".tp-agents")?.textContent).toContain("Otto");
-    expect(document.querySelector(".onb__steps")?.textContent).toContain("Loja online");
+    expect(document.querySelector(".onb__steps")?.textContent).toContain("Limpeza de casas");
   });
 
   test("a type and a sentence are saved together: going back, or coming back later, finds both", async () => {
@@ -281,15 +281,15 @@ describe("the steps", () => {
     await forATeam();
     await type("Nome", "Ateliê Couto");
     await click(button("Continuar"), 14);
-    await click(button("Clínica ou consultório"), 4);
+    await click(button("Telhados"), 4);
     await type("Em uma frase", "Atendemos com hora marcada");
     await click(button("Continuar"), 14);
     const orgId = state.me?.organizations[0]?.id;
-    const context = "Clínica ou consultório · Atendemos com hora marcada";
+    const context = "Telhados · Atendemos com hora marcada";
     expect(calls(state, "orgs.updateSettings").at(-1)?.args).toEqual([orgId, { context }]);
     // Back on step 2: the type still picked, the sentence still there, and Continuar keeps both.
     await click(document.querySelectorAll(".onb__step")[1] as HTMLElement, 8);
-    expect(button("Clínica ou consultório").getAttribute("aria-pressed")).toBe("true");
+    expect(button("Telhados").getAttribute("aria-pressed")).toBe("true");
     expect((screen().getByLabelText("Em uma frase") as HTMLTextAreaElement).value).toBe("Atendemos com hora marcada");
     await click(button("Continuar"), 14);
     expect(calls(state, "orgs.updateSettings").at(-1)?.args).toEqual([orgId, { context }]);
@@ -313,14 +313,14 @@ describe("the steps", () => {
     await readyMade();
     const team = () => document.querySelector(".tp-agents")?.textContent;
     expect(team()).toContain("Otto");
-    await pick(screen().getByRole("combobox", { name: "Modelos de time" }), "Clínica ou consultório");
+    await pick(screen().getByRole("combobox", { name: "Modelos de time" }), "Telhados");
     expect(team()).toContain("Nina");
     const backToStep2 = () => click(document.querySelectorAll(".onb__step")[1] as HTMLElement, 8);
     await backToStep2();
     await click(button("Continuar"), 14);
     expect(team()).toContain("Nina");
     await backToStep2();
-    await click(button("Loja online"), 4);
+    await click(button("Limpeza de casas"), 4);
     await click(button("Continuar"), 14);
     expect(team()).toContain("Otto");
   });
@@ -340,7 +340,7 @@ describe("the steps", () => {
     const state = newcomer(false);
     const { router, landed } = await throughTheTeam(state);
     const orgId = state.me?.organizations[0]?.id;
-    expect(calls(state, "agents.applyTeamTemplate").map((c) => c.args[1])).toEqual(["store"]);
+    expect(calls(state, "agents.applyTeamTemplate").map((c) => c.args[1])).toEqual(["cleaning"]);
     expect(heading()).toBe(PEOPLE);
     expect(eyebrow()).toBe("Passo 6 de 6");
     expect(router.state.location.pathname).toBe("/onboarding");
@@ -380,7 +380,7 @@ describe("the steps", () => {
   });
 
   test("back from the AI step: the team, whose Continuar comes back to it; nothing opens meanwhile", async () => {
-    const state = noAiYet(settingUp({ context: "Loja online", team: true }));
+    const state = noAiYet(settingUp({ context: "Limpeza de casas", team: true }));
     const { router } = await renderApp("/onboarding", { api: createFakeApi(state) });
     await settle(16);
     expect(heading()).toBe(CONNECT);
@@ -400,7 +400,7 @@ describe("the steps", () => {
   });
 
   test("an AI connected meanwhile: its done screen stays, Continuar goes on to the people, then #general with the beta notice alone", async () => {
-    const state = noAiYet(settingUp({ context: "Loja online", team: true }));
+    const state = noAiYet(settingUp({ context: "Limpeza de casas", team: true }));
     const { router, services } = await renderApp("/onboarding", { api: createFakeApi(state) });
     const landed = landings(router);
     await settle(16);
@@ -430,7 +430,7 @@ describe("the steps", () => {
   });
 
   test("a step of the template that fails says why, and the same button tries again", async () => {
-    const state = settingUp({ context: "Loja online", step: "import" });
+    const state = settingUp({ context: "Limpeza de casas", step: "import" });
     const api = createFakeApi(state);
     api.agents.applyTeamTemplate = async () => ({
       channelId: "dm",
@@ -472,7 +472,7 @@ describe("the steps", () => {
       await type("Nome", "Ateliê Couto");
       expect(name()).toBe("Ateliê Couto");
       await click(button("Continuar"), 14);
-      await click(button("Loja online"), 4);
+      await click(button("Limpeza de casas"), 4);
       await click(button("Continuar"), 14);
       // On the team's question, nobody but Doki yet.
       expect(agents()).toEqual(["Doki"]);
@@ -533,7 +533,7 @@ describe("the plan step (xquads Cloud)", () => {
   });
 
   test("back at the plan step from the billing page: it opens whole, its price there from its first frame", async () => {
-    const state = settingUp({ context: "Loja online", team: true, held: true });
+    const state = settingUp({ context: "Limpeza de casas", team: true, held: true });
     let answer: (r: Response) => void = () => {};
     globalThis.fetch = (() =>
       new Promise<Response>((done) => {
@@ -587,10 +587,10 @@ describe("a workspace being set up resumes from its data", () => {
   test("at what it does, at its team's question or how it starts, at its plan; never a second workspace", async () => {
     for (const [opts, title, saved] of [
       [{}, "O que a Ateliê Couto faz?", []],
-      [{ context: "Loja online" }, ASK, []],
+      [{ context: "Limpeza de casas" }, ASK, []],
       // Past the question ("I don't use any yet"), wherever it was left: how to start, its templates a click away.
-      [{ context: "Loja online", step: "import" }, START, []],
-      [{ context: "Loja online", team: true, held: true }, "Ligue o time", [[ORG_ID, { step: "computer" }]]],
+      [{ context: "Limpeza de casas", step: "import" }, START, []],
+      [{ context: "Limpeza de casas", team: true, held: true }, "Ligue o time", [[ORG_ID, { step: "computer" }]]],
     ] as const) {
       const state = settingUp(opts);
       plans(PLANS);
@@ -604,7 +604,7 @@ describe("a workspace being set up resumes from its data", () => {
   });
 
   test("a step answered in another tab meanwhile: this one moves on when it comes back, never a second team", async () => {
-    const state = settingUp({ context: "Loja online", held: true });
+    const state = settingUp({ context: "Limpeza de casas", held: true });
     plans(PLANS);
     await renderApp("/onboarding", { api: createFakeApi(state) });
     await settle(14);
@@ -622,7 +622,7 @@ describe("a workspace being set up resumes from its data", () => {
 
   test("a read that fails, or a workspace that won't open, says so with a way on, never a sky that waits", async () => {
     const broke = () => new ApiError(500, "internal", "Something broke");
-    const state = settingUp({ context: "Loja online" });
+    const state = settingUp({ context: "Limpeza de casas" });
     const api = createFakeApi(state);
     const read = api.orgs.settings;
     let fails = 1;
@@ -637,7 +637,7 @@ describe("a workspace being set up resumes from its data", () => {
     cleanup();
 
     // Its people invited already ("team"): nothing left to answer, it opens by itself.
-    const ready = settingUp({ context: "Loja online", team: true, step: "team" });
+    const ready = settingUp({ context: "Limpeza de casas", team: true, step: "team" });
     const opening = createFakeApi(ready);
     const finish = opening.orgs.saveOnboarding;
     let refusals = 1;
@@ -653,26 +653,26 @@ describe("a workspace being set up resumes from its data", () => {
   });
 
   test("its team thinking, it resumes on inviting people; invited already, it opens in #general", async () => {
-    const state = settingUp({ context: "Loja online", team: true });
+    const state = settingUp({ context: "Limpeza de casas", team: true });
     const first = await renderApp("/onboarding", { api: createFakeApi(state) });
     await settle(16);
     expect(first.router.state.location.pathname).toBe("/onboarding");
     expect(heading()).toBe(PEOPLE);
     cleanup();
     // The AI left for later ("ai"): the people step too, never the AI step again.
-    const later = noAiYet(settingUp({ context: "Loja online", team: true, step: "ai" }));
+    const later = noAiYet(settingUp({ context: "Limpeza de casas", team: true, step: "ai" }));
     await renderApp("/onboarding", { api: createFakeApi(later) });
     await settle(16);
     expect(heading()).toBe(PEOPLE);
     cleanup();
-    const invited = settingUp({ context: "Loja online", team: true, step: "team" });
+    const invited = settingUp({ context: "Limpeza de casas", team: true, step: "team" });
     const { router } = await renderApp("/onboarding", { api: createFakeApi(invited) });
     await settle(16);
     expect(router.state.location.pathname).toBe(`/org/${ORG_ID}/c/${GENERAL_ID}`);
   });
 
   test("back from paying: the payment received, then the AI step once the hold lifts; back without: the plan", async () => {
-    const paid = noAiYet(settingUp({ context: "Loja online", team: true, held: true }));
+    const paid = noAiYet(settingUp({ context: "Limpeza de casas", team: true, held: true }));
     plans(PLANS);
     const { router } = await renderApp(`/org/${ORG_ID}/onboarding?paid=1`, { api: createFakeApi(paid) });
     await settle(14);
@@ -698,7 +698,7 @@ describe("a workspace being set up resumes from its data", () => {
     expect(calls(paid, "orgs.saveOnboarding").map((c) => c.args)).toEqual([[ORG_ID, { step: "computer" }]]);
     cleanup();
 
-    const back = settingUp({ context: "Loja online", team: true, held: true });
+    const back = settingUp({ context: "Limpeza de casas", team: true, held: true });
     plans(PLANS);
     await renderApp(`/org/${ORG_ID}/onboarding`, { api: createFakeApi(back) });
     await settle(14);
@@ -707,7 +707,7 @@ describe("a workspace being set up resumes from its data", () => {
     cleanup();
 
     // Back without paying to one set up meanwhile in another tab: it opens as it is, never a new workspace's step 1.
-    const meanwhile = settingUp({ context: "Loja online", team: true, held: true });
+    const meanwhile = settingUp({ context: "Limpeza de casas", team: true, held: true });
     const setUp = meanwhile.me?.organizations[0];
     if (setUp) delete setUp.onboarding;
     const again = await renderApp(`/org/${ORG_ID}/onboarding`, { api: createFakeApi(meanwhile) });
@@ -727,7 +727,7 @@ describe("a workspace being set up resumes from its data", () => {
 
 describe("a team with no agents for now (ADR 0162, amended 2026-11-11)", () => {
   test("Skip this step on the question: the right hand alone on the AI step; back, the question again", async () => {
-    const state = noAiYet(settingUp({ context: "Loja online" }));
+    const state = noAiYet(settingUp({ context: "Limpeza de casas" }));
     const { router } = await renderApp("/onboarding", { api: createFakeApi(state) });
     await settle(14);
     expect(heading()).toBe(ASK);
@@ -756,7 +756,7 @@ describe("a team with no agents for now (ADR 0162, amended 2026-11-11)", () => {
     await readyMade();
     expect(heading()).toBe("Seu time");
     await click(button("Criar o time"), 20);
-    expect(calls(state, "agents.applyTeamTemplate").map((c) => c.args[1])).toEqual(["store"]);
+    expect(calls(state, "agents.applyTeamTemplate").map((c) => c.args[1])).toEqual(["cleaning"]);
     // The step gone back to stays on screen with who is in the team now, until Continuar.
     expect(
       [...document.querySelectorAll(".onb__body .tp-agent .ac-mediarow__head b")].map((b) => b.textContent),
@@ -767,7 +767,7 @@ describe("a team with no agents for now (ADR 0162, amended 2026-11-11)", () => {
   });
 
   test("Start from scratch, picked on how to start: the plan for the right hand alone, and a reload resumes there", async () => {
-    const state = settingUp({ context: "Loja online", held: true });
+    const state = settingUp({ context: "Limpeza de casas", held: true });
     plans(PLANS);
     const withoutRoutines = () => {
       const api = createFakeApi(state);
@@ -790,7 +790,7 @@ describe("a team with no agents for now (ADR 0162, amended 2026-11-11)", () => {
     expect(template.getAttribute("aria-checked")).toBe("false");
     expect(scratch.getAttribute("aria-checked")).toBe("true");
     expect(template.closest("label")?.textContent).toContain(
-      "3 agentes do modelo Loja online, cada um no seu canal, com as rotinas prontas.",
+      "3 agentes do modelo Limpeza de casas, cada um no seu canal, com as rotinas prontas.",
     );
     expect(template.closest("label")?.querySelector(".onb-start__names")?.textContent).toBe("Iara, Otto e Lia");
     expect(scratch.closest("label")?.textContent).toContain(
@@ -821,7 +821,7 @@ describe("a team with no agents for now (ADR 0162, amended 2026-11-11)", () => {
   });
 
   test("Start with a ready-made team: its templates with no way out but Back, to how to start, then the question", async () => {
-    const state = noAiYet(settingUp({ context: "Loja online" }));
+    const state = noAiYet(settingUp({ context: "Limpeza de casas" }));
     await renderApp("/onboarding", { api: createFakeApi(state) });
     await settle(14);
     await noneYet();
@@ -850,13 +850,13 @@ describe("a team with no agents for now (ADR 0162, amended 2026-11-11)", () => {
     expect(answer(/Começar do zero/).getAttribute("aria-checked")).toBe("true");
     await readyMade();
     await click(button("Criar o time"), 20);
-    expect(calls(state, "agents.applyTeamTemplate").map((c) => c.args[1])).toEqual(["store"]);
+    expect(calls(state, "agents.applyTeamTemplate").map((c) => c.args[1])).toEqual(["cleaning"]);
     expect(heading()).toBe(CONNECT);
     expect(document.querySelector(".onb__steps")?.textContent).toContain("Iara, Otto e Lia");
   });
 
   test("self-hosted with an AI already there: skipping goes on to the people, then #general, the team's place", async () => {
-    const state = settingUp({ context: "Loja online" });
+    const state = settingUp({ context: "Limpeza de casas" });
     const { router } = await renderApp("/onboarding", { api: createFakeApi(state) });
     await settle(14);
     await click(button("Pular esta etapa"), 16);
@@ -888,7 +888,7 @@ describe("the person's own step, Sobre você (ADR 0162, amended 2026-11-12)", ()
     await forATeam();
     await type("Nome", "Ateliê Couto");
     await click(button("Continuar"), 14);
-    await click(button("Loja online"), 4);
+    await click(button("Limpeza de casas"), 4);
     await click(button("Continuar"), 14);
     expect(heading()).toBe(YOU);
     expect(document.querySelector(".onb__lead")?.textContent).toBe(
@@ -904,14 +904,14 @@ describe("the person's own step, Sobre você (ADR 0162, amended 2026-11-12)", ()
     // Back: what it does, as answered.
     await click(button("Voltar"), 8);
     expect(heading()).toBe("O que a Ateliê Couto faz?");
-    expect(button("Loja online").getAttribute("aria-pressed")).toBe("true");
+    expect(button("Limpeza de casas").getAttribute("aria-pressed")).toBe("true");
     await click(button("Continuar"), 14);
     expect(heading()).toBe(YOU);
     // One area at a time; pressed again, none.
-    await click(chip("Vendas"), 4);
+    await click(chip("Vendas e orçamentos"), 4);
     await click(chip("Marketing"), 4);
     expect(chip("Marketing").getAttribute("aria-pressed")).toBe("true");
-    expect(chip("Vendas").getAttribute("aria-pressed")).toBe("false");
+    expect(chip("Vendas e orçamentos").getAttribute("aria-pressed")).toBe("false");
     await type("Seu nome", "  Ana Souza  ");
     await click(button("Continuar"), 14);
     expect(fake.calls.filter((c) => c.method === "updateName").map((c) => c.args[0])).toEqual(["Ana Souza"]);
@@ -928,7 +928,7 @@ describe("the person's own step, Sobre você (ADR 0162, amended 2026-11-12)", ()
   });
 
   test("no area picked stores that it was asked; a name left as it was isn't saved; a reload before asks again", async () => {
-    const state = unasked(settingUp({ context: "Loja online" }));
+    const state = unasked(settingUp({ context: "Limpeza de casas" }));
     const fake = createFakeAuth();
     await renderApp("/onboarding", { api: createFakeApi(state), auth: fake.auth });
     await settle(14);
@@ -945,7 +945,7 @@ describe("the person's own step, Sobre você (ADR 0162, amended 2026-11-12)", ()
   });
 
   test("an empty name can't go on; one the account refuses is said under the field, and the step stays", async () => {
-    const state = unasked(settingUp({ context: "Loja online" }));
+    const state = unasked(settingUp({ context: "Limpeza de casas" }));
     const fake = createFakeAuth({
       updateName: { ok: false, status: 400, message: "Name too long", code: "INVALID_NAME" },
     });
@@ -961,14 +961,14 @@ describe("the person's own step, Sobre você (ADR 0162, amended 2026-11-12)", ()
   });
 
   test("an area's save that fails never holds the onboarding", async () => {
-    const state = unasked(settingUp({ context: "Loja online" }));
+    const state = unasked(settingUp({ context: "Limpeza de casas" }));
     const api = createFakeApi(state);
     api.account.setWorkArea = async () => {
       throw new ApiError(500, "internal", "Something broke");
     };
     await renderApp("/onboarding", { api });
     await settle(14);
-    await click(chip("Finanças"), 4);
+    await click(chip("Cobrança e finanças"), 4);
     await click(button("Continuar"), 14);
     expect(heading()).toBe(ASK);
   });
@@ -985,16 +985,16 @@ describe("the person's own step, Sobre você (ADR 0162, amended 2026-11-12)", ()
       "Seu nome e sua foto aparecem para os seus agentes.",
     );
     expect(screen().queryByRole("button", { name: "Voltar" })).toBeNull();
-    await click(chip("Desenvolvimento"), 4);
+    await click(chip("Dono ou gerente"), 4);
     await click(button("Continuar"), 14);
-    expect(calls(state, "account.setWorkArea").map((c) => c.args[0])).toEqual(["dev"]);
+    expect(calls(state, "account.setWorkArea").map((c) => c.args[0])).toEqual(["owner"]);
     expect(heading()).toBe(ASK);
   });
 });
 
 describe("inviting people, a team's last step (ADR 0162, amended 2026-11-11)", () => {
   test("the addresses as chips, each with its role, sent by the step's button; the workspace opens in #general", async () => {
-    const state = settingUp({ context: "Loja online", team: true });
+    const state = settingUp({ context: "Limpeza de casas", team: true });
     const { router } = await renderApp("/onboarding", { api: createFakeApi(state) });
     const landed = landings(router);
     await settle(16);
@@ -1035,7 +1035,7 @@ describe("inviting people, a team's last step (ADR 0162, amended 2026-11-11)", (
   });
 
   test("Convidar depois opens the workspace with no invitation; an address already in is said and left out", async () => {
-    const state = settingUp({ context: "Loja online", team: true });
+    const state = settingUp({ context: "Limpeza de casas", team: true });
     const { router } = await renderApp("/onboarding", { api: createFakeApi(state) });
     await settle(16);
     const field = screen().getByLabelText("E-mails");
@@ -1051,7 +1051,7 @@ describe("inviting people, a team's last step (ADR 0162, amended 2026-11-11)", (
   });
 
   test("a server that sends no email: the workspace's link, and Entrar no workspace", async () => {
-    const state = settingUp({ context: "Loja online", team: true });
+    const state = settingUp({ context: "Limpeza de casas", team: true });
     state.authConfig = { passwordReset: false };
     const { router } = await renderApp("/onboarding", { api: createFakeApi(state) });
     await settle(16);
@@ -1090,7 +1090,7 @@ describe("the name step's other cases", () => {
   });
 
   test("back on the name after another visit: the workspace's own zone and name, the zone kept unless changed", async () => {
-    const state = settingUp({ context: "Loja online" });
+    const state = settingUp({ context: "Limpeza de casas" });
     const api = createFakeApi(state);
     const read = api.orgs.settings;
     api.orgs.settings = async (orgId) => ({ ...(await read(orgId)), timezone: "Asia/Tokyo" });

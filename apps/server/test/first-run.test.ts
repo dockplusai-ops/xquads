@@ -33,7 +33,7 @@ test("a new workspace's right hand starts the checklist; only Agora não is stor
   // The other rows read done from the data: nothing to store.
   expect((await api(`/agents/${lodi?.id}/setup/about`, { json: {} })).status).toBe(404);
 
-  const used = await api("/team-templates/clinic/use", { json: { locale: "pt-BR" } });
+  const used = await api("/team-templates/cleaning/use", { json: { locale: "pt-BR" } });
   expect(used.status).toBe(200);
   const card = (await used.json()) as { channelId: string; state: string; error: unknown };
   expect(card).toMatchObject({ state: "created", error: null });

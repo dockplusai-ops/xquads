@@ -1004,17 +1004,17 @@
         "build": "Créer un avatar",
         "edit": "Modifier l'avatar",
         "upload": "Envoyer une photo",
-        "area": "Vous travaillez sur quoi ?",
+        "area": "Quel est votre rôle ?",
         "areaHint": "Facultatif. Juste pour savoir qui utilise xquads."
       },
       "area": {
         "options": {
-          "dev": "Développement",
+          "owner": "Propriétaire ou gérant",
+          "sales": "Ventes et devis",
+          "office": "Bureau et planning",
+          "field": "Terrain et équipes",
+          "finance": "Facturation et finances",
           "marketing": "Marketing",
-          "sales": "Ventes",
-          "finance": "Finances",
-          "ops": "Opérations",
-          "support": "Service client",
           "other": "Autre chose"
         }
       },
@@ -20768,16 +20768,16 @@
         "gil_female": "{{name}} vérifie qu'il est bien à nous"
       },
       "ordering": {
-        "helena": "{{name}} a demandé {{gb}} Go de mémoire",
-        "helena_female": "{{name}} a demandé {{gb}} Go de mémoire",
+        "davi": "{{name}} a demandé {{gb}} Go de mémoire",
+        "davi_female": "{{name}} a demandé {{gb}} Go de mémoire",
         "rui": "{{name}} en a commandé un tout neuf",
         "rui_female": "{{name}} en a commandé un tout neuf",
         "ana": "{{name}} garde un œil sur la commande",
         "ana_female": "{{name}} garde un œil sur la commande"
       },
       "wiping": {
-        "helena": "{{name}} lui fait un bon nettoyage",
-        "helena_female": "{{name}} lui fait un bon nettoyage",
+        "davi": "{{name}} lui fait un bon nettoyage",
+        "davi_female": "{{name}} lui fait un bon nettoyage",
         "rui": "{{name}} sort les poubelles",
         "rui_female": "{{name}} sort les poubelles",
         "gil": "{{name}} vérifie qu'il ne reste rien d'ancien",
@@ -20786,14 +20786,14 @@
       "starting": {
         "rui": "{{name}} le remet sur pied",
         "rui_female": "{{name}} le remet sur pied",
-        "helena": "{{name}} fait chauffer les moteurs",
-        "helena_female": "{{name}} fait chauffer les moteurs",
+        "davi": "{{name}} fait chauffer les moteurs",
+        "davi_female": "{{name}} fait chauffer les moteurs",
         "ana": "{{name}} a donné le départ",
         "ana_female": "{{name}} a donné le départ"
       },
       "booting": {
-        "helena": "{{name}} compte les {{gb}} Go de mémoire",
-        "helena_female": "{{name}} compte les {{gb}} Go de mémoire",
+        "davi": "{{name}} compte les {{gb}} Go de mémoire",
+        "davi_female": "{{name}} compte les {{gb}} Go de mémoire",
         "rui": "{{name}} vérifie que chaque pièce est là",
         "rui_female": "{{name}} vérifie que chaque pièce est là",
         "ana": "{{name}} le laisse charger en paix",
@@ -20802,14 +20802,14 @@
       "updating": {
         "gil": "{{name}} va chercher les dernières mises à jour",
         "gil_female": "{{name}} va chercher les dernières mises à jour",
-        "helena": "{{name}} resserre chaque vis",
-        "helena_female": "{{name}} resserre chaque vis",
+        "davi": "{{name}} resserre chaque vis",
+        "davi_female": "{{name}} resserre chaque vis",
         "ana": "{{name}} coche chaque mise à jour",
         "ana_female": "{{name}} coche chaque mise à jour"
       },
       "restarting": {
-        "helena": "{{name}} assure que ce redémarrage est normal",
-        "helena_female": "{{name}} assure que ce redémarrage est normal",
+        "davi": "{{name}} assure que ce redémarrage est normal",
+        "davi_female": "{{name}} assure que ce redémarrage est normal",
         "rui": "{{name}} fait en sorte que la mise à jour tienne",
         "rui_female": "{{name}} fait en sorte que la mise à jour tienne",
         "ana": "{{name}} compte jusqu'à dix",
@@ -20836,12 +20836,12 @@
         "ana_female": "{{name}} cherche les applications",
         "gil": "{{name}} déballe les applications",
         "gil_female": "{{name}} déballe les applications",
-        "helena": "{{name}} dispose les outils",
-        "helena_female": "{{name}} dispose les outils"
+        "davi": "{{name}} dispose les outils",
+        "davi_female": "{{name}} dispose les outils"
       },
       "connecting": {
-        "helena": "{{name}} attend son premier bonjour",
-        "helena_female": "{{name}} attend son premier bonjour",
+        "davi": "{{name}} attend son premier bonjour",
+        "davi_female": "{{name}} attend son premier bonjour",
         "rui": "{{name}} remet les clés",
         "rui_female": "{{name}} remet les clés",
         "gil": "{{name}} le présente à l'équipe",
@@ -21881,12 +21881,11 @@
       "templatesPersonal": "Voir des agents prêts"
     },
     "business": {
-      "agency": "Agence",
-      "store": "Boutique en ligne",
-      "clinic": "Clinique ou cabinet",
-      "software": "Logiciels et apps",
-      "support": "Service client",
-      "services": "Cabinet de services",
+      "cleaning": "Ménage à domicile",
+      "painting": "Peinture",
+      "roofing": "Toiture",
+      "landscaping": "Jardins et pelouses",
+      "remodeling": "Rénovation et petits travaux",
       "other": "Autre chose"
     },
     "step": "Question {{step}} sur {{of}}",
@@ -22129,35 +22128,30 @@
       "sub": "Clients, factures et agenda",
       "desc": "Pour les indépendants qui gèrent eux-mêmes leurs clients et leur argent."
     },
-    "agency": {
-      "name": "Agence marketing",
-      "sub": "Contenu, publicités et service client",
-      "desc": "Pour une agence qui gère le contenu et les campagnes de ses clients."
+    "cleaning": {
+      "name": "Ménage à domicile",
+      "sub": "Visites régulières, équipes et avis",
+      "desc": "Pour une entreprise de ménage avec des clients réguliers et des équipes sur la route."
     },
-    "store": {
-      "name": "Boutique en ligne",
-      "sub": "Commandes, stock et réseaux sociaux",
-      "desc": "Pour une boutique qui vend en ligne et répond à ses acheteurs."
+    "painting": {
+      "name": "Peinture",
+      "sub": "Devis, équipes et factures",
+      "desc": "Pour une entreprise de peinture qui chiffre chaque chantier et y envoie une équipe."
     },
-    "clinic": {
-      "name": "Clinique ou cabinet",
-      "sub": "Rendez-vous sur WhatsApp, facturation et suivi",
-      "desc": "Pour une clinique ou un cabinet qui prend les rendez-vous des patients et assure le suivi."
+    "roofing": {
+      "name": "Toiture",
+      "sub": "Inspections, devis et paiements",
+      "desc": "Pour une entreprise de toiture qui inspecte, chiffre et encaisse chaque chantier."
     },
-    "software": {
-      "name": "Logiciels et apps",
-      "sub": "Service client, paiements et code",
-      "desc": "Pour une entreprise qui vend un logiciel et s'occupe de ses propres clients."
+    "landscaping": {
+      "name": "Jardins et pelouses",
+      "sub": "Tournées hebdomadaires, factures et avis",
+      "desc": "Pour une entreprise de jardins ou de pelouses avec des passages chaque semaine."
     },
-    "support": {
-      "name": "Service client",
-      "sub": "File de clients et base de réponses",
-      "desc": "Pour une équipe qui répond à beaucoup de clients chaque jour."
-    },
-    "services": {
-      "name": "Cabinet de services",
-      "sub": "Comptabilité, droit, conseil",
-      "desc": "Pour un cabinet qui prend les rendez-vous, envoie des propositions et facture."
+    "remodeling": {
+      "name": "Rénovation et petits travaux",
+      "sub": "Devis, clients en anglais et factures",
+      "desc": "Pour une entreprise de rénovation ou de petits travaux qui chiffre, parle au client et facture chaque étape."
     },
     "hello": {
       "lodi": {
@@ -22172,61 +22166,47 @@
       }
     },
     "agents": {
-      "luana": {
-        "role": "Service client",
-        "line": "Répond aux clients sur WhatsApp et par e-mail. T'appelle quand elle ne sait pas.",
-        "routine": "Résumer ce qui est resté sans réponse",
-        "task": "Écris une réponse à ce message client :",
-        "hello": "Bonjour {{first}}. Je m'occupe de ceux qui écrivent sur WhatsApp."
-      },
-      "teo": {
-        "role": "Facturation",
-        "line": "Relance les retards de paiement et envoie la relance après ton accord.",
-        "routine": "Lister qui a un paiement en retard",
-        "task": "Écris un rappel de paiement aimable pour :",
-        "hello": "Bonjour. Je gère les paiements et j'envoie un rappel seulement après votre accord."
-      },
-      "helena": {
-        "role": "Dev",
-        "line": "Corrige les bugs signalés par les clients et ouvre la PR.",
-        "routine": "Lister les nouveaux bugs",
-        "task": "Dis-moi par où commencer pour enquêter sur ce bug :",
-        "hello": "Salut. Envoyez-moi les bugs qui arrivent, j'enquête et j'ouvre la PR."
-      },
-      "gil": {
-        "role": "Contenu",
-        "line": "Écrit posts et scripts dans le ton de l'entreprise et les programme après ton accord.",
-        "routine": "Proposer les posts de la semaine",
-        "task": "Propose trois posts pour cette semaine sur :",
-        "hello": "Bonjour à tous. Les posts de la semaine, c'est pour moi."
-      },
       "ana": {
-        "role": "Ventes",
-        "line": "Relance toutes les personnes qui ont demandé un devis et rédige les propositions.",
-        "routine": "Lister qui a demandé un devis sans réponse",
-        "task": "Écris un devis court pour cette demande :",
-        "hello": "Bonjour {{first}}. Personne qui demande un devis ne restera sans réponse."
+        "role": "Devis",
+        "line": "Rédige les devis à partir de photos et de mesures et relance ceux restés sans réponse.",
+        "routine": "Lister les devis sans réponse",
+        "task": "Rédige un devis avec ces photos et ces mesures :",
+        "hello": "Bonjour {{first}}. Envoyez-moi les photos et les mesures, et je rédige le devis."
       },
       "rui": {
         "role": "Agenda",
-        "line": "Prend, confirme et déplace les rendez-vous, et rappelle les clients la veille.",
-        "routine": "Confirmer les rendez-vous de demain",
-        "task": "Organise ces horaires de demain :",
-        "hello": "Bonjour. Je m'occupe de l'agenda et je rappelle les clients la veille."
+        "line": "Prend les rendez-vous, les confirme la veille et les déplace quand un client le demande.",
+        "routine": "Confirmer les passages de demain",
+        "task": "Trouve un créneau pour ce passage :",
+        "hello": "Bonjour. Je m'occupe du planning et je confirme chaque passage la veille."
       },
-      "tiago": {
-        "role": "Commandes",
-        "line": "Suit les commandes et le stock et prévient de ce qui manque bientôt.",
-        "routine": "Prévenir de ce qui manque bientôt en stock",
-        "task": "Liste ce qu'il reste à faire sur ces commandes :",
-        "hello": "Me voilà. Je surveille les commandes et je préviens si le stock baisse."
+      "lia": {
+        "role": "Anglais",
+        "line": "T'aide à écrire aux clients dans un anglais clair et t'explique ce qu'ils ont écrit.",
+        "routine": "Lister les messages de clients sans réponse",
+        "task": "Écris cette réponse au client en anglais :",
+        "hello": "Bonjour {{first}}. Dites-moi ce que vous voulez dire, et je l'écris en anglais."
       },
-      "sofia": {
-        "role": "Base de réponses",
-        "line": "Tient la base de réponses à jour avec ce que l'équipe répond.",
-        "routine": "Mettre à jour la base avec les réponses de la semaine",
-        "task": "Écris les réponses à ces questions de clients :",
-        "hello": "Salut. Je tiens la base de réponses à jour avec ce que répond l'équipe."
+      "teo": {
+        "role": "Facturation",
+        "line": "Envoie la facture quand un chantier est fini et relance les retards, après ton accord.",
+        "routine": "Lister les factures en retard",
+        "task": "Rédige la facture de ce chantier :",
+        "hello": "Bonjour. Je m'occupe des factures et j'envoie un rappel seulement après votre accord."
+      },
+      "gil": {
+        "role": "Avis",
+        "line": "Demande un avis Google aux clients satisfaits et rédige les réponses aux nouveaux avis.",
+        "routine": "Lister les chantiers finis aujourd'hui pour demander un avis",
+        "task": "Rédige une demande d'avis pour ce client :",
+        "hello": "Bonjour à tous. Je vais demander un avis Google à chaque client satisfait."
+      },
+      "davi": {
+        "role": "Équipes",
+        "line": "Envoie à chaque équipe ses chantiers, adresses et horaires du jour et te prévient quand quelqu'un est en retard.",
+        "routine": "Envoyer à chaque équipe ses chantiers du jour",
+        "task": "Répartis ces chantiers entre les équipes :",
+        "hello": "Bonjour {{first}}. Chaque équipe reçoit de moi ses chantiers et ses adresses avant le début de la journée."
       },
       "marina": {
         "role": "Agenda et rappels",
@@ -22284,14 +22264,12 @@
       }
     },
     "channels": {
-      "luana": "support",
-      "teo": "finances",
-      "helena": "eng",
-      "gil": "contenu",
-      "ana": "ventes",
+      "ana": "devis",
       "rui": "agenda",
-      "tiago": "commandes",
-      "sofia": "support"
+      "lia": "clients",
+      "teo": "finances",
+      "gil": "avis",
+      "davi": "equipes"
     },
     "skills": {
       "voice": {
