@@ -12916,6 +12916,8 @@ export const ptBR = {
       home_only: "O {{program}} está instalado só para o root no {{computer}}, onde os agentes não chegam.",
       not_reported: "O {{computer}} ainda está vendo quais programas tem. Isto muda sozinho quando terminar.",
       system: "O {{program}} ainda não roda no sistema do {{computer}}.",
+      /** The server lets no plan of this kind think there (`planOff`): an API key does. */
+      plan_off: "Os agentes não podem usar este plano no {{computer}}. Escolha uma chave de API.",
       no_computerCloud: "Disponível assim que o {{computer}} ficar pronto.",
     },
     notAvailableNow: "Escolhido, mas indisponível agora.",

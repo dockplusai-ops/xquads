@@ -4,6 +4,7 @@ import {
   useAgentBrain,
   useAiAccounts,
   useApi,
+  useAuthConfig,
   useComputerSetup,
   useMachines,
   useModels,
@@ -170,6 +171,7 @@ export function usePlanGates(orgId: string, agentId: string | undefined, poll: n
   // step and back).
   const [waited, setWaited] = useState(false);
   const markWaited = useCallback(() => setWaited(true), []);
+  const plans = useAuthConfig().data?.planSignIns;
   const gateOf = (choice: PlanChoice): PlanGate =>
     catching
       ? { state: "ready" }
@@ -183,6 +185,7 @@ export function usePlanGates(orgId: string, agentId: string | undefined, poll: n
           computer: row,
           caughtUp: caught,
           standing: org.standing,
+          plans,
         });
   // A poll that fails once keeps the last view: a sign-in in progress goes on. A read that failed with nothing to show
   // ends the panel's wait with Tentar de novo.
@@ -747,6 +750,7 @@ export function useGatesWithoutAgent(orgId: string, on: boolean) {
   const setupQ = useComputerSetup(orgId);
   const edition = computerEdition(setupQ.data);
   const setup = setupView(setupQ.data, setupQ.dataUpdatedAt);
+  const plans = useAuthConfig().data?.planSignIns;
   const at = (choice: PlanChoice) =>
     planGateWithoutAgent({
       choice,
@@ -755,6 +759,7 @@ export function useGatesWithoutAgent(orgId: string, on: boolean) {
       computers: ai.data?.computers,
       machines: machines.data,
       standing: org.standing,
+      plans,
     });
   return { at, edition, accounts: ai.data?.accounts };
 }

@@ -12809,6 +12809,7 @@
       "home_only": "{{program}} está instalado solo para root en {{computer}}, donde los agentes no llegan.",
       "not_reported": "{{computer}} todavía está comprobando qué programas tiene. Esto cambia solo cuando termine.",
       "system": "{{program}} todavía no funciona en el sistema de {{computer}}.",
+      "plan_off": "Los agentes no pueden usar este plan en {{computer}}. Elige una clave de API.",
       "no_computerCloud": "Listo en cuanto {{computer}} lo esté."
     },
     "notAvailableNow": "Elegido, pero no disponible ahora.",

@@ -31,6 +31,7 @@ import type { ModelGateway } from "../gateway";
 import type { MachineStatus } from "../machine-hub";
 import { pausedMessage } from "../machines";
 import { missionTurnFor } from "../missions-engine";
+import { planSignInRefusal } from "../plan-sign-ins";
 import {
   isRightHand,
   type RightHandStandIn,
@@ -366,6 +367,9 @@ export function computerBrainUnavailable(
   if (kind === "model") return null;
   const name = BRAIN_NAMES[kind];
   if (!machineId) return { code: "no_computer", message: `The agent has no computer for ${name}.` };
+  // A plan where it may not think (`planSignInRefusal`): signed out for this agent, so the no-AI card asks for a key.
+  const planOff = planSignInRefusal(kind, status?.kind, account?.provider);
+  if (planOff) return { code: "not_logged_in", message: planOff.message };
   // OpenCode's free tier on a computer nobody connected (ADR 0132): no sign-in, nobody's plan, any agent's.
   const freeTier = kind === "opencode" && !account && status?.pairedByUserId === null;
   // The computer's own sign-in thinks only for agents of whoever connected the computer (ADR 0059 §3): on one

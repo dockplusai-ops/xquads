@@ -12900,6 +12900,8 @@ export const en = {
       not_reported: "{{computer}} is still checking which programs it has. This changes by itself when it's done.",
       /** The runner doesn't run this program on that computer's system (Cursor on Windows, for one). */
       system: "{{program}} doesn't run on {{computer}}'s system yet.",
+      /** The server lets no plan of this kind think there (`planOff`): an API key does. */
+      plan_off: "Agents can't think with this plan on {{computer}}. Choose an API key instead.",
       no_computerCloud: "Ready as soon as {{computer}} is.",
     },
     notAvailableNow: "Chosen, but unavailable right now.",

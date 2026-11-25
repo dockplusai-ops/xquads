@@ -117,6 +117,7 @@ import {
 import { planLentGroup, planModelDroppedGroup } from "./notification-producers";
 import { resolveNotifications } from "./notifications";
 import { can, getMembership, requirePermission } from "./organizations";
+import { hostedMachine } from "./plan-sign-ins";
 import { isRightHand, personalBrain, personalModel } from "./right-hand";
 import { orgModelProvider } from "./router";
 import { readRefusal } from "./standing";
@@ -548,6 +549,8 @@ export interface BrainComputer {
   machineId: string;
   name: string;
   online: boolean;
+  /** One the server runs (`hostedMachine`): where `HOSTED_PLAN_SIGN_INS` decides whether plans think. */
+  hosted?: boolean;
 }
 
 /** A computer the caller may give the agent, with what it offers (the page moves the agent to one that has a brain). */
@@ -784,7 +787,9 @@ function view(
     effectiveModel: brain === "model" ? null : (agent.brainModel ?? defaultBrainModel(brain)),
     fallback: false,
     extraUsage: paysExtraUsage(agent),
-    computer: machine ? { machineId: machine.id, name: machine.name, online: shownOnline(machine) } : null,
+    computer: machine
+      ? { machineId: machine.id, name: machine.name, online: shownOnline(machine), hosted: hostedMachine(machine.kind) }
+      : null,
     options: brainOptions(machine),
     machines,
     canEdit: true,
@@ -2064,6 +2069,8 @@ export interface AiComputer {
   online: boolean;
   /** The caller connected it. */
   mine: boolean;
+  /** One the server runs (`hostedMachine`): where `HOSTED_PLAN_SIGN_INS` decides whether plans think. */
+  hosted?: boolean;
   /** The caller adds accounts there (they connected it, or nobody did), on a runner that knows accounts. */
   canAdd: boolean;
   /** Its runner takes coding plans' keys (protocol 20). */
@@ -2140,6 +2147,7 @@ export async function listAiAccounts(deps: BrainDeps, userId: string, orgId: str
         name: m.name,
         online: shownOnline(m),
         mine: m.pairedByUserId === userId,
+        hosted: hostedMachine(m.kind),
         canAdd: mayAddAccounts(m, userId) && m.protocol >= ACCOUNTS_PROTOCOL,
         keys: m.protocol >= PLAN_KEYS_PROTOCOL,
         shares: {

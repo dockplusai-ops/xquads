@@ -12,6 +12,7 @@ import type {
   MachineAccount,
   MachineAccountKind,
   OrgStanding,
+  PlanSignIns,
 } from "../api/types";
 import { groupPlans, type OwnSignInRow, ownSignInReady, ownSignIns, planWordOf } from "./ai-accounts";
 import { answersOthers, audienceOf, managesAgent } from "./audience";
@@ -439,7 +440,8 @@ export type PlanGate =
   /** `overdue`: on the Cloud, it should have passed by itself by now and didn't. */
   | {
       state: "unsupported";
-      reason: BrainUnavailable | "keys";
+      /** `plan_off`: the server lets no plan of this kind think on that computer (`planOff`): an API key does. */
+      reason: BrainUnavailable | "keys" | "plan_off";
       overdue?: boolean;
     }
   /** `owner`: the viewer doesn't own the agent; `computer`: only whoever connected it adds a sign-in there. */
@@ -479,6 +481,16 @@ export const unsupportedGate = (
  * again after the Cloud's computer said ready (`catchUp`), so a view with no computer still has none, and nothing is
  * coming.
  */
+/**
+ * The server lets no plan of this kind think on that computer (`AuthConfig.planSignIns`): on one it runs (`hosted`)
+ * only API keys, and a Claude subscription nowhere. Keys (coding plans, OpenCode) always pass. Absent: an older server.
+ */
+export const planOff = (choice: PlanChoice, hosted: boolean | undefined, plans: PlanSignIns | undefined) =>
+  Boolean(plans) &&
+  !isPlanId(choice) &&
+  choice !== "zen" &&
+  ((hosted === true && !plans?.hosted) || (choice === "claude" && !plans?.claude));
+
 export function planGate({
   choice,
   edition,
@@ -487,6 +499,7 @@ export function planGate({
   computer,
   caughtUp = false,
   standing,
+  plans,
   now = Date.now(),
 }: {
   choice: PlanChoice;
@@ -496,6 +509,7 @@ export function planGate({
   computer: AiComputer | undefined;
   caughtUp?: boolean;
   standing?: Pick<OrgStanding, "state" | "reason"> | null;
+  plans?: PlanSignIns;
   now?: number;
 }): PlanGate {
   const hold = planHoldOf(edition, standing);
@@ -505,6 +519,7 @@ export function planGate({
   if (!brain.canUsePlans) return { state: "locked", who: "owner" };
   if (!brain.computer)
     return edition === "cloud" && !caughtUp ? { state: "preparing", view: null } : { state: "missing" };
+  if (planOff(choice, brain.computer.hosted, plans)) return { state: "unsupported", reason: "plan_off" };
   if (!brain.computer.online) return { state: "offline" };
   const option = brain.options.find((o) => o.kind === kindOf(choice));
   if (!option?.available) return unsupportedGate(option?.reason ?? "not_reported", edition, setup, now);
@@ -527,6 +542,7 @@ export function planGateWithoutAgent({
   computers,
   machines,
   standing,
+  plans,
   now = Date.now(),
 }: {
   choice: PlanChoice;
@@ -535,6 +551,7 @@ export function planGateWithoutAgent({
   computers: readonly AiComputer[] | undefined;
   machines?: readonly Pick<Machine, "id" | "pairedBy">[] | undefined;
   standing?: Pick<OrgStanding, "state" | "reason"> | null;
+  plans?: PlanSignIns;
   now?: number;
 }): { gate: PlanGate; computer?: AiComputer } {
   const hold = planHoldOf(edition, standing);
@@ -543,7 +560,8 @@ export function planGateWithoutAgent({
   if (!computers || !edition) return { gate: { state: "loading" } };
   const kind = kindOf(choice);
   const machineOf = (c: AiComputer) => machines?.find((m) => m.id === c.machineId);
-  const fits = (c: AiComputer) => c.online && c.brains[kind] === true && (!isPlanId(choice) || c.keys);
+  const fits = (c: AiComputer) =>
+    c.online && c.brains[kind] === true && (!isPlanId(choice) || c.keys) && !planOff(choice, c.hosted, plans);
   const addable = computers.filter((c) => c.canAdd);
   const computer = addable.find(fits) ?? addable.find((c) => c.online) ?? addable[0];
   if (!computer) {
@@ -558,6 +576,7 @@ export function planGateWithoutAgent({
     if (!first) return { gate: edition === "cloud" ? { state: "preparing", view: null } : { state: "missing" } };
     return { gate: { state: "locked", who: "computer" }, computer: first };
   }
+  if (planOff(choice, computer.hosted, plans)) return { gate: { state: "unsupported", reason: "plan_off" }, computer };
   if (!computer.online) return { gate: { state: "offline" }, computer };
   if (computer.brains[kind] !== true)
     return {
@@ -604,7 +623,8 @@ export const gateRechecks = (gate: PlanGate, edition: Edition | null) =>
   gate.state === "offline" ||
   (gate.state === "unsupported" &&
     !gate.overdue &&
-    (gate.reason === "not_reported" || (edition === "cloud" && gate.reason !== "tool_off")));
+    (gate.reason === "not_reported" ||
+      (edition === "cloud" && gate.reason !== "tool_off" && gate.reason !== "plan_off")));
 
 /** The Cloud's line per reason a plan can't sign in on the workspace's computer (`aiAccounts.connect.needsCloud.*`). */
 const CLOUD_REASON = {
@@ -672,6 +692,7 @@ export function gateLine(
   if (gate.state !== "unsupported") return null;
   if (gate.reason === "not_reported" && !gate.overdue)
     return { text: t("brain.reasons.not_reported", { computer }), rechecks };
+  if (gate.reason === "plan_off") return { text: t("brain.reasons.plan_off", { computer }), rechecks };
   if (edition === "cloud")
     return {
       text: t(`aiAccounts.connect.needsCloud.${gate.overdue ? "stuck" : CLOUD_REASON[gate.reason]}`, {

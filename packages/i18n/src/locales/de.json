@@ -12420,6 +12420,7 @@
       "home_only": "{{program}} ist auf {{computer}} nur für root installiert, wo die Agenten nicht hinkommen.",
       "not_reported": "{{computer}} prüft noch, welche Programme vorhanden sind. Das ändert sich von selbst, wenn es so weit ist.",
       "system": "{{program}} läuft noch nicht auf dem System von {{computer}}.",
+      "plan_off": "Die Agenten können dieses Abo auf {{computer}} nicht nutzen. Wähle stattdessen einen API-Schlüssel.",
       "no_computerCloud": "Bereit, sobald {{computer}} es ist."
     },
     "notAvailableNow": "Ausgewählt, aber gerade nicht verfügbar.",
