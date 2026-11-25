@@ -436,7 +436,7 @@ test("its turn goes to the runner as the locked-down chat profile, with no check
   const brain = createClaudeCodeBrain({
     hub: hub as never,
     pubsub: { publish: async () => {}, subscribe: () => () => {} } as never,
-    agentScope: async () => ({ id: "a", handle: "lodi" }),
+    agentScope: async () => ({ id: "a", handle: "doki" }),
     permissions: () => RIGHT_HAND_TURN,
     personalMcp: () => true,
     prepare: async () => {

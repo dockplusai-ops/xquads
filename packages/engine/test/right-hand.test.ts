@@ -55,13 +55,13 @@ test("every workspace comes with one right hand, Doki, owned by its owner", asyn
   expect(more).toEqual([]);
   expect(lodi).toMatchObject({
     name: "Doki",
-    handle: "lodi",
+    handle: "doki",
     model: "auto",
     ownerUserId: f.owner.id,
     monthlyBudgetNanoUsd: null,
     audienceMode: "everyone",
     machineId: null,
-    appearance: { color: "teal", eyes: "happy", accessory: "headset" },
+    appearance: { color: "teal", eyes: "round", accessory: "none" },
   });
   // Again changes nothing.
   expect(await ensureRightHand(f.db, f.org.id)).toBeNull();
@@ -70,8 +70,8 @@ test("every workspace comes with one right hand, Doki, owned by its owner", asyn
 
 test("the boot backfill gives older workspaces theirs, not one being deleted, and takes the next free handle", async () => {
   f = await setup();
-  // `setup` leaves the workspace without it, as one made before it; `@lodi` is taken there.
-  await createAgent(f.db, f.owner.id, f.org.id, { name: "Doki", handle: "lodi" }, { model: "claude-sonnet-5-5" });
+  // `setup` leaves the workspace without it, as one made before it; `@doki` is taken there.
+  await createAgent(f.db, f.owner.id, f.org.id, { name: "Doki", handle: "doki" }, { model: "claude-sonnet-5-5" });
   const other = await addUser(f.db, "bia");
   const { organization: closing } = await createOrganization(f.db, other.id, { name: "Closing" });
   await f.db.delete(schema.agents).where(eq(schema.agents.orgId, closing.id));
@@ -80,7 +80,7 @@ test("the boot backfill gives older workspaces theirs, not one being deleted, an
     .set({ deletionDueAt: new Date(Date.now() + 86_400_000) })
     .where(eq(schema.organizations.id, closing.id));
   expect(await ensureRightHands(f.db)).toBe(1);
-  expect((await rightHandOf(f.org.id))[0]?.handle).toBe("lodi-2");
+  expect((await rightHandOf(f.org.id))[0]?.handle).toBe("doki-2");
   expect(await rightHandOf(closing.id)).toEqual([]);
   expect(await ensureRightHands(f.db)).toBe(0);
 });
@@ -209,7 +209,7 @@ test("its prompt says what the person may do, and shows only the agents they may
   const prompt = (personId: string) =>
     rightHandPrompt({ db: f.db }, { orgId: f.org.id, agent: lodi, personId, inDm: true });
   const owner = await prompt(f.owner.id);
-  expect(owner).toContain("You are Doki (@lodi)");
+  expect(owner).toContain("You are Doki (@doki)");
   expect(owner).toContain("an owner of this workspace");
   // "Edit agents" and "Create routines" reach the agents a person talks to (ADR 0085 addendum of 2026-11-17).
   expect(owner).toContain(
@@ -448,7 +448,7 @@ test("in no channel, an @mention in any channel still reaches it, and only that"
         .where(eq(schema.agentRuns.triggerMessageId, messageId))
     ).map((r) => [r.agentId, r.trigger]);
   const called = await postPersonMessage({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, f.general.id, {
-    body: "@lodi cria um agente de suporte?",
+    body: "@doki cria um agente de suporte?",
   });
   expect(called.mentionedAgentIds).toEqual([lodi.id]);
   expect(await runsOf(called.id)).toEqual([[lodi.id, "mention"]]);

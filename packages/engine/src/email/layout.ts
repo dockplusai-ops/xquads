@@ -101,16 +101,16 @@ export const HANDSET = { on: "phone.png", off: "phone-off.png", kind: "android" 
  * colour's face.
  */
 export const ONBOARDING_CREW = [
-  { color: "indigo", eyes: "round", accessory: "cap" },
-  { color: "green", eyes: "wide", accessory: "headphones" },
-  { color: "rose", eyes: "dots", accessory: "flower" },
-  { color: "amber", eyes: "round", accessory: "antenna" },
-] as const satisfies readonly { color: AgentColorName; eyes: EyeStyle; accessory: AccessoryName }[];
+  { color: "sky", eyes: "round", accessory: "none" },
+  { color: "indigo", eyes: "round", accessory: "none" },
+  { color: "amber", eyes: "round", accessory: "none" },
+  { color: "green", eyes: "round", accessory: "none" },
+] as const satisfies readonly { color: AgentColorName; eyes: EyeStyle; accessory: AccessoryName | "none" }[];
 /** The workspace assistant's own look (`RIGHT_HAND_DEFAULTS` in packages/engine/src/right-hand.ts), drawn whole too. */
-export const ASSISTANT_LOOK = { color: "teal", eyes: "happy", accessory: "headset" } as const satisfies {
+export const ASSISTANT_LOOK = { color: "teal", eyes: "round", accessory: "none" } as const satisfies {
   color: AgentColorName;
   eyes: EyeStyle;
-  accessory: AccessoryName;
+  accessory: AccessoryName | "none";
 };
 /** Every look drawn whole by `packages/engine/scripts/email-art.ts`. */
 export const WHOLE_LOOKS = [...ONBOARDING_CREW, ASSISTANT_LOOK];

@@ -225,7 +225,7 @@ export function sceneTeam<A extends { id: string }>(agents: readonly A[], lead: 
  */
 export const RIGHT_HAND_DEFAULT = {
   name: "Doki",
-  appearance: { color: "teal", eyes: "happy", accessory: "headset" },
+  appearance: { color: "teal", eyes: "round", accessory: "none" },
 } as const;
 
 /** Where its name comes from ("lodestar") is told only while it keeps that name: a renamed one has another story. */

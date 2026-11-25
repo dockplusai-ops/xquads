@@ -914,7 +914,7 @@ describe("Usar planos de outras pessoas (ADR 0059 §3, amended 2026-11-04)", () 
     await account(BIAS, bia.id);
     const [lodi] = await fx.db
       .insert(schema.agents)
-      .values({ orgId: fx.org.id, name: "Doki", handle: "lodi", model: "claude-sonnet-5-5", builtin: "right_hand" })
+      .values({ orgId: fx.org.id, name: "Doki", handle: "doki", model: "claude-sonnet-5-5", builtin: "right_hand" })
       .returning();
     if (!lodi) throw new Error("no agent");
     const dan = await editor();

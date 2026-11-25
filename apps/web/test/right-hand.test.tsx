@@ -136,7 +136,7 @@ describe("the right hand elsewhere", () => {
     const names = [...agents.querySelectorAll(".members-side__label")].map((n) => n.textContent);
     expect(names.length).toBeGreaterThan(0);
     expect(names).not.toContain("Doki");
-    expect(column.textContent).not.toContain("chame com @lodi");
+    expect(column.textContent).not.toContain("chame com @doki");
   });
 
   test("its DM says what it is and that nothing changes without you", async () => {
@@ -246,7 +246,7 @@ describe("the right hand elsewhere", () => {
     const state = withRightHand(seedState());
     state.dms.push({
       channelId: "dm-lodi",
-      with: { type: "agent", id: LODI_ID, name: "Doki", handle: "lodi" },
+      with: { type: "agent", id: LODI_ID, name: "Doki", handle: "doki" },
       everRead: false,
     });
     state.channelMembers["dm-lodi"] = [
@@ -287,7 +287,7 @@ describe("the right hand elsewhere", () => {
       if (mode) {
         const machines = fakeMachinesOf.get(api);
         machines?.pair({ id: "machine_1", name: "Servidor", os: "linux", mode });
-        machines?.setAgents("machine_1", [{ id: LODI_ID, name: "Doki", handle: "lodi" }]);
+        machines?.setAgents("machine_1", [{ id: LODI_ID, name: "Doki", handle: "doki" }]);
       }
       await renderApp(`/org/${ORG_ID}/agents/${LODI_ID}`, { api });
       await settle(8);

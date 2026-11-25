@@ -458,7 +458,8 @@ describe("the picture over the headline", () => {
   const lia = { color: "rose", eyes: "dots", accessory: "flower" };
   const atlas = { color: "amber", eyes: "round", accessory: "antenna" };
   // xquads' agents wear nothing: every look, the onboarding's own included, is its colour's face.
-  const ONBOARDING = ["face-indigo.png 32×32", "face-green.png 32×32", "face-rose.png 32×32", "face-amber.png 32×32"];
+  // The emails' own crew: the onboarding's brand agents (Ana, Rui, Lia, Téo).
+  const ONBOARDING = ["face-sky.png 32×32", "face-indigo.png 32×32", "face-amber.png 32×32", "face-green.png 32×32"];
   const plain = (...colors: string[]) => colors.map((color) => ({ color, eyes: "round", accessory: "none" }));
   /** The pictures between the card's top and the headline, in order: file, size and alt text. */
   const scene = (t: EmailTemplate) => {
@@ -493,7 +494,7 @@ describe("the picture over the headline", () => {
   });
 
   test("every look is its colour's face: eyes and accessory are never drawn", () => {
-    expect(shown([theo, ada, lia, atlas])).toEqual(ONBOARDING);
+    expect(shown([theo, ada, lia, atlas])).toEqual(faces("indigo", "green", "rose", "amber"));
     expect(shown([{ color: "indigo", accessory: "cap" }, { ...ada, eyes: "round" }, ...plain("rose")])).toEqual(
       faces("indigo", "green", "rose"),
     );

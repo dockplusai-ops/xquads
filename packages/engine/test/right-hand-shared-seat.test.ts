@@ -487,7 +487,7 @@ test("the audit log says when it was the shared seat that was opened", async () 
       agentId,
       machineId,
       request: { kind: "terminal", cols: 80, rows: 24 },
-      scope: { id: scopeId, handle: "lodi" },
+      scope: { id: scopeId, handle: "doki" },
       openedAt: Date.now(),
       bytesIn: 0,
       bytesOut: 0,

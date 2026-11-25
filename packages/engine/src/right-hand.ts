@@ -42,9 +42,9 @@ export const isRightHand = (a: { builtin?: string | null } | null | undefined) =
 /** What it starts with. The name is the same in every language; admins may rename it and change its look. */
 export const RIGHT_HAND_DEFAULTS = {
   name: "Doki",
-  handle: "lodi",
+  handle: "doki",
   model: AUTO_MODEL,
-  appearance: { color: "teal", eyes: "happy", accessory: "headset" },
+  appearance: { color: "teal", eyes: "round", accessory: "none" },
 } as const;
 
 /** What "Automático" reads of it (`chooseAutoModel`): small work first, so it starts on the cheap tier. */

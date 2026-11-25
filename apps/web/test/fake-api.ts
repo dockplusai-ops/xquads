@@ -747,7 +747,7 @@ export function withRightHand(state: FakeState, extra: Partial<Agent> = {}) {
   state.agents.push({
     id: LODI_ID,
     name: "Doki",
-    handle: "lodi",
+    handle: "doki",
     role: "",
     instructions: "",
     model: "auto",

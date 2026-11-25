@@ -80,22 +80,17 @@ function mix(a: Rgb, b: Rgb, k: number): Rgb {
 
 /**
  * The tile a picked color makes, [top, bottom] as "#rrggbb": `gradientOf(hsvToHex(h, s, v))`, the engine's
- * `customGradient` (the bottom's lightness held where white eyes still read, the top lighter and capped).
+ * `customGradient` (the color itself, lifted only until it reads on the petrol page, and a lighter step on top).
  */
 export function tileOf(h: number, s: number, v: number): [string, string] {
   "worklet";
-  const [hue, sat, l0] = rgbHsl(hsvRgb(h, s, v));
-  let l = Math.max(0.28, Math.min(0.55, l0));
-  let bottom = hslRgb(hue, sat, l);
-  while (luminance(bottom) > 0.28 && l > 0.2) {
-    l -= 0.01;
+  const picked = hsvRgb(h, s, v);
+  const [hue, sat, l0] = rgbHsl(picked);
+  let l = l0;
+  let bottom = picked;
+  while (luminance(bottom) < 0.09 && l < 1) {
+    l = Math.min(1, l + 0.01);
     bottom = hslRgb(hue, sat, l);
   }
-  let lt = Math.min(0.78, l + 0.26);
-  let top = hslRgb(hue, sat, lt);
-  while ((luminance(top) > 0.59 || luminance(mix(bottom, top, 0.5)) > 0.405) && lt > l) {
-    lt -= 0.01;
-    top = hslRgb(hue, sat, lt);
-  }
-  return [rgbHex(top), rgbHex(bottom)];
+  return [rgbHex(mix(bottom, [255, 255, 255], 0.3)), rgbHex(bottom)];
 }

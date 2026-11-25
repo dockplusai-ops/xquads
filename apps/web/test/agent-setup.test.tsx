@@ -138,7 +138,7 @@ describe("a template agent's greeting", () => {
         ...ada,
         id: "lodi-x",
         name: "Doki",
-        handle: "lodi",
+        handle: "doki",
         builtin: "right_hand",
         setup: { role: null, done: ["apps"] },
       });

@@ -46,7 +46,7 @@ describe("opening a workspace in round trips (#1)", () => {
 describe("a DM opened from its own answer, the list not read again for it (#1)", () => {
   const dm = {
     channelId: "d-lodi",
-    with: { type: "agent", id: "lodi", name: "Doki", handle: "lodi" },
+    with: { type: "agent", id: "lodi", name: "Doki", handle: "doki" },
   } as DirectMessage;
   const watch = (qc: QueryClient, answer: () => Promise<DirectMessage[]>) => {
     let reads = 0;
