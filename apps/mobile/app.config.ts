@@ -5,7 +5,8 @@ import versions from "./versions.json";
  * The app's Expo config. Builds: the "Android build" and "iOS build" workflows on GitHub Actions, or EAS (see
  * README.md). The native projects are made from this file by `expo prebuild` and never committed.
  * - `EXPO_PUBLIC_API_URL`: the server the app talks to by default (production); people can pick their own.
- * - `EAS_PROJECT_ID`: overrides the EAS project, for those who build with EAS; defaults to ours on expo.dev.
+ * - `EAS_PROJECT_ID`: overrides the EAS project, for those who build with EAS; defaults to xquads' own on expo.dev
+ *   (@dockplusai/xquads).
  * - `APP_VARIANT`: "development" | "preview" | "production" (from eas.json or the workflow), so the three install
  *   side by side.
  * - `GOOGLE_SERVICES_JSON`: path to Firebase's google-services.json, for push on Android (FCM).
@@ -92,8 +93,8 @@ export const APP_LINK_PATTERNS = [
 ];
 /** The app icons (ADR 0179), one folder each: packages/ui/scripts/app-icons.mjs writes them. */
 const ICONS = "./assets/app-icons";
-// xquads' own Expo project, from the environment: the original's id belongs to its own Expo account.
-const projectId = process.env.EAS_PROJECT_ID;
+// xquads' own Expo project (@dockplusai/xquads on expo.dev), unless the environment names another.
+const projectId = process.env.EAS_PROJECT_ID ?? "58a2aae1-159b-481a-ab8b-1aab0a4a4a36";
 // expo-image-picker and expo-camera both set iOS's camera text: one text for both uses.
 const CAMERA_USE = "To take pictures for your conversations and scan QR codes.";
 
@@ -111,6 +112,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: variant === "production" ? "xquads" : `xquads ${variant}`,
   slug: "xquads",
+  // The Expo account that owns the project above.
+  owner: process.env.EAS_PROJECT_ID ? undefined : "dockplusai",
   scheme: "agenteschat",
   version,
   // Upright everywhere (the plugin below); only the agent's screen, in control, lies down (`useSideways`).
