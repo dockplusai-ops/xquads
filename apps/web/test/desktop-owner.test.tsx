@@ -79,7 +79,7 @@ describe("Entrar no servidor que o app roda neste computador", () => {
     await act(async () => fireEvent.click(continueHere() as HTMLElement));
     await settle(2);
     expect(screen().getByRole("alert").textContent).toBe(
-      "Não sobrou nenhuma conta no agentes.chat deste Mac. Crie o novo dono na janela que abriu.",
+      "Não sobrou nenhuma conta no xquads deste Mac. Crie o novo dono na janela que abriu.",
     );
     // The refusal says nothing against the address field.
     expect(screen().getByLabelText("E-mail").getAttribute("aria-invalid")).toBeNull();
@@ -158,7 +158,7 @@ describe("Entrar no servidor que o app roda neste computador", () => {
     await renderApp("/login", { api: signedOut() });
     await settle(6);
     const line = document.querySelector(".auth__place");
-    expect(line?.textContent).toContain("Entrando no agentes.chat deste Mac");
+    expect(line?.textContent).toContain("Entrando no xquads deste Mac");
     await act(async () =>
       fireEvent.click(within(line as HTMLElement).getByRole("button", { name: "Trocar de servidor" })),
     );
@@ -177,7 +177,7 @@ describe("Entrar no servidor que o app roda neste computador", () => {
     (win().__agentesDesktop as Record<string, unknown>).servers = true;
     await renderApp("/login", { api: signedOut() });
     await settle(6);
-    expect(document.querySelector(".auth__place")?.textContent).toContain("Entrando no agentes.chat Cloud");
+    expect(document.querySelector(".auth__place")?.textContent).toContain("Entrando no xquads Cloud");
   });
 
   test("forgot password on this computer's server: Continue on this Mac, then a new password (ADR 0158)", async () => {

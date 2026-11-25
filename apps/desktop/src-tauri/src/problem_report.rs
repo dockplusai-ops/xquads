@@ -7,7 +7,7 @@ use std::time::Duration;
 
 /// The problem report contract's limit.
 pub const MAX_BYTES: usize = 256 * 1024;
-const DEFAULT_URL: &str = "https://telemetry.agentes.chat/v1/problem-report";
+const DEFAULT_URL: &str = "https://telemetry.xquads.com/v1/problem-report";
 const TIMEOUT: Duration = Duration::from_secs(15);
 
 /// Where reports go: the app process's `PROBLEM_REPORT_URL` when set (`off` turns sending off), else agentes.chat's.

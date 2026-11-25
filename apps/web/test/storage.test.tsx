@@ -502,11 +502,11 @@ describe("Configurações → Armazenamento", () => {
 
     await back(true);
     expect(section().textContent).toContain(
-      "Copia para o seu bucket os arquivos que o armazenamento do agentes.chat ainda guarda.",
+      "Copia para o seu bucket os arquivos que o armazenamento do xquads ainda guarda.",
     );
-    await click(within(section()).getByRole("button", { name: "Voltar para o armazenamento do agentes.chat" }));
-    const cloud = screen().getByRole("dialog", { name: "Voltar para o armazenamento do agentes.chat?" });
-    expect(cloud.textContent).toContain("Novos arquivos voltam para o armazenamento do agentes.chat.");
+    await click(within(section()).getByRole("button", { name: "Voltar para o armazenamento do xquads" }));
+    const cloud = screen().getByRole("dialog", { name: "Voltar para o armazenamento do xquads?" });
+    expect(cloud.textContent).toContain("Novos arquivos voltam para o armazenamento do xquads.");
   });
 });
 

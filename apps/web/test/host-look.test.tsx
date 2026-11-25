@@ -40,7 +40,7 @@ describe("the sign-in page", () => {
     expect(logo.getAttribute("src")).toBe(NORTHWIND.logoUrl);
     expect(document.querySelector(".auth--host")).not.toBeNull();
     expect(screen().queryByRole("img", { name: "agentes" })).toBeNull();
-    const powered = screen().getByRole("link", { name: "Feito com agentes.chat" });
+    const powered = screen().getByRole("link", { name: "Feito com xquads" });
     expect(powered.getAttribute("href")).toBe(DOCS_SITE);
     expect(screen().queryByRole("button", { name: /Continuar com/ })).toBeNull();
     expect(agentVar()).toBe(accentPalette(NORTHWIND.accent).light.agent);
@@ -59,7 +59,7 @@ describe("the sign-in page", () => {
   test("on a registered host whose operator turned the powered-by line off: its look without the line", async () => {
     await signInPage({ ...NORTHWIND, poweredBy: false }, false);
     expect(screen().getByRole("img", { name: "Northwind Studio" })).toBeTruthy();
-    expect(screen().queryByRole("link", { name: "Feito com agentes.chat" })).toBeNull();
+    expect(screen().queryByRole("link", { name: "Feito com xquads" })).toBeNull();
     expect(document.querySelector(".auth__powered")).toBeNull();
   });
 
@@ -70,7 +70,7 @@ describe("the sign-in page", () => {
     expect(screen().getByRole("button", { name: /Continuar com GitHub/ })).toBeTruthy();
     expect(agentVar()).toBe("");
     await settle(4);
-    expect(document.querySelector(".auth__place")?.textContent).toContain("Entrando no agentes.chat Cloud");
+    expect(document.querySelector(".auth__place")?.textContent).toContain("Entrando no xquads Cloud");
   });
 });
 
@@ -119,11 +119,11 @@ test("a suspended workspace's screen keeps the workspace's accent, on any host, 
 test("the tab's title names the host where it names the product, in every language and on every page", async () => {
   const i18n = createI18n("en");
   translateTabTitle(i18n);
-  expect(document.title).toContain("agentes.chat");
+  expect(document.title).toContain("xquads");
   brandTabTitle("Northwind Studio");
   expect(document.title).toBe("Northwind Studio · Your team and your agents, in the same conversation");
   await act(async () => {
-    document.title = "#general · Acme · agentes.chat";
+    document.title = "#general · Acme · xquads";
     await Promise.resolve();
   });
   expect(document.title).toBe("#general · Acme · Northwind Studio");
@@ -135,7 +135,7 @@ test("the tab's title names the host where it names the product, in every langua
   // A name with "$" is taken as written.
   brandTabTitle("Cash $& Co.");
   await act(async () => {
-    document.title = "agentes.chat";
+    document.title = "xquads";
     await Promise.resolve();
   });
   expect(document.title).toBe("Cash $& Co.");

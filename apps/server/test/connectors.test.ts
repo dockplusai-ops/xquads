@@ -351,11 +351,11 @@ test("catalog: one list of our connectors and the one-click MCP servers, one ent
 });
 
 test("catalog on the Cloud: no API key for Intercom's servers (US and EU), whose terms forbid asking for one; the others keep it", async () => {
-  t = await createTestServer({ env: { PUBLIC_URL: "https://app.agentes.chat" } });
+  t = await createTestServer({ env: { PUBLIC_URL: "https://app.xquads.com" } });
   const owner = browser(t);
   const signedUp = await owner("/api/auth/sign-up/email", {
     json: { email: "owner@example.com", password: "correct horse battery", name: "owner" },
-    origin: "https://app.agentes.chat",
+    origin: "https://app.xquads.com",
   });
   expect(signedUp.status).toBe(200);
   const { connectors } = (await (await owner("/api/app/connectors/catalog")).json()) as {

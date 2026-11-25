@@ -133,11 +133,11 @@ describe("the iPhone setup's checklist", () => {
 
 describe("this computer on its server", () => {
   test("the QR and the Android steps open this computer's own steps", () => {
-    expect(iphoneStepsUrl("https://app.agentes.chat", "o1", "m-1")).toBe(
-      "https://app.agentes.chat/org/o1/settings/devices/iphone-setup?computer=m-1",
+    expect(iphoneStepsUrl("https://app.xquads.com", "o1", "m-1")).toBe(
+      "https://app.xquads.com/org/o1/settings/devices/iphone-setup?computer=m-1",
     );
-    expect(androidStepsUrl("https://app.agentes.chat", "o1", "m-1")).toBe(
-      "https://app.agentes.chat/org/o1/settings/devices/android-setup?computer=m-1",
+    expect(androidStepsUrl("https://app.xquads.com", "o1", "m-1")).toBe(
+      "https://app.xquads.com/org/o1/settings/devices/android-setup?computer=m-1",
     );
   });
 

@@ -77,7 +77,7 @@ describe("problem reports", () => {
     expect(res.status).toBe(200);
     expect(await res.json()).toEqual({ id: "R-7K3QXM" });
     expect(calls).toHaveLength(1);
-    expect(calls[0]?.url).toBe("https://telemetry.agentes.chat/v1/problem-report");
+    expect(calls[0]?.url).toBe("https://telemetry.xquads.com/v1/problem-report");
     const sent = calls[0]?.body as Record<string, unknown>;
     expect({ ...sent, note: undefined, replyTo: undefined }).toEqual({
       ...report,

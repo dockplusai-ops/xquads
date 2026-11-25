@@ -275,11 +275,11 @@ describe("Connect a device", () => {
     expect(chooser.textContent).toContain("Android phone");
     await click(within(chooser).getByRole("button", { name: /A server or VPS/ }));
     const dialog = screen().getByRole("dialog", { name: "Connect a server" });
-    expect(dialog.querySelector("code")?.textContent).toBe("curl -fsSL https://app.agentes.chat/i/7KQ2-M9X1 | sh");
+    expect(dialog.querySelector("code")?.textContent).toBe("curl -fsSL https://app.xquads.com/i/7KQ2-M9X1 | sh");
     expect(dialog.textContent).toContain("Works once, for 10 minutes");
     expect(dialog.textContent).toContain("Waiting for the server…");
     await click(within(dialog).getByRole("radio", { name: "Windows" }));
-    expect(dialog.querySelector("code")?.textContent).toBe("irm https://app.agentes.chat/i/7KQ2-M9X1/ps | iex");
+    expect(dialog.querySelector("code")?.textContent).toBe("irm https://app.xquads.com/i/7KQ2-M9X1/ps | iex");
     devices.setLink({ status: "asking", request: acmeDevices().requests[0] });
     await refetch(services);
     const asking = screen().getByRole("dialog", { name: "ci-runner wants to join Acme" });
@@ -309,21 +309,21 @@ describe("Connect a device", () => {
     // Served over plain http here: the app wouldn't take a link to it, so this computer gets its one line.
     await click(screen().getByRole("button", { name: /This computer/ }));
     const line = screen().getByRole("dialog", { name: "Connect a computer" });
-    expect(within(line).queryByRole("link", { name: "Open the agentes.chat app" })).toBeNull();
+    expect(within(line).queryByRole("link", { name: "Open the xquads app" })).toBeNull();
   });
 
   test("this computer, from a browser: the app opens a link to this server, asks to join, the maker lets it in", async () => {
-    servedAt("https://app.agentes.chat/");
+    servedAt("https://app.xquads.com/");
     const { state, devices, services } = await open(`/org/${ORG_ID}/settings/devices`);
     await click(screen().getByRole("button", { name: "Connect a device" }));
     await click(screen().getByRole("button", { name: /This computer/ }));
     const dialog = screen().getByRole("dialog", { name: "This computer" });
     expect(calls(state, "devices.createLink")[0]?.args).toEqual([ORG_ID, "computer"]);
-    const app = within(dialog).getByRole("link", { name: "Open the agentes.chat app" });
-    expect(app.getAttribute("href")).toBe("agenteschat://pair?server=https%3A%2F%2Fapp.agentes.chat&link=7KQ2-M9X1");
+    const app = within(dialog).getByRole("link", { name: "Open the xquads app" });
+    expect(app.getAttribute("href")).toBe("agenteschat://pair?server=https%3A%2F%2Fapp.xquads.com&link=7KQ2-M9X1");
     expect(dialog.textContent).toContain("Waiting for the app on this computer…");
     expect(within(dialog).getByRole("heading", { name: "Don't have the app?" })).toBeTruthy();
-    expect(dialog.textContent).toContain("After installing, press Open the agentes.chat app again.");
+    expect(dialog.textContent).toContain("After installing, press Open the xquads app again.");
 
     devices.setLink({ status: "asking", request: acmeDevices().requests[0] });
     await refetch(services);
@@ -337,7 +337,7 @@ describe("Connect a device", () => {
   });
 
   test("this computer without the app: one line for its terminal, or a server's", async () => {
-    servedAt("https://app.agentes.chat/");
+    servedAt("https://app.xquads.com/");
     await open(`/org/${ORG_ID}/settings/devices`);
     await click(screen().getByRole("button", { name: "Connect a device" }));
     await click(screen().getByRole("button", { name: /This computer/ }));
@@ -585,7 +585,7 @@ describe("Connect a device", () => {
     await ask();
     const failed = dialog.querySelector('.dv-step[data-state="needs"]');
     expect(failed?.textContent).toContain(
-      "No phone paired in 2 minutes. If the camera scanned the code or the phone left the Wi-Fi, put it on the same Wi-Fi as Sam's MacBook Pro and scan from Wireless debugging. On that Mac, also turn on agentes.chat in System Settings › Privacy & Security › Local Network.",
+      "No phone paired in 2 minutes. If the camera scanned the code or the phone left the Wi-Fi, put it on the same Wi-Fi as Sam's MacBook Pro and scan from Wireless debugging. On that Mac, also turn on xquads in System Settings › Privacy & Security › Local Network.",
     );
     await click(within(dialog).getByRole("button", { name: "Try again" }));
     expect(calls(state, "devices.startWifiPairing")).toHaveLength(2);
@@ -679,7 +679,7 @@ describe("Connect a device", () => {
     await click(within(dialog).getByRole("button", { name: "Usar um código de pareamento" }));
     expect(qr).toContain("Não pela câmera");
     expect(failed).toBe(
-      "Não deu para alcançar o celular. Coloque-o no mesmo Wi-Fi que Sam's MacBook Pro. Nesse Mac, ligue também o agentes.chat em Ajustes do Sistema › Privacidade e Segurança › Rede Local.",
+      "Não deu para alcançar o celular. Coloque-o no mesmo Wi-Fi que Sam's MacBook Pro. Nesse Mac, ligue também o xquads em Ajustes do Sistema › Privacidade e Segurança › Rede Local.",
     );
     expect(within(dialog).getByLabelText("Endereço IP e porta")).toBeTruthy();
     expect(within(dialog).getByLabelText("Código de pareamento por Wi-Fi")).toBeTruthy();
@@ -742,7 +742,7 @@ describe("Connect a device", () => {
     );
     // A picture of that window, with the words macOS shows, so it's no surprise on the Mac.
     expect(step()?.querySelector(".dv-mac-ask")?.textContent).toContain(
-      "agentes.chat wants to put Xcode in use to connect iPhones.",
+      "xquads wants to put Xcode in use to connect iPhones.",
     );
     await click(inStep().getByRole("button", { name: "Cancel" }));
     expect(calls(app.state, "devices.cancelXcodeFix")).toHaveLength(1);
@@ -773,7 +773,7 @@ describe("Connect a device", () => {
     // A Mac whose app is too old: update it, or the command.
     app.devices.setXcodeFix({ fix: null, update: true });
     await refetch(app.services);
-    expect(step()?.textContent).toContain("Update the agentes.chat app on Sam's MacBook Pro to fix it with one click.");
+    expect(step()?.textContent).toContain("Update the xquads app on Sam's MacBook Pro to fix it with one click.");
     expect(step()?.querySelector(".machine-command")).toBeTruthy();
     expect(inStep().queryByRole("button", { name: "Fix it for me" })).toBeNull();
 
@@ -932,7 +932,7 @@ describe("an iPhone at Developer Mode", () => {
     expect(causes()[0]).toBe(
       "The iPhone hides the option until Xcode asks to show it. Open Xcode on Sam's MacBook Pro with the iPhone plugged in.",
     );
-    expect(causes()[2]).toContain("The agentes.chat app on Sam's MacBook Pro is out of date.");
+    expect(causes()[2]).toContain("The xquads app on Sam's MacBook Pro is out of date.");
     expect(within(step()).getByRole("link", { name: "Download the app" }).getAttribute("href")).toContain("/download");
     expect(step().querySelector(".dv-slow__list .machine-command__code")?.textContent).toBe("agentes-runner update");
 

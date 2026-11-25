@@ -156,7 +156,7 @@ test("the provider is only for the installation's owner", async () => {
 });
 
 test("on agentes.chat the provider can't be chosen", async () => {
-  const origin = "https://app.agentes.chat";
+  const origin = "https://app.xquads.com";
   const server = await createTestServer({ env: { ALLOW_SIGNUP: "true", PUBLIC_URL: origin }, speechFetch: groq });
   t = server;
   const owner = browser(server);

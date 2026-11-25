@@ -276,14 +276,14 @@ export const envVars = {
   TERMS_URL: {
     schema: z.url().optional(),
     description:
-      "Your terms of service, linked on the sign-in and sign-up screens when `PRIVACY_URL` is set too, and where this server's /terms leads. Default on agentes.chat Cloud (https://app.agentes.chat): its /terms page.",
+      "Your terms of service, linked on the sign-in and sign-up screens when `PRIVACY_URL` is set too, and where this server's /terms leads. Default on agentes.chat Cloud (https://app.xquads.com): its /terms page.",
     section: "Sign-in",
     example: "https://example.com/terms",
   },
   PRIVACY_URL: {
     schema: z.url().optional(),
     description:
-      "Your privacy policy, linked on the sign-in and sign-up screens together with `TERMS_URL`, and where this server's /privacy leads. Default on agentes.chat Cloud (https://app.agentes.chat): its /privacy page.",
+      "Your privacy policy, linked on the sign-in and sign-up screens together with `TERMS_URL`, and where this server's /privacy leads. Default on agentes.chat Cloud (https://app.xquads.com): its /privacy page.",
     section: "Sign-in",
     example: "https://example.com/privacy",
   },
@@ -561,7 +561,7 @@ export const envVars = {
   MODEL_ENDPOINTS_PRIVATE: {
     schema: z.stringbool().optional(),
     description:
-      "Whether a workspace's own model endpoint (Settings › AI keys › Other provider) may be on this server's network or over http: an Ollama, vLLM, LM Studio or LiteLLM next to it. The other addresses a workspace names (custom MCP servers and their sign-in, its own bucket, server icons, the pages agents read) reach a private network only through `OUTBOUND_ALLOW_CIDRS` or `OUTBOUND_ALLOW_HOSTS`. Unset: allowed, except on agentes.chat Cloud (https://app.agentes.chat) and with `ALLOW_SIGNUP=true`, where only public https addresses are, checked again at every connection.",
+      "Whether a workspace's own model endpoint (Settings › AI keys › Other provider) may be on this server's network or over http: an Ollama, vLLM, LM Studio or LiteLLM next to it. The other addresses a workspace names (custom MCP servers and their sign-in, its own bucket, server icons, the pages agents read) reach a private network only through `OUTBOUND_ALLOW_CIDRS` or `OUTBOUND_ALLOW_HOSTS`. Unset: allowed, except on agentes.chat Cloud (https://app.xquads.com) and with `ALLOW_SIGNUP=true`, where only public https addresses are, checked again at every connection.",
     section: "Agents",
   },
   OUTBOUND_ALLOW_HOSTS: {
@@ -979,7 +979,7 @@ export const envVars = {
   EMAIL_FROM: {
     schema: z.string().optional(),
     description:
-      "Sender of transactional emails, e.g. `agentes.chat <ping@example.com>` (its domain must be verified with your email provider). Default: `agentes.chat <ping@HOST>`, HOST being the host of `PUBLIC_URL`. On agentes.chat Cloud (https://app.agentes.chat): `agentes.chat <ping@agentes.chat>`.",
+      "Sender of transactional emails, e.g. `agentes.chat <ping@example.com>` (its domain must be verified with your email provider). Default: `agentes.chat <ping@HOST>`, HOST being the host of `PUBLIC_URL`. On agentes.chat Cloud (https://app.xquads.com): `agentes.chat <ping@agentes.chat>`.",
     section: "Email",
   },
   EMAIL_ART: {
@@ -1111,7 +1111,7 @@ export const envVars = {
   APNS_APP_IDS: {
     schema: z
       .string()
-      .default("chat.agentes.app,chat.agentes.app.preview,chat.agentes.app.development")
+      .default("com.xquads.app,com.xquads.app.preview,com.xquads.app.development")
       .transform((value, ctx) => {
         const ids = value
           .split(",")
@@ -1138,7 +1138,7 @@ export const envVars = {
     schema: z
       .url()
       .refine((u) => u.startsWith("https://"), "must be an https URL")
-      .default("https://app.agentes.chat/api/push-relay/v1"),
+      .default("https://app.xquads.com/api/push-relay/v1"),
     description:
       "The push relay phone pushes go through with `PUSH_SENDER=relay` (or `auto` without the platform's own credentials).",
     section: "Push",
@@ -1367,7 +1367,7 @@ export const envVars = {
     section: "Operator",
   },
   FEEDBACK_URL: {
-    schema: z.url().default("https://app.agentes.chat/api/feedback/inbox"),
+    schema: z.url().default("https://app.xquads.com/api/feedback/inbox"),
     description: "Where `FEEDBACK_RELAY` sends a feedback (as JSON in a POST).",
     section: "Operator",
   },
@@ -1451,12 +1451,12 @@ export const envVars = {
     section: "Usage report",
   },
   TELEMETRY_URL: {
-    schema: z.url().default("https://telemetry.agentes.chat/v1/report"),
+    schema: z.url().default("https://telemetry.xquads.com/v1/report"),
     description: "Where the usage report is sent (the report as JSON in a POST).",
     section: "Usage report",
   },
   PROBLEM_REPORT_URL: {
-    schema: z.union([z.literal("off"), z.url()]).default("https://telemetry.agentes.chat/v1/problem-report"),
+    schema: z.union([z.literal("off"), z.url()]).default("https://telemetry.xquads.com/v1/problem-report"),
     description:
       "Where Send a report sends a report someone chose to send after seeing it in full (versions, which settings are set, what failed, recent log lines; never messages, pages, names or keys). Sent even with `TELEMETRY=off`, since a person clicked Send. `off`: the button only copies the report.",
     section: "Usage report",

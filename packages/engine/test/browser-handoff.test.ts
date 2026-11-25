@@ -622,7 +622,7 @@ describe("browser_ask_person", () => {
     expect(refused).toContain("propose_remove_agents");
     expect(refused).toContain(`/org/${f.org.id}/team`);
 
-    pageUrl = "https://app.agentes.chat/org/x/settings/members";
+    pageUrl = "https://app.xquads.com/org/x/settings/members";
     await post("@dev sign in please");
     await drainOutbox(f.db, f.handlers);
     expect(await handoffs()).toEqual([]);
@@ -634,8 +634,8 @@ describe("browser_ask_person", () => {
 
   test("what names our own app: its domains and this server's address, never a mailbox there", () => {
     expect(namesOwnApp("Entre no agentes.chat com a conta administradora")).toBe(true);
-    expect(namesOwnApp("https://app.agentes.chat/org/1/settings")).toBe(true);
-    expect(namesOwnApp("Abra https://admin@app.agentes.chat/login")).toBe(true);
+    expect(namesOwnApp("https://app.xquads.com/org/1/settings")).toBe(true);
+    expect(namesOwnApp("Abra https://admin@app.xquads.com/login")).toBe(true);
     expect(namesOwnApp("Abra app.agentes。chat e entre")).toBe(true);
     expect(namesOwnApp("Abra APP.AGENTES.CHAT. e entre")).toBe(true);
     expect(namesOwnApp("Type the code sent to theo@acme.agentes.chat")).toBe(false);

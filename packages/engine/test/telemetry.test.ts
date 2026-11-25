@@ -374,11 +374,14 @@ test("the instance id is made once and kept; the switch and the Cloud decide wha
   expect(telemetrySends(self, true)).toBe(true);
   expect(telemetrySends(self, false)).toBe(false);
   expect(telemetrySends({ ...self, TELEMETRY: "off" }, true)).toBe(false);
-  const cloud = { TELEMETRY: "off" as const, PUBLIC_URL: "https://agentes.chat" };
+  const cloud = { TELEMETRY: "off" as const, PUBLIC_URL: "https://xquads.com" };
   expect(telemetrySends(cloud, false)).toBe(true);
-  expect(isAgentesCloud("https://www.agentes.chat")).toBe(true);
-  expect(isAgentesCloud("https://agentes.chat.example.com")).toBe(false);
-  expect(isAgentesCloud("https://notagentes.chat")).toBe(false);
+  expect(isAgentesCloud("https://www.xquads.com")).toBe(true);
+  expect(isAgentesCloud("https://app.xquads.com")).toBe(true);
+  expect(isAgentesCloud("https://xquads.com.example.com")).toBe(false);
+  expect(isAgentesCloud("https://notxquads.com")).toBe(false);
+  // The original's Cloud is someone else's server now.
+  expect(isAgentesCloud("https://agentes.chat")).toBe(false);
 });
 
 test("the server's own computer is one machine, however many organizations it serves", async () => {

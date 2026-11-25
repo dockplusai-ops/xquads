@@ -212,7 +212,7 @@ describe("the author's own plan", () => {
     expect(old.hub.calls).toHaveLength(0);
     await f.close();
 
-    const cloud = await plansOnly(fakeHub(), "https://app.agentes.chat");
+    const cloud = await plansOnly(fakeHub(), "https://app.xquads.com");
     const m = await post(f.owner.id, "alguém viu o relatório?");
     await drain(cloud.handlers);
     expect(cloud.hub.calls).toHaveLength(0);

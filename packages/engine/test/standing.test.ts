@@ -678,7 +678,7 @@ describe("on agentes.chat Cloud: a restriction's kind and how to contest it, nev
   });
 
   test("only on an agentes.chat address", () => {
-    for (const url of ["https://agentes.chat", "https://app.agentes.chat"]) {
+    for (const url of ["https://agentes.chat", "https://app.xquads.com"]) {
       setRestrictionNotices(url);
       expect(cloudNotice()).toEqual({ cloud: true });
     }

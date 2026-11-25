@@ -4971,6 +4971,9 @@
   },
   "desktop": {
     "pt-BR": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "common.hours",
       "common.minutes",
       "device.mac",
@@ -4994,6 +4997,9 @@
       "tools.opencodeName"
     ],
     "es": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "common.hours",
       "common.minutes",
       "device.mac",
@@ -5013,6 +5019,9 @@
       "tools.opencodeName"
     ],
     "fr": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "common.hours",
       "common.minutes",
       "device.mac",
@@ -5035,6 +5044,9 @@
       "tools.opencodeName"
     ],
     "de": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "device.mac",
       "device.windows",
       "iphone.account",
@@ -5061,6 +5073,9 @@
       "tools.opencodeName"
     ],
     "it": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "common.hours",
       "common.minutes",
       "device.linux",
@@ -5083,6 +5098,9 @@
       "tools.opencodeName"
     ],
     "nl": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "common.minutes",
       "device.linux",
       "device.mac",
@@ -5113,6 +5131,9 @@
       "tools.opencodeName"
     ],
     "ja": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "connect.placeholder",
       "device.mac",
       "device.windows",
@@ -5128,6 +5149,9 @@
       "tools.opencodeName"
     ],
     "ko": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "connect.placeholder",
       "device.mac",
       "device.windows",
@@ -5142,6 +5166,9 @@
       "tools.opencodeName"
     ],
     "zh-Hans": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "connect.placeholder",
       "device.mac",
       "device.windows",
@@ -5156,6 +5183,9 @@
       "tools.opencodeName"
     ],
     "id": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "device.mac",
       "device.windows",
       "link.chipTailnet",
@@ -5175,6 +5205,9 @@
       "tools.opencodeName"
     ],
     "tr": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "device.mac",
       "device.windows",
       "link.chipTailnet",
@@ -5188,6 +5221,9 @@
       "tools.opencodeName"
     ],
     "pl": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "common.minutes",
       "device.mac",
       "device.windows",
@@ -5204,6 +5240,9 @@
       "tools.opencodeName"
     ],
     "ru": [
+      "tray.label",
+      "servers.cloud",
+      "prefs.thisMac.placeCloud",
       "connect.placeholder",
       "device.mac",
       "link.chipTailnet",

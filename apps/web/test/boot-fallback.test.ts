@@ -37,7 +37,7 @@ function boot(
   const globals = {
     window: win,
     document: doc,
-    location: { href: "https://app.agentes.chat/org/acme", reload: () => void reloads++ },
+    location: { href: "https://app.xquads.com/org/acme", reload: () => void reloads++ },
     navigator: { languages: env.languages ?? ["pt-BR"], language: env.languages?.[0] ?? "pt-BR" },
     localStorage: { getItem: (key: string) => (key === "agentes.locale" ? (env.locale ?? null) : null) },
     sessionStorage: {
@@ -100,7 +100,7 @@ describe("a boot whose files didn't load (index.html)", () => {
     expect(page.reloads()).toBe(0);
     expect(page.alert()?.className).toBe("boot__box");
     expect(page.words()).toEqual([
-      "O agentes.chat não abriu",
+      "O xquads não abriu",
       "Uma parte do app não carregou. Confira a conexão e recarregue.",
       "Recarregar",
     ]);
@@ -117,7 +117,7 @@ describe("a boot whose files didn't load (index.html)", () => {
       const page = boot({ retried: NOW - 1000, ...env });
       page.fail("script", "src", "/assets/index-4f2a.js");
       expect(page.words()).toEqual([
-        "agentes.chat didn't open",
+        "xquads didn't open",
         "Part of the app didn't load. Check your connection, then reload.",
         "Reload",
       ]);

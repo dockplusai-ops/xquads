@@ -5,8 +5,11 @@ import { type Config, configSchema, envVars } from "./schema";
 export { composioAuthConfigs, connectorOAuthApps, githubAppConfig, mcpCallerIdentity } from "./connectors";
 export { type Config, type EnvVarDefinition, type EnvVarName, envVars } from "./schema";
 
-/** agentes.chat's own servers: their legal pages are their own, and their mail goes out from agentes.chat. */
-const OFFICIAL_HOSTS = new Set(["app.agentes.chat", "agentes.chat", "www.agentes.chat"]);
+/**
+ * xquads' own servers (the fork's Cloud): their mail goes out from xquads.com. Their legal pages aren't set for them:
+ * the Terms and Privacy texts in this code are the original's (AGENTESCHAT, LLC), not xquads', until it has its own.
+ */
+const OFFICIAL_HOSTS = new Set(["app.xquads.com", "xquads.com", "www.xquads.com"]);
 
 /** Whether a VAPID public key (an uncompressed P-256 point) belongs to this private key (`d`), both base64url. */
 function vapidPairMatches(publicKey: string, privateKey: string): boolean {
@@ -145,9 +148,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
   }
   const site = new URL(config.PUBLIC_URL);
   if (OFFICIAL_HOSTS.has(site.hostname)) {
-    config.TERMS_URL ??= `${site.origin}/terms`;
-    config.PRIVACY_URL ??= `${site.origin}/privacy`;
-    config.EMAIL_FROM ??= "agentes.chat <ping@agentes.chat>";
+    config.EMAIL_FROM ??= "xquads <ping@xquads.com>";
   }
   return config;
 }

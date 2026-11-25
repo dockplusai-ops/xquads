@@ -341,7 +341,7 @@ export function LaunchSplash({
       onLayout={onLayout}
       // One element for screen readers, except while it waits on the person: then its buttons are reachable.
       accessible={!asking}
-      accessibilityLabel={lineText ? `agentes.chat. ${lineText}` : "agentes.chat"}
+      accessibilityLabel={lineText ? `xquads. ${lineText}` : "xquads"}
       accessibilityLiveRegion="polite"
     >
       <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: c.bg }, ground]} />

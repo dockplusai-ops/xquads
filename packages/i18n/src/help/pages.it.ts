@@ -107,7 +107,7 @@ export const helpIt: Partial<Record<HelpSlug, HelpDocument>> = {
               "Esci dall’app. Chiudere la finestra non basta. Su un Mac, fai clic sulla sua icona nel Dock e scegli **Esci da xquads** nel menu xquads, in alto sullo schermo, oppure premi ⌘Q. Su Windows e Linux, fai clic sull’icona di xquads vicino all’orologio e scegli **Esci da xquads**. Se chiede **Uscire da xquads?**, premi **Esci**.",
               "Elimina l’app. Su un Mac, spostala nel Cestino. Su Windows e Linux, disinstallala come qualsiasi altra app.",
               "Elimina queste cartelle della tua cartella personale. Contengono i tuoi dati, e una volta eliminati non tornano, quindi tieni prima un backup altrove se potresti volerli: `.agentes` (messaggi, file, account, impostazioni e backup), ogni cartella `xquads erased`, `.agentes-runner` (ciò che gli agenti tengono su questo computer, come i loro browser e accessi) e `agentes` (i file degli agenti). Le cartelle il cui nome inizia con un punto sono nascoste. Su un Mac, apri la tua cartella personale nel Finder e premi ⇧⌘. (Maiuscole, Comando e il tasto del punto) per mostrarle.",
-              "Elimina le cartelle dell’app stessa. Contengono solo le sue impostazioni, gli accessi della sua finestra e i suoi log. Su un Mac: tutto ciò il cui nome inizia con `chat.agentes.desktop` nelle cartelle Application Support, Caches, HTTPStorages, Logs, Preferences e WebKit di `~/Library`, e `agentes.chat.plist` in `~/Library/LaunchAgents`. Su Windows: `%APPDATA%\\chat.agentes.desktop` e `%LOCALAPPDATA%\\chat.agentes.desktop`. Su Linux: `~/.config/chat.agentes.desktop` e `~/.local/share/chat.agentes.desktop`. Su un Mac, per aprire una di queste cartelle, premi ⇧⌘G nel Finder e scrivi il suo percorso, per esempio `~/Library/Caches`.",
+              "Elimina le cartelle dell’app stessa. Contengono solo le sue impostazioni, gli accessi della sua finestra e i suoi log. Su un Mac: tutto ciò il cui nome inizia con `com.xquads.desktop` nelle cartelle Application Support, Caches, HTTPStorages, Logs, Preferences e WebKit di `~/Library`, e `xquads.plist` in `~/Library/LaunchAgents`. Su Windows: `%APPDATA%\\com.xquads.desktop` e `%LOCALAPPDATA%\\com.xquads.desktop`. Su Linux: `~/.config/com.xquads.desktop` e `~/.local/share/com.xquads.desktop`. Su un Mac, per aprire una di queste cartelle, premi ⇧⌘G nel Finder e scrivi il suo percorso, per esempio `~/Library/Caches`.",
             ],
           },
         ],
@@ -127,7 +127,7 @@ export const helpIt: Partial<Record<HelpSlug, HelpDocument>> = {
             list: ["Chiudi l’app, poi esporta il database con la copia del server che l’app ha con sé. Su un Mac:"],
           },
           {
-            code: "BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
+            code: "BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
           },
           {
             list: [

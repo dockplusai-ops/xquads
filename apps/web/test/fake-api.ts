@@ -229,7 +229,7 @@ export interface FakeState {
   agentsOf?: Record<string, Agent[]>;
   /** Overrides `account.signInOptions` (default: no account, sign-up allowed). */
   signInOptions?: SignInOptions;
-  /** The server `account.phoneSignIn` names (default: https://app.agentes.chat). */
+  /** The server `account.phoneSignIn` names (default: https://app.xquads.com). */
   phoneServer?: string;
   /** Questions someone else answered on the server (this tab still shows them open). */
   answeredElsewhere?: Set<string>;
@@ -1507,7 +1507,7 @@ export function createFakeHttpApi(state: FakeState): Omit<HttpApi, FakedParts> {
         version: "test",
         api: 1,
         minApi: 1,
-        url: "https://app.agentes.chat",
+        url: "https://app.xquads.com",
         signIn: { email: true, google: false, github: true, apple: false },
         signup: "open",
         cloud: true,
@@ -1722,7 +1722,7 @@ export function createFakeHttpApi(state: FakeState): Omit<HttpApi, FakedParts> {
         log("account.phoneSignIn");
         return {
           token: `tok-${state.calls.filter((c) => c.method === "account.phoneSignIn").length}`,
-          server: state.phoneServer ?? "https://app.agentes.chat",
+          server: state.phoneServer ?? "https://app.xquads.com",
           expiresIn: 180,
         };
       },

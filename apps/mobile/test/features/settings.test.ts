@@ -439,7 +439,7 @@ describe("Computadores", () => {
     expect(machineFacts(t, "pt-BR", offline, NOW)).toBe("Linux · visto há 2 h");
     expect(seenText(t, "pt-BR", { online: false, lastSeenAt: null }, NOW)).toBe("ainda não conectou");
     expect(machineFacts(t, "pt-BR", machine({ id: "host", kind: "host", os: "linux" }), NOW)).toBe(
-      "Onde o agentes.chat está instalado, um usuário por agente.",
+      "Onde o xquads está instalado, um usuário por agente.",
     );
   });
 
@@ -652,7 +652,7 @@ test("the export's file name, as the web saves it", () => {
   expect(exportFileName(new Date("2026-10-28T12:00:00.000Z"))).toBe("agentes-chat-2026-10-28.json");
 });
 
-test("Sobre o agentes.chat in Você: on every self-hosted server, old ones too; never on agentes.chat Cloud", () => {
+test("Sobre o xquads in Você: on every self-hosted server, old ones too; never on xquads Cloud", () => {
   const server = (cloud?: boolean): AuthConfig => ({
     socialProviders: { google: false, github: false },
     signupOpen: false,
@@ -716,9 +716,9 @@ test("Auditoria says an operator's answer to a support request as the web does: 
   expect(auditSentence(en, assisted, "en").text).toBe("Whoever runs this server answered by email");
   // The row's own screen says it whole in the reason's place: the list's line is one line there.
   expect(auditReason(en, assisted)).toBe(`support request from ${name} · with an AI assistant`);
-  // On agentes.chat's own servers, with no AI assistant, of an account that is gone since.
+  // On xquads's own servers, with no AI assistant, of an account that is gone since.
   const plain = replied({ template: "received", chars: 0, assistedByAi: false, cloud: true }, null);
-  expect(auditSentence(en, plain, "en").text).toBe("agentes.chat support answered by email");
+  expect(auditSentence(en, plain, "en").text).toBe("xquads support answered by email");
   expect(auditSubLine(en, plain)).toBe("support request from Removed");
   expect(auditOutcome(en, plain)).toBeNull();
 });
@@ -752,16 +752,16 @@ test("Auditoria says an operator's disclosure of a safety review as the web does
   expect(auditSubLine(pt, many, "pt-BR")).toBe("10.000 itens · 3 mar a 9 mar");
   expect(auditSentence(en, many, "en").text).toBe("Whoever runs this server reviewed content for safety");
   expect(auditSubLine(en, many, "en")).toBe("10,000 items · Mar 3 to Mar 9");
-  // One item, on one day, on agentes.chat's own servers.
+  // One item, on one day, on xquads's own servers.
   const one = disclosed({
     from: `${year}-03-09T10:00:00.000Z`,
     to: `${year}-03-09T13:00:00.000Z`,
     count: 1,
     cloud: true,
   });
-  expect(auditSentence(pt, one, "pt-BR").text).toBe("O suporte do agentes.chat analisou conteúdo por segurança");
+  expect(auditSentence(pt, one, "pt-BR").text).toBe("O suporte do xquads analisou conteúdo por segurança");
   expect(auditSubLine(pt, one, "pt-BR")).toBe("1 item · 9 mar");
-  expect(auditSentence(en, one, "en").text).toBe("agentes.chat support reviewed content for safety");
+  expect(auditSentence(en, one, "en").text).toBe("xquads support reviewed content for safety");
   expect(auditSubLine(en, one, "en")).toBe("1 item · Mar 9");
   // A date of another year says its year.
   const years = disclosed({ from: `${year - 1}-12-28T12:00:00.000Z`, to: `${year}-01-03T12:00:00.000Z`, count: 12 });

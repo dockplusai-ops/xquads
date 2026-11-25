@@ -107,7 +107,7 @@ export const helpId: Partial<Record<HelpSlug, HelpDocument>> = {
               "Keluar dari aplikasi. Menutup jendelanya saja tidak cukup. Di Mac, klik ikonnya di Dock, lalu pilih **Keluar dari xquads** di menu xquads di bagian atas layar, atau tekan ⌘Q. Di Windows dan Linux, klik ikon xquads di dekat jam dan pilih **Keluar dari xquads**. Kalau muncul pertanyaan **Keluar dari xquads?**, tekan **Keluar**.",
               "Hapus aplikasinya. Di Mac, pindahkan ke Tempat Sampah. Di Windows dan Linux, copot pemasangannya seperti aplikasi lain.",
               "Hapus folder-folder ini di folder pribadimu. Isinya datamu, dan setelah dihapus tidak bisa kembali, jadi simpan dulu cadangan di tempat lain kalau mungkin masih kamu perlukan: `.agentes` (pesan, file, akun, pengaturan, dan cadangan), setiap folder `xquads erased`, `.agentes-runner` (yang disimpan para agen di komputer ini, seperti browser dan login mereka), dan `agentes` (file para agen). Folder yang namanya diawali titik tersembunyi. Di Mac, buka folder pribadimu di Finder lalu tekan ⇧⌘. (Shift, Command, dan tombol titik) untuk menampilkannya.",
-              "Hapus folder milik aplikasi itu sendiri. Isinya hanya pengaturannya, login jendelanya, dan log-nya. Di Mac: semua yang namanya diawali `chat.agentes.desktop` di folder Application Support, Caches, HTTPStorages, Logs, Preferences, dan WebKit di `~/Library`, serta `agentes.chat.plist` di `~/Library/LaunchAgents`. Di Windows: `%APPDATA%\\chat.agentes.desktop` dan `%LOCALAPPDATA%\\chat.agentes.desktop`. Di Linux: `~/.config/chat.agentes.desktop` dan `~/.local/share/chat.agentes.desktop`. Di Mac, untuk membuka salah satu folder ini, tekan ⇧⌘G di Finder lalu ketik jalurnya, misalnya `~/Library/Caches`.",
+              "Hapus folder milik aplikasi itu sendiri. Isinya hanya pengaturannya, login jendelanya, dan log-nya. Di Mac: semua yang namanya diawali `com.xquads.desktop` di folder Application Support, Caches, HTTPStorages, Logs, Preferences, dan WebKit di `~/Library`, serta `xquads.plist` di `~/Library/LaunchAgents`. Di Windows: `%APPDATA%\\com.xquads.desktop` dan `%LOCALAPPDATA%\\com.xquads.desktop`. Di Linux: `~/.config/com.xquads.desktop` dan `~/.local/share/com.xquads.desktop`. Di Mac, untuk membuka salah satu folder ini, tekan ⇧⌘G di Finder lalu ketik jalurnya, misalnya `~/Library/Caches`.",
             ],
           },
         ],
@@ -127,7 +127,7 @@ export const helpId: Partial<Record<HelpSlug, HelpDocument>> = {
             list: ["Tutup aplikasi, lalu buat dump database dengan salinan server milik aplikasi itu sendiri. Di Mac:"],
           },
           {
-            code: "BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
+            code: "BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
           },
           {
             list: [

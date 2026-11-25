@@ -143,23 +143,23 @@ describe("Preferences: a setting's explanation behind its ⓘ", () => {
       },
     ));
 
-  test("Servers: what the usage switch sends and that changing it restarts agentes.chat sit behind its ⓘ", () =>
+  test("Servers: what the usage switch sends and that changing it restarts xquads sit behind its ⓘ", () =>
     pane(
       "here",
       <Servers />,
       (el) =>
-        row(el, "Send anonymous usage statistics to agentes.chat") &&
+        row(el, "Send anonymous usage statistics to xquads") &&
         row(el, "Reach it from your phone and teammates")?.line === null,
       (el) => {
-        expect(row(el, "Send anonymous usage statistics to agentes.chat")).toEqual({
-          title: "Send anonymous usage statistics to agentes.chat",
-          hint: "Counts such as people, agents, machine sizes, AI tokens used and how much data the agents' browsers send and receive. Never messages, files, names or sites. Changing it restarts agentes.chat for a moment.",
+        expect(row(el, "Send anonymous usage statistics to xquads")).toEqual({
+          title: "Send anonymous usage statistics to xquads",
+          hint: "Counts such as people, agents, machine sizes, AI tokens used and how much data the agents' browsers send and receive. Never messages, files, names or sites. Changing it restarts xquads for a moment.",
           switch:
-            "Counts such as people, agents, machine sizes, AI tokens used and how much data the agents' browsers send and receive. Never messages, files, names or sites. Changing it restarts agentes.chat for a moment.",
+            "Counts such as people, agents, machine sizes, AI tokens used and how much data the agents' browsers send and receive. Never messages, files, names or sites. Changing it restarts xquads for a moment.",
           line: null,
         });
         expect(el.textContent).not.toContain("nothing is sent");
-        expect(el.querySelector(".dk-phead .dk-lead")?.textContent).toBe("Where this app opens agentes.chat.");
+        expect(el.querySelector(".dk-phead .dk-lead")?.textContent).toBe("Where this app opens xquads.");
       },
     ));
 
@@ -231,7 +231,7 @@ describe("Preferences: a setting's explanation behind its ⓘ", () => {
         await until(() => host.runners.size === 0);
         await act(() => new Promise((resolve) => setTimeout(resolve, 50)));
         expect(header()).not.toContain(address);
-        expect(header()).toBe("agentes.chat");
+        expect(header()).toBe("xquads");
       },
     ));
 
@@ -245,7 +245,7 @@ describe("Preferences: a setting's explanation behind its ⓘ", () => {
         await act(async () => eraseButton(el)?.click());
         await until(() => document.querySelector('[role="dialog"]'));
         const dialog = document.querySelector('[role="dialog"]') as HTMLElement;
-        expect(dialog.textContent).toContain("Erase agentes.chat on this Mac?");
+        expect(dialog.textContent).toContain("Erase xquads on this Mac?");
         // Its date never breaks at a hyphen (U+2011).
         expect(dialog.textContent).toContain("~/agentes.chat erased 2026\u201111\u201114");
         expect([...dialog.querySelectorAll("button")].map((b) => b.textContent).filter(Boolean)).toEqual([
@@ -259,7 +259,7 @@ describe("Preferences: a setting's explanation behind its ⓘ", () => {
         await act(() => new Promise((resolve) => setTimeout(resolve, 50)));
         expect(document.querySelector('[role="dialog"]')).toBe(dialog);
         await until(() => !eraseButton(el) && !document.querySelector('[role="dialog"]'));
-        expect(el.textContent).not.toContain("agentes.chat on this Mac");
+        expect(el.textContent).not.toContain("xquads on this Mac");
         expect(document.querySelector(".dk-toast")?.textContent).toContain(
           "Erased. Its old data is in ~/agentes.chat erased 2026-11-14.",
         );
@@ -319,7 +319,7 @@ describe("Preferences: a setting's explanation behind its ⓘ", () => {
         await until(() => dialog.querySelector('[role="alert"]'));
         expectFailureInDialog(
           dialog,
-          "Another agentes.chat server is using its folder, so nothing was erased. Stop that server, then try again.",
+          "Another xquads server is using its folder, so nothing was erased. Stop that server, then try again.",
         );
         await act(async () => buttonIn(dialog, "Erase it")?.click());
         await until(() => !document.querySelector('[role="dialog"]'));
@@ -398,7 +398,7 @@ describe("Preferences: a setting's explanation behind its ⓘ", () => {
           },
           {
             title: "Commands",
-            hint: "Tests, builds and other Terminal commands. Each one shows in Activity. Commands run as you. They can read anything you can on this Mac, agentes.chat's database and keys included. Turn them on only for workspaces you trust with all of it.",
+            hint: "Tests, builds and other Terminal commands. Each one shows in Activity. Commands run as you. They can read anything you can on this Mac, xquads's database and keys included. Turn them on only for workspaces you trust with all of it.",
           },
           {
             title: "Browser",
@@ -486,7 +486,7 @@ describe("Preferences: a setting's explanation behind its ⓘ", () => {
         await until(() => document.querySelector('[role="dialog"]'));
         const dialog = document.querySelector('[role="dialog"]') as HTMLElement;
         expect(dialog.textContent).toContain("Turn on Commands for Horizonte?");
-        expect(dialog.textContent).toContain("agentes.chat's database and keys included");
+        expect(dialog.textContent).toContain("xquads's database and keys included");
         const turnOn = [...dialog.querySelectorAll("button")].find((b) => b.textContent === "Turn on");
         await act(async () => turnOn?.click());
         await until(() => switchOf("Horizonte").getAttribute("aria-checked") === "true");
@@ -608,7 +608,7 @@ describe("Preferences: a setting's explanation behind its ⓘ", () => {
     ));
 
   test("Updates: no lead; Update and reopen alone, and the manual way keeps what stays", async () => {
-    const latest = { version: "9.9.9", url: "https://app.agentes.chat/api/desktop/download/9.9.9/agentes.dmg" };
+    const latest = { version: "9.9.9", url: "https://app.xquads.com/api/desktop/download/9.9.9/agentes.dmg" };
     const update: UpdateCheck = {
       state: { latest, available: true, required: false },
       checkedAt: null,
@@ -661,7 +661,7 @@ describe("Preferences: a setting's explanation behind its ⓘ", () => {
             (r) => r.querySelector(".dk-crow__title")?.textContent === "System details",
           ) as HTMLElement;
           const line =
-            "agentes.chat 0.6.0 · Linux · Ubuntu 26.04 LTS · wayland (GNOME) · WebKitGTK 2.50.4 · Intel (i915) · CPU (chosen) · AppImage";
+            "xquads 0.6.0 · Linux · Ubuntu 26.04 LTS · wayland (GNOME) · WebKitGTK 2.50.4 · Intel (i915) · CPU (chosen) · AppImage";
           expect(row.querySelector("small")?.textContent).toBe(line);
           await act(async () => (row.querySelector("button") as HTMLButtonElement).click());
           await until(() => copied.length > 0);
@@ -673,7 +673,7 @@ describe("Preferences: a setting's explanation behind its ⓘ", () => {
         <Updates update={update} />,
         (el) => rows(el).some((r) => r.title === "System details"),
         (el) => {
-          expect(row(el, "System details")?.line).toBe("agentes.chat 0.6.0 · macOS 15.5");
+          expect(row(el, "System details")?.line).toBe("xquads 0.6.0 · macOS 15.5");
         },
       );
     } finally {
@@ -682,7 +682,7 @@ describe("Preferences: a setting's explanation behind its ⓘ", () => {
   });
 
   test("Updates: the download with its bar and Cancel, which drops it; once whole, Installing… with no Cancel", async () => {
-    const latest = { version: "9.9.9", url: "https://app.agentes.chat/api/desktop/download/9.9.9/agentes.dmg" };
+    const latest = { version: "9.9.9", url: "https://app.xquads.com/api/desktop/download/9.9.9/agentes.dmg" };
     const update: UpdateCheck = {
       state: { latest, available: true, required: false },
       checkedAt: null,
@@ -802,7 +802,7 @@ describe("Preferences › General: Compatibility mode (Linux)", () => {
       { host: (h) => (h.compat = { on: true, fellBack: true, own: false }) },
     ));
 
-  test("the fallback's way back asks first when agentes.chat starts running here after the window opened", () => {
+  test("the fallback's way back asks first when xquads starts running here after the window opened", () => {
     let said: ((status: LocalServerStatus) => void) | undefined;
     return pane(
       "linux",
@@ -819,8 +819,8 @@ describe("Preferences › General: Compatibility mode (Linux)", () => {
         await act(async () => buttonIn(toast() as HTMLElement, "Try the graphics card again")?.click());
         await until(() => document.querySelector('[role="dialog"]'));
         const dialog = document.querySelector('[role="dialog"]')?.textContent;
-        expect(dialog).toContain("Reopen agentes.chat?");
-        expect(dialog).toContain("agentes.chat stops on this computer: nobody can use it");
+        expect(dialog).toContain("Reopen xquads?");
+        expect(dialog).toContain("xquads stops on this computer: nobody can use it");
         expect(reopened).toBe(0);
       },
       {
@@ -852,7 +852,7 @@ describe("Preferences › General: Compatibility mode (Linux)", () => {
         await act(async () => buttonIn(toast() as HTMLElement, "Reopen now")?.click());
         await until(() => document.querySelector('[role="dialog"]'));
         const dialog = document.querySelector('[role="dialog"]') as HTMLElement;
-        expect(dialog.textContent).toContain("Reopen agentes.chat?");
+        expect(dialog.textContent).toContain("Reopen xquads?");
         expect(dialog.textContent).toContain("Agents can't use this computer until the app opens again.");
         expect(reopened).toBe(0);
         await act(async () => buttonIn(dialog, "Reopen now")?.click());

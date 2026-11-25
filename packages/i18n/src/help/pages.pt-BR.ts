@@ -106,7 +106,7 @@ export const helpPtBR: Record<HelpSlug, HelpDocument> = {
               "Saia do app. Fechar a janela não basta. Num Mac, clique no ícone dele no Dock e escolha **Sair do xquads** no menu xquads, no alto da tela, ou aperte ⌘Q. No Windows e no Linux, clique no ícone do xquads perto do relógio e escolha **Sair do xquads**. Se ele perguntar **Sair do xquads?**, aperte **Sair**.",
               "Apague o app. Num Mac, mande para a Lixeira. No Windows e no Linux, desinstale como qualquer outro app.",
               "Apague estas pastas da sua pasta pessoal. Elas guardam os seus dados, e depois de apagados eles não voltam, então guarde um backup em outro lugar antes se puder querer de volta: `.agentes` (mensagens, arquivos, contas, ajustes e backups), toda pasta `xquads erased`, `.agentes-runner` (o que os agentes guardam neste computador, como os navegadores e logins deles) e `agentes` (os arquivos dos agentes). Pastas cujo nome começa com ponto ficam ocultas. Num Mac, abra a sua pasta pessoal no Finder e aperte ⇧⌘. (Shift, Command e a tecla de ponto) para mostrá-las.",
-              "Apague as pastas do próprio app. Elas guardam só os ajustes dele, os logins da janela e os registros. Num Mac: tudo cujo nome começa com `chat.agentes.desktop` nas pastas Application Support, Caches, HTTPStorages, Logs, Preferences e WebKit de `~/Library`, e `agentes.chat.plist` em `~/Library/LaunchAgents`. No Windows: `%APPDATA%\\chat.agentes.desktop` e `%LOCALAPPDATA%\\chat.agentes.desktop`. No Linux: `~/.config/chat.agentes.desktop` e `~/.local/share/chat.agentes.desktop`. Num Mac, para abrir uma dessas pastas, aperte ⇧⌘G no Finder e digite o caminho dela, como `~/Library/Caches`.",
+              "Apague as pastas do próprio app. Elas guardam só os ajustes dele, os logins da janela e os registros. Num Mac: tudo cujo nome começa com `com.xquads.desktop` nas pastas Application Support, Caches, HTTPStorages, Logs, Preferences e WebKit de `~/Library`, e `xquads.plist` em `~/Library/LaunchAgents`. No Windows: `%APPDATA%\\com.xquads.desktop` e `%LOCALAPPDATA%\\com.xquads.desktop`. No Linux: `~/.config/com.xquads.desktop` e `~/.local/share/com.xquads.desktop`. Num Mac, para abrir uma dessas pastas, aperte ⇧⌘G no Finder e digite o caminho dela, como `~/Library/Caches`.",
             ],
           },
         ],
@@ -126,7 +126,7 @@ export const helpPtBR: Record<HelpSlug, HelpDocument> = {
             list: ["Feche o app e exporte o banco de dados com a cópia do servidor que vem no próprio app. Num Mac:"],
           },
           {
-            code: "BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
+            code: "BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
           },
           {
             list: [

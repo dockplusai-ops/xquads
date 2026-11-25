@@ -18,7 +18,7 @@ const OUT = path.join(import.meta.dir, "..", "out");
 export function agentBrowserBin(): string {
   const candidates = [
     process.env.AGENT_BROWSER_BIN,
-    "/Applications/agentes.chat.app/Contents/MacOS/agent-browser",
+    "/Applications/xquads.app/Contents/MacOS/agent-browser",
     path.join(os.homedir(), ".agentes-runner", "bin", "agent-browser"),
   ].filter((p): p is string => Boolean(p));
   const found = candidates.find((p) => existsSync(p));

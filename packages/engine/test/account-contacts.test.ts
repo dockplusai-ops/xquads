@@ -15,7 +15,7 @@ import {
 } from "../src";
 import { addMember, addUser, type Fixture, setup } from "./fixtures";
 
-const CLOUD = "https://app.agentes.chat";
+const CLOUD = "https://app.xquads.com";
 const SELF_HOSTED = "https://chat.example.com";
 const contacts = createFakeEmailSender();
 

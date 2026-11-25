@@ -107,7 +107,7 @@ export const helpNl: Partial<Record<HelpSlug, HelpDocument>> = {
               "Sluit de app af. Het venster sluiten is niet genoeg. Klik op een Mac op het icoon in het Dock en kies **xquads afsluiten** in het menu xquads bovenaan het scherm, of druk op ⌘Q. Klik op Windows en Linux op het xquads-icoon bij de klok en kies **xquads afsluiten**. Vraagt hij **xquads afsluiten?**, druk dan op **Afsluiten**.",
               "Verwijder de app. Sleep hem op een Mac naar de prullenmand. Verwijder hem op Windows en Linux zoals elke andere app.",
               "Verwijder deze mappen in je thuismap. Ze bevatten je gegevens, en eenmaal verwijderd komen die niet terug, dus bewaar eerst ergens anders een back-up als je ze misschien nog wilt: `.agentes` (berichten, bestanden, accounts, instellingen en back-ups), elke map `xquads erased`, `.agentes-runner` (wat de agenten op deze computer bewaren, zoals hun browsers en logins) en `agentes` (de bestanden van de agenten). Mappen waarvan de naam met een punt begint, zijn verborgen. Open op een Mac je thuismap in de Finder en druk op ⇧⌘. (Shift, Command en de punttoets) om ze te tonen.",
-              "Verwijder de mappen van de app zelf. Daarin staan alleen de instellingen, de logins van het venster en de logboeken. Op een Mac: alles waarvan de naam begint met `chat.agentes.desktop` in de mappen Application Support, Caches, HTTPStorages, Logs, Preferences en WebKit van `~/Library`, en `agentes.chat.plist` in `~/Library/LaunchAgents`. Op Windows: `%APPDATA%\\chat.agentes.desktop` en `%LOCALAPPDATA%\\chat.agentes.desktop`. Op Linux: `~/.config/chat.agentes.desktop` en `~/.local/share/chat.agentes.desktop`. Open op een Mac een van deze mappen door in de Finder op ⇧⌘G te drukken en het pad te typen, zoals `~/Library/Caches`.",
+              "Verwijder de mappen van de app zelf. Daarin staan alleen de instellingen, de logins van het venster en de logboeken. Op een Mac: alles waarvan de naam begint met `com.xquads.desktop` in de mappen Application Support, Caches, HTTPStorages, Logs, Preferences en WebKit van `~/Library`, en `xquads.plist` in `~/Library/LaunchAgents`. Op Windows: `%APPDATA%\\com.xquads.desktop` en `%LOCALAPPDATA%\\com.xquads.desktop`. Op Linux: `~/.config/com.xquads.desktop` en `~/.local/share/com.xquads.desktop`. Open op een Mac een van deze mappen door in de Finder op ⇧⌘G te drukken en het pad te typen, zoals `~/Library/Caches`.",
             ],
           },
         ],
@@ -129,7 +129,7 @@ export const helpNl: Partial<Record<HelpSlug, HelpDocument>> = {
             ],
           },
           {
-            code: "BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
+            code: "BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
           },
           {
             list: [

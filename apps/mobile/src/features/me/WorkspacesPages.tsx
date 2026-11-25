@@ -280,7 +280,7 @@ export function AddWorkspacePage() {
         <GroupedRow
           icon="person"
           label={t("mobile.me.addAccount")}
-          sub={t("mobile.me.addAccountSub", { host: server === CLOUD_SERVER ? "agentes.chat" : serverHost(server) })}
+          sub={t("mobile.me.addAccountSub", { host: server === CLOUD_SERVER ? "xquads" : serverHost(server) })}
           chevron
           onPress={() => void addAccount(server)}
         />

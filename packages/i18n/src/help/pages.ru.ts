@@ -107,7 +107,7 @@ export const helpRu: Partial<Record<HelpSlug, HelpDocument>> = {
               "Завершите приложение. Просто закрыть окно недостаточно. На Mac нажмите на его значок в Dock и выберите **Завершить xquads** в меню xquads вверху экрана или нажмите ⌘Q. В Windows и Linux нажмите на значок xquads возле часов и выберите **Завершить xquads**. Если оно спросит **Завершить xquads?**, нажмите **Завершить**.",
               "Удалите приложение. На Mac переместите его в Корзину. В Windows и Linux удалите его, как любое другое приложение.",
               "Удалите эти папки из домашней папки. В них ваши данные, и после удаления их не вернуть, поэтому сначала сохраните копию в другом месте, если она может понадобиться: `.agentes` (сообщения, файлы, аккаунты, настройки и резервные копии), каждую папку `xquads erased`, `.agentes-runner` (то, что агенты хранят на этом компьютере, например их браузеры и входы в аккаунты) и `agentes` (файлы агентов). Папки, имя которых начинается с точки, скрыты. На Mac откройте домашнюю папку в Finder и нажмите ⇧⌘. (Shift, Command и клавишу точки), чтобы их показать.",
-              "Удалите папки самого приложения. В них только его настройки, входы его окна и журналы. На Mac: всё, чьё имя начинается с `chat.agentes.desktop`, в папках Application Support, Caches, HTTPStorages, Logs, Preferences и WebKit в `~/Library`, а также `agentes.chat.plist` в `~/Library/LaunchAgents`. В Windows: `%APPDATA%\\chat.agentes.desktop` и `%LOCALAPPDATA%\\chat.agentes.desktop`. В Linux: `~/.config/chat.agentes.desktop` и `~/.local/share/chat.agentes.desktop`. На Mac, чтобы открыть одну из этих папок, нажмите ⇧⌘G в Finder и введите её путь, например `~/Library/Caches`.",
+              "Удалите папки самого приложения. В них только его настройки, входы его окна и журналы. На Mac: всё, чьё имя начинается с `com.xquads.desktop`, в папках Application Support, Caches, HTTPStorages, Logs, Preferences и WebKit в `~/Library`, а также `xquads.plist` в `~/Library/LaunchAgents`. В Windows: `%APPDATA%\\com.xquads.desktop` и `%LOCALAPPDATA%\\com.xquads.desktop`. В Linux: `~/.config/com.xquads.desktop` и `~/.local/share/com.xquads.desktop`. На Mac, чтобы открыть одну из этих папок, нажмите ⇧⌘G в Finder и введите её путь, например `~/Library/Caches`.",
             ],
           },
         ],
@@ -127,7 +127,7 @@ export const helpRu: Partial<Record<HelpSlug, HelpDocument>> = {
             list: ["Закройте приложение и выгрузите базу данных копией сервера, встроенной в приложение. На Mac:"],
           },
           {
-            code: "BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
+            code: "BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
           },
           {
             list: [

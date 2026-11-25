@@ -36424,6 +36424,15 @@
   "toolNames.label.create_invite_link": {
     "value": "Create invite link"
   },
+  "toolNames.label.send_sms": {
+    "value": "Send text"
+  },
+  "toolNames.label.send_template": {
+    "value": "Send template"
+  },
+  "toolNames.label.list_templates": {
+    "value": "List templates"
+  },
   "toolNames.label.get_my_posts": {
     "value": "See my posts"
   },

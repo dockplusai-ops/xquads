@@ -107,7 +107,7 @@ export const helpEs: Partial<Record<HelpSlug, HelpDocument>> = {
               "Sal de la app. Cerrar su ventana no basta. En una Mac, haz clic en su ícono del Dock y elige **Salir de xquads** en el menú xquads, arriba en la pantalla, o pulsa ⌘Q. En Windows y Linux, haz clic en el ícono de xquads junto al reloj y elige **Salir de xquads**. Si pregunta **¿Salir de xquads?**, pulsa **Salir**.",
               "Borra la app. En una Mac, muévela a la Papelera. En Windows y Linux, desinstálala como cualquier otra app.",
               "Borra estas carpetas de tu carpeta personal. Contienen tus datos, y una vez borrados no vuelven, así que guarda antes una copia en otro lugar si quizá los quieras: `.agentes` (mensajes, archivos, cuentas, ajustes y copias), cada carpeta `xquads erased`, `.agentes-runner` (lo que los agentes guardan en esta computadora, como sus navegadores e inicios de sesión) y `agentes` (los archivos de los agentes). Las carpetas cuyo nombre empieza por un punto están ocultas. En una Mac, abre tu carpeta personal en el Finder y pulsa ⇧⌘. (Mayúsculas, Comando y la tecla del punto) para verlas.",
-              "Borra las carpetas de la propia app. Solo contienen sus ajustes, las sesiones de su ventana y sus registros. En una Mac: todo lo que empiece por `chat.agentes.desktop` en las carpetas Application Support, Caches, HTTPStorages, Logs, Preferences y WebKit de `~/Library`, y `agentes.chat.plist` en `~/Library/LaunchAgents`. En Windows: `%APPDATA%\\chat.agentes.desktop` y `%LOCALAPPDATA%\\chat.agentes.desktop`. En Linux: `~/.config/chat.agentes.desktop` y `~/.local/share/chat.agentes.desktop`. En una Mac, para abrir una de estas carpetas, pulsa ⇧⌘G en el Finder y escribe su ruta, como `~/Library/Caches`.",
+              "Borra las carpetas de la propia app. Solo contienen sus ajustes, las sesiones de su ventana y sus registros. En una Mac: todo lo que empiece por `com.xquads.desktop` en las carpetas Application Support, Caches, HTTPStorages, Logs, Preferences y WebKit de `~/Library`, y `xquads.plist` en `~/Library/LaunchAgents`. En Windows: `%APPDATA%\\com.xquads.desktop` y `%LOCALAPPDATA%\\com.xquads.desktop`. En Linux: `~/.config/com.xquads.desktop` y `~/.local/share/com.xquads.desktop`. En una Mac, para abrir una de estas carpetas, pulsa ⇧⌘G en el Finder y escribe su ruta, como `~/Library/Caches`.",
             ],
           },
         ],
@@ -129,7 +129,7 @@ export const helpEs: Partial<Record<HelpSlug, HelpDocument>> = {
             ],
           },
           {
-            code: "BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
+            code: "BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
           },
           {
             list: [

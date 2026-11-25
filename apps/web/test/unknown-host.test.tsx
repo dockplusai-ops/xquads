@@ -49,7 +49,7 @@ test("a page marked data-unknown-host shows only the not-set-up screen and asks 
   expect(screen().getByRole("heading", { name: "This address isn't set up yet" })).toBeTruthy();
   expect(screen().getByText("If it was just connected, try again in a few minutes.")).toBeTruthy();
   expect(screen().getByRole("button", { name: "Try again" })).toBeTruthy();
-  expect(document.title).toBe("Address not set up · agentes.chat");
+  expect(document.title).toBe("Address not set up · xquads");
   expect(document.documentElement.lang).toBe("en");
 });
 

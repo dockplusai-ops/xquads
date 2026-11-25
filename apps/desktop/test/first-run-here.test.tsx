@@ -18,7 +18,7 @@ import { until } from "./until";
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
 const REACH_TEXT =
-  "With Tailscale, a private network for your devices: your phone and the people you invite join it, and nobody else can reach agentes.chat.";
+  "With Tailscale, a private network for your devices: your phone and the people you invite join it, and nobody else can reach xquads.";
 const USAGE_TEXT =
   "Counts such as people, agents, machine sizes, AI tokens used and how much data the agents' browsers send and receive. Never messages, files, names or sites.";
 
@@ -56,7 +56,7 @@ async function firstRun(
         </I18nextProvider>,
       ),
     );
-    // Whether this build runs agentes.chat here arrives from the host first.
+    // Whether this build runs xquads here arrives from the host first.
     await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
     await check(screenOf(el, opened, tailscale, host));
   } finally {
@@ -100,7 +100,7 @@ function switchRows(el: HTMLElement) {
   });
 }
 
-describe("Run agentes.chat on this Mac", () => {
+describe("Run xquads on this Mac", () => {
   test("the title, one sentence, the two fields alone, two one-line switches with their ⓘ, and Start", () =>
     firstRun("first", async ({ el, press, until, button }) => {
       await press("On this Mac");
@@ -137,8 +137,8 @@ describe("Run agentes.chat on this Mac", () => {
           line: null,
         },
         {
-          label: "Send anonymous usage statistics to agentes.chat",
-          about: "About Send anonymous usage statistics to agentes.chat",
+          label: "Send anonymous usage statistics to xquads",
+          about: "About Send anonymous usage statistics to xquads",
           hint: USAGE_TEXT,
           same: true,
           line: null,
@@ -251,7 +251,7 @@ describe("Run agentes.chat on this Mac", () => {
   test("running here already: one sentence, never its address", () =>
     firstRun("here", async ({ el, press, until }) => {
       await press("On this Mac");
-      await until(() => el.querySelector("h1")?.textContent === "agentes.chat already runs on this Mac");
+      await until(() => el.querySelector("h1")?.textContent === "xquads already runs on this Mac");
       expect(el.querySelector(".dk-lead")?.textContent).toBe("This app runs it. Open it to sign in.");
     }));
 
@@ -368,7 +368,7 @@ describe("Where will your workspace live?", () => {
         expect(el.querySelector(".dk-choose__list ~ button.dk-btn-lg")).toBeNull();
         const rows = [...el.querySelectorAll<HTMLButtonElement>("button.dk-choose__place")];
         expect(rows.map((r) => r.querySelector(".ac-optrow__title")?.textContent)).toEqual([
-          "In the agentes.chat cloudRecommended",
+          "In the xquads cloudRecommended",
           "On this Mac",
           "On a server or VPS",
         ]);
@@ -385,7 +385,7 @@ describe("Where will your workspace live?", () => {
         await act(async () => rows[2]?.focus());
         expect(place()).toBe("box");
         expect(el.querySelector(".ac-place canvas.ac-computer")?.getAttribute("data-kind")).toBe("linux");
-        await press("In the agentes.chat cloud");
+        await press("In the xquads cloud");
         expect(chosen).toEqual(["/login"]);
       },
       {
@@ -531,11 +531,11 @@ describe("Setting it up here", () => {
       async (screen) => {
         const { el, until } = screen;
         await startSetup(screen);
-        await until(() => stepOf(el, "Turning agentes.chat on")?.dataset.state === "active");
+        await until(() => stepOf(el, "Turning xquads on")?.dataset.state === "active");
         setSystemTime(new Date(Date.now() + 31_000));
         try {
-          await until(() => stepOf(el, "Turning agentes.chat on")?.querySelector(".dk-fr__steptime"));
-          const step = stepOf(el, "Turning agentes.chat on") as HTMLElement;
+          await until(() => stepOf(el, "Turning xquads on")?.querySelector(".dk-fr__steptime"));
+          const step = stepOf(el, "Turning xquads on") as HTMLElement;
           expect(step.querySelector(".dk-fr__steptime")?.textContent).toBe("0:31");
           expect(step.querySelector(".dk-fr__steptime")?.getAttribute("aria-hidden")).toBe("true");
           expect(step.querySelector(".dk-fr__stepline")?.textContent).toBe(
@@ -571,7 +571,7 @@ describe("Setting it up here", () => {
         async (screen) => {
           const { el, until } = screen;
           await startSetup(screen);
-          await until(() => stepOf(el, "Turning agentes.chat on")?.dataset.state === "active");
+          await until(() => stepOf(el, "Turning xquads on")?.dataset.state === "active");
           const lead = () =>
             (el.querySelector(".dk-fr__setup") as HTMLElement).style.getPropertyValue("--dk-setup-lead");
           expect(lead()).toBe("94px");
@@ -579,7 +579,7 @@ describe("Setting it up here", () => {
           room = 82.6;
           setSystemTime(new Date(Date.now() + 31_000));
           try {
-            await until(() => stepOf(el, "Turning agentes.chat on")?.querySelector(".dk-fr__stepline"));
+            await until(() => stepOf(el, "Turning xquads on")?.querySelector(".dk-fr__stepline"));
             expect(lead()).toBe("94px");
           } finally {
             setSystemTime();
@@ -765,11 +765,9 @@ describe("Setting it up here", () => {
         const { el, until, button, press } = screen;
         await startSetup(screen);
         await until(() => button("Try again"));
-        const step = stepOf(el, "Turning agentes.chat on") as HTMLElement;
+        const step = stepOf(el, "Turning xquads on") as HTMLElement;
         expect(step.dataset.state).toBe("failed");
-        expect(step.querySelector(".dk-honest")?.textContent).toBe(
-          "agentes.chat didn't start on this Mac. Copy details",
-        );
+        expect(step.querySelector(".dk-honest")?.textContent).toBe("xquads didn't start on this Mac. Copy details");
         expect(runButtons(el)).toEqual(["Cancel", "Try again"]);
         expect(document.activeElement).toBe(button("Try again") ?? null);
         // The computer dims.
@@ -863,23 +861,23 @@ describe("Setting it up here", () => {
 });
 
 describe("Add a workspace", () => {
-  /** The welcome window opened by the site's "Add workspace", with agentes.chat signed in here or not. */
+  /** The welcome window opened by the site's "Add workspace", with xquads signed in here or not. */
   const adding = (cloud: boolean, chosen: (string | undefined)[]) => (host: FakeHost) => {
     host.welcomeMode = async () => "add";
-    host.workspaces = async () => [{ server: "https://app.agentes.chat", signedIn: cloud, orgs: [] }];
+    host.workspaces = async () => [{ server: "https://app.xquads.com", signedIn: cloud, orgs: [] }];
     host.chooseServer = async (_server, page) => {
       chosen.push(page);
     };
     host.hideWindow = async () => {};
   };
 
-  test("not signed in to agentes.chat: the cloud's row signs in (the workspaces you have), a new one is the line", () => {
+  test("not signed in to xquads: the cloud's row signs in (the workspaces you have), a new one is the line", () => {
     const chosen: (string | undefined)[] = [];
     return firstRun(
       "first",
       async ({ press, until, button }) => {
         await until(() => button("Want a new workspace?") || button("Create one"));
-        await press("In the agentes.chat cloud");
+        await press("In the xquads cloud");
         await press("Create one");
         expect(chosen).toEqual(["/login", "/onboarding"]);
         expect(button("Create an account")).toBeUndefined();
@@ -888,14 +886,14 @@ describe("Add a workspace", () => {
     );
   });
 
-  test("signed in to agentes.chat here already: the cloud's row makes a new workspace", () => {
+  test("signed in to xquads here already: the cloud's row makes a new workspace", () => {
     const chosen: (string | undefined)[] = [];
     return firstRun(
       "first",
       async ({ press, until, button }) => {
-        await until(() => button("Create a workspace on agentes.chat"));
+        await until(() => button("Create a workspace on xquads"));
         expect(button("Create one")).toBeUndefined();
-        await press("Create a workspace on agentes.chat");
+        await press("Create a workspace on xquads");
         expect(chosen).toEqual(["/onboarding"]);
       },
       { host: adding(true, chosen) },

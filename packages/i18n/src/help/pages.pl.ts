@@ -107,7 +107,7 @@ export const helpPl: Partial<Record<HelpSlug, HelpDocument>> = {
               "Zakończ aplikację. Samo zamknięcie okna nie wystarczy. Na Macu kliknij jej ikonę w Docku i wybierz **Zakończ xquads** w menu xquads u góry ekranu albo naciśnij ⌘Q. Na Windowsie i Linuksie kliknij ikonę xquads przy zegarze i wybierz **Zakończ xquads**. Jeśli zapyta **Zakończyć xquads?**, naciśnij **Zakończ**.",
               "Usuń aplikację. Na Macu przenieś ją do Kosza. Na Windowsie i Linuksie odinstaluj ją jak każdą inną aplikację.",
               "Usuń te foldery ze swojego folderu domowego. Są w nich twoje dane, a po usunięciu nie da się ich odzyskać, więc najpierw zrób kopię w innym miejscu, jeśli możesz ich jeszcze potrzebować: `.agentes` (wiadomości, pliki, konta, ustawienia i kopie zapasowe), każdy folder `xquads erased`, `.agentes-runner` (to, co agenci trzymają na tym komputerze, na przykład ich przeglądarki i logowania) i `agentes` (pliki agentów). Foldery, których nazwa zaczyna się od kropki, są ukryte. Na Macu otwórz swój folder domowy w Finderze i naciśnij ⇧⌘. (Shift, Command i klawisz kropki), żeby je pokazać.",
-              "Usuń foldery samej aplikacji. Są w nich tylko jej ustawienia, logowania jej okna i logi. Na Macu: wszystko, czego nazwa zaczyna się od `chat.agentes.desktop`, w folderach Application Support, Caches, HTTPStorages, Logs, Preferences i WebKit w `~/Library`, oraz `agentes.chat.plist` w `~/Library/LaunchAgents`. Na Windowsie: `%APPDATA%\\chat.agentes.desktop` i `%LOCALAPPDATA%\\chat.agentes.desktop`. Na Linuksie: `~/.config/chat.agentes.desktop` i `~/.local/share/chat.agentes.desktop`. Na Macu, żeby otworzyć jeden z tych folderów, naciśnij ⇧⌘G w Finderze i wpisz jego ścieżkę, na przykład `~/Library/Caches`.",
+              "Usuń foldery samej aplikacji. Są w nich tylko jej ustawienia, logowania jej okna i logi. Na Macu: wszystko, czego nazwa zaczyna się od `com.xquads.desktop`, w folderach Application Support, Caches, HTTPStorages, Logs, Preferences i WebKit w `~/Library`, oraz `xquads.plist` w `~/Library/LaunchAgents`. Na Windowsie: `%APPDATA%\\com.xquads.desktop` i `%LOCALAPPDATA%\\com.xquads.desktop`. Na Linuksie: `~/.config/com.xquads.desktop` i `~/.local/share/com.xquads.desktop`. Na Macu, żeby otworzyć jeden z tych folderów, naciśnij ⇧⌘G w Finderze i wpisz jego ścieżkę, na przykład `~/Library/Caches`.",
             ],
           },
         ],
@@ -127,7 +127,7 @@ export const helpPl: Partial<Record<HelpSlug, HelpDocument>> = {
             list: ["Zamknij aplikację, a potem zrzuć bazę danych kopią serwera, którą ma aplikacja. Na Macu:"],
           },
           {
-            code: "BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
+            code: "BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
           },
           {
             list: [

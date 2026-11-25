@@ -31,7 +31,7 @@ afterEach(async () => {
 type Request = Extract<ServerFrame, { type: "request" }>;
 
 /** What the fake runner's browser shows after any command. */
-const PAGE = { snapshot: '- heading "agentes.chat" [ref=e1]', origin: "https://app.agentes.chat/" };
+const PAGE = { snapshot: '- heading "agentes.chat" [ref=e1]', origin: "https://app.xquads.com/" };
 
 /**
  * A runner over an in-memory socket that answers the live view's ops. `dead`: its socket's close never
@@ -487,7 +487,7 @@ async function toolSetup() {
     const r = await (f.tools as NonNullable<Fixture["tools"]>).invoke(ctx, {
       toolUseId: `tu_${crypto.randomUUID()}`,
       name: "browser_do",
-      input: { steps: [{ do: "open", url: "https://app.agentes.chat/" }] },
+      input: { steps: [{ do: "open", url: "https://app.xquads.com/" }] },
     });
     if (r.type !== "result") throw new Error("expected a result");
     return r.output;

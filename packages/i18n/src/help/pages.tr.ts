@@ -107,7 +107,7 @@ export const helpTr: Partial<Record<HelpSlug, HelpDocument>> = {
               "Uygulamadan çıkın. Penceresini kapatmak yetmez. Mac'te Dock'taki simgesine tıklayın, sonra ekranın üstündeki xquads menüsünden **xquads'tan çık** seçeneğini seçin ya da ⌘Q tuşlarına basın. Windows ve Linux'ta saatin yanındaki xquads simgesine tıklayın ve **xquads'tan çık** seçeneğini seçin. **xquads'tan çıkılsın mı?** diye sorarsa **Çık** düğmesine basın.",
               "Uygulamayı silin. Mac'te Çöp Sepeti'ne taşıyın. Windows ve Linux'ta diğer uygulamalar gibi kaldırın.",
               "Ana klasörünüzdeki şu klasörleri silin. Verileriniz bunlardadır ve silindikten sonra geri gelmez, bu yüzden ileride isteyebilirseniz önce başka bir yerde yedek alın: `.agentes` (mesajlar, dosyalar, hesaplar, ayarlar ve yedekler), her `xquads erased` klasörü, `.agentes-runner` (ajanların bu bilgisayarda tuttukları, örneğin tarayıcıları ve oturumları) ve `agentes` (ajanların dosyaları). Adı nokta ile başlayan klasörler gizlidir. Mac'te ana klasörünüzü Finder'da açın ve göstermek için ⇧⌘. (Shift, Command ve nokta tuşu) tuşlarına basın.",
-              "Uygulamanın kendi klasörlerini silin. Bunlarda yalnızca ayarları, penceresinin oturumları ve günlükleri bulunur. Mac'te: `~/Library` içindeki Application Support, Caches, HTTPStorages, Logs, Preferences ve WebKit klasörlerinde adı `chat.agentes.desktop` ile başlayan her şey ve `~/Library/LaunchAgents` içindeki `agentes.chat.plist`. Windows'ta: `%APPDATA%\\chat.agentes.desktop` ve `%LOCALAPPDATA%\\chat.agentes.desktop`. Linux'ta: `~/.config/chat.agentes.desktop` ve `~/.local/share/chat.agentes.desktop`. Mac'te bu klasörlerden birini açmak için Finder'da ⇧⌘G tuşlarına basıp yolunu yazın, örneğin `~/Library/Caches`.",
+              "Uygulamanın kendi klasörlerini silin. Bunlarda yalnızca ayarları, penceresinin oturumları ve günlükleri bulunur. Mac'te: `~/Library` içindeki Application Support, Caches, HTTPStorages, Logs, Preferences ve WebKit klasörlerinde adı `com.xquads.desktop` ile başlayan her şey ve `~/Library/LaunchAgents` içindeki `xquads.plist`. Windows'ta: `%APPDATA%\\com.xquads.desktop` ve `%LOCALAPPDATA%\\com.xquads.desktop`. Linux'ta: `~/.config/com.xquads.desktop` ve `~/.local/share/com.xquads.desktop`. Mac'te bu klasörlerden birini açmak için Finder'da ⇧⌘G tuşlarına basıp yolunu yazın, örneğin `~/Library/Caches`.",
             ],
           },
         ],
@@ -127,7 +127,7 @@ export const helpTr: Partial<Record<HelpSlug, HelpDocument>> = {
             list: ["Uygulamadan çıkın, sonra veritabanının dökümünü uygulamanın kendi sunucu kopyasıyla alın. Mac'te:"],
           },
           {
-            code: "BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
+            code: "BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
           },
           {
             list: [

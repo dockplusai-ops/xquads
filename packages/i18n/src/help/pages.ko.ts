@@ -106,7 +106,7 @@ export const helpKo: Partial<Record<HelpSlug, HelpDocument>> = {
               "앱을 종료하세요. 창을 닫는 것만으로는 종료되지 않아요. Mac에서는 Dock의 아이콘을 클릭한 다음 화면 위쪽의 xquads 메뉴에서 **xquads 종료**를 고르거나 ⌘Q를 누르세요. Windows와 Linux에서는 시계 옆의 xquads 아이콘을 클릭하고 **xquads 종료**를 고르세요. **xquads을 종료할까요?**라고 물으면 **종료**를 누르세요.",
               "앱을 삭제하세요. Mac에서는 휴지통으로 옮기세요. Windows와 Linux에서는 다른 앱처럼 제거하세요.",
               "홈 폴더에서 다음 폴더를 삭제하세요. 내 데이터가 들어 있고 삭제하면 되돌릴 수 없으니, 나중에 필요할 수 있다면 먼저 다른 곳에 백업해 두세요. `.agentes`(메시지, 파일, 계정, 설정, 백업), 모든 `xquads erased` 폴더, `.agentes-runner`(에이전트가 이 컴퓨터에 저장한 것, 예를 들어 브라우저와 로그인 정보), `agentes`(에이전트 파일). 이름이 점으로 시작하는 폴더는 숨겨져 있어요. Mac에서는 Finder에서 홈 폴더를 열고 ⇧⌘.(Shift, Command, 마침표 키)를 누르면 보여요.",
-              "앱 자체의 폴더를 삭제하세요. 앱 설정, 창의 로그인 정보, 로그만 들어 있어요. Mac: `~/Library`의 Application Support, Caches, HTTPStorages, Logs, Preferences, WebKit 폴더에서 이름이 `chat.agentes.desktop`으로 시작하는 모든 것과 `~/Library/LaunchAgents`의 `agentes.chat.plist`. Windows: `%APPDATA%\\chat.agentes.desktop`과 `%LOCALAPPDATA%\\chat.agentes.desktop`. Linux: `~/.config/chat.agentes.desktop`과 `~/.local/share/chat.agentes.desktop`. Mac에서 이 폴더들을 열려면 Finder에서 ⇧⌘G를 누르고 경로(예: `~/Library/Caches`)를 입력하세요.",
+              "앱 자체의 폴더를 삭제하세요. 앱 설정, 창의 로그인 정보, 로그만 들어 있어요. Mac: `~/Library`의 Application Support, Caches, HTTPStorages, Logs, Preferences, WebKit 폴더에서 이름이 `com.xquads.desktop`으로 시작하는 모든 것과 `~/Library/LaunchAgents`의 `xquads.plist`. Windows: `%APPDATA%\\com.xquads.desktop`과 `%LOCALAPPDATA%\\com.xquads.desktop`. Linux: `~/.config/com.xquads.desktop`과 `~/.local/share/com.xquads.desktop`. Mac에서 이 폴더들을 열려면 Finder에서 ⇧⌘G를 누르고 경로(예: `~/Library/Caches`)를 입력하세요.",
             ],
           },
         ],
@@ -126,7 +126,7 @@ export const helpKo: Partial<Record<HelpSlug, HelpDocument>> = {
             list: ["앱을 종료한 다음, 앱에 들어 있는 서버로 데이터베이스를 덤프하세요. Mac에서는:"],
           },
           {
-            code: "BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
+            code: "BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
           },
           {
             list: [

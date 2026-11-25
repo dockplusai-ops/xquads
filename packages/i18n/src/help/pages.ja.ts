@@ -107,7 +107,7 @@ export const helpJa: Partial<Record<HelpSlug, HelpDocument>> = {
               "アプリを終了します。ウィンドウを閉じるだけでは終了しません。Mac では、Dock のアイコンをクリックしてから、画面上部の xquads メニューで **xquadsを終了** を選ぶか、⌘Q を押します。Windows と Linux では、時計の横にある xquads のアイコンをクリックし、**xquadsを終了** を選びます。**xquadsを終了しますか？** と聞かれたら、**終了** を押します。",
               "アプリを削除します。Mac ではゴミ箱に入れます。Windows と Linux では、ほかのアプリと同じようにアンインストールします。",
               "ホームフォルダにある次のフォルダを削除します。あなたのデータが入っていて、削除すると元に戻せないので、あとで必要になりそうなら先にほかの場所へバックアップを取っておいてください。`.agentes` (メッセージ、ファイル、アカウント、設定、バックアップ)、すべての `xquads erased` フォルダ、`.agentes-runner` (エージェントがこのコンピューターに保存しているもの。ブラウザやサインイン情報など)、`agentes` (エージェントのファイル)。名前がドットで始まるフォルダは隠れています。Mac では、Finder でホームフォルダを開き、⇧⌘. (Shift、Command、ピリオドキー) を押すと表示されます。",
-              "アプリ自体のフォルダを削除します。入っているのはアプリの設定、ウィンドウのサインイン情報、ログだけです。Mac: `~/Library` の Application Support、Caches、HTTPStorages、Logs、Preferences、WebKit フォルダ内で名前が `chat.agentes.desktop` で始まるものすべてと、`~/Library/LaunchAgents` の `agentes.chat.plist`。Windows: `%APPDATA%\\chat.agentes.desktop` と `%LOCALAPPDATA%\\chat.agentes.desktop`。Linux: `~/.config/chat.agentes.desktop` と `~/.local/share/chat.agentes.desktop`。Mac でこれらのフォルダを開くには、Finder で ⇧⌘G を押してパス (`~/Library/Caches` など) を入力します。",
+              "アプリ自体のフォルダを削除します。入っているのはアプリの設定、ウィンドウのサインイン情報、ログだけです。Mac: `~/Library` の Application Support、Caches、HTTPStorages、Logs、Preferences、WebKit フォルダ内で名前が `com.xquads.desktop` で始まるものすべてと、`~/Library/LaunchAgents` の `xquads.plist`。Windows: `%APPDATA%\\com.xquads.desktop` と `%LOCALAPPDATA%\\com.xquads.desktop`。Linux: `~/.config/com.xquads.desktop` と `~/.local/share/com.xquads.desktop`。Mac でこれらのフォルダを開くには、Finder で ⇧⌘G を押してパス (`~/Library/Caches` など) を入力します。",
             ],
           },
         ],
@@ -127,7 +127,7 @@ export const helpJa: Partial<Record<HelpSlug, HelpDocument>> = {
             list: ["アプリを終了してから、アプリに入っているサーバーでデータベースをダンプします。Mac の場合:"],
           },
           {
-            code: "BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
+            code: "BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
           },
           {
             list: [

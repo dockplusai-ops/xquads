@@ -22,7 +22,7 @@ function preloaded(env: { stored?: string; cookie?: string; languages: string[] 
   const globals = {
     window: {},
     document: doc,
-    location: { href: "https://app.agentes.chat/", reload: () => {} },
+    location: { href: "https://app.xquads.com/", reload: () => {} },
     navigator: { languages: env.languages, language: env.languages[0] },
     localStorage: { getItem: (key: string) => (key === "agentes.locale" ? (env.stored ?? null) : null) },
     sessionStorage: { getItem: () => null, setItem: () => {} },

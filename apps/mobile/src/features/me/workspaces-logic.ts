@@ -44,7 +44,7 @@ export function workspacesOf(input: {
     server: input.server,
     email: input.email ?? null,
     several: input.several === true,
-    host: input.server === CLOUD_SERVER ? "agentes.chat" : serverHost(input.server),
+    host: input.server === CLOUD_SERVER ? "xquads" : serverHost(input.server),
     current: input.current,
     orgs: input.orgs.map((o) => ({ ...o, unread: counts.get(o.id) ?? 0 })),
     failed: input.failed && input.orgs.length === 0,

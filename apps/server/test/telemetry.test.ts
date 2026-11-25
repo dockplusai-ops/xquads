@@ -112,7 +112,7 @@ describe("sending", () => {
     expect(http.calls).toHaveLength(1);
     const [call] = http.calls;
     expect(call?.url).toBe(config.TELEMETRY_URL);
-    expect(call?.url).toBe("https://telemetry.agentes.chat/v1/report");
+    expect(call?.url).toBe("https://telemetry.xquads.com/v1/report");
     expect(call?.init.method).toBe("POST");
     expect(call?.init.signal).toBeInstanceOf(AbortSignal);
     expect(Object.keys(call?.body ?? {})).toEqual([
@@ -279,7 +279,7 @@ test("agentes telemetry prints exactly the next report, on or off, and sends not
   expect(JSON.parse(out.join("")).computers).toEqual([
     expect.objectContaining({ count: 1, browserTraffic: { upMb: 5, downMb: 81, hours: 1.5, computers: 1 } }),
   ]);
-  expect(err.join("")).toContain("On: sent once a day to https://telemetry.agentes.chat/v1/report");
+  expect(err.join("")).toContain("On: sent once a day to https://telemetry.xquads.com/v1/report");
 
   await setTelemetryEnabled(db, false);
   out.length = 0;

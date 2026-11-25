@@ -28,7 +28,7 @@ import {
 } from "../src/lib/server-choice";
 
 // Workspaces across servers (ADR 0154).
-const cloud = "https://app.agentes.chat";
+const cloud = "https://app.xquads.com";
 const box = "https://agentes.exemplo.com.br";
 const lab = "https://lab.tail1234.ts.net";
 

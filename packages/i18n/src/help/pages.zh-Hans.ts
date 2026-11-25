@@ -106,7 +106,7 @@ export const helpZhHans: Partial<Record<HelpSlug, HelpDocument>> = {
               "退出应用。只关闭窗口是不够的。在 Mac 上，点按它在程序坞中的图标，然后在屏幕顶部的 xquads 菜单中选择 **退出 xquads**，或按 ⌘Q。在 Windows 和 Linux 上，点按时钟旁的 xquads 图标，选择 **退出 xquads**。如果它询问 **退出 xquads？**，点按 **退出**。",
               "删除应用。在 Mac 上，把它移到废纸篓。在 Windows 和 Linux 上，像卸载其他应用一样卸载它。",
               "删除你主文件夹中的这些文件夹。它们保存着你的数据，删除后无法恢复，所以如果以后可能还需要，请先在别处留一份备份：`.agentes`（消息、文件、账号、设置和备份）、每个 `xquads erased` 文件夹、`.agentes-runner`（智能体在这台电脑上保存的内容，比如它们的浏览器和登录信息）以及 `agentes`（智能体的文件）。名称以点开头的文件夹是隐藏的。在 Mac 上，在访达中打开你的主文件夹，按 ⇧⌘.（Shift、Command 和句点键）即可显示。",
-              "删除应用自己的文件夹。里面只有它的设置、窗口的登录信息和日志。在 Mac 上：`~/Library` 中 Application Support、Caches、HTTPStorages、Logs、Preferences 和 WebKit 文件夹里名称以 `chat.agentes.desktop` 开头的所有内容，以及 `~/Library/LaunchAgents` 中的 `agentes.chat.plist`。在 Windows 上：`%APPDATA%\\chat.agentes.desktop` 和 `%LOCALAPPDATA%\\chat.agentes.desktop`。在 Linux 上：`~/.config/chat.agentes.desktop` 和 `~/.local/share/chat.agentes.desktop`。在 Mac 上，要打开其中一个文件夹，请在访达中按 ⇧⌘G，然后输入它的路径，比如 `~/Library/Caches`。",
+              "删除应用自己的文件夹。里面只有它的设置、窗口的登录信息和日志。在 Mac 上：`~/Library` 中 Application Support、Caches、HTTPStorages、Logs、Preferences 和 WebKit 文件夹里名称以 `com.xquads.desktop` 开头的所有内容，以及 `~/Library/LaunchAgents` 中的 `xquads.plist`。在 Windows 上：`%APPDATA%\\com.xquads.desktop` 和 `%LOCALAPPDATA%\\com.xquads.desktop`。在 Linux 上：`~/.config/com.xquads.desktop` 和 `~/.local/share/com.xquads.desktop`。在 Mac 上，要打开其中一个文件夹，请在访达中按 ⇧⌘G，然后输入它的路径，比如 `~/Library/Caches`。",
             ],
           },
         ],
@@ -126,7 +126,7 @@ export const helpZhHans: Partial<Record<HelpSlug, HelpDocument>> = {
             list: ["退出应用，然后用应用自带的服务器导出数据库。在 Mac 上："],
           },
           {
-            code: "BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
+            code: "BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
           },
           {
             list: [

@@ -523,7 +523,7 @@ describe("dashboards in links, notifications and routines", () => {
 
   test("the web's dashboards, a board and a widget open on Home or a board, as the app's screens", () => {
     const to = (path: string) => {
-      const link = appLinkFromUrl(`https://app.agentes.chat/org/org-1${path}`);
+      const link = appLinkFromUrl(`https://app.xquads.com/org/org-1${path}`);
       const href = link && "href" in link ? link.href : "";
       return new URLSearchParams(href.slice("/link?".length)).get("to");
     };
@@ -537,7 +537,7 @@ describe("dashboards in links, notifications and routines", () => {
 
   test("every dashboards target the web opens has a screen on the phone", () => {
     const screen = (target: OpenTarget) => {
-      const link = appLinkFromUrl(`https://app.agentes.chat${targetPath("org-1", target)}`);
+      const link = appLinkFromUrl(`https://app.xquads.com${targetPath("org-1", target)}`);
       const href = link && "href" in link ? link.href : "";
       return new URLSearchParams(href.slice("/link?".length)).get("to");
     };

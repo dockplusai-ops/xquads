@@ -107,7 +107,7 @@ export const helpFr: Partial<Record<HelpSlug, HelpDocument>> = {
               "Quittez l’app. Fermer sa fenêtre ne suffit pas. Sur un Mac, cliquez sur son icône dans le Dock, puis choisissez **Quitter xquads** dans le menu xquads, en haut de l’écran, ou appuyez sur ⌘Q. Sous Windows et Linux, cliquez sur l’icône xquads près de l’horloge et choisissez **Quitter xquads**. S’il demande **Quitter xquads\u00a0?**, appuyez sur **Quitter**.",
               "Supprimez l’app. Sur un Mac, mettez-la à la corbeille. Sous Windows et Linux, désinstallez-la comme n’importe quelle autre app.",
               "Supprimez ces dossiers de votre dossier personnel. Ils contiennent vos données, et une fois supprimées elles ne reviennent pas, alors gardez d’abord une sauvegarde ailleurs si vous pourriez en avoir besoin\u00a0: `.agentes` (messages, fichiers, comptes, réglages et sauvegardes), chaque dossier `xquads erased`, `.agentes-runner` (ce que les agents gardent sur cet ordinateur, comme leurs navigateurs et leurs connexions) et `agentes` (les fichiers des agents). Les dossiers dont le nom commence par un point sont masqués. Sur un Mac, ouvrez votre dossier personnel dans le Finder et appuyez sur ⇧⌘. (Maj, Commande et la touche point) pour les afficher.",
-              "Supprimez les dossiers de l’app elle-même. Ils ne contiennent que ses réglages, les connexions de sa fenêtre et ses journaux. Sur un Mac\u00a0: tout ce dont le nom commence par `chat.agentes.desktop` dans les dossiers Application Support, Caches, HTTPStorages, Logs, Preferences et WebKit de `~/Library`, et `agentes.chat.plist` dans `~/Library/LaunchAgents`. Sous Windows\u00a0: `%APPDATA%\\chat.agentes.desktop` et `%LOCALAPPDATA%\\chat.agentes.desktop`. Sous Linux\u00a0: `~/.config/chat.agentes.desktop` et `~/.local/share/chat.agentes.desktop`. Sur un Mac, pour ouvrir l’un de ces dossiers, appuyez sur ⇧⌘G dans le Finder et tapez son chemin, par exemple `~/Library/Caches`.",
+              "Supprimez les dossiers de l’app elle-même. Ils ne contiennent que ses réglages, les connexions de sa fenêtre et ses journaux. Sur un Mac\u00a0: tout ce dont le nom commence par `com.xquads.desktop` dans les dossiers Application Support, Caches, HTTPStorages, Logs, Preferences et WebKit de `~/Library`, et `xquads.plist` dans `~/Library/LaunchAgents`. Sous Windows\u00a0: `%APPDATA%\\com.xquads.desktop` et `%LOCALAPPDATA%\\com.xquads.desktop`. Sous Linux\u00a0: `~/.config/com.xquads.desktop` et `~/.local/share/com.xquads.desktop`. Sur un Mac, pour ouvrir l’un de ces dossiers, appuyez sur ⇧⌘G dans le Finder et tapez son chemin, par exemple `~/Library/Caches`.",
             ],
           },
         ],
@@ -129,7 +129,7 @@ export const helpFr: Partial<Record<HelpSlug, HelpDocument>> = {
             ],
           },
           {
-            code: "BUN_BE_BUN=1 /Applications/agentes.chat.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
+            code: "BUN_BE_BUN=1 /Applications/xquads.app/Contents/MacOS/agentes-runner \\\n  ~/.agentes/app/current/server/native.js db dump --data ~/.agentes --out agentes.sql",
           },
           {
             list: [

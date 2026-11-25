@@ -175,13 +175,13 @@ describe("feedback about what was clicked", () => {
     expect(sent.files).toHaveLength(1);
   });
 
-  test("where it goes to the agentes.chat team, the form says so and takes photos only", async () => {
+  test("where it goes to the xquads team, the form says so and takes photos only", async () => {
     const { state } = await open(seedState({ authConfig: { feedback: true, feedbackRelay: true } }));
     await click(screen().getByRole("button", { name: "Enviar feedback" }));
     const form = screen().getByRole("dialog", { name: "O que faltou, quebrou ou incomodou?" });
     expect(
       within(form).getByText(
-        "O que você escrever vai por e-mail para o time do agentes.chat, que pode usar um assistente de IA para analisar.",
+        "O que você escrever vai por e-mail para o time do xquads, que pode usar um assistente de IA para analisar.",
       ),
     ).toBeTruthy();
     expect(within(form).getByRole("button", { name: "Anexar foto" })).toBeTruthy();

@@ -24,7 +24,7 @@ const cloud = () =>
   createFakeApi(
     seedState({
       me: null,
-      authConfig: { termsUrl: "https://app.agentes.chat/terms", privacyUrl: "https://app.agentes.chat/privacy" },
+      authConfig: { termsUrl: "https://app.xquads.com/terms", privacyUrl: "https://app.xquads.com/privacy" },
     }),
   );
 

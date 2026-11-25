@@ -105,7 +105,7 @@ describe("Apps de IA on the phone (ADR 0119)", () => {
 
   test("the import's AI app option: the address and the request, or unavailable on a private server or a held workspace", async () => {
     const pt = await translator("pt-BR");
-    const open = { serverUrl: "https://app.agentes.chat/mcp", serverPublic: true };
+    const open = { serverUrl: "https://app.xquads.com/mcp", serverPublic: true };
     expect(aiAppImport(pt, undefined, undefined)).toBeNull();
     expect(aiAppImport(pt, { serverUrl: "http://10.0.0.5/mcp", serverPublic: false }, undefined)).toEqual({
       available: false,
@@ -122,7 +122,7 @@ describe("Apps de IA on the phone (ADR 0119)", () => {
     });
     const ready = aiAppImport(pt, open, { state: "active", reason: null });
     expect(ready?.available && ready.prompt).toStartWith(
-      "Use o servidor MCP do agentes.chat que você acabou de conectar (https://app.agentes.chat/mcp)",
+      "Use o servidor MCP do xquads que você acabou de conectar (https://app.xquads.com/mcp)",
     );
     // The phone shows the request itself, selectable, not only a Copiar button.
     const card = readFileSync(

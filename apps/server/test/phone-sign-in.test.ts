@@ -125,7 +125,7 @@ describe("GET /api/instance", () => {
       api: 1,
       minApi: 1,
       url: ORIGIN,
-      sourceUrl: "https://github.com/agentes-chat/agentes-chat",
+      sourceUrl: "https://github.com/dockplusai-ops/xquads",
       signIn: { email: true, google: true, github: false, apple: false },
       // Nobody yet: the first account signs up.
       signup: "open",
@@ -144,10 +144,10 @@ describe("GET /api/instance", () => {
     });
   });
 
-  test("agentes.chat's own servers say they are the Cloud", async () => {
-    t = await createTestServer({ env: { PUBLIC_URL: "https://app.agentes.chat" } });
+  test("xquads's own servers say they are the Cloud", async () => {
+    t = await createTestServer({ env: { PUBLIC_URL: "https://app.xquads.com" } });
     expect(await (await t.app.request("/api/instance")).json()).toMatchObject({
-      url: "https://app.agentes.chat",
+      url: "https://app.xquads.com",
       cloud: true,
     });
     expect(await (await browser(t)("/api/app/auth-config")).json()).toMatchObject({ cloud: true });

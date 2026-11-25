@@ -59,7 +59,7 @@ describe("finding the settings", () => {
     expect(document.documentElement.hasAttribute("data-menu-overlay")).toBe(false);
   });
 
-  test("New workspace only for whoever can make one (on agentes.chat Cloud, by invitation for now)", async () => {
+  test("New workspace only for whoever can make one (on xquads Cloud, by invitation for now)", async () => {
     for (const [can, offered] of [
       [undefined, true],
       [false, false],
@@ -137,12 +137,12 @@ describe("finding the settings", () => {
     expect(org.parentElement?.className).toBe("ac-pagehead__meta");
   });
 
-  test("Sobre o agentes.chat: for a member too, with the license's attribution, the version and the source", async () => {
+  test("Sobre o xquads: for a member too, with the license's attribution, the version and the source", async () => {
     const state = seedState();
     if (state.me?.organizations[0]) state.me.organizations[0].role = "member";
     state.instance = { version: "2026.11.06.1", sourceUrl: "https://git.example.com/fork" };
     await go("settings/about", state);
-    expect(screen().getAllByRole("heading", { level: 2, name: "Sobre o agentes.chat" }).length).toBeGreaterThan(0);
+    expect(screen().getAllByRole("heading", { level: 2, name: "Sobre o xquads" }).length).toBeGreaterThan(0);
     const site = screen().getByRole("link", { name: "agentes.chat" });
     expect(site.closest("h2")?.textContent).toBe("Baseado no agentes.chat da AGENTESCHAT, LLC");
     expect(site.getAttribute("href")).toBe("https://agentes.chat");
@@ -158,7 +158,7 @@ describe("finding the settings", () => {
     expect(screen().getByText("Copyright © 2026 AGENTESCHAT, LLC e colaboradores")).toBeTruthy();
   });
 
-  test("Sobre o agentes.chat only on a self-hosted server: agentes.chat Cloud lists it nowhere, its link opens Sua conta", async () => {
+  test("Sobre o xquads only on a self-hosted server: xquads Cloud lists it nowhere, its link opens Sua conta", async () => {
     const nav = () => within(screen().getByRole("navigation", { name: "Seções das configurações" }));
     const license = () => screen().queryByRole("link", { name: "GNU Affero General Public License v3" });
     const inPalette = async () => {
@@ -167,13 +167,13 @@ describe("finding the settings", () => {
       return screen().queryByRole("option", { name: /Sobre o agentes\.chat/ }) !== null;
     };
     await go("settings/about", seedState({ authConfig: { cloud: false } }));
-    expect(nav().getByRole("link", { name: "Sobre o agentes.chat" }).getAttribute("aria-current")).toBe("page");
+    expect(nav().getByRole("link", { name: "Sobre o xquads" }).getAttribute("aria-current")).toBe("page");
     expect(license()).not.toBeNull();
     expect(await inPalette()).toBe(true);
     cleanup();
 
     await go("settings/about", seedState({ authConfig: { cloud: true } }));
-    expect(nav().queryByRole("link", { name: "Sobre o agentes.chat" })).toBeNull();
+    expect(nav().queryByRole("link", { name: "Sobre o xquads" })).toBeNull();
     expect(screen().getByRole("heading", { level: 2, name: "Sua conta" })).toBeTruthy();
     // The Cloud has no Sobre for anyone: nothing to say about the person's role.
     expect(screen().queryByText(/não abre com o seu cargo/)).toBeNull();
