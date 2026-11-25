@@ -294,7 +294,7 @@ describe("Entrar (e-mail primeiro)", () => {
       await settle(2);
       const get = screen().getByRole("dialog", { name: "Ter o seu próprio servidor" });
       expect(within(get).getByRole("link", { name: "Baixar o app" }).getAttribute("href")).toBe(
-        "https://agentes.chat/download",
+        "https://agents.xquads.com/download",
       );
       expect(within(get).getByRole("link", { name: "Como funciona" }).getAttribute("href")).toBe(
         "https://agents.xquads.com/help/run-on-your-computer?lang=pt-BR",
