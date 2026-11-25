@@ -164,7 +164,7 @@ describe("finding the settings", () => {
     const inPalette = async () => {
       await act(async () => fireEvent.keyDown(window, { key: "k", metaKey: true }));
       await type(screen().getByRole("combobox", { name: "Ir para, ou pedir a um agente" }), "sobre");
-      return screen().queryByRole("option", { name: /Sobre o agentes\.chat/ }) !== null;
+      return screen().queryByRole("option", { name: /Sobre o xquads/ }) !== null;
     };
     await go("settings/about", seedState({ authConfig: { cloud: false } }));
     expect(nav().getByRole("link", { name: "Sobre o xquads" }).getAttribute("aria-current")).toBe("page");

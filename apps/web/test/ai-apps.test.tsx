@@ -90,21 +90,21 @@ describe("the client facts: one command, link or file per app, with this server'
   const url = "https://agentes.example/mcp";
   test("commands and files", () => {
     expect(claudeCodeCommand(url)).toBe(
-      "claude mcp add --transport http --scope user agentes https://agentes.example/mcp",
+      "claude mcp add --transport http --scope user xquads https://agentes.example/mcp",
     );
-    expect(codexCommands(url)).toBe("codex mcp add agentes --url https://agentes.example/mcp\ncodex mcp login agentes");
-    expect(JSON.parse(cursorConfig(url))).toEqual({ mcpServers: { agentes: { url } } });
-    expect(JSON.parse(vscodeConfig(url))).toEqual({ servers: { agentes: { type: "http", url } } });
+    expect(codexCommands(url)).toBe("codex mcp add xquads --url https://agentes.example/mcp\ncodex mcp login xquads");
+    expect(JSON.parse(cursorConfig(url))).toEqual({ mcpServers: { xquads: { url } } });
+    expect(JSON.parse(vscodeConfig(url))).toEqual({ servers: { xquads: { type: "http", url } } });
   });
 
   test("each vendor's own config format, with the address in it", () => {
-    expect(codexConfig(url)).toBe('[mcp_servers.agentes]\nurl = "https://agentes.example/mcp"');
-    expect(JSON.parse(geminiCliConfig(url))).toEqual({ mcpServers: { agentes: { httpUrl: url } } });
-    expect(JSON.parse(zedConfig(url))).toEqual({ context_servers: { agentes: { url } } });
-    expect(JSON.parse(warpConfig(url))).toEqual({ agentes: { url, headers: { Authorization: "Bearer <token>" } } });
-    expect(JSON.parse(opencodeConfig(url)).mcp).toEqual({ agentes: { type: "remote", url } });
+    expect(codexConfig(url)).toBe('[mcp_servers.xquads]\nurl = "https://agentes.example/mcp"');
+    expect(JSON.parse(geminiCliConfig(url))).toEqual({ mcpServers: { xquads: { httpUrl: url } } });
+    expect(JSON.parse(zedConfig(url))).toEqual({ context_servers: { xquads: { url } } });
+    expect(JSON.parse(warpConfig(url))).toEqual({ xquads: { url, headers: { Authorization: "Bearer <token>" } } });
+    expect(JSON.parse(opencodeConfig(url)).mcp).toEqual({ xquads: { type: "remote", url } });
     expect(JSON.parse(copilotIdesConfig(url))).toEqual({
-      servers: { agentes: { url, requestInit: { headers: { Authorization: "Bearer <token>" } } } },
+      servers: { xquads: { url, requestInit: { headers: { Authorization: "Bearer <token>" } } } },
     });
     expect(continueConfig(url)).toContain("    type: streamable-http\n    url: https://agentes.example/mcp\n");
     const goose = new URL(gooseInstallLink(url));
@@ -136,12 +136,12 @@ describe("the client facts: one command, link or file per app, with this server'
     expect(`${cursor.protocol}//${cursor.host}${cursor.pathname}`).toBe(
       "cursor://anysphere.cursor-deeplink/mcp/install",
     );
-    expect(cursor.searchParams.get("name")).toBe("agentes");
+    expect(cursor.searchParams.get("name")).toBe("xquads");
     expect(JSON.parse(atob(cursor.searchParams.get("config") ?? ""))).toEqual({ url });
     const vscode = vscodeInstallLink(url);
     expect(vscode.startsWith("vscode:mcp/install?")).toBe(true);
     expect(JSON.parse(decodeURIComponent(vscode.slice("vscode:mcp/install?".length)))).toEqual({
-      name: "agentes",
+      name: "xquads",
       type: "http",
       url,
     });
@@ -359,11 +359,11 @@ describe("Configurações › Apps de IA (ADR 0119)", () => {
       Perplexity: SIGN_IN,
       "Le Chat": SIGN_IN,
       Raycast: SIGN_IN,
-      "Claude Code": "escolha agentes e Authenticate",
+      "Claude Code": "escolha xquads e Authenticate",
       Cursor: "O Cursor pede para entrar",
       Codex: "O Codex abre a página para você entrar",
       "VS Code": FIRST,
-      "Gemini CLI": "Para entrar, digite /mcp auth agentes no app.",
+      "Gemini CLI": "Para entrar, digite /mcp auth xquads no app.",
       "Devin Desktop": FIRST,
       "JetBrains AI Assistant": FIRST,
       "GitHub Copilot": TOKEN,
@@ -371,7 +371,7 @@ describe("Configurações › Apps de IA (ADR 0119)", () => {
       Cline: FIRST,
       Warp: TOKEN,
       Goose: FIRST,
-      OpenCode: "Para entrar, rode opencode mcp auth agentes.",
+      OpenCode: "Para entrar, rode opencode mcp auth xquads.",
       "Visual Studio": SIGN_IN,
       Continue: TOKEN,
       "Copilot CLI": FIRST,

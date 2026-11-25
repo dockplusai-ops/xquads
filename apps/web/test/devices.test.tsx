@@ -344,7 +344,7 @@ describe("Connect a device", () => {
     await click(screen().getByRole("button", { name: "Or paste one line in its terminal" }));
     const line = screen().getByRole("dialog", { name: "Connect a computer" });
     expect(line.querySelector("code")?.textContent).toMatch(
-      /^curl -fsSL https:\/\/app\.agentes\.chat\/i\/7KQ2-M9X\d \| sh$/,
+      /^curl -fsSL https:\/\/agents\.xquads\.com\/i\/7KQ2-M9X\d \| sh$/,
     );
     await click(within(line).getByRole("button", { name: "Back" }));
     await click(screen().getByRole("button", { name: /This computer/ }));

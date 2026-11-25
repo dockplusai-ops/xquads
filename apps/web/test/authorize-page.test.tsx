@@ -361,7 +361,7 @@ describe("/autorizar: an AI app asks to act as this person (ADR 0119)", () => {
 
   test("the server's own refusals before a request: shown without signing in, nothing of the request echoed", async () => {
     const cases: [string, string][] = [
-      ["app_desconhecido", "No Claude Code, digite /mcp, escolha agentes e Clear authentication."],
+      ["app_desconhecido", "No Claude Code, digite /mcp, escolha xquads e Clear authentication."],
       ["pedido_invalido", "O app mandou um pedido de conexão incompleto."],
       [
         "endereco_de_retorno",

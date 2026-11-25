@@ -947,7 +947,7 @@ describe("the computer page: pause, folders and tools (ADR 0036)", () => {
   test("the browser off on an app too old to switch from here: update it there, on Linux the command too", async () => {
     const card = () => document.querySelector('[aria-labelledby="sec-machine-browser"]') as HTMLElement;
     await open();
-    expect(card().textContent).toMatch(/Atualize o app do agentes\.chat no .+ para ligar daqui\./);
+    expect(card().textContent).toMatch(/Atualize o app do xquads no .+ para ligar daqui\./);
     expect(card().textContent).not.toContain("Preferências");
     expect(card().querySelector(".machine-command__code")).toBeNull();
     cleanup();

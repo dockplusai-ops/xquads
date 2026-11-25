@@ -208,7 +208,7 @@ describe("Conectar GitHub: the xquads app first", () => {
     const how = within(flow).getByRole("radiogroup", { name: "Como os agentes entram no GitHub" });
     const [app, account] = within(how).getAllByRole("radio");
     expect(app?.textContent).toBe(
-      "O app agentes.chatRecomendadoOs agentes aparecem como o app, e você escolhe os repositórios no GitHub.",
+      "O app xquadsRecomendadoOs agentes aparecem como o app, e você escolhe os repositórios no GitHub.",
     );
     expect(app?.getAttribute("aria-checked")).toBe("true");
     expect(account?.textContent).toBe(

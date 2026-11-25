@@ -278,7 +278,7 @@ describe("Entrar (e-mail primeiro)", () => {
       await act(async () => fireEvent.click(within(line).getByRole("button", { name: "Trocar de servidor" })));
       await settle(2);
       const sheet = screen().getByRole("dialog", { name: "Onde fica o seu workspace?" });
-      const cloud = within(sheet).getByRole("radio", { name: /agentes\.chat Cloud/ });
+      const cloud = within(sheet).getByRole("radio", { name: /xquads Cloud/ });
       expect(cloud.getAttribute("aria-checked")).toBe("true");
       expect(cloud.textContent).toContain("Recomendado");
       expect(cloud.textContent).toContain("Computador dos agentes sempre ligado");
@@ -306,7 +306,7 @@ describe("Entrar (e-mail primeiro)", () => {
       await settle(2);
       expect(
         within(sheet)
-          .getByRole("radio", { name: /agentes\.chat Cloud/ })
+          .getByRole("radio", { name: /xquads Cloud/ })
           .getAttribute("aria-checked"),
       ).toBe("true");
       await act(async () => fireEvent.click(within(sheet).getByRole("radio", { name: /No seu servidor/ })));

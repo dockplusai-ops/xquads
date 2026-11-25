@@ -233,7 +233,7 @@ describe("Configurações → Importar e exportar", () => {
         ["Hermes Agent", "/brands/hermes.svg"],
         ["OpenClaw", "/brands/openclaw.svg"],
         ["Paperclip", "/brands/paperclip.svg"],
-        ["xquads", "/favicon.svg"],
+        ["agentes.chat", "/favicon.svg"],
         // It names many apps: no one maker's logo fits.
         ["Outro app", null],
       ]);
@@ -249,7 +249,7 @@ describe("Configurações → Importar e exportar", () => {
         ["Hermes Agent", "/brands/hermes-dark.svg"],
         ["OpenClaw", "/brands/openclaw.svg"],
         ["Paperclip", "/brands/paperclip-dark.svg"],
-        ["xquads", "/favicon.svg"],
+        ["agentes.chat", "/favicon.svg"],
         ["Outro app", null],
       ]);
     } finally {
@@ -301,7 +301,7 @@ describe("Configurações → Importar e exportar", () => {
       "Na conversa com o seu bot, mande:",
       "Clique em Add it e depois em Authorize.",
       "Entre com sua conta do xquads na página que abrir e escolha Criar e editar agentes, rotinas e skills.",
-      "Na conversa, digite @ e escolha agentes.",
+      "Na conversa, digite @ e escolha xquads.",
       "Cole este pedido no app:",
     ]);
     expect([...sheet.querySelectorAll(".imp-do__n")].map((n) => n.textContent)).toEqual(["1", "2", "3", "4", "5"]);

@@ -65,7 +65,7 @@ describe("the sign-in page", () => {
 
   test("anywhere else: exactly as before", async () => {
     await signInPage(null);
-    expect(screen().getByRole("img", { name: "agentes" })).toBeTruthy();
+    expect(screen().getByRole("img", { name: "xquads" })).toBeTruthy();
     expect(document.querySelector(".auth--host, .auth__powered")).toBeNull();
     expect(screen().getByRole("button", { name: /Continuar com GitHub/ })).toBeTruthy();
     expect(agentVar()).toBe("");
