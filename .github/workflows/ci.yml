@@ -37,9 +37,9 @@ permissions:
   contents: read
 
 env:
-  APP_IMAGE: ghcr.io/agentes-chat/agentes
-  BACKUP_IMAGE: ghcr.io/agentes-chat/backup
-  SPEECH_IMAGE: ghcr.io/agentes-chat/speech
+  APP_IMAGE: ghcr.io/dockplusai-ops/xquads
+  BACKUP_IMAGE: ghcr.io/dockplusai-ops/xquads-backup
+  SPEECH_IMAGE: ghcr.io/dockplusai-ops/xquads-speech
 
 # A newer push supersedes a running check of the same branch or pull request (on main only the newest
 # commit's image matters); a release tag's run is never cancelled. A pull request's runs and a manual run
