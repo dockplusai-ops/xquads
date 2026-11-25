@@ -248,10 +248,10 @@ describe("our scrollbars, never the browser's", () => {
     expect(value(layout, ".ac-msg__text .code-card__code", "overflow-y")).toBe("auto");
   });
 
-  test("an agent's face by a scroller's edge never scrolls it: the room for its accessories is drawn, not laid out", async () => {
+  test("an agent's face by a scroller's edge never scrolls it: its canvas is its box, and drawn, not laid out", async () => {
     const kit = topLevel(await read(KIT));
-    // The canvas reaches past the face (ACCESSORY_REACH): as ink overflow, a scroller doesn't count it.
-    expect(value(kit, ".ac-avatar__canvas", "height")).toBe("200%");
+    // xquads draws no accessory (ACCESSORY_REACH is none): the canvas is the face's own box.
+    expect(value(kit, ".ac-avatar__canvas", "height")).toBe("100%");
     expect(value(kit, ".ac-avatar--agent", "contain")).toBe("layout");
   });
 });

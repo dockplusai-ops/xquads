@@ -117,10 +117,17 @@
   flex: none;
   color: var(--ink2);
 }
+/* The words keep a phone's line of their own: under 160px a control at the end (a select, a link) goes under them. */
 .wd__grow {
-  flex: 1;
+  flex: 1 1 160px;
   min-width: 0;
   overflow-wrap: anywhere;
+}
+.wd__row {
+  flex-wrap: wrap;
+}
+.wd__row > .wd__grow ~ * {
+  margin-inline-start: auto;
 }
 .wd__grow small {
   display: block;

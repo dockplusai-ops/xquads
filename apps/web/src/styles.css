@@ -6,9 +6,8 @@
    sheets' general ones by specificity, which a layer between them would undo. The fonts and the variables below stay
    unlayered, as they were. */
 @layer base;
-/* Onest and Martian Mono: the app's faces (`--font-sans`, `--font-mono`). Source Sans 3 stays for the slides people
-   make, whose themes name it. */
-@import "@fontsource-variable/onest/index.css";
+/* Onest (`fonts.css`, with its line box) and Martian Mono: the app's faces (`--font-sans`, `--font-mono`). Source Sans 3
+   stays for the slides people make, whose themes name it. */
 @import "@fontsource-variable/martian-mono/index.css";
 @import "@fontsource-variable/source-sans-3/index.css";
 @import "./fonts.css";

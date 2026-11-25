@@ -12,3 +12,7 @@
   display: flex;
   gap: 16px;
 }
+/* A path or a command in a sentence (`%APPDATA%\com.xquads.desktop`) breaks where it must on a phone, never past it. */
+.help__doc :not(pre) > code {
+  overflow-wrap: anywhere;
+}

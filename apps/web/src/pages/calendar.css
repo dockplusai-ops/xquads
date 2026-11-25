@@ -18,6 +18,14 @@
   gap: 8px 12px;
   min-width: 0;
 }
+/* Touch: the view switch takes the toggle's 40 beside it, one height on the row as in a toolbar (`.ac-toolbar`). */
+@media (pointer: coarse) {
+  .cal-page__tools .ac-seg--sm {
+    --seg-h: var(--control-h-md);
+    --seg-r: var(--control-r-md);
+    --seg-in: 4px;
+  }
+}
 .cal-page__new .ac-kbd {
   margin-left: 6px;
   background: color-mix(in srgb, currentColor 16%, transparent);

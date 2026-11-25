@@ -41,7 +41,8 @@ export function ArchivedChannelsDialog({ open, onClose }: { open: boolean; onClo
                 <span className="ac-mediarow__body small muted">
                   {t("channel.archivedOn", { date: formatShortDate(i18n.language, c.archivedAt) })}
                 </span>
-                <span className="ac-mediarow__end">
+                {/* In the dialog's narrow box (and on a phone) Restaurar goes under the date: a long name keeps the row. */}
+                <span className="ac-mediarow__end ac-mediarow__end--wrap">
                   <Button
                     size="sm"
                     icon="undo"

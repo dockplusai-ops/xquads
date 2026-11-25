@@ -43,6 +43,10 @@
   padding: 12px;
   gap: 4px;
 }
+/* A long word in a narrow card (Russian's "приложение") breaks at its syllables, with a hyphen, never anywhere. */
+.imp-source .ac-option__title {
+  hyphens: auto;
+}
 .imp-mark {
   flex: none;
   width: 34px;

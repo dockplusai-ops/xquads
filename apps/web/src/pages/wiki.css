@@ -284,9 +284,12 @@ button.wiki-folder-row__act:hover {
   border-radius: 12px;
   background: var(--plate);
 }
+/* Its two buttons wrap inside the bar on a phone rather than run to its edge. */
 .wiki-trash__acts {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-2);
+  max-width: 100%;
 }
 .wiki-trash__list {
   display: flex;
@@ -1412,8 +1415,10 @@ html:not([data-pointer]) .wiki-outline__item:focus-visible {
   margin: 0 4px;
   background: var(--line2);
 }
+/* At the bar's end, and at least 8 from the last tool when the bar is full (its own gap is 2). */
 .wiki-bar__end {
   margin-left: auto;
+  padding-inline-start: 6px;
 }
 .wiki-bar__block {
   width: 140px;
