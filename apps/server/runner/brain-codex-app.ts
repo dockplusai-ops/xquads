@@ -653,7 +653,7 @@ export class CodexAppMapper {
 // ── Approvals (ADR 0053 §3) ──────────────────────────────────────────────────
 
 /** How the reason of a declined command or change starts, steered to Codex: from the computer, not a person. */
-export const DECLINED_PREFIX = "[agentes.chat, not the person] The computer declined that command or change: ";
+export const DECLINED_PREFIX = "[xquads, not the person] The computer declined that command or change: ";
 
 /** A call as the command policy reads it (Claude Code's permission prompt arguments). */
 export type PolicyCall = { tool_name: string; input: Record<string, unknown> };
@@ -1022,7 +1022,7 @@ export class CodexAppServers implements CodexAppRunner {
       await client.request(
         "initialize",
         {
-          clientInfo: { name: "agentes_runner", title: "agentes.chat runner", version: "1" },
+          clientInfo: { name: "agentes_runner", title: "xquads runner", version: "1" },
           capabilities: {
             experimentalApi: false,
             requestAttestation: false,
@@ -1474,7 +1474,7 @@ export class CodexAppServers implements CodexAppRunner {
     return (tool: string, args: Record<string, unknown>): Promise<IpcReply> =>
       socketPath
         ? ipcCall(socketPath, { taskId: live.id, token, tool, args })
-        : Promise.resolve({ ok: false, error: "This computer can't ask agentes.chat (no local endpoint)." });
+        : Promise.resolve({ ok: false, error: "This computer can't ask xquads (no local endpoint)." });
   }
 
   private armIdle(live: AppLive) {

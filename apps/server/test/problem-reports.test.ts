@@ -9,7 +9,7 @@ afterEach(async () => {
   t = undefined;
 });
 
-/** A receiver that answers like agentes.chat's, and keeps what it got. */
+/** A receiver that answers like xquads's, and keeps what it got. */
 function receiver(answer: (n: number) => Response = () => Response.json({ id: "R-7K3QXM" }, { status: 201 })) {
   const calls: { url: string; body: Record<string, unknown> }[] = [];
   const http = (async (url: string | URL | Request, init?: RequestInit) => {
@@ -134,8 +134,8 @@ describe("problem reports", () => {
     expect(((await res.json()) as { error: { code: string } }).error.code).toBe("off");
   });
 
-  test("on agentes.chat itself it isn't there", async () => {
-    const origin = "https://agentes.chat";
+  test("on xquads itself it isn't there", async () => {
+    const origin = "https://xquads.com";
     t = await createTestServer({ env: { ALLOW_SIGNUP: "true", PUBLIC_URL: origin } });
     const first = browser(t);
     await first("/api/auth/sign-up/email", {

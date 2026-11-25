@@ -360,8 +360,8 @@ describe("Jev through OpenRouter (ADR 0073 §9)", () => {
       assets: { "a3f1-shot": { format: "png" } },
     });
     expect(sent?.headers.get("authorization")).toBe("Bearer sk-or-v1-secret");
-    expect(sent?.headers.get("http-referer")).toBe("https://agentes.chat");
-    expect(sent?.headers.get("x-openrouter-title")).toBe("agentes.chat");
+    expect(sent?.headers.get("http-referer")).toBe("https://xquads.com");
+    expect(sent?.headers.get("x-openrouter-title")).toBe("xquads");
     // TypeSafe's own switch stays with TypeSafe: OpenRouter sets what Jev needs itself.
     expect(sent?.headers.get("typesafe-danger-zone-images")).toBeNull();
 

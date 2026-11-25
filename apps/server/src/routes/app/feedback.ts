@@ -183,7 +183,7 @@ export function feedbackRoutes(deps: AppDeps) {
       tags,
       summary: "Send feedback to whoever runs this server",
       description:
-        "One email to `FEEDBACK_EMAIL` (or, where it is unset, one message to the agentes.chat team's inbox: `auth-config.feedbackRelay`) with the text, the person's name and address (to answer them), the workspace's name when `orgId` is one of theirs, what they reported (`about`), what the app knew of where they were (`facts`), their files as links good for thirty days, and this server's version. 404 when the server takes no feedback (`auth-config.feedback` is false), 429 past ten an hour.",
+        "One email to `FEEDBACK_EMAIL` (or, where it is unset, one message to the xquads team's inbox: `auth-config.feedbackRelay`) with the text, the person's name and address (to answer them), the workspace's name when `orgId` is one of theirs, what they reported (`about`), what the app knew of where they were (`facts`), their files as links good for thirty days, and this server's version. 404 when the server takes no feedback (`auth-config.feedback` is false), 429 past ten an hour.",
       security,
       request: {
         body: body(

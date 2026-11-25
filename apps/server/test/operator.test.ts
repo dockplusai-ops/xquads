@@ -630,8 +630,8 @@ test("user block: signed out at once, refused everywhere, no sign-in; unblocked,
   expect(await body(await op(`/users/${biaId}`))).toMatchObject({ blockedAt: null, blockedReason: null });
 });
 
-test("on agentes.chat Cloud a blocked sign-in says the block's kind, never its reason", async () => {
-  setRestrictionNotices("https://agentes.chat");
+test("on xquads Cloud a blocked sign-in says the block's kind, never its reason", async () => {
+  setRestrictionNotices("https://xquads.com");
   try {
     const cid = browser(t);
     await signUp(cid, "cid@acme.test");

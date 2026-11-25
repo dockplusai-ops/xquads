@@ -810,7 +810,7 @@ export class Supervisor {
       if (!w.ready) continue;
       this.send(w, { type: "worker.close" });
       w.ready = false;
-      this.endSession(w, "The computer lost its connection to agentes.chat");
+      this.endSession(w, "The computer lost its connection to xquads");
     }
   }
 

@@ -343,7 +343,7 @@ describe("OpenRouter (Images API)", () => {
     expect(result?.costNanoUsd).toBe(120_000_000);
     expect(sent[0]?.url).toBe("https://openrouter.ai/api/v1/images");
     expect(sent[0]?.headers.get("authorization")).toBe("Bearer sk-or-test");
-    expect(sent[0]?.headers.get("x-openrouter-title")).toBe("agentes.chat");
+    expect(sent[0]?.headers.get("x-openrouter-title")).toBe("xquads");
     expect(sent[0]?.body).toEqual({
       model: "openai/gpt-image-2",
       prompt: "a lighthouse at dusk",

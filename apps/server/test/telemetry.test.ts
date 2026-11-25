@@ -223,8 +223,8 @@ describe("sending", () => {
     expect(http.calls).toEqual([]);
   });
 
-  test("agentes.chat's own server always sends, whatever TELEMETRY and the switch say", async () => {
-    const { clock, http } = await start({ PUBLIC_URL: "https://agentes.chat", TELEMETRY: "off" });
+  test("xquads's own server always sends, whatever TELEMETRY and the switch say", async () => {
+    const { clock, http } = await start({ PUBLIC_URL: "https://xquads.com", TELEMETRY: "off" });
     await setTelemetryEnabled(db, false);
     await clock.fire(FIRST_REPORT_MS);
     expect(http.calls).toHaveLength(1);
@@ -345,8 +345,8 @@ describe("the switch in Settings", () => {
     expect(view).toMatchObject({ enabled: true, envOff: true });
   });
 
-  test("on agentes.chat itself nobody has it", async () => {
-    const origin = "https://agentes.chat";
+  test("on xquads itself nobody has it", async () => {
+    const origin = "https://xquads.com";
     t = await createTestServer({ env: { ALLOW_SIGNUP: "true", PUBLIC_URL: origin } });
     const first = browser(t);
     const signedUp = await first("/api/auth/sign-up/email", {

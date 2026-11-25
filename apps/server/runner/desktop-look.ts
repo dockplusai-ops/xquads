@@ -34,7 +34,7 @@ import { xmlEscape, xmlUnescape } from "./xml";
  */
 
 /** Bumped whenever what `lookFiles` writes changes. */
-export const LOOK_VERSION = 8;
+export const LOOK_VERSION = 9;
 
 /** Orchis's light theme (GTK and xfwm4), else GTK's Adwaita and xfwm4's Default. */
 export type LookTheme = "orchis" | "stock";
@@ -436,7 +436,7 @@ const keeperAutostart = (home: string) =>
   [
     "[Desktop Entry]",
     "Type=Application",
-    "Name=agentes.chat",
+    "Name=xquads",
     "Comment=Lists the windows open on this desktop, to open them again after its computer restarted or moved",
     `Exec=python3 -I ${execArg(`${home}/${KEEPER_FILE}`)} ${execArg(`${home}/${KEEPER_SETTINGS}`)}`,
     "NoDisplay=true",

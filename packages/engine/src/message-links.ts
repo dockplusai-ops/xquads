@@ -18,7 +18,9 @@ export function setMessageLinkBase(publicUrl: string) {
 export const appPageLink = (orgId: string, path: string) => `${base}/org/${orgId}${path}`;
 
 /** The Cloud's domain: an address under it is our own app wherever this server runs. */
-const PRODUCT_HOST = "agentes.chat";
+const PRODUCT_HOST = "xquads.com";
+/** The product's name alone ("Entre no xquads"): unlike the original's, it isn't its domain too. */
+const PRODUCT_NAME = "xquads";
 
 /** A loopback `PUBLIC_URL` (a self-host's default): there, on the agent's computer, it is some other app. */
 const LOOPBACK = /^(localhost|127(\.\d+){3}|\[::1\])$/;
@@ -41,7 +43,7 @@ export function namesOwnApp(text: string): boolean {
     .split(/[^\w.@-]+/)
     .filter((word) => !word.includes("@"))
     .map((word) => word.replace(/\.+$/, ""))
-    .some((word) => hosts.some((h) => word === h || word.endsWith(`.${h}`)));
+    .some((word) => word === PRODUCT_NAME || hosts.some((h) => word === h || word.endsWith(`.${h}`)));
 }
 
 /** A message's permalink on this server, as agents write it and the apps show it as a pill. */

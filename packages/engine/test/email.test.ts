@@ -312,7 +312,7 @@ describe("the look", () => {
   });
 
   test("the footer says who sent it: xquads, or a self-hosted server by its host", () => {
-    expect(renderEmail(verify, emailArtAt("https://agentes.chat")).text).toContain("\nSent by xquads.\n");
+    expect(renderEmail(verify, emailArtAt("https://xquads.com")).text).toContain("\nSent by xquads.\n");
     expect(renderEmail(verify, emailArtAt("https://chat.acme.com/")).text).toContain(
       "\nSent by the xquads server at chat.acme.com.\n",
     );

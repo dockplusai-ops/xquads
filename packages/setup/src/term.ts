@@ -495,9 +495,9 @@ export function createTerm(o: TermOptions = {}) {
     /** The logo where it fits, then ┌ and the badge; nothing when the frame is the parent's. */
     intro(title: string, logo = true) {
       if (inherited) return;
-      if (!tty) return say([`agentes.chat ${title}`]);
+      if (!tty) return say([`xquads ${title}`]);
       if (logo && unicode && width >= LOGO_WIDTH + 1) say(["", ...logoLines(depth), ""]);
-      const badge = depth > 1 ? `\x1b[${BADGE[depth]}m agentes.chat \x1b[0m` : "agentes.chat";
+      const badge = depth > 1 ? `\x1b[${BADGE[depth]}m xquads \x1b[0m` : "xquads";
       say([...wrap(`${badge} ${title}`, width - 3).map((l, i) => lineOf(i === 0 ? dim(S.start) : bar(), l)), bar()]);
       gapped = true;
     },

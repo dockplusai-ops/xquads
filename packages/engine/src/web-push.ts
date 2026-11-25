@@ -27,7 +27,7 @@ export const VAPID_RECHECK_MS = 60_000;
 export const VAPID_KEEP_NEW_MS = 10 * 60_000;
 
 /** The contact push services get from a server with no public address or sender of its own. */
-export const VAPID_FALLBACK_SUBJECT = "https://agentes.chat";
+export const VAPID_FALLBACK_SUBJECT = "https://xquads.com";
 
 export interface VapidConfig {
   PUBLIC_URL: string;

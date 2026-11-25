@@ -714,7 +714,7 @@ test("refused where a key is: a service through Composio, and a sign-in-only ser
   expect([r.asked, r.sessions]).toEqual([[], []]);
   expect(await fx.db.select().from(schema.connectorConnections)).toEqual([]);
   const intercom = mcpPreset("intercom")?.serverUrl ?? "";
-  await expect(start({ ...self, publicUrl: "https://agentes.chat" }, intercom)).rejects.toMatchObject({
+  await expect(start({ ...self, publicUrl: "https://xquads.com" }, intercom)).rejects.toMatchObject({
     code: "connector.oauth_only",
   });
   expect(r.probes).toEqual([]);

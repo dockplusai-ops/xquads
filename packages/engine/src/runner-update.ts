@@ -22,5 +22,5 @@ export const personAtComputerWay = (
   commands: string[],
 ) =>
   computer.os === "darwin" || computer.os === "windows"
-    ? `in the agentes.chat app there (Preferences › ${pane})`
+    ? `in the xquads app there (Preferences › ${pane})`
     : `with ${commands.map((c) => `\`${computer.executors?.mode === "system" ? "sudo " : ""}agentes-runner ${c}\``).join(" and ")} there`;

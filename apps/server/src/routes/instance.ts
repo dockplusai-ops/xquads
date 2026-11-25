@@ -33,7 +33,7 @@ const InstanceResponse = z
     }),
     cloud: z.boolean().openapi({
       description:
-        "One of agentes.chat's own servers (`PUBLIC_URL` on agentes.chat): `/terms` and `/privacy` show agentes.chat Cloud's Terms and Privacy Policy.",
+        "One of xquads's own servers (`PUBLIC_URL` on xquads): `/terms` and `/privacy` show xquads Cloud's Terms and Privacy Policy.",
     }),
   })
   .openapi("Instance");
@@ -44,7 +44,7 @@ const route = createRoute({
   tags: ["System"],
   summary: "What this server is",
   description:
-    "Public, nothing secret. The phone and desktop apps check it before using a server: that it is agentes.chat, on an API they speak, and how people sign in.",
+    "Public, nothing secret. The phone and desktop apps check it before using a server: that it is xquads, on an API they speak, and how people sign in.",
   responses: { 200: { description: "OK", content: { "application/json": { schema: InstanceResponse } } } },
 });
 

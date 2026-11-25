@@ -259,7 +259,7 @@ export const Organization = z
         reason: z.string().nullable().openapi({ description: "Only when the workspace is told why; else null." }),
         cloud: z.literal(true).optional().openapi({
           description:
-            "agentes.chat Cloud: the apps read `review` as the automatic review hold's line (`review.<category>` naming what was flagged), and add how to contest a reason.",
+            "xquads Cloud: the apps read `review` as the automatic review hold's line (`review.<category>` naming what was flagged), and add how to contest a reason.",
         }),
       })
       .optional()
@@ -1153,7 +1153,7 @@ export const BrainOption = z
       .optional()
       .openapi({
         description:
-          "Antigravity: the newest Gemini isn't among its models because the computer's agentes.chat is too old to bring a CLI that runs it (`app_old`), its CLI predates it where the computer's setup installs it (`cli_old`), or no account there has a plan with it (`plan`).",
+          "Antigravity: the newest Gemini isn't among its models because the computer's xquads is too old to bring a CLI that runs it (`app_old`), its CLI predates it where the computer's setup installs it (`cli_old`), or no account there has a plan with it (`plan`).",
       }),
   })
   .openapi("BrainOption");

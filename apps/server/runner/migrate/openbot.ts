@@ -230,7 +230,7 @@ function read(query: Query, options: OpenBotOptions): Collected {
   if (!has("projection_agents")) {
     throw new MigrateError(
       "unsupported",
-      "This OpenBot keeps its agents in a way this command doesn't read. In OpenBot, open Server settings › Transfer › Export from this server, and drop that .zip on agentes.chat instead.",
+      "This OpenBot keeps its agents in a way this command doesn't read. In OpenBot, open Server settings › Transfer › Export from this server, and drop that .zip on xquads instead.",
     );
   }
   const left = noLeft();
@@ -382,9 +382,9 @@ function read(query: Query, options: OpenBotOptions): Collected {
     };
   });
   if (mcpServers.length === 1) {
-    notes.push("1 MCP server comes by name only: connect it again on agentes.chat.");
+    notes.push("1 MCP server comes by name only: connect it again on xquads.");
   } else if (mcpServers.length > 1) {
-    notes.push(`${mcpServers.length} MCP servers come by name only: connect them again on agentes.chat.`);
+    notes.push(`${mcpServers.length} MCP servers come by name only: connect them again on xquads.`);
   }
 
   const workflows = workflowsOf(all, keys, channelKeyOf);
@@ -395,9 +395,8 @@ function read(query: Query, options: OpenBotOptions): Collected {
     ),
   ).length;
   hookCount += hookFlows;
-  if (hookCount === 1) notes.push("1 routine starts from a webhook: it gets a new address on agentes.chat.");
-  else if (hookCount > 1)
-    notes.push(`${hookCount} routines start from a webhook: each gets a new address on agentes.chat.`);
+  if (hookCount === 1) notes.push("1 routine starts from a webhook: it gets a new address on xquads.");
+  else if (hookCount > 1) notes.push(`${hookCount} routines start from a webhook: each gets a new address on xquads.`);
 
   // What hands a routine's answer on: only between agents that came.
   const routineFlows = all("routine_flow_links", "created_at, link_id").flatMap((l) => {
@@ -417,12 +416,9 @@ function read(query: Query, options: OpenBotOptions): Collected {
     platform: str(m.platform),
     name: str(m.workspace_name),
   }));
-  if (messagingConnections.length === 1)
-    notes.push("1 messaging connection is named only: it has no match on agentes.chat.");
+  if (messagingConnections.length === 1) notes.push("1 messaging connection is named only: it has no match on xquads.");
   else if (messagingConnections.length > 1) {
-    notes.push(
-      `${messagingConnections.length} messaging connections are named only: they have no match on agentes.chat.`,
-    );
+    notes.push(`${messagingConnections.length} messaging connections are named only: they have no match on xquads.`);
   }
 
   const manifest = {

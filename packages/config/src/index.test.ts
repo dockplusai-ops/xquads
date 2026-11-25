@@ -462,7 +462,7 @@ describe("GITHUB_APP_PRIVATE_KEY", () => {
 });
 
 describe("phone push settings", () => {
-  test("auto by default, through agentes.chat's relay unless told otherwise; the relay only over https", () => {
+  test("auto by default, through xquads's relay unless told otherwise; the relay only over https", () => {
     const config = loadConfig(valid);
     expect(config.PUSH_SENDER).toBe("auto");
     expect(config.PUSH_RELAY_URL).toBe("https://app.xquads.com/api/push-relay/v1");
@@ -487,11 +487,7 @@ describe("APNs key", () => {
     expect(config.APNS_KEY).toBe(p8.trim());
     expect(config.APNS_KEY_ID).toBe("ABC123DEFG");
     expect(config.APNS_TEAM_ID).toBe("XYZ987WVUT");
-    expect(config.APNS_APP_IDS).toEqual([
-      "chat.agentes.app",
-      "chat.agentes.app.preview",
-      "chat.agentes.app.development",
-    ]);
+    expect(config.APNS_APP_IDS).toEqual(["com.xquads.app", "com.xquads.app.preview", "com.xquads.app.development"]);
     expect(redactConfig(config).APNS_KEY).toBe("********");
     expect(loadConfig({ ...valid, APNS_KEY: Buffer.from(p8).toString("base64") }).APNS_KEY).toBe(p8.trim());
     expect(loadConfig({ ...valid, APNS_APP_IDS: " com.example.app , com.example.app.beta " }).APNS_APP_IDS).toEqual([

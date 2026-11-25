@@ -29,7 +29,7 @@ const ApiKey = z.object({
 /** Limits checking keys through this server, so it can't test keys in bulk. */
 const WRITES = { limit: 10, windowMs: 60_000 };
 
-const notFound = "404 for everyone but the installation's pinned owner (ADR 0073), and on agentes.chat itself.";
+const notFound = "404 for everyone but the installation's pinned owner (ADR 0073), and on xquads itself.";
 const tooMany = { 429: errorResponse("Too many tries (`rate_limited`)") };
 
 /**

@@ -126,7 +126,7 @@ export function telemetryRoutes(deps: AppDeps) {
       tags,
       summary: "The usage report's switch, and the next report",
       description:
-        "404 for everyone but the installation's owner (its first account, kept once it is gone), and on agentes.chat itself.",
+        "404 for everyone but the installation's owner (its first account, kept once it is gone), and on xquads itself.",
       security,
       responses: { 200: json(Telemetry), 401: errors[401], 404: errors[404] },
     }),
