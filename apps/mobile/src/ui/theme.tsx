@@ -1,4 +1,10 @@
-import { durations, motion as motionCurves, radius as radii, type ShadowLayer } from "@agenteschat/tokens";
+import {
+  durations,
+  motion as motionCurves,
+  radius as radii,
+  type ShadowLayer,
+  THEME_CHOICE,
+} from "@agenteschat/tokens";
 import { isAccentHex } from "@agenteschat/tokens/accent";
 import {
   createContext,
@@ -24,6 +30,8 @@ import { type AppColors, appColors, appShadows, paintSky, type Scheme, skyAccent
 export type { AppColors, Scheme } from "./palette";
 export { weights } from "./type-scale";
 export type ThemePreference = "system" | Scheme;
+
+export { THEME_CHOICE } from "@agenteschat/tokens";
 
 /** A token shadow as React Native's `boxShadow` string (New Architecture: layers, spread and inset). */
 export const boxShadow = (layers: readonly ShadowLayer[]) =>
@@ -124,7 +132,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     void writeValue(STORED.theme, next);
   }, []);
 
-  const scheme: Scheme = preference === "system" ? (system === "dark" ? "dark" : "light") : preference;
+  const chosen: Scheme = preference === "system" ? (system === "dark" ? "dark" : "light") : preference;
+  const scheme: Scheme = THEME_CHOICE ? chosen : "dark";
   const value = useMemo<Theme>(
     () => ({ ...makeTheme(scheme, reducedMotion), preference, setPreference }),
     [scheme, reducedMotion, preference, setPreference],

@@ -169,13 +169,14 @@ describe("the look", () => {
     }
   });
 
-  test("dark: our design where clients apply an email's own, the bone logo hidden from classic Outlook", () => {
+  test("dark: our design where clients apply an email's own, the light logo on both designs", () => {
     const { html } = renderEmail(verify, art);
     expect(html).toContain('<meta name="color-scheme" content="light dark">');
     expect(html).toContain(":root{color-scheme:light dark;");
-    expect(html).toContain("@media (prefers-color-scheme:dark){.bg{background:#0f0f0e!important}");
-    expect(html).toContain("[data-ogsb] .logo-ink{display:none!important}");
-    expect(html).toContain('<!--[if !mso]><!--><img class="logo-bone"');
+    expect(html).toContain("@media (prefers-color-scheme:dark){.bg{background:#0e1c22!important}");
+    // xquads is dark only: one logo, the light one, classic Outlook included.
+    expect(html).toContain('<img class="logo-bone"');
+    expect(html).not.toContain("logo-ink");
   });
 
   test("the button is the app's primary at its large size, in layers a client can drop one by one", () => {
@@ -183,21 +184,21 @@ describe("the look", () => {
     const lift =
       "inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.18),0 6px 14px -6px rgba(0,0,0,.45)";
     // The flat fill and the lift inline; the gradient only where a client reads the colour scheme.
-    expect(html).toContain(`background-color:#151514;border:1px solid #151514;border-radius:14px;box-shadow:${lift}`);
+    expect(html).toContain(`background-color:#c79d70;border:1px solid #c79d70;border-radius:14px;box-shadow:${lift}`);
     expect(html).toContain(
-      "@media (prefers-color-scheme:light){.btn{background-image:linear-gradient(180deg,#3e3e3d 0%,#151514 100%)!important}}",
+      "@media (prefers-color-scheme:light){.btn{background-image:linear-gradient(180deg,#a68662 0%,#c79d70 100%)!important}}",
     );
     expect(html).not.toMatch(/style="[^"]*background-image/);
     expect(html).toContain("font-size:15px;line-height:20px;font-weight:600;text-decoration:none;padding:13px 15px");
     // Dark: the flat bone wherever our dark applies, and the bone gradient in a block of its own after Outlook's hooks.
-    expect(html).toContain(".btn{background:#efefec!important;color:#0f0f0e!important;border-color:#efefec!important}");
+    expect(html).toContain(".btn{background:#c79d70!important;color:#0e1c22!important;border-color:#c79d70!important}");
     const gradient =
-      "<style>\n@media (prefers-color-scheme:dark){.btn{background-image:linear-gradient(180deg,#c7c7c4 0%,#efefec 100%)!important}}\n</style>";
+      "<style>\n@media (prefers-color-scheme:dark){.btn{background-image:linear-gradient(180deg,#a68662 0%,#c79d70 100%)!important}}\n</style>";
     expect(html.indexOf(gradient)).toBeGreaterThan(html.lastIndexOf("[data-ogsb] "));
     // Classic Outlook: its spacers in em at the 15 px label, both labels raised alike, no exact line height on a link.
     expect(html).toContain('<i style="mso-font-width:107%;mso-text-raise:187%" hidden>&emsp;</i>');
     expect(html).toContain('<i style="mso-font-width:107%" hidden>&emsp;&#8203;</i>');
-    expect(html).toContain('<span style="mso-text-raise:93%;color:#fbfbfa">Approve</span>');
+    expect(html).toContain('<span style="mso-text-raise:93%;color:#0e1c22">Approve</span>');
     expect(html).toContain('<span style="mso-text-raise:93%">Deny</span>');
     expect(html).not.toMatch(/<a [^>]*mso-line-height-rule:exactly/);
     // Deny 16 px after the button, as the app spaces its actions. Four spaces where the width is ignored.
@@ -212,7 +213,7 @@ describe("the look", () => {
     const at = css.lastIndexOf(".ac-btn--primary {");
     const primary = css.slice(at, css.indexOf("}", at));
     expect(primary).toContain(
-      "linear-gradient(180deg, color-mix(in srgb, var(--ink) 82%, var(--bg)) 0%, var(--ink) 100%)",
+      "linear-gradient(180deg, color-mix(in srgb, var(--action) 82%, var(--bg)) 0%, var(--action) 100%)",
     );
     for (const layer of [
       "inset 0 1px 0 var(--b1-light)",
@@ -298,7 +299,7 @@ describe("the look", () => {
       expect(e.subject).toBe(subject);
       expect(e.text).toContain(`\n\n${body} Acme evil.${BREAK}com.\n\n482913\n\n`);
       expect(e.html).toContain(
-        'letter-spacing:8px;font-variant-numeric:tabular-nums;color:#151514;text-align:center">482913</td>',
+        'letter-spacing:8px;font-variant-numeric:tabular-nums;color:#ede6e1;text-align:center">482913</td>',
       );
       expect(e.html).toContain('<table width="100%" class="well"');
       expect(e.html).not.toContain('class="btn"');
@@ -368,7 +369,7 @@ describe("the look", () => {
     expect(html("join_code.en")).toContain(`Souza Bakery ${nobr}on xquads.</span></p>`);
     // A name in bold moves down with its period, still bold.
     expect(html("join_code.en")).toContain(
-      `to ask to join ${nobr}<b class="ink" style="font-weight:600;color:#151514">Souza Bakery</b>.</span></p>`,
+      `to ask to join ${nobr}<b class="ink" style="font-weight:600;color:#ede6e1">Souza Bakery</b>.</span></p>`,
     );
     expect(html("computer_ready-ai.pt-BR")).toContain(`dos seus agentes ${nobr}está pronto</span></h1>`);
     // Headlines and paragraphs of every kind, the fallback's words before its address (which breaks anywhere); the
@@ -644,7 +645,6 @@ describe("where the pictures come from", () => {
     expect(html).toContain('src="cid:computer@agentes.chat"');
     expect(html).toContain('src="cid:agent-rose-dots-flower@agentes.chat"');
     expect(inline.map((p) => p.filename)).toEqual([
-      "logo-ink-tile.png",
       "logo-bone.png",
       "computer.png",
       "sky-band.png",
@@ -656,8 +656,8 @@ describe("where the pictures come from", () => {
 
   test("linked from this server's /email/, with the web font", () => {
     const { html, inline } = renderEmail(EMAIL_SAMPLES["verify_email.en"] as EmailTemplate, art);
-    expect(html).toContain('src="https://x.test/email/logo-ink-tile.png"');
-    expect(html).toContain("src:url('https://x.test/email/source-sans-3-latin.woff2')");
+    expect(html).toContain('src="https://x.test/email/logo-bone.png"');
+    expect(html).toContain("src:url('https://x.test/email/onest-latin.woff2')");
     expect(html).toContain('<a href="https://x.test" target="_blank"');
     expect(inline).toEqual([]);
   });
@@ -674,7 +674,7 @@ describe("where the pictures come from", () => {
       expect(faces).toEqual(
         from
           ? [
-              `@font-face{font-family:'Source Sans 3';font-style:normal;font-weight:200 900;font-display:swap;size-adjust:107%;src:url('${from}/email/source-sans-3-latin.woff2') format('woff2')}`,
+              `@font-face{font-family:'Onest';font-style:normal;font-weight:100 900;font-display:swap;src:url('${from}/email/onest-latin.woff2') format('woff2')}`,
             ]
           : [],
       );
@@ -687,7 +687,7 @@ describe("where the pictures come from", () => {
       // classic Outlook is told its own.
       if (from) expect(html).toContain(`<!--[if !mso]><!--><style>${faces[0]}</style><!--<![endif]-->`);
       expect(html).toContain(
-        "font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,'Hiragino Sans','PingFang SC','Microsoft YaHei','Apple SD Gothic Neo','Malgun Gothic',sans-serif",
+        "font-family:'Onest',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,'Hiragino Sans','PingFang SC','Microsoft YaHei','Apple SD Gothic Neo','Malgun Gothic',sans-serif",
       );
       expect(html).toContain("<!--[if mso]>");
       expect(html).toMatch(/<!--\[if mso\]>.*font-family:'Segoe UI',Arial,sans-serif!important.*<!\[endif\]-->/);
@@ -707,14 +707,9 @@ describe("where the pictures come from", () => {
       },
       attached,
     );
-    expect(html).toContain('src="cid:logo-ink-tile@agentes.chat"');
-    expect(inline.map((p) => p.filename)).toEqual([
-      "logo-ink-tile.png",
-      "logo-bone.png",
-      "sky-band.png",
-      "agent-rose.png",
-    ]);
-    expect(inline[0]).toMatchObject({ cid: "logo-ink-tile@agentes.chat", contentType: "image/png" });
+    expect(html).toContain('src="cid:logo-bone@agentes.chat"');
+    expect(inline.map((p) => p.filename)).toEqual(["logo-bone.png", "sky-band.png", "agent-rose.png"]);
+    expect(inline[0]).toMatchObject({ cid: "logo-bone@agentes.chat", contentType: "image/png" });
     expect([...(inline[0]?.content ?? []).slice(1, 4)].map((c) => String.fromCharCode(c)).join("")).toBe("PNG");
   });
 
@@ -809,11 +804,7 @@ describe("outbox delivery", () => {
     const sender = createFakeEmailSender();
     const attached: EmailArt = await emailArtFor("http://localhost:3000", WEB_DIR, "attach");
     await sendQueuedEmail(sender, { key: "k", to: ["a@b.c"], template: EMAIL_SAMPLES["verify_email.en"] }, attached);
-    expect(sender.sent[0]?.inline?.map((p) => p.cid)).toEqual([
-      "logo-ink-tile@agentes.chat",
-      "logo-bone@agentes.chat",
-      "sky-band@agentes.chat",
-    ]);
+    expect(sender.sent[0]?.inline?.map((p) => p.cid)).toEqual(["logo-bone@agentes.chat", "sky-band@agentes.chat"]);
     await sendQueuedEmail(sender, { key: "k2", to: ["a@b.c"], template: EMAIL_SAMPLES["verify_email.en"] }, art);
     expect(sender.sent[1]).not.toHaveProperty("inline");
   });

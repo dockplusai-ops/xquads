@@ -92,14 +92,15 @@ describe("settings found by name (Você's magnifier, the Buscar tab)", () => {
     expect(names("conta")).toContain("Apagar conta");
     // Accents and case aside, and every word must be somewhere.
     expect(names("NOTIFICACOES")).toEqual(["Notificações"]);
-    expect(names("tema escuro")).toEqual(["Aparência"]);
+    // xquads is dark only: no Appearance to find (`THEME_CHOICE`).
+    expect(names("tema escuro")).toEqual([]);
     expect(names("senhas")[0]).toBe("Cofre");
     expect(names("")).toEqual([]);
     expect(names("zzz")).toEqual([]);
-    // Sons and Aparência change in their menu: no screen to push.
-    const look = findSettings("aparência", index, t)[0]?.entry;
-    expect(look?.pick).toBe("appearance");
-    expect(look?.href).toBeUndefined();
+    // Sons change in their menu: no screen to push.
+    const sounds = findSettings("sons", index, t)[0]?.entry;
+    expect(sounds?.pick).toBe("sounds");
+    expect(sounds?.href).toBeUndefined();
   });
 
   test("Você's magnifier pushes the search; the Buscar tab lists Configurações before the conversations", () => {

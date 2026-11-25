@@ -68,7 +68,7 @@ import { useOpenParam } from "@/lib/open-param";
 import { ownPlanLines, planMeterText } from "@/lib/plan-usage";
 import { onSoundChoiceChange, type SoundChoice, setSoundChoice, soundChoice } from "@/lib/sounds";
 import { STORAGE_KEYS, sessionStore } from "@/lib/storage";
-import { type ThemePreference, useTheme } from "@/lib/theme";
+import { THEME_CHOICE, type ThemePreference, useTheme } from "@/lib/theme";
 import { useToast } from "@/lib/toast";
 import { LanguageSelect } from "./LanguageSelect";
 
@@ -216,24 +216,26 @@ export function AccountSection() {
       <Card aria-labelledby="account-device">
         <CardHeader id="account-device" title={t("settings.account.device")} />
         <div className="settings-rows">
-          <PrefRow
-            id="account-theme"
-            icon="bulb"
-            label={t("shell.theme")}
-            control={
-              <Segmented
-                size="sm"
-                label={t("shell.theme")}
-                value={theme.preference}
-                onValueChange={(v) => theme.setPreference(v as ThemePreference)}
-                options={[
-                  { value: "system", label: t("shell.themeSystem") },
-                  { value: "light", label: t("shell.themeLight") },
-                  { value: "dark", label: t("shell.themeDark") },
-                ]}
-              />
-            }
-          />
+          {THEME_CHOICE && (
+            <PrefRow
+              id="account-theme"
+              icon="bulb"
+              label={t("shell.theme")}
+              control={
+                <Segmented
+                  size="sm"
+                  label={t("shell.theme")}
+                  value={theme.preference}
+                  onValueChange={(v) => theme.setPreference(v as ThemePreference)}
+                  options={[
+                    { value: "system", label: t("shell.themeSystem") },
+                    { value: "light", label: t("shell.themeLight") },
+                    { value: "dark", label: t("shell.themeDark") },
+                  ]}
+                />
+              }
+            />
+          )}
           {picksAppIcon() && (
             <PrefRow
               id="account-app-icon"

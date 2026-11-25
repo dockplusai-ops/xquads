@@ -24,6 +24,7 @@ import {
   PressScale,
   SCREEN_X,
   Text,
+  THEME_CHOICE,
   useTheme,
   useToast,
   WithPresence,
@@ -548,14 +549,16 @@ function MePage() {
               menu
               onPress={pickSound}
             />
-            <GroupedRow
-              key="appearance"
-              icon={theme.scheme === "dark" ? "moon" : "sun"}
-              label={t("mobile.me.appearance")}
-              value={themeValue}
-              menu
-              onPress={pickTheme}
-            />
+            {THEME_CHOICE ? (
+              <GroupedRow
+                key="appearance"
+                icon={theme.scheme === "dark" ? "moon" : "sun"}
+                label={t("mobile.me.appearance")}
+                value={themeValue}
+                menu
+                onPress={pickTheme}
+              />
+            ) : null}
             {/* The app icon (ADR 0179): only where this build carries the others. */}
             {appIcon.supported && appIcon.icon ? (
               <GroupedRow

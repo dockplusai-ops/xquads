@@ -28,7 +28,7 @@ const pick = (t: AccentTokens): AccentTokens => ({
   onAgent: t.onAgent,
 });
 
-/** The design system's own blue: what a workspace without an accent shows. */
+/** The design system's own camel: what a workspace without an accent shows. */
 export const DEFAULT_ACCENT = light.agent;
 export const DEFAULT_ACCENT_PALETTE: AccentPalette = { light: pick(light), dark: pick(dark) };
 
@@ -112,7 +112,7 @@ function tokensFor(hex: string, theme: typeof light): AccentTokens {
 /**
  * The four agent tokens for each theme from a picked "#rrggbb". `agent` reaches 4.5:1 on the theme's page and on
  * `agentSoft`, and carries
- * one of the two default on-colors at 4.5:1 (`onAgent`); the design system's blue gives back its own tokens exactly.
+ * one of the two default on-colors at 4.5:1 (`onAgent`); the design system's camel gives back its own tokens exactly.
  */
 export function accentPalette(hex: string): AccentPalette {
   const color = hex.toLowerCase();
@@ -121,11 +121,18 @@ export function accentPalette(hex: string): AccentPalette {
 }
 
 /**
- * The accent as the agents' engine draws it (`sky`, ADR 0193): [top, bottom], the light theme's `agent2` and `agent`
- * in both themes, as the landing's sky is one pair in both. That `agent` carries white at 4.5:1, which keeps agents'
- * white eyes readable on it whatever was picked.
+ * The accent as the agents' engine draws it (`sky`, ADR 0193): [top, bottom], one pair in both themes, as the landing's
+ * sky is. The bottom is the accent darkened, as little as needed, until it carries white at 4.5:1, which keeps agents'
+ * white eyes readable on it whatever was picked. The top is its lighter step, as the default palette's `agent2`. xquads'
+ * themes are both dark, so this no longer comes from a light theme's `agent` (DESIGN.md).
  */
 export function accentSky(hex: string): [string, string] {
-  const { agent, agent2 } = accentPalette(hex).light;
-  return [agent2, agent];
+  const [h, s, l0] = toHsl(isAccentHex(hex) ? hex.toLowerCase() : DEFAULT_ACCENT);
+  let l = l0;
+  let agent = fromHsl(h, s, l);
+  while (contrastRatio(agent, "#ffffff") < AA && l > 0) {
+    l = Math.max(0, l - 0.005);
+    agent = fromHsl(h, s, l);
+  }
+  return [fromHsl(h, s, l + (1 - l) * 0.35), agent];
 }

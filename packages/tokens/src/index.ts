@@ -37,6 +37,16 @@ export interface ThemeColors {
   plate: string;
   plateSoft: string;
   scrim: string;
+  /** Each agent's color (its rounded square), by the color's name. */
+  agentCamelo: string;
+  agentArdosia: string;
+  agentAreia: string;
+  agentSalvia: string;
+  agentArgila: string;
+  agentNevoa: string;
+  /** The phone's Liquid Glass: its fill and its dark inner edge. */
+  glassTint: string;
+  glassEdge: string;
   /** Names from v1 (aliases that follow the theme). */
   surface: string;
   surfaceRaised: string;
@@ -50,89 +60,62 @@ export interface ThemeColors {
   success: string;
 }
 
-export const light: ThemeColors = {
-  bg: "#fbfbfa",
-  raised: "#ffffff",
-  raised2: "#ffffff",
-  sunken: "#f3f3f0",
-  side: "#f6f9fd",
-  pane: "#ffffff",
-  glass: "rgba(255, 255, 255, 0.88)",
-  glassSolid: "#fbfbf9",
-  line: "rgba(23, 23, 22, 0.07)",
-  line2: "rgba(23, 23, 22, 0.12)",
-  lineStrong: "#82827d",
-  ink: "#151514",
-  ink2: "#2a2a28",
-  muted: "#5c5c58",
-  faint: "#6f6f6a",
-  focusColor: "#82827d",
-  agent: "#0063d1",
-  agent2: "#3d8bff",
-  agentSoft: "#e3eefd",
-  onAgent: "#ffffff",
-  ok: "#1f7a45",
-  warn: "#9a5b00",
-  warnSoft: "#fbeed5",
-  onWarn: "#ffffff",
-  danger: "#b42a20",
-  info: "#0a6f9e",
-  plate: "rgba(127, 127, 127, 0.1)",
-  plateSoft: "rgba(127, 127, 127, 0.06)",
-  scrim: "rgba(10, 10, 10, 0.32)",
-  surface: "#fbfbfa",
-  surfaceRaised: "#ffffff",
-  surfaceSunken: "#f3f3f0",
-  inkMuted: "#5c5c58",
-  action: "#151514",
-  onAction: "#fbfbfa",
-  attention: "#9a5b00",
-  onAttention: "#ffffff",
-  attentionSoft: "#fbeed5",
-  success: "#151514",
+/** xquads is dark only (DESIGN.md): petrol and camel, the same values under both names. */
+const xquads: ThemeColors = {
+  bg: "#0e1c22",
+  raised: "#15282f",
+  raised2: "#1f353d",
+  sunken: "#0a161b",
+  side: "#0b171c",
+  pane: "#112229",
+  glass: "rgba(21, 40, 47, 0.72)",
+  glassSolid: "#15282f",
+  line: "rgba(237, 230, 225, 0.1)",
+  line2: "rgba(237, 230, 225, 0.16)",
+  lineStrong: "#6f8189",
+  ink: "#ede6e1",
+  ink2: "#d9d0ca",
+  muted: "#beb5b0",
+  faint: "#a39b97",
+  focusColor: "#6f8189",
+  agent: "#c79d70",
+  agent2: "#ddbe9c",
+  agentSoft: "#2b2722",
+  onAgent: "#0e1c22",
+  ok: "#8fbb9c",
+  warn: "#d9a55b",
+  warnSoft: "#33291a",
+  onWarn: "#1f1404",
+  danger: "#e08476",
+  info: "#8aa3ae",
+  plate: "rgba(237, 230, 225, 0.08)",
+  plateSoft: "rgba(237, 230, 225, 0.05)",
+  scrim: "rgba(4, 10, 13, 0.6)",
+  agentCamelo: "#c79d70",
+  agentArdosia: "#8aa3ae",
+  agentAreia: "#d3c3b9",
+  agentSalvia: "#8fbb9c",
+  agentArgila: "#cf9580",
+  agentNevoa: "#a9b3ce",
+  glassTint: "rgba(255, 255, 255, 0.08)",
+  glassEdge: "rgba(0, 0, 0, 0.32)",
+  surface: "#0e1c22",
+  surfaceRaised: "#15282f",
+  surfaceSunken: "#0a161b",
+  inkMuted: "#beb5b0",
+  action: "#c79d70",
+  onAction: "#0e1c22",
+  attention: "#d9a55b",
+  onAttention: "#1f1404",
+  attentionSoft: "#33291a",
+  success: "#ede6e1",
 };
 
-export const dark: ThemeColors = {
-  bg: "#0f0f0e",
-  raised: "#1c1c1b",
-  raised2: "#242423",
-  sunken: "#0a0a09",
-  side: "#0b0d11",
-  pane: "#181817",
-  glass: "rgba(30, 30, 28, 0.86)",
-  glassSolid: "#1e1e1c",
-  line: "rgba(255, 255, 255, 0.1)",
-  line2: "rgba(255, 255, 255, 0.15)",
-  lineStrong: "#71716c",
-  ink: "#efefec",
-  ink2: "#d6d6d2",
-  muted: "#a3a39e",
-  faint: "#8f8f89",
-  focusColor: "#71716c",
-  agent: "#5aa8ff",
-  agent2: "#8cc3ff",
-  agentSoft: "#11253f",
-  onAgent: "#00203f",
-  ok: "#5fc48a",
-  warn: "#e0a84a",
-  warnSoft: "#33260e",
-  onWarn: "#2a1c00",
-  danger: "#f08a80",
-  info: "#5cc4ea",
-  plate: "rgba(127, 127, 127, 0.14)",
-  plateSoft: "rgba(127, 127, 127, 0.08)",
-  scrim: "rgba(0, 0, 0, 0.5)",
-  surface: "#0f0f0e",
-  surfaceRaised: "#1c1c1b",
-  surfaceSunken: "#0a0a09",
-  inkMuted: "#a3a39e",
-  action: "#efefec",
-  onAction: "#0f0f0e",
-  attention: "#e0a84a",
-  onAttention: "#2a1c00",
-  attentionSoft: "#33260e",
-  success: "#efefec",
-};
+/** Whether people pick a theme: off, as both themes hold the same petrol. The apps stay on dark and hide the choice. */
+export const THEME_CHOICE = false;
+
+export const light: ThemeColors = xquads;
+export const dark: ThemeColors = xquads;
 
 export const themes = { light, dark } as const;
 export type ThemeName = keyof typeof themes;
@@ -149,41 +132,26 @@ export interface ShadowLayer {
 
 export type ShadowName = "e1" | "e2" | "e3" | "top";
 
-/** Elevations (`--e1`…`--e3`) and the raised top edge (`--top`), per theme, as layer lists. */
+const xquadsShadows: Record<ShadowName, ShadowLayer[]> = {
+  e1: [
+    { x: 0, y: 1, blur: 2, spread: 0, color: "rgba(0, 0, 0, 0.5)" },
+    { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(237, 230, 225, 0.1)" },
+  ],
+  e2: [
+    { x: 0, y: 8, blur: 20, spread: -6, color: "rgba(0, 0, 0, 0.6)" },
+    { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(237, 230, 225, 0.1)" },
+  ],
+  e3: [
+    { x: 0, y: 28, blur: 64, spread: -16, color: "rgba(0, 0, 0, 0.8)" },
+    { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(237, 230, 225, 0.16)" },
+  ],
+  top: [{ x: 0, y: 1, blur: 0, spread: 0, color: "rgba(237, 230, 225, 0.08)", inset: true }],
+};
+
+/** Elevations (`--e1`…`--e3`) and the raised top edge (`--top`), per theme, as layer lists: one dark set. */
 export const shadows: Record<ThemeName, Record<ShadowName, ShadowLayer[]>> = {
-  light: {
-    e1: [
-      { x: 0, y: 1, blur: 1, spread: 0, color: "rgba(23, 23, 22, 0.04)" },
-      { x: 0, y: 2, blur: 4, spread: -1, color: "rgba(23, 23, 22, 0.05)" },
-      { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(23, 23, 22, 0.07)" },
-    ],
-    e2: [
-      { x: 0, y: 1, blur: 1, spread: 0, color: "rgba(23, 23, 22, 0.04)" },
-      { x: 0, y: 6, blur: 16, spread: -4, color: "rgba(23, 23, 22, 0.1)" },
-      { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(23, 23, 22, 0.07)" },
-    ],
-    e3: [
-      { x: 0, y: 2, blur: 4, spread: 0, color: "rgba(23, 23, 22, 0.04)" },
-      { x: 0, y: 24, blur: 56, spread: -16, color: "rgba(23, 23, 22, 0.3)" },
-      { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(23, 23, 22, 0.12)" },
-    ],
-    top: [{ x: 0, y: 1, blur: 0, spread: 0, color: "rgba(255, 255, 255, 0.9)", inset: true }],
-  },
-  dark: {
-    e1: [
-      { x: 0, y: 1, blur: 2, spread: 0, color: "rgba(0, 0, 0, 0.5)" },
-      { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(255, 255, 255, 0.1)" },
-    ],
-    e2: [
-      { x: 0, y: 8, blur: 20, spread: -6, color: "rgba(0, 0, 0, 0.6)" },
-      { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(255, 255, 255, 0.1)" },
-    ],
-    e3: [
-      { x: 0, y: 28, blur: 64, spread: -16, color: "rgba(0, 0, 0, 0.8)" },
-      { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(255, 255, 255, 0.15)" },
-    ],
-    top: [{ x: 0, y: 1, blur: 0, spread: 0, color: "rgba(255, 255, 255, 0.08)", inset: true }],
-  },
+  light: xquadsShadows,
+  dark: xquadsShadows,
 };
 
 /** Corner radii (px). */
@@ -201,7 +169,7 @@ export const radius = {
 } as const;
 
 /** The agent symbol's corners (`--radius-agent`), as fractions of its size: top-left, top-right, bottom-right, bottom-left. */
-export const agentRadius = [0.3, 0.3, 0.3, 0.09] as const;
+export const agentRadius = [0.28, 0.28, 0.28, 0.28] as const;
 
 /** Spacing steps (px), by `--space-N`. */
 export const space = {

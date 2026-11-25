@@ -382,10 +382,12 @@ describe("```mermaid fences", () => {
       asked.push(`${dark ? "dark" : "light"}: ${source}`);
       return `<svg xmlns="http://www.w3.org/2000/svg"><text>${dark ? "dark" : "light"}</text></svg>`;
     });
+    // From light, set by hand: the app itself stays on dark (`THEME_CHOICE`), the switch is what's tested.
+    const html = document.documentElement;
+    html.dataset.theme = "light";
     const el = render(<Markdown source={fence(FLOW)} />).container;
     await settle();
     expect(shown(el)).toContain("<text>light</text>");
-    const html = document.documentElement;
     try {
       await act(async () => {
         html.dataset.theme = "dark";

@@ -1565,8 +1565,9 @@ describe("Criar agente: nothing leaves the steps", () => {
     expect(other?.textContent).toBe("De outro appTraga os agentes que você já tem em outro app.");
     // It opens the import: not one of the roles to choose, so it is never pressed-in.
     expect(other?.hasAttribute("aria-pressed")).toBe(false);
+    // The dark theme's marks: xquads is dark only.
     expect([...(other?.querySelectorAll(".newag__marks img") ?? [])].map((i) => i.getAttribute("src"))).toEqual([
-      "/brands/grok-bot.svg",
+      "/brands/grok-bot-dark.svg",
       "/brands/chatgpt-dots.svg",
       "/brands/openbotrun.svg",
     ]);

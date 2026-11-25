@@ -14,7 +14,8 @@ Measure, don't eyeball. Vision misses 1 to 2 px errors, source review can't see 
 - Every page starts at `--page-top` (its title's line on the sidebar's workspace row, 20 on phones) and `--page-x` (24, 16 under 640). Header, toolbar and content 16 apart, list groups 24 (`.ac-groups`).
 - No raw px for padding, gaps or heights. Use the tokens.
 - Rounded inside rounded: inner radius is the outer radius minus the gap between them. For a box, derive it from what's inside: outer = inner + gap (the composer's 18 = 10 + 8). One exception to "pills only for labels you don't press": inside a fully round pill (the notice island), a face or button at its end is fully round and as far from the end as from the top, 4 when the pill leaves only 4 above it (`nest` in `scripts/geometry` checks it).
-- Fonts are fixed: Source Sans 3 (the app, titles too), JetBrains Mono (code), Funnel Display (brand), Doto (dot type), Onest and Martian Mono (the kit's defaults, the desktop app). Never swap or "improve" them, whatever a tool suggests. A new font gets `--cap-mid` and `--cap-top` measured again.
+- Fonts are fixed: Onest (the app on the web, the desktop and the phone, titles too), Martian Mono (code), Funnel Display (brand), Doto (dot type). Source Sans 3 stays only in the slides people make. Never swap or "improve" them, whatever a tool suggests. A new font gets `--cap-mid`, `--cap-top` and `--title-cap-mid` measured again.
+- xquads is dark only (`DESIGN.md`): petrol surfaces, camel for the main action, one camel action per area. Both themes hold the same values and the apps show no Theme choice (`THEME_CHOICE` in `@agenteschat/tokens`).
 
 ## Rules
 

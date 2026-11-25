@@ -61,14 +61,12 @@ window.addEventListener("storage", (e) => {
   if (e.key === `agentes.desktop.${LOCALE_PREF}`) switchDesktopLocale(i18n, systemLocale(), host.platform);
 });
 
-// Light or dark like the system (`?theme=` while designing).
-const dark = window.matchMedia("(prefers-color-scheme: dark)");
+// Dark only, as xquads is (DESIGN.md); `?theme=` still forces one while designing.
 const forced = fakeHost ? params.get("theme") : null;
 const applyTheme = () => {
-  switchTheme(forced === "dark" || forced === "light" ? forced : dark.matches ? "dark" : "light");
+  switchTheme(forced === "dark" || forced === "light" ? forced : "dark");
 };
 applyTheme();
-dark.addEventListener("change", applyTheme);
 
 const store = new DesktopStore(host, {
   // Only the popover window raises notifications (every window has its own store).

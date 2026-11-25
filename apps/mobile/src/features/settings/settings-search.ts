@@ -1,6 +1,7 @@
 import type { OrgSummary } from "@agenteschat/client";
 import { settingsSectionNameKey } from "@agenteschat/client/lib/personal-view";
 import { isPersonal } from "@agenteschat/client/lib/workspace-mode";
+import { THEME_CHOICE } from "@agenteschat/tokens";
 import type { IconName } from "@/ui";
 import { fold } from "../search/logic";
 import {
@@ -176,7 +177,7 @@ function mine(reach: SettingsReach): SettingEntry[] {
       pick: "sounds",
       words: `${WORDS}.sounds`,
     },
-    {
+    THEME_CHOICE && {
       id: "appearance",
       scope: "me",
       icon: "sun",

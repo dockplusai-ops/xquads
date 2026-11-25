@@ -35,9 +35,9 @@ test("a face's corner reaches the tile it draws, through every layer to the agen
   expect(face).toContain("radius={radius}\n      />");
   expect(face).toContain("photo={photo} radius={radius} />");
   expect(face).toContain("radius={moment.radius}");
-  expect(source("agent/AgentAvatar.tsx")).toContain("borderRadius: radius ?? size * 0.3");
+  expect(source("agent/AgentAvatar.tsx")).toContain("borderRadius: radius ?? size * agentRadius[0]");
   expect(source("agent/AgentAvatar.tsx")).toContain("a.radius === b.radius");
   const person = source("agent/PersonAvatar.tsx");
-  expect(person).toContain("radius = size * 0.3");
+  expect(person).toContain("radius = size / 2");
   expect(person.match(/borderRadius: radius\b/g)?.length).toBe(2);
 });

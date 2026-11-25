@@ -5,7 +5,7 @@ import { dark, light } from "../src/index";
 const HEX = /^#[0-9a-f]{6}$/;
 
 describe("accentPalette", () => {
-  test("the design system's blue gives back the default tokens exactly", () => {
+  test("the design system's camel gives back the default tokens exactly", () => {
     const p = accentPalette(DEFAULT_ACCENT);
     for (const [palette, theme] of [
       [p.light, light],
@@ -18,7 +18,7 @@ describe("accentPalette", () => {
         onAgent: theme.onAgent,
       });
     }
-    expect(accentPalette("#0063D1")).toEqual(p);
+    expect(accentPalette("#C79D70")).toEqual(p);
   });
 
   const picks = {
@@ -54,7 +54,8 @@ describe("accentPalette", () => {
   }
 
   test("a color already readable is not moved", () => {
-    expect(accentPalette("#6d28d9").light.agent).toBe("#6d28d9");
+    // Both themes are xquads' petrol: a light color reads there as it is.
+    expect(accentPalette("#ffb020").light.agent).toBe("#ffb020");
     expect(accentPalette("#ffb020").dark.agent).toBe("#ffb020");
   });
 

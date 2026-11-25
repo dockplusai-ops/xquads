@@ -22,7 +22,7 @@ export interface PersonAvatarProps {
  * on disk (its address changes with its content) and drawn at once, with no fade: a face seen in every list must not
  * flicker in each time a row comes back.
  */
-export function PersonAvatar({ name, size, photo, radius = size * 0.3 }: PersonAvatarProps) {
+export function PersonAvatar({ name, size, photo, radius = size / 2 }: PersonAvatarProps) {
   const { scheme } = useTheme();
   const dark = scheme === "dark";
   // The first of the web's initials: an emoji before the name gives way to it, and no character is cut in half.

@@ -167,6 +167,7 @@ export {
   fonts,
   motion,
   type Scheme,
+  THEME_CHOICE,
   type Theme,
   type ThemePreference,
   ThemeProvider,
