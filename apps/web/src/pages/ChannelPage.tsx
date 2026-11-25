@@ -907,8 +907,9 @@ function ChannelView({
   // A thread whose replies are still loading: only their skeleton shows, never the root the channel holds above it,
   // which the replies would push out of view. It opens on them, at its end, in one paint.
   const repliesPending = Boolean(thread && messages.isPlaceholderData && thread.replyCount > 0);
-  // An agent's DM whose setup checklist still reads its data: shown with the messages once it can draw as it stays.
-  const introPending = Boolean(!thread && chrome?.introPending);
+  // An agent's DM whose setup checklist still reads its data, or whose first page is still loading: the intro shows with
+  // the messages, never alone over their skeleton (the rows would then land under it and push it out of view).
+  const introPending = Boolean(!thread && (chrome?.introPending || (chrome?.intro && messages.isLoading)));
   // The channel's threads: closed lines, context marks, markers (not in a thread view or while adjusting).
   const listsThreads = readable && !thread;
   const openThreads = useChannelThreads(org.id, channel.id, "all", listsThreads);
