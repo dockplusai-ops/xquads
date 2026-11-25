@@ -3,7 +3,7 @@ import { z } from "zod";
 import { parseFirebaseServiceAccount, parsePemKey } from "./pem";
 
 /**
- * Every environment variable agentes.chat reads is declared here, exactly once.
+ * Every environment variable xquads reads is declared here, exactly once.
  *
  * This list is the single source of truth for:
  * - runtime validation (see `loadConfig`)
@@ -142,7 +142,7 @@ export const envVars = {
     description:
       "Public URL of the xquads landing page (its own site), without a trailing slash. Turns on the waiting lists, the product's and the partner program's: that origin may call them (CORS on `/api/waitlist` and `/api/partners/waitlist` only), and the confirmation email links there. With the bot check on, a token its page makes on this host counts for these lists and nothing else. Unset: no waiting lists.",
     section: "Server",
-    example: "https://agentes.chat",
+    example: "https://agents.xquads.com",
   },
   APP_VERSION: {
     schema: z
@@ -690,7 +690,7 @@ export const envVars = {
   GIPHY_API_KEY: {
     schema: z.string().optional(),
     description:
-      "GIPHY API key (https://developers.giphy.com), optional. With it, people search and send GIFs in chat and agents may follow a light reply with one; each workspace can turn GIFs off and pick their rating in Settings › GIFs and stickers. The installation's owner can also add it there, on a server that isn't xquads's own. This variable wins over that one. This server searches GIPHY and serves every GIF itself, so browsers and the phone app never talk to GIPHY and the key never leaves the server. With no key: no GIFs anywhere; the agents' own stickers still work.",
+      "GIPHY API key (https://developers.giphy.com), optional. With it, people search and send GIFs in chat and agents may follow a light reply with one; each workspace can turn GIFs off and pick their rating in Settings › GIFs and stickers. The installation's owner can also add it there, on a server that isn't xquads' own. This variable wins over that one. This server searches GIPHY and serves every GIF itself, so browsers and the phone app never talk to GIPHY and the key never leaves the server. With no key: no GIFs anywhere; the agents' own stickers still work.",
     section: "Chat",
     secret: true,
   },
@@ -773,18 +773,18 @@ export const envVars = {
   VOICE_LIMIT_PERSON_MINUTES_PER_DAY: {
     schema: z.coerce.number().int().min(0).default(60),
     description:
-      "xquads's own servers: minutes of voice messages one person may send in 24 hours (ADR 0100). 0 = no limit. Never applies on a self-hosted server.",
+      "xquads' own servers: minutes of voice messages one person may send in 24 hours (ADR 0100). 0 = no limit. Never applies on a self-hosted server.",
     section: "Chat",
   },
   VOICE_LIMIT_ORG_MINUTES_PER_MEMBER: {
     schema: z.coerce.number().int().min(0).default(20),
     description:
-      "xquads's own servers: minutes of voice messages a workspace may send in 24 hours, per member (ADR 0100). 0 = no limit for the workspace.",
+      "xquads' own servers: minutes of voice messages a workspace may send in 24 hours, per member (ADR 0100). 0 = no limit for the workspace.",
     section: "Chat",
   },
   VOICE_LIMIT_ORG_MIN_MINUTES_PER_DAY: {
     schema: z.coerce.number().int().min(0).default(300),
-    description: "xquads's own servers: the least a workspace's limit above may be, however few its members.",
+    description: "xquads' own servers: the least a workspace's limit above may be, however few its members.",
     section: "Chat",
   },
   CONNECTOR_GITHUB_CLIENT_ID: {
@@ -1149,7 +1149,7 @@ export const envVars = {
       .transform((on) => (on ? "on" : "off") as "on" | "off")
       .default("off"),
     description:
-      "Runs the push relay at `/api/push-relay/v1` for other installations' phone pushes, sent with this server's `FIREBASE_SERVICE_ACCOUNT` (Android) and `APNS_KEY` (iPhone): xquads's own servers. `on` with neither serves nothing.",
+      "Runs the push relay at `/api/push-relay/v1` for other installations' phone pushes, sent with this server's `FIREBASE_SERVICE_ACCOUNT` (Android) and `APNS_KEY` (iPhone): xquads' own servers. `on` with neither serves nothing.",
     section: "Push",
   },
   WEB_PUSH: {
@@ -1357,13 +1357,13 @@ export const envVars = {
   FEEDBACK_RELAY: {
     schema: z.stringbool().default(true),
     description:
-      "What a person writes in the feedback form goes to the xquads team, who make the app (`FEEDBACK_URL`), and the form says so. Only when someone presses Send, and only that message: their text, their name and address to answer them, the workspace's name, the app's version and the pictures they added, never a conversation (https://agentes.chat/docs/install-on-a-server#data). `false`: the apps show no form.",
+      "What a person writes in the feedback form goes to the xquads team, who make the app (`FEEDBACK_URL`), and the form says so. Only when someone presses Send, and only that message: their text, their name and address to answer them, the workspace's name, the app's version and the pictures they added, never a conversation (https://agents.xquads.com/help/install-on-a-server?lang=en#data). `false`: the apps show no form.",
     section: "Operator",
   },
   FEEDBACK_INBOX: {
     schema: z.stringbool().default(true),
     description:
-      "For xquads Cloud. On xquads's own servers, takes the feedback other servers send (`POST /api/feedback/inbox`) and mails each one to `FEEDBACK_EMAIL`, keeping nothing. `false` stops taking it. No other server has the route.",
+      "For xquads Cloud. On xquads' own servers, takes the feedback other servers send (`POST /api/feedback/inbox`) and mails each one to `FEEDBACK_EMAIL`, keeping nothing. `false` stops taking it. No other server has the route.",
     section: "Operator",
   },
   FEEDBACK_URL: {
@@ -1447,7 +1447,7 @@ export const envVars = {
       .transform((on) => (on ? "on" : "off") as "on" | "off")
       .default("on"),
     description:
-      "Send anonymous usage statistics to xquads once a day: counts such as people, agents, machine sizes, AI tokens used and how much data the agents' browsers send and receive. Never messages, files, names or sites. `off` stops it, whatever the switch in Settings → General says (the installation's owner can turn it off there too). `docker compose run --rm agentes telemetry` prints exactly what would be sent (https://agentes.chat/docs/install-on-a-server#data).",
+      "Send anonymous usage statistics to xquads once a day: counts such as people, agents, machine sizes, AI tokens used and how much data the agents' browsers send and receive. Never messages, files, names or sites. `off` stops it, whatever the switch in Settings → General says (the installation's owner can turn it off there too). `docker compose run --rm agentes telemetry` prints exactly what would be sent (https://agents.xquads.com/help/install-on-a-server?lang=en#data).",
     section: "Usage report",
   },
   TELEMETRY_URL: {
@@ -1481,7 +1481,7 @@ export const envVars = {
   SENTRY_DSN: {
     schema: z.string().regex(DSN, DSN_MESSAGE).optional(),
     description:
-      "Error reports from this server to a Sentry-compatible server: the DSN of a project there. Each report holds the error, its stack, the release and internal ids, never message content, emails, IP addresses, cookies or tokens (https://agentes.chat/docs/install-on-a-server#data). Unset (default): no reports, and the reporting code isn't loaded.",
+      "Error reports from this server to a Sentry-compatible server: the DSN of a project there. Each report holds the error, its stack, the release and internal ids, never message content, emails, IP addresses, cookies or tokens (https://agents.xquads.com/help/install-on-a-server?lang=en#data). Unset (default): no reports, and the reporting code isn't loaded.",
     section: "Observability",
     example: "https://<key>@errors.example.com/1",
     secret: true,

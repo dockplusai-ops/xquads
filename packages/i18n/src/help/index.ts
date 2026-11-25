@@ -73,15 +73,6 @@ export function helpDocument(slug: HelpSlug, locale: string): HelpDocument {
   return HELP[appLocale([locale], true) ?? "en"][slug] ?? helpEn[slug];
 }
 
-/**
- * Where an old `/help/<slug>` address goes now: the docs page in `locale`, in English where that language has no
- * page (as `helpDocument`), the docs index for a page that doesn't exist.
- */
-export function helpDocsUrl(slug: string | undefined, locale: AppLocale): string {
-  if (!slug || !isHelpSlug(slug)) return docsUrl(locale);
-  return docsUrl(HELP[locale][slug] ? locale : "en", slug);
-}
-
 /** A piece of inline help text: plain, `**bold**`, `` `code` `` or a link. */
 export type HelpInline = LegalInline | { kind: "code"; text: string };
 

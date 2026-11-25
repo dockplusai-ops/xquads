@@ -7,7 +7,6 @@ import {
   type HelpBlock,
   type HelpDocument,
   type HelpSlug,
-  helpDocsUrl,
   helpDocument,
   helpInline,
   INSTALL_DOCS_URL,
@@ -206,10 +205,9 @@ describe("links to the help pages", () => {
 });
 
 describe("the install page", () => {
-  test("is a self-hosted page, at agentes.chat/docs in English for the CLI and the settings", () => {
+  test("is a self-hosted page, on xquads Cloud's help in English for the CLI and the settings", () => {
     expect(HELP_PAGES[INSTALL_PAGE]).toBe("selfhost");
-    expect(INSTALL_DOCS_URL).toBe("https://agentes.chat/docs/install-on-a-server");
-    expect(helpDocsUrl(INSTALL_PAGE, "pt-BR")).toBe("https://agentes.chat/pt/docs/install-on-a-server");
+    expect(INSTALL_DOCS_URL).toBe("https://agents.xquads.com/help/install-on-a-server?lang=en");
   });
 
   test("every self-hosted pointer outside this package says its URL, and none points at the repository's file", () => {
@@ -241,21 +239,6 @@ describe("help pages in every language", () => {
   test("every language has every page: the apps link to the docs in the reader's language with no fallback", () => {
     for (const [code, pages] of Object.entries(HELP))
       expect({ code, missing: SLUGS.filter((slug) => !pages[slug]) }).toEqual({ code, missing: [] });
-  });
-
-  test("an old address goes to its docs page, English where the language has none, the index where none exists", () => {
-    expect(helpDocsUrl("memory", "pt-BR")).toBe("https://agentes.chat/pt/docs/memory");
-    expect(helpDocsUrl("memory", "zh-Hans")).toBe("https://agentes.chat/zh/docs/memory");
-    expect(helpDocsUrl("memory", "ja")).toBe("https://agentes.chat/ja/docs/memory");
-    expect(helpDocsUrl(undefined, "de")).toBe("https://agentes.chat/de/docs");
-    expect(helpDocsUrl("nope", "en")).toBe("https://agentes.chat/docs");
-    const ja = HELP.ja.memory;
-    delete HELP.ja.memory;
-    try {
-      expect(helpDocsUrl("memory", "ja")).toBe("https://agentes.chat/docs/memory");
-    } finally {
-      HELP.ja.memory = ja;
-    }
   });
 
   test("Approvals names the controls the app has, in each language's own words for them", () => {

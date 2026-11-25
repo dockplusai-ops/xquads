@@ -294,13 +294,13 @@ describe("Entrar (e-mail primeiro)", () => {
       await settle(2);
       const get = screen().getByRole("dialog", { name: "Ter o seu próprio servidor" });
       expect(within(get).getByRole("link", { name: "Baixar o app" }).getAttribute("href")).toBe(
-        "https://agentes.chat/download",
+        "https://agents.xquads.com/download",
       );
       expect(within(get).getByRole("link", { name: "Como funciona" }).getAttribute("href")).toBe(
-        "https://agentes.chat/pt/docs/run-on-your-computer",
+        "https://agents.xquads.com/help/run-on-your-computer?lang=pt-BR",
       );
       expect(within(get).getByRole("link", { name: "Ver o passo a passo" }).getAttribute("href")).toBe(
-        "https://agentes.chat/pt/docs/install-on-a-server",
+        "https://agents.xquads.com/help/install-on-a-server?lang=pt-BR",
       );
       await act(async () => fireEvent.click(within(get).getByRole("button", { name: "Use o Cloud" })));
       await settle(2);
@@ -391,7 +391,7 @@ describe("Entrar (e-mail primeiro)", () => {
   });
 
   test("on xquads Cloud a blocked account reads why by the block's kind, and how to contest it", async () => {
-    const contest = "Para contestar, escreva para legal@agentes.chat.";
+    const contest = "Para contestar, escreva para legal@xquads.com.";
     for (const [block, says] of [
       [
         { kind: "abuse", cloud: true },
@@ -399,7 +399,7 @@ describe("Entrar (e-mail primeiro)", () => {
       ],
       [
         { kind: "legal", cloud: true },
-        "Esta conta está bloqueada enquanto guardamos os dados dela por uma questão legal. Para perguntar sobre isso, escreva para legal@agentes.chat.",
+        "Esta conta está bloqueada enquanto guardamos os dados dela por uma questão legal. Para perguntar sobre isso, escreva para legal@xquads.com.",
       ],
       [{ kind: "other", cloud: true }, `Esta conta não pode entrar. ${contest}`],
       // A self-hosted server: the line it always had.
@@ -1531,7 +1531,7 @@ describe("Onboarding: the workspace's name", () => {
     for (const [cloud, says] of [
       [
         true,
-        "Você não pode criar um workspace enquanto a sua conta ou um dos seus workspaces estiver com restrição. Para contestar, escreva para legal@agentes.chat.",
+        "Você não pode criar um workspace enquanto a sua conta ou um dos seus workspaces estiver com restrição. Para contestar, escreva para legal@xquads.com.",
       ],
       [false, "Você não pode criar um workspace agora."],
     ] as const) {

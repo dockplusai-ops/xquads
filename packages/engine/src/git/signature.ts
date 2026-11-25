@@ -16,7 +16,7 @@ const { accounts, organizationMembers, organizationSettings, users } = schema;
  */
 
 /** The agents' address in their own line: GitHub shows the account that verified it, agentes.chat's. */
-export const AGENT_CO_AUTHOR_EMAIL = "noreply@agentes.chat";
+export const AGENT_CO_AUTHOR_EMAIL = "noreply@xquads.com";
 
 /** Where the line starts in a body, so an edit can replace it. */
 export const SIGNATURE_MARK = "<!-- agentes.chat -->";
@@ -65,7 +65,7 @@ const trailerName = (name: string) =>
   // biome-ignore lint/suspicious/noControlCharactersInRegex: control characters would break the trailer
   name.replace(/[\u0000-\u001f\u007f-\u009f\u2028\u2029<>]/g, "").trim();
 
-/** `Co-authored-by: Nick <noreply@agentes.chat>`: the agent's own line on its commits (its handle when its name is empty). */
+/** `Co-authored-by: Nick <noreply@xquads.com>`: the agent's own line on its commits (its handle when its name is empty). */
 export const agentCoAuthor = (agent: { name: string; handle: string }) =>
   `Co-authored-by: ${trailerName(agent.name) || agent.handle} <${AGENT_CO_AUTHOR_EMAIL}>`;
 

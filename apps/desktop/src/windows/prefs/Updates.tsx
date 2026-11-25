@@ -1,5 +1,5 @@
 import { LICENSE_URL, PUBLIC_SOURCE_URL } from "@agenteschat/client/lib/about";
-import { DOCS_SITE } from "@agenteschat/i18n/docs";
+import { UPSTREAM_SITE } from "@agenteschat/i18n/docs";
 import { Button, Chip, InfoHint, Switch } from "@agenteschat/ui";
 import { type ReactNode, useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
@@ -228,7 +228,7 @@ function About() {
       <CardTitle>{t("settings.section.about")}</CardTitle>
       <PrefCard padded>
         <p className="dk-help">
-          <Trans i18nKey="settings.about.basedOn" components={{ site: <Out href={DOCS_SITE} /> }} />
+          <Trans i18nKey="settings.about.basedOn" components={{ site: <Out href={UPSTREAM_SITE} /> }} />
         </p>
         <p className="dk-help">
           <Trans i18nKey="settings.about.license" components={{ license: <Out href={LICENSE_URL} /> }} />

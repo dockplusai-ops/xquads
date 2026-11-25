@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.description    = s.summary
   s.license        = 'AGPL-3.0-only'
   s.author         = 'agentes.chat'
-  s.homepage       = 'https://agentes.chat'
+  s.homepage       = 'https://xquads.com'
   s.platforms      = { :ios => '16.4' }
   s.swift_version  = '5.9'
   s.source         = { git: 'https://github.com/agentes-chat/agentes-chat.git' }

@@ -7,7 +7,7 @@ ones, read on 2026-11-10.
 Every OAuth app takes one redirect URI, the same for all of them:
 
 - `{PUBLIC_URL}/api/app/connectors/oauth/callback`
-- On the Cloud: `https://app.agentes.chat/api/app/connectors/oauth/callback`
+- On the Cloud: `https://agents.xquads.com/api/app/connectors/oauth/callback`
 
 Meta's two apps also take two callbacks, which ship with the Threads phase:
 
@@ -34,7 +34,7 @@ bot an admin. Free ([bots](https://core.telegram.org/bots)).
 1. https://console.x.com: accept the Developer Agreement and describe the use. The description binds the app, so keep
    it to what's built: "Team workspace where AI agents post on the team's own X account, with the account owner's
    consent. No replies, likes, follows or direct messages." X allows up to 3 apps (development, staging, production).
-2. New App, named agentes.chat, website `https://agentes.chat`. The name and the website show as each post's source.
+2. New App, named xquads, website `https://xquads.com`. The name and the website show as each post's source.
 3. User authentication settings: OAuth 2.0, type Web App, Automated App or Bot (a confidential client), permissions
    Read and write. Callback URL: the redirect URI above, exactly (a test server: `http://127.0.0.1:<port>/…`, not
    `localhost`). Add the terms and privacy pages if it asks for them.
@@ -95,7 +95,7 @@ bot an admin. Free ([bots](https://core.telegram.org/bots)).
    URLs, each verified (the domain by DNS). The website must be a real site about the product, with terms and privacy
    linked without opening a menu.
 3. Products: Login Kit, with the redirect URI above (https, no parameters), and the Content Posting API. Verify the
-   domain of `PUBLIC_URL` (Cloud: `app.agentes.chat`) for media TikTok pulls from links.
+   domain of `PUBLIC_URL` (Cloud: `agents.xquads.com`) for media TikTok pulls from links.
 4. Scopes: `user.info.basic`, `user.info.profile`, `user.info.stats`, `video.list`, `video.upload`, `video.publish`.
 5. Demo videos from a sandbox (Manage apps › Sandbox): up to 5, 50 MB each, with a written explanation per product
    and scope. Describe a team workspace where people and their agents make content and post it to the team's TikTok:

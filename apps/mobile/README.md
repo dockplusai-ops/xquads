@@ -1,6 +1,6 @@
 # agentes (phone app)
 
-Expo + React Native app for agentes.chat (ADR 0035).
+Expo + React Native app for xquads (ADR 0035).
 
 Code is checked in CI (`.github/workflows/ci.yml`: lint, typecheck,
 unit tests of the pure logic in `apps/mobile/test`). Android builds on the **Android build** workflow
@@ -96,7 +96,7 @@ on expo.dev (EAS environment variables) for EAS:
 
 | Variable | What | Default |
 | --- | --- | --- |
-| `EXPO_PUBLIC_API_URL` | The default server. **Must be the server's `PUBLIC_URL` host** (see below). | `https://app.agentes.chat` |
+| `EXPO_PUBLIC_API_URL` | The default server. **Must be the server's `PUBLIC_URL` host** (see below). | `https://agents.xquads.com` |
 | `EAS_PROJECT_ID` | EAS project, for those who build with EAS. | ours (`8514d5b3-…`) |
 | `GOOGLE_SERVICES_JSON` | Path to Firebase's `google-services.json` (the Android workflow writes it from a secret): push on Android (FCM). | none |
 | `ANDROID_VERSION_CODE` | The build's version code (the Android workflow's run). | from the config |
@@ -109,11 +109,11 @@ Why the API URL must equal the public URL: React Native's WebSocket adds an `Ori
 `X-Agentes-Client: mobile`, and refuses a foreign `Origin` even with the header. So the app's host must be the
 one the server considers its own.
 
-People can point the app at their own server ("Servidor: agentes.chat · Trocar" on sign-in, a QR code from the web
+People can point the app at their own server ("Servidor: xquads · Trocar" on sign-in, a QR code from the web
 app's "Abrir no celular", or an `agenteschat://connect?server=…` link). The app checks `GET /api/instance` first and,
 for the same reason, uses the address the server gives there (its `PUBLIC_URL`); when that address doesn't answer from
 the phone, the server is refused with that host in the message. Switching signs out of the previous server. Pushes from
-a self-hosted server reach the app from the stores, on Android and on the iPhone, through agentes.chat's push relay
+a self-hosted server reach the app from the stores, on Android and on the iPhone, through xquads' push relay
 (`PUSH_SENDER`, ADR 0152, ADR 0178).
 
 Push on the iPhone comes straight from Apple (APNs), with no Expo service in between: the app registers the system's

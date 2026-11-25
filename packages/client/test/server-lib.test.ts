@@ -104,14 +104,16 @@ describe("server addresses", () => {
 
 describe("help links", () => {
   test("a page on agentes.chat in the reader's language, with only the section after it", () => {
-    expect(helpUrl("memory", "en")).toBe("https://agentes.chat/docs/memory");
-    expect(helpUrl("computers", "pt-BR", "folders")).toBe("https://agentes.chat/pt/docs/computers#folders");
-    expect(helpUrl("wiki", "en-GB")).toBe("https://agentes.chat/docs/wiki");
+    expect(helpUrl("memory", "en")).toBe("https://agents.xquads.com/help/memory?lang=en");
+    expect(helpUrl("computers", "pt-BR", "folders")).toBe(
+      "https://agents.xquads.com/help/computers?lang=pt-BR#folders",
+    );
+    expect(helpUrl("wiki", "en-GB")).toBe("https://agents.xquads.com/help/wiki?lang=en");
     // Any language of the app, in the docs site's folders.
-    expect(helpUrl("wiki", "fr-CA")).toBe("https://agentes.chat/fr/docs/wiki");
-    expect(helpUrl("wiki", "zh-TW")).toBe("https://agentes.chat/zh/docs/wiki");
-    expect(helpUrl("wiki", "ko")).toBe("https://agentes.chat/ko/docs/wiki");
-    expect(helpUrl("wiki", "xx")).toBe("https://agentes.chat/docs/wiki");
+    expect(helpUrl("wiki", "fr-CA")).toBe("https://agents.xquads.com/help/wiki?lang=fr");
+    expect(helpUrl("wiki", "zh-TW")).toBe("https://agents.xquads.com/help/wiki?lang=zh-Hans");
+    expect(helpUrl("wiki", "ko")).toBe("https://agents.xquads.com/help/wiki?lang=ko");
+    expect(helpUrl("wiki", "xx")).toBe("https://agents.xquads.com/help/wiki?lang=en");
   });
 });
 

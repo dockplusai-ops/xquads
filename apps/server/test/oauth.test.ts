@@ -68,7 +68,7 @@ describe("discovery", () => {
         scopes_supported: ["read", "write", "manage"],
         bearer_methods_supported: ["header"],
         resource_name: "xquads",
-        resource_documentation: "https://agentes.chat/docs/apps-de-ia",
+        resource_documentation: "https://agents.xquads.com/help/apps-de-ia?lang=en",
       });
     }
     const as = await (await t.app.request("/.well-known/oauth-authorization-server")).json();

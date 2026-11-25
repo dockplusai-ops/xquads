@@ -863,7 +863,7 @@ describe("the wiki's header", () => {
       "O que a empresa sabe, em páginas ligadas. Como a wiki funciona",
     );
     const how = within(head).getByRole("link", { name: "Como a wiki funciona" });
-    expect(how.getAttribute("href")).toBe("https://agentes.chat/pt/docs/wiki");
+    expect(how.getAttribute("href")).toBe("https://agents.xquads.com/help/wiki?lang=pt-BR");
     expect(how.getAttribute("target")).toBe("_blank");
     expect(how.getAttribute("rel")).toBe("noopener noreferrer");
     expect(how.className).toBe("ac-link ac-link--muted");

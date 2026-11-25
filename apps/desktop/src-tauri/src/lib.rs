@@ -79,17 +79,11 @@ fn is_app_download(url: &str) -> bool {
     url.starts_with("https://agents.xquads.com/api/desktop/download/")
 }
 
-/// The help pages on the docs site ("Which one to choose?", "How folders work"), whichever server it opens:
-/// `https://agentes.chat/docs/<page>`, or under a language folder (`/pt/docs/<page>`).
+/// The help pages on xquads Cloud ("Which one to choose?", "How folders work"), whichever server it opens:
+/// `https://agents.xquads.com/help/<page>`, with its `?lang=` and `#section`.
 fn is_help_page(url: &str) -> bool {
-    let Some(path) = url.strip_prefix("https://agentes.chat/") else {
-        return false;
-    };
-    let path = match path.split_once('/') {
-        Some((lang, rest)) if lang.len() == 2 && lang.bytes().all(|b| b.is_ascii_lowercase()) => rest,
-        _ => path,
-    };
-    path.starts_with("docs/")
+    url.strip_prefix("https://agents.xquads.com/help/")
+        .is_some_and(|page| !page.is_empty() && !page.contains('/'))
 }
 
 pub(crate) fn present(app: &AppHandle, name: &str) -> Result<(), String> {
@@ -935,13 +929,14 @@ mod tests {
         assert!(is_app_download("https://agents.xquads.com/api/desktop/download/0.6.0/agentes_0.6.0_universal.dmg"));
         assert!(!is_app_download("https://agents.xquads.com.evil.com/api/desktop/download/x"));
         assert!(!is_sign_in_url("https://claude.ai.evil.com/oauth/authorize?"));
-        assert!(is_help_page("https://agentes.chat/docs/run-on-your-computer#who"));
-        assert!(is_help_page("https://agentes.chat/pt/docs/computers#folders"));
-        assert!(!is_help_page("https://agentes.chat.evil.com/docs/x"));
-        assert!(!is_help_page("https://agentes.chat@evil.com/docs/x"));
-        assert!(!is_help_page("https://agentes.chat/docsx"));
-        assert!(!is_help_page("https://agentes.chat/pricing"));
-        assert!(!is_help_page("https://agentes.chat/a/b/docs/x"));
+        assert!(is_help_page("https://agents.xquads.com/help/run-on-your-computer?lang=en#who"));
+        assert!(is_help_page("https://agents.xquads.com/help/computers?lang=pt-BR#folders"));
+        assert!(!is_help_page("https://agents.xquads.com.evil.com/help/x"));
+        assert!(!is_help_page("https://agents.xquads.com@evil.com/help/x"));
+        assert!(!is_help_page("https://agents.xquads.com/helpdesk"));
+        assert!(!is_help_page("https://agents.xquads.com/help/"));
+        assert!(!is_help_page("https://agents.xquads.com/pricing"));
+        assert!(!is_help_page("https://agents.xquads.com/help/a/b"));
     }
 
     #[cfg(unix)]

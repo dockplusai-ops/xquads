@@ -1,7 +1,7 @@
-# agentes.chat (desktop app)
+# xquads (desktop app)
 
 Tauri 2 app for macOS, Windows and Linux (ADR 0036). Rust in `src-tauri/` keeps to windows, the tray, the server list,
-links, the children it runs (the runners and, for "Run agentes.chat on this computer", the server), notifications and
+links, the children it runs (the runners and, for "Run xquads on this computer", the server), notifications and
 self-update; the app's own windows (the popover, Preferences, the welcome window, the cover) are the TypeScript in `src/`;
 the main window loads the server's own pages.
 
@@ -27,7 +27,7 @@ Measure before changing anything bigger than a small fix.
    thread idle in `mach_msg` while the window is stuck is the web view. The release build is stripped: for Rust frames
    with names, run the **Desktop** workflow with `profiling` on (and `release` = none) and use that build on a test Mac.
    It keeps the symbols and turns the web inspector on.
-3. **The web view**: Safari › Develop › the Mac › agentes.chat (the profiling build), Timelines with JavaScript and
+3. **The web view**: Safari › Develop › the Mac › xquads (the profiling build), Timelines with JavaScript and
    Events, Layout and Rendering, and Memory. Record 10 s of the symptom, then a 30-minute soak on a busy channel: long
    tasks over 50 ms and a growing heap or node count say which screen does it.
 4. **Resizing and a hidden window**: Instruments' Time Profiler during a 5 s drag of a window edge, and the thread

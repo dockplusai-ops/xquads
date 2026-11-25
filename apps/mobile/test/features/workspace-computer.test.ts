@@ -218,7 +218,7 @@ describe("a suspended organization on the phone", () => {
     expect(suspendedText(t, suspendedOf(orgs, "a"))).toBe("Este workspace está suspenso: uso fora dos termos");
     const cloud = [{ id: "e", name: "Eco", standing: { state: "suspended", reason: "Termos 5: spam", cloud: true } }];
     expect(suspendedText(t, suspendedOf(cloud, "e"))).toBe(
-      "Este workspace está suspenso: Termos 5: spam. Para contestar, escreva para legal@agentes.chat.",
+      "Este workspace está suspenso: Termos 5: spam. Para contestar, escreva para legal@xquads.com.",
     );
     expect(suspendedText(t, suspendedOf(orgs, "d"))).toBe(
       "As conversas e os agentes dele estão fechados por enquanto.",

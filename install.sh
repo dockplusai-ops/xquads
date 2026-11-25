@@ -30,7 +30,7 @@ main() {
   COMPOSE_VERSION=5.5.1
   MIN_COMPOSE=2.23.1
   INSTALL_URL=https://agents.xquads.com/install
-  GUIDE=https://agentes.chat/docs/install-on-a-server
+  GUIDE=https://agents.xquads.com/help/install-on-a-server?lang=en
   DOCKER_DOCS=https://docs.docker.com/engine/install/
   BREW_INSTALL=https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 

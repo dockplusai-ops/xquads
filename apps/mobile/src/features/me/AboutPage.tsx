@@ -1,7 +1,7 @@
 import { instanceQuery, useApi } from "@agenteschat/client";
 import { LICENSE_URL, PUBLIC_SOURCE_URL } from "@agenteschat/client/lib/about";
 import { shownAddress } from "@agenteschat/client/lib/sites";
-import { DOCS_SITE } from "@agenteschat/i18n/docs";
+import { UPSTREAM_SITE } from "@agenteschat/i18n/docs";
 import { useQuery } from "@tanstack/react-query";
 import { Trans, useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
@@ -34,7 +34,7 @@ export function AboutPage() {
         />
       </GroupedList>
       <GroupedFooter>
-        <Trans i18nKey="settings.about.basedOn" components={{ site: link(DOCS_SITE) }} />
+        <Trans i18nKey="settings.about.basedOn" components={{ site: link(UPSTREAM_SITE) }} />
         {"\n\n"}
         <Trans i18nKey="settings.about.license" components={{ license: link(LICENSE_URL) }} />
         {"\n\n"}

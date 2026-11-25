@@ -201,7 +201,7 @@ test("commands get the agent's secrets, and no result shows them", async () => {
 
 test("commands get what root's turn named for its agent (its commits' lines), the session's latest", async () => {
   const asked: unknown[] = [];
-  const line = "Co-authored-by: Ada <noreply@agentes.chat>";
+  const line = "Co-authored-by: Ada <noreply@xquads.com>";
   const { call, state, tools, scope } = setup(
     { agent: { ...AGENT, coAuthors: [line] } },
     {

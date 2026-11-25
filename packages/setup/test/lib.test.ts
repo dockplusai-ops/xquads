@@ -772,7 +772,7 @@ describe("the agents' computer", () => {
     // Ubuntu's systemd can't keep each agent its own user: offered in simple mode instead (ADR 0153 §5).
     expect(why({ ...server, bpf: false })).toBeNull();
     expect(why(server, null, true)?.fix).toBe(
-      "Run the installer on the server for this folder instead, with --dir <folder> --computer yes: https://agentes.chat/docs/install-on-a-server#computers",
+      "Run the installer on the server for this folder instead, with --dir <folder> --computer yes: https://agents.xquads.com/help/install-on-a-server?lang=en#computers",
     );
     expect(why({ ...server, platform: "win32" })?.error).toBe("The agents' computer runs on Linux or a Mac.");
     // Already a computer of some server: its service would be replaced.
