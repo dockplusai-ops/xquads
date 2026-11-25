@@ -169,7 +169,7 @@ describe("the agents a new person meets first", () => {
   test("Doki in its own DM keeps the message, and no model is called", async () => {
     f = await setup({ rightHand: true, reply: () => ({ chunks: ["On it."] }) });
     await hold("payment");
-    const used = await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "store", "en");
+    const used = await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "cleaning", "en");
     await postPersonMessage({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, used.channelId, { body: "oi" });
     await drainOutbox(f.db, f.handlers);
     expect(f.provider.calls).toHaveLength(0);
@@ -296,7 +296,7 @@ describe("the team before paying", () => {
   test("Criar o time makes the team at once, with no question, no run and no model call", async () => {
     f = await setup({ rightHand: true });
     await hold("payment");
-    const used = await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "store", "pt-BR");
+    const used = await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "cleaning", "pt-BR");
     await drainOutbox(f.db, f.handlers);
     expect(used.state).toBe("created");
     const rows = await lodiDm(used.channelId);
@@ -306,12 +306,12 @@ describe("the team before paying", () => {
     expect(await f.db.select().from(schema.agentRuns)).toHaveLength(0);
     expect(f.provider.calls).toHaveLength(0);
     const team = await f.db.select({ name: schema.agents.name }).from(schema.agents);
-    expect(team.map((a) => a.name)).toEqual(expect.arrayContaining(["Iara", "Lia", "Otto"]));
+    expect(team.map((a) => a.name)).toEqual(expect.arrayContaining(["Rui", "Ana", "Gil", "Davi"]));
   });
 
   test("with a plan in force the same template is made at once", async () => {
     f = await setup({ rightHand: true });
-    const used = await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "store", "pt-BR");
+    const used = await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "cleaning", "pt-BR");
     expect(used.state).toBe("created");
     const rows = await lodiDm(used.channelId);
     expect(rows.some((m) => m.meta.replyChips)).toBe(false);
@@ -320,7 +320,7 @@ describe("the team before paying", () => {
   test("making the team on a hold queues the two reminders", async () => {
     f = await setup({ rightHand: true });
     await hold("payment");
-    await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "support", "en");
+    await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "painting", "en");
     expect(await reminders()).toHaveLength(2);
   });
 });

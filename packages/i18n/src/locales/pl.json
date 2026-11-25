@@ -1024,17 +1024,17 @@
         "build": "Stwórz awatar",
         "edit": "Edytuj awatar",
         "upload": "Prześlij zdjęcie",
-        "area": "Czym się zajmujesz?",
+        "area": "Jaka jest twoja rola?",
         "areaHint": "Opcjonalnie. Tylko po to, żebyśmy wiedzieli, kto używa xquads."
       },
       "area": {
         "options": {
-          "dev": "Programowanie",
+          "owner": "Właściciel lub kierownik",
+          "sales": "Sprzedaż i wyceny",
+          "office": "Biuro i grafik",
+          "field": "Teren i ekipy",
+          "finance": "Faktury i finanse",
           "marketing": "Marketing",
-          "sales": "Sprzedaż",
-          "finance": "Finanse",
-          "ops": "Operacje",
-          "support": "Obsługa klienta",
           "other": "Coś innego"
         }
       },
@@ -21367,35 +21367,35 @@
         "gil": "{{name}} sprawdza, czy jest tylko nasz"
       },
       "ordering": {
-        "helena": "{{name}} poprosił o {{gb}} GB pamięci",
-        "helena_female": "{{name}} poprosiła o {{gb}} GB pamięci",
+        "davi": "{{name}} poprosił o {{gb}} GB pamięci",
+        "davi_female": "{{name}} poprosiła o {{gb}} GB pamięci",
         "rui": "{{name}} zamówił nowiutki",
         "rui_female": "{{name}} zamówiła nowiutki",
         "ana": "{{name}} pilnuje zamówienia"
       },
       "wiping": {
-        "helena": "{{name}} porządnie go szoruje",
+        "davi": "{{name}} porządnie go szoruje",
         "rui": "{{name}} wynosi śmieci",
         "gil": "{{name}} sprawdza, czy nic starego nie zostało"
       },
       "starting": {
         "rui": "{{name}} stawia go na nogi",
-        "helena": "{{name}} rozgrzewa silniki",
+        "davi": "{{name}} rozgrzewa silniki",
         "ana": "{{name}} machnął flagą startową",
         "ana_female": "{{name}} machnęła flagą startową"
       },
       "booting": {
-        "helena": "{{name}} liczy wszystkie {{gb}} GB pamięci",
+        "davi": "{{name}} liczy wszystkie {{gb}} GB pamięci",
         "rui": "{{name}} sprawdza, czy wszystkie części są na miejscu",
         "ana": "{{name}} pozwala mu spokojnie się załadować"
       },
       "updating": {
         "gil": "{{name}} pobiera najnowsze aktualizacje",
-        "helena": "{{name}} dokręca każdą śrubkę",
+        "davi": "{{name}} dokręca każdą śrubkę",
         "ana": "{{name}} odhacza kolejne aktualizacje"
       },
       "restarting": {
-        "helena": "{{name}} mówi, że ten restart to nic dziwnego",
+        "davi": "{{name}} mówi, że ten restart to nic dziwnego",
         "rui": "{{name}} utrwala aktualizację",
         "ana": "{{name}} liczy do dziesięciu"
       },
@@ -21413,10 +21413,10 @@
       "installing": {
         "ana": "{{name}} szuka aplikacji",
         "gil": "{{name}} rozpakowuje aplikacje",
-        "helena": "{{name}} rozkłada narzędzia"
+        "davi": "{{name}} rozkłada narzędzia"
       },
       "connecting": {
-        "helena": "{{name}} czeka na jego pierwsze „cześć”",
+        "davi": "{{name}} czeka na jego pierwsze „cześć”",
         "rui": "{{name}} przekazuje klucze",
         "gil": "{{name}} przedstawia go zespołowi"
       }
@@ -22472,12 +22472,11 @@
       "templatesPersonal": "Zobacz gotowych agentów"
     },
     "business": {
-      "agency": "Agencja",
-      "store": "Sklep internetowy",
-      "clinic": "Klinika lub gabinet",
-      "software": "Oprogramowanie i aplikacje",
-      "support": "Obsługa klienta",
-      "services": "Biuro usługowe",
+      "cleaning": "Sprzątanie domów",
+      "painting": "Malowanie",
+      "roofing": "Dachy",
+      "landscaping": "Ogrody i trawniki",
+      "remodeling": "Remonty i naprawy",
       "other": "Coś innego"
     },
     "step": "Pytanie {{step}} z {{of}}",
@@ -22727,35 +22726,30 @@
       "sub": "Klienci, faktury i kalendarz",
       "desc": "Dla freelancerów, którzy sami dbają o swoich klientów i pieniądze."
     },
-    "agency": {
-      "name": "Agencja marketingowa",
-      "sub": "Treści, reklamy i obsługa klienta",
-      "desc": "Dla agencji, która prowadzi treści i kampanie klientów."
+    "cleaning": {
+      "name": "Sprzątanie domów",
+      "sub": "Stałe wizyty, ekipy i opinie",
+      "desc": "Dla firmy sprzątającej ze stałymi klientami i ekipami w terenie."
     },
-    "store": {
-      "name": "Sklep internetowy",
-      "sub": "Zamówienia, magazyn i media społecznościowe",
-      "desc": "Dla sklepu, który sprzedaje online i odpowiada kupującym."
+    "painting": {
+      "name": "Malowanie",
+      "sub": "Wyceny, ekipy i faktury",
+      "desc": "Dla firmy malarskiej, która wycenia każde zlecenie i wysyła na nie ekipę."
     },
-    "clinic": {
-      "name": "Klinika lub gabinet",
-      "sub": "Wizyty przez WhatsApp, płatności i kontrole",
-      "desc": "Dla kliniki lub gabinetu, który umawia pacjentów i prowadzi kontrole."
+    "roofing": {
+      "name": "Dachy",
+      "sub": "Oględziny, wyceny i płatności",
+      "desc": "Dla firmy dekarskiej, która ogląda, wycenia i rozlicza każde zlecenie."
     },
-    "software": {
-      "name": "Oprogramowanie i aplikacje",
-      "sub": "Obsługa klienta, płatności i kod",
-      "desc": "Dla firmy, która sprzedaje oprogramowanie i dba o własnych klientów."
+    "landscaping": {
+      "name": "Ogrody i trawniki",
+      "sub": "Cotygodniowe trasy, faktury i opinie",
+      "desc": "Dla firmy ogrodniczej lub pielęgnującej trawniki z cotygodniowymi wizytami."
     },
-    "support": {
-      "name": "Obsługa klienta",
-      "sub": "Kolejka klientów i baza odpowiedzi",
-      "desc": "Dla zespołu, który codziennie odpowiada wielu klientom."
-    },
-    "services": {
-      "name": "Biuro usługowe",
-      "sub": "Księgowość, prawo, doradztwo",
-      "desc": "Dla biura, które umawia klientów, wysyła oferty i wystawia rachunki."
+    "remodeling": {
+      "name": "Remonty i naprawy",
+      "sub": "Wyceny, klienci po angielsku i faktury",
+      "desc": "Dla firmy remontowej lub złotej rączki, która wycenia, rozmawia z klientem i rozlicza każdy etap."
     },
     "hello": {
       "lodi": {
@@ -22770,61 +22764,47 @@
       }
     },
     "agents": {
-      "luana": {
-        "role": "Obsługa klienta",
-        "line": "Odpowiada klientom na WhatsAppie i mailowo. Woła cię, gdy czegoś nie wie.",
-        "routine": "Podsumować, co zostało bez odpowiedzi",
-        "task": "Napisz odpowiedź na tę wiadomość od klienta:",
-        "hello": "Cześć, {{first}}. Tych, którzy piszą na WhatsAppie, zostaw mnie."
-      },
-      "teo": {
-        "role": "Płatności",
-        "line": "Przypomina zalegającym z płatnością i wysyła upomnienie po twojej zgodzie.",
-        "routine": "Wypisać, kto zalega z płatnością",
-        "task": "Napisz uprzejme przypomnienie o płatności dla:",
-        "hello": "Dzień dobry. Zajmę się płatnościami i wyślę przypomnienie dopiero po twojej zgodzie."
-      },
-      "helena": {
-        "role": "Dev",
-        "line": "Naprawia błędy zgłaszane przez klientów i otwiera PR.",
-        "routine": "Wypisać nowe błędy",
-        "task": "Powiedz, od czego zacząć badanie tego błędu:",
-        "hello": "Cześć. Podsyłajcie mi zgłaszane bugi, zbadam je i otworzę PR."
-      },
-      "gil": {
-        "role": "Treści",
-        "line": "Pisze posty i scenariusze w tonie firmy i planuje je po twojej zgodzie.",
-        "routine": "Zaproponować posty na ten tydzień",
-        "task": "Zaproponuj trzy posty na ten tydzień o:",
-        "hello": "Cześć wszystkim. Posty na ten tydzień biorę na siebie."
-      },
       "ana": {
-        "role": "Sprzedaż",
-        "line": "Pilnuje wszystkich, którzy prosili o wycenę, i pisze oferty.",
-        "routine": "Wypisać, kto prosił o wycenę i nie dostał odpowiedzi",
-        "task": "Napisz krótką wycenę dla tego zlecenia:",
-        "hello": "Cześć, {{first}}. Nikt, kto poprosi o wycenę, nie zostanie bez odpowiedzi."
+        "role": "Wyceny",
+        "line": "Pisze wyceny na podstawie zdjęć i wymiarów i wraca do tych, które zostały bez odpowiedzi.",
+        "routine": "Wypisać wyceny bez odpowiedzi",
+        "task": "Napisz wycenę na podstawie tych zdjęć i wymiarów:",
+        "hello": "Cześć, {{first}}. Wyślij mi zdjęcia i wymiary, a napiszę wycenę."
       },
       "rui": {
         "role": "Terminy",
-        "line": "Umawia, potwierdza i przesuwa wizyty oraz przypomina klientom dzień wcześniej.",
+        "line": "Umawia wizyty, potwierdza je dzień wcześniej i przesuwa, gdy klient poprosi.",
         "routine": "Potwierdzić jutrzejsze wizyty",
-        "task": "Uporządkuj te jutrzejsze godziny:",
-        "hello": "Dzień dobry. Kalendarz biorę na siebie i dzień wcześniej przypomnę klientom."
+        "task": "Znajdź termin na tę wizytę:",
+        "hello": "Dzień dobry. Grafik biorę na siebie i potwierdzę każdą wizytę dzień wcześniej."
       },
-      "tiago": {
-        "role": "Zamówienia",
-        "line": "Śledzi zamówienia i magazyn i ostrzega, czego zaczyna brakować.",
-        "routine": "Ostrzec, czego brakuje w magazynie",
-        "task": "Wypisz, co zostało do zrobienia przy tych zamówieniach:",
-        "hello": "Jestem. Pilnuję zamówień i dam znać, gdy zapasy się kończą."
+      "lia": {
+        "role": "Angielski",
+        "line": "Pomaga ci pisać do klientów jasnym angielskim i wyjaśnia, co napisali.",
+        "routine": "Wypisać wiadomości klientów bez odpowiedzi",
+        "task": "Napisz tę odpowiedź do klienta po angielsku:",
+        "hello": "Cześć, {{first}}. Powiedz mi, co chcesz przekazać, a napiszę to po angielsku."
       },
-      "sofia": {
-        "role": "Baza odpowiedzi",
-        "line": "Aktualizuje bazę odpowiedzi według tego, co odpowiada zespół.",
-        "routine": "Zaktualizować bazę odpowiedziami z tygodnia",
-        "task": "Napisz odpowiedzi na te pytania klientów:",
-        "hello": "Cześć. Będę aktualizować bazę odpowiedzi tym, co odpowiada zespół."
+      "teo": {
+        "role": "Płatności",
+        "line": "Wysyła fakturę po zakończeniu zlecenia i przypomina zalegającym, po twojej zgodzie.",
+        "routine": "Wypisać zaległe faktury",
+        "task": "Napisz fakturę za to zlecenie:",
+        "hello": "Dzień dobry. Faktury biorę na siebie i wyślę przypomnienie dopiero po twojej zgodzie."
+      },
+      "gil": {
+        "role": "Opinie",
+        "line": "Prosi zadowolonych klientów o opinię w Google i szkicuje odpowiedzi na nowe opinie.",
+        "routine": "Wypisać zlecenia zakończone dziś, żeby poprosić o opinię",
+        "task": "Napisz prośbę o opinię do tego klienta:",
+        "hello": "Cześć wszystkim. Poproszę każdego zadowolonego klienta o opinię w Google."
+      },
+      "davi": {
+        "role": "Ekipy",
+        "line": "Wysyła każdej ekipie zlecenia, adresy i godziny na dany dzień i daje ci znać, gdy ktoś się spóźnia.",
+        "routine": "Wysłać każdej ekipie zlecenia na dziś",
+        "task": "Podziel te zlecenia między ekipy:",
+        "hello": "Cześć, {{first}}. Każda ekipa dostanie ode mnie zlecenia i adresy, zanim zacznie się dzień."
       },
       "marina": {
         "role": "Kalendarz i przypomnienia",
@@ -22882,14 +22862,12 @@
       }
     },
     "channels": {
-      "luana": "wsparcie",
-      "teo": "finanse",
-      "helena": "eng",
-      "gil": "tresci",
-      "ana": "sprzedaz",
+      "ana": "wyceny",
       "rui": "terminy",
-      "tiago": "zamowienia",
-      "sofia": "wsparcie"
+      "lia": "klienci",
+      "teo": "finanse",
+      "gil": "opinie",
+      "davi": "ekipy"
     },
     "skills": {
       "voice": {

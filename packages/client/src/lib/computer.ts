@@ -115,24 +115,21 @@ export function setupView(setup: ComputerSetup | null | undefined, receivedAt = 
  */
 const SETUP_LINES = {
   reserving: ["rui", "ana", "gil"],
-  ordering: ["helena", "rui", "ana"],
-  wiping: ["helena", "rui", "gil"],
-  starting: ["rui", "helena", "ana"],
-  booting: ["helena", "rui", "ana"],
-  updating: ["gil", "helena", "ana"],
-  restarting: ["helena", "rui", "ana"],
+  ordering: ["davi", "rui", "ana"],
+  wiping: ["davi", "rui", "gil"],
+  starting: ["rui", "davi", "ana"],
+  booting: ["davi", "rui", "ana"],
+  updating: ["gil", "davi", "ana"],
+  restarting: ["davi", "rui", "ana"],
   network: ["gil", "rui", "ana"],
   firewall: ["rui", "gil", "ana"],
-  installing: ["ana", "gil", "helena"],
-  connecting: ["helena", "rui", "gil"],
+  installing: ["ana", "gil", "davi"],
+  connecting: ["davi", "rui", "gil"],
 } as const satisfies Record<SetupStage | ComputerSetupStep, readonly string[]>;
 type Said = keyof typeof SETUP_LINES;
 type SetupLineKey = { [S in Said]: `computerSetup.lines.${S}.${(typeof SETUP_LINES)[S][number]}` }[Said];
 /** The lines that give the computer's memory: left out until its size is known. */
-const MEMORY_LINES: readonly SetupLineKey[] = [
-  "computerSetup.lines.ordering.helena",
-  "computerSetup.lines.booting.helena",
-];
+const MEMORY_LINES: readonly SetupLineKey[] = ["computerSetup.lines.ordering.davi", "computerSetup.lines.booting.davi"];
 
 /**
  * The lines for where it is now, in order, each with the agent it names: only an agent on the team; none while it

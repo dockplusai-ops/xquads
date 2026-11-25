@@ -298,17 +298,17 @@ describe("team templates", () => {
     state.aiStatus = { any: false, agents: [{ agentId: LODI_ID, state: "no_ai", reason: "no_key" }] };
     state.teamTemplates = [
       {
-        id: "software",
-        name: "Software e apps",
-        sub: "Atendimento, cobrança e código",
-        description: "Para quem vende um sistema.",
+        id: "painting",
+        name: "Pintura",
+        sub: "Orçamentos, equipes e faturas",
+        description: "Para uma empresa de pintura.",
         team: CARD.params,
       },
       {
-        id: "clinic",
-        name: "Clínica ou consultório",
-        sub: "Agenda e retorno",
-        description: "Para clínicas.",
+        id: "roofing",
+        name: "Telhados",
+        sub: "Vistorias, orçamentos e pagamentos",
+        description: "Para uma empresa de telhados.",
         team: { ...CARD.params, agents: [CARD.params.agents[0] as never] },
       },
     ];
@@ -333,15 +333,15 @@ describe("team templates", () => {
     await settle(10);
     await click(button("Ver modelos de time"), 10);
     const dialog = screen().getByRole("dialog", { name: "Modelos de time" });
-    expect(dialog.textContent).toContain("Para quem vende um sistema.");
+    expect(dialog.textContent).toContain("Para uma empresa de pintura.");
     expect(dialog.textContent).toContain("Responde os clientes no WhatsApp e no e-mail.");
-    await click(within(dialog).getByRole("button", { name: /Clínica ou consultório/ }), 4);
-    expect(dialog.textContent).toContain("Para clínicas.");
+    await click(within(dialog).getByRole("button", { name: /Telhados/ }), 4);
+    expect(dialog.textContent).toContain("Para uma empresa de telhados.");
     // The other ways in, under the list.
     for (const name of ["Trazer agentes de outro app", "Criar um agente do zero"])
       expect(within(dialog).getByRole("button", { name }).className).toBe("ac-link");
     await click(within(dialog).getByRole("button", { name: "Criar o time" }), 12);
-    expect(calls(state, "agents.applyTeamTemplate").map((c) => c.args[1])).toEqual(["clinic"]);
+    expect(calls(state, "agents.applyTeamTemplate").map((c) => c.args[1])).toEqual(["roofing"]);
     expect(screen().queryByRole("dialog", { name: "Modelos de time" })).toBeNull();
   });
 });

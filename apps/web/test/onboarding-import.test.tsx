@@ -41,8 +41,8 @@ const text = () => document.body.textContent ?? "";
 
 const TEMPLATES: TeamTemplate[] = [
   {
-    id: "store",
-    name: "Loja online",
+    id: "cleaning",
+    name: "Limpeza de casas",
     sub: "Pedidos, estoque e redes sociais",
     description: "Para uma loja que vende online.",
     team: {
@@ -86,7 +86,7 @@ const settingUp = (o: { cloud?: boolean; personal?: boolean } = {}) => {
         ...(o.cloud ? { standing: { state: "hold" as const, reason: "payment" } } : {}),
       },
     ];
-  state.context = "Loja online";
+  state.context = "Limpeza de casas";
   state.teamTemplates = TEMPLATES;
   if (o.cloud) {
     state.authConfig = { billingUrl: "https://billing.example.com" };

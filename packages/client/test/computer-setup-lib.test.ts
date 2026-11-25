@@ -102,20 +102,20 @@ describe("the workspace's own computer (ADR 0056 §10)", () => {
   });
 
   test("the team's lines: by what the status line says, only agents on the team, the memory ones once its size is known", () => {
-    const team = [{ handle: "helena" }, { handle: "rui" }, { handle: "marina" }];
+    const team = [{ handle: "davi" }, { handle: "rui" }, { handle: "marina" }];
     const linesOf = (patch: Partial<ComputerSetup>, who = team) =>
       setupLines(setupView(external(patch)) as SetupView, who).map((l) => l.key);
     // Its step's, or its stage's when the stage has words; Ana isn't on this team, so her line is left out.
     expect(linesOf({ step: "starting" })).toEqual([
       "computerSetup.lines.starting.rui",
-      "computerSetup.lines.starting.helena",
+      "computerSetup.lines.starting.davi",
     ]);
-    expect(linesOf({ step: "installing", stage: "updating" })).toEqual(["computerSetup.lines.updating.helena"]);
-    expect(linesOf({ step: "installing", stage: "defragmenting" })).toEqual(["computerSetup.lines.installing.helena"]);
+    expect(linesOf({ step: "installing", stage: "updating" })).toEqual(["computerSetup.lines.updating.davi"]);
+    expect(linesOf({ step: "installing", stage: "defragmenting" })).toEqual(["computerSetup.lines.installing.davi"]);
     // The computer's memory, only once its size is known.
     expect(linesOf({ step: "installing", stage: "booting" })).toEqual(["computerSetup.lines.booting.rui"]);
     expect(linesOf({ step: "installing", stage: "booting", specs: { cpus: 4, memoryGb: 8, diskGb: 100 } })).toEqual([
-      "computerSetup.lines.booting.helena",
+      "computerSetup.lines.booting.davi",
       "computerSetup.lines.booting.rui",
     ]);
     // No step yet, a wait, or nobody the lines name: none.

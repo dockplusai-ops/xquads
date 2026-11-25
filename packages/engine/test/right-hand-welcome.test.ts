@@ -90,7 +90,14 @@ describe("who is greeted", () => {
       bodyParams: { org: "Acme" },
       forUserId: bia.id,
       replyChips: {
-        choices: ["Desenvolvimento", "Marketing", "Vendas", "Finanças", "Operações", "Atendimento"],
+        choices: [
+          "Dono ou gerente",
+          "Vendas e orçamentos",
+          "Escritório e agenda",
+          "Campo e equipes",
+          "Cobrança e finanças",
+          "Marketing",
+        ],
         multiple: false,
         step: 1,
         of: 1,
@@ -125,7 +132,16 @@ describe("who is greeted", () => {
       "You just joined Acme. **What do you look after here?** Tell me and I set up your first agent with you.",
     );
     expect(m?.meta).toMatchObject({
-      replyChips: { choices: ["Development", "Marketing", "Sales", "Finance", "Operations", "Customer support"] },
+      replyChips: {
+        choices: [
+          "Owner or manager",
+          "Sales and estimates",
+          "Office and scheduling",
+          "Field and crews",
+          "Billing and finance",
+          "Marketing",
+        ],
+      },
     });
   });
 
@@ -271,8 +287,8 @@ describe("while they are new", () => {
     expect(text).toContain("# Someone new");
     expect(text).toContain("propose_agent");
     expect(text).toContain("offer_connect_ai");
-    expect(text).not.toContain("Finance");
-    expect(await block(f, caio.id)).toContain("They work in Finance.");
+    expect(text).not.toContain("Billing and finance");
+    expect(await block(f, caio.id)).toContain("Their role: Billing and finance.");
     const prompt = (inDm: boolean) =>
       rightHandPrompt({ db: f.db }, { orgId: f.org.id, agent: lodi, personId: bia.id, inDm });
     expect(await prompt(true)).toContain("# Someone new");

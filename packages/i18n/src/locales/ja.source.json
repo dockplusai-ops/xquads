@@ -2454,28 +2454,28 @@
     "value": "Upload a photo"
   },
   "onboarding.flow.you.area": {
-    "value": "What do you work on?"
+    "value": "What's your role?"
   },
   "onboarding.flow.you.areaHint": {
     "value": "Optional. Just so we know who uses xquads."
   },
-  "onboarding.flow.area.options.dev": {
-    "value": "Development"
+  "onboarding.flow.area.options.owner": {
+    "value": "Owner or manager"
+  },
+  "onboarding.flow.area.options.sales": {
+    "value": "Sales and estimates"
+  },
+  "onboarding.flow.area.options.office": {
+    "value": "Office and scheduling"
+  },
+  "onboarding.flow.area.options.field": {
+    "value": "Field and crews"
+  },
+  "onboarding.flow.area.options.finance": {
+    "value": "Billing and finance"
   },
   "onboarding.flow.area.options.marketing": {
     "value": "Marketing"
-  },
-  "onboarding.flow.area.options.sales": {
-    "value": "Sales"
-  },
-  "onboarding.flow.area.options.finance": {
-    "value": "Finance"
-  },
-  "onboarding.flow.area.options.ops": {
-    "value": "Operations"
-  },
-  "onboarding.flow.area.options.support": {
-    "value": "Customer support"
   },
   "onboarding.flow.area.options.other": {
     "value": "Something else"
@@ -49230,7 +49230,7 @@
   "computerSetup.lines.reserving.gil": {
     "value": "{{name}} is checking it's all ours"
   },
-  "computerSetup.lines.ordering.helena": {
+  "computerSetup.lines.ordering.davi": {
     "value": "{{name}} asked for {{gb}} GB of memory"
   },
   "computerSetup.lines.ordering.rui": {
@@ -49239,7 +49239,7 @@
   "computerSetup.lines.ordering.ana": {
     "value": "{{name}} is keeping an eye on the order"
   },
-  "computerSetup.lines.wiping.helena": {
+  "computerSetup.lines.wiping.davi": {
     "value": "{{name}} is giving it a good scrub"
   },
   "computerSetup.lines.wiping.rui": {
@@ -49251,13 +49251,13 @@
   "computerSetup.lines.starting.rui": {
     "value": "{{name}} is getting it on its feet"
   },
-  "computerSetup.lines.starting.helena": {
+  "computerSetup.lines.starting.davi": {
     "value": "{{name}} is warming up the engines"
   },
   "computerSetup.lines.starting.ana": {
     "value": "{{name}} waved the starting flag"
   },
-  "computerSetup.lines.booting.helena": {
+  "computerSetup.lines.booting.davi": {
     "value": "{{name}} is counting all {{gb}} GB of memory"
   },
   "computerSetup.lines.booting.rui": {
@@ -49269,13 +49269,13 @@
   "computerSetup.lines.updating.gil": {
     "value": "{{name}} is fetching the latest updates"
   },
-  "computerSetup.lines.updating.helena": {
+  "computerSetup.lines.updating.davi": {
     "value": "{{name}} is tightening every screw"
   },
   "computerSetup.lines.updating.ana": {
     "value": "{{name}} is ticking off each update"
   },
-  "computerSetup.lines.restarting.helena": {
+  "computerSetup.lines.restarting.davi": {
     "value": "{{name}} says this restart is normal"
   },
   "computerSetup.lines.restarting.rui": {
@@ -49308,10 +49308,10 @@
   "computerSetup.lines.installing.gil": {
     "value": "{{name}} is unpacking the apps"
   },
-  "computerSetup.lines.installing.helena": {
+  "computerSetup.lines.installing.davi": {
     "value": "{{name}} is laying out the tools"
   },
-  "computerSetup.lines.connecting.helena": {
+  "computerSetup.lines.connecting.davi": {
     "value": "{{name}} is waiting for its first hello"
   },
   "computerSetup.lines.connecting.rui": {
@@ -51643,23 +51643,20 @@
   "teamPlan.start.templatesPersonal": {
     "value": "See ready agents"
   },
-  "teamPlan.business.agency": {
-    "value": "Agency"
+  "teamPlan.business.cleaning": {
+    "value": "House cleaning"
   },
-  "teamPlan.business.store": {
-    "value": "Online store"
+  "teamPlan.business.painting": {
+    "value": "Painting"
   },
-  "teamPlan.business.clinic": {
-    "value": "Clinic or practice"
+  "teamPlan.business.roofing": {
+    "value": "Roofing"
   },
-  "teamPlan.business.software": {
-    "value": "Software and apps"
+  "teamPlan.business.landscaping": {
+    "value": "Landscaping and lawn care"
   },
-  "teamPlan.business.support": {
-    "value": "Customer service"
-  },
-  "teamPlan.business.services": {
-    "value": "Services office"
+  "teamPlan.business.remodeling": {
+    "value": "Remodeling and handyman"
   },
   "teamPlan.business.other": {
     "value": "Something else"
@@ -52219,59 +52216,50 @@
   "teamTemplates.freelance.desc": {
     "value": "For freelancers who look after their own clients and money."
   },
-  "teamTemplates.agency.name": {
-    "value": "Marketing agency"
+  "teamTemplates.cleaning.name": {
+    "value": "House cleaning"
   },
-  "teamTemplates.agency.sub": {
-    "value": "Content, ads and customer service"
+  "teamTemplates.cleaning.sub": {
+    "value": "Recurring visits, crews and reviews"
   },
-  "teamTemplates.agency.desc": {
-    "value": "For an agency that runs its clients' content and campaigns."
+  "teamTemplates.cleaning.desc": {
+    "value": "For a cleaning company with recurring customers and crews on the road."
   },
-  "teamTemplates.store.name": {
-    "value": "Online store"
+  "teamTemplates.painting.name": {
+    "value": "Painting"
   },
-  "teamTemplates.store.sub": {
-    "value": "Orders, stock and social media"
+  "teamTemplates.painting.sub": {
+    "value": "Estimates, crews and invoices"
   },
-  "teamTemplates.store.desc": {
-    "value": "For a store that sells online and answers its buyers."
+  "teamTemplates.painting.desc": {
+    "value": "For a painting company that quotes each job and sends a crew to do it."
   },
-  "teamTemplates.clinic.name": {
-    "value": "Clinic or practice"
+  "teamTemplates.roofing.name": {
+    "value": "Roofing"
   },
-  "teamTemplates.clinic.sub": {
-    "value": "Bookings on WhatsApp, billing and follow-ups"
+  "teamTemplates.roofing.sub": {
+    "value": "Inspections, estimates and payments"
   },
-  "teamTemplates.clinic.desc": {
-    "value": "For a clinic or practice that books patients and follows up with them."
+  "teamTemplates.roofing.desc": {
+    "value": "For a roofing company that inspects, quotes and collects on each job."
   },
-  "teamTemplates.software.name": {
-    "value": "Software and apps"
+  "teamTemplates.landscaping.name": {
+    "value": "Landscaping and lawn care"
   },
-  "teamTemplates.software.sub": {
-    "value": "Customer care, billing and code"
+  "teamTemplates.landscaping.sub": {
+    "value": "Weekly routes, invoices and reviews"
   },
-  "teamTemplates.software.desc": {
-    "value": "For a company that sells software and looks after its own customers."
+  "teamTemplates.landscaping.desc": {
+    "value": "For a landscaping or lawn care company with weekly visits."
   },
-  "teamTemplates.support.name": {
-    "value": "Customer service"
+  "teamTemplates.remodeling.name": {
+    "value": "Remodeling and handyman"
   },
-  "teamTemplates.support.sub": {
-    "value": "Customer queue and answer base"
+  "teamTemplates.remodeling.sub": {
+    "value": "Estimates, customers in English and invoices"
   },
-  "teamTemplates.support.desc": {
-    "value": "For a team that answers many customers every day."
-  },
-  "teamTemplates.services.name": {
-    "value": "Services office"
-  },
-  "teamTemplates.services.sub": {
-    "value": "Accounting, law, consulting"
-  },
-  "teamTemplates.services.desc": {
-    "value": "For an office that books clients, sends proposals and bills them."
+  "teamTemplates.remodeling.desc": {
+    "value": "For a remodeling or handyman company that quotes, talks to customers and bills each stage."
   },
   "teamTemplates.hello.lodi.starting": {
     "value": "Plan active. My computer is starting up. Let's get to work."
@@ -52291,125 +52279,95 @@
   "teamTemplates.hello.lodiNoAi.created": {
     "value": "The team is here. Connect an AI and we'll get to work."
   },
-  "teamTemplates.agents.luana.role": {
-    "value": "Customer service"
-  },
-  "teamTemplates.agents.luana.line": {
-    "value": "Answers customers on WhatsApp and email. Calls you when she doesn't know."
-  },
-  "teamTemplates.agents.luana.routine": {
-    "value": "Sum up what was left unanswered"
-  },
-  "teamTemplates.agents.luana.task": {
-    "value": "Write a reply to this customer message:"
-  },
-  "teamTemplates.agents.luana.hello": {
-    "value": "Hi, {{first}}. Leave whoever writes on WhatsApp to me."
-  },
-  "teamTemplates.agents.teo.role": {
-    "value": "Billing"
-  },
-  "teamTemplates.agents.teo.line": {
-    "value": "Reminds whoever is late on payment and sends the reminder after your ok."
-  },
-  "teamTemplates.agents.teo.routine": {
-    "value": "List who is late on payment"
-  },
-  "teamTemplates.agents.teo.task": {
-    "value": "Write a friendly payment reminder for:"
-  },
-  "teamTemplates.agents.teo.hello": {
-    "value": "Hello. I'll handle billing and only send reminders after your ok."
-  },
-  "teamTemplates.agents.helena.role": {
-    "value": "Dev"
-  },
-  "teamTemplates.agents.helena.line": {
-    "value": "Fixes the bugs customers report and opens the PR."
-  },
-  "teamTemplates.agents.helena.routine": {
-    "value": "List the new bugs"
-  },
-  "teamTemplates.agents.helena.task": {
-    "value": "Tell me where to start looking at this bug:"
-  },
-  "teamTemplates.agents.helena.hello": {
-    "value": "Hi. Send me the bugs that come in, I'll dig in and open the PR."
-  },
-  "teamTemplates.agents.gil.role": {
-    "value": "Content"
-  },
-  "teamTemplates.agents.gil.line": {
-    "value": "Writes posts and scripts in the company's voice and schedules them after your ok."
-  },
-  "teamTemplates.agents.gil.routine": {
-    "value": "Propose the week's posts"
-  },
-  "teamTemplates.agents.gil.task": {
-    "value": "Suggest three posts for this week about:"
-  },
-  "teamTemplates.agents.gil.hello": {
-    "value": "Hi, everyone. This week's posts are on me."
-  },
   "teamTemplates.agents.ana.role": {
-    "value": "Sales"
+    "value": "Quotes"
   },
   "teamTemplates.agents.ana.line": {
-    "value": "Follows up on everyone who asked for a quote and writes the proposals."
+    "value": "Writes estimates from photos and measurements and follows up on the ones with no answer."
   },
   "teamTemplates.agents.ana.routine": {
-    "value": "List who asked for a quote and got no answer"
+    "value": "List the estimates with no answer"
   },
   "teamTemplates.agents.ana.task": {
-    "value": "Write a short quote for this request:"
+    "value": "Write an estimate from these photos and measurements:"
   },
   "teamTemplates.agents.ana.hello": {
-    "value": "Hi, {{first}}. Nobody who asks for a quote will go unanswered."
+    "value": "Hi, {{first}}. Send me the photos and measurements, and I'll write the estimate."
   },
   "teamTemplates.agents.rui.role": {
     "value": "Scheduling"
   },
   "teamTemplates.agents.rui.line": {
-    "value": "Books, confirms and moves appointments, and reminds clients the day before."
+    "value": "Books visits, confirms them the day before and moves them when a customer asks."
   },
   "teamTemplates.agents.rui.routine": {
-    "value": "Confirm tomorrow's appointments"
+    "value": "Confirm tomorrow's visits"
   },
   "teamTemplates.agents.rui.task": {
-    "value": "Organize tomorrow's schedule:"
+    "value": "Find a time for this visit:"
   },
   "teamTemplates.agents.rui.hello": {
-    "value": "Hello. The calendar is mine, and I'll remind clients the day before."
+    "value": "Hello. The schedule is mine, and I'll confirm every visit the day before."
   },
-  "teamTemplates.agents.tiago.role": {
-    "value": "Orders"
+  "teamTemplates.agents.lia.role": {
+    "value": "English"
   },
-  "teamTemplates.agents.tiago.line": {
-    "value": "Follows orders and stock and warns what is running out."
+  "teamTemplates.agents.lia.line": {
+    "value": "Helps you write to customers in clear English and explains what they wrote."
   },
-  "teamTemplates.agents.tiago.routine": {
-    "value": "Warn what is running out in stock"
+  "teamTemplates.agents.lia.routine": {
+    "value": "List the customer messages waiting for an answer"
   },
-  "teamTemplates.agents.tiago.task": {
-    "value": "List what's left to do on these orders:"
+  "teamTemplates.agents.lia.task": {
+    "value": "Write this reply to the customer in English:"
   },
-  "teamTemplates.agents.tiago.hello": {
-    "value": "I'm here. I'll watch the orders and tell you if stock runs low."
+  "teamTemplates.agents.lia.hello": {
+    "value": "Hi, {{first}}. Tell me what you want to say, and I'll write it in English."
   },
-  "teamTemplates.agents.sofia.role": {
-    "value": "Answer base"
+  "teamTemplates.agents.teo.role": {
+    "value": "Billing"
   },
-  "teamTemplates.agents.sofia.line": {
-    "value": "Keeps the answer base up to date with what the team answers."
+  "teamTemplates.agents.teo.line": {
+    "value": "Sends the invoice when a job is done and reminds whoever is late, after your ok."
   },
-  "teamTemplates.agents.sofia.routine": {
-    "value": "Update the base with the week's answers"
+  "teamTemplates.agents.teo.routine": {
+    "value": "List the overdue invoices"
   },
-  "teamTemplates.agents.sofia.task": {
-    "value": "Write answers to these customer questions:"
+  "teamTemplates.agents.teo.task": {
+    "value": "Write the invoice for this job:"
   },
-  "teamTemplates.agents.sofia.hello": {
-    "value": "Hi. I'll keep the answer base up to date with what the team says."
+  "teamTemplates.agents.teo.hello": {
+    "value": "Hello. Invoices are mine, and I only send reminders after your ok."
+  },
+  "teamTemplates.agents.gil.role": {
+    "value": "Reviews"
+  },
+  "teamTemplates.agents.gil.line": {
+    "value": "Asks happy customers for a Google review and drafts replies to new reviews."
+  },
+  "teamTemplates.agents.gil.routine": {
+    "value": "List today's finished jobs to ask for a review"
+  },
+  "teamTemplates.agents.gil.task": {
+    "value": "Write a review request for this customer:"
+  },
+  "teamTemplates.agents.gil.hello": {
+    "value": "Hi, everyone. I'll ask every happy customer for a Google review."
+  },
+  "teamTemplates.agents.davi.role": {
+    "value": "Crew"
+  },
+  "teamTemplates.agents.davi.line": {
+    "value": "Sends each crew its jobs, addresses and times for the day and tells you when someone is running late."
+  },
+  "teamTemplates.agents.davi.routine": {
+    "value": "Send each crew its jobs for the day"
+  },
+  "teamTemplates.agents.davi.task": {
+    "value": "Split these jobs among the crews:"
+  },
+  "teamTemplates.agents.davi.hello": {
+    "value": "Hi, {{first}}. Each crew gets its jobs and addresses from me before the day starts."
   },
   "teamTemplates.agents.marina.role": {
     "value": "Calendar and reminders"
@@ -52519,29 +52477,23 @@
   "teamTemplates.agents.fabio.task": {
     "value": "Write a short proposal for this client:"
   },
-  "teamTemplates.channels.luana": {
-    "value": "support"
-  },
-  "teamTemplates.channels.teo": {
-    "value": "billing"
-  },
-  "teamTemplates.channels.helena": {
-    "value": "eng"
-  },
-  "teamTemplates.channels.gil": {
-    "value": "content"
-  },
   "teamTemplates.channels.ana": {
-    "value": "sales"
+    "value": "quotes"
   },
   "teamTemplates.channels.rui": {
     "value": "schedule"
   },
-  "teamTemplates.channels.tiago": {
-    "value": "orders"
+  "teamTemplates.channels.lia": {
+    "value": "customers"
   },
-  "teamTemplates.channels.sofia": {
-    "value": "support"
+  "teamTemplates.channels.teo": {
+    "value": "billing"
+  },
+  "teamTemplates.channels.gil": {
+    "value": "reviews"
+  },
+  "teamTemplates.channels.davi": {
+    "value": "crew"
   },
   "teamTemplates.skills.voice.name": {
     "value": "Tone of voice"

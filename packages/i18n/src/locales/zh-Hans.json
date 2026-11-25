@@ -964,17 +964,17 @@
         "build": "创建头像",
         "edit": "编辑头像",
         "upload": "上传照片",
-        "area": "你负责哪方面的工作？",
+        "area": "你的角色是？",
         "areaHint": "可选。只是想了解谁在使用 xquads。"
       },
       "area": {
         "options": {
-          "dev": "开发",
+          "owner": "老板或经理",
+          "sales": "销售和报价",
+          "office": "办公室和排程",
+          "field": "现场和施工队",
+          "finance": "账单和财务",
           "marketing": "市场营销",
-          "sales": "销售",
-          "finance": "财务",
-          "ops": "运营",
-          "support": "客户支持",
           "other": "其他"
         }
       },
@@ -19602,16 +19602,16 @@
         "gil_female": "{{name}} 正在确认它完全归我们所有"
       },
       "ordering": {
-        "helena": "{{name}} 申请了 {{gb}} GB 内存",
-        "helena_female": "{{name}} 申请了 {{gb}} GB 内存",
+        "davi": "{{name}} 申请了 {{gb}} GB 内存",
+        "davi_female": "{{name}} 申请了 {{gb}} GB 内存",
         "rui": "{{name}} 订了一台全新的",
         "rui_female": "{{name}} 订了一台全新的",
         "ana": "{{name}} 正在盯着订单",
         "ana_female": "{{name}} 正在盯着订单"
       },
       "wiping": {
-        "helena": "{{name}} 正在把它彻底擦干净",
-        "helena_female": "{{name}} 正在把它彻底擦干净",
+        "davi": "{{name}} 正在把它彻底擦干净",
+        "davi_female": "{{name}} 正在把它彻底擦干净",
         "rui": "{{name}} 正在倒垃圾",
         "rui_female": "{{name}} 正在倒垃圾",
         "gil": "{{name}} 正在检查没有留下旧东西",
@@ -19620,14 +19620,14 @@
       "starting": {
         "rui": "{{name}} 正在让它站起来",
         "rui_female": "{{name}} 正在让它站起来",
-        "helena": "{{name}} 正在给引擎预热",
-        "helena_female": "{{name}} 正在给引擎预热",
+        "davi": "{{name}} 正在给引擎预热",
+        "davi_female": "{{name}} 正在给引擎预热",
         "ana": "{{name}} 挥动了发车旗",
         "ana_female": "{{name}} 挥动了发车旗"
       },
       "booting": {
-        "helena": "{{name}} 正在清点全部 {{gb}} GB 内存",
-        "helena_female": "{{name}} 正在清点全部 {{gb}} GB 内存",
+        "davi": "{{name}} 正在清点全部 {{gb}} GB 内存",
+        "davi_female": "{{name}} 正在清点全部 {{gb}} GB 内存",
         "rui": "{{name}} 正在检查每个零件都在",
         "rui_female": "{{name}} 正在检查每个零件都在",
         "ana": "{{name}} 正在让它安心加载",
@@ -19636,14 +19636,14 @@
       "updating": {
         "gil": "{{name}} 正在获取最新更新",
         "gil_female": "{{name}} 正在获取最新更新",
-        "helena": "{{name}} 正在拧紧每一颗螺丝",
-        "helena_female": "{{name}} 正在拧紧每一颗螺丝",
+        "davi": "{{name}} 正在拧紧每一颗螺丝",
+        "davi_female": "{{name}} 正在拧紧每一颗螺丝",
         "ana": "{{name}} 正在逐项核对更新",
         "ana_female": "{{name}} 正在逐项核对更新"
       },
       "restarting": {
-        "helena": "{{name}} 说这次重启很正常",
-        "helena_female": "{{name}} 说这次重启很正常",
+        "davi": "{{name}} 说这次重启很正常",
+        "davi_female": "{{name}} 说这次重启很正常",
         "rui": "{{name}} 正在让更新生效",
         "rui_female": "{{name}} 正在让更新生效",
         "ana": "{{name}} 正在数到十",
@@ -19670,12 +19670,12 @@
         "ana_female": "{{name}} 正在寻找应用",
         "gil": "{{name}} 正在拆开应用包",
         "gil_female": "{{name}} 正在拆开应用包",
-        "helena": "{{name}} 正在摆好工具",
-        "helena_female": "{{name}} 正在摆好工具"
+        "davi": "{{name}} 正在摆好工具",
+        "davi_female": "{{name}} 正在摆好工具"
       },
       "connecting": {
-        "helena": "{{name}} 正在等它第一声问候",
-        "helena_female": "{{name}} 正在等它第一声问候",
+        "davi": "{{name}} 正在等它第一声问候",
+        "davi_female": "{{name}} 正在等它第一声问候",
         "rui": "{{name}} 正在交出钥匙",
         "rui_female": "{{name}} 正在交出钥匙",
         "gil": "{{name}} 正在把它介绍给团队",
@@ -20653,12 +20653,11 @@
       "templatesPersonal": "查看现成的智能体"
     },
     "business": {
-      "agency": "代理公司",
-      "store": "网店",
-      "clinic": "诊所或工作室",
-      "software": "软件与应用",
-      "support": "客户服务",
-      "services": "服务事务所",
+      "cleaning": "住宅清洁",
+      "painting": "油漆",
+      "roofing": "屋顶",
+      "landscaping": "园林和草坪养护",
+      "remodeling": "装修和维修",
       "other": "其他"
     },
     "step": "第 {{step}} 个问题，共 {{of}} 个",
@@ -20896,35 +20895,30 @@
       "sub": "客户、发票和日程",
       "desc": "适合自己照顾客户和收支的自由职业者。"
     },
-    "agency": {
-      "name": "营销代理公司",
-      "sub": "内容、广告和客户服务",
-      "desc": "适合为客户运营内容和推广活动的代理公司。"
+    "cleaning": {
+      "name": "住宅清洁",
+      "sub": "定期上门、施工队和评价",
+      "desc": "适合有固定客户、施工队在外奔走的清洁公司。"
     },
-    "store": {
-      "name": "网店",
-      "sub": "订单、库存和社交媒体",
-      "desc": "适合在线销售并回复买家的网店。"
+    "painting": {
+      "name": "油漆",
+      "sub": "报价、施工队和发票",
+      "desc": "适合每单都要报价、再派施工队去做的油漆公司。"
     },
-    "clinic": {
-      "name": "诊所或工作室",
-      "sub": "WhatsApp 预约、收费和复诊",
-      "desc": "适合为患者预约并跟进复诊的诊所或工作室。"
+    "roofing": {
+      "name": "屋顶",
+      "sub": "勘察、报价和收款",
+      "desc": "适合每单都要勘察、报价和收款的屋顶公司。"
     },
-    "software": {
-      "name": "软件与应用",
-      "sub": "客户服务、收款和代码",
-      "desc": "适合销售软件并照顾自有客户的公司。"
+    "landscaping": {
+      "name": "园林和草坪养护",
+      "sub": "每周路线、发票和评价",
+      "desc": "适合每周上门的园林或草坪养护公司。"
     },
-    "support": {
-      "name": "客户服务",
-      "sub": "客户队列和回答库",
-      "desc": "适合每天要回复大量客户的团队。"
-    },
-    "services": {
-      "name": "服务事务所",
-      "sub": "会计、法律、咨询",
-      "desc": "适合为客户预约、发送方案并收费的事务所。"
+    "remodeling": {
+      "name": "装修和维修",
+      "sub": "报价、英语客户和发票",
+      "desc": "适合要报价、和客户沟通并按阶段收款的装修或维修公司。"
     },
     "hello": {
       "lodi": {
@@ -20939,61 +20933,47 @@
       }
     },
     "agents": {
-      "luana": {
-        "role": "客户服务",
-        "line": "在 WhatsApp 和邮件上回复客户。不知道时会叫你。",
-        "routine": "汇总还没回复的内容",
-        "task": "为这条客户消息写一条回复：",
-        "hello": "你好，{{first}}。通过 WhatsApp 来联系的人交给我吧。"
-      },
-      "teo": {
-        "role": "收款",
-        "line": "提醒逾期付款的人，并在你同意后发送催款。",
-        "routine": "列出付款逾期的人",
-        "task": "给以下对象写一条友好的付款提醒：",
-        "hello": "你好，我负责收款，只在你同意后才发提醒。"
-      },
-      "helena": {
-        "role": "开发",
-        "line": "修复客户报告的 bug 并提交 PR。",
-        "routine": "列出新的 bug",
-        "task": "告诉我该从哪里开始排查这个 bug：",
-        "hello": "嗨，把收到的 bug 交给我，我来排查并提交 PR。"
-      },
-      "gil": {
-        "role": "内容",
-        "line": "按公司的语气写帖子和脚本，在你同意后排期发布。",
-        "routine": "提出本周的帖子",
-        "task": "围绕以下主题提出本周的三篇帖子：",
-        "hello": "大家好，本周的帖子交给我。"
-      },
       "ana": {
-        "role": "销售",
-        "line": "跟进所有询价的人并撰写方案。",
-        "routine": "列出询价后没有得到回复的人",
-        "task": "为这个需求写一份简短报价：",
-        "hello": "你好，{{first}}。每个来询价的人都不会没有回音。"
+        "role": "报价",
+        "line": "根据照片和尺寸写报价，并跟进没有回复的报价。",
+        "routine": "列出没有回复的报价",
+        "task": "根据这些照片和尺寸写一份报价：",
+        "hello": "你好，{{first}}。把照片和尺寸发给我，我来写报价。"
       },
       "rui": {
         "role": "日程",
-        "line": "预约、确认和改约，并在前一天提醒客户。",
-        "routine": "确认明天的预约",
-        "task": "整理明天的这些时间安排：",
-        "hello": "你好，日程由我来管，我会在前一天提醒客户。"
+        "line": "安排上门时间，前一天确认，客户要求时改期。",
+        "routine": "确认明天的上门",
+        "task": "为这次上门找一个时间：",
+        "hello": "你好，排程由我来管，每次上门我都会在前一天确认。"
       },
-      "tiago": {
-        "role": "订单",
-        "line": "跟踪订单和库存，提醒快用完的东西。",
-        "routine": "提醒库存里快用完的东西",
-        "task": "列出这些订单还有哪些事要做：",
-        "hello": "我来了。我会盯着订单，库存不足时告诉你。"
+      "lia": {
+        "role": "英语",
+        "line": "帮你用清楚的英语给客户写信，并解释客户写了什么。",
+        "routine": "列出等待回复的客户消息",
+        "task": "把这条给客户的回复写成英语：",
+        "hello": "你好，{{first}}。告诉我你想说什么，我来写成英语。"
       },
-      "sofia": {
-        "role": "回答库",
-        "line": "让回答库与团队的回答保持一致。",
-        "routine": "用本周的回答更新回答库",
-        "task": "写出这些客户问题的答案：",
-        "hello": "嗨，我会根据团队的回答，让答案库保持最新。"
+      "teo": {
+        "role": "收款",
+        "line": "活儿做完就发发票，并在你同意后提醒逾期付款的人。",
+        "routine": "列出逾期的发票",
+        "task": "为这单活儿写发票：",
+        "hello": "你好，发票由我负责，只在你同意后才发提醒。"
+      },
+      "gil": {
+        "role": "评价",
+        "line": "请满意的客户在 Google 上留评价，并为新评价起草回复。",
+        "routine": "列出今天完工的活儿，以便请求评价",
+        "task": "为这位客户写一条评价请求：",
+        "hello": "大家好，我会请每位满意的客户在 Google 上留评价。"
+      },
+      "davi": {
+        "role": "施工队",
+        "line": "把当天的活儿、地址和时间发给每个施工队，有人迟到时告诉你。",
+        "routine": "把当天的活儿发给每个施工队",
+        "task": "把这些活儿分给各个施工队：",
+        "hello": "你好，{{first}}。每个施工队都会在一天开始前从我这里拿到活儿和地址。"
       },
       "marina": {
         "role": "日程和提醒",
@@ -21051,14 +21031,12 @@
       }
     },
     "channels": {
-      "luana": "support",
-      "teo": "billing",
-      "helena": "eng",
-      "gil": "content",
-      "ana": "sales",
+      "ana": "quotes",
       "rui": "schedule",
-      "tiago": "orders",
-      "sofia": "support"
+      "lia": "customers",
+      "teo": "billing",
+      "gil": "reviews",
+      "davi": "crew"
     },
     "skills": {
       "voice": {

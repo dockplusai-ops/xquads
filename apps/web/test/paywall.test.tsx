@@ -409,7 +409,7 @@ describe("Primeira tarefa on a hold", () => {
     weekly: null,
     approvals: "",
     invite: ["bia@acme.com"],
-    template: "store",
+    template: "cleaning",
   } as unknown as TeamProposalCard["params"];
   const created: Partial<TeamProposalCard> = {
     kind: "team_proposal",

@@ -169,11 +169,11 @@ export function YouStep({ me, onDone }: { me: Me; onDone: () => void }) {
 
 /** Each area's chip leads with its icon, chosen or not (the chip darkens when chosen). */
 const AREA_ICONS: Record<WorkArea, IconName> = {
-  dev: "code",
-  marketing: "bulb",
-  sales: "chart",
+  owner: "crown",
+  sales: "document",
+  office: "calendar",
+  field: "members",
   finance: "wallet",
-  ops: "cog",
-  support: "message",
+  marketing: "bulb",
   other: "more",
 };

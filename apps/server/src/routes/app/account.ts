@@ -1,6 +1,6 @@
 import { retryInSeconds } from "@agenteschat/adapters";
 import { isLoopback } from "@agenteschat/client/lib/server";
-import { isWorkAreaAnswer, WORK_AREA_ANSWERS } from "@agenteschat/client/lib/work-area";
+import { WORK_AREA_ANSWERS, workAreaOf } from "@agenteschat/client/lib/work-area";
 import {
   acceptInvitation,
   accountDeletionPlan,
@@ -264,7 +264,7 @@ export function accountRoutes(deps: AppDeps) {
         confirmsOnThisMac: onThisMac,
         locale: account.locale,
         localeAuto: account.localeAuto,
-        workArea: isWorkAreaAnswer(account.workArea) ? account.workArea : null,
+        workArea: workAreaOf(account.workArea),
         canCreateWorkspace: creates && !account.deletionDueAt,
         ...(account.deletionDueAt
           ? {

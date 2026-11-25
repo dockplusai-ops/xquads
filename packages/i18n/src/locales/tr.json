@@ -984,17 +984,17 @@
         "build": "Avatar oluştur",
         "edit": "Avatarı düzenle",
         "upload": "Fotoğraf yükle",
-        "area": "Ne iş yapıyorsun?",
+        "area": "Rolün ne?",
         "areaHint": "İsteğe bağlı. Sadece xquads'ı kimlerin kullandığını anlamak için."
       },
       "area": {
         "options": {
-          "dev": "Geliştirme",
+          "owner": "Sahip veya yönetici",
+          "sales": "Satış ve teklifler",
+          "office": "Ofis ve takvim",
+          "field": "Saha ve ekipler",
+          "finance": "Faturalar ve finans",
           "marketing": "Pazarlama",
-          "sales": "Satış",
-          "finance": "Finans",
-          "ops": "Operasyon",
-          "support": "Müşteri desteği",
           "other": "Başka bir şey"
         }
       },
@@ -20038,32 +20038,32 @@
         "gil": "{{name}} tamamen bizim olduğunu kontrol ediyor"
       },
       "ordering": {
-        "helena": "{{name}} {{gb}} GB bellek istedi",
+        "davi": "{{name}} {{gb}} GB bellek istedi",
         "rui": "{{name}} yepyeni bir tane sipariş etti",
         "ana": "{{name}} siparişi takip ediyor"
       },
       "wiping": {
-        "helena": "{{name}} güzelce temizliyor",
+        "davi": "{{name}} güzelce temizliyor",
         "rui": "{{name}} çöpü dışarı çıkarıyor",
         "gil": "{{name}} eskiden bir şey kalmadığını kontrol ediyor"
       },
       "starting": {
         "rui": "{{name}} onu ayağa kaldırıyor",
-        "helena": "{{name}} motorları ısıtıyor",
+        "davi": "{{name}} motorları ısıtıyor",
         "ana": "{{name}} başlama bayrağını salladı"
       },
       "booting": {
-        "helena": "{{name}} {{gb}} GB belleğin hepsini sayıyor",
+        "davi": "{{name}} {{gb}} GB belleğin hepsini sayıyor",
         "rui": "{{name}} her parçanın yerinde olduğunu kontrol ediyor",
         "ana": "{{name}} yüklenmesini sakince bekliyor"
       },
       "updating": {
         "gil": "{{name}} en son güncellemeleri getiriyor",
-        "helena": "{{name}} her vidayı sıkıyor",
+        "davi": "{{name}} her vidayı sıkıyor",
         "ana": "{{name}} güncellemeleri tek tek işaretliyor"
       },
       "restarting": {
-        "helena": "{{name}} bu yeniden başlatmanın normal olduğunu söylüyor",
+        "davi": "{{name}} bu yeniden başlatmanın normal olduğunu söylüyor",
         "rui": "{{name}} güncellemenin oturmasını sağlıyor",
         "ana": "{{name}} ona kadar sayıyor"
       },
@@ -20080,10 +20080,10 @@
       "installing": {
         "ana": "{{name}} uygulamaları arıyor",
         "gil": "{{name}} uygulamaları paketlerinden çıkarıyor",
-        "helena": "{{name}} araçları diziyor"
+        "davi": "{{name}} araçları diziyor"
       },
       "connecting": {
-        "helena": "{{name}} ilk merhabasını bekliyor",
+        "davi": "{{name}} ilk merhabasını bekliyor",
         "rui": "{{name}} anahtarları teslim ediyor",
         "gil": "{{name}} onu ekiple tanıştırıyor"
       }
@@ -21061,12 +21061,11 @@
       "templatesPersonal": "Hazır ajanları gör"
     },
     "business": {
-      "agency": "Ajans",
-      "store": "Online mağaza",
-      "clinic": "Klinik veya muayenehane",
-      "software": "Yazılım ve uygulamalar",
-      "support": "Müşteri hizmetleri",
-      "services": "Hizmet ofisi",
+      "cleaning": "Ev temizliği",
+      "painting": "Boya",
+      "roofing": "Çatı",
+      "landscaping": "Bahçe ve çim bakımı",
+      "remodeling": "Tadilat ve tamir",
       "other": "Başka bir şey"
     },
     "step": "Soru {{step}}/{{of}}",
@@ -21308,35 +21307,30 @@
       "sub": "Müşteriler, faturalar ve takvim",
       "desc": "Kendi müşterileriyle ve parasıyla kendisi ilgilenen serbest çalışanlar için."
     },
-    "agency": {
-      "name": "Pazarlama ajansı",
-      "sub": "İçerik, reklam ve müşteri hizmetleri",
-      "desc": "Müşterilerinin içeriğini ve kampanyalarını yöneten bir ajans için."
+    "cleaning": {
+      "name": "Ev temizliği",
+      "sub": "Düzenli ziyaretler, ekipler ve yorumlar",
+      "desc": "Düzenli müşterileri ve sahada ekipleri olan bir temizlik şirketi için."
     },
-    "store": {
-      "name": "Online mağaza",
-      "sub": "Siparişler, stok ve sosyal medya",
-      "desc": "Online satış yapan ve alıcılarına yanıt veren bir mağaza için."
+    "painting": {
+      "name": "Boya",
+      "sub": "Teklifler, ekipler ve faturalar",
+      "desc": "Her işe teklif veren ve işi yapmaya bir ekip gönderen bir boya şirketi için."
     },
-    "clinic": {
-      "name": "Klinik veya muayenehane",
-      "sub": "WhatsApp ile randevu, ödeme ve kontrol",
-      "desc": "Hasta randevusu veren ve kontrolleri takip eden bir klinik veya muayenehane için."
+    "roofing": {
+      "name": "Çatı",
+      "sub": "Keşifler, teklifler ve ödemeler",
+      "desc": "Her işte keşif yapan, teklif veren ve ödemeyi alan bir çatı şirketi için."
     },
-    "software": {
-      "name": "Yazılım ve uygulamalar",
-      "sub": "Müşteri hizmetleri, ödemeler ve kod",
-      "desc": "Yazılım satan ve kendi müşterileriyle ilgilenen bir şirket için."
+    "landscaping": {
+      "name": "Bahçe ve çim bakımı",
+      "sub": "Haftalık rotalar, faturalar ve yorumlar",
+      "desc": "Her hafta ziyaret yapan bir bahçe veya çim bakımı şirketi için."
     },
-    "support": {
-      "name": "Müşteri hizmetleri",
-      "sub": "Müşteri kuyruğu ve yanıt tabanı",
-      "desc": "Her gün çok sayıda müşteriye yanıt veren bir ekip için."
-    },
-    "services": {
-      "name": "Hizmet ofisi",
-      "sub": "Muhasebe, hukuk, danışmanlık",
-      "desc": "Müşterilere randevu veren, teklif gönderen ve fatura kesen bir ofis için."
+    "remodeling": {
+      "name": "Tadilat ve tamir",
+      "sub": "Teklifler, İngilizce konuşan müşteriler ve faturalar",
+      "desc": "Teklif veren, müşteriyle konuşan ve her aşamayı faturalayan bir tadilat veya tamir şirketi için."
     },
     "hello": {
       "lodi": {
@@ -21351,61 +21345,47 @@
       }
     },
     "agents": {
-      "luana": {
-        "role": "Müşteri hizmetleri",
-        "line": "Müşterilere WhatsApp ve e-postadan yanıt verir. Bilmediğinde seni çağırır.",
-        "routine": "Yanıtsız kalanları özetle",
-        "task": "Bu müşteri mesajına bir yanıt yaz:",
-        "hello": "Merhaba {{first}}. WhatsApp'tan yazanları bana bırak."
-      },
-      "teo": {
-        "role": "Tahsilat",
-        "line": "Ödemesi gecikenlere hatırlatır ve onayından sonra ödeme hatırlatmasını gönderir.",
-        "routine": "Ödemesi gecikenleri listele",
-        "task": "Şu kişi için nazik bir ödeme hatırlatması yaz:",
-        "hello": "Merhaba. Ödemeleri ben takip ederim ve hatırlatmayı yalnızca senin onayından sonra gönderirim."
-      },
-      "helena": {
-        "role": "Dev",
-        "line": "Müşterilerin bildirdiği hataları düzeltir ve PR açar.",
-        "routine": "Yeni hataları listele",
-        "task": "Bu hatayı araştırmaya nereden başlayacağımı söyle:",
-        "hello": "Selam. Gelen hataları bana gönderin, inceleyip PR'ı açarım."
-      },
-      "gil": {
-        "role": "İçerik",
-        "line": "Şirketin üslubuyla gönderi ve senaryo yazar, onayından sonra planlar.",
-        "routine": "Haftanın gönderilerini öner",
-        "task": "Şu konuda bu hafta için üç gönderi öner:",
-        "hello": "Herkese merhaba. Bu haftanın gönderileri bende."
-      },
       "ana": {
-        "role": "Satış",
-        "line": "Teklif isteyen herkesi takip eder ve teklifleri yazar.",
-        "routine": "Teklif isteyip yanıt alamayanları listele",
-        "task": "Bu talep için kısa bir teklif yaz:",
-        "hello": "Merhaba {{first}}. Teklif isteyen kimse cevapsız kalmayacak."
+        "role": "Teklifler",
+        "line": "Fotoğraf ve ölçülerden teklif yazar ve cevapsız kalanların peşine düşer.",
+        "routine": "Cevapsız teklifleri listele",
+        "task": "Bu fotoğraf ve ölçülerle bir teklif yaz:",
+        "hello": "Merhaba {{first}}. Fotoğrafları ve ölçüleri gönder, teklifi ben yazayım."
       },
       "rui": {
         "role": "Randevu",
-        "line": "Randevu verir, onaylar, değiştirir ve müşterilere bir gün önce hatırlatır.",
-        "routine": "Yarının randevularını onayla",
-        "task": "Yarının şu saatlerini düzenle:",
-        "hello": "Merhaba. Ajanda bende, müşterilere bir gün önceden hatırlatırım."
+        "line": "Ziyaretleri planlar, bir gün önce onaylar ve müşteri isterse değiştirir.",
+        "routine": "Yarının ziyaretlerini onayla",
+        "task": "Bu ziyaret için bir saat bul:",
+        "hello": "Merhaba. Takvim bende, her ziyareti bir gün önceden onaylarım."
       },
-      "tiago": {
-        "role": "Siparişler",
-        "line": "Siparişleri ve stoku takip eder, biten şeyleri haber verir.",
-        "routine": "Stokta bitmek üzere olanları haber ver",
-        "task": "Bu siparişlerde yapılacak işleri listele:",
-        "hello": "Geldim. Siparişleri takip eder, stok azalınca haber veririm."
+      "lia": {
+        "role": "İngilizce",
+        "line": "Müşterilere açık bir İngilizceyle yazmana yardım eder ve yazdıklarını açıklar.",
+        "routine": "Cevap bekleyen müşteri mesajlarını listele",
+        "task": "Müşteriye bu cevabı İngilizce yaz:",
+        "hello": "Merhaba {{first}}. Ne söylemek istediğini anlat, ben İngilizce yazayım."
       },
-      "sofia": {
-        "role": "Yanıt tabanı",
-        "line": "Yanıt tabanını ekibin verdiği yanıtlarla güncel tutar.",
-        "routine": "Tabanı haftanın yanıtlarıyla güncelle",
-        "task": "Bu müşteri sorularının yanıtlarını yaz:",
-        "hello": "Selam. Cevap tabanını ekibin verdiği cevaplarla güncel tutacağım."
+      "teo": {
+        "role": "Tahsilat",
+        "line": "İş bitince faturayı gönderir ve ödemesi gecikenlere onayından sonra hatırlatır.",
+        "routine": "Vadesi geçmiş faturaları listele",
+        "task": "Bu işin faturasını yaz:",
+        "hello": "Merhaba. Faturalar bende ve hatırlatmayı yalnızca senin onayından sonra gönderirim."
+      },
+      "gil": {
+        "role": "Yorumlar",
+        "line": "Memnun müşterilerden Google yorumu ister ve yeni yorumlara cevap taslakları yazar.",
+        "routine": "Yorum istemek için bugün biten işleri listele",
+        "task": "Bu müşteri için bir yorum isteği yaz:",
+        "hello": "Herkese merhaba. Memnun kalan her müşteriden Google yorumu isteyeceğim."
+      },
+      "davi": {
+        "role": "Ekipler",
+        "line": "Her ekibe günün işlerini, adreslerini ve saatlerini gönderir ve biri geç kalınca sana haber verir.",
+        "routine": "Her ekibe günün işlerini gönder",
+        "task": "Bu işleri ekipler arasında paylaştır:",
+        "hello": "Merhaba {{first}}. Her ekip, gün başlamadan işlerini ve adreslerini benden alır."
       },
       "marina": {
         "role": "Takvim ve hatırlatmalar",
@@ -21463,14 +21443,12 @@
       }
     },
     "channels": {
-      "luana": "destek",
-      "teo": "finans",
-      "helena": "eng",
-      "gil": "icerik",
-      "ana": "satis",
+      "ana": "teklifler",
       "rui": "randevu",
-      "tiago": "siparis",
-      "sofia": "destek"
+      "lia": "musteriler",
+      "teo": "finans",
+      "gil": "yorumlar",
+      "davi": "ekipler"
     },
     "skills": {
       "voice": {

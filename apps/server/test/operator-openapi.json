@@ -678,8 +678,8 @@
           },
           "workArea": {
             "type": ["string", "null"],
-            "enum": ["dev", "marketing", "sales", "finance", "ops", "support", "other", "skipped", null],
-            "description": "The person's own area, asked once during the onboarding: `dev`, `marketing`, `sales`, `finance`, `ops`, `support`, `other`, or `skipped`; null until asked (or for an account from before the question)."
+            "enum": ["owner", "sales", "office", "field", "finance", "marketing", "other", "skipped", null],
+            "description": "The person's own area, asked once during the onboarding: `owner`, `sales`, `office`, `field`, `finance`, `marketing`, `other`, or `skipped`; null until asked (or for an account from before the question). An id of an older list reads `other`."
           },
           "orgs": {
             "type": "array",

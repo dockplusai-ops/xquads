@@ -1408,7 +1408,7 @@ export function createFakeHttpApi(state: FakeState): Omit<HttpApi, FakedParts> {
   // their own area already (the onboarding asks it once per account): a test of that screen sets `workArea: null`.
   const meNow = () =>
     state.me &&
-    withPermissions({ ...state.me, user: { locale: "pt-BR", localeAuto: false, workArea: "dev", ...state.me.user } });
+    withPermissions({ ...state.me, user: { locale: "pt-BR", localeAuto: false, workArea: "owner", ...state.me.user } });
   /** What finishing a workspace's onboarding answers, as the server does: where it opens, and `/me` now. */
   const opened = () => ({
     rightHandId: state.agents.find((a) => a.builtin === "right_hand")?.id ?? null,

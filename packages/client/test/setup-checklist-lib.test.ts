@@ -344,10 +344,11 @@ describe("the right hand's first run (ADR 0155 §6, ADR 0162)", () => {
 
   test("the apps a team made from a template would use, the most suggested first", () => {
     const a = (handle: string) => ({ handle, setup: null });
-    expect(teamRole(a("luana-2"))).toBe("support");
+    expect(teamRole(a("ana-2"))).toBe("quotes");
     expect(teamRole({ handle: "zed", setup: { role: "dev", done: [] } })).toBe("dev");
     expect(teamRole(a("zed"))).toBeNull();
-    expect(firstRunApps([a("luana"), a("sofia")]).slice(0, 1)).toEqual(["intercom"]);
+    expect(firstRunApps([a("teo"), a("rui")]).slice(0, 1)).toEqual(["twilio"]);
+    expect(teamRole(a("davi"))).toBe("crew");
     expect(firstRunApps([a("zed")])).toEqual([]);
     // A personal template's agents (ADR 0159): a person's calendar, lists and files.
     expect(teamRole(a("marina"))).toBeNull();
@@ -373,16 +374,16 @@ describe("the right hand's first run (ADR 0155 §6, ADR 0162)", () => {
     });
     const defs = [
       def("gmail"),
-      def("intercom"),
+      def("twilio"),
       def("apikey", { auth: ["api_key"] }),
       def("off", { oauthConfigured: false }),
       def("later", { available: false }),
       def("vendor", { soon: true }),
       def("notion"),
     ];
-    const list = firstRunAppList(defs, new Set(["notion"]), [{ handle: "luana", setup: null }]);
+    const list = firstRunAppList(defs, new Set(["notion"]), [{ handle: "teo", setup: null }]);
     expect(list.map((x) => [x.def.id, x.suggested])).toEqual([
-      ["intercom", true],
+      ["twilio", true],
       ["gmail", false],
     ]);
     expect(

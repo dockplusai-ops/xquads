@@ -1,4 +1,4 @@
-import { isWorkAreaAnswer, WORK_AREA_ANSWERS } from "@agenteschat/client/lib/work-area";
+import { WORK_AREA_ANSWERS, workAreaOf } from "@agenteschat/client/lib/work-area";
 import { eq, schema } from "@agenteschat/db";
 import {
   liveProcesses,
@@ -250,7 +250,7 @@ const User = z
     blockedReason: z.string().nullable(),
     workArea: z.enum(WORK_AREA_ANSWERS).nullable().openapi({
       description:
-        "The person's own area, asked once during the onboarding: `dev`, `marketing`, `sales`, `finance`, `ops`, `support`, `other`, or `skipped`; null until asked (or for an account from before the question).",
+        "The person's own area, asked once during the onboarding: `owner`, `sales`, `office`, `field`, `finance`, `marketing`, `other`, or `skipped`; null until asked (or for an account from before the question). An id of an older list reads `other`.",
     }),
     orgs: z.array(
       z.object({
@@ -475,7 +475,7 @@ export function registerOperatorOrgs(
           ...user,
           createdAt: user.createdAt.toISOString(),
           blockedAt: iso(user.blockedAt),
-          workArea: isWorkAreaAnswer(user.workArea) ? user.workArea : null,
+          workArea: workAreaOf(user.workArea),
           orgs: user.orgs.map((o) => ({ ...o, joinedAt: o.joinedAt.toISOString(), lastSeenAt: iso(o.lastSeenAt) })),
           sessions: user.sessions.map((s) => ({ ...s, createdAt: s.createdAt.toISOString() })),
         },

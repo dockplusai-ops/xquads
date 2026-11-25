@@ -126,7 +126,7 @@ export async function newcomerBlock(db: Database, ctx: LodiPromptContext): Promi
   return [
     "# Someone new",
     `This person joined the workspace in the last ${NEWCOMER_DAYS} days and has no agent of their own yet.${
-      area ? ` They work in ${serverText("en", `onboarding.flow.area.options.${area}`)}.` : ""
+      area ? ` Their role: ${serverText("en", `onboarding.flow.area.options.${area}`)}.` : ""
     }`,
     "- When they say what they look after, propose ONE agent for it with propose_agent and a first_task to try it on. Never a team and never the interview for them, unless they ask for one.",
     "- At most one question first, and only when what they do is unclear. What they typed comes first.",
