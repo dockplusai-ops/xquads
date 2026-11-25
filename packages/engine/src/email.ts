@@ -61,7 +61,7 @@ const { users, organizations, organizationInvitations, agents, approvals, channe
  */
 const SENDER_NAME = "xquads";
 
-/** The sender when `EMAIL_FROM` is unset, at this server's host (`loadConfig` sets the Cloud's: ping@agentes.chat). */
+/** The sender when `EMAIL_FROM` is unset, at this server's host (`loadConfig` sets the Cloud's: ping@xquads.com). */
 export const defaultEmailFrom = (publicUrl: string) => `${SENDER_NAME} <ping@${new URL(publicUrl).hostname}>`;
 
 /** A stored or chosen language as an email locale: any registry language ("pt-PT" reads pt-BR), else English. */

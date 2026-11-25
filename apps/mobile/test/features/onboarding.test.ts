@@ -63,7 +63,7 @@ test("a step that failed says why the server refused it, else that it didn't sav
   const refused = (params?: Record<string, unknown>) =>
     new ApiError(403, "org.create_refused", "You can't create a workspace right now", params);
   expect(stepFailedText(pt, refused({ cloud: true }))).toBe(
-    "Você não pode criar um workspace enquanto a sua conta ou um dos seus workspaces estiver com restrição. Para contestar, escreva para legal@agentes.chat.",
+    "Você não pode criar um workspace enquanto a sua conta ou um dos seus workspaces estiver com restrição. Para contestar, escreva para legal@xquads.com.",
   );
   expect(stepFailedText(pt, refused())).toBe("Você não pode criar um workspace agora.");
   const inviteOnly = new ApiError(403, "org.create_invite_only", "New workspaces need an invitation for now");

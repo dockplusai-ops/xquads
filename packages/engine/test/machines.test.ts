@@ -1288,7 +1288,7 @@ describe("tools on a connected machine", () => {
         id: f.agent.id,
         handle: "dev",
         name: "Dev",
-        ...(r.op === "exec" ? { coAuthors: ["Co-authored-by: Dev <noreply@agentes.chat>"] } : {}),
+        ...(r.op === "exec" ? { coAuthors: ["Co-authored-by: Dev <noreply@xquads.com>"] } : {}),
       });
     }
     // A person asked to turn it off: the next command goes without it.

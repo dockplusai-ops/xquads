@@ -1774,7 +1774,7 @@ test.if(posix)(
   "other lines for the agent's commits (turned off, the agent renamed) restart the process, resumed",
   async () => {
     const { spawns, turn } = setup();
-    const nick = { agent: { ...AGENT, coAuthors: ["Co-authored-by: Nick <noreply@agentes.chat>"] } };
+    const nick = { agent: { ...AGENT, coAuthors: ["Co-authored-by: Nick <noreply@xquads.com>"] } };
     await turn(1, "first", {}, undefined, nick);
     await turn(2, "second", {}, undefined, nick);
     expect(spawns()).toHaveLength(1);

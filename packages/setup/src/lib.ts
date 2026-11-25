@@ -12,7 +12,7 @@ export const INSTALL_URL = "https://agents.xquads.com/install";
 /** Every instance serves its own build's compose file there; xquads' follows main, so it can be ahead of `:latest`. */
 export const COMPOSE_URL = `${INSTALL_URL}/docker-compose.yml`;
 /** `INSTALL_DOCS_URL` in @agenteschat/i18n, as text: this MIT package bundles none of the AGPL workspace. */
-export const GUIDE_URL = "https://agentes.chat/docs/install-on-a-server";
+export const GUIDE_URL = "https://agents.xquads.com/help/install-on-a-server?lang=en";
 export const ISSUES_URL = "https://github.com/dockplusai-ops/xquads/issues";
 export const IMAGE = "ghcr.io/dockplusai-ops/xquads:latest";
 /** The compose file's Tailscale serve config is inline (`configs.content`), which Compose reads from 2.23.1 on. */

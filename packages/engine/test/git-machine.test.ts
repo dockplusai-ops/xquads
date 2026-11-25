@@ -380,7 +380,7 @@ describe("git on a connected machine through the proxy (ADR 0024 addendum)", () 
     // Where it starts goes in the turn's prompt, with the agent's own line on its commits (ADR 0156): the system text
     // stays the same whichever checkout a turn is about.
     expect(named?.start).toBe(
-      `You start in ${FOLDER}/repos/acme/web.\nCommits you make this turn: end each commit message with the line Co-authored-by: Dev <noreply@agentes.chat>`,
+      `You start in ${FOLDER}/repos/acme/web.\nCommits you make this turn: end each commit message with the line Co-authored-by: Dev <noreply@xquads.com>`,
     );
     expect(named?.prompt).not.toContain("beta/old");
     // Nothing named: the agent's first repository.
@@ -799,7 +799,7 @@ describe("agents' commits and the GitHub App (ADR 0156)", () => {
       session: { machineId: w.paired.machineId, cwd: "" },
     };
     w.answers.fn = () => [];
-    const dev = "Co-authored-by: Dev <noreply@agentes.chat>";
+    const dev = "Co-authored-by: Dev <noreply@xquads.com>";
     const own = `Commits you make this turn: end each commit message with the line ${dev}`;
     // The agent's own line turned off and no GitHub linked: nothing to say.
     await setAgentCoAuthor(f.db, f.org.id, false);

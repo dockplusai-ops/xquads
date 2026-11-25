@@ -17,7 +17,7 @@
     "url": "git+https://github.com/dockplusai-ops/xquads.git",
     "directory": "packages/setup"
   },
-  "homepage": "https://agentes.chat/docs/install-on-a-server",
+  "homepage": "https://agents.xquads.com/help/install-on-a-server?lang=en",
   "bugs": {
     "url": "https://github.com/dockplusai-ops/xquads/issues"
   },

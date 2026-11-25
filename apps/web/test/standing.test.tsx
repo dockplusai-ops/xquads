@@ -252,7 +252,7 @@ describe("a billing hold (ADR 0079): its own words, and its fix for whoever runs
   });
 });
 
-const CONTEST = "Para contestar, escreva para legal@agentes.chat.";
+const CONTEST = "Para contestar, escreva para legal@xquads.com.";
 
 describe("on xquads Cloud: what it is, the Terms section and how to contest it", () => {
   test("the automatic hold reads the review line, an operator's reason how to contest it, a silent hold neither", async () => {

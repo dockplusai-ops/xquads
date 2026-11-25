@@ -145,7 +145,7 @@ describe("Jev's key in Configurações › IA e uso", () => {
     const section = screen().getByRole("region", { name: "Quem escolhe os agentes" });
     expect(section.textContent).toContain("Cada plano escolhe só nas mensagens de quem o conectou.");
     expect(within(section).getByRole("link", { name: "Como os agentes são escolhidos" }).getAttribute("href")).toBe(
-      "https://agentes.chat/pt/docs/who-answers",
+      "https://agents.xquads.com/help/who-answers?lang=pt-BR",
     );
     expect(screen().queryByRole("region", { name: "Jev" })).toBeNull();
     expect(document.body.textContent).not.toMatch(/jev|typesafe/i);
@@ -185,7 +185,7 @@ describe("Jev's key in Configurações › IA e uso", () => {
     ])
       expect(card().textContent).toContain(why);
     expect(within(card()).getByRole("link", { name: "Como o Jev funciona" }).getAttribute("href")).toBe(
-      "https://agentes.chat/pt/docs/jev",
+      "https://agents.xquads.com/help/jev?lang=pt-BR",
     );
     expect(within(card()).queryByLabelText("Cole aqui")).toBeNull();
 

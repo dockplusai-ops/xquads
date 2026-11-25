@@ -3,7 +3,7 @@
 # hours from then), a pg_dump of the database to an S3-compatible bucket, deleting dumps older than
 # BACKUP_RETENTION_DAYS (14 by default). With BACKUP_AGE_RECIPIENT set, an age public key, the dump is
 # encrypted to it before it leaves the server, and the bucket alone is not enough to read it. Settings
-# and the restore: https://agentes.chat/docs/install-on-a-server#backups
+# and the restore: https://agents.xquads.com/help/install-on-a-server?lang=en#backups
 #   backup.sh             the schedule (what the service runs)
 #   backup.sh now         one dump, right away
 #   backup.sh list        the dumps in the bucket
@@ -11,7 +11,7 @@
 set -eu
 
 if [ -z "${S3_BACKUP_BUCKET:-}" ]; then
-  echo "backup: off, S3_BACKUP_BUCKET is not set (https://agentes.chat/docs/install-on-a-server#backups)" >&2
+  echo "backup: off, S3_BACKUP_BUCKET is not set (https://agents.xquads.com/help/install-on-a-server?lang=en#backups)" >&2
   # The service idles instead of exiting, which restart: unless-stopped would turn into a loop.
   [ "$#" -gt 0 ] || exec sleep infinity
   exit 1

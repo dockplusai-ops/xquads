@@ -200,10 +200,10 @@ describe("refusals in the phone's words", () => {
     expect(refusalText(en, { status: 403, code: "ACCOUNT_BLOCKED" })).toBe(en("auth.accountBlocked"));
     // On agentes.chat Cloud: the block's kind and how to contest it, never its reason.
     expect(refusalText(en, { status: 403, code: "ACCOUNT_BLOCKED", kind: "abuse", cloud: true })).toBe(
-      "This account is blocked. Our checks linked it to an account closed for abuse (Terms, section 5). To contest it, write to legal@agentes.chat.",
+      "This account is blocked. Our checks linked it to an account closed for abuse (Terms, section 5). To contest it, write to legal@xquads.com.",
     );
     expect(refusalText(en, { status: 403, code: "ACCOUNT_BLOCKED", kind: "legal", cloud: true })).toBe(
-      "This account is blocked while we keep its data for a legal matter. To ask about it, write to legal@agentes.chat.",
+      "This account is blocked while we keep its data for a legal matter. To ask about it, write to legal@xquads.com.",
     );
     expect(refusalText(en, { status: 500, code: "internal" })).toBe("Something went wrong. Try again.");
     expect(failureText(en, new TypeError("Network request failed"))).toBe(en("mobile.auth.errors.network"));
@@ -244,10 +244,10 @@ describe("refusals in the phone's words", () => {
     // Apple's native sign-in gets the server's answer itself.
     const blocked = "ACCOUNT_BLOCKED";
     expect(socialRefusalText(en, { code: blocked, kind: "abuse", cloud: true }, true)).toBe(
-      "This account is blocked. Our checks linked it to an account closed for abuse (Terms, section 5). To contest it, write to legal@agentes.chat.",
+      "This account is blocked. Our checks linked it to an account closed for abuse (Terms, section 5). To contest it, write to legal@xquads.com.",
     );
     expect(socialRefusalText(en, { code: blocked, kind: "other", cloud: true }, true)).toBe(
-      "This account can't sign in. To contest it, write to legal@agentes.chat.",
+      "This account can't sign in. To contest it, write to legal@xquads.com.",
     );
     expect(socialRefusalText(en, { code: blocked }, true)).toBe(en("auth.accountBlocked"));
     expect(socialRefusalText(en, { code: "INVALID_TOKEN" }, true)).toBe("Couldn't sign you in right now. Try again.");

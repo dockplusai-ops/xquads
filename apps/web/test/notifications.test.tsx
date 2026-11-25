@@ -981,7 +981,7 @@ describe("what the workspace itself tells: nobody's face, its own", () => {
     await go(seed([held]));
     expect(row("n-held").querySelector(".nt-what")?.textContent).toBe("Ada está em pausa");
     const line =
-      "Este agente está pausado. As nossas regras de rede viram sinais de abuso no tráfego dele (Termos, seção 5). Para contestar, escreva para legal@agentes.chat.";
+      "Este agente está pausado. As nossas regras de rede viram sinais de abuso no tráfego dele (Termos, seção 5). Para contestar, escreva para legal@xquads.com.";
     expect(row("n-held").querySelector(".ib-row__sub")?.textContent).toBe(line);
     // How to contest it is never cut off: the row keeps one line, the open item says it whole.
     expect(read().querySelector(".ib-read__say")?.textContent).toBe(line);
@@ -992,7 +992,7 @@ describe("what the workspace itself tells: nobody's face, its own", () => {
   });
 
   test("the workspace held or suspended on agentes.chat Cloud reads as the restriction, never 'review'", async () => {
-    const contest = "Para contestar, escreva para legal@agentes.chat.";
+    const contest = "Para contestar, escreva para legal@xquads.com.";
     const standing = (id: string, latest: AppNotification["latest"]) =>
       notification({ id, kind: "org_standing", latest, updatedAt: ago(2) });
     await go(

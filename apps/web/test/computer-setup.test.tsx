@@ -400,7 +400,7 @@ describe("Configurações → Computadores: the workspace's own computer", () =>
     expect(document.body.textContent).not.toContain("plano de IA");
     const about = screen().getByRole("link", { name: "Sobre este computador" });
     const url = new URL(about.getAttribute("href") ?? "");
-    expect(url.href).toBe("https://agentes.chat/pt/docs/workspace-computer");
+    expect(url.href).toBe("https://agents.xquads.com/help/workspace-computer?lang=pt-BR");
     expect(about.className).toBe("ac-link ac-link--muted");
     expect(about.getAttribute("rel")).toBe("noopener noreferrer");
     const links = [...document.querySelectorAll("main a, .settings__body a")];

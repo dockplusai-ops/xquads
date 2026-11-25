@@ -18,9 +18,12 @@ const go = async (path: string, state = seedState()) => {
 };
 const click = (el: Element) => act(async () => fireEvent.click(el));
 const type = (el: Element, value: string) => act(async () => fireEvent.change(el, { target: { value } }));
-/** A help line's link: to the page on agentes.chat in Portuguese, in a new tab with no referrer. */
+/** A help line's link: to the help page on xquads Cloud in Portuguese, in a new tab with no referrer. */
 const expectHelpLink = (link: HTMLElement, page: string) => {
-  expect(link.getAttribute("href")).toBe(`https://agentes.chat/pt/docs/${page}`);
+  const [slug, section] = page.split("#");
+  expect(link.getAttribute("href")).toBe(
+    `https://agents.xquads.com/help/${slug}?lang=pt-BR${section ? `#${section}` : ""}`,
+  );
   expect(link.getAttribute("target")).toBe("_blank");
   expect(link.getAttribute("rel")).toBe("noopener noreferrer");
   expect(link.className).toBe("ac-link ac-link--muted");

@@ -653,7 +653,7 @@ describe("install.sh", () => {
       const run = await plan(machine);
       expect(run.code).toBe(1);
       expect(run.err).toContain(`this is ${machine.os} on ${machine.arch}`);
-      expect(run.err).toContain("https://agentes.chat/docs/install-on-a-server");
+      expect(run.err).toContain("https://agents.xquads.com/help/install-on-a-server?lang=en");
     }
     const musl = await plan({ ...linuxRoot, musl: true });
     expect(musl.code).toBe(1);

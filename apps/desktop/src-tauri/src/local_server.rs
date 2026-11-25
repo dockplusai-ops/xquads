@@ -227,7 +227,7 @@ fn write_env(folder: &Folder, entries: &[(&str, String)]) -> io::Result<()> {
 }
 
 const ENV_HEADER: &str = "# xquads on this computer, run by the xquads app. Help:\n\
-# https://agentes.chat/docs/run-on-your-computer. AGENTES_SECRET encrypts the keys stored in the database: it\n\
+# https://agents.xquads.com/help/run-on-your-computer?lang=en. AGENTES_SECRET encrypts the keys stored in the database: it\n\
 # travels with the folder in a backup, and changing it makes them unreadable.\n";
 
 /// The port the server takes and the address it answers at.

@@ -510,7 +510,7 @@ describe("the workspace's standing in words (ADR 0056 §8)", () => {
       "standing.agentPaused",
     );
     // On agentes.chat Cloud, the hold's kind and how to contest it; a run's values say "true".
-    const email = '{"email":"legal@agentes.chat"}';
+    const email = '{"email":"legal@xquads.com"}';
     expect(restrictionLine(t, "run.agent_paused", { kind: "network", cloud: "true" })).toBe(
       `standing.cloud.agentNetwork ${email}`,
     );
