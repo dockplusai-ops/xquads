@@ -1135,3 +1135,14 @@ describe("the right hand's stand-in line (ADR 0137 §7, amended 2026-11-15)", ()
     expect(rightHandUnusable(view, "a2")).toEqual([]);
   });
 });
+
+test("planOff: API keys on the server's computers, no Claude subscription, keys and older servers pass", async () => {
+  const { planOff } = await import("../src/lib/no-ai");
+  const off = { hosted: false, claude: false };
+  expect(planOff("chatgpt", true, off)).toBe(true);
+  expect(planOff("chatgpt", false, off)).toBe(false);
+  expect(planOff("claude", false, off)).toBe(true);
+  expect(planOff("zai", true, off)).toBe(false);
+  expect(planOff("zen", true, off)).toBe(false);
+  expect(planOff("claude", true, undefined)).toBe(false);
+});

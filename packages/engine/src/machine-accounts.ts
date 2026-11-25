@@ -94,6 +94,7 @@ import {
 } from "./machines";
 import { recordAccountFailure } from "./operator-events";
 import { can, requirePermission } from "./organizations";
+import { planSignInRefusal } from "./plan-sign-ins";
 import { runState } from "./run-state";
 import { runnerUpdateWay } from "./runner-update";
 import { scrubSignIns } from "./tool-detail";
@@ -1549,6 +1550,8 @@ export async function beginAccountLogin(
   }
   const plan = planOf(provider);
   const { machine } = await memberMachine(deps.db, userId, orgId, machineId);
+  const planOff = planSignInRefusal(kind, machine.kind, plan || cliKey || enterprise ? provider : undefined);
+  if (planOff) throw new ForbiddenError(planOff.message, "account.plan_off");
   let existing: MachineAccountRow | null = null;
   if (accountId !== undefined) {
     existing = await getListedAccount(deps.db, orgId, machine.id, accountId);

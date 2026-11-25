@@ -279,6 +279,7 @@ export * from "./person-usage-report";
 export * from "./pins";
 export * from "./plan-models";
 export * from "./plan-move";
+export * from "./plan-sign-ins";
 export * from "./plan-usage";
 export * from "./problem-report";
 export * from "./process-vitals";

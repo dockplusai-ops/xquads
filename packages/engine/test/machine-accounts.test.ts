@@ -628,6 +628,7 @@ test("a coding plan's key: no sign-in page but the plan's key page, the key seal
       name: "mac",
       online: expect.any(Boolean),
       mine: true,
+      hosted: false,
       canAdd: true,
       keys: true,
       // A runner before protocol 29: a sign-in thinks for one agent.

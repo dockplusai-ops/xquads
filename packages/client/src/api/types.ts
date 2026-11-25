@@ -212,6 +212,12 @@ export interface FeedbackFile {
   contentType: string;
 }
 
+/** Where an AI plan may think for agents (`AuthConfig.planSignIns`). */
+export interface PlanSignIns {
+  hosted: boolean;
+  claude: boolean;
+}
+
 export interface AuthConfig {
   socialProviders: { google: boolean; github: boolean; apple?: boolean };
   signupOpen: boolean;
@@ -235,6 +241,11 @@ export interface AuthConfig {
   billingUrl?: string | null;
   /** The referral service (ADR 0192): "Refer and earn" opens it (`account.referralsLink`); null or absent: none. */
   referralsUrl?: string | null;
+  /**
+   * Where an AI plan may think for agents: `hosted`, on the computers the server runs; `claude`, a Claude subscription
+   * on a person's computer. Absent: a server from before, where both may.
+   */
+  planSignIns?: PlanSignIns;
   /** One of agentes.chat's own servers (`Instance.cloud`); absent: a self-hosted server too old to say. */
   cloud?: boolean;
   /** The bot check's site key (Cloudflare Turnstile, ADR 0075); null or absent: no check, nothing from Cloudflare. */
@@ -6489,7 +6500,8 @@ export interface AgentBrain {
   /** As stored; null = the brain's default. */
   model: string | null;
   effectiveModel: string | null;
-  computer: { machineId: string; name: string; online: boolean } | null;
+  /** `hosted`: one the server runs, where `AuthConfig.planSignIns.hosted` decides (absent: an older server). */
+  computer: { machineId: string; name: string; online: boolean; hosted?: boolean } | null;
   options: BrainOption[];
   /** Every computer the caller may give the agent, with what each offers ("Vai para o Mac mini"). */
   machines: BrainMachine[];
@@ -6703,6 +6715,8 @@ export interface AiComputer {
   online: boolean;
   /** The viewer connected it. */
   mine: boolean;
+  /** One the server runs, where `AuthConfig.planSignIns.hosted` decides (absent: an older server). */
+  hosted?: boolean;
   /** The viewer adds accounts there (they connected it, or nobody did), on a runner that knows accounts. */
   canAdd: boolean;
   /** Its runner takes coding plans' keys. */

@@ -30327,6 +30327,9 @@
   "brain.reasons.system": {
     "value": "{{program}} doesn't run on {{computer}}'s system yet."
   },
+  "brain.reasons.plan_off": {
+    "value": "Agents can't think with this plan on {{computer}}. Choose an API key instead."
+  },
   "brain.reasons.no_computerCloud": {
     "value": "Ready as soon as {{computer}} is."
   },

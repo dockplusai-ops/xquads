@@ -85,6 +85,7 @@ import {
   STARTUP_RAMP_MS,
   SURFACE_PREFIX,
   setMessageLinkBase,
+  setPlanSignIns,
   setRestrictionNotices,
   setScreenJudgments,
   setSurface,
@@ -157,6 +158,8 @@ export function applyBootSwitches(config: Config, log?: Logger) {
   setSurface(surfaceFromConfig(config));
   // Where each workspace gets its own computer, the computers people bring are targets, never agents' homes.
   setWorkspaceComputers(config.MACHINE_PROVISIONING === "external");
+  // Where an AI plan may think for agents: API keys on the server's own computers, no Claude subscription anywhere.
+  setPlanSignIns({ hosted: config.HOSTED_PLAN_SIGN_INS, claude: config.CLAUDE_PLAN_SIGN_INS });
   setScreenJudgments(config.SCREEN_JUDGMENTS, config.SCREEN_JUDGMENTS_ORGS, log);
 }
 

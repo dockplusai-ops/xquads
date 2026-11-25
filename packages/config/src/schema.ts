@@ -489,6 +489,18 @@ export const envVars = {
       "How many agent runs one Claude plan sign-in (a subscription, never an API key) works on at once. Past it, the next run waits in line like any other and starts as soon as one ends. 0 turns the limit off.",
     section: "Agents",
   },
+  CLAUDE_PLAN_SIGN_INS: {
+    schema: z.stringbool().default(false),
+    description:
+      "Lets a Claude subscription (Free, Pro, Max or Ultra, signed in through Claude Code) think for agents on the computers people connect. Off by default: Anthropic's terms let no third-party product route agents through those plans, so agents think with an Anthropic API key. Turn it on only with Anthropic's written approval.",
+    section: "Agents",
+  },
+  HOSTED_PLAN_SIGN_INS: {
+    schema: z.stringbool().default(false),
+    description:
+      "Lets AI plans (Claude, ChatGPT, Gemini, Grok, Cursor sign-ins) think for agents on the computers this server runs (`MACHINE_PROVISIONING=external`, `HOST_COMPUTER_TOKEN`). Off by default: there agents think with API keys, and a plan signs in only on a computer a person connected. API keys and coding plans' keys work either way.",
+    section: "Agents",
+  },
   AGENT_MAX_TOOL_TURNS: {
     schema: z.coerce.number().int().min(1).max(200).default(200),
     description:

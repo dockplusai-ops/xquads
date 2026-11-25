@@ -405,6 +405,10 @@ export function accountRoutes(deps: AppDeps) {
               description:
                 "The referral service (REFERRALS_URL, ADR 0192): a signed-in person opens it through `POST /api/app/referrals-link`. Null: no referrals.",
             }),
+            planSignIns: z.object({ hosted: z.boolean(), claude: z.boolean() }).openapi({
+              description:
+                "Where an AI plan may think for agents (`HOSTED_PLAN_SIGN_INS`, `CLAUDE_PLAN_SIGN_INS`): `hosted`, on the computers this server runs; `claude`, a Claude subscription on a person's computer. Where it may not, the apps dim the plan and point to an API key.",
+            }),
             cloud: z.boolean().openapi({
               description:
                 "One of agentes.chat's own servers (`cloud` in `GET /api/instance`): the apps show no About screen there, which every other server shows.",
@@ -467,6 +471,7 @@ export function accountRoutes(deps: AppDeps) {
           workspaceComputer: config.MACHINE_PROVISIONING === "external",
           billingUrl: config.BILLING_URL ?? null,
           referralsUrl: config.REFERRALS_URL ?? null,
+          planSignIns: { hosted: config.HOSTED_PLAN_SIGN_INS, claude: config.CLAUDE_PLAN_SIGN_INS },
           cloud: isAgentesCloud(config.PUBLIC_URL),
           turnstileSiteKey: look ? null : (deps.adapters.humanCheck?.siteKey ?? null),
           errorReports: reportsTo(config.SENTRY_WEB_DSN),
