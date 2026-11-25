@@ -7,33 +7,32 @@ import type { EmailWords } from "./index";
  * forms with `plural("nl", n, { one, few, many, other })` from `@agenteschat/i18n/format`.
  */
 export const words: EmailWords = {
-  sentBy: (host) =>
-    host ? atHost("Verstuurd door de agentes.chat-server", "op", host) : "Verstuurd door agentes.chat.",
+  sentBy: (host) => (host ? atHost("Verstuurd door de xquads-server", "op", host) : "Verstuurd door xquads."),
   fallback: "Werkt de knop niet? Kopieer dit adres naar je browser:",
   role: { owner: "eigenaar", member: "lid" },
   anAgent: "Een agent",
   someone: "Iemand",
   verify: {
-    subject: "Bevestig je e-mailadres voor agentes.chat",
+    subject: "Bevestig je e-mailadres voor xquads",
     preheader: "Eén klik om dit adres te bevestigen. De link werkt een uur.",
     headline: "Bevestig je e-mailadres",
     body: "Nog één stap: bevestig dat dit adres van jou is.",
     button: "E-mailadres bevestigen",
     small: "De link werkt een uur. Heb je je niet aangemeld? Dan kun je deze e-mail negeren.",
-    why: "Je krijgt deze e-mail omdat dit adres is gebruikt om je aan te melden bij agentes.chat.",
+    why: "Je krijgt deze e-mail omdat dit adres is gebruikt om je aan te melden bij xquads.",
   },
   reset: {
-    subject: "Stel je wachtwoord voor agentes.chat opnieuw in",
+    subject: "Stel je wachtwoord voor xquads opnieuw in",
     preheader: "Kies een nieuw wachtwoord. De link werkt een uur.",
     headline: "Kies een nieuw wachtwoord",
     body: "We kregen een verzoek om het wachtwoord van dit adres opnieuw in te stellen.",
     button: "Nieuw wachtwoord kiezen",
     note: "Niet door jou gevraagd? Negeer deze e-mail. Je wachtwoord blijft hetzelfde.",
     small: "De link werkt een uur.",
-    why: "Je krijgt deze e-mail omdat iemand heeft gevraagd het wachtwoord van dit adres op agentes.chat opnieuw in te stellen.",
+    why: "Je krijgt deze e-mail omdat iemand heeft gevraagd het wachtwoord van dit adres op xquads opnieuw in te stellen.",
   },
   invitation: {
-    subject: "Je bent uitgenodigd voor een werkruimte op agentes.chat",
+    subject: "Je bent uitgenodigd voor een werkruimte op xquads",
     preheader: "Accepteer binnen 7 dagen, met dit e-mailadres.",
     headline: "Je bent uitgenodigd voor een werkruimte",
     body: (inviter, email, org, role) =>
@@ -48,7 +47,7 @@ export const words: EmailWords = {
     starts: (channels, agents) =>
       sentences(channels && ["Je zit meteen in ", ...channels, "."], agents && ["Je werkt samen met ", ...agents, "."]),
     more: (n) => `nog ${n}`,
-    what: "Op agentes.chat werken mensen en AI-agents samen.",
+    what: "Op xquads werken mensen en AI-agents samen.",
     noteFrom: (inviter, note) => [{ b: inviter ? `${inviter}: ` : "Hun bericht: " }, `‘${note}’`],
     button: "Uitnodiging accepteren",
     small: "De uitnodiging werkt 7 dagen. Accepteer haar met dit e-mailadres.",
@@ -57,11 +56,8 @@ export const words: EmailWords = {
     personal: {
       body: (inviter, email) =>
         inviter
-          ? [
-              { b: inviter },
-              `${email ? ` (${email})` : ""} nodigt je uit voor een persoonlijke werkruimte op agentes.chat.`,
-            ]
-          : "Je bent uitgenodigd voor een persoonlijke werkruimte op agentes.chat.",
+          ? [{ b: inviter }, `${email ? ` (${email})` : ""} nodigt je uit voor een persoonlijke werkruimte op xquads.`]
+          : "Je bent uitgenodigd voor een persoonlijke werkruimte op xquads.",
       why: () =>
         "Je krijgt deze e-mail omdat iemand dit adres heeft uitgenodigd voor een persoonlijke werkruimte. Ken je diegene niet? Negeer de e-mail dan. Er gebeurt niets tot je accepteert.",
     },
@@ -98,41 +94,41 @@ export const words: EmailWords = {
     },
   },
   waitlist: {
-    subject: "Bevestig je plek op de wachtlijst van agentes.chat",
+    subject: "Bevestig je plek op de wachtlijst van xquads",
     preheader: "Eén klik en je plek is vastgelegd.",
     headline: "Bevestig je plek op de lijst",
     body: (email) =>
       email
-        ? ["We kregen een verzoek om ", { b: email }, " op de wachtlijst van agentes.chat te zetten."]
-        : "We kregen een verzoek om dit adres op de wachtlijst van agentes.chat te zetten.",
+        ? ["We kregen een verzoek om ", { b: email }, " op de wachtlijst van xquads te zetten."]
+        : "We kregen een verzoek om dit adres op de wachtlijst van xquads te zetten.",
     approve: "Hier gebeurt niets belangrijks zonder dat een mens het goedkeurt. Dat geldt ook voor dit verzoek.",
     button: "Mijn e-mailadres bevestigen",
     small:
       "De link werkt 48 uur. Was jij het niet? Negeer deze e-mail. Zonder de klik komt het adres nooit op de lijst.",
-    why: "Je krijgt deze e-mail omdat dit adres is opgegeven voor de wachtlijst van agentes.chat.",
+    why: "Je krijgt deze e-mail omdat dit adres is opgegeven voor de wachtlijst van xquads.",
   },
   earlyAccess: {
-    subject: "Je uitnodiging voor agentes.chat is er",
+    subject: "Je uitnodiging voor xquads is er",
     preheader: (days) => `Maak binnen ${days} dagen je account aan, met dit e-mailadres.`,
     headline: "Je toegang staat klaar",
-    body: (email) => [{ b: email }, " kan nu een account en een werkruimte aanmaken op agentes.chat."],
-    what: "Op agentes.chat werken mensen en AI-agents samen.",
+    body: (email) => [{ b: email }, " kan nu een account en een werkruimte aanmaken op xquads."],
+    what: "Op xquads werken mensen en AI-agents samen.",
     button: "Mijn account aanmaken",
     small: (days) =>
       `De link werkt ${days} dagen, alleen voor dit adres. Meld je aan met een wachtwoord, of met Google, GitHub of Apple op ditzelfde adres.`,
-    why: "Je krijgt deze e-mail omdat dit adres op de wachtlijst van agentes.chat staat of is uitgenodigd voor agentes.chat. Er gebeurt niets tot je je aanmeldt.",
+    why: "Je krijgt deze e-mail omdat dit adres op de wachtlijst van xquads staat of is uitgenodigd voor xquads. Er gebeurt niets tot je je aanmeldt.",
   },
   earlyAccessAllowed: {
     subject: "Je kunt nu je eigen werkruimte aanmaken",
     preheader: "Log in met het account dat je al hebt en richt hem in.",
     headline: "Maak je eigen werkruimte aan",
     body: (email) => [
-      "Je kunt nu je eigen werkruimte aanmaken op agentes.chat met ",
+      "Je kunt nu je eigen werkruimte aanmaken op xquads met ",
       { b: email },
       ", het account dat je al hebt.",
     ],
     button: "Mijn werkruimte aanmaken",
-    why: "Je krijgt deze e-mail omdat dit account vroege toegang tot agentes.chat heeft gekregen.",
+    why: "Je krijgt deze e-mail omdat dit account vroege toegang tot xquads heeft gekregen.",
   },
   budget: {
     subject: {
@@ -220,7 +216,7 @@ export const words: EmailWords = {
     },
     button: { ai: "Je AI koppelen", task: "Eerste taak geven", create: "Agent aanmaken" },
     why: (org) =>
-      `Je krijgt deze e-mail omdat je eigenaar bent van ${org} op agentes.chat. Het is de enige e-mail over deze computer.`,
+      `Je krijgt deze e-mail omdat je eigenaar bent van ${org} op xquads. Het is de enige e-mail over deze computer.`,
     personal: {
       body: () =>
         "Bedankt voor het wachten. De computer van je agents staat aan en is ingericht, met een eigen gebruiker voor elke agent. Hij blijft dag en nacht aan, zodat je agents altijd kunnen werken.",
@@ -228,7 +224,7 @@ export const words: EmailWords = {
         task: ["Geef een eerste taak.", "Open een gesprek met een van je agents en zeg wat je nodig hebt."],
       },
       why: () =>
-        "Je krijgt deze e-mail omdat deze werkruimte op agentes.chat van jou is. Het is de enige e-mail over deze computer.",
+        "Je krijgt deze e-mail omdat deze werkruimte op xquads van jou is. Het is de enige e-mail over deze computer.",
     },
   },
   joinRequest: {
@@ -282,7 +278,7 @@ export const words: EmailWords = {
       reason: (reason) => [{ b: "Hun bericht: " }, `‘${reason}’`],
       small: "Denk je dat het een vergissing is? Vraag iemand daar om je per e-mail uit te nodigen.",
     },
-    why: (org) => `Je krijgt deze e-mail omdat dit adres heeft gevraagd om lid te worden van ${org} op agentes.chat.`,
+    why: (org) => `Je krijgt deze e-mail omdat dit adres heeft gevraagd om lid te worden van ${org} op xquads.`,
     personal: {
       joined: { body: (who) => `${who} heeft je verzoek goedgekeurd. Je zit nu in de werkruimte.` },
       invited: { body: (who) => `${who} heeft je verzoek om lid te worden van de werkruimte goedgekeurd.` },
@@ -292,21 +288,20 @@ export const words: EmailWords = {
         small: "Denk je dat het een vergissing is? Vraag diegene om je per e-mail uit te nodigen.",
       },
       why: () =>
-        "Je krijgt deze e-mail omdat dit adres heeft gevraagd om lid te worden van een persoonlijke werkruimte op agentes.chat.",
+        "Je krijgt deze e-mail omdat dit adres heeft gevraagd om lid te worden van een persoonlijke werkruimte op xquads.",
     },
   },
   joinCode: {
-    subject: (code) => `${code} is je code voor agentes.chat`,
+    subject: (code) => `${code} is je code voor xquads`,
     preheader: "Typ hem op de pagina om te vragen of je lid mag worden. Hij werkt 10 minuten.",
     headline: "Je code",
     body: (org) => ["Typ deze code op de pagina om te vragen of je lid mag worden van ", { b: org }, "."],
     small: ["Hij werkt 10 minuten. Heb je er niet om gevraagd? ", { nobr: "Negeer deze e-mail." }],
-    why: (org) =>
-      `Je krijgt deze e-mail omdat iemand dit adres heeft ingevuld om lid te worden van ${org} op agentes.chat.`,
+    why: (org) => `Je krijgt deze e-mail omdat iemand dit adres heeft ingevuld om lid te worden van ${org} op xquads.`,
     personal: {
       body: () => "Typ deze code op de pagina om te vragen of je lid mag worden van deze werkruimte.",
       why: () =>
-        "Je krijgt deze e-mail omdat iemand dit adres heeft ingevuld om lid te worden van een persoonlijke werkruimte op agentes.chat.",
+        "Je krijgt deze e-mail omdat iemand dit adres heeft ingevuld om lid te worden van een persoonlijke werkruimte op xquads.",
     },
   },
   deletionCode: {
@@ -318,9 +313,8 @@ export const words: EmailWords = {
       { b: org },
       " te resetten. Agents, gesprekken, bestanden en geheugen worden meteen en definitief gewist, en hij begint opnieuw als een nieuwe werkruimte.",
     ],
-    whyReset: (org) =>
-      `Je krijgt deze e-mail omdat vanuit je account is gevraagd om ${org} op agentes.chat te resetten.`,
-    preheader: "Typ hem in agentes.chat om te bevestigen. Hij werkt 10 minuten.",
+    whyReset: (org) => `Je krijgt deze e-mail omdat vanuit je account is gevraagd om ${org} op xquads te resetten.`,
+    preheader: "Typ hem in xquads om te bevestigen. Hij werkt 10 minuten.",
     headline: "Je code",
     workspace: (org) => [
       "Typ deze code om de werkruimte ",
@@ -340,8 +334,8 @@ export const words: EmailWords = {
     noSupport:
       "Hij werkt 10 minuten, en zonder deze code wordt er niets verwijderd. Was jij het niet? Deel hem dan niet en laat het weten aan de mensen die deze server beheren.",
     whyWorkspace: (org) =>
-      `Je krijgt deze e-mail omdat vanuit je account is gevraagd om ${org} op agentes.chat te verwijderen.`,
-    whyAccount: "Je krijgt deze e-mail omdat vanuit je account is gevraagd om het van agentes.chat te verwijderen.",
+      `Je krijgt deze e-mail omdat vanuit je account is gevraagd om ${org} op xquads te verwijderen.`,
+    whyAccount: "Je krijgt deze e-mail omdat vanuit je account is gevraagd om het van xquads te verwijderen.",
     personal: {
       workspace: (org) => [
         "Typ deze code om je werkruimte ",
@@ -353,7 +347,7 @@ export const words: EmailWords = {
   emailChange: {
     code: {
       subject: (code) => `${code} is je code om je e-mailadres te wijzigen`,
-      preheader: "Typ hem in agentes.chat om te bevestigen. Hij werkt 10 minuten.",
+      preheader: "Typ hem in xquads om te bevestigen. Hij werkt 10 minuten.",
       headline: "Je code",
       body: (email, newEmail) => [
         "Typ deze code om het e-mailadres van het account ",
@@ -369,19 +363,19 @@ export const words: EmailWords = {
       ],
       noSupport:
         "Hij werkt 10 minuten, en zonder deze code blijft je e-mailadres hetzelfde. Was jij het niet? Deel hem dan niet en laat het weten aan de mensen die deze server beheren.",
-      why: "Je krijgt deze e-mail omdat vanuit je account is gevraagd om het e-mailadres op agentes.chat te wijzigen.",
+      why: "Je krijgt deze e-mail omdat vanuit je account is gevraagd om het e-mailadres op xquads te wijzigen.",
     },
     link: {
-      subject: "Bevestig je nieuwe e-mailadres voor agentes.chat",
+      subject: "Bevestig je nieuwe e-mailadres voor xquads",
       preheader: "Eén klik en je logt voortaan in met dit adres. De link werkt een uur.",
       headline: "Bevestig je nieuwe e-mailadres",
       body: "Nog één stap: bevestig dat dit adres van jou is. Daarna logt je account ermee in.",
       button: "Nieuw e-mailadres bevestigen",
       small: "De link werkt een uur. Heb je hier niet om gevraagd? Dan kun je deze e-mail negeren.",
-      why: "Je krijgt deze e-mail omdat iemand dit adres wil gebruiken voor een agentes.chat-account.",
+      why: "Je krijgt deze e-mail omdat iemand dit adres wil gebruiken voor een xquads-account.",
     },
     changed: {
-      subject: "Het e-mailadres van je agentes.chat-account is gewijzigd",
+      subject: "Het e-mailadres van je xquads-account is gewijzigd",
       preheader: "Was jij het niet? Dan kun je dit adres 7 dagen lang terugzetten.",
       headline: "Je e-mailadres is gewijzigd",
       body: (email, newEmail) => ["Het account ", { b: email }, " logt nu in met ", { b: newEmail }, "."],
@@ -389,7 +383,7 @@ export const words: EmailWords = {
         "Was jij het niet? Druk binnen 7 dagen op de knop. Dit adres komt terug, alle sessies worden uitgelogd, de AI-apps worden ontkoppeld en inlogmethoden die sindsdien zijn toegevoegd, werken niet meer. Ook het wachtwoord wordt gewist, en met “Wachtwoord vergeten” stel je het volgende in.",
       button: "Dit was ik niet",
       small: "Was jij het wel? Dan hoef je niets te doen.",
-      why: "Je krijgt deze e-mail omdat dit adres het e-mailadres van een agentes.chat-account was.",
+      why: "Je krijgt deze e-mail omdat dit adres het e-mailadres van een xquads-account was.",
     },
   },
   deleting: {
@@ -405,10 +399,10 @@ export const words: EmailWords = {
     owner: "Toch van gedachten veranderd? Herstel hem voor die tijd.",
     button: "Werkruimte herstellen",
     member: "Is het een vergissing? Vraag een eigenaar om hem te herstellen.",
-    why: (org) => `Je krijgt deze e-mail omdat je in ${org} op agentes.chat zit.`,
+    why: (org) => `Je krijgt deze e-mail omdat je in ${org} op xquads zit.`,
     personal: {
       member: "Is het een vergissing? Vraag degene die hem verwijderde om hem te herstellen.",
-      why: () => "Je krijgt deze e-mail omdat je in deze werkruimte op agentes.chat zit.",
+      why: () => "Je krijgt deze e-mail omdat je in deze werkruimte op xquads zit.",
     },
   },
   restored: {
@@ -417,27 +411,27 @@ export const words: EmailWords = {
     headline: "De werkruimte is terug",
     body: (by, org) => [{ b: by }, " heeft ", { b: org }, " hersteld. Hij werkt weer."],
     button: "Werkruimte openen",
-    why: (org) => `Je krijgt deze e-mail omdat je in ${org} op agentes.chat zit.`,
+    why: (org) => `Je krijgt deze e-mail omdat je in ${org} op xquads zit.`,
     personal: {
-      why: () => "Je krijgt deze e-mail omdat je in deze werkruimte op agentes.chat zit.",
+      why: () => "Je krijgt deze e-mail omdat je in deze werkruimte op xquads zit.",
     },
   },
   appConnected: {
-    subject: "Er is een app gekoppeld aan je agentes.chat-account",
+    subject: "Er is een app gekoppeld aan je xquads-account",
     preheader: "Hij kan in één werkruimte namens jou lezen en taken naar agents sturen.",
     headline: "Er is een app gekoppeld",
     body: (app, org) => [{ b: app }, " heeft nu toegang tot je account in ", { b: org }, "."],
     note: "Heb je hem niet gekoppeld? Ontkoppel hem nu en wijzig je wachtwoord.",
     button: "Gekoppelde apps bekijken",
-    why: (org) => `Je krijgt deze e-mail omdat er een app is gekoppeld aan je account in ${org} op agentes.chat.`,
+    why: (org) => `Je krijgt deze e-mail omdat er een app is gekoppeld aan je account in ${org} op xquads.`,
     personal: {
       body: (app) => [{ b: app }, " heeft nu toegang tot je account in je persoonlijke werkruimte."],
       why: () =>
-        "Je krijgt deze e-mail omdat er een app is gekoppeld aan je account in je persoonlijke werkruimte op agentes.chat.",
+        "Je krijgt deze e-mail omdat er een app is gekoppeld aan je account in je persoonlijke werkruimte op xquads.",
     },
   },
   accountDeleting: {
-    subject: (day) => `Je agentes.chat-account wordt op ${day} verwijderd`,
+    subject: (day) => `Je xquads-account wordt op ${day} verwijderd`,
     preheader: "Je hebt 7 dagen om van gedachten te veranderen.",
     headline: "Je account wordt verwijderd",
     body: (email, day, time) => [
@@ -455,10 +449,10 @@ export const words: EmailWords = {
     ],
     undo: "Toch van gedachten veranderd? Log voor die datum in en druk op Herstellen.",
     button: "Inloggen om te herstellen",
-    why: "Je krijgt deze e-mail omdat dit adres een account heeft op agentes.chat.",
+    why: "Je krijgt deze e-mail omdat dit adres een account heeft op xquads.",
   },
   accountDeleted: {
-    subject: "Je agentes.chat-account is verwijderd",
+    subject: "Je xquads-account is verwijderd",
     preheader: "Het is overal uitgelogd en kan niet meer inloggen.",
     headline: "Je account is verwijderd",
     body: (email) => ["We hebben het account ", { b: email }, " verwijderd."],
@@ -472,7 +466,7 @@ export const words: EmailWords = {
     ],
     support: (address) => ["Was jij het niet? Schrijf naar ", { mail: address }, "."],
     noSupport: "Was jij het niet? Laat het weten aan de mensen die deze server beheren.",
-    why: "Je krijgt deze e-mail omdat dit adres een account had op agentes.chat.",
+    why: "Je krijgt deze e-mail omdat dit adres een account had op xquads.",
   },
   autonomy: {
     subject: (day, stalls, noise) => `Agents op ${day}: ${stalls} keer vastgelopen, ${noise} runs voor niets`,
@@ -583,34 +577,33 @@ export const words: EmailWords = {
   },
   planWaiting: {
     subject: "Je team wacht",
-    preheader: "Je werkruimte is klaar. Er is een agentes.chat-abonnement nodig om te beginnen.",
+    preheader: "Je werkruimte is klaar. Er is een xquads-abonnement nodig om te beginnen.",
     headline: "Je team wacht",
     body: (agents, channels, routines) => {
       const a = plural("nl", agents, { one: `1 agent`, other: `${agents} agents` });
       const c = plural("nl", channels, { one: `1 kanaal`, other: `${channels} kanalen` });
       const r = plural("nl", routines, { one: `1 routine`, other: `${routines} routines` });
       return routines > 0
-        ? `${a}, ${c} en ${r} staan klaar. Er is een agentes.chat-abonnement nodig om te beginnen.`
-        : `${a} en ${c} staan klaar. Er is een agentes.chat-abonnement nodig om te beginnen.`;
+        ? `${a}, ${c} en ${r} staan klaar. Er is een xquads-abonnement nodig om te beginnen.`
+        : `${a} en ${c} staan klaar. Er is een xquads-abonnement nodig om te beginnen.`;
     },
-    button: "agentes.chat-abonnementen bekijken",
-    why: (org) =>
-      `Je krijgt deze e-mail omdat je ${org} beheert op agentes.chat. We sturen maar twee van deze berichten.`,
+    button: "xquads-abonnementen bekijken",
+    why: (org) => `Je krijgt deze e-mail omdat je ${org} beheert op xquads. We sturen maar twee van deze berichten.`,
     personal: {
       subject: "Je agents wachten",
       headline: "Je agents wachten",
       body: (agents, _channels, routines) => {
         const a = plural("nl", agents, { one: `1 agent`, other: `${agents} agents` });
         const r = plural("nl", routines, { one: `1 routine`, other: `${routines} routines` });
-        return `Klaar: ${routines > 0 ? `${a} en ${r}` : a}. Alleen een agentes.chat-abonnement ontbreekt nog.`;
+        return `Klaar: ${routines > 0 ? `${a} en ${r}` : a}. Alleen een xquads-abonnement ontbreekt nog.`;
       },
       why: () =>
-        "Je krijgt deze e-mail omdat deze werkruimte op agentes.chat van jou is. We sturen maar twee van deze berichten.",
+        "Je krijgt deze e-mail omdat deze werkruimte op xquads van jou is. We sturen maar twee van deze berichten.",
     },
   },
   surface: {
     linked: {
-      subject: (surface) => `${surface} is gekoppeld aan je agentes.chat-account`,
+      subject: (surface) => `${surface} is gekoppeld aan je xquads-account`,
       preheader: "Je assistent antwoordt je daar nu. Was jij het niet? Ontkoppel het.",
       headline: (surface) => `${surface} is gekoppeld`,
       body: (surface, display, org) => [
@@ -622,22 +615,22 @@ export const words: EmailWords = {
       notYou: "Was jij het niet? Ontkoppel het. Berichten van daar bereiken je account dan meteen niet meer.",
       button: "Ontkoppelen",
       small: "Was jij het wel? Dan hoef je niets te doen. Je kunt het altijd ontkoppelen in Instellingen.",
-      why: (surface) => `Je krijgt deze e-mail omdat ${surface} aan je agentes.chat-account is gekoppeld.`,
+      why: (surface) => `Je krijgt deze e-mail omdat ${surface} aan je xquads-account is gekoppeld.`,
       picture: "Je assistent, nu ook op je telefoon",
     },
     unlinked: {
-      subject: (surface) => `${surface} is ontkoppeld van je agentes.chat-account`,
+      subject: (surface) => `${surface} is ontkoppeld van je xquads-account`,
       preheader: "De identiteit is veranderd. Koppel het opnieuw in Instellingen als jij het was.",
       headline: (surface) => `${surface} is ontkoppeld`,
       body: (surface, display) => [{ b: display }, ` op ${surface} is ontkoppeld omdat de identiteit is veranderd.`],
       small: "Koppel het opnieuw in Instellingen als jij het was.",
-      why: (surface) => `Je krijgt deze e-mail omdat ${surface} aan je agentes.chat-account gekoppeld was.`,
+      why: (surface) => `Je krijgt deze e-mail omdat ${surface} aan je xquads-account gekoppeld was.`,
       picture: "Je assistent, niet meer op je telefoon",
     },
   },
   supportReply: {
     subject: "Een antwoord op je hulpvraag",
-    preheader: "Over de hulp die je vroeg op agentes.chat.",
+    preheader: "Over de hulp die je vroeg op xquads.",
     headline: "Een antwoord op je hulpvraag",
     answers: {
       received: "We hebben je vraag ontvangen en kijken ernaar.",
@@ -646,11 +639,9 @@ export const words: EmailWords = {
       handed_over: "Een persoon heeft je vraag nu en geeft je antwoord.",
     },
     from: (host) =>
-      host
-        ? atHost("Beantwoord door de beheerders van de agentes.chat-server", "op", host)
-        : "Beantwoord door agentes.chat.",
+      host ? atHost("Beantwoord door de beheerders van de xquads-server", "op", host) : "Beantwoord door xquads.",
     ai: "Een AI-assistent schreef dit antwoord.",
     reply: (address) => ["Wil je antwoorden? Schrijf naar ", { mail: address }, "."],
-    why: "Je krijgt deze e-mail omdat je om hulp vroeg op agentes.chat.",
+    why: "Je krijgt deze e-mail omdat je om hulp vroeg op xquads.",
   },
 };

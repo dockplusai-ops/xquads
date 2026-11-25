@@ -1075,7 +1075,7 @@
     "notificationsKindsHint": "Aktivitas menyimpan semuanya. Ini berlaku untuk ruang kerja ini, di semua perangkatmu.",
     "liveActivity": "Agen di Dynamic Island",
     "liveActivityHint": "Saat agen mengerjakan sesuatu yang kamu minta, ia muncul di atas layar, di aplikasi apa pun, dan di Layar Terkunci. Saat aplikasi tertutup, perlu iOS 17.2 atau lebih baru.",
-    "version": "agentes.chat · versi {{version}}",
+    "version": "xquads · versi {{version}}",
     "edit": "Ubah",
     "status": "Status",
     "workspace": "Ruang kerja",
@@ -1092,11 +1092,11 @@
     "workspacesUnreachable": "Belum ada respons sekarang",
     "addWorkspace": "Tambah workspace",
     "addWorkspaceCreate": "Buat workspace baru",
-    "addWorkspaceCreateSub": "Di agentes.chat",
+    "addWorkspaceCreateSub": "Di xquads",
     "addWorkspaceTeam": "Masuk ke server tim kamu",
     "addWorkspaceTeamSub": "Lewat alamatnya atau kode QR yang tampil di komputer",
     "teamServer": "Server tim",
-    "teamServerLead": "Alamat agentes.chat tim kamu, sama seperti yang tampil di browser.",
+    "teamServerLead": "Alamat xquads tim kamu, sama seperti yang tampil di browser.",
     "teamServerFoot": "Kamu tidak keluar dari workspace mana pun: server tim kamu masuk ke daftar, dengan akun kamu di sana.",
     "workspacesHoldHint": "Tahan untuk ganti ruang kerja",
     "workspacesSheetFoot": "Kamu tetap masuk di semuanya. Notifikasi dari masing-masing masuk ke sini.",
@@ -1157,7 +1157,7 @@
     "blocked": "Kamu satu-satunya pemilik {{names}}. Di situs web, di Orang, jadikan orang lain pemilik, lalu kembali ke sini.",
     "addPasswordFirst": "Tambahkan kata sandi ke akunmu di situs web dulu, lalu ketik di sini.",
     "addPasswordWeb": "Tambahkan kata sandi di situs web",
-    "onThisComputer": "Hapus di aplikasi agentes.chat di komputer yang menjalankan server ini.",
+    "onThisComputer": "Hapus di aplikasi xquads di komputer yang menjalankan server ini.",
     "otherAccount": "Kamu masuk ke akun lain. Tidak ada yang dihapus.",
     "hold": "Tahan untuk menghapus"
   },
@@ -1867,8 +1867,8 @@
       "serverText": "Satu baris untuk ditempel di terminalnya",
       "computer": "Komputer lain",
       "computerText": "Pasang aplikasinya di sana",
-      "appNote": "Di Mac atau PC yang kamu pakai, aplikasi desktop agentes.chat juga bisa menghubungkannya.",
-      "appStep1": "Pasang aplikasi agentes.chat di komputer itu",
+      "appNote": "Di Mac atau PC yang kamu pakai, aplikasi desktop xquads juga bisa menghubungkannya.",
+      "appStep1": "Pasang aplikasi xquads di komputer itu",
       "appStep2": "Buka, lalu masuk dengan akun Anda sendiri",
       "appStep3": "Klik Izinkan saat aplikasinya bertanya apakah agen {{org}} boleh memakainya",
       "appShows": "Komputer itu muncul di sini dengan sendirinya, hanya untuk Anda sampai Anda membagikannya.",
@@ -1891,7 +1891,7 @@
       "connecting": "Menghubungkan ke {{host}}",
       "computer": "Komputer",
       "noHost": "Ponsel ini bekerja lewat salah satu komputermu. Hubungkan komputer dulu.",
-      "hostOffline": "{{host}} sedang offline. Nyalakan dan buka agentes.chat di sana.",
+      "hostOffline": "{{host}} sedang offline. Nyalakan dan buka xquads di sana.",
       "step1": "Nyalakan Opsi developer",
       "step1Text": "Ketuk Nomor build 7 kali, lalu masukkan PIN-mu. Di Samsung: Informasi perangkat lunak › Nomor versi.",
       "openAbout": "Buka Tentang ponsel",
@@ -1916,9 +1916,9 @@
       "wifi1Text": "Centang Selalu izinkan di jaringan ini, lalu ketuk Izinkan.",
       "wifi2": "Pindai kode di komputer",
       "wifi2Text": "Dari Proses debug nirkabel › Sambungkan perangkat dengan kode QR. Jangan pakai kamera: kamera membaca kode sebagai jaringan Wi-Fi dan mengeluarkan ponsel dari Wi-Fi kamu.",
-      "wifi2Hint": "Di agentes.chat pada komputer, buka Hubungkan perangkat › Ponsel Android › Lewat Wi-Fi dan pilih {{host}}.",
+      "wifi2Hint": "Di xquads pada komputer, buka Hubungkan perangkat › Ponsel Android › Lewat Wi-Fi dan pilih {{host}}.",
       "codeHead": "Sambungkan dengan kode penyambungan",
-      "codeNote": "Dari Proses debug nirkabel › Sambungkan perangkat dengan kode penyambungan. Buka Setelan dan agentes.chat berdampingan agar kodenya tetap terlihat.",
+      "codeNote": "Dari Proses debug nirkabel › Sambungkan perangkat dengan kode penyambungan. Buka Setelan dan xquads berdampingan agar kodenya tetap terlihat.",
       "wifiNote": "Wi-Fi bisa terputus setelah dimulai ulang. Kabel lebih andal.",
       "done": "{{name}} sudah terhubung",
       "openFailed": "Ponsel ini tidak membuka layar itu. Cari di Setelan."
@@ -1975,7 +1975,7 @@
         "openXcode": "Buka Xcode",
         "opened": "Xcode terbuka di {{host}}. Lihat lagi di Pengaturan, lalu tutup Xcode di sana.",
         "unlock": "Sudah dinyalakan dan dimulai ulang? Peringatan dengan Nyalakan muncul saat kunci iPhone ini terbuka.",
-        "outdated": "Aplikasi agentes.chat di {{host}} sudah usang. Perbarui di Mac itu."
+        "outdated": "Aplikasi xquads di {{host}} sudah usang. Perbarui di Mac itu."
       }
     },
     "notice": {
@@ -2091,7 +2091,7 @@
     },
     "fromAgent": "Hubungkan layanan",
     "githubApp": {
-      "useApp": "Pakai aplikasi agentes.chat",
+      "useApp": "Pakai aplikasi xquads",
       "useAccount": "Pakai akun GitHub",
       "createInBrowser": "Buat di browser"
     },
@@ -2184,11 +2184,11 @@
     "zoneTitle": "Zona waktu",
     "anotherTitle": "Apa nama ruang kerja barunya?",
     "anotherPurpose": "Untuk apa ruang kerja barunya?",
-    "anotherLead": "Di agentes.chat. Kamu tetap di {{org}} dan bisa berpindah kapan saja.",
+    "anotherLead": "Di xquads. Kamu tetap di {{org}} dan bisa berpindah kapan saja.",
     "suggested": "Dari emailmu di {{domain}}, aku menyarankan {{org}}.",
     "create": "Buat",
     "enter": "Masuk ke ruang kerja",
-    "shareMessage": "Gabung ke {{org}} di agentes.chat: {{url}}",
+    "shareMessage": "Gabung ke {{org}} di xquads: {{url}}",
     "failed": "Tidak bisa menyimpan. Coba lagi."
   },
   "ai": {

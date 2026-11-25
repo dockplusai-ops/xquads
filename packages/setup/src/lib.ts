@@ -279,7 +279,7 @@ export function httpUrlProblem(url: string): string | null {
 }
 
 /** The name every email is sent under: the server's own default sender's (`SENDER_NAME` in packages/engine/src/email.ts). */
-const SENDER_NAME = "agentes.chat";
+const SENDER_NAME = "xquads";
 
 /** A sender at `domain`, as the server's default one reads. */
 export const senderAt = (domain: string) => `${SENDER_NAME} <ping@${domain}>`;

@@ -1309,7 +1309,7 @@
     "notificationsKindsHint": "Aktywność zachowuje wszystko. To ustawienie dotyczy tej przestrzeni roboczej na wszystkich twoich urządzeniach.",
     "liveActivity": "Agenci w Dynamic Island",
     "liveActivityHint": "Gdy agent pracuje nad tym, o co prosisz, pojawia się u góry ekranu, w każdej aplikacji, i na ekranie blokady. Przy zamkniętej aplikacji potrzebny jest iOS 17.2 lub nowszy.",
-    "version": "agentes.chat · wersja {{version}}",
+    "version": "xquads · wersja {{version}}",
     "edit": "Edytuj",
     "status": "Status",
     "workspace": "Przestrzeń robocza",
@@ -1335,11 +1335,11 @@
     "workspacesUnreachable": "Na razie brak odpowiedzi",
     "addWorkspace": "Dodaj workspace",
     "addWorkspaceCreate": "Utwórz nowy workspace",
-    "addWorkspaceCreateSub": "W agentes.chat",
+    "addWorkspaceCreateSub": "W xquads",
     "addWorkspaceTeam": "Dołącz do serwera swojego zespołu",
     "addWorkspaceTeamSub": "Przez jego adres lub kod QR widoczny na komputerze",
     "teamServer": "Serwer zespołu",
-    "teamServerLead": "Adres agentes.chat twojego zespołu, ten sam co w przeglądarce.",
+    "teamServerLead": "Adres xquads twojego zespołu, ten sam co w przeglądarce.",
     "teamServerFoot": "Nie opuszczasz żadnego workspace’u: serwer twojego zespołu trafia na twoją listę, z twoim kontem w nim.",
     "workspacesHoldHint": "Przytrzymaj, aby przełączyć przestrzeń roboczą",
     "workspacesSheetFoot": "Nie wylogowujemy cię z żadnej. Powiadomienia z każdej trafiają tutaj.",
@@ -1400,7 +1400,7 @@
     "blocked": "Jesteś jedynym właścicielem: {{names}}. Na stronie, w sekcji Osoby, nadaj komuś rolę właściciela i wróć tutaj.",
     "addPasswordFirst": "Najpierw dodaj hasło do konta na stronie, a potem wpisz je tutaj.",
     "addPasswordWeb": "Dodaj hasło na stronie",
-    "onThisComputer": "Usuń to w aplikacji agentes.chat na komputerze, na którym działa ten serwer.",
+    "onThisComputer": "Usuń to w aplikacji xquads na komputerze, na którym działa ten serwer.",
     "otherAccount": "Zalogowano się na inne konto. Nic nie zostało usunięte.",
     "hold": "Przytrzymaj, aby usunąć"
   },
@@ -2173,8 +2173,8 @@
       "serverText": "Jedno polecenie do wklejenia w jego terminalu",
       "computer": "Inny komputer",
       "computerText": "Zainstaluj na nim aplikację",
-      "appNote": "Maca albo PC, z którego korzystasz, podłączy też aplikacja agentes.chat na komputer.",
-      "appStep1": "Zainstaluj na nim aplikację agentes.chat",
+      "appNote": "Maca albo PC, z którego korzystasz, podłączy też aplikacja xquads na komputer.",
+      "appStep1": "Zainstaluj na nim aplikację xquads",
       "appStep2": "Otwórz ją i zaloguj się na swoje konto",
       "appStep3": "Kliknij Zezwól, gdy zapyta, czy agenci {{org}} mogą go używać",
       "appShows": "Pojawi się tu sam, widoczny tylko dla ciebie, dopóki go nie udostępnisz.",
@@ -2197,7 +2197,7 @@
       "connecting": "Łączenie z {{host}}",
       "computer": "Komputer",
       "noHost": "Ten telefon działa przez twój komputer. Najpierw podłącz komputer.",
-      "hostOffline": "{{host}} jest offline. Włącz go i otwórz tam agentes.chat.",
+      "hostOffline": "{{host}} jest offline. Włącz go i otwórz tam xquads.",
       "step1": "Włącz Opcje programisty",
       "step1Text": "Stuknij 7 razy Numer kompilacji, a potem wpisz PIN. Na Samsungu: Informacje o oprogramowaniu › Numer wersji.",
       "openAbout": "Otwórz Informacje o telefonie",
@@ -2222,9 +2222,9 @@
       "wifi1Text": "Zaznacz Zawsze zezwalaj w tej sieci i stuknij Zezwól.",
       "wifi2": "Zeskanuj kod na komputerze",
       "wifi2Text": "W Debugowanie bezprzewodowe › Sparuj urządzenie za pomocą kodu QR. Nie używaj aparatu: odczyta kod jako sieć Wi-Fi i odłączy telefon od twojej sieci.",
-      "wifi2Hint": "W agentes.chat na komputerze otwórz Podłącz urządzenie › Telefon z Androidem › Przez Wi-Fi i wybierz {{host}}.",
+      "wifi2Hint": "W xquads na komputerze otwórz Podłącz urządzenie › Telefon z Androidem › Przez Wi-Fi i wybierz {{host}}.",
       "codeHead": "Sparuj za pomocą kodu parowania",
-      "codeNote": "W Debugowanie bezprzewodowe › Sparuj urządzenie za pomocą kodu parowania. Otwórz Ustawienia i agentes.chat obok siebie, żeby kod został na ekranie.",
+      "codeNote": "W Debugowanie bezprzewodowe › Sparuj urządzenie za pomocą kodu parowania. Otwórz Ustawienia i xquads obok siebie, żeby kod został na ekranie.",
       "wifiNote": "Wi-Fi może się rozłączyć po ponownym uruchomieniu. Kabel jest pewniejszy.",
       "done": "{{name}} jest podłączony",
       "openFailed": "Ten telefon nie otworzył tego ekranu. Znajdź go w Ustawieniach."
@@ -2281,7 +2281,7 @@
         "openXcode": "Otwórz Xcode",
         "opened": "Xcode otworzył się na {{host}}. Zajrzyj jeszcze raz do Ustawień, a potem zamknij tam Xcode.",
         "unlock": "Włączone i uruchomił się ponownie? Alert z Włącz pojawia się, gdy ten iPhone jest odblokowany.",
-        "outdated": "Aplikacja agentes.chat na {{host}} jest nieaktualna. Zaktualizuj ją na tym Macu."
+        "outdated": "Aplikacja xquads na {{host}} jest nieaktualna. Zaktualizuj ją na tym Macu."
       }
     },
     "notice": {
@@ -2409,7 +2409,7 @@
     },
     "fromAgent": "Połącz usługę",
     "githubApp": {
-      "useApp": "Użyj aplikacji agentes.chat",
+      "useApp": "Użyj aplikacji xquads",
       "useAccount": "Użyj konta GitHub",
       "createInBrowser": "Utwórz w przeglądarce"
     },
@@ -2505,11 +2505,11 @@
     "zoneTitle": "Strefa czasowa",
     "anotherTitle": "Jak nazywa się nowa przestrzeń robocza?",
     "anotherPurpose": "Do czego ma służyć nowa przestrzeń robocza?",
-    "anotherLead": "W agentes.chat. Zostajesz w {{org}} i możesz przełączyć się w każdej chwili.",
+    "anotherLead": "W xquads. Zostajesz w {{org}} i możesz przełączyć się w każdej chwili.",
     "suggested": "Na podstawie twojego adresu w domenie {{domain}} proponuję {{org}}.",
     "create": "Utwórz",
     "enter": "Wejdź do przestrzeni roboczej",
-    "shareMessage": "Dołącz do {{org}} w agentes.chat: {{url}}",
+    "shareMessage": "Dołącz do {{org}} w xquads: {{url}}",
     "failed": "Nie udało się zapisać. Spróbuj ponownie."
   },
   "ai": {

@@ -113,7 +113,7 @@ describe("options", () => {
       "--smtp-url",
       "smtps://u:p@smtp.example.com:465",
       "--email-from",
-      "agentes.chat <ping@example.com>",
+      "xquads <ping@example.com>",
       "--computer",
       "no",
       "--computer-commands",
@@ -133,7 +133,7 @@ describe("options", () => {
         hostname: "chat",
         email: "smtp",
         smtpUrl: "smtps://u:p@smtp.example.com:465",
-        emailFrom: "agentes.chat <ping@example.com>",
+        emailFrom: "xquads <ping@example.com>",
         computer: "no",
         computerCommands: "yes",
         telemetry: "off",
@@ -342,16 +342,16 @@ describe("answers", () => {
     expect(domainProblem("box.tail1234.ts.net")).toContain("Tailscale");
   });
 
-  test("the sender offered is the server's own default: agentes.chat, at a public domain only", () => {
+  test("the sender offered is the server's own default: xquads, at a public domain only", () => {
     // The same name every email signs with (packages/engine's defaultEmailFrom).
-    expect(senderFor("domain", "chat.acme.com")).toBe("agentes.chat <ping@chat.acme.com>");
+    expect(senderFor("domain", "chat.acme.com")).toBe("xquads <ping@chat.acme.com>");
     expect(senderFor("domain", null)).toBeUndefined();
     expect(senderFor("tailscale", null)).toBeUndefined();
     expect(senderFor("local", null)).toBeUndefined();
-    expect(emailFromProblem("agentes.chat <ping@chat.acme.com>")).toBeNull();
+    expect(emailFromProblem("xquads <ping@chat.acme.com>")).toBeNull();
     // The old name is still a sender: a .env that has it keeps it.
     expect(emailFromProblem("agentes <ping@chat.acme.com>")).toBeNull();
-    expect(emailFromProblem("ola")).toBe('that isn\'t a sender like "agentes.chat <ping@example.com>".');
+    expect(emailFromProblem("ola")).toBe('that isn\'t a sender like "xquads <ping@example.com>".');
   });
 
   test("a problem shown on its own starts as a sentence", () => {

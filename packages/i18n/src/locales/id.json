@@ -1,7 +1,7 @@
 {
   "app": {
-    "name": "agentes",
-    "tabTitle": "agentes.chat · Timmu dan agenmu, dalam percakapan yang sama"
+    "name": "xquads",
+    "tabTitle": "xquads · Timmu dan agenmu, dalam percakapan yang sama"
   },
   "common": {
     "close": "Tutup",
@@ -29,7 +29,7 @@
     "overLimit": "Teks ini {{length}} karakter dan batasnya {{max}}. Persingkat teksnya.",
     "ourSide": "Ada yang salah di pihak kami. Coba lagi sebentar lagi.",
     "signedOut": "Sesimu berakhir. Masuk lagi untuk melanjutkan.",
-    "newVersion": "Versi baru agentes.chat sudah tersedia.",
+    "newVersion": "Versi baru xquads sudah tersedia.",
     "reload": "Muat ulang",
     "copy": "Salin",
     "copied": "Disalin",
@@ -52,7 +52,7 @@
     "notAllowed": "Kamu tidak punya izin untuk ini.",
     "tooMany": "Terlalu banyak percobaan. Coba lagi nanti.",
     "offline": "Kamu sedang offline. Periksa koneksimu dan coba lagi.",
-    "unreachable": "agentes.chat tidak bisa dijangkau sekarang. Coba lagi sebentar lagi."
+    "unreachable": "xquads tidak bisa dijangkau sekarang. Coba lagi sebentar lagi."
   },
   "reconnect": {
     "device": "Menghubungkan ulang… Tidak ada internet di perangkat ini.",
@@ -531,7 +531,7 @@
     "recommended": "Disarankan",
     "free": "Gratis · sumber terbuka",
     "cloud": {
-      "name": "agentes.chat Cloud",
+      "name": "xquads Cloud",
       "short": "Selalu menyala, tanpa perlu instal apa pun.",
       "on": "Komputer agen selalu menyala",
       "care": "Pembaruan dan cadangan kami yang urus",
@@ -551,7 +551,7 @@
       "address": "Alamat server",
       "connect": "Hubungkan",
       "invalid": "Itu bukan alamat. Tulis seperti di peramban, misalnya agentes.example.com.",
-      "unreachable": "Kami tidak menemukan agentes.chat di {{host}}. Periksa alamatnya dan pastikan servernya menyala.",
+      "unreachable": "Kami tidak menemukan xquads di {{host}}. Periksa alamatnya dan pastikan servernya menyala.",
       "none": "Belum punya?",
       "noneLink": "Lihat cara punya sendiri, gratis"
     },
@@ -622,7 +622,7 @@
     "termsMiddle": " dan",
     "privacy": "Kebijakan privasi",
     "termsAfter": ".",
-    "poweredBy": "Didukung oleh agentes.chat",
+    "poweredBy": "Didukung oleh xquads",
     "signOut": "Keluar",
     "earlyAccess": {
       "otherEmail": "Undangan ini untuk alamat lain. Daftar dengan alamat tujuan undangan itu.",
@@ -669,11 +669,11 @@
       "openMail": "Buka {{app}}",
       "ownerWaits": "Server ini menunggu pemiliknya.",
       "ownerWaitsLead": "Buka tautan pemilik server ini (berakhiran /owner#claim=…), di komputer ini atau di ponselmu.",
-      "noPassword": "Akun ini masuk dari aplikasi agentes.chat.",
+      "noPassword": "Akun ini masuk dari aplikasi xquads.",
       "noPasswordLead": "Di komputer yang menjalankan server ini, buka aplikasinya lalu pilih Tambah kata sandi di Pengaturan › Akunmu.",
       "backToSignIn": "Kembali ke halaman masuk",
       "backToAccount": "Kembali ke {{name}}",
-      "toAuthorizeApp": "Untuk menghubungkan aplikasi ke agentes.chat."
+      "toAuthorizeApp": "Untuk menghubungkan aplikasi ke xquads."
     },
     "desktop": {
       "browser": "Lanjutkan di browsermu",
@@ -684,11 +684,11 @@
       "otherServer": "Pakai server lain",
       "opening": "Membuka {{provider}}…",
       "confirm": "Apakah ini aplikasimu?",
-      "confirmLead": "Kode ini harus sama dengan yang ditampilkan aplikasi agentes.chat di komputermu.",
+      "confirmLead": "Kode ini harus sama dengan yang ditampilkan aplikasi xquads di komputermu.",
       "confirmYes": "Ya, masukkan aplikasinya",
       "confirmNo": "Ini bukan aku",
       "done": "Beres.",
-      "doneLead": "Kamu sudah masuk di aplikasi agentes. Kamu bisa menutup tab ini.",
+      "doneLead": "Kamu sudah masuk di aplikasi xquads. Kamu bisa menutup tab ini.",
       "expired": "Permintaan ini sudah kedaluwarsa.",
       "expiredLead": "Kembali ke aplikasi lalu pilih {{provider}} lagi.",
       "handover": "Masuk dengan akunmu dari perangkat lain…",
@@ -708,19 +708,19 @@
     },
     "desktopOwner": {
       "continue": "Lanjutkan di {{device}} ini",
-      "text": "Kamu memasang agentes.chat di {{device}} ini: tidak perlu kata sandi.",
+      "text": "Kamu memasang xquads di {{device}} ini: tidak perlu kata sandi.",
       "gone": "Pemilik server ini menghapus akunnya, jadi Lanjutkan di {{device}} ini tidak bisa memasukkan siapa pun. Masuk dengan emailmu sendiri.",
-      "none": "Tidak ada akun yang tersisa di agentes.chat pada {{device}} ini. Buat pemilik barunya di jendela yang terbuka."
+      "none": "Tidak ada akun yang tersisa di xquads pada {{device}} ini. Buat pemilik barunya di jendela yang terbuka."
     },
     "server": {
       "into": "Masuk ke <b>{{server}}</b>",
-      "intoHere": "Masuk ke agentes.chat <b>di {{device}} ini</b>",
-      "intoCloud": "Masuk ke <b>agentes.chat Cloud</b>",
+      "intoHere": "Masuk ke xquads <b>di {{device}} ini</b>",
+      "intoCloud": "Masuk ke <b>xquads Cloud</b>",
       "change": "Ganti server"
     },
     "forgotHere": {
       "ownerTitle": "Di sini kamu tidak perlu kata sandi.",
-      "ownerLead": "Kamu memasang agentes.chat di {{device}} ini. Masuk dari sini, lalu buat kata sandi baru.",
+      "ownerLead": "Kamu memasang xquads di {{device}} ini. Masuk dari sini, lalu buat kata sandi baru.",
       "notOwner": "Bukan akun orang yang memasangnya? Minta tautan kata sandi baru kepada pemilik workspace kamu.",
       "title": "Server ini tidak mengirim email.",
       "lead": "Minta tautan kata sandi baru kepada pemilik workspace kamu. Ia membuatnya di Anggota, dan tautannya berlaku 1 jam.",
@@ -965,7 +965,7 @@
         "edit": "Ubah avatar",
         "upload": "Unggah foto",
         "area": "Kamu mengurus bidang apa?",
-        "areaHint": "Opsional. Hanya supaya kami tahu siapa yang memakai agentes.chat."
+        "areaHint": "Opsional. Hanya supaya kami tahu siapa yang memakai xquads."
       },
       "area": {
         "options": {
@@ -1039,7 +1039,7 @@
         "asleep": "Tidur sampai ada paket",
         "price": "<b>Paket {{name}}</b> · {{price}} per bulan",
         "name": "<b>Paket {{name}}</b>",
-        "generic": "Paket agentes.chat",
+        "generic": "Paket xquads",
         "cancel": "Batalkan kapan saja",
         "cta": "Nyalakan tim",
         "all": "Lihat semua paket",
@@ -1095,9 +1095,9 @@
     },
     "yourCompany": "perusahaanmu",
     "purpose": {
-      "title": "Untuk apa kamu akan memakai agentes.chat?",
+      "title": "Untuk apa kamu akan memakai xquads?",
       "lead": "Kamu bisa mengganti mode ruang kerja kapan saja di Pengaturan, tanpa kehilangan apa pun.",
-      "pick": "Pilih cara kamu ingin melihat agentes.chat.",
+      "pick": "Pilih cara kamu ingin melihat xquads.",
       "switchTitle": "Ganti kapan saja.",
       "switchText": "Mode ruang kerja diubah di Pengaturan, dan tidak ada yang hilang.",
       "personal": "Untukku",
@@ -1181,7 +1181,7 @@
         "leadDots": "MCP memberi dot-mu akses ke ruang kerja ini lewat plugin yang kamu tambahkan di ChatGPT, jadi ia membuat agen di sini sendiri.",
         "howTo": "Cara menghubungkan, per aplikasi",
         "paste": "Tempel permintaan ini di aplikasi:",
-        "prompt": "Gunakan server MCP agentes.chat yang baru kamu hubungkan ({{url}}) untuk memindahkan yang kamu punya ke agentes.chat. Pertama panggil import_summary untuk melihat apa yang sudah ada di sana, agar tidak ada yang ganda. Lalu, untuk setiap agen, instruksi, skill, dan rutinitas yang kamu punya, buat padanannya dengan create_agent, create_skill, dan create_routine, dan simpan apa yang harus diingat setiap agen dengan add_memory.",
+        "prompt": "Gunakan server MCP xquads yang baru kamu hubungkan ({{url}}) untuk memindahkan yang kamu punya ke xquads. Pertama panggil import_summary untuk melihat apa yang sudah ada di sana, agar tidak ada yang ganda. Lalu, untuk setiap agen, instruksi, skill, dan rutinitas yang kamu punya, buat padanannya dengan create_agent, create_skill, dan create_routine, dan simpan apa yang harus diingat setiap agen dengan add_memory.",
         "promptLabel": "Permintaan untuk aplikasi AI-mu",
         "copy": "Salin permintaan",
         "copied": "Sekarang tempel di aplikasi AI-mu.",
@@ -1628,8 +1628,8 @@
     "keyStep": {
       "title": "AI mana yang akan mereka pakai?",
       "lead": "Masuk dengan paket AI-mu: tidak perlu kunci API.",
-      "paid": "Paket agentes.chat-mu sudah aktif. Komputer mereka sedang disiapkan.",
-      "confirming": "Mengonfirmasi pembayaran untuk paket agentes.chat ruang kerja ini.",
+      "paid": "Paket xquads-mu sudah aktif. Komputer mereka sedang disiapkan.",
+      "confirming": "Mengonfirmasi pembayaran untuk paket xquads ruang kerja ini.",
       "leadNoComputer": "Agenmu berpikir dengan kunci API, atau dengan paket AI-mu di komputer yang kamu hubungkan."
     },
     "jev": {
@@ -1640,7 +1640,7 @@
       "title": "Batas pengeluaran per agen",
       "label": "Batas bulanan per agen, dalam dolar",
       "perMonth": "/bulan",
-      "noteKey": "Hanya untuk penggunaan API, ditagih oleh penyedia kunci, bukan oleh agentes.chat. Saat agen mencapainya, agen berhenti dan memberitahumu. Paket tidak dihitung di sini.",
+      "noteKey": "Hanya untuk penggunaan API, ditagih oleh penyedia kunci, bukan oleh xquads. Saat agen mencapainya, agen berhenti dan memberitahumu. Paket tidak dihitung di sini.",
       "notePlatform": "Hanya untuk penggunaan API. Saat agen mencapainya, agen berhenti dan memberitahumu."
     },
     "keySite": "Buat kunci di {{site}}.",
@@ -1693,7 +1693,7 @@
     },
     "team": {
       "title": "Siapa lagi yang bekerja denganmu?",
-      "payment": "Kamu bisa mengundang timmu setelah memilih paket agentes.chat.",
+      "payment": "Kamu bisa mengundang timmu setelah memilih paket xquads.",
       "lead": "Undang mereka lewat email, atau bagikan tautannya.",
       "leadLink": "Bagikan tautan undangan kepada mereka.",
       "emails": "Email",
@@ -1806,7 +1806,7 @@
     "reload": "Muat ulang",
     "search": "Cari atau tanya…",
     "look": "Klik kanan",
-    "lookOurs": "agentes.chat",
+    "lookOurs": "xquads",
     "lookSystem": "Sistem",
     "markRead": "Tandai sudah dibaca",
     "muteChannel": "Bisukan saluran",
@@ -1831,8 +1831,8 @@
     "copied": "Disalin. Tempel di terminal.",
     "mac": {
       "why": "<b>Aplikasinya masih beta.</b> Jadi pada kali pertama, Mac-mu meminta konfirmasi:",
-      "drag": "Seret agentes.chat ke Aplikasi.",
-      "dragLong": "Buka file yang diunduh lalu seret agentes.chat ke Aplikasi.",
+      "drag": "Seret xquads ke Aplikasi.",
+      "dragLong": "Buka file yang diunduh lalu seret xquads ke Aplikasi.",
       "blocked": "Buka aplikasinya lalu klik Selesai.",
       "blockedSub": "Jangan klik Pindahkan ke Tong Sampah.",
       "settings": "Di Pengaturan › Privasi & Keamanan, klik Tetap Buka.",
@@ -1859,17 +1859,17 @@
       "why": "Untuk Ubuntu, Debian, dan sistem serupa (x64). Linux tidak meminta apa pun tambahan:",
       "apt": "Pasang .deb dengan klik dua kali, atau dari terminal.",
       "aptLong": "Klik dua kali file yang diunduh lalu klik Pasang, atau tempel ini di terminal:",
-      "open": "Buka agentes.chat dari daftar aplikasimu.",
+      "open": "Buka xquads dari daftar aplikasimu.",
       "otherTitle": "Pakai Arch, Fedora, atau sistem lain yang tidak menerima .deb?",
       "otherText": "Unduh AppImage: berjalan di distribusi apa pun dan memperbarui dirinya sendiri. Lalu tempel ini di terminal, di folder tempat Anda menyimpannya:",
       "appImage": "Unduh AppImage"
     },
     "page": {
-      "docTitle": "Unduh aplikasinya · agentes.chat",
-      "title": "Unduh aplikasi agentes.chat",
+      "docTitle": "Unduh aplikasinya · xquads",
+      "title": "Unduh aplikasi xquads",
       "beta": "Beta",
       "text": "Workspace-mu di jendelanya sendiri, dengan notifikasi sistemmu. Dengan satu klik, agen bekerja di komputer ini, di folder mereka sendiri.",
-      "open": "Buka agentes.chat",
+      "open": "Buka xquads",
       "version": "Versi {{version}}",
       "versionSize": "Versi {{version}} · {{size}}",
       "soon": "Belum ada versi untuk {{system}}.",
@@ -1879,7 +1879,7 @@
       "installOn": "Pasang di {{system}}",
       "system": "Sistem",
       "whyTitle": "Kenapa komputerku meminta konfirmasi?",
-      "whyText": "agentes.chat masih beta: versi Mac belum dinotarisasi oleh Apple, dan penginstal Windows belum membawa sertifikat Microsoft. Tanpa keduanya, komputermu bertanya sekali sebelum membuka aplikasi yang diunduh dari internet. Setelah itu, aplikasinya langsung terbuka dan memperbarui dirinya sendiri. Sebelum beta berakhir, langkah ini akan hilang.",
+      "whyText": "xquads masih beta: versi Mac belum dinotarisasi oleh Apple, dan penginstal Windows belum membawa sertifikat Microsoft. Tanpa keduanya, komputermu bertanya sekali sebelum membuka aplikasi yang diunduh dari internet. Setelah itu, aplikasinya langsung terbuka dan memperbarui dirinya sendiri. Sebelum beta berakhir, langkah ini akan hilang.",
       "openSource": "Sumber terbuka",
       "onlyHere": "Hanya diterbitkan di sini dan di rilis proyek",
       "signedUpdates": "Pembaruan bertanda tangan"
@@ -2196,7 +2196,7 @@
     "addAccount": "Tambah akun",
     "addAccountHint": "Masuk ke akun lain tanpa keluar dari akun ini",
     "yourServer": "Servermu",
-    "serverHere": "agentes.chat di {{device}} ini",
+    "serverHere": "xquads di {{device}} ini",
     "serverStopped": "berhenti",
     "serverOffline": "offline sejak {{time}}",
     "serverSignedOut": "belum masuk",
@@ -2340,9 +2340,9 @@
     "googlePlay": "Google Play"
   },
   "openOnPhone": {
-    "qr": "Kode QR untuk masuk ke aplikasi agentes",
+    "qr": "Kode QR untuk masuk ke aplikasi xquads",
     "making": "Membuat kode…",
-    "stepApp": "Pasang aplikasi agentes di ponselmu.",
+    "stepApp": "Pasang aplikasi xquads di ponselmu.",
     "stepTailscale": "Pasang Tailscale di ponselmu dan masuk dengan akun Tailscale yang sama dengan server ini.",
     "appStore": "App Store",
     "googlePlay": "Google Play",
@@ -2351,12 +2351,12 @@
     "private": "Siapa pun yang memindai kode ini akan masuk sebagai kamu.",
     "failed": "Kode tidak bisa dibuat.",
     "localOnly": "Server ini hanya terbuka di komputer tempat ia berjalan, jadi ponselmu tidak bisa menjangkaunya.",
-    "localOnlyHow": "Di aplikasi agentes.chat pada komputer itu, nyalakan Akses dari ponselmu dan rekan tim di Preferensi › Server. Lalu kembali ke sini.",
+    "localOnlyHow": "Di aplikasi xquads pada komputer itu, nyalakan Akses dari ponselmu dan rekan tim di Preferensi › Server. Lalu kembali ke sini.",
     "localOnlyHere": "Nyalakan Akses dari ponselmu dan rekan tim. Lalu kembali ke sini."
   },
   "surface": {
     "link": {
-      "consent": "{{assistant}} dari agentes.chat boleh mengirimimu pesan di {{surface}} tentang ruang kerjamu, dan meneleponmu hanya saat ada yang mendesak dan kamu mengizinkannya. Tulis stop untuk mematikannya.",
+      "consent": "{{assistant}} dari xquads boleh mengirimimu pesan di {{surface}} tentang ruang kerjamu, dan meneleponmu hanya saat ada yang mendesak dan kamu mengizinkannya. Tulis stop untuk mematikannya.",
       "title": "Ngobrol dengan {{assistant}} di {{surface}}",
       "qr": "Kode QR yang membuka {{surface}} dengan kodemu sudah terisi",
       "making": "Membuat kodemu",
@@ -2845,8 +2845,8 @@
       "greetingPersonal": "Halo, saya {{name}}. Saya akan menyiapkan agen-agenmu bersama kamu.",
       "lead": "Saya membuat agen, menghubungkan aplikasi, dan mengundang orang. Tidak ada yang berubah tanpa permintaan Anda, dan saya hanya melakukan apa yang bisa Anda lakukan.",
       "leadPersonal": "Saya membuat agenmu dan menghubungkan aplikasimu. Tidak ada yang berubah tanpa permintaanmu.",
-      "heldLead": "Pilih bidang usahamu dan timnya muncul di sini. Agen mulai bekerja setelah workspace punya paket agentes.chat.",
-      "heldLeadPersonal": "Pilih hal yang ingin dibantu, lalu agenmu muncul di sini. Mereka mulai bekerja setelah kamu punya paket agentes.chat.",
+      "heldLead": "Pilih bidang usahamu dan timnya muncul di sini. Agen mulai bekerja setelah workspace punya paket xquads.",
+      "heldLeadPersonal": "Pilih hal yang ingin dibantu, lalu agenmu muncul di sini. Mereka mulai bekerja setelah kamu punya paket xquads.",
       "connect": {
         "title": "Hubungkan AI untuk tim",
         "titlePersonal": "Hubungkan AI untuk agenmu",
@@ -3286,7 +3286,7 @@
       "plans_not_yours": "{{plan}} di sini hanya milik {{owner}}. Hubungkan milikmu dan aku akan menjawab.",
       "plan_unattended": "{{name}} tidak menjawab: permintaannya tidak datang dari seseorang, dan paket workspace hanya menjawab pemiliknya.",
       "runner_outdated": "{{name}} belum bisa menjawab sekarang: program di komputer paket perlu diperbarui.",
-      "plan_tools": "{{name}} berhenti sebelum menjawab: AI paket di komputer itu tidak tetap memakai alat agentes.chat saja.",
+      "plan_tools": "{{name}} berhenti sebelum menjawab: AI paket di komputer itu tidak tetap memakai alat xquads saja.",
       "model_limit": "{{name}} tidak bisa menjawab sekarang: {{model}} sudah mencapai batasnya sendiri di paket. Model lain di paket itu tetap berjalan.",
       "model_region": "{{name}} tidak bisa menjawab: {{model}} butuh wilayah Global dinyalakan di OpenCode (Settings › Privacy).",
       "model_off": "{{name}} tidak bisa menjawab: OpenCode menolak {{model}} dengan kunci ini. Aktifkan model atau akunnya di OpenCode, atau pilih model lain.",
@@ -3297,16 +3297,16 @@
     "kept": {
       "title": "Saya menyimpan pesanmu",
       "wait": {
-        "payment": "Saya akan menjawab di sini setelah workspace punya paket agentes.chat.",
-        "unpaid": "Saya akan menjawab di sini setelah pembayaran paket agentes.chat berhasil.",
-        "ended": "Saya akan menjawab di sini setelah workspace berlangganan agentes.chat lagi."
+        "payment": "Saya akan menjawab di sini setelah workspace punya paket xquads.",
+        "unpaid": "Saya akan menjawab di sini setelah pembayaran paket xquads berhasil.",
+        "ended": "Saya akan menjawab di sini setelah workspace berlangganan xquads lagi."
       },
-      "askAdmin": "Saya akan menjawab di sini setelah admin membereskan paket agentes.chat.",
+      "askAdmin": "Saya akan menjawab di sini setelah admin membereskan paket xquads.",
       "plan": "Paket ini membawa komputer agen. AI-nya yang sudah kamu bayar: Claude, ChatGPT dan lainnya, atau kunci API.",
       "activeTitle": "Paket aktif",
       "activeLine": "Hubungkan AI dan {{name}} menjawab di sini.",
       "receipt": "Disimpan",
-      "channel": "Disimpan. Agen menjawab setelah workspace punya paket agentes.chat."
+      "channel": "Disimpan. Agen menjawab setelah workspace punya paket xquads."
     },
     "receipt": "Tidak ada yang akan menjawab: belum ada AI yang terhubung",
     "notYours": {
@@ -3337,7 +3337,7 @@
       "gitMissing": "{{program}} butuh Git for Windows di {{computer}}.",
       "getGit": "Unduh Git for Windows",
       "cantStart": "{{program}} ada di {{computer}}, tetapi tidak mau berjalan: {{message}}",
-      "outdated": "Perbarui aplikasi agentes.chat di {{computer}} untuk memasang dari sini.",
+      "outdated": "Perbarui aplikasi xquads di {{computer}} untuk memasang dari sini.",
       "asked": "Permintaan terkirim. {{name}} mendapat tombol untuk memasangnya.",
       "runThis": "Jalankan perintah ini di sana untuk memasangnya.",
       "missingSystem": "{{program}} belum ada di {{computer}} untuk para agen, yang masing-masing bekerja sebagai pengguna sendiri. Jalankan perintah ini di sana untuk memasangnya bagi semuanya.",
@@ -3409,8 +3409,8 @@
         "unshare": "Hanya untukku"
       }
     },
-    "billing": "Paket masuk di komputer workspace, dan komputer itu datang dengan paket agentes.chat yang aktif.",
-    "billingWeb": "Pilih satu di web, di agentes.chat.",
+    "billing": "Paket masuk di komputer workspace, dan komputer itu datang dengan paket xquads yang aktif.",
+    "billingWeb": "Pilih satu di web, di xquads.",
     "orPayGo": "Atau bayar sesuai pemakaian",
     "pay": {
       "label": "Bagaimana kamu membayar?",
@@ -3481,7 +3481,7 @@
       "untested": "Belum ada model {{name}} yang lolos uji.",
       "testModels": "Uji model",
       "savedUnchecked": "Tersimpan, tetapi {{provider}} tidak menjawab, jadi kami tidak bisa memeriksa kuncinya. Jika gagal, percakapan memberi tahu alasannya.",
-      "closed": "Kunci API terbuka bersama paket agentes.chat workspace.",
+      "closed": "Kunci API terbuka bersama paket xquads workspace.",
       "notPlan": "Kunci paket coding dimasukkan di opsinya sendiri di atas.",
       "billing": "Aktifkan penagihan untuk proyek kunci ini. Tanpa penagihan, Google bisa memakai apa yang dikirim agenmu.",
       "privacy": "{{provider}} meneruskan apa yang dikirim agenmu ke perusahaan yang membuat atau menghosting model, sesuai ketentuan dan pengaturan privasi {{provider}}."
@@ -4197,7 +4197,7 @@
     "clearsAt": "Dihapus pukul {{time}}",
     "clearsOn": "Dihapus {{when}}",
     "help": {
-      "auto": "Online selama agentes.chat terbuka.",
+      "auto": "Online selama xquads terbuka.",
       "away": "Pergi sebentar: orang tahu balasanmu mungkin butuh waktu.",
       "busy": "Semua orang tahu sebaiknya kamu tidak diganggu dulu.",
       "out": "Sedang tidak bekerja (liburan, cuti): semua orang melihatnya sampai statusmu hilang.",
@@ -4715,7 +4715,7 @@
       "removeText_other": "{{count}} item keluar dari Vault dan agenmu berhenti menggunakannya. Tidak ada yang berubah di {{name}}.",
       "removed": "{{name}} diputus",
       "listOf": "Koneksi ke {{name}}",
-      "note": "Agenmu membaca isinya saat perlu. Tidak ada yang disalin ke agentes.chat selain nama dan alamat.",
+      "note": "Agenmu membaca isinya saat perlu. Tidak ada yang disalin ke xquads selain nama dan alamat.",
       "error": {
         "auth_failed": "Masuk ditolak",
         "locked": "Kata sandi salah",
@@ -5451,7 +5451,7 @@
       "eyebrow": "Permintaan persetujuan",
       "close": "Tutup",
       "exact": "Tindakan persisnya",
-      "builtIn": "Alat agentes.chat",
+      "builtIn": "Alat xquads",
       "orgConnector": "Konektor ruang kerjamu",
       "bound": "Hanya untuk nilai ini: perubahan apa pun butuh persetujuan baru.",
       "why": "Alasan",
@@ -5541,7 +5541,7 @@
     "noInstructions": "{{name}} belum punya instruksi. Jelaskan bagaimana dia harus bekerja.",
     "noInstructions_female": "{{name}} belum punya instruksi. Jelaskan bagaimana dia harus bekerja.",
     "savedToast": "Perubahan {{name}} tersimpan.",
-    "builtinName": "agentes",
+    "builtinName": "xquads",
     "builtinNote": "izin bawaan",
     "connectHint": "Hubungkan layanan",
     "subtitle": "{{role}} · milik <b>{{owner}}</b> · {{model}} {{key}}",
@@ -5886,11 +5886,11 @@
       "steps": {
         "title": "Tinggal satu langkah, di {{computer}} itu sendiri",
         "waiting": "Menunggu",
-        "one": "Klik ikon agentes.chat di dekat jam",
+        "one": "Klik ikon xquads di dekat jam",
         "two": "Preferensi",
         "three": "Nyalakan Browser",
         "done": "Selesai. Halaman ini mendeteksinya sendiri, tidak perlu dimuat ulang.",
-        "menuOpen": "Buka agentes",
+        "menuOpen": "Buka xquads",
         "menuPrefs": "Preferensi…",
         "menuPause": "Jeda",
         "menuQuit": "Keluar",
@@ -6074,7 +6074,7 @@
       "setAll": "Ubah semua",
       "connectors": "Konektor {{org}}",
       "connectorsPersonal": "Konektormu",
-      "builtin": "Bawaan agentes",
+      "builtin": "Bawaan xquads",
       "noMatch": "Tidak ada yang cocok dengan “{{q}}”",
       "noneHere": "Tidak ada apa pun di filter ini",
       "library": "Pustaka skill",
@@ -6577,10 +6577,10 @@
       "afterPlanNext": "Ini langkah setelah paket.",
       "plan": {
         "todo": "Nyalakan timnya.",
-        "todoDesc": "Dengan paket agentes.chat, agen mulai bekerja.",
+        "todoDesc": "Dengan paket xquads, agen mulai bekerja.",
         "action": "Lihat paket",
         "todoPersonal": "Nyalakan agenmu.",
-        "todoDescPersonal": "Dengan paket agentes.chat, agenmu mulai bekerja."
+        "todoDescPersonal": "Dengan paket xquads, agenmu mulai bekerja."
       },
       "about": {
         "action": "Ceritakan",
@@ -7655,13 +7655,13 @@
     "crashTitle": "Ada yang salah",
     "crashText": "Muat ulang halaman untuk melanjutkan.",
     "crashCode": "Kalau kamu minta bantuan, sebutkan kode {{id}}.",
-    "unreachableTitle": "agentes.chat tidak bisa dijangkau",
+    "unreachableTitle": "xquads tidak bisa dijangkau",
     "unreachableText": "Mungkin sedang dimulai ulang. Halaman ini terbuka sendiri begitu kembali normal.",
     "offlineTitle": "Kamu sedang offline",
     "offlineText": "Halaman ini terbuka sendiri saat kamu kembali online.",
     "unknownHostTitle": "Alamat ini belum disiapkan",
     "unknownHostText": "Kalau baru saja dihubungkan, coba lagi dalam beberapa menit.",
-    "unknownHostTab": "Alamat belum disiapkan · agentes.chat"
+    "unknownHostTab": "Alamat belum disiapkan · xquads"
   },
   "scopes": {
     "context_read": {
@@ -8751,7 +8751,7 @@
         "pr_opened": "PR dibuka di GitHub"
       },
       "issue": {
-        "created": "Tugas dibuat di agentes"
+        "created": "Tugas dibuat di xquads"
       },
       "deploy": {
         "succeeded": "Deploy selesai"
@@ -9337,7 +9337,7 @@
       "title": "File misi",
       "folder": "folder",
       "tabs": "File",
-      "missionSub": "Rencana dan aturan · diperbarui oleh agentes.chat",
+      "missionSub": "Rencana dan aturan · diperbarui oleh xquads",
       "decisionsSub": "Keputusan yang disetujui",
       "notesSub": "Catatan {{executor}}",
       "notesSub_female": "Catatan {{executor}}",
@@ -9413,7 +9413,7 @@
       "title": "Misi baru",
       "text": "Proyek panjang untuk agen. Agen mengusulkan rencana, bekerja di komputernya, dan meminta keputusan serta tinjauan di utas.",
       "goal": "Tujuan",
-      "goalPlaceholder": "Misalnya, bangun aplikasi seluler agentes.chat dengan Expo, berdasarkan aplikasi web saat ini.",
+      "goalPlaceholder": "Misalnya, bangun aplikasi seluler xquads dengan Expo, berdasarkan aplikasi web saat ini.",
       "agent": "Agen",
       "computer": "Komputer",
       "noMachine": "Tidak ada yang terhubung",
@@ -10301,7 +10301,7 @@
   },
   "jev": {
     "title": "Jev",
-    "about": "Model cepat dari TypeSafe, dibuat untuk keputusan cepat. agentes.chat mengajukan pertanyaan kecil padanya, seperti siapa yang sebaiknya menjawab. Kamu membayar langsung ke TypeSafe, atau lewat OpenRouter dengan harga yang sama.",
+    "about": "Model cepat dari TypeSafe, dibuat untuk keputusan cepat. xquads mengajukan pertanyaan kecil padanya, seperti siapa yang sebaiknya menjawab. Kamu membayar langsung ke TypeSafe, atau lewat OpenRouter dengan harga yang sama.",
     "lead": "Membantu agen-agenmu bekerja sebagai tim.",
     "how": "Cara kerja Jev",
     "why": {
@@ -10514,14 +10514,14 @@
       "antigravity": "Gemini",
       "opencode": "OpenCode",
       "needs": {
-        "keys": "Perbarui agentes di komputer untuk memakai kunci paket"
+        "keys": "Perbarui xquads di komputer untuk memakai kunci paket"
       },
       "noComputer": "Akun disimpan di komputer yang terhubung. Hubungkan salah satu komputermu dulu.",
       "addComputer": "Hubungkan komputer",
       "needsCloud": {
         "online": "{{computer}} sedang memulai ulang atau menyambung lagi. Ini berubah sendiri begitu ia kembali.",
         "installing": "{{program}} sedang dipasang di {{computer}}. Ini berubah sendiri setelah selesai.",
-        "runnerOld": "Program agentes.chat di {{computer}} sudah usang dan pembaruannya sedang dalam perjalanan. Ini berubah sendiri setelah selesai.",
+        "runnerOld": "Program xquads di {{computer}} sudah usang dan pembaruannya sedang dalam perjalanan. Ini berubah sendiri setelah selesai.",
         "execOff": "{{computer}} belum bisa menjalankan {{program}}. Kami sedang menanganinya, dan ini berubah sendiri.",
         "toolOff": "{{program}} belum diizinkan di {{computer}}. Itu urusan kami: coba lagi nanti.",
         "preparing": "{{computer}} sedang disiapkan. Ini berubah sendiri setelah selesai.",
@@ -10535,7 +10535,7 @@
     },
     "page": {
       "title": "Paketmu",
-      "hint": "Setiap paket tetap di komputer tempat ia dihubungkan, dan siapa pun yang mengelola komputer itu bisa mengaksesnya. agentes.chat hanya menyimpan nama, email, dan pemakaiannya.",
+      "hint": "Setiap paket tetap di komputer tempat ia dihubungkan, dan siapa pun yang mengelola komputer itu bisa mengaksesnya. xquads hanya menyimpan nama, email, dan pemakaiannya.",
       "emptyTitle": "Pakai paket AI yang sudah kamu bayar",
       "emptyViewer": "Orang yang mengurus AI ruang kerja menghubungkan paket, lalu muncul di sini.",
       "connect": "Hubungkan AI",
@@ -11992,7 +11992,7 @@
     "reasons": {
       "no_computer": "Pilih komputer yang terhubung di Komputer untuk memakainya.",
       "exec_off": "Komputer ini terhubung tanpa izin menjalankan program.",
-      "runner_old": "Perbarui program agentes.chat di komputer untuk memakainya.",
+      "runner_old": "Perbarui program xquads di komputer untuk memakainya.",
       "tool_offOne": "{{program}} mati di {{computer}}.",
       "not_installed": "{{program}} belum terpasang di {{computer}}.",
       "cant_start": "{{program}} ada di {{computer}}, tetapi tidak mau berjalan.",
@@ -12029,7 +12029,7 @@
     "free": "Gratis",
     "opencodeFreeHint": "Model gratis lainnya berjalan lewat OpenCode di komputer agen.",
     "missingModel": {
-      "app_old": "Perbarui aplikasi agentes.chat di komputer agen untuk memakai {{model}}.",
+      "app_old": "Perbarui aplikasi xquads di komputer agen untuk memakai {{model}}.",
       "cli_old": "{{model}} memerlukan Antigravity CLI versi lebih baru di komputer agen. Jalankan agy update di sana.",
       "plan": "{{model}} tersedia di Google AI Pro dan Ultra. Tidak ada akun Gemini di komputer agen yang memiliki paket itu."
     },
@@ -12525,7 +12525,7 @@
   "storage": {
     "title": "Penyimpanan",
     "options": "Tempat menyimpan file",
-    "agentes": "Penyimpanan agentes.chat",
+    "agentes": "Penyimpanan xquads",
     "agentesText": "Filemu disimpan di penyimpanan kami, terpisah untuk tiap ruang kerja.",
     "server": "Server ini",
     "serverText": {
@@ -12536,7 +12536,7 @@
     },
     "showFolder": "Tampilkan folder",
     "place": {
-      "agentes": "penyimpanan agentes.chat",
+      "agentes": "penyimpanan xquads",
       "server": "server ini"
     },
     "s3": "Penyimpanan milikmu sendiri",
@@ -12648,7 +12648,7 @@
       "step": {
         "bucketTitle": "Buat bucket",
         "keyTitle": "Buat kunci akses",
-        "userTitle": "Buat pengguna khusus untuk agentes.chat",
+        "userTitle": "Buat pengguna khusus untuk xquads",
         "r2Bucket": "Di dasbor Cloudflare, buka <b>R2</b> lalu klik <b>Create bucket</b>. Nama apa pun boleh.",
         "r2Key": "Di halaman R2, pada <b>API Tokens</b>, klik <b>Manage</b> lalu <b>Create API Token</b>. Pilih izin <b>Object Read & Write</b> dan bucket-mu. Di akhir, Cloudflare menampilkan tiga nilai di bawah ini hanya sekali.",
         "s3Bucket": "Di konsol AWS, buka <b>S3</b> lalu klik <b>Create bucket</b>. Catat wilayah yang kamu pilih.",
@@ -12726,11 +12726,11 @@
   },
   "githubApp": {
     "title": "Repositori GitHub",
-    "text": "Di tempat aplikasi agentes.chat terpasang, agen membuka pull request, issue, komentar, dan commit sebagai aplikasi itu, dengan nama agen dan orang yang meminta.",
-    "install": "Pasang aplikasi agentes.chat",
+    "text": "Di tempat aplikasi xquads terpasang, agen membuka pull request, issue, komentar, dan commit sebagai aplikasi itu, dengan nama agen dan orang yang meminta.",
+    "install": "Pasang aplikasi xquads",
     "installMore": "Pasang di akun lain",
     "none": "Belum ada akun GitHub.",
-    "usingAccount": "Saat ini agen muncul di GitHub sebagai {{account}}. Pasang aplikasinya agar mereka muncul sebagai aplikasi agentes.chat.",
+    "usingAccount": "Saat ini agen muncul di GitHub sebagai {{account}}. Pasang aplikasinya agar mereka muncul sebagai aplikasi xquads.",
     "allRepos": "Semua repositori",
     "someRepos": "Repositori terpilih",
     "suspended": "Ditangguhkan di GitHub",
@@ -12739,27 +12739,27 @@
     "remove": "Hapus",
     "removeName": "Hapus {{account}}",
     "removeTitle": "Hapus aplikasi dari {{account}}?",
-    "removeText": "Aplikasi agentes.chat dicopot dari {{account}} di GitHub, dan agen berhenti memakai repositori akun itu lewat aplikasi ini.",
+    "removeText": "Aplikasi xquads dicopot dari {{account}} di GitHub, dan agen berhenti memakai repositori akun itu lewat aplikasi ini.",
     "removeLast": "Ini yang terakhir, jadi agen kehilangan GitHub sampai seseorang memasang aplikasinya atau menghubungkan akun.",
     "removed": "Aplikasi dihapus dari {{account}} dan dicopot di GitHub.",
     "notUninstalled": "Aplikasi dihapus di sini, tapi GitHub belum mengonfirmasi pencopotan dari {{account}}. Copot di sana.",
     "openPage": "Buka",
-    "installed": "Aplikasi agentes.chat terpasang.",
+    "installed": "Aplikasi xquads terpasang.",
     "requested": "Hanya pemilik akun GitHub itu yang bisa memasang aplikasinya. Minta dia memasangnya dari Konektor › GitHub di ruang kerja ini.",
     "notVisible": "Akun GitHub-mu tidak bisa melihat pemasangan itu. Pasang dengan akun yang punya akses ke sana.",
     "otherWorkspace": "Akun GitHub itu sudah terhubung ke ruang kerja lain. Hapus aplikasinya di sana sebelum memasangnya di sini.",
-    "installedOutside": "Aplikasinya dipasang di akun GitHub itu di luar agentes.chat. Hapus di GitHub, lalu pasang lagi dari Konektor › GitHub.",
+    "installedOutside": "Aplikasinya dipasang di akun GitHub itu di luar xquads. Hapus di GitHub, lalu pasang lagi dari Konektor › GitHub.",
     "ownerUnknown": "GitHub tidak memberi tahu siapa pemilik organisasi itu. Pengelola server perlu menambahkan izin organisasi Members (hanya baca) ke aplikasi GitHub, lalu kamu pasang lagi.",
     "misconfigured": "Aplikasi GitHub di server memakai kunci rahasia yang salah, jadi pemasangan tidak bisa selesai. Pengelola server perlu mengganti kunci itu di pengaturan aplikasi.",
     "connectAccount": "Hubungkan akun GitHub",
     "ownerHint": "Pemilik server ini bisa membuat aplikasi GitHub di sini, di Konektor.",
-    "viaApp": "Lewat aplikasi agentes.chat di {{accounts}}",
-    "disconnectApp": "Aplikasi agentes.chat juga dicopot dari {{accounts}} di GitHub.",
-    "disconnectKeepsApp": "Agen tetap di GitHub lewat aplikasi agentes.chat di {{accounts}}.",
-    "keptApp": "Akun GitHub diputuskan. Agen tetap di GitHub lewat aplikasi agentes.chat.",
+    "viaApp": "Lewat aplikasi xquads di {{accounts}}",
+    "disconnectApp": "Aplikasi xquads juga dicopot dari {{accounts}} di GitHub.",
+    "disconnectKeepsApp": "Agen tetap di GitHub lewat aplikasi xquads di {{accounts}}.",
+    "keptApp": "Akun GitHub diputuskan. Agen tetap di GitHub lewat aplikasi xquads.",
     "signature": {
-      "forPerson": "{{agent}}, agen {{person}} di agentes.chat",
-      "alone": "{{agent}}, agen di agentes.chat"
+      "forPerson": "{{agent}}, agen {{person}} di xquads",
+      "alone": "{{agent}}, agen di xquads"
     },
     "manifestPage": {
       "title": "Membuat aplikasi GitHub",
@@ -14479,7 +14479,7 @@
     "continueInComposio": "Lanjutkan di Composio",
     "github": {
       "how": "Cara agen menjangkau GitHub",
-      "app": "Aplikasi agentes.chat",
+      "app": "Aplikasi xquads",
       "recommended": "Disarankan",
       "appText": "Agen muncul sebagai aplikasi, dan kamu memilih repositorinya di GitHub.",
       "account": "Akun GitHub",
@@ -14501,11 +14501,11 @@
     "or": "atau",
     "withKey": "Hubungkan dengan kunci API",
     "needsKey": "Server ini tidak mendukung OAuth. Hubungkan dengan kunci API.",
-    "notApproved": "{{name}} hanya mengizinkan aplikasi yang sudah disetujuinya untuk masuk, dan agentes.chat belum disetujui. Kalau {{name}} memberimu kunci API, kamu bisa menghubungkan dengan kunci itu.",
+    "notApproved": "{{name}} hanya mengizinkan aplikasi yang sudah disetujuinya untuk masuk, dan xquads belum disetujui. Kalau {{name}} memberimu kunci API, kamu bisa menghubungkan dengan kunci itu.",
     "serverSaid": "Jawaban server: {{detail}}",
     "ownClient": {
       "title": "Pakai aplikasi OAuth Anda sendiri",
-      "notApproved": "{{name}} hanya mengizinkan aplikasi yang sudah disetujuinya, dan agentes.chat belum termasuk. Anda bisa menghubungkannya dengan aplikasi Anda sendiri di sana.",
+      "notApproved": "{{name}} hanya mengizinkan aplikasi yang sudah disetujuinya, dan xquads belum termasuk. Anda bisa menghubungkannya dengan aplikasi Anda sendiri di sana.",
       "askAdmin": "Admin bisa menghubungkannya dengan aplikasi milik workspace.",
       "help": "Buat aplikasi di penyedia, daftarkan URI pengalihan ini di sana, lalu tempel client ID-nya. Setiap masuk ke sana dari workspace akan memakai aplikasi Anda.",
       "guide": {
@@ -14801,7 +14801,7 @@
     "whatIsText": "Kata sandi khusus untuk agen. Kamu membuatnya di situs email-mu dan bisa menghapusnya kapan saja, tanpa mengubah kata sandimu sendiri.",
     "step": {
       "1": "Buka halaman keamanan akunmu.",
-      "2": "Buat kata sandi aplikasi bernama “agentes”.",
+      "2": "Buat kata sandi aplikasi bernama “xquads”.",
       "3": "Salin kata sandinya lalu tempel di sini."
     },
     "openPage": "Buka halaman {{name}}",
@@ -15194,7 +15194,7 @@
       "noAssistant": "Asisten di ruang kerja ini tidak diatur untuk bicara denganmu. Pilih ruang kerja lain untuk ditautkan.",
       "noWorkspace": "Kamu tidak lagi ada di ruang kerja ini. Pilih ruang kerja lain untuk ditautkan.",
       "linkGone": "Tautan ini tidak lagi menunggu: kedaluwarsa setelah 10 menit atau dibatalkan. Buat kode baru untuk mulai lagi.",
-      "taken": "Pengirim itu tertaut ke akun agentes.chat lain. Lepaskan tautannya di sana, lalu kirim kode baru.",
+      "taken": "Pengirim itu tertaut ke akun xquads lain. Lepaskan tautannya di sana, lalu kirim kode baru.",
       "undoGone": "Tautan pembatalan ini sudah dipakai atau kedaluwarsa. Lepaskan tautan lewat pengaturan notifikasimu saja.",
       "codeGone": "Kode ini salah, sudah dipakai, atau kedaluwarsa setelah 10 menit. Buat kode baru dan kirim lagi."
     },
@@ -15246,7 +15246,7 @@
       "leadChannelOnly": "Hanya kanal yang punya agen penanggung jawab.",
       "leadNotMember": "Agen penanggung jawab harus ada di kanal.",
       "mcpUnreachable": "Tidak bisa terhubung ke server MCP. Periksa alamatnya dan coba lagi.",
-      "notApproved": "Layanan ini belum menyetujui agentes.chat.",
+      "notApproved": "Layanan ini belum menyetujui xquads.",
       "alreadyInvited": "Orang ini sudah punya undangan.",
       "alreadyAsked": "Seseorang sudah meminta untuk orang ini.",
       "mailboxConnected": "Kotak surat ini sudah terhubung.",
@@ -15425,7 +15425,7 @@
       "noComputer": "Agen ini belum punya komputer untuk misi.",
       "computerOffline": "Komputer agen sedang offline.",
       "execDisabled": "Perintah dinonaktifkan di komputer itu.",
-      "runnerOutdated": "Program di komputer itu terlalu lama untuk misi: perbarui aplikasi agentes.chat di sana, atau jalankan lagi perintah pemasangannya.",
+      "runnerOutdated": "Program di komputer itu terlalu lama untuk misi: perbarui aplikasi xquads di sana, atau jalankan lagi perintah pemasangannya.",
       "exists": "Utas ini sudah punya misi.",
       "closed": "Misi ini sudah ditutup.",
       "wrongStatus": "Status misi tidak memungkinkan hal ini.",
@@ -15559,7 +15559,7 @@
       "notOwner": "Hanya orang yang menghubungkan komputer ini yang menyalakan alatnya. Minta kepada orang itu.",
       "askSelf": "Ini komputermu: nyalakan dengan tombolnya.",
       "adminAskSelf": "Kamu bisa melakukannya sendiri di sini.",
-      "accountMethodUnsupported": "Komputer ini belum bisa menghubungkan Claude dengan cara ini. Perbarui program agentes.chat di komputer ini, atau pakai kunci API.",
+      "accountMethodUnsupported": "Komputer ini belum bisa menghubungkan Claude dengan cara ini. Perbarui program xquads di komputer ini, atau pakai kunci API.",
       "brainUnavailable": "AI ini belum disiapkan di {{computer}}. Siapkan di sana, atau pilih yang lain.",
       "offline": "{{name}} sedang offline. Coba lagi setelah ia kembali.",
       "paused": "{{name}} dijeda: tidak ada yang baru dimulai di sana sampai dilanjutkan.",
@@ -15613,6 +15613,7 @@
       "notRestorable": "Akun ini sudah tidak bisa dipulihkan.",
       "notOwner": "Hanya orang yang menghubungkan akun atau paket ini yang bisa melakukan ini.",
       "permissionForbidden": "Hanya pemilik akun, admin, atau orang yang boleh mengelolanya yang bisa mengubah ini.",
+      "planOff": "Agen tidak bisa berpikir dengan paket ini di sini. Pilih kunci API saja.",
       "orderForbidden": "Hanya orang yang menghubungkan akun ini atau Admin yang bisa mengubah posisinya dalam urutan."
     },
     "channel": {
@@ -15717,7 +15718,7 @@
       "ask": "Minta {{name}}",
       "asked": "Sudah diminta. {{name}} mendapat tombol untuk menyalakannya.",
       "done": "Menyala di {{machine}}.",
-      "outdated": "Perbarui aplikasi agentes.chat di {{machine}} untuk menyalakannya dari sini.",
+      "outdated": "Perbarui aplikasi xquads di {{machine}} untuk menyalakannya dari sini.",
       "offline": "{{machine}} sedang offline. Begitu kembali, tombol ini menyalakan {{tool}}."
     },
     "remotePause": {
@@ -15731,7 +15732,7 @@
       "byYouUntil": "Dijeda olehmu sampai {{time}}.",
       "byName": "Dijeda oleh {{name}}.",
       "byNameUntil": "Dijeda oleh {{name}} sampai {{time}}.",
-      "outdated": "Perbarui aplikasi agentes.chat di komputer ini untuk menjedanya dari sini.",
+      "outdated": "Perbarui aplikasi xquads di komputer ini untuk menjedanya dari sini.",
       "paused": "{{name}} dijeda",
       "resumed": "{{name}} kembali bekerja"
     },
@@ -15789,9 +15790,9 @@
     },
     "host": {
       "label": "Komputer server ini",
-      "desc": "Tempat agentes.chat terpasang.",
-      "descUsers": "Tempat agentes.chat terpasang, satu pengguna per agen.",
-      "descShared": "Komputer tempat agentes.chat terpasang. Agen bekerja sebagai orang yang memasangnya.",
+      "desc": "Tempat xquads terpasang.",
+      "descUsers": "Tempat xquads terpasang, satu pengguna per agen.",
+      "descShared": "Komputer tempat xquads terpasang. Agen bekerja sebagai orang yang memasangnya.",
       "stop": "Berhenti memakainya di ruang kerja ini",
       "stopTitle": "Berhenti memakai komputer server ini?",
       "stopText": "Agen di ruang kerja ini berhenti memakai komputer ini sekarang. Kamu bisa memakainya lagi kapan saja.",
@@ -15802,7 +15803,7 @@
     },
     "download": {
       "title": "Hubungkan komputer lain",
-      "text": "Pasang aplikasi agentes.chat di komputer itu.",
+      "text": "Pasang aplikasi xquads di komputer itu.",
       "mac": "Unduh aplikasi untuk {{system}}",
       "version": "Versi {{version}}",
       "versionSize": "Versi {{version}} · {{size}}",
@@ -15813,7 +15814,7 @@
       "unavailable": "Aplikasinya belum tersedia.",
       "unavailableCommand": "Aplikasinya belum tersedia. Untuk sementara, pakai perintah di bawah.",
       "firstTime": "Pertama kali",
-      "step1": "Buka file yang diunduh lalu seret agentes.chat ke Applications.",
+      "step1": "Buka file yang diunduh lalu seret xquads ke Applications.",
       "step1Install": "Buka file yang diunduh untuk memasangnya.",
       "otherText": "Jalankan ini di terminal komputer itu, lalu konfirmasi kode yang ditampilkannya.",
       "waiting": "Menunggu komputer terhubung…"
@@ -15844,7 +15845,7 @@
       "ownFolder": "Folder tiap agen",
       "ownFolderText": "Selalu. Agen tidak bisa melihat folder agen lain.",
       "noFolders": "Tidak ada folder tambahan. Tiap agen hanya memakai foldernya sendiri.",
-      "noReport": "Komputer ini belum memberi tahu apa yang diizinkannya. Perbarui agentes.chat di sana.",
+      "noReport": "Komputer ini belum memberi tahu apa yang diizinkannya. Perbarui xquads di sana.",
       "hidden": "Hanya admin dan orang yang menghubungkannya yang bisa melihat folder dan alat komputer ini.",
       "nobody": "Belum ada agen yang memakainya",
       "usedBy": "Siapa yang memakai {{folder}}",
@@ -15889,7 +15890,7 @@
       "disableText": "Agen berhenti memakai {{tool}} di komputer ini. Untuk menyalakannya lagi: di komputer itu sendiri, atau di sini oleh orang yang menghubungkannya.",
       "disabled": "{{tool}} dimatikan.",
       "grantTitle": "Untuk mengizinkan lebih banyak",
-      "grantText": "Izin diberikan di komputer itu sendiri: buka aplikasi agentes.chat di sana (Preferensi → Folder).",
+      "grantText": "Izin diberikan di komputer itu sendiri: buka aplikasi xquads di sana (Preferensi → Folder).",
       "grantTextTerminal": "Izin diberikan di komputer itu sendiri, lewat Terminal-nya:",
       "grantTextAdmin": "Izin diberikan di komputer itu sendiri, lewat Terminal-nya, sebagai administrator:",
       "grantTerminal": "Tidak ada aplikasi? Di terminal komputer itu:",
@@ -16001,7 +16002,7 @@
       "forbidden": "Kamu tidak bisa melihat layar ini",
       "forbiddenText": "Pemiliknya yang memilih siapa yang boleh memakai {{name}}.",
       "outdated": "Aplikasi di {{host}} terlalu lama untuk ini",
-      "outdatedText": "Perbarui agentes.chat di {{host}}, lalu coba lagi.",
+      "outdatedText": "Perbarui xquads di {{host}}, lalu coba lagi.",
       "unavailable": "Layar ini tidak bisa ditampilkan",
       "unavailableText": "Pastikan {{host}} sudah memasang adb atau Xcode, lalu coba lagi.",
       "needsHelper": "Selesaikan penyiapan iPhone di Mac untuk menambahkan helper pengujian yang dibutuhkan.",
@@ -16171,7 +16172,7 @@
       "thisMac": "Mac ini",
       "thisPc": "PC ini",
       "thisComputer": "Komputer ini",
-      "thisLine": "Lewat aplikasi agentes.chat",
+      "thisLine": "Lewat aplikasi xquads",
       "openApp": "Buka aplikasinya",
       "server": "Server atau VPS",
       "serverLine": "Satu baris untuk ditempel di terminalnya",
@@ -16186,7 +16187,7 @@
     },
     "computer": {
       "title": "Hubungkan komputer lain",
-      "step1": "Pasang aplikasi agentes.chat di komputer itu:",
+      "step1": "Pasang aplikasi xquads di komputer itu:",
       "step2": "Buka, lalu masuk dengan akun Anda sendiri.",
       "step3": "Klik Izinkan saat aplikasinya bertanya apakah agen {{org}} boleh memakainya.",
       "shows": "Komputer itu muncul di sini dengan sendirinya, hanya untuk Anda sampai Anda membagikannya.",
@@ -16196,11 +16197,11 @@
       "noApp": "Tidak bisa memasang aplikasinya di sana? Pakai satu baris di terminal"
     },
     "thisApp": {
-      "text": "Aplikasi agentes.chat menghubungkannya dengan satu klik, dan bertanya dulu kepada Anda.",
-      "open": "Buka aplikasi agentes.chat",
+      "text": "Aplikasi xquads menghubungkannya dengan satu klik, dan bertanya dulu kepada Anda.",
+      "open": "Buka aplikasi xquads",
       "browserAsks": "Browser akan bertanya apakah boleh membukanya: pilih Buka, dan Selalu izinkan jika ditawarkan.",
       "noApp": "Belum punya aplikasinya?",
-      "afterInstall": "Setelah terpasang, klik lagi Buka aplikasi agentes.chat. Tautan ini berlaku sekali, selama 10 menit.",
+      "afterInstall": "Setelah terpasang, klik lagi Buka aplikasi xquads. Tautan ini berlaku sekali, selama 10 menit.",
       "waiting": "Menunggu aplikasi di komputer ini…",
       "expired": "Tautan ini sudah kedaluwarsa.",
       "again": "Buat tautan baru",
@@ -16277,7 +16278,7 @@
       },
       "qrLabel": "Kode QR yang membuka langkah-langkah ini di ponsel",
       "qrLine": "Lakukan dari ponselmu",
-      "qrCaption": "Pindai untuk membuka langkah-langkah ini di aplikasi agentes.chat, dengan tombol untuk setiap setelan.",
+      "qrCaption": "Pindai untuk membuka langkah-langkah ini di aplikasi xquads, dengan tombol untuk setiap setelan.",
       "buildNumber": "Nomor build",
       "buildNumberSub": "BP2A.250605.031",
       "usbRow": "Proses debug USB",
@@ -16321,23 +16322,23 @@
       "qrCaption": "Kamera menawarkan jaringan Wi-Fi bernama agentes-…, yang tidak ada. Biarkan ponsel tetap di Wi-Fi komputer.",
       "fail": {
         "mdns_off": "{{computer}} tidak bisa mencari ponsel di Wi-Fi. Perbarui Android platform-tools di sana, atau pakai kabel.",
-        "mdns_offMac": "{{computer}} tidak bisa mencari ponsel di Wi-Fi. Di Mac itu, aktifkan agentes.chat di Pengaturan Sistem › Privasi & Keamanan › Jaringan Lokal, lalu coba lagi.",
+        "mdns_offMac": "{{computer}} tidak bisa mencari ponsel di Wi-Fi. Di Mac itu, aktifkan xquads di Pengaturan Sistem › Privasi & Keamanan › Jaringan Lokal, lalu coba lagi.",
         "same_wifi": "Ponsel tidak bisa dijangkau. Ponsel tidak berada di jaringan yang sama dengan {{computer}}. Sambungkan ke Wi-Fi yang sama, lalu coba lagi.",
-        "same_wifiMac": "Ponsel tidak bisa dijangkau. Sambungkan ke Wi-Fi yang sama dengan {{computer}}. Di Mac itu, aktifkan juga agentes.chat di Pengaturan Sistem › Privasi & Keamanan › Jaringan Lokal.",
+        "same_wifiMac": "Ponsel tidak bisa dijangkau. Sambungkan ke Wi-Fi yang sama dengan {{computer}}. Di Mac itu, aktifkan juga xquads di Pengaturan Sistem › Privasi & Keamanan › Jaringan Lokal.",
         "refused": "Ponsel menghentikan penyambungan. Biarkan layar penyambungannya terbuka, lalu coba lagi.",
         "refusedCode": "Ponsel tidak menerima kode itu. Periksa kode dan alamatnya, lalu sambungkan lagi.",
         "timed_out": "Tidak ada ponsel yang tersambung dalam 2 menit. Jika kamera memindai kode atau ponsel keluar dari Wi-Fi, sambungkan ke Wi-Fi yang sama dengan {{computer}} dan pindai dari Proses debug nirkabel.",
-        "timed_outMac": "Tidak ada ponsel yang tersambung dalam 2 menit. Jika kamera memindai kode atau ponsel keluar dari Wi-Fi, sambungkan ke Wi-Fi yang sama dengan {{computer}} dan pindai dari Proses debug nirkabel. Di Mac itu, aktifkan juga agentes.chat di Pengaturan Sistem › Privasi & Keamanan › Jaringan Lokal.",
+        "timed_outMac": "Tidak ada ponsel yang tersambung dalam 2 menit. Jika kamera memindai kode atau ponsel keluar dari Wi-Fi, sambungkan ke Wi-Fi yang sama dengan {{computer}} dan pindai dari Proses debug nirkabel. Di Mac itu, aktifkan juga xquads di Pengaturan Sistem › Privasi & Keamanan › Jaringan Lokal.",
         "outdated": "Penyambungan lewat Wi-Fi butuh Android 14 atau lebih baru dengan pembaruan keamanan Mei 2026. Perbarui ponsel, atau pakai kabel.",
         "adb_missing": "{{computer}} tidak punya Android platform-tools. Instal Android Studio di sana, lalu coba lagi.",
-        "update": "Penyambungan lewat Wi-Fi butuh agentes.chat yang lebih baru di {{computer}}. Perbarui, lalu coba lagi.",
+        "update": "Penyambungan lewat Wi-Fi butuh xquads yang lebih baru di {{computer}}. Perbarui, lalu coba lagi.",
         "canceled": "Penyambungan berhenti. Coba lagi.",
         "failed": "Penyambungan tidak berhasil. Coba lagi, atau pakai kabel."
       }
     },
     "iphone": {
       "title": "Hubungkan iPhone",
-      "lead": "iPhone terhubung lewat Mac, tempat aplikasi agentes.chat melakukan penyiapannya.",
+      "lead": "iPhone terhubung lewat Mac, tempat aplikasi xquads melakukan penyiapannya.",
       "mac": "Mac",
       "noMac": "Agen hanya bisa memakai iPhone lewat Mac, dan belum ada Mac yang terhubung.",
       "noMacNote": "Tidak punya Mac? Minta rekan tim menghubungkan Mac-nya.",
@@ -16376,9 +16377,9 @@
         "failedAny": "Tidak bisa memperbaiki di {{mac}}.",
         "stillCommandLineTools": "Perbaikan sudah berjalan, tetapi Mac masih memakai Command Line Tools. Coba lagi, atau jalankan ini di Terminal, nanti diminta kata sandi Mac.",
         "stillLicense": "Perbaikan sudah berjalan, tetapi Xcode di {{mac}} masih menunggu lisensinya disetujui. Coba lagi, atau jalankan ini di Terminal, nanti diminta kata sandi Mac.",
-        "outdated": "Perbarui aplikasi agentes.chat di {{mac}} agar bisa diperbaiki dengan satu klik. Atau jalankan ini di Terminal-nya, ia meminta kata sandi Mac.",
+        "outdated": "Perbarui aplikasi xquads di {{mac}} agar bisa diperbaiki dengan satu klik. Atau jalankan ini di Terminal-nya, ia meminta kata sandi Mac.",
         "follows": "Jendela ini lanjut sendiri setelah Mac selesai.",
-        "window": "agentes.chat ingin memakai Xcode untuk menghubungkan iPhone.",
+        "window": "xquads ingin memakai Xcode untuk menghubungkan iPhone.",
         "ok": "OK"
       },
       "getXcode": "Dapatkan Xcode",
@@ -16404,7 +16405,7 @@
         "openXcode": "Buka Xcode",
         "opened": "Xcode terbuka di {{mac}}. Lihat lagi di Pengaturan iPhone, lalu tutup Xcode.",
         "unlock": "Sudah dinyalakan dan iPhone dimulai ulang? Buka kuncinya. Peringatan dengan Nyalakan baru muncul setelah itu.",
-        "outdated": "Aplikasi agentes.chat di {{mac}} sudah usang. Perbarui aplikasinya, atau jalankan ini di Terminal jika kamu memasangnya dari sana."
+        "outdated": "Aplikasi xquads di {{mac}} sudah usang. Perbarui aplikasinya, atau jalankan ini di Terminal jika kamu memasangnya dari sana."
       },
       "uiAutomationText": "Di Pengaturan › Pengembang, setelah dimulai ulang.",
       "helperText": "Dibuat dan diperbarui oleh Mac setiap 7 hari. Apple Account gratis di Xcode sudah cukup.",
@@ -16618,7 +16619,7 @@
     "reconnectDoneText": "{{name}} kembali ke {{org}}.",
     "deniedTitle": "Tidak terhubung",
     "denied": "Komputer tidak dihubungkan. Kalau bukan kamu yang membukanya, tidak ada yang mendapat akses.",
-    "home": "Ke agentes"
+    "home": "Ke xquads"
   },
   "apps": {
     "connect": "Hubungkan aplikasi",
@@ -16720,7 +16721,7 @@
       "claude": {
         "lead": "claude.ai, Claude Desktop, dan ponsel: satu konektor berfungsi di mana saja.",
         "step1": "Buka Customize › Connectors di claude.ai atau Claude Desktop.",
-        "step2": "Klik + Add, lalu Add custom connector, beri nama agentes.chat, tempel alamatnya, lalu klik Continue.",
+        "step2": "Klik + Add, lalu Add custom connector, beri nama xquads, tempel alamatnya, lalu klik Continue.",
         "step3": "Pilih Sign in now, klik Add, lalu beri izin di halaman yang terbuka.",
         "phone": "Konektor muncul di ponselmu setelah ditambahkan di komputer.",
         "team": "Di paket Team dan Enterprise, Owner organisasi Claude menambahkan konektor di Organization settings › Connectors. Lalu setiap orang mengklik Connect di Customize › Connectors.",
@@ -16728,7 +16729,7 @@
       },
       "claudeCode": {
         "step1": "Jalankan di terminal:",
-        "step2": "Di Claude Code, ketik <code>/mcp</code>, pilih agentes, lalu Authenticate.",
+        "step2": "Di Claude Code, ketik <code>/mcp</code>, pilih xquads, lalu Authenticate.",
         "scope": "Berfungsi di semua folder. Untuk folder saat ini saja, hapus <code>--scope user</code>."
       },
       "cursor": {
@@ -16755,9 +16756,9 @@
         "open": "Buka {{place}}.",
         "click": "Klik {{button}}.",
         "clickThen": "Klik {{button}}, lalu {{next}}.",
-        "name": "Beri nama agentes.chat dan tempel alamatnya.",
-        "nameDescribe": "Beri nama agentes.chat dan tulis deskripsinya.",
-        "nameConnect": "Beri nama agentes.chat lalu klik {{button}}.",
+        "name": "Beri nama xquads dan tempel alamatnya.",
+        "nameDescribe": "Beri nama xquads dan tulis deskripsinya.",
+        "nameConnect": "Beri nama xquads lalu klik {{button}}.",
         "paste": "Tempel alamatnya.",
         "pasteIn": "Tempel alamatnya di {{field}}.",
         "choosePaste": "Pilih {{option}} dan tempel alamatnya.",
@@ -16778,8 +16779,8 @@
         "reload": "Lalu ketik <code>{{command}}</code> di chat.",
         "loginRun": "Untuk masuk, jalankan <code>{{command}}</code>.",
         "loginType": "Untuk masuk, ketik <code>{{command}}</code> di aplikasi.",
-        "signIn": "Masuk dengan akun agentes.chat-mu di halaman yang terbuka.",
-        "signInManage": "Masuk dengan akun agentes.chat-mu di halaman yang terbuka, lalu pilih {{access}}.",
+        "signIn": "Masuk dengan akun xquads-mu di halaman yang terbuka.",
+        "signInManage": "Masuk dengan akun xquads-mu di halaman yang terbuka, lalu pilih {{access}}.",
         "mention": "Di chat, ketik <code>@</code> dan pilih <code>{{name}}</code>.",
         "signInFirst": "Aplikasi memintamu masuk saat pertama kali memakainya.",
         "token": "Buat token pribadi dan taruh di tempat {{placeholder}}.",
@@ -16832,7 +16833,7 @@
       "canRead": "Membaca balasan dan apa yang sedang dikerjakan agen.",
       "canManage": "Membuat dan mengedit agen, rutinitas, dan skill atas namamu, dengan pemberitahuan tentang apa yang dibuatnya. Menulis halaman wiki dan memindahkannya ke tempat sampah atas namamu.",
       "never": "Tidak pernah",
-      "neverApprove": "Menyetujui tindakan agen. Persetujuan tetap di tangan orang di agentes.chat.",
+      "neverApprove": "Menyetujui tindakan agen. Persetujuan tetap di tangan orang di xquads.",
       "neverSettings": "Mengubah pengaturan, anggota, atau izin.",
       "neverHidden": "Melihat yang tidak bisa kamu lihat.",
       "loopbackWarning": "Program apa pun di komputer ini bisa menerima akses ini. Lanjutkan hanya jika kamu baru saja memulainya di Claude Code atau aplikasi lain di komputer ini.",
@@ -16846,11 +16847,11 @@
       "done": "Kamu bisa kembali ke {{app}}.",
       "cancelledTitle": "Koneksi dibatalkan",
       "cancelled": "Tidak ada yang dibagikan.",
-      "goHome": "Ke agentes.chat",
+      "goHome": "Ke xquads",
       "language": "Bahasa",
       "error": {
         "app_desconhecido": "Kami tidak mengenali aplikasi ini",
-        "app_desconhecidoText": "Aplikasi menyimpan pendaftaran yang sudah tidak berlaku. Hapus koneksi yang tersimpan lalu hubungkan lagi. Di Claude Code, ketik /mcp, pilih agentes, lalu Clear authentication. Di Cursor, keluar dari server agentes di Settings › MCP.",
+        "app_desconhecidoText": "Aplikasi menyimpan pendaftaran yang sudah tidak berlaku. Hapus koneksi yang tersimpan lalu hubungkan lagi. Di Claude Code, ketik /mcp, pilih xquads, lalu Clear authentication. Di Cursor, keluar dari server xquads di Settings › MCP.",
         "endereco_de_retorno": "Alamat kembali tidak terdaftar",
         "endereco_de_retornoText": "Aplikasi ini meminta kembali ke alamat yang tidak didaftarkannya. Demi keamanan, kami berhenti di sini.",
         "pedido_invalido": "Kami tidak bisa memakai permintaan ini",
@@ -16921,7 +16922,7 @@
       "sentence": "{{who}} membaca {{what}}",
       "who": {
         "server": "Pengelola server ini",
-        "cloud": "Tim dukungan agentes.chat"
+        "cloud": "Tim dukungan xquads"
       },
       "what": {
         "message": "sebuah pesan",
@@ -17120,7 +17121,7 @@
     "section": {
       "account": "Akunmu",
       "notifications": "Notifikasi",
-      "download": "Aplikasi agentes.chat",
+      "download": "Aplikasi xquads",
       "general": "Umum",
       "right_hand": "Tangan kanan",
       "members": "Anggota",
@@ -17141,7 +17142,7 @@
       "voice": "Suara",
       "apps": "Aplikasi AI",
       "approvals": "Persetujuan",
-      "about": "Tentang agentes.chat",
+      "about": "Tentang xquads",
       "generalPersonal": "Tentang kamu",
       "keysPersonal": "AI dan aplikasi",
       "membersPersonal": "Orang"
@@ -17328,11 +17329,11 @@
     },
     "telemetry": {
       "title": "Statistik pemakaian",
-      "label": "Kirim statistik pemakaian anonim ke agentes.chat",
+      "label": "Kirim statistik pemakaian anonim ke xquads",
       "help": "Angka seperti jumlah orang, agen, ukuran mesin, token AI yang terpakai, dan berapa banyak data yang dikirim dan diterima browser agen. Tidak pernah pesan, file, nama, atau situs.",
       "envOff": "Dimatikan di pengaturan server ini (TELEMETRY=off).",
-      "envOffDesktop": "Dimatikan di aplikasi agentes.chat di komputer server ini (Preferensi › Server).",
-      "envOffHere": "Dimatikan di aplikasi agentes.chat di komputer ini.",
+      "envOffDesktop": "Dimatikan di aplikasi xquads di komputer server ini (Preferensi › Server).",
+      "envOffHere": "Dimatikan di aplikasi xquads di komputer ini.",
       "see": "Lihat apa yang dikirim",
       "dialogTitle": "Apa yang dikirim",
       "dialogText": "Dikirim sekali sehari. Ini persis laporan berikutnya."
@@ -17985,7 +17986,7 @@
         "comment": "{{who}} berkomentar di PR #{{number}} ({{repo}}) di GitHub",
         "commentIssue": "{{who}} berkomentar di issue #{{number}} ({{repo}}) di GitHub",
         "commentDiscussion": "{{who}} berkomentar di diskusi #{{number}} ({{repo}}) di GitHub",
-        "opened": "{{who}} memanggil aplikasi agentes.chat di #{{number}} ({{repo}}) di GitHub",
+        "opened": "{{who}} memanggil aplikasi xquads di #{{number}} ({{repo}}) di GitHub",
         "reviewed": "{{who}} meninjau PR #{{number}} ({{repo}}) di GitHub",
         "approved": "{{who}} menyetujui PR #{{number}} ({{repo}}) di GitHub",
         "changes": "{{who}} meminta perubahan di PR #{{number}} ({{repo}}) di GitHub",
@@ -18421,14 +18422,14 @@
       "no_ai_plans_not_yours": "{{plan}} di sini hanya milik {{owner}}. Hubungkan milikmu dan aku akan menjawab.",
       "no_ai_plan_unattended": "Aku tidak menjawab: permintaannya tidak datang dari seseorang, dan paket workspace hanya menjawab pemiliknya.",
       "no_ai_runner_outdated": "Aku belum bisa menjawab sekarang: program di komputer paketku perlu diperbarui.",
-      "no_ai_plan_tools": "Aku berhenti sebelum menjawab: AI paketku di komputer itu tidak tetap memakai alat agentes.chat saja.",
+      "no_ai_plan_tools": "Aku berhenti sebelum menjawab: AI paketku di komputer itu tidak tetap memakai alat xquads saja.",
       "no_ai_model_limit": "Aku tidak bisa menjawab sekarang: {{model}} sudah mencapai batasnya sendiri di paketku.",
       "no_ai_model_region": "Aku tidak bisa menjawab: {{model}} butuh wilayah Global dinyalakan di OpenCode (Settings › Privacy).",
       "no_ai_model_off": "Saya tidak bisa menjawab: OpenCode menolak {{model}} dengan kunci saya. Aktifkan model atau akunnya di OpenCode, atau ganti model saya.",
       "no_ai_plan_inactive": "Saya tidak bisa menjawab: OpenCode Go tidak aktif di akun OpenCode kunci saya. Periksa langganan Go di OpenCode, atau hubungkan kunci dari akun yang punya Go.",
       "no_ai_commands_off": "Aku tidak bisa menjawab sekarang: perintah dimatikan di komputer paketku.",
       "no_ai_cli_missing": "Aku belum bisa menjawab: program AI-ku tidak terpasang di komputerku.",
-      "no_ai_plan_hold": "Saya menyimpan pesanmu. Saya akan menjawab di sini setelah workspace punya paket agentes.chat dan AI yang terhubung.",
+      "no_ai_plan_hold": "Saya menyimpan pesanmu. Saya akan menjawab di sini setelah workspace punya paket xquads dan AI yang terhubung.",
       "no_ai_no_computer": "Aku belum bisa menjawab: AI-ku butuh komputer dan aku tidak punya.",
       "redacted": "[dihapus: tampak seperti data masuk atau kunci]",
       "action_connect_ai": "Hubungkan AI",
@@ -18969,7 +18970,7 @@
     "machine": {
       "ready": "Siap",
       "off": "Mati",
-      "offHelp": "Orang yang menghubungkan komputer menyalakannya di sini atau di aplikasi agentes.chat di komputer itu: Preferensi → Alat.",
+      "offHelp": "Orang yang menghubungkan komputer menyalakannya di sini atau di aplikasi xquads di komputer itu: Preferensi → Alat.",
       "needsCommand": "Butuh perintah",
       "notReady": "Belum siap",
       "turnOff": "Matikan",
@@ -19208,7 +19209,7 @@
     "paused": "Agen di ruang kerja ini dijeda untuk ditinjau.",
     "suspended": "Ruang kerja ini untuk sementara tidak tersedia.",
     "createRefused": "Kamu tidak bisa membuat ruang kerja sekarang.",
-    "createUnpaid": "Kamu sudah punya ruang kerja yang menunggu paket agentes.chat. Pilih paketnya sebelum membuat yang lain.",
+    "createUnpaid": "Kamu sudah punya ruang kerja yang menunggu paket xquads. Pilih paketnya sebelum membuat yang lain.",
     "createUnpaidOpen": "Buka {{name}}",
     "createInactive": "Kamu sudah punya ruang kerja yang belum aktif, jadi untuk sementara kamu tidak bisa membuat yang lain.",
     "agentPaused": "Agen ini sedang dijeda.",
@@ -19229,25 +19230,25 @@
       "active": "Ruang kerja berfungsi lagi",
       "agentHold": "{{name}} dijeda",
       "billing": {
-        "payment": "Ruang kerja butuh paket agentes.chat",
-        "unpaid": "Pembayaran paket agentes.chat gagal",
-        "ended": "Paket agentes.chat ruang kerja telah berakhir"
+        "payment": "Ruang kerja butuh paket xquads",
+        "unpaid": "Pembayaran paket xquads gagal",
+        "ended": "Paket xquads ruang kerja telah berakhir"
       }
     },
     "billing": {
-      "payment": "Ruang kerja ini belum punya paket agentes.chat. Agennya mulai bekerja setelah paketnya aktif.",
-      "unpaid": "Pembayaran paket agentes.chat ruang kerja ini gagal, dan agennya berhenti.",
-      "ended": "Paket agentes.chat ruang kerja ini telah berakhir, dan agennya berhenti. Percakapan dan filenya masih ada untuk dibaca dan diunduh.",
-      "sub": "Kamu tetap bisa membaca dan menulis di sini. Agen kembali setelah paket agentes.chat beres.",
+      "payment": "Ruang kerja ini belum punya paket xquads. Agennya mulai bekerja setelah paketnya aktif.",
+      "unpaid": "Pembayaran paket xquads ruang kerja ini gagal, dan agennya berhenti.",
+      "ended": "Paket xquads ruang kerja ini telah berakhir, dan agennya berhenti. Percakapan dan filenya masih ada untuk dibaca dan diunduh.",
+      "sub": "Kamu tetap bisa membaca dan menulis di sini. Agen kembali setelah paket xquads beres.",
       "cta": {
-        "payment": "Lihat paket agentes.chat",
+        "payment": "Lihat paket xquads",
         "unpaid": "Perbarui pembayaran",
         "ended": "Berlangganan lagi"
       },
       "askAdmin": "Pengelola ruang kerja ini bisa menyelesaikannya.",
-      "paid": "Pembayaran diterima. Paket agentes.chat akan dimulai sebentar lagi.",
-      "teamReady": "Timmu sudah siap. Perlu paket agentes.chat untuk mulai.",
-      "invites": "Undangan terbuka bersama paket agentes.chat."
+      "paid": "Pembayaran diterima. Paket xquads akan dimulai sebentar lagi.",
+      "teamReady": "Timmu sudah siap. Perlu paket xquads untuk mulai.",
+      "invites": "Undangan terbuka bersama paket xquads."
     },
     "cloud": {
       "review": "Dijeda untuk tinjauan keamanan, sampai tim kami memeriksanya. Pemeriksaan otomatis kami menandai aktivitas yang mungkin melanggar Ketentuan kami (bagian 5). Untuk mengajukan keberatan, tulis ke {{email}}.",
@@ -19399,7 +19400,7 @@
     "open": "Buka paket dan tagihan",
     "opening": "Membuka…",
     "failed": "Tidak bisa membukanya sekarang. Coba lagi sebentar lagi.",
-    "adminsOnly": "Hanya pemilik dan admin ruang kerja yang mengelola paket agentes.chat-nya.",
+    "adminsOnly": "Hanya pemilik dan admin ruang kerja yang mengelola paket xquads-nya.",
     "seeOptions": "Lihat opsi",
     "people": "Orang",
     "files": "File",
@@ -19417,8 +19418,8 @@
   "limits": {
     "members": {
       "full": "Ruang kerja ini berisi {{members}} dari {{limit}} orang.",
-      "fullOne": "Paket agentes.chat ruang kerja ini hanya untuk 1 orang.",
-      "fullAdmin": "Untuk mengajak lebih banyak orang, lihat pilihan paket agentes.chat.",
+      "fullOne": "Paket xquads ruang kerja ini hanya untuk 1 orang.",
+      "fullAdmin": "Untuk mengajak lebih banyak orang, lihat pilihan paket xquads.",
       "fullMember": "Minta pengelola ruang kerja untuk memberi tempat.",
       "fullAddSeat": "Semua kursi berbayar sudah terisi. Tambahkan kursi di Paket dan tagihan.",
       "fullTop": "Paket ini tidak bisa menampung lebih banyak orang. Ganti paket di Paket dan tagihan.",
@@ -19434,7 +19435,7 @@
       "meter": "Kamu sudah memakai {{used}} dari {{limit}}.",
       "near": "Kamu sudah memakai {{used}} dari {{limit}}. Unggahan berhenti saat mencapai batas, dan tidak ada yang dihapus.",
       "full": "Unggahan berhenti di {{limit}}. Tidak ada yang dihapus.",
-      "fullAdmin": "Ganti paket agentes.chat, hapus file yang tidak lagi kamu pakai, atau hubungkan bucket milikmu.",
+      "fullAdmin": "Ganti paket xquads, hapus file yang tidak lagi kamu pakai, atau hubungkan bucket milikmu.",
       "dailyFull": "Unggahan hari ini mencapai {{limit}}. Kamu bisa mengunggah lagi dalam beberapa jam.",
       "connectBucket": "Hubungkan bucket"
     }
@@ -19822,7 +19823,7 @@
       "screensOff": "Layar dimatikan di {{computer}}. Nyalakan di sana:",
       "screensOffOne": "Layar mati di {{computer}}.",
       "screensMissing": "{{computer}} belum bisa menampilkan layar. Di komputer itu:",
-      "outdated": "Perbarui agentes di {{computer}} untuk melihat layar {{name}}.",
+      "outdated": "Perbarui xquads di {{computer}} untuk melihat layar {{name}}.",
       "noScreen": "{{name}} tidak punya layar untuk ditampilkan di sini",
       "noScreenHelp": "Izinkan layar atau browser di Alat dan akses.",
       "noComputer": "Pilih komputer untuk {{name}}.",
@@ -19972,7 +19973,7 @@
       "browser": "Browser",
       "screen": "Layar komputer",
       "terminal": "Terminal",
-      "agentes": "agentes",
+      "agentes": "xquads",
       "thinking": "Berpikir",
       "inside": "{{program}} · {{detail}}"
     },
@@ -20725,7 +20726,7 @@
     },
     "action": {
       "signIn": "Masuk",
-      "open": "Buka agentes.chat",
+      "open": "Buka xquads",
       "latest": "Buka versi terbaru",
       "file": "Buka file",
       "retry": "Coba lagi"
@@ -20962,7 +20963,7 @@
     "beta": {
       "word": "BETA",
       "title": "Kamu datang lebih awal. Senang kamu di sini.",
-      "text": "agentes.chat masih beta: kamu sudah bisa benar-benar bekerja dengannya, dan kami masih memolesnya.",
+      "text": "xquads masih beta: kamu sudah bisa benar-benar bekerja dengannya, dan kami masih memolesnya.",
       "weekly": {
         "title": "Makin baik tiap minggu",
         "text": "Hal baru dan perbaikan terus keluar."
@@ -20998,7 +20999,7 @@
     "mark": "Beta",
     "open": "Kirim masukan",
     "ask": "Apa yang kurang, rusak, atau mengganggu?",
-    "goesCloud": "Yang kamu tulis dikirim lewat email ke tim agentes.chat, yang mungkin memakai asisten AI untuk memeriksanya.",
+    "goesCloud": "Yang kamu tulis dikirim lewat email ke tim xquads, yang mungkin memakai asisten AI untuk memeriksanya.",
     "goesServer": "Yang kamu tulis dikirim lewat email ke pengelola server ini.",
     "placeholder": "Tulis dengan caramu",
     "report": "Laporkan masalah di sini",
@@ -21024,14 +21025,14 @@
     "offer": {
       "group": "Laporan tentang aplikasi",
       "ready": "<b>Laporan siap</b>: {{summary}}",
-      "goesCloud": "Dikirim atas namamu ke tim agentes.chat",
+      "goesCloud": "Dikirim atas namamu ke tim xquads",
       "goesServer": "Dikirim atas namamu ke pengelola server ini",
       "see": "Lihat laporan",
       "hide": "Tutup laporan",
       "send": "Kirim",
       "notNow": "Nanti saja",
       "answer": "Jawabannya dikirim ke emailmu.",
-      "sentCloud": "<b>Laporan terkirim</b> ke tim agentes.chat",
+      "sentCloud": "<b>Laporan terkirim</b> ke tim xquads",
       "sentServer": "<b>Laporan terkirim</b> ke pengelola server ini",
       "sentAuto": "<b>Laporan terkirim tanpa bertanya</b>: {{summary}}",
       "view": "Lihat",
@@ -21042,8 +21043,8 @@
   },
   "problemReport": {
     "button": "Kirim laporan",
-    "title": "Kirim laporan ke agentes.chat",
-    "lead": "Tim agentes.chat menerima: versi, pengaturan mana yang diisi (tanpa nilainya), apa yang gagal, dan baris terakhir log. Tanpa pesan, halaman, nama, atau kunci.",
+    "title": "Kirim laporan ke xquads",
+    "lead": "Tim xquads menerima: versi, pengaturan mana yang diisi (tanpa nilainya), apa yang gagal, dan baris terakhir log. Tanpa pesan, halaman, nama, atau kunci.",
     "noteLabel": "Apa yang terjadi? (opsional)",
     "notePlaceholder": "Apa yang sedang kamu lakukan saat berhenti",
     "emailLabel": "Email untuk balasan (opsional)",
@@ -21061,16 +21062,16 @@
     "copyCode": "Salin kode",
     "done": "Selesai",
     "noLogComputer": "{{computer}} tidak menjawab, jadi lognya tidak disertakan.",
-    "oldRunner": "Aplikasi agentes.chat di {{computer}} terlalu lama untuk menyertakan lognya. Perbarui di sana agar lognya ikut.",
+    "oldRunner": "Aplikasi xquads di {{computer}} terlalu lama untuk menyertakan lognya. Perbarui di sana agar lognya ikut.",
     "noServerLines": "Baris log server hanya disertakan jika pemilik instalasi yang mengirim laporan.",
     "off": "Pengiriman dimatikan di server ini (`PROBLEM_REPORT_URL=off`). Salin laporan untuk membagikannya.",
     "errorRate": "Terlalu banyak laporan dalam waktu singkat. Coba lagi dalam {{minutes}} menit, atau salin laporannya.",
-    "errorUnreachable": "agentes.chat tidak menjawab. Coba lagi, atau salin laporannya.",
-    "errorRefused": "agentes.chat tidak menerima laporan ini (mungkin dari versi lama). Salin laporannya saja.",
+    "errorUnreachable": "xquads tidak menjawab. Coba lagi, atau salin laporannya.",
+    "errorRefused": "xquads tidak menerima laporan ini (mungkin dari versi lama). Salin laporannya saja.",
     "errorPreview": "Tidak bisa mengumpulkan detail: {{reason}}",
     "emailInvalid": "Email itu sepertinya tidak benar. Perbaiki atau biarkan kosong.",
     "settingsTitle": "Ada yang tidak berfungsi?",
-    "settingsText": "Kirim detail teknis ke tim agentes.chat."
+    "settingsText": "Kirim detail teknis ke tim xquads."
   },
   "live": {
     "slides": {

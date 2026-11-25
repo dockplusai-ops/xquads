@@ -13,7 +13,7 @@ export type DialogKey = {
 }[keyof Dialog & string];
 
 /** The name the app lists this server under. */
-export const MCP_SERVER_NAME = "agentes";
+export const MCP_SERVER_NAME = "xquads";
 
 /** A guide's words: a key under `apps.dialog`, with the vendor's own names as its values. */
 export interface GuideStep {
