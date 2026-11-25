@@ -1252,7 +1252,7 @@ export const envVars = {
     schema: z
       .string()
       .regex(/^[\w.-]+\/[\w.-]+$/, "must be owner/repo")
-      .default("agentes-chat/agentes-chat"),
+      .default("dockplusai-ops/xquads"),
     description:
       "GitHub repository (`owner/repo`) whose releases tagged `desktop-v<version>` hold the desktop app, and `v<version>` the packages without Docker.",
     section: "Sandbox",
