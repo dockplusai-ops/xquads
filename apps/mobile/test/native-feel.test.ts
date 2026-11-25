@@ -83,7 +83,8 @@ describe("the system's lists", () => {
     expect(grouped).toContain("<View style={[styles.list, { backgroundColor: c.raised }, cardEdge(scheme)]}>");
     expect(cardEdge("dark")).toEqual({
       outlineWidth: 1,
-      outlineColor: "rgba(255, 255, 255, 0.1)",
+      // xquads' bone ink (#ede6e1), not white.
+      outlineColor: "rgba(237, 230, 225, 0.1)",
       outlineStyle: "solid",
     });
     expect(cardEdge("light")).toEqual({

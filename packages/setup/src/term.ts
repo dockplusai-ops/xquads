@@ -125,30 +125,30 @@ export const LOGO_MARK = [
   ".3333333332.",
   "333333333233",
   "232323232223",
-  "3232w23w3222",
+  "323232323222",
   "2222w22w2212",
-  "2222w22w2122",
+  "222222222122",
   "121212121112",
   "212121212111",
   "111111111101",
-  "11111111101.",
-  "0101010100..",
+  ".1111111101.",
+  "..01010100..",
 ];
 
-/** The wordmark: "agentes" in pixels after Funnel Display Light at about 12 px (x-height 6, one-pixel strokes). */
+/** The wordmark: "xquads" in pixels at about 12 px (x-height 6, one-pixel strokes). */
 const GLYPHS: Record<string, string[]> = {
+  x: ["", "", "", "#...#", ".#.#.", "..#..", "..#..", ".#.#.", "#...#", "", "", ""],
+  q: ["", "", "", ".####", "#...#", "#...#", "#...#", "#...#", ".####", "....#", "....#", ""],
+  u: ["", "", "", "#...#", "#...#", "#...#", "#...#", "#...#", ".####", "", "", ""],
   a: ["", "", "", ".###.", "....#", ".####", "#...#", "#...#", ".####", "", "", ""],
-  g: ["", "", "", ".####", "#...#", "#...#", "#...#", "#...#", ".####", "....#", ".###.", ""],
-  e: ["", "", "", ".###.", "#...#", "#####", "#....", "#....", ".####", "", "", ""],
-  n: ["", "", "", "#.##.", "##..#", "#...#", "#...#", "#...#", "#...#", "", "", ""],
-  t: ["", ".#..", ".#..", "####", ".#..", ".#..", ".#..", ".#..", "..##", "", "", ""],
+  d: ["", "....#", "....#", ".####", "#...#", "#...#", "#...#", "#...#", ".####", "", "", ""],
   s: ["", "", "", ".####", "#....", ".###.", "....#", "....#", "####.", "", "", ""],
 };
 
-const TONE_RGB = ["0;61;130", "0;99;209", "70;147;232", "140;195;255", "198;225;255", "255;255;255"];
-const TONE_256 = [25, 26, 68, 111, 189, 231];
-/** 16 colors: blue for the deep tones, bright blue for the light ones, bright white for the eyes. */
-const TONE_16 = [4, 4, 12, 12, 12, 15];
+const TONE_RGB = ["110;86;62", "150;118;84", "199;157;112", "217;188;155", "236;220;200", "14;28;34"];
+const TONE_256 = [94, 137, 179, 180, 223, 234];
+/** 16 colors: yellow for the deep tones, bright yellow for the light ones, black for the eyes (camel and petrol). */
+const TONE_16 = [3, 3, 11, 11, 11, 0];
 
 /** The SGR parameter for tone `t` (0–4, 5 the eyes) as foreground (38) or background (48). */
 function toneSgr(depth: Depth, t: number, layer: 38 | 48): string {
@@ -185,9 +185,9 @@ function wordRows(word: string): string[] {
   return rows;
 }
 
-/** The logo's lines (63 columns): the mark in the sky's dither beside "agentes", ".chat" muted on the baseline. */
+/** The logo's lines (63 columns): the mark in camel beside "xquads". */
 export function logoLines(depth: Depth): string[] {
-  const word = wordRows("agentes");
+  const word = wordRows("xquads");
   const lines: string[] = [];
   for (let y = 0; y < 12; y += 2) {
     const top = LOGO_MARK[y] as string;
@@ -200,8 +200,7 @@ export function logoLines(depth: Depth): string[] {
     let letters = "";
     for (let x = 0; x < wt.length; x++) letters += halfBlock(1, wt[x] === "#" ? 0 : -1, wb[x] === "#" ? 0 : -1);
     const reset = depth === 1 ? "" : "\x1b[0m";
-    const tld = y === 8 ? (depth === 1 ? " .chat" : " \x1b[2m.chat\x1b[0m") : "";
-    lines.push(`  ${mark}${reset}   ${letters.trimEnd()}${tld}`.trimEnd());
+    lines.push(`  ${mark}${reset}   ${letters.trimEnd()}`.trimEnd());
   }
   return lines;
 }

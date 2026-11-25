@@ -228,7 +228,7 @@ describe("what each terminal gets", () => {
     steps(term);
     // Only the cursor moves a wait needs: no color, bold or dim.
     expect(text().match(COLORS)).toBeNull();
-    expect(text()).toContain("████ ██ ████");
+    expect(text()).toContain("████▀██▀████");
     expect(text()).toContain("┌  xquads setup\n│\n");
     expect(text()).toContain("◇  Docker 27.3.1");
   });

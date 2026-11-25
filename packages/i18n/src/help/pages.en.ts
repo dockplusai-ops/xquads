@@ -1,4 +1,4 @@
-import type { HelpSlug } from "./index";
+import type { HelpSlug } from "./core";
 import type { HelpDocument } from "./types";
 
 export const helpEn: Record<HelpSlug, HelpDocument> = {

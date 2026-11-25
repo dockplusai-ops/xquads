@@ -22,7 +22,6 @@ import {
   madeIcons,
   madeId,
   madeScene,
-  monoLayers,
   SCENES,
 } from "../scripts/app-icons/scenes.mjs";
 
@@ -75,35 +74,17 @@ describe("app icons (ADR 0179)", () => {
     );
     const leaning = picture({ sky: "night", color: "rose", look: "heart", pose: "peek" });
     expect(leaning).not.toBe(picture({ sky: "night", color: "rose", look: "heart" }));
-    expect(leaning).not.toBe(picture({ sky: "night", color: "rose", look: "round", pose: "peek" }));
+    // xquads draws one face: a look no longer changes it.
+    expect(leaning).toBe(picture({ sky: "night", color: "rose", look: "round", pose: "peek" }));
     expect(leaning).not.toBe(picture({ sky: "night", color: "teal", look: "heart", pose: "peek" }));
     expect(leaning).not.toBe(picture({ sky: "sky", color: "rose", look: "heart", pose: "peek" }));
   });
 
-  test("a made icon draws its face or its accessory on the agent", () => {
-    /** How many of a 64 px picture's pixels are fully `hex`. */
-    const count = (icon: { sky: string; color: string; look: string }, hex: [number, number, number]) => {
-      const { px } = render(64, madeScene(icon), { k: 16 });
-      let n = 0;
-      for (let i = 0; i < px.length; i += 4)
-        if (px[i] === hex[0] && px[i + 1] === hex[1] && px[i + 2] === hex[2] && px[i + 3] === 1) n++;
-      return n;
-    };
-    const white: [number, number, number] = [255, 255, 255];
-    // Every face has its eyes, and they are not all the plain pills (a 64 px picture tells most apart by size).
-    const faces = MADE_FACES.map((look) => count({ sky: "night", color: "rose", look }, white));
-    expect(faces.every((n) => n > 0)).toBe(true);
-    expect(new Set(faces).size).toBeGreaterThanOrEqual(6);
-    // The crown's gold is on the icon that wears it and on no other.
-    const gold: [number, number, number] = [0xf2, 0xc1, 0x4e];
-    expect(count({ sky: "night", color: "rose", look: "crown" }, gold)).toBeGreaterThan(0);
-    expect(count({ sky: "night", color: "rose", look: "round" }, gold)).toBe(0);
-    // The one-color icon keeps the accessory's shape.
-    const mono = (look: string) =>
-      render(64, monoLayers(madeScene({ sky: "night", color: "rose", look })), { k: 16 })
-        .px.filter((_, i) => i % 4 === 3)
-        .reduce((a, b) => a + b, 0);
-    expect(mono("crown")).not.toBe(mono("hat"));
+  test("a made icon draws xquads' one face: no look changes it", () => {
+    const picture = (look: string) =>
+      [...render(64, madeScene({ sky: "night", color: "rose", look }), { k: 16 }).px].join();
+    const round = picture("round");
+    for (const look of MADE_FACES) expect(picture(look)).toBe(round);
   });
 
   test("the peeking agent leans to the left: its right eye sits higher than its left", () => {
@@ -136,8 +117,8 @@ describe("app icons (ADR 0179)", () => {
     let white = 0;
     for (let i = 0; i < px.length; i += 4)
       if (px[i] === 255 && px[i + 1] === 255 && px[i + 2] === 255 && px[i + 3] === 1) white++;
-    // Two eyes of 1 × 4 pixels, fully white, nothing half covered.
-    expect(white).toBe(8);
+    // xquads' face: two eyes of 1 × 2 pixels, fully white, nothing half covered.
+    expect(white).toBe(4);
   });
 });
 

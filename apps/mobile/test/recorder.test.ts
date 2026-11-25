@@ -30,38 +30,32 @@ describe("cornerRadii", () => {
 });
 
 describe("RecordingContext + compile", () => {
-  test("records the engine's whole agent: body cells, clip, eyes", () => {
+  test("records the engine's whole agent: xquads' flat face, its eyes and its smile, as paths", () => {
     const rec = new RecordingContext();
     drawAgent(asCtx(rec), 0, 0, 40, { color: "teal", eyes: "round", pose: { turn: [0.4, 0.1] } });
     const ops = rec.commands.map((c) => c.op);
-    expect(ops).toContain("clip");
-    expect(ops).toContain("fillRect");
-    expect(ops).toContain("fill");
-    expect(ops.filter((o) => o === "save").length).toBe(ops.filter((o) => o === "restore").length);
+    // The body, two eyes, the smile: no pixel cells, no clip.
+    expect(ops).toEqual(["save", "translate", "fill", "fill", "fill", "stroke", "restore"]);
   });
 
-  test("compile groups each run of cells into one path per tone", () => {
+  test("compile keeps the face's paths as they were recorded", () => {
     const rec = new RecordingContext();
     drawAgent(asCtx(rec), 0, 0, 64, { color: "sky", eyes: "dots" });
-    const cells = rec.commands.filter((c) => c.op === "fillRect").length;
     const compiled = compile(rec.commands);
-    const groups = compiled.filter((c) => c.op === "rects");
-    expect(cells).toBeGreaterThan(100);
-    // Five body tones (plus a few for the extruded sides at most).
-    expect(groups.length).toBeLessThanOrEqual(8);
-    const total = groups.reduce((n, g) => n + (g.op === "rects" ? g.rects.length / 4 : 0), 0);
-    expect(total).toBe(cells);
+    expect(compiled.filter((c) => c.op === "rects")).toHaveLength(0);
+    expect(compiled.filter((c) => c.op === "fill").length).toBe(rec.commands.filter((c) => c.op === "fill").length);
   });
 
-  test("an accessory's pixels are recorded too", () => {
-    const rec = new RecordingContext();
-    drawAgent(asCtx(rec), 0, 0, 48, {
+  test("an accessory draws nothing on xquads' face", () => {
+    const plain = new RecordingContext();
+    drawAgent(asCtx(plain), 0, 0, 48, { color: "amber", eyes: "round" });
+    const capped = new RecordingContext();
+    drawAgent(asCtx(capped), 0, 0, 48, {
       color: "amber",
       eyes: "round",
       after: (ctx, s, frame) => drawAccessory(ctx, s, "cap", frame, 0, false),
     });
-    const colors = new Set(rec.commands.flatMap((c) => (c.op === "fillRect" ? [c.color] : [])));
-    expect(colors.has("#23272e")).toBe(true);
+    expect(capped.commands).toEqual(plain.commands);
   });
 
   test("save/restore restore the style", () => {

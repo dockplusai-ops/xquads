@@ -26,10 +26,7 @@ describe("links read as ours, never the browser's blue", () => {
   });
 
   test("a link to a help page is a help line's link, to a new tab with no referrer, carrying only the language and the section", () => {
-    for (const [lng, folder] of [
-      ["en", ""],
-      ["pt-BR", "pt/"],
-    ] as const) {
+    for (const lng of ["en", "pt-BR"] as const) {
       render(
         <I18nextProvider i18n={createI18n(lng)}>
           <HelpLink slug="computers" section="folders">
@@ -41,7 +38,8 @@ describe("links read as ours, never the browser's blue", () => {
       expect(a?.className).toBe("ac-link ac-link--muted");
       expect(a?.getAttribute("target")).toBe("_blank");
       expect(a?.getAttribute("rel")).toBe("noopener noreferrer");
-      expect(a?.getAttribute("href")).toBe(`https://agentes.chat/${folder}docs/computers#folders`);
+      // xquads' help lives in the app itself (/help), its language in the address.
+      expect(a?.getAttribute("href")).toBe(`https://agents.xquads.com/help/computers?lang=${lng}#folders`);
       cleanup();
     }
   });

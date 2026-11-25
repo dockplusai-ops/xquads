@@ -199,41 +199,24 @@ describe("the account menu", () => {
     await press("Enter");
     await settle(2);
     expect(screen().queryByRole("menu")).toBeNull();
-    const ask = screen().getByRole("dialog", { name: "Como você quer aparecer?" });
-    expect(within(ask).getByRole("button", { name: /^Criar um avatar/ })).toBeTruthy();
-    expect(within(ask).getByRole("button", { name: /^Enviar uma foto/ })).toBeTruthy();
+    // xquads has no avatar builder (`PORTRAITS`): the photo to upload, at once.
+    const photo = screen().getByRole("dialog", { name: "Foto do perfil" });
+    expect(within(photo).getByRole("button", { name: /Solte uma imagem aqui/ })).toBeTruthy();
     expect(router.state.location.pathname).toBe(`/org/${ORG_ID}/c/${ENG_ID}`);
     await press("Escape");
     expect(screen().queryByRole("dialog")).toBeNull();
     expect(document.activeElement === row).toBe(true);
   });
 
-  test("its question leads where Editar perfil's does: the photo to upload, or the avatar builder", async () => {
+  test("Trocar foto leads where Editar perfil's does: the photo to upload (no avatar builder in xquads)", async () => {
     await go();
     await click(within(await openMenu()).getByRole("menuitem", { name: "Trocar foto" }));
-    await click(
-      within(screen().getByRole("dialog", { name: "Como você quer aparecer?" })).getByRole("button", {
-        name: /^Enviar uma foto/,
-      }),
-    );
     const photo = screen().getByRole("dialog", { name: "Foto do perfil" });
     expect(within(photo).getByRole("button", { name: /Solte uma imagem aqui/ })).toBeTruthy();
     expect(screen().queryByRole("dialog", { name: "Como você quer aparecer?" })).toBeNull();
+    expect(screen().queryByRole("dialog", { name: "Seu avatar" })).toBeNull();
     await press("Escape");
     expect(screen().queryByRole("dialog")).toBeNull();
-
-    await click(within(await openMenu()).getByRole("menuitem", { name: "Trocar foto" }));
-    await click(
-      within(screen().getByRole("dialog", { name: "Como você quer aparecer?" })).getByRole("button", {
-        name: /^Criar um avatar/,
-      }),
-    );
-    const builder = screen().getByRole("dialog", { name: "Seu avatar" });
-    expect(within(builder).getByRole("radio", { name: "Masculino" })).toBeTruthy();
-    // The photo is one link away there too.
-    await click(within(builder).getByRole("button", { name: "Enviar foto" }));
-    expect(screen().getByRole("dialog", { name: "Foto do perfil" })).toBeTruthy();
-    expect(screen().queryByRole("dialog", { name: "Seu avatar" })).toBeNull();
   });
 
   test("a long name and @ are whole on top and at the foot, the name's capitals at the face's top", async () => {

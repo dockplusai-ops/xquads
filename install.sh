@@ -30,7 +30,7 @@ main() {
   COMPOSE_VERSION=5.5.1
   MIN_COMPOSE=2.23.1
   INSTALL_URL=https://agents.xquads.com/install
-  GUIDE=https://agents.xquads.com/help/install-on-a-server?lang=en
+  GUIDE="https://agents.xquads.com/help/install-on-a-server?lang=en"
   DOCKER_DOCS=https://docs.docker.com/engine/install/
   BREW_INSTALL=https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 
@@ -754,16 +754,15 @@ t_intro() {
 
 # The logo. The mark: the agent of packages/ui/src/agent/engine.js on the 12×12 grid of the web's LogoMark,
 # rows of pixels where 0-4 are its body's tones (deep to light), w its eyes and . nothing. Beside it,
-# "agentes" in pixels after Funnel Display Light. Two rows of pixels make one line of ▀▄█.
+# "xquads" in pixels. Two rows of pixels make one line of ▀▄█.
 t_logo() {
   printf '\n' >&"$T_FD"
-  t_row=0
-  set -- ..43434343.. .3333333332. '                         ▄' \
-    333333333233 232323232223 ' ▄▄▄   ▄▄▄▄  ▄▄▄  ▄ ▄▄  ▄█▄▄  ▄▄▄   ▄▄▄▄' \
-    3232w23w3222 2222w22w2212 ' ▄▄▄█ █   █ █▄▄▄█ █▀  █  █   █▄▄▄█ ▀▄▄▄' \
-    2222w22w2122 121212121112 '█   █ █   █ █     █   █  █   █         █' \
-    212121212111 111111111101 ' ▀▀▀▀  ▀▀▀█  ▀▀▀▀ ▀   ▀   ▀▀  ▀▀▀▀ ▀▀▀▀' \
-    11111111101. 0101010100.. '       ▀▀▀'
+  set -- ..43434343.. .3333333332. '                            ▄' \
+    333333333233 232323232223 '▄   ▄  ▄▄▄▄ ▄   ▄  ▄▄▄   ▄▄▄█  ▄▄▄▄' \
+    323232323222 2222w22w2212 ' ▀▄▀  █   █ █   █  ▄▄▄█ █   █ ▀▄▄▄' \
+    222222222122 121212121112 ' ▄▀▄  █   █ █   █ █   █ █   █     █' \
+    212121212111 111111111101 '▀   ▀  ▀▀▀█  ▀▀▀▀  ▀▀▀▀  ▀▀▀▀ ▀▀▀▀' \
+    .1111111101. ..01010100.. '          ▀'
   while [ $# -ge 3 ]; do
     t_top=$1 t_bot=$2 t_word=$3
     shift 3
@@ -773,8 +772,6 @@ t_logo() {
       t_line=$t_line$t_c
       t_top=${t_top#?} t_bot=${t_bot#?}
     done
-    t_row=$((t_row + 1))
-    if [ "$t_row" = 5 ]; then t_word="$t_word $C_DIM.chat$C_OFF"; fi
     printf '  %s%s   %s\n' "$t_line" "$C_OFF" "$t_word" >&"$T_FD"
   done
   printf '\n' >&"$T_FD"
@@ -815,19 +812,19 @@ t_tone() {
   case $T_DEPTH in
     24)
       case $2 in
-        0) t_n='0;61;130' ;; 1) t_n='0;99;209' ;; 2) t_n='70;147;232' ;; 3) t_n='140;195;255' ;;
-        4) t_n='198;225;255' ;; *) t_n='255;255;255' ;;
+        0) t_n='110;86;62' ;; 1) t_n='150;118;84' ;; 2) t_n='199;157;112' ;; 3) t_n='217;188;155' ;;
+        4) t_n='236;220;200' ;; *) t_n='14;28;34' ;;
       esac
       t_n="$1;2;$t_n"
       ;;
     256)
-      case $2 in 0) t_n=25 ;; 1) t_n=26 ;; 2) t_n=68 ;; 3) t_n=111 ;; 4) t_n=189 ;; *) t_n=231 ;; esac
+      case $2 in 0) t_n=94 ;; 1) t_n=137 ;; 2) t_n=179 ;; 3) t_n=180 ;; 4) t_n=223 ;; *) t_n=234 ;; esac
       t_n="$1;5;$t_n"
       ;;
     *)
-      # Blue for the deep tones, bright blue for the light ones, bright white for the eyes.
+      # Yellow for the deep tones, bright yellow for the light ones, black for the eyes (camel and petrol).
       case $1$2 in
-        380 | 381) t_n=34 ;; 38w) t_n=97 ;; 38?) t_n=94 ;; 480 | 481) t_n=44 ;; 48w) t_n=107 ;; *) t_n=104 ;;
+        380 | 381) t_n=33 ;; 38w) t_n=30 ;; 38?) t_n=93 ;; 480 | 481) t_n=43 ;; 48w) t_n=40 ;; *) t_n=103 ;;
       esac
       ;;
   esac

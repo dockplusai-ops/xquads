@@ -35,7 +35,7 @@ import { isRoutineCall, routineReplyOf } from "@agenteschat/client/lib/routines"
 import { secretRequestOf } from "@agenteschat/client/lib/secret-requests";
 import { usagePauseCardOf } from "@agenteschat/client/lib/usage-pause";
 import { voiceOf } from "@agenteschat/client/lib/voice";
-import { type AgentColorName, gradientOf, mentionTone, mixHex } from "@agenteschat/ui/agent/engine";
+import { type AgentColorName, contrastOf, gradientOf, mentionTone, mixHex } from "@agenteschat/ui/agent/engine";
 import type { TFunction } from "i18next";
 import { agentLook, previewOf } from "../shared/logic";
 import { continuesReply } from "./media";
@@ -672,7 +672,16 @@ export function reactionPills(reactions: ReactionCount[] | undefined, meId: stri
 /** My bubble: a tint of the deep end of the color on the page (stronger on a dark page), or the color a step darker. */
 export function bubbleFill(color: AgentColorName, tone: "light" | "strong", page: string, dark: boolean) {
   const deep = gradientOf(color)[1];
-  return tone === "strong" ? mixHex(deep, "#000000", 0.18) : mixHex(page, deep, dark ? 0.3 : 0.2);
+  return tone === "strong" ? strongOf(deep) : mixHex(page, deep, dark ? 0.3 : 0.2);
+}
+
+/** The color darkened, from 18%, until white on it is AA: xquads' soft colors need more than the original's. */
+function strongOf(deep: string) {
+  for (let k = 0.18; k < 1; k += 0.04) {
+    const fill = mixHex(deep, "#000000", k);
+    if (contrastOf("#ffffff", fill) >= 4.5) return fill;
+  }
+  return "#000000";
 }
 
 /**
@@ -681,7 +690,7 @@ export function bubbleFill(color: AgentColorName, tone: "light" | "strong", page
  */
 export const nameInk = (color: AgentColorName, dark: boolean) => {
   const [top, deep] = gradientOf(color);
-  return dark ? mixHex(top, "#ffffff", 0.15) : mixHex(deep, "#000000", 0.35);
+  return dark ? mixHex(top, "#ffffff", 0.15) : mixHex(deep, "#000000", 0.6);
 };
 
 /** What my row shows under its bubble (`MessageRow`'s foot, files and cards): it ends a run's look (`runAround`). */

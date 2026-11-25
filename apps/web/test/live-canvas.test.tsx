@@ -433,7 +433,8 @@ describe("the canvas editor", () => {
       { api, org: true },
     );
     expect(document.querySelectorAll(".cnv-mini__frame")).toHaveLength(1);
-    expect(document.querySelector('rect[fill="#fbd8e3"]')).toBeTruthy();
+    // The note in its color's tone for the theme: xquads' one look is the dark one.
+    expect(document.querySelector('rect[fill="#4d2633"]')).toBeTruthy();
     expect(document.querySelector(".cnv-mini image")?.getAttribute("href")).toBe(
       `/api/app/organizations/${ORG_ID}/artifacts/file-1/assets/asset-1`,
     );

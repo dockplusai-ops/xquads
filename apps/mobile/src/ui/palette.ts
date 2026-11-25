@@ -148,9 +148,6 @@ export function paintSky(color: string | null) {
   setSkyColors(color ? accentSky(color) : null);
 }
 
-/** A card inside a dark sheet: one step above the sheet, as the sheet is one above the screen. */
-const DARK_SHEET_CARD = "#292928";
-
 /**
  * The colors inside a form sheet. In dark the sheet is lifted one step above the screen behind it (the dark
  * page's own color made the two read as one) and its cards one more, as the system's own sheets do. Light
@@ -158,16 +155,18 @@ const DARK_SHEET_CARD = "#292928";
  */
 export function sheetColors(colors: AppColors, scheme: Scheme): AppColors {
   if (scheme !== "dark") return colors;
+  // A card inside a dark sheet: one step above the sheet, as the sheet is one above the screen (xquads' petrol steps).
+  const card = colors.raised2;
   return {
     ...colors,
     bg: colors.raised,
     grouped: colors.raised,
     surface: colors.raised,
-    raised: DARK_SHEET_CARD,
-    raised2: DARK_SHEET_CARD,
-    surfaceRaised: DARK_SHEET_CARD,
+    raised: card,
+    raised2: card,
+    surfaceRaised: card,
     // Android's "glass" plates (round buttons) are opaque: a card's tone, so they don't vanish into the sheet.
-    glassSolid: DARK_SHEET_CARD,
+    glassSolid: card,
   };
 }
 

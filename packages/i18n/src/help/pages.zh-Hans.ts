@@ -1,4 +1,4 @@
-import type { HelpSlug } from "./index";
+import type { HelpSlug } from "./core";
 import type { HelpDocument } from "./types";
 
 /** The help pages in zh-Hans: a page not here shows in English. */

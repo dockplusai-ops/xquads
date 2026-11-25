@@ -31,20 +31,16 @@ test("what ships keeps dark's chosen press visible, the ready line apart from th
   const light = '[data-theme="light"]';
   const dark = '[data-theme="dark"]';
 
-  // Dark presses a chosen option into a face lighter than a card, where a black shadow shows, under light's shadow made
-  // deeper: the same layers, each at least three times as dark. Light stays as it was.
+  // Dark presses a chosen option into a face lighter than a card, where a black shadow shows. xquads keeps one look
+  // (DESIGN.md, `THEME_CHOICE`): light gives the very same face and press.
   expect(level(last(dark, "--chosen-bg"))).toBeGreaterThan(level(last(dark, "--raised")));
-  const darkPress = layers(last(dark, "--chosen-press"));
-  const lightPress = layers(last(light, "--chosen-press"));
-  expect(darkPress.map((l) => l.shape)).toEqual(lightPress.map((l) => l.shape));
-  expect(darkPress.map((l, i) => l.alpha >= 3 * (lightPress[i]?.alpha ?? 1))).toEqual([true, true]);
-  expect(last(light, "--chosen-bg")).toBe("var(--sunken)");
-  expect(lightPress.map((l) => +l.alpha.toFixed(2))).toEqual([0.16, 0.12]);
-  // Only the two theme blocks give the face: no later rule hands dark light's again.
+  expect(layers(last(light, "--chosen-press"))).toEqual(layers(last(dark, "--chosen-press")));
+  expect(last(light, "--chosen-bg")).toBe(last(dark, "--chosen-bg"));
+  // One block gives the face to both themes (xquads' one look): no later rule hands either another.
   const giving = [...shipped.matchAll(/([^{}]+)\{[^{}]*--chosen-bg:/g)].map((m) =>
     (m[1] ?? "").replace(/\s+/g, "").replace(/"/g, ""),
   );
-  expect(giving).toEqual([":root,[data-theme=light]", "[data-theme=dark]"]);
+  expect(giving).toEqual([":root,[data-theme=light],[data-theme=dark]"]);
 
   // The computer ready, in a plan's panel: a group of its own over a hairline edge to edge. Its zero margin comes
   // after every margin a panel's note gets, @supports blocks included, so the account's words keep the group's gap.
