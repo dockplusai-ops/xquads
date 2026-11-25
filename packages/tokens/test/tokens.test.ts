@@ -52,7 +52,15 @@ const sharedVars = block((s) => s.includes("[data-theme]") && !s.includes("="));
 const camel = (name: string) => name.replace(/-([a-z0-9])/g, (_, c: string) => c.toUpperCase());
 const SHADOWS = ["e1", "e2", "e3", "top"] as const;
 /** CSS-only state tokens (the web's chosen state, the sidebar's plates): composite values with no RN equivalent. */
-const CSS_ONLY = ["chosen-bg", "chosen-press", "chosen-shadow", "chosen-lift", "side-hover", "side-chosen"];
+const CSS_ONLY = [
+  "chosen-bg",
+  "chosen-press",
+  "chosen-shadow",
+  "chosen-lift",
+  "side-hover",
+  "side-chosen",
+  "glass-shadow",
+];
 const resolve = (value: string, theme: Vars) =>
   value.replace(/var\(--([\w-]+)\)/g, (_, n: string) => theme.get(n) ?? "");
 
@@ -121,8 +129,10 @@ describe("@agenteschat/tokens equals tokens.css", () => {
     for (const [key, value] of Object.entries(radius)) expect<unknown>(value).toBe(px(`radius-${key}`));
     const cssRadii = [...sharedVars.keys()].filter((k) => k.startsWith("radius-") && k !== "radius-agent");
     expect<unknown>(cssRadii.map((k) => k.slice("radius-".length)).sort()).toEqual(Object.keys(radius).sort());
-    expect<unknown>(agentRadius.map((v) => `${Math.round(v * 100)}%`).join(" ")).toBe(
-      sharedVars.get("radius-agent") ?? "",
+    // One value for the four corners in CSS (`28%`), four in the phone's list.
+    const corners = (sharedVars.get("radius-agent") ?? "").split(/\s+/);
+    expect<unknown>(agentRadius.map((v) => `${Math.round(v * 100)}%`)).toEqual(
+      corners.length === 1 ? Array(4).fill(corners[0]) : corners,
     );
     for (const [key, value] of Object.entries(space)) expect<unknown>(value).toBe(px(`space-${key}`));
     for (const [key, value] of Object.entries(text)) expect<unknown>(value).toBe(px(`text-${key}`));

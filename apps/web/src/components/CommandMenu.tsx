@@ -20,7 +20,7 @@ import { useNewAgent } from "@/components/new-agent/new-agent-context";
 import { useOrg } from "@/components/org-context";
 import { MyFace } from "@/components/ProfilePhoto";
 import { useDirectory } from "@/hooks/useDirectory";
-import { type ThemePreference, useTheme } from "@/lib/theme";
+import { THEME_CHOICE, type ThemePreference, useTheme } from "@/lib/theme";
 import { SETTINGS_SECTIONS } from "@/pages/settings-sections";
 import { isPaletteShortcut } from "./palette";
 
@@ -244,7 +244,7 @@ export function CommandMenu() {
       ["light", t("shell.themeLight")],
       ["dark", t("shell.themeDark")],
     ];
-    for (const [value, name] of themes) {
+    for (const [value, name] of THEME_CHOICE ? themes : []) {
       if (value === theme.preference) continue;
       list.push({
         key: `th:${value}`,

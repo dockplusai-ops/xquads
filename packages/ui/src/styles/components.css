@@ -24,7 +24,7 @@ body {
   font-family: var(--font-sans);
   font-size: 15px;
   line-height: 22px;
-  /* Letters as tall as the app's sizes were drawn for, whatever the face (Source Sans 3 draws small). */
+  /* Letters as tall as the app's sizes were drawn for, whatever the face (`--font-size-adjust`). */
   font-size-adjust: var(--font-size-adjust, none);
   color: var(--ink);
   background: var(--surface);

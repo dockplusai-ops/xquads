@@ -14,6 +14,9 @@ import { STORAGE_KEYS, storage } from "./storage";
 
 export type ThemePreference = "light" | "dark" | "system";
 
+/** Whether people pick a theme: off, as xquads is dark only (DESIGN.md, and `THEME_CHOICE` in @agenteschat/tokens). */
+export const THEME_CHOICE = false;
+
 interface ThemeContextValue {
   preference: ThemePreference;
   resolved: "light" | "dark";
@@ -42,7 +45,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     return () => query.removeEventListener("change", onChange);
   }, []);
 
-  const resolved = preference === "system" ? (systemDark ? "dark" : "light") : preference;
+  const chosen = preference === "system" ? (systemDark ? "dark" : "light") : preference;
+  const resolved = THEME_CHOICE ? chosen : "dark";
   useEffect(() => {
     switchTheme(resolved);
   }, [resolved]);

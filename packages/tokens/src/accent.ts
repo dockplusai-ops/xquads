@@ -28,7 +28,7 @@ const pick = (t: AccentTokens): AccentTokens => ({
   onAgent: t.onAgent,
 });
 
-/** The design system's own blue: what a workspace without an accent shows. */
+/** The design system's own camel: what a workspace without an accent shows. */
 export const DEFAULT_ACCENT = light.agent;
 export const DEFAULT_ACCENT_PALETTE: AccentPalette = { light: pick(light), dark: pick(dark) };
 
@@ -112,7 +112,7 @@ function tokensFor(hex: string, theme: typeof light): AccentTokens {
 /**
  * The four agent tokens for each theme from a picked "#rrggbb". `agent` reaches 4.5:1 on the theme's page and on
  * `agentSoft`, and carries
- * one of the two default on-colors at 4.5:1 (`onAgent`); the design system's blue gives back its own tokens exactly.
+ * one of the two default on-colors at 4.5:1 (`onAgent`); the design system's camel gives back its own tokens exactly.
  */
 export function accentPalette(hex: string): AccentPalette {
   const color = hex.toLowerCase();

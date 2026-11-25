@@ -122,14 +122,11 @@ export const WHOLE_LOOKS = [...ONBOARDING_CREW, ASSISTANT_LOOK];
 export const WHOLE = { width: 36, height: 46, x: 2, y: 16, body: 28 } as const;
 export const wholeFile = (look: Required<Look>) => `agent-${look.color}-${look.eyes}-${look.accessory}.png`;
 /**
- * The ink logo with its wordmark on a rounded tile of the page's colour: unseen on our light page, and the wordmark
- * still reads where a client darkens the page but not the picture (the Gmail apps, Gmail with other accounts, classic
- * Outlook), or inverts the picture too. `logo-ink.png`, without the tile, stays for the emails already sent.
+ * The light logo, on the petrol page of both designs (xquads is dark only). `logo-ink.png` and `logo-ink-tile.png`
+ * stay for the emails already sent.
  */
-const LOGO_INK = "logo-ink-tile.png";
 /** Every picture an email may show, as the web app serves them (`apps/web/public/email/`). */
 export const EMAIL_PICTURES = [
-  LOGO_INK,
   "logo-bone.png",
   COMPUTER.file,
   "sky-band.png",
@@ -139,7 +136,7 @@ export const EMAIL_PICTURES = [
   HANDSET.off,
   wholeFile(ASSISTANT_LOOK),
 ];
-const FONT = "source-sans-3-latin.woff2";
+const FONT = "onest-latin.woff2";
 const LOGO = { width: 173, height: 36, alt: "xquads" } as const;
 const SKY = { width: 552, height: 27 } as const;
 /** An agent's face for its colour: a custom "#rrggbb" is the closest preset's, an unknown one is sky, as the app draws it. */
@@ -176,7 +173,7 @@ const D = palette(dark);
 
 /** Japanese, Chinese and Korean fall back to each system's own fonts before the generic one. */
 const SANS =
-  "'Source Sans 3',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,'Hiragino Sans','PingFang SC','Microsoft YaHei','Apple SD Gothic Neo','Malgun Gothic',sans-serif";
+  "'Onest',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,'Hiragino Sans','PingFang SC','Microsoft YaHei','Apple SD Gothic Neo','Malgun Gothic',sans-serif";
 
 /**
  * The bottom margin of the card's last block, by what its lowest ink is: the room under that ink then matches the
@@ -212,8 +209,6 @@ const DARK = [
   `.ln-d{color:${D.danger}!important;text-decoration-color:${D.border}!important}`,
   `.ln-m{color:${D.muted}!important;text-decoration-color:${D.border}!important}`,
   `.end-btn{margin-bottom:${END.box}px!important}`,
-  ".logo-ink{display:none!important}",
-  ".logo-bone{display:block!important}",
 ];
 
 const PHONE = [
@@ -492,7 +487,7 @@ body{margin:0!important;padding:0!important;width:100%!important}
 a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important}
 @media (max-width:620px){${PHONE.join("")}}
 </style>
-${fonts ? `<!--[if !mso]><!--><style>@font-face{font-family:'Source Sans 3';font-style:normal;font-weight:200 900;font-display:swap;size-adjust:107%;src:url('${esc(`${fonts}${FONT}`)}') format('woff2')}</style><!--<![endif]-->` : ""}
+${fonts ? `<!--[if !mso]><!--><style>@font-face{font-family:'Onest';font-style:normal;font-weight:100 900;font-display:swap;src:url('${esc(`${fonts}${FONT}`)}') format('woff2')}</style><!--<![endif]-->` : ""}
 </head>
 <body class="body bg" style="margin:0;padding:0;width:100%;background:${L.page};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%">
 <div style="display:none;max-height:0;max-width:0;overflow:hidden;mso-hide:all">${esc(doc.preheader)}${FILLER}</div>
@@ -503,8 +498,7 @@ ${fonts ? `<!--[if !mso]><!--><style>@font-face{font-family:'Source Sans 3';font
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:552px;margin:0 auto">
 <tr><td style="padding:32px 0 20px">
 <a href="${esc(art.home)}" target="_blank" style="display:inline-block;text-decoration:none">
-${logo(LOGO_INK, "logo-ink", "block", L.ink)}
-<!--[if !mso]><!-->${logo("logo-bone.png", "logo-bone", "none", D.ink)}<!--<![endif]-->
+${logo("logo-bone.png", "logo-bone", "block", L.ink)}
 </a>
 </td></tr>
 <tr><td class="card" style="background:${L.card};border:1px solid ${L.border};border-radius:16px;padding:32px">
