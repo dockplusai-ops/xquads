@@ -44,7 +44,14 @@ const keptValue = (pick: AppIconPick) => (typeof pick === "string" ? pick : JSON
 /** The agent of a pick, if it is one. */
 export const pickedAgent = (pick: AppIconPick) => (typeof pick === "string" ? null : pick.agent);
 
-let current: AppIconPick = inDesktopApp() ? DEFAULT_APP_ICON : parsePick(storage.get(STORAGE_KEYS.appIcon));
+/**
+ * Whether people pick another app icon (ADR 0179): off. The other icons are the original's pixel art; xquads ships its
+ * own icon alone (DESIGN.md), and a pick saved before shows the shipped one.
+ */
+export const APP_ICON_CHOICE = false;
+
+let current: AppIconPick =
+  inDesktopApp() || !APP_ICON_CHOICE ? DEFAULT_APP_ICON : parsePick(storage.get(STORAGE_KEYS.appIcon));
 
 /** The icon's picture in the picker (packages/ui/scripts/app-icons.mjs writes them). */
 export const appIconPicture = (id: AppIconId) => `/app-icons/${id}.png`;
@@ -52,7 +59,7 @@ export const appIconPicture = (id: AppIconId) => `/app-icons/${id}.png`;
 export const faviconOf = (id: AppIconId) => (id === DEFAULT_APP_ICON ? "/favicon.ico" : `/app-icons/${id}.ico`);
 
 /** Whether this device can change its icon here (a browser, or a desktop app that keeps one). */
-export const picksAppIcon = () => !inDesktopApp() || desktopPicksAppIcon();
+export const picksAppIcon = () => APP_ICON_CHOICE && (!inDesktopApp() || desktopPicksAppIcon());
 
 export const appIcon = () => current;
 export const onAppIconChange = (cb: () => void) => {

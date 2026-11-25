@@ -201,8 +201,15 @@ export function AvatarChoiceDialog({
  * "Trocar foto" as Editar perfil's button and the account menu's face open it: the question, then the builder or the
  * photo. `onClose` as soon as the question is answered or dismissed: what it led to stays open on its own.
  */
+/**
+ * Whether people build a pixel portrait (ADR 0166): off. xquads draws a person as a circle with an initial or their
+ * photo (DESIGN.md), so "Change photo" goes straight to the photo.
+ */
+export const PORTRAITS = false;
+
 export function ChangeAvatarDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [next, setNext] = useState<"build" | "photo" | null>(null);
+  if (!PORTRAITS) return <ProfilePhotoDialog open={open} onClose={onClose} />;
   const go = (to: "build" | "photo") => {
     onClose();
     setNext(to);

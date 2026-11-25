@@ -714,7 +714,7 @@
   left: 58px;
   top: -12px;
   color: #fff;
-  font-family: "Doto", var(--font-mono);
+  font-family: var(--font-dot);
   font-weight: 900;
   pointer-events: none;
 }

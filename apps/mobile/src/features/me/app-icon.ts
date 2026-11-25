@@ -59,6 +59,9 @@ export const MADE_ICON_SKY_PICTURES: Record<MadeIconPose, Record<MadeIconSky, nu
   },
 };
 
+/** Whether people pick another app icon (ADR 0179): off in xquads. */
+const APP_ICON_CHOICE = false;
+
 const KEY = ["app-icon"] as const;
 
 /** Whether this build can change its icon, and the one it shows now (null while asking). */
@@ -68,7 +71,8 @@ export function useAppIcon() {
     queryKey: KEY,
     staleTime: Number.POSITIVE_INFINITY,
     queryFn: async (): Promise<{ supported: boolean; icon: PhoneIcon }> => {
-      if (!native) return { supported: false, icon: PHONE_APP_ICON };
+      // xquads ships its own icon alone (DESIGN.md): the original's other icons are never offered.
+      if (!native || !APP_ICON_CHOICE) return { supported: false, icon: PHONE_APP_ICON };
       const supported = await native.supported(NAMES).catch(() => false);
       if (!supported) return { supported: false, icon: PHONE_APP_ICON };
       const name = await native.get(NAMES).catch(() => null);

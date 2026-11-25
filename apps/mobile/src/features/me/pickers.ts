@@ -15,7 +15,7 @@ export function useMePickers() {
   const sounds = useSoundChoice();
   const styleLabel = useSoundLabel();
   const pickSound = () => {
-    const choices: SoundChoice[] = ["tactile", "sky", "pixel", "off"];
+    const choices: SoundChoice[] = ["tactile", "off"];
     void pickOne({
       title: t("mobile.me.sounds"),
       value: sounds,

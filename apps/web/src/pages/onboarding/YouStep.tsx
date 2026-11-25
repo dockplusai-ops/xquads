@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { AuthResult } from "@/auth/client";
 import { useAuth } from "@/auth/context";
-import { AvatarBuilderDialog } from "@/components/AvatarBuilder";
+import { AvatarBuilderDialog, PORTRAITS } from "@/components/AvatarBuilder";
 import { useOrg } from "@/components/org-context";
 import { ProfilePhotoDialog } from "@/components/ProfilePhoto";
 
@@ -83,9 +83,11 @@ export function YouStep({ me, onDone }: { me: Me; onDone: () => void }) {
             <div className="onb-you__side">
               <span className="ac-field__label ac-captop">{t("onboarding.flow.you.photo")}</span>
               <span className="onb-you__acts">
-                <Button icon="smile" onClick={() => setBuilding(true)}>
-                  {t(drawn ? "onboarding.flow.you.edit" : "onboarding.flow.you.build")}
-                </Button>
+                {PORTRAITS && (
+                  <Button icon="smile" onClick={() => setBuilding(true)}>
+                    {t(drawn ? "onboarding.flow.you.edit" : "onboarding.flow.you.build")}
+                  </Button>
+                )}
                 <Button icon="image" onClick={() => setUploading(true)}>
                   {t("onboarding.flow.you.upload")}
                 </Button>

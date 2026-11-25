@@ -147,8 +147,11 @@ export function Avatar({
   const a11y = labelled ? ({ role: "img", "aria-label": name } as const) : ({ "aria-hidden": true } as const);
   const agent = kind === "agent";
   const mood: AgentState = state ?? (running ? "thinking" : "idle");
-  // A photo that is a drawn portrait (ADR 0166) is drawn here from its recipe, crisp at this size.
-  const portrait = !agent && imageUrl && canDrawPortraits() ? recipeOfUrl(imageUrl) : null;
+  // A photo that is a drawn pixel portrait (ADR 0166) shows as the person's initial: xquads draws a person as a circle
+  // with an initial or a real photo (DESIGN.md).
+  const drawnPortrait = !agent && imageUrl ? recipeOfUrl(imageUrl) : null;
+  const portrait = null;
+  void canDrawPortraits;
   return (
     <span
       className={cx(
@@ -181,7 +184,7 @@ export function Avatar({
         />
       ) : portrait ? (
         <PersonPortrait recipe={portrait} />
-      ) : imageUrl ? (
+      ) : imageUrl && !drawnPortrait ? (
         <img src={imageUrl} alt="" />
       ) : (
         <span className="ac-avatar__initials">{initials ?? initialsOf(name)}</span>

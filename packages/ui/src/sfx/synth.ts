@@ -11,6 +11,11 @@ export const SAMPLE_RATE = 44100;
 export const SOUND_STYLES = ["tactile", "sky", "pixel"] as const;
 export type SoundStyle = (typeof SOUND_STYLES)[number];
 export const DEFAULT_SOUND_STYLE: SoundStyle = "tactile";
+/**
+ * The styles people pick from: tactile alone. Sky and pixel were the original's own sounds (xquads keeps no pixel
+ * art, DESIGN.md); a saved one plays as tactile.
+ */
+export const OFFERED_SOUND_STYLES: readonly SoundStyle[] = ["tactile"];
 
 export const SOUNDS = [
   "send",

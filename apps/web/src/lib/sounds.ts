@@ -1,5 +1,12 @@
 import { type SoundName, setSoundPlayer } from "@agenteschat/client/lib/sounds";
-import { DEFAULT_SOUND_STYLE, isSoundStyle, renderSound, SAMPLE_RATE, type SoundStyle } from "@agenteschat/ui/sfx";
+import {
+  DEFAULT_SOUND_STYLE,
+  isSoundStyle,
+  OFFERED_SOUND_STYLES,
+  renderSound,
+  SAMPLE_RATE,
+  type SoundStyle,
+} from "@agenteschat/ui/sfx";
 import { STORAGE_KEYS, sessionStore, storage } from "./storage";
 
 /**
@@ -16,7 +23,7 @@ const REPEAT_MS = 150;
 
 const read = (): SoundChoice => {
   const saved = storage.get(STORAGE_KEYS.sounds);
-  return saved === "off" || isSoundStyle(saved) ? saved : DEFAULT_SOUND_STYLE;
+  return saved === "off" || (isSoundStyle(saved) && OFFERED_SOUND_STYLES.includes(saved)) ? saved : DEFAULT_SOUND_STYLE;
 };
 let choice: SoundChoice = read();
 

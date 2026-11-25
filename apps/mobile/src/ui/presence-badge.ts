@@ -1,4 +1,3 @@
-import { mixHex } from "@agenteschat/ui/agent/engine";
 import { type BadgePresence, type BadgeTone, badgeCells } from "@agenteschat/ui/presence/badge";
 
 /**
@@ -56,28 +55,28 @@ export function badgePaths(presence: BadgePresence, ring = true): { size: number
 }
 
 /**
- * The badge's color per presence, light and dark theme (the approved design's: green, red, amber, a faint gray). An
- * agent at work wears the agents' blue (`palette.ts` `agent`), one waiting on you the amber of what waits on you.
+ * The badge's color per presence, the same in both themes (xquads is dark only): the app's states, sálvia online,
+ * argila busy, amber away, ardósia out, the faint sand offline, an agent at work camel, one waiting on you amber.
  */
 const TONES: Record<BadgePresence, readonly [light: string, dark: string]> = {
-  online: ["#2f9e5b", "#46c47a"],
-  busy: ["#d92d20", "#ff6961"],
-  away: ["#c98a00", "#f2b04a"],
-  out: ["#0a6f9e", "#5cc4ea"],
-  offline: ["#8a8a8f", "#77776f"],
-  hidden: ["#8a8a8f", "#77776f"],
-  working: ["#0063d1", "#5aa8ff"],
-  waiting: ["#c98a00", "#f2b04a"],
+  online: ["#8fbb9c", "#8fbb9c"],
+  busy: ["#e08476", "#e08476"],
+  away: ["#d9a55b", "#d9a55b"],
+  out: ["#8aa3ae", "#8aa3ae"],
+  offline: ["#a39b97", "#a39b97"],
+  hidden: ["#a39b97", "#a39b97"],
+  working: ["#c79d70", "#c79d70"],
+  waiting: ["#d9a55b", "#d9a55b"],
 };
 
-/** Each tone's fill: the dither lighter at the top left and deeper at the bottom right, the white mark, the ring. */
+/** Each tone's fill: one flat color (no dither in xquads), the white mark, the ring. */
 export function badgeFills(presence: BadgePresence, dark: boolean, ring: string): Record<BadgeTone, string> {
   const base = TONES[presence][dark ? 1 : 0];
   return {
     base,
-    light: mixHex(base, "#ffffff", 0.4),
-    deep: mixHex(base, "#000000", 0.25),
-    mark: "#ffffff",
+    light: base,
+    deep: base,
+    mark: "#0e1c22",
     ring,
   };
 }

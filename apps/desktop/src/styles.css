@@ -8,8 +8,8 @@
 :root {
   --font-sans: "Onest Variable", Onest, system-ui, sans-serif;
   --font-mono: "Martian Mono Variable", "Martian Mono", ui-monospace, Menlo, monospace;
-  --font-display: "Funnel Display", var(--font-sans);
-  --font-dot: "Doto", var(--font-mono);
+  --font-display: var(--font-sans);
+  --font-dot: var(--font-sans);
 }
 
 /* Japanese, Korean and Chinese read in each system's own face after Onest (no web font to download). Russian titles:
@@ -1368,7 +1368,7 @@ body[data-window="popover"] {
   }
 }
 
-/* A sign-in code (Preferences > Tools, "Add account"): big, in Doto. */
+/* A sign-in code (Preferences > Tools, "Add account"): big, in the dot face (Onest in xquads). */
 .dk-code {
   display: inline-flex;
   align-items: baseline;

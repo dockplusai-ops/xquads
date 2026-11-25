@@ -8,8 +8,8 @@
   padding: 24px;
   border-radius: 24px;
   overflow: hidden;
-  background: #2b74e6;
-  color: var(--sky-ink);
+  background: var(--raised);
+  color: var(--ink);
   isolation: isolate;
 }
 /* In a channel, under its header like the day's greeting. */
