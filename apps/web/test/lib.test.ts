@@ -307,8 +307,8 @@ describe("grammar", () => {
   test("the app's starter agents get their names' own pronoun and article", () => {
     const english = createI18n("en");
     const te = english.t.bind(english) as TFunction;
-    const feminine = ["Ada", "Iris", "Nina", "Mila", "Dora", "Clara", "Eva"];
-    const masculine = ["Atlas", "Theo", "Leo", "Bento", "Otto", "Hugo"];
+    const feminine = ["Ana", "Lia", "Bia", "Duda", "Flora", "Joana", "Nara", "Rita", "Vera"];
+    const masculine = ["Rui", "Téo", "Gil", "Davi", "Caio", "Enzo", "Igor", "Murilo", "Paulo", "Sérgio"];
     for (const dict of [ptBR, en]) {
       const roles = Object.values(dict.newAgent.roles as Record<string, { agent?: string }>);
       expect(roles.flatMap((r) => (r.agent ? [r.agent] : [])).toSorted()).toEqual(
@@ -317,6 +317,7 @@ describe("grammar", () => {
     }
     for (const name of feminine) expect(agentGrammar(name)).toEqual({ name, context: "female" });
     for (const name of masculine) expect(agentGrammar(name)).toEqual({ name, context: undefined });
+    // A name the app gave before, feminine without ending in "a", keeps its grammar.
     expect(te("noAi.agent", agentGrammar("Iris"))).toBe("Iris won't reply because she has no AI\u00a0connected.");
     expect(t("chat.joined.tip", agentGrammar("Iris"))).toBe("Ninguém chamou a Iris. Ela entrou para ajudar.");
   });

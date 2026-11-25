@@ -113,7 +113,7 @@ export function createItems(
 }
 
 /** Names offered for a new agent (short, friendly, easy to call). */
-export const AGENT_NAMES = ["Lu", "Nina", "Theo", "Iris", "Ada", "Otto", "Clara", "Bento", "Dora", "Rui"] as const;
+export const AGENT_NAMES = ["Ana", "Rui", "Lia", "Téo", "Gil", "Davi"] as const;
 
 const fold = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").trim().toLowerCase();
 

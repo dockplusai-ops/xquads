@@ -96,9 +96,9 @@ export const COMPUTER = { file: "computer.png", kind: "linux", cell: 2, t: 0.75,
  */
 export const HANDSET = { on: "phone.png", off: "phone-off.png", kind: "android" } as const;
 /**
- * The onboarding's own agents, Theo, Ada, Lia and Atlas (`PRESET_LOOK` in packages/client/src/lib/onboarding.ts and
- * apps/mobile/src/features/onboarding/logic.ts), each drawn whole by `packages/engine/scripts/email-art.ts`. Any other
- * look is its colour's face.
+ * The emails' own crew of four looks, each drawn whole by `packages/engine/scripts/email-art.ts` (pictures in
+ * apps/web/public/email/, redrawn with the emails' art, not with the onboarding's agents). Any other look is its
+ * colour's face.
  */
 export const ONBOARDING_CREW = [
   { color: "indigo", eyes: "round", accessory: "cap" },

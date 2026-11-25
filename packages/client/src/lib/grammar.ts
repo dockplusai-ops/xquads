@@ -1,4 +1,7 @@
-/** The app's own starter names (`newAgent.roles.*.agent`) that are feminine without ending in "a". */
+/**
+ * Starter names the app gave (`newAgent.roles.*.agent`, now or before) that are feminine without ending in "a": agents
+ * made with an earlier one keep its grammar.
+ */
 const FEMININE = new Set(["iris"]);
 
 /**

@@ -755,7 +755,7 @@
     "free": "空き",
     "workingLabel": "{{name}}、作業中",
     "new": "新しいエージェント",
-    "namePlaceholder": "名前（例: Nina）",
+    "namePlaceholder": "名前（例: Ana）",
     "whatPlaceholder": "例: 顧客にメールで回答して、急ぎのときは知らせて",
     "create": "エージェントを作成",
     "created": "{{name}}がチームに加わりました",

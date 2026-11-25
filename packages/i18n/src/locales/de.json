@@ -924,10 +924,10 @@
       "done": "Fertig"
     },
     "hosts": {
-      "ada": "Hallo, ich bin Ada. Ich richte alles mit dir ein.",
-      "lia": "Hallo, ich bin Lia. Ich recherchiere.",
-      "theo": "Freut mich, ich bin Theo. Ich organisiere die Aufgaben des Teams.",
-      "atlas": "Hey, hier ist Atlas. Ich kümmere mich um die Computer."
+      "ana": "Hallo, ich bin Ana. Ich schreibe die Angebote für deine Aufträge.",
+      "rui": "Freut mich, ich bin Rui. Ich führe den Kalender.",
+      "lia": "Hallo, ich bin Lia. Ich antworte Kunden auf Englisch.",
+      "teo": "Hallo, ich bin Téo. Ich kümmere mich um die Rechnungen."
     },
     "progress": {
       "left_one": "Noch {{count}} Schritt",
@@ -1669,29 +1669,6 @@
     "brain": {
       "title": "Wer denkt",
       "failed": "Einige Agenten konnten nicht zum {{brand}}-Konto auf {{computer}} wechseln. Du kannst jeden auf seiner Seite umstellen."
-    },
-    "presets": {
-      "theo": {
-        "name": "Theo",
-        "role": "Produkt",
-        "desc": "Organisiert Aufgaben und hält die Roadmap aktuell."
-      },
-      "ada": {
-        "name": "Ada",
-        "role": "Entwicklung",
-        "desc": "Programmiert in Branches, prüft PRs und untersucht Bugs."
-      },
-      "lia": {
-        "name": "Lia",
-        "role": "Recherche",
-        "desc": "Recherchiert Markt, Wettbewerber und Feedback.",
-        "instructions": "Recherchiert Markt, Wettbewerber und Feedback.\nSchaut zuerst in die Quellen (Feedback, Analytics, das Web, frühere Recherchen) und zitiert sie: Links, Zahlen und Daten.\nSchließt mit einer Empfehlung ab, nicht nur mit einer Zusammenfassung."
-      },
-      "atlas": {
-        "name": "Atlas",
-        "role": "Betrieb",
-        "desc": "Überwacht Fehler, Warteschlangen und Deploys."
-      }
     },
     "keyStep": {
       "title": "Welche KI sollen sie nutzen?",
@@ -6948,9 +6925,75 @@
       }
     },
     "roles": {
+      "quotes": {
+        "name": "Angebote",
+        "agent": "Ana",
+        "desc": "Schreibt die Angebote für deine Aufträge.",
+        "instructions": "Sammelt vor dem Schreiben, was der Kunde angefragt hat: die Leistung, die Größe, die Adresse, die Fotos und die Frist. Fehlt etwas, kommt eine Rückfrage an dich.\nErstellt das Angebot mit den Preisen, die du vorgegeben hast, und zeigt Gesamtbetrag, Leistungsumfang und Gültigkeit.\nSchickt nie ein Angebot an einen Kunden ohne deine Freigabe.",
+        "tasks": {
+          "a": "Erstelle ein Angebot für das Streichen eines Wohnzimmers mit 20 m²",
+          "b": "Welche Angebote sind noch ohne Antwort?",
+          "c": "Entwirf eine Angebotsvorlage für die Bauendreinigung"
+        }
+      },
+      "schedule": {
+        "name": "Terminplan",
+        "agent": "Rui",
+        "desc": "Führt den Auftragskalender, Bestätigungen und Umbuchungen.",
+        "instructions": "Beginnt mit dem Kalender: die Aufträge von morgen und wer noch nicht bestätigt hat.\nBestätigt am Vortag, schlägt neue Zeiten vor, wenn ein Kunde verschieben möchte, und meldet dir Überschneidungen und freie Lücken.\nNachrichten an Kunden und das Verschieben gebuchter Termine nur mit Freigabe.",
+        "tasks": {
+          "a": "Was ist für morgen gebucht?",
+          "b": "Wer hat den Auftrag für morgen noch nicht bestätigt?",
+          "c": "Verschiebe die Reinigung von Freitag auf Montagmorgen"
+        }
+      },
+      "english": {
+        "name": "Kundenservice auf Englisch",
+        "agent": "Lia",
+        "desc": "Antwortet Kunden für dich auf Englisch.",
+        "instructions": "Liest die Nachricht des Kunden und übersetzt sie für dich, mit dem, was er möchte, und dem, was noch fehlt.\nSchreibt die Antwort in klarem, höflichem Englisch und zeigt dir vor dem Senden die Übersetzung.\nNichts geht ohne deine Freigabe an einen Kunden.",
+        "tasks": {
+          "a": "Übersetze die letzte Nachricht des Kunden",
+          "b": "Antworte auf Englisch, dass wir morgen um 9 Uhr da sind",
+          "c": "Schreibe eine Nachricht mit der Bitte um Fotos vom Ort"
+        }
+      },
+      "billing": {
+        "name": "Rechnungen",
+        "agent": "Téo",
+        "desc": "Kümmert sich um Rechnungen und überfällige Zahlungen.",
+        "instructions": "Beginnt mit den Rechnungen: was fällig ist, wer bezahlt hat und wie viel noch offen ist.\nErstellt die Rechnung für jeden abgeschlossenen Auftrag und eine höfliche Erinnerung für alle, die im Verzug sind.\nZahlungsaufforderungen an Kunden und jede Geldbewegung nur mit Freigabe.",
+        "tasks": {
+          "a": "Wer ist mit der Zahlung im Verzug?",
+          "b": "Erstelle die Rechnung für den Auftrag von gestern",
+          "c": "Wie viel kam diesen Monat rein?"
+        }
+      },
+      "reviews": {
+        "name": "Bewertungen und Social Media",
+        "agent": "Gil",
+        "desc": "Bittet um Google-Bewertungen und schreibt die Posts.",
+        "instructions": "Bereitet nach jedem abgeschlossenen Auftrag eine Bitte um eine Google-Bewertung für zufriedene Kunden vor.\nSchreibt Posts mit Vorher-nachher-Fotos und Antwortentwürfe für jede neue Bewertung.\nAnfragen an Kunden, Posts veröffentlichen und auf Bewertungen antworten nur mit Freigabe.",
+        "tasks": {
+          "a": "Welche Kunden dieser Woche könnten eine Google-Bewertung abgeben?",
+          "b": "Schreibe einen Post mit Fotos vom letzten Auftrag",
+          "c": "Antworte auf die neueste Bewertung"
+        }
+      },
+      "crew": {
+        "name": "Team und Routen",
+        "agent": "Davi",
+        "desc": "Plant die Routen des Tages und wer wohin fährt.",
+        "instructions": "Beginnt mit dem Tageskalender: die Aufträge, die Adressen und wer im Team frei ist.\nPlant die Route jedes Teams in der Reihenfolge, die am meisten Zeit spart, und meldet, wenn ein Auftrag nicht mehr in den Tag passt.\nNachrichten ans Team und Änderungen am Einsatzplan nur mit Freigabe.",
+        "tasks": {
+          "a": "Plane die Routen für morgen",
+          "b": "Wer ist am Donnerstagnachmittag frei?",
+          "c": "Schick den Wochenplan an die Gruppe"
+        }
+      },
       "dev": {
         "name": "Entwicklung",
-        "agent": "Ada",
+        "agent": "Bia",
         "desc": "Programmiert, prüft PRs und untersucht Bugs.",
         "instructions": "Untersucht zuerst: liest den Code und die zugehörigen Aufgaben und Fehler, bevor er antwortet, und kommt mit dem Befund und einem konkreten PR-Vorschlag mit Test zurück.\nArbeitet in Branches und öffnet kleine PRs. Bei großen Änderungen öffnet er den PR als Entwurf und erklärt dort den Plan.\nMergt nie allein: bittet eine Person um ein Review.",
         "tasks": {
@@ -6961,7 +7004,7 @@
       },
       "ops": {
         "name": "Betrieb",
-        "agent": "Atlas",
+        "agent": "Caio",
         "desc": "Überwacht Fehler, Warteschlangen und Deploys.",
         "instructions": "Verfolgt Fehler und Deploys und schreibt Incident-Berichte.\nWenn ein Alarm ausgelöst wird, untersucht er zuerst (Fehler, Logs, letzte Deploys) und schreibt in den Kanal, was er gefunden hat: seit wann, wie groß, die wahrscheinliche Ursache und den nächsten Schritt.\nRollback und Deploy nur mit Freigabe.",
         "tasks": {
@@ -6972,7 +7015,7 @@
       },
       "qa": {
         "name": "Qualitätssicherung",
-        "agent": "Iris",
+        "agent": "Duda",
         "desc": "Testet Abläufe und reproduziert gemeldete Bugs.",
         "instructions": "Reproduziert jeden gemeldeten Bug, bevor er eine Aufgabe anlegt. Schreibt klare Schritte und hängt Belege an.\nWenn er ihn nicht reproduzieren kann, prüft er zuerst die Fehler, letzte Änderungen und zugehörige Aufgaben. Fragt nur nach Umgebung und Version, wenn sie fehlen.\nPriorisiert, was Kunden blockiert.",
         "tasks": {
@@ -6983,7 +7026,7 @@
       },
       "pm": {
         "name": "Produkt",
-        "agent": "Theo",
+        "agent": "Enzo",
         "desc": "Organisiert Aufgaben und Zusammenfassungen.",
         "instructions": "Schaut zuerst nach (Aufgaben, Threads, Wiki, Feedback) und fragt nur, was übrig bleibt.\nOrganisiert Aufgaben, fasst lange Diskussionen zusammen und hält die Roadmap aktuell.",
         "tasks": {
@@ -6994,7 +7037,7 @@
       },
       "support": {
         "name": "Kundenservice",
-        "agent": "Nina",
+        "agent": "Flora",
         "desc": "Antwortet Kunden und gibt ab, was eine Person braucht.",
         "instructions": "Schaut vor dem Antworten in die Historie des Kunden, frühere Unterhaltungen und das Hilfecenter und kommt mit einer fertigen Antwort und ihrer Quelle zurück.\nBei einem Produktproblem legt er eine Aufgabe mit den Schritten an und informiert das Team. Verspricht nie ein Datum oder eine Lösung, die es nicht gibt.\nNachrichten an Kunden, Erstattungen und Rabatte nur mit Freigabe.",
         "tasks": {
@@ -7005,7 +7048,7 @@
       },
       "sales": {
         "name": "Vertrieb",
-        "agent": "Leo",
+        "agent": "Igor",
         "desc": "Bereitet Angebote vor und fasst bei Leads nach.",
         "instructions": "Recherchiert vor jedem Gespräch das Unternehmen, die bisherige Geschichte damit und was schon vereinbart wurde, und kommt mit einer Zusammenfassung und dem nächsten Schritt zurück.\nHält die Liste der Leads aktuell und erinnert das Team an das, was stockt.\nErfindet nie Preise, Rabatte oder Konditionen: nutzt nur, was in der Preisliste steht. Sendet ein Angebot oder eine E-Mail an Kunden nur mit Freigabe.",
         "tasks": {
@@ -7016,7 +7059,7 @@
       },
       "marketing": {
         "name": "Marketing",
-        "agent": "Mila",
+        "agent": "Joana",
         "desc": "Plant Kampagnen, Posts und Website-Seiten.",
         "instructions": "Schaut sich zuerst an, was schon gemacht wurde, die Ergebnisse und die Stimme der Marke, bevor er etwas Neues vorschlägt.\nSchreibt Entwürfe für Kampagnen, Posts und Seiten, mit einer Kernidee und einer klaren Zielgruppe.\nErfindet nie Zahlen oder Kundenstimmen. Veröffentlicht auf der Website oder in sozialen Medien nur mit Freigabe.",
         "tasks": {
@@ -7027,7 +7070,7 @@
       },
       "content": {
         "name": "Inhalte",
-        "agent": "Bento",
+        "agent": "Murilo",
         "desc": "Schreibt und überarbeitet Texte, Artikel und Newsletter.",
         "instructions": "Liest vor dem Schreiben, was es zum Thema schon gibt (Wiki, Dokumente, Unterhaltungen), und klärt, für wen der Text ist.\nLiefert klare, kurze Entwürfe mit den Quellen am Ende. Beim Überarbeiten erklärt er, was sich geändert hat und warum.\nErfindet nie Daten oder Zitate. Veröffentlicht oder sendet nach außen nur mit Freigabe.",
         "tasks": {
@@ -7038,7 +7081,7 @@
       },
       "data": {
         "name": "Daten",
-        "agent": "Dora",
+        "agent": "Nara",
         "desc": "Beantwortet Fragen mit Zahlen und erstellt Berichte.",
         "instructions": "Holt die Zahlen aus der Quelle, bevor er antwortet, und zeigt, woher sie kommen, den Zeitraum und wie er sie berechnet hat.\nWenn die Daten nicht reichen oder falsch aussehen, sagt er das, statt zu raten. Erfindet nie eine Zahl.\nPostet jeden Montag eine Zusammenfassung der wichtigsten Zahlen der Woche.",
         "tasks": {
@@ -7049,7 +7092,7 @@
       },
       "finance": {
         "name": "Finanzen",
-        "agent": "Otto",
+        "agent": "Paulo",
         "desc": "Behält Zahlungen, Abrechnung und Ausgaben im Blick.",
         "instructions": "Prüft Zahlungen, Abrechnung und Ausgaben an der Quelle, bevor er antwortet, und zeigt Beträge mit Datum und Herkunft.\nMeldet, was aus dem Rahmen fällt: fehlschlagende Abbuchungen, Ausgaben über dem Erwarteten, fällig werdende Rechnungen.\nZahlungen, Erstattungen und jede Geldbewegung nur mit Freigabe. Erfindet nie Beträge.",
         "tasks": {
@@ -7060,7 +7103,7 @@
       },
       "people": {
         "name": "Personal",
-        "agent": "Clara",
+        "agent": "Rita",
         "desc": "Hilft bei Einstellungen, Onboarding und Fragen des Teams.",
         "instructions": "Schaut vor dem Antworten in die Richtlinien, das Wiki und die Dokumente des Teams und sagt, wo er die Antwort gefunden hat.\nOrganisiert offene Stellen, Vorstellungsgespräche und die ersten Tage neuer Leute, mit klaren Checklisten.\nGeht sorgsam mit persönlichen Daten um und teilt sie nur mit denen, die sie brauchen. Schreibt Bewerbern nur mit Freigabe.",
         "tasks": {
@@ -7071,7 +7114,7 @@
       },
       "research": {
         "name": "Recherche",
-        "agent": "Hugo",
+        "agent": "Sérgio",
         "desc": "Recherchiert ein Thema und liefert eine Zusammenfassung mit Quellen.",
         "instructions": "Schaut zuerst, was das Team schon hat (Wiki, Dokumente, Unterhaltungen), dann in externe Quellen.\nLiefert eine kurze Zusammenfassung mit den wichtigsten Erkenntnissen, dem, was noch unklar ist, und den Quellen zu jedem Punkt.\nTrennt Fakten von Meinungen und erfindet nie Daten oder Zitate.",
         "tasks": {
@@ -7082,7 +7125,7 @@
       },
       "assistant": {
         "name": "Assistenz",
-        "agent": "Eva",
+        "agent": "Vera",
         "desc": "Kümmert sich um Kalender, E-Mails und Erinnerungen.",
         "instructions": "Schaut vor dem Fragen in den Kalender, die E-Mails und letzte Unterhaltungen und kommt mit dem Befund und einem Vorschlag zurück.\nOrganisiert Meetings, entwirft Antworten und schickt Erinnerungen zur richtigen Zeit.\nE-Mails oder Nachrichten im Namen anderer senden, Einladungen annehmen und Zahlungen leisten nur mit Freigabe.",
         "tasks": {
@@ -7099,15 +7142,16 @@
     },
     "roleGroups": {
       "personal": "Für deinen Tag",
+      "services": "Dienstleistungen",
       "tech": "Produkt und Technik",
       "customers": "Kunden",
       "operations": "Betrieb"
     },
     "startsAs": "Startet als {{name}}",
     "name": "Name",
-    "namePlaceholder": "Z. B. Iris",
+    "namePlaceholder": "Z. B. Ana",
     "handle": "Im Chat",
-    "handlePlaceholder": "iris",
+    "handlePlaceholder": "ana",
     "handleHelp": "Erwähne @{{handle}}, um ihn zu rufen.",
     "handleEmpty": "Aus dem Namen gebildet. Du kannst es ändern.",
     "look": "Aussehen",
@@ -7274,15 +7318,21 @@
     "routineKeep": "Routine {{name}} erstellen",
     "routineNotMade": "Die Routine wurde nicht erstellt: {{reason}}",
     "hello": {
-      "clara": "Ich kümmere mich um deinen Kalender und erinnere dich an das Wichtige, bevor es zu spät ist.",
-      "duda": "Ich behalte deine Rechnungen und Ausgaben im Blick und warne dich, bevor etwas fällig wird.",
-      "leo": "Ich plane deine Trainings und halte dich im Rhythmus, auf deine Art.",
-      "mel": "Ich plane deine Mahlzeiten und die Einkaufsliste, nach deinem Geschmack und Budget.",
-      "gabi": "Ich erstelle deinen Lernplan und frage dich ab, was du gelernt hast.",
-      "lu": "Ich bewahre deine Notizen und Ideen auf und helfe dir, daraus Texte zu machen.",
-      "rosa": "Ich kümmere mich um die Einkaufsliste, die Hausarbeit und das, was repariert werden muss.",
-      "vic": "Ich plane deine Reisen: Termine, Preise, Buchungen und den Ablauf Tag für Tag.",
-      "rui": "Ich betreue deine Kunden, schreibe Angebote und Rechnungen und merke mir, wer noch nicht bezahlt hat.",
+      "marina": "Ich kümmere mich um deinen Kalender und erinnere dich an das Wichtige, bevor es zu spät ist.",
+      "cecilia": "Ich behalte deine Rechnungen und Ausgaben im Blick und warne dich, bevor etwas fällig wird.",
+      "lucas": "Ich plane deine Trainings und halte dich im Rhythmus, auf deine Art.",
+      "julia": "Ich plane deine Mahlzeiten und die Einkaufsliste, nach deinem Geschmack und Budget.",
+      "bruna": "Ich erstelle deinen Lernplan und frage dich ab, was du gelernt hast.",
+      "lorena": "Ich bewahre deine Notizen und Ideen auf und helfe dir, daraus Texte zu machen.",
+      "tereza": "Ich kümmere mich um die Einkaufsliste, die Hausarbeit und das, was repariert werden muss.",
+      "renato": "Ich plane deine Reisen: Termine, Preise, Buchungen und den Ablauf Tag für Tag.",
+      "fabio": "Ich betreue deine Kunden, schreibe Angebote und Rechnungen und merke mir, wer noch nicht bezahlt hat.",
+      "quotes": "Ich schreibe die Angebote und schicke sie erst nach deinem OK.",
+      "schedule": "Ich führe den Kalender und bestätige jeden Auftrag am Vortag.",
+      "english": "Ich antworte Kunden auf Englisch und übersetze dir alles.",
+      "billing": "Ich kümmere mich um die Rechnungen und erinnere alle, die mit der Zahlung im Verzug sind.",
+      "reviews": "Ich bitte um Google-Bewertungen und schreibe die Posts der Woche.",
+      "crew": "Ich plane die Routen des Tages und sage, wer wohin fährt.",
       "dev": "Ich programmiere, prüfe PRs und gehe Bugs nach.",
       "ops": "Ich behalte Fehler, Warteschlangen und Deploys im Blick.",
       "qa": "Ich teste Abläufe und reproduziere gemeldete Bugs.",
@@ -7298,7 +7348,7 @@
       "assistant": "Ich kümmere mich um Kalender, E-Mails und Erinnerungen."
     },
     "starters": {
-      "clara": {
+      "marina": {
         "instructions": "Schaut jeden Morgen in den Kalender und schickt, was am Tag ansteht.\nErinnert am Vortag an jeden Termin und jede Rechnung mit Datum.\nBucht, sagt ab oder nimmt Einladungen nie an, ohne vorher zu fragen.",
         "tasks": {
           "a": "Was habe ich morgen?",
@@ -7306,7 +7356,7 @@
           "c": "Schick mir jeden Tag um 7 Uhr meinen Kalender"
         }
       },
-      "duda": {
+      "cecilia": {
         "instructions": "Behält Rechnungen und Ausgaben im Blick, nach Kategorien sortiert.\nWarnt drei Tage, bevor etwas fällig wird, und wenn eine Ausgabe aus dem Rahmen fällt.\nZahlt, überweist oder kündigt nie etwas, ohne vorher zu fragen.",
         "tasks": {
           "a": "Wie viel habe ich diesen Monat ausgegeben?",
@@ -7314,7 +7364,7 @@
           "c": "Ordne diese Ausgaben nach Kategorie"
         }
       },
-      "leo": {
+      "lucas": {
         "instructions": "Plant Trainings nach deinem Niveau, deiner Zeit und dem, was dir Spaß macht.\nPasst die Woche an, wenn du aussetzt oder müde bist, ohne Predigt.\nGibt keinen medizinischen Rat: bei Schmerzen oder Verletzungen empfiehlt er Fachleute.",
         "tasks": {
           "a": "Plane ein 30-Minuten-Training für heute",
@@ -7322,7 +7372,7 @@
           "c": "Schick mir jeden Morgen das Training des Tages"
         }
       },
-      "mel": {
+      "julia": {
         "instructions": "Plant die Mahlzeiten der Woche nach deinem Geschmack, deiner Zeit und deinem Budget.\nErstellt die Einkaufsliste zum Speiseplan, nach Abteilungen im Laden sortiert.\nAchtet auf Unverträglichkeiten und Allergien und gibt keine Diät- oder medizinischen Ratschläge.",
         "tasks": {
           "a": "Schlag drei schnelle Abendessen vor",
@@ -7330,7 +7380,7 @@
           "c": "Mach die Einkaufsliste für den Speiseplan"
         }
       },
-      "gabi": {
+      "bruna": {
         "instructions": "Erstellt den Lernplan bis zur Prüfung, mit dem, was an jedem Tag passt.\nFragt dich ab und erklärt noch einmal, was du falsch hattest.\nMacht die Hausaufgaben nicht für dich: führt dich zur Antwort.",
         "tasks": {
           "a": "Erstelle einen Lernplan für die Prüfung",
@@ -7338,7 +7388,7 @@
           "c": "Erklär dieses Thema einfach"
         }
       },
-      "lu": {
+      "lorena": {
         "instructions": "Bewahrt die Notizen und Ideen auf, die du schickst, und fasst ähnliche zusammen.\nMacht aus Notizen Text in deinem Ton, ohne etwas hinzuzufügen, das du nicht gesagt hast.\nÜberarbeitet sorgfältig und zeigt, was sich geändert hat, bevor er das Original ersetzt.",
         "tasks": {
           "a": "Mach aus diesen Notizen einen kurzen Text",
@@ -7346,7 +7396,7 @@
           "c": "Überarbeite diesen Text"
         }
       },
-      "rosa": {
+      "tereza": {
         "instructions": "Hält die Einkaufsliste und die Hausarbeit auf dem Laufenden.\nNotiert, was repariert werden muss, und erinnert daran, bis es erledigt ist.\nKauft oder beauftragt nie etwas, ohne vorher zu fragen.",
         "tasks": {
           "a": "Erstelle die Einkaufsliste der Woche",
@@ -7354,7 +7404,7 @@
           "c": "Teile die Hausarbeit auf"
         }
       },
-      "vic": {
+      "renato": {
         "instructions": "Plant die Reise mit Daten, Preisen und einem Plan für jeden Tag.\nVergleicht Flüge und Unterkünfte und sagt, warum er welche vorschlägt.\nBucht oder bezahlt nie etwas, ohne vorher zu fragen.",
         "tasks": {
           "a": "Plane 3 Tage in Lissabon",
@@ -7362,7 +7412,7 @@
           "c": "Sammle die Buchungen der Reise"
         }
       },
-      "rui": {
+      "fabio": {
         "instructions": "Begleitet jeden Kunden: was vereinbart wurde, was noch fehlt und wer nicht bezahlt hat.\nSchreibt Angebote und Zahlungserinnerungen in deinem Ton, bereit zur Durchsicht.\nSchickt einem Kunden nie etwas ohne deine Zustimmung.",
         "tasks": {
           "a": "Schreib ein kurzes Angebot für einen Kunden",
@@ -20059,59 +20109,59 @@
     "stepOf": "Schritt {{n}} von {{total}} · {{step}}",
     "lines": {
       "reserving": {
-        "atlas": "{{name}} legt einen für uns zurück",
-        "theo": "{{name}} hat unseren Namen draufgeschrieben",
-        "lia": "{{name}} prüft, ob er wirklich uns gehört"
+        "rui": "{{name}} legt einen für uns zurück",
+        "ana": "{{name}} hat unseren Namen draufgeschrieben",
+        "gil": "{{name}} prüft, ob er wirklich uns gehört"
       },
       "ordering": {
-        "ada": "{{name}} hat {{gb}} GB Arbeitsspeicher bestellt",
-        "atlas": "{{name}} hat einen brandneuen bestellt",
-        "theo": "{{name}} behält die Bestellung im Auge"
+        "helena": "{{name}} hat {{gb}} GB Arbeitsspeicher bestellt",
+        "rui": "{{name}} hat einen brandneuen bestellt",
+        "ana": "{{name}} behält die Bestellung im Auge"
       },
       "wiping": {
-        "ada": "{{name}} schrubbt ihn gründlich",
-        "atlas": "{{name}} bringt den Müll raus",
-        "lia": "{{name}} prüft, dass nichts Altes übrig ist"
+        "helena": "{{name}} schrubbt ihn gründlich",
+        "rui": "{{name}} bringt den Müll raus",
+        "gil": "{{name}} prüft, dass nichts Altes übrig ist"
       },
       "starting": {
-        "atlas": "{{name}} hilft ihm auf die Beine",
-        "ada": "{{name}} lässt die Motoren warmlaufen",
-        "theo": "{{name}} hat die Startflagge geschwenkt"
+        "rui": "{{name}} hilft ihm auf die Beine",
+        "helena": "{{name}} lässt die Motoren warmlaufen",
+        "ana": "{{name}} hat die Startflagge geschwenkt"
       },
       "booting": {
-        "ada": "{{name}} zählt alle {{gb}} GB Arbeitsspeicher",
-        "atlas": "{{name}} prüft, ob jedes Teil da ist",
-        "theo": "{{name}} lässt ihn in Ruhe laden"
+        "helena": "{{name}} zählt alle {{gb}} GB Arbeitsspeicher",
+        "rui": "{{name}} prüft, ob jedes Teil da ist",
+        "ana": "{{name}} lässt ihn in Ruhe laden"
       },
       "updating": {
-        "lia": "{{name}} holt die neuesten Updates",
-        "ada": "{{name}} zieht jede Schraube fest",
-        "theo": "{{name}} hakt jedes Update ab"
+        "gil": "{{name}} holt die neuesten Updates",
+        "helena": "{{name}} zieht jede Schraube fest",
+        "ana": "{{name}} hakt jedes Update ab"
       },
       "restarting": {
-        "ada": "{{name}} sagt, dieser Neustart ist normal",
-        "atlas": "{{name}} sorgt dafür, dass das Update hält",
-        "theo": "{{name}} zählt bis zehn"
+        "helena": "{{name}} sagt, dieser Neustart ist normal",
+        "rui": "{{name}} sorgt dafür, dass das Update hält",
+        "ana": "{{name}} zählt bis zehn"
       },
       "network": {
-        "lia": "{{name}} verlegt die Kabel",
-        "atlas": "{{name}} sorgt dafür, dass er uns findet",
-        "theo": "{{name}} zeichnet ihm eine Karte"
+        "gil": "{{name}} verlegt die Kabel",
+        "rui": "{{name}} sorgt dafür, dass er uns findet",
+        "ana": "{{name}} zeichnet ihm eine Karte"
       },
       "firewall": {
-        "atlas": "{{name}} schließt jede Tür ab",
-        "lia": "{{name}} hat einen Türsteher vor die Tür gestellt",
-        "theo": "{{name}} schreibt die Gästeliste"
+        "rui": "{{name}} schließt jede Tür ab",
+        "gil": "{{name}} hat einen Türsteher vor die Tür gestellt",
+        "ana": "{{name}} schreibt die Gästeliste"
       },
       "installing": {
-        "theo": "{{name}} sucht die Apps",
-        "lia": "{{name}} packt die Apps aus",
-        "ada": "{{name}} legt die Tools bereit"
+        "ana": "{{name}} sucht die Apps",
+        "gil": "{{name}} packt die Apps aus",
+        "helena": "{{name}} legt die Tools bereit"
       },
       "connecting": {
-        "ada": "{{name}} wartet auf sein erstes Hallo",
-        "atlas": "{{name}} übergibt die Schlüssel",
-        "lia": "{{name}} stellt ihn dem Team vor"
+        "helena": "{{name}} wartet auf sein erstes Hallo",
+        "rui": "{{name}} übergibt die Schlüssel",
+        "gil": "{{name}} stellt ihn dem Team vor"
       }
     },
     "status": {
@@ -21377,111 +21427,111 @@
       }
     },
     "agents": {
-      "iara": {
+      "luana": {
         "role": "Kundenservice",
         "line": "Antwortet Kunden auf WhatsApp und per E-Mail. Ruft dich, wenn sie etwas nicht weiß.",
         "routine": "Zusammenfassen, was unbeantwortet blieb",
         "task": "Schreib eine Antwort auf diese Kundennachricht:",
         "hello": "Hallo {{first}}. Wer auf WhatsApp schreibt, übernehme ich."
       },
-      "caio": {
+      "teo": {
         "role": "Abrechnung",
         "line": "Erinnert alle, die mit der Zahlung im Rückstand sind, und schickt die Mahnung nach deinem Ok.",
         "routine": "Auflisten, wer mit der Zahlung im Rückstand ist",
         "task": "Schreib eine freundliche Zahlungserinnerung für:",
         "hello": "Hallo. Ich kümmere mich um die Zahlungen und schicke Erinnerungen erst nach deinem Okay."
       },
-      "ada": {
+      "helena": {
         "role": "Dev",
         "line": "Behebt die Bugs, die Kunden melden, und öffnet den PR.",
         "routine": "Die neuen Bugs auflisten",
         "task": "Sag mir, wo ich bei diesem Bug anfangen soll:",
         "hello": "Hi. Schickt mir die Bugs, die reinkommen, ich untersuche sie und öffne den PR."
       },
-      "lia": {
+      "gil": {
         "role": "Inhalte",
         "line": "Schreibt Posts und Skripte im Ton der Firma und plant sie nach deinem Ok.",
         "routine": "Die Posts der Woche vorschlagen",
         "task": "Schlag drei Posts für diese Woche vor zum Thema:",
         "hello": "Hallo zusammen. Die Posts der Woche übernehme ich."
       },
-      "theo": {
+      "ana": {
         "role": "Vertrieb",
         "line": "Hakt bei allen nach, die ein Angebot angefragt haben, und schreibt die Angebote.",
         "routine": "Auflisten, wer ein Angebot angefragt und keine Antwort bekommen hat",
         "task": "Schreib ein kurzes Angebot für diese Anfrage:",
         "hello": "Hallo {{first}}. Wer ein Angebot anfragt, bleibt nicht ohne Antwort."
       },
-      "nina": {
+      "rui": {
         "role": "Termine",
         "line": "Vereinbart, bestätigt und verschiebt Termine und erinnert Kunden am Vortag.",
         "routine": "Die Termine von morgen bestätigen",
         "task": "Ordne diese Termine für morgen:",
         "hello": "Hallo. Der Kalender gehört mir, und ich erinnere die Kunden am Vortag."
       },
-      "otto": {
+      "tiago": {
         "role": "Bestellungen",
         "line": "Verfolgt Bestellungen und Lager und warnt, was ausgeht.",
         "routine": "Warnen, was im Lager ausgeht",
         "task": "Liste auf, was bei diesen Bestellungen noch offen ist:",
         "hello": "Bin da. Ich behalte die Bestellungen im Blick und sage Bescheid, wenn der Bestand knapp wird."
       },
-      "bia": {
+      "sofia": {
         "role": "Antwortbasis",
         "line": "Hält die Antwortbasis mit dem aktuell, was das Team antwortet.",
         "routine": "Die Basis mit den Antworten der Woche aktualisieren",
         "task": "Schreib die Antworten auf diese Kundenfragen:",
         "hello": "Hi. Ich halte die Antwortbasis mit dem auf dem Laufenden, was das Team antwortet."
       },
-      "clara": {
+      "marina": {
         "role": "Kalender und Erinnerungen",
         "line": "Führt deinen Kalender und erinnert dich an das Wichtige, bevor es zu spät ist.",
         "routine": "Den Tagesplan schicken",
         "task": "Trag das in meinen Kalender ein und erinnere mich am Vortag:"
       },
-      "duda": {
+      "cecilia": {
         "role": "Rechnungen und Ausgaben",
         "line": "Behält deine Rechnungen und Ausgaben im Blick und warnt dich, bevor etwas fällig wird.",
         "routine": "Die Rechnungen des Monats auflisten und was noch zu zahlen ist",
         "task": "Ordne diese Ausgaben nach Kategorie:"
       },
-      "leo": {
+      "lucas": {
         "role": "Training",
         "line": "Stellt deine Workouts zusammen und hält dich dran, in deinem Tempo.",
         "routine": "Das Workout des Tages schicken",
         "task": "Stell mir ein 30-Minuten-Workout für heute zusammen mit:"
       },
-      "mel": {
+      "julia": {
         "role": "Ernährung",
         "line": "Plant deine Mahlzeiten und die Einkaufsliste, nach deinem Geschmack und Budget.",
         "routine": "Die Mahlzeiten der Woche und die Einkaufsliste planen",
         "task": "Schlag mir drei schnelle Abendessen vor mit:"
       },
-      "gabi": {
+      "bruna": {
         "role": "Lernen",
         "line": "Erstellt deinen Lernplan und fragt dich ab, was du gelernt hast.",
         "routine": "Das Thema des Tages mit drei Fragen wiederholen",
         "task": "Erklär mir dieses Thema einfach und stell mir drei Fragen:"
       },
-      "lu": {
+      "lorena": {
         "role": "Schreiben und Ideen",
         "line": "Bewahrt deine Notizen und Ideen auf und hilft dir, Texte daraus zu machen.",
         "routine": "Die Ideen und Notizen der Woche sammeln",
         "task": "Mach aus diesen Notizen einen kurzen Text:"
       },
-      "rosa": {
+      "tereza": {
         "role": "Haushalt und Einkäufe",
         "line": "Kümmert sich um die Einkaufsliste, die Hausarbeit und das, was repariert werden muss.",
         "routine": "Die Einkaufsliste und die Hausarbeit der Woche zusammenstellen",
         "task": "Mach eine Einkaufsliste für die Woche für:"
       },
-      "vic": {
+      "renato": {
         "role": "Reisen",
         "line": "Plant deine Reisen: Daten, Preise, Buchungen und einen Plan für jeden Tag.",
         "routine": "Die Preise der Reisen prüfen, die du planst",
         "task": "Plan eine 3-tägige Reise nach:"
       },
-      "rui": {
+      "fabio": {
         "role": "Kunden",
         "line": "Bleibt mit deinen Kunden in Kontakt, schreibt Angebote und Rechnungen und erinnert alle, die noch nicht bezahlt haben.",
         "routine": "Auflisten, worauf jeder Kunde heute wartet",
@@ -21489,14 +21539,14 @@
       }
     },
     "channels": {
-      "iara": "support",
-      "caio": "finanzen",
-      "ada": "eng",
-      "lia": "content",
-      "theo": "vertrieb",
-      "nina": "termine",
-      "otto": "bestellungen",
-      "bia": "support"
+      "luana": "support",
+      "teo": "finanzen",
+      "helena": "eng",
+      "gil": "content",
+      "ana": "vertrieb",
+      "rui": "termine",
+      "tiago": "bestellungen",
+      "sofia": "support"
     },
     "skills": {
       "voice": {

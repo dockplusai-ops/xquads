@@ -111,25 +111,28 @@ export function setupView(setup: ComputerSetup | null | undefined, receivedAt = 
 /**
  * The team's playful lines while the computer is prepared (`computerSetup.lines.<said>.<agent>`), keyed by what the
  * status line says (`setupView`): its stage when it has words, else its step. Each line names one of the
- * onboarding's agents, by the handle the onboarding gives it.
+ * template teams' agents, by its handle (`MEMBERS` in packages/engine/src/team-templates.ts).
  */
 const SETUP_LINES = {
-  reserving: ["atlas", "theo", "lia"],
-  ordering: ["ada", "atlas", "theo"],
-  wiping: ["ada", "atlas", "lia"],
-  starting: ["atlas", "ada", "theo"],
-  booting: ["ada", "atlas", "theo"],
-  updating: ["lia", "ada", "theo"],
-  restarting: ["ada", "atlas", "theo"],
-  network: ["lia", "atlas", "theo"],
-  firewall: ["atlas", "lia", "theo"],
-  installing: ["theo", "lia", "ada"],
-  connecting: ["ada", "atlas", "lia"],
+  reserving: ["rui", "ana", "gil"],
+  ordering: ["helena", "rui", "ana"],
+  wiping: ["helena", "rui", "gil"],
+  starting: ["rui", "helena", "ana"],
+  booting: ["helena", "rui", "ana"],
+  updating: ["gil", "helena", "ana"],
+  restarting: ["helena", "rui", "ana"],
+  network: ["gil", "rui", "ana"],
+  firewall: ["rui", "gil", "ana"],
+  installing: ["ana", "gil", "helena"],
+  connecting: ["helena", "rui", "gil"],
 } as const satisfies Record<SetupStage | ComputerSetupStep, readonly string[]>;
 type Said = keyof typeof SETUP_LINES;
 type SetupLineKey = { [S in Said]: `computerSetup.lines.${S}.${(typeof SETUP_LINES)[S][number]}` }[Said];
 /** The lines that give the computer's memory: left out until its size is known. */
-const MEMORY_LINES: readonly SetupLineKey[] = ["computerSetup.lines.ordering.ada", "computerSetup.lines.booting.ada"];
+const MEMORY_LINES: readonly SetupLineKey[] = [
+  "computerSetup.lines.ordering.helena",
+  "computerSetup.lines.booting.helena",
+];
 
 /**
  * The lines for where it is now, in order, each with the agent it names: only an agent on the team; none while it

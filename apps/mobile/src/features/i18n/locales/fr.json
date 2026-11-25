@@ -803,7 +803,7 @@
     "free": "Libre",
     "workingLabel": "{{name}}, au travail",
     "new": "Nouvel agent",
-    "namePlaceholder": "Nom, par ex. Nina",
+    "namePlaceholder": "Nom, par ex. Ana",
     "whatPlaceholder": "Par ex. répondre aux clients par e-mail et me prévenir quand c'est urgent",
     "create": "Créer l'agent",
     "created": "{{name}} a rejoint l'équipe",

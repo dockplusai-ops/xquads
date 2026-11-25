@@ -32,7 +32,7 @@ export interface SetupChecklist {
   done: SetupStep[];
   /** How it introduced itself on its card, in its own voice (ADR 0164): its first message says it back. */
   hello?: string;
-  /** The personal starter it began as ("clara", ADR 0159 §3): its first tasks. */
+  /** The personal starter it began as ("marina", ADR 0159 §3): its first tasks. */
   starter?: string;
   /** The apps it was made to use (catalog connector ids) at their levels (ADR 0164): its checklist suggests them. */
   apps?: Record<string, SetupAppLevel>;

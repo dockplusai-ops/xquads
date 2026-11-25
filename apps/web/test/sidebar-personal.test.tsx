@@ -157,7 +157,7 @@ describe("a personal workspace's sidebar", () => {
     expect(last.textContent).toBe("Novo agente");
     await click(last);
     const dialog = screen().getByRole("dialog", { name: "Novo agente" });
-    // From scratch first, then the personal starters; Clara picked, introducing herself on her card.
+    // From scratch first, then the personal starters; Marina picked, introducing herself on her card.
     const options = within(dialog).getAllByRole("option");
     expect(options[0]?.textContent).toContain("Do zero");
     // Each row's face stands beside its two lines, the name's capitals at its top (never centred on both).
@@ -165,8 +165,12 @@ describe("a personal workspace's sidebar", () => {
       expect(option.classList.contains("ac-faceline")).toBe(true);
       expect(option.querySelector(".tp-gallery__text > b.ac-captop")).toBeTruthy();
     }
-    expect(within(dialog).getByRole("option", { name: /Clara/ }).getAttribute("aria-selected")).toBe("true");
-    expect((within(dialog).getByRole("textbox", { name: "Nome" }) as HTMLInputElement).value).toBe("Clara");
+    expect(
+      within(dialog)
+        .getByRole("option", { name: /Marina/ })
+        .getAttribute("aria-selected"),
+    ).toBe("true");
+    expect((within(dialog).getByRole("textbox", { name: "Nome" }) as HTMLInputElement).value).toBe("Marina");
     expect(dialog.textContent).toContain("Oi, eu sou a");
     // "Vai usar" holds only what is connected here (GitHub), at write; her starter's apps wait for the chat.
     const uses = within(dialog).getByRole("region", { name: "Vai usar" });
@@ -178,7 +182,7 @@ describe("a personal workspace's sidebar", () => {
     expect(dialog.textContent).not.toContain("Para começar, peça");
     // The footer's start: the import, always in sight.
     expect(within(dialog).getByRole("button", { name: /Trazer agentes de outro app/ })).toBeTruthy();
-    await click(within(dialog).getByRole("button", { name: /Criar Clara/ }));
+    await click(within(dialog).getByRole("button", { name: /Criar Marina/ }));
     const made = state.calls.find((c) => c.method === "agents.create");
     expect(made).toBeTruthy();
     const input = made?.args[1] as {
@@ -186,9 +190,9 @@ describe("a personal workspace's sidebar", () => {
       instructions: string;
       setup: { starter?: string; hello?: string; apps?: object };
     };
-    expect(input.name).toBe("Clara");
+    expect(input.name).toBe("Marina");
     expect(input.instructions).toContain("Confere a agenda toda manhã");
-    expect(input.setup.starter).toBe("clara");
+    expect(input.setup.starter).toBe("marina");
     expect(input.setup.hello).toContain("agenda");
     // The checklist suggests her starter's apps not connected yet, and keeps the card's (ADR 0164).
     expect(input.setup.apps).toMatchObject({ "google-calendar": "write", todoist: "write", github: "write" });
@@ -216,12 +220,12 @@ describe("a personal workspace's sidebar", () => {
     const dialog = screen().getByRole("dialog", { name: "Novo agente" });
     const handle = () => dialog.querySelector(".nac__handle")?.textContent;
     const shown = handle();
-    expect(shown).toContain("No chat: @clara");
-    await click(within(dialog).getByRole("button", { name: /Criar Clara/ }));
+    expect(shown).toContain("No chat: @marina");
+    await click(within(dialog).getByRole("button", { name: /Criar Marina/ }));
     // Made on the server, which says so on the socket before it answers.
     await act(async () => sockets.last().push({ type: "event", scope: "org", event: { type: "agents.changed" } }));
     await settle(6);
-    expect(agents.textContent).toContain("Clara");
+    expect(agents.textContent).toContain("Marina");
     expect(handle()).toBe(shown);
     await act(async () => answer());
     await settle(6);
@@ -233,7 +237,7 @@ describe("a personal workspace's sidebar", () => {
     const agents = nav().querySelector('.sidebar__block[data-section="agents"]') as HTMLElement;
     await click([...agents.querySelectorAll(".sidebar__item")].at(-1) as HTMLElement);
     const dialog = screen().getByRole("dialog", { name: "Novo agente" });
-    expect(within(dialog).getByRole("region", { name: "Como a Clara trabalha" })).toBeTruthy();
+    expect(within(dialog).getByRole("region", { name: "Como a Marina trabalha" })).toBeTruthy();
     const how = within(dialog).getByRole("textbox", { name: "Instruções" }) as HTMLTextAreaElement;
     await act(async () => fireEvent.change(how, { target: { value: "Só lembra, nunca marca." } }));
     await click(within(dialog).getByRole("button", { name: "O que evitar" }));
@@ -242,7 +246,7 @@ describe("a personal workspace's sidebar", () => {
     // Enter in it is a new line, not Create.
     await act(async () => fireEvent.keyDown(how, { key: "Enter" }));
     expect(state.calls.some((c) => c.method === "agents.create")).toBe(false);
-    await click(within(dialog).getByRole("button", { name: /Criar Clara/ }));
+    await click(within(dialog).getByRole("button", { name: /Criar Marina/ }));
     const input = state.calls.find((c) => c.method === "agents.create")?.args[1] as { instructions: string };
     expect(input.instructions).toBe("Só lembra, nunca marca.\nEvite:");
   });
@@ -253,14 +257,14 @@ describe("a personal workspace's sidebar", () => {
     const agents = nav().querySelector('.sidebar__block[data-section="agents"]') as HTMLElement;
     await click([...agents.querySelectorAll(".sidebar__item")].at(-1) as HTMLElement);
     const dialog = screen().getByRole("dialog", { name: "Novo agente" });
-    await click(within(dialog).getByRole("option", { name: /Gabi/ }));
+    await click(within(dialog).getByRole("option", { name: /Bruna/ }));
     // Taken off the card, GitHub is one click away again.
     await click(within(dialog).getByRole("button", { name: /GitHub/ }));
     await click(screen().getByRole("button", { name: "Tirar GitHub" }));
     const uses = within(dialog).getByRole("region", { name: "Vai usar" });
     expect(uses.textContent).toContain("Nada por enquanto.");
     await click(within(uses).getByRole("button", { name: "Escolher apps" }));
-    const picker = screen().getByRole("dialog", { name: /Apps d[ao] Gabi/ });
+    const picker = screen().getByRole("dialog", { name: /Apps d[ao] Bruna/ });
     const suggested = within(picker).getByRole("region", { name: /Sugeridos para/ });
     expect(suggested.textContent).toContain("Notion");
     expect(within(suggested).getByRole("button", { name: "Conectar" })).toBeTruthy();
@@ -274,7 +278,7 @@ describe("a personal workspace's sidebar", () => {
     await click(within(suggested).getByRole("button", { name: "Conectar" }));
     expect(screen().getByRole("dialog", { name: /Notion/ })).toBeTruthy();
     const saved = JSON.parse(sessionStorage.getItem("agentes:new-agent") ?? "null") as { sel: string; pending: string };
-    expect(saved).toMatchObject({ sel: "gabi", pending: "notion" });
+    expect(saved).toMatchObject({ sel: "bruna", pending: "notion" });
   });
 
   test("on a narrow screen, two steps: a row opens its card, Back keeps every edit, Create is the card's (ADR 0164)", async () => {
@@ -298,11 +302,11 @@ describe("a personal workspace's sidebar", () => {
     await click(within(bring).getByRole("button", { name: "Fechar" }));
     dialog = screen().getByRole("dialog", { name: "Novo agente" });
     // A row leads to its card, titled with its name, a back arrow before it.
-    await click(within(dialog).getByRole("option", { name: /Gabi/ }));
-    dialog = screen().getByRole("dialog", { name: "Gabi" });
+    await click(within(dialog).getByRole("option", { name: /Bruna/ }));
+    dialog = screen().getByRole("dialog", { name: "Bruna" });
     expect(within(dialog).queryAllByRole("option")).toHaveLength(0);
     const nameField = within(dialog).getByRole("textbox", { name: "Nome" }) as HTMLInputElement;
-    expect(nameField.value).toBe("Gabi");
+    expect(nameField.value).toBe("Bruna");
     await act(async () => fireEvent.change(nameField, { target: { value: "Gabriela" } }));
     const how = within(dialog).getByRole("textbox", { name: "Instruções" }) as HTMLTextAreaElement;
     await act(async () => fireEvent.change(how, { target: { value: "Só perguntas." } }));
@@ -330,7 +334,7 @@ describe("a personal workspace's sidebar", () => {
   test("back from connecting an app on the provider's page, the card opens as it was, the app on it", async () => {
     const state = withRightHand(personal());
     const draft = {
-      name: "Gabi",
+      name: "Bruna",
       what: "Monto o seu plano de estudos.",
       look: { color: "sky", eyes: "round", accessory: "none" },
       apps: {},
@@ -343,8 +347,8 @@ describe("a personal workspace's sidebar", () => {
         org: ORG_ID,
         at: Date.now(),
         channelId: null,
-        sel: "gabi",
-        drafts: { gabi: draft },
+        sel: "bruna",
+        drafts: { bruna: draft },
         pending: "notion",
       }),
     );
@@ -355,7 +359,7 @@ describe("a personal workspace's sidebar", () => {
     );
     await go(state);
     const dialog = screen().getByRole("dialog", { name: "Novo agente" });
-    expect(within(dialog).getByRole("option", { name: /Gabi/ }).getAttribute("aria-selected")).toBe("true");
+    expect(within(dialog).getByRole("option", { name: /Bruna/ }).getAttribute("aria-selected")).toBe("true");
     expect((within(dialog).getByRole("textbox", { name: "Instruções" }) as HTMLTextAreaElement).value).toBe(
       "Só perguntas, nunca respostas.",
     );

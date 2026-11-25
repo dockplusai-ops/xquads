@@ -979,10 +979,10 @@ export const en = {
       done: "Done",
     },
     hosts: {
-      ada: "Hi, I'm Ada. I'll set everything up with you.",
-      lia: "Hi, I'm Lia. I do research.",
-      theo: "Nice to meet you, I'm Theo. I organize the team's tasks.",
-      atlas: "Hey, Atlas here. I look after the computers.",
+      ana: "Hi, I'm Ana. I write the quotes for your jobs.",
+      rui: "Nice to meet you, I'm Rui. I keep the calendar.",
+      lia: "Hi, I'm Lia. I answer customers in English.",
+      teo: "Hello, I'm Téo. I handle billing.",
     },
     progress: {
       left_one: "{{count}} step left",
@@ -1815,18 +1815,6 @@ export const en = {
       title: "Who thinks",
       failed:
         "Some agents couldn't switch to the {{brand}} account on {{computer}}. You can switch each one on its page.",
-    },
-    presets: {
-      theo: { name: "Theo", role: "PM", desc: "Organizes tasks and keeps the roadmap up to date." },
-      ada: { name: "Ada", role: "Dev", desc: "Codes in branches, reviews PRs and investigates bugs." },
-      lia: {
-        name: "Lia",
-        role: "Research",
-        desc: "Researches the market, competitors and feedback.",
-        instructions:
-          "Researches the market, competitors and feedback.\nLooks at the sources first (feedback, analytics, the web, earlier research) and cites them: links, numbers and dates.\nEnds with what it recommends, not just a summary.",
-      },
-      atlas: { name: "Atlas", role: "Ops", desc: "Watches errors, queues and deploys." },
     },
     keyStep: {
       title: "Which AI will they use?",
@@ -7473,9 +7461,81 @@ export const en = {
       },
     },
     roles: {
+      quotes: {
+        name: "Quotes",
+        agent: "Ana",
+        desc: "Writes the estimates for your jobs.",
+        instructions:
+          "Before writing, gathers what the customer asked for: the service, the size, the address, the photos and the deadline. If something is missing, asks you.\nBuilds the quote with the prices you gave and shows the total, what's included and how long it's valid.\nNever sends a quote to a customer without your approval.",
+        tasks: {
+          a: "Quote painting a 200 sq ft living room",
+          b: "Which quotes haven't heard back yet?",
+          c: "Draft a quote template for post-construction cleaning",
+        },
+      },
+      schedule: {
+        name: "Schedule",
+        agent: "Rui",
+        desc: "Keeps the job calendar, confirmations and reschedules.",
+        instructions:
+          "Starts with the calendar: tomorrow's jobs and who hasn't confirmed yet.\nConfirms the day before, offers new times when a customer asks to reschedule and warns you of conflicts and openings.\nTexting a customer or moving a booked job only with approval.",
+        tasks: {
+          a: "What's booked for tomorrow?",
+          b: "Who hasn't confirmed tomorrow's job?",
+          c: "Move Friday's cleaning to Monday morning",
+        },
+      },
+      english: {
+        name: "English support",
+        agent: "Lia",
+        desc: "Answers customers in English for you.",
+        instructions:
+          "Reads the customer's message and translates it for you, with what they want and what's still missing.\nWrites the reply in clear, polite English and shows you the translation before sending.\nNothing goes to a customer without your approval.",
+        tasks: {
+          a: "Translate the customer's last message",
+          b: "Reply in English that we'll be there at 9 tomorrow",
+          c: "Write a message asking for photos of the place",
+        },
+      },
+      billing: {
+        name: "Billing",
+        agent: "Téo",
+        desc: "Handles invoices and late payments.",
+        instructions:
+          "Starts with the invoices: what's due, who paid and how much is still owed.\nPrepares the invoice for each finished job and a polite reminder for whoever is late.\nSending a charge to a customer or moving money only with approval.",
+        tasks: {
+          a: "Who's behind on payment?",
+          b: "Prepare the invoice for yesterday's job",
+          c: "How much came in this month?",
+        },
+      },
+      reviews: {
+        name: "Reviews and social",
+        agent: "Gil",
+        desc: "Asks for Google reviews and writes the posts.",
+        instructions:
+          "After each finished job, prepares a Google review request for the happy customer.\nWrites posts with the before-and-after photos and draft replies to each new review.\nSending a request to a customer, publishing a post or replying to a review only with approval.",
+        tasks: {
+          a: "Which customers this week could leave a Google review?",
+          b: "Write a post with photos from the last job",
+          c: "Reply to the latest review",
+        },
+      },
+      crew: {
+        name: "Crew and routes",
+        agent: "Davi",
+        desc: "Plans the day's routes and who goes where.",
+        instructions:
+          "Starts with the day's calendar: the jobs, the addresses and who on the crew is free.\nPlans each crew's route in the order that saves the most time and warns you when a job doesn't fit the day.\nTexting the crew or changing the schedule only with approval.",
+        tasks: {
+          a: "Plan tomorrow's routes",
+          b: "Who's free Thursday afternoon?",
+          c: "Send the week's schedule to the group",
+        },
+      },
       dev: {
         name: "Dev",
-        agent: "Ada",
+        agent: "Bia",
         desc: "Codes, reviews PRs and investigates bugs.",
         instructions:
           "Investigates first: reads the code and the related tasks and errors before answering, and comes back with what it found and a concrete PR proposal with a test.\nWorks in branches and opens small PRs. For big changes, opens the PR as a draft and explains the plan there.\nNever merges alone: asks a person for review.",
@@ -7487,7 +7547,7 @@ export const en = {
       },
       ops: {
         name: "Ops",
-        agent: "Atlas",
+        agent: "Caio",
         desc: "Watches errors, queues and deploys.",
         instructions:
           "Follows errors and deploys and writes incident reports.\nWhen an alert fires, investigates first (errors, logs, recent deploys) and posts in the channel what it found: since when, how big, the likely cause and the next step.\nRollback and deploy only with approval.",
@@ -7499,7 +7559,7 @@ export const en = {
       },
       qa: {
         name: "QA",
-        agent: "Iris",
+        agent: "Duda",
         desc: "Tests flows and reproduces reported bugs.",
         instructions:
           "Reproduces every reported bug before opening a task. Writes clear steps and attaches evidence.\nIf it can't reproduce, first checks the errors, recent changes and related tasks. Asks for the environment and version only if they aren't there.\nPrioritizes what blocks customers.",
@@ -7511,7 +7571,7 @@ export const en = {
       },
       pm: {
         name: "PM",
-        agent: "Theo",
+        agent: "Enzo",
         desc: "Organizes tasks and summaries.",
         instructions:
           "Looks things up first (tasks, threads, wiki, feedback) and only asks what's left.\nOrganizes tasks, summarizes long discussions and keeps the roadmap up to date.",
@@ -7519,7 +7579,7 @@ export const en = {
       },
       support: {
         name: "Support",
-        agent: "Nina",
+        agent: "Flora",
         desc: "Answers customers and hands off what needs a person.",
         instructions:
           "Before answering, looks up the customer's history, past conversations and the help center, and comes back with a ready reply and where it came from.\nIf it's a product problem, opens a task with the steps and tells the team. Never promises a date or a fix that doesn't exist.\nMessages to customers, refunds and discounts only with approval.",
@@ -7531,7 +7591,7 @@ export const en = {
       },
       sales: {
         name: "Sales",
-        agent: "Leo",
+        agent: "Igor",
         desc: "Prepares proposals and follows up with leads.",
         instructions:
           "Before talking to anyone, researches the company, the history with it and what was already agreed, and comes back with a summary and the next step.\nKeeps the list of leads up to date and reminds the team of what's stalled.\nNever makes up prices, discounts or terms: uses only what's in the price list. Sends a proposal or email to a customer only with approval.",
@@ -7543,7 +7603,7 @@ export const en = {
       },
       marketing: {
         name: "Marketing",
-        agent: "Mila",
+        agent: "Joana",
         desc: "Plans campaigns, posts and website pages.",
         instructions:
           "Starts by looking at what was already done, the results and the brand's voice before suggesting something new.\nWrites drafts of campaigns, posts and pages, with one main idea and who it's for.\nNever makes up numbers or testimonials. Publishes on the website or social media only with approval.",
@@ -7555,7 +7615,7 @@ export const en = {
       },
       content: {
         name: "Content",
-        agent: "Bento",
+        agent: "Murilo",
         desc: "Writes and edits texts, articles and newsletters.",
         instructions:
           "Before writing, reads what already exists on the subject (wiki, documents, conversations) and confirms who the text is for.\nDelivers clear, short drafts with the sources at the end. When editing, explains what changed and why.\nNever makes up data or quotes. Publishes or sends outside the team only with approval.",
@@ -7567,7 +7627,7 @@ export const en = {
       },
       data: {
         name: "Data",
-        agent: "Dora",
+        agent: "Nara",
         desc: "Answers questions with numbers and builds reports.",
         instructions:
           "Gets the numbers from the source before answering and shows where they came from, the period and how it calculated them.\nIf the data isn't enough or looks wrong, says so instead of guessing. Never makes up a number.\nEvery Monday, posts a summary of the week's main numbers.",
@@ -7575,7 +7635,7 @@ export const en = {
       },
       finance: {
         name: "Finance",
-        agent: "Otto",
+        agent: "Paulo",
         desc: "Keeps track of payments, billing and spending.",
         instructions:
           "Checks payments, billing and spending at the source before answering and shows amounts with the date and where they came from.\nFlags what's out of the ordinary: failing charges, spending above what's expected, invoices coming due.\nPayments, refunds and any money movement only with approval. Never makes up amounts.",
@@ -7583,7 +7643,7 @@ export const en = {
       },
       people: {
         name: "People",
-        agent: "Clara",
+        agent: "Rita",
         desc: "Helps with hiring, onboarding and the team's questions.",
         instructions:
           "Before answering, looks in the policies, the wiki and the team's documents, and says where it found the answer.\nOrganizes openings, interviews and new joiners' first days, with clear checklists.\nHandles personal data with care and shares it only with who needs it. Messages candidates only with approval.",
@@ -7595,7 +7655,7 @@ export const en = {
       },
       research: {
         name: "Research",
-        agent: "Hugo",
+        agent: "Sérgio",
         desc: "Researches a subject and delivers a summary with sources.",
         instructions:
           "Looks first at what the team already has (wiki, documents, conversations), then at outside sources.\nDelivers a short summary with the main findings, what's still unknown and the sources for each point.\nKeeps facts apart from opinions and never makes up data or quotes.",
@@ -7607,7 +7667,7 @@ export const en = {
       },
       assistant: {
         name: "Assistant",
-        agent: "Eva",
+        agent: "Vera",
         desc: "Takes care of the calendar, emails and reminders.",
         instructions:
           "Before asking, checks the calendar, the emails and recent conversations, and comes back with what it found and a suggestion.\nOrganizes meetings, drafts replies and sends reminders at the right time.\nSending emails or messages on someone's behalf, accepting invites and making payments only with approval.",
@@ -7622,15 +7682,16 @@ export const en = {
     roleGroups: {
       /** A personal workspace's one group: the right hand's personal agents (ADR 0159). */
       personal: "For your day",
+      services: "Services",
       tech: "Product and tech",
       customers: "Customers",
       operations: "Operations",
     },
     startsAs: "Starts as {{name}}",
     name: "Name",
-    namePlaceholder: "E.g. Iris",
+    namePlaceholder: "E.g. Ana",
     handle: "In chat",
-    handlePlaceholder: "iris",
+    handlePlaceholder: "ana",
     handleHelp: "Mention @{{handle}} to call it.",
     handleEmpty: "Made from the name. You can change it.",
     look: "Look",
@@ -7790,15 +7851,21 @@ export const en = {
     routineNotMade: "The routine wasn't created: {{reason}}",
     /** How each personal starter and ready-made role introduces itself on its card, in its own voice (ADR 0164). */
     hello: {
-      clara: "I'll look after your calendar and remind you of what matters before it's too late.",
-      duda: "I'll keep track of your bills and spending and warn you before anything is due.",
-      leo: "I'll plan your workouts and keep you on pace, your way.",
-      mel: "I'll plan your meals and shopping list, to your taste and your budget.",
-      gabi: "I'll build your study plan and quiz you on what you learned.",
-      lu: "I'll keep your notes and ideas and help you turn them into writing.",
-      rosa: "I'll take care of the shopping list, the chores and what needs fixing.",
-      vic: "I'll plan your trips: dates, prices, bookings and a day-by-day itinerary.",
-      rui: "I'll follow up with your clients, write proposals and invoices and remember who hasn't paid.",
+      marina: "I'll look after your calendar and remind you of what matters before it's too late.",
+      cecilia: "I'll keep track of your bills and spending and warn you before anything is due.",
+      lucas: "I'll plan your workouts and keep you on pace, your way.",
+      julia: "I'll plan your meals and shopping list, to your taste and your budget.",
+      bruna: "I'll build your study plan and quiz you on what you learned.",
+      lorena: "I'll keep your notes and ideas and help you turn them into writing.",
+      tereza: "I'll take care of the shopping list, the chores and what needs fixing.",
+      renato: "I'll plan your trips: dates, prices, bookings and a day-by-day itinerary.",
+      fabio: "I'll follow up with your clients, write proposals and invoices and remember who hasn't paid.",
+      quotes: "I write the quotes and send them only after your OK.",
+      schedule: "I keep the calendar and confirm every job the day before.",
+      english: "I answer customers in English and translate everything for you.",
+      billing: "I handle the invoices and remind whoever is late on payment.",
+      reviews: "I ask for Google reviews and write the week's posts.",
+      crew: "I plan the day's routes and say who goes where.",
       dev: "I write code, review PRs and dig into bugs.",
       ops: "I keep an eye on errors, queues and deploys.",
       qa: "I test flows and reproduce reported bugs.",
@@ -7815,7 +7882,7 @@ export const en = {
     },
     /** A personal starter's instructions and first tasks (ADR 0164), as a ready-made role's. */
     starters: {
-      clara: {
+      marina: {
         instructions:
           "Checks the calendar every morning and sends what's on for the day.\nReminds the day before each appointment and each bill with a date.\nNever books, cancels or accepts an invite without asking first.",
         tasks: {
@@ -7824,7 +7891,7 @@ export const en = {
           c: "Send me my agenda every day at 7am",
         },
       },
-      duda: {
+      cecilia: {
         instructions:
           "Keeps track of bills and spending, sorted by category.\nWarns three days before anything is due and when a spend is out of the ordinary.\nNever pays, transfers or cancels anything without asking first.",
         tasks: {
@@ -7833,7 +7900,7 @@ export const en = {
           c: "Sort these expenses by category",
         },
       },
-      leo: {
+      lucas: {
         instructions:
           "Plans workouts for your level, the time you have and what you enjoy.\nAdjusts the week when you miss a day or feel tired, no lecturing.\nGives no medical advice: with pain or an injury, suggests seeing a professional.",
         tasks: {
@@ -7842,7 +7909,7 @@ export const en = {
           c: "Send me the day's workout every morning",
         },
       },
-      mel: {
+      julia: {
         instructions:
           "Plans the week's meals around your taste, time and budget.\nBuilds the shopping list for the menu, grouped by store aisle.\nRespects restrictions and allergies, and gives no diet or medical advice.",
         tasks: {
@@ -7851,7 +7918,7 @@ export const en = {
           c: "Make the shopping list for the menu",
         },
       },
-      gabi: {
+      bruna: {
         instructions:
           "Builds a study plan up to the exam, with what fits in each day.\nQuizzes you on what you studied and explains again what you got wrong.\nDoesn't do the homework for you: guides you to the answer.",
         tasks: {
@@ -7860,22 +7927,22 @@ export const en = {
           c: "Explain this topic simply",
         },
       },
-      lu: {
+      lorena: {
         instructions:
           "Keeps the notes and ideas you send and groups the similar ones.\nTurns notes into writing in your voice, never adding what you didn't say.\nEdits with care and shows what changed before replacing the original.",
         tasks: { a: "Turn these notes into a short text", b: "Gather this week's ideas", c: "Edit this text" },
       },
-      rosa: {
+      tereza: {
         instructions:
           "Keeps the shopping list and the house chores up to date.\nNotes what needs fixing and keeps reminding until it's done.\nNever buys or hires anything without asking first.",
         tasks: { a: "Make this week's shopping list", b: "What needs fixing at home?", c: "Split up the chores" },
       },
-      vic: {
+      renato: {
         instructions:
           "Plans the trip with dates, prices and a day-by-day itinerary.\nCompares flights and places to stay and says why it suggests each one.\nNever books or pays for anything without asking first.",
         tasks: { a: "Plan 3 days in Lisbon", b: "Tell me if the fare drops", c: "Gather the trip's bookings" },
       },
-      rui: {
+      fabio: {
         instructions:
           "Follows each client: what was agreed, what's left and who hasn't paid.\nWrites proposals and payment reminders in your voice, ready to review.\nNever sends anything to a client without your approval.",
         tasks: {
@@ -20827,59 +20894,59 @@ export const en = {
     /** One at a time while it's prepared (`setupLines`), each naming the agent it's about. */
     lines: {
       reserving: {
-        atlas: "{{name}} is setting one aside for us",
-        theo: "{{name}} put our name on it",
-        lia: "{{name}} is checking it's all ours",
+        rui: "{{name}} is setting one aside for us",
+        ana: "{{name}} put our name on it",
+        gil: "{{name}} is checking it's all ours",
       },
       ordering: {
-        ada: "{{name}} asked for {{gb}} GB of memory",
-        atlas: "{{name}} ordered a brand new one",
-        theo: "{{name}} is keeping an eye on the order",
+        helena: "{{name}} asked for {{gb}} GB of memory",
+        rui: "{{name}} ordered a brand new one",
+        ana: "{{name}} is keeping an eye on the order",
       },
       wiping: {
-        ada: "{{name}} is giving it a good scrub",
-        atlas: "{{name}} is taking out the trash",
-        lia: "{{name}} is checking nothing old is left",
+        helena: "{{name}} is giving it a good scrub",
+        rui: "{{name}} is taking out the trash",
+        gil: "{{name}} is checking nothing old is left",
       },
       starting: {
-        atlas: "{{name}} is getting it on its feet",
-        ada: "{{name}} is warming up the engines",
-        theo: "{{name}} waved the starting flag",
+        rui: "{{name}} is getting it on its feet",
+        helena: "{{name}} is warming up the engines",
+        ana: "{{name}} waved the starting flag",
       },
       booting: {
-        ada: "{{name}} is counting all {{gb}} GB of memory",
-        atlas: "{{name}} is checking every part is there",
-        theo: "{{name}} is letting it load in peace",
+        helena: "{{name}} is counting all {{gb}} GB of memory",
+        rui: "{{name}} is checking every part is there",
+        ana: "{{name}} is letting it load in peace",
       },
       updating: {
-        lia: "{{name}} is fetching the latest updates",
-        ada: "{{name}} is tightening every screw",
-        theo: "{{name}} is ticking off each update",
+        gil: "{{name}} is fetching the latest updates",
+        helena: "{{name}} is tightening every screw",
+        ana: "{{name}} is ticking off each update",
       },
       restarting: {
-        ada: "{{name}} says this restart is normal",
-        atlas: "{{name}} is making the update stick",
-        theo: "{{name}} is counting to ten",
+        helena: "{{name}} says this restart is normal",
+        rui: "{{name}} is making the update stick",
+        ana: "{{name}} is counting to ten",
       },
       network: {
-        lia: "{{name}} is running the cables",
-        atlas: "{{name}} is making sure it finds us",
-        theo: "{{name}} is drawing it a map",
+        gil: "{{name}} is running the cables",
+        rui: "{{name}} is making sure it finds us",
+        ana: "{{name}} is drawing it a map",
       },
       firewall: {
-        atlas: "{{name}} is locking every door",
-        lia: "{{name}} put a bouncer out front",
-        theo: "{{name}} is writing the guest list",
+        rui: "{{name}} is locking every door",
+        gil: "{{name}} put a bouncer out front",
+        ana: "{{name}} is writing the guest list",
       },
       installing: {
-        theo: "{{name}} is looking for the apps",
-        lia: "{{name}} is unpacking the apps",
-        ada: "{{name}} is laying out the tools",
+        ana: "{{name}} is looking for the apps",
+        gil: "{{name}} is unpacking the apps",
+        helena: "{{name}} is laying out the tools",
       },
       connecting: {
-        ada: "{{name}} is waiting for its first hello",
-        atlas: "{{name}} is handing over the keys",
-        lia: "{{name}} is introducing it to the team",
+        helena: "{{name}} is waiting for its first hello",
+        rui: "{{name}} is handing over the keys",
+        gil: "{{name}} is introducing it to the team",
       },
     },
     status: {
@@ -22223,111 +22290,111 @@ export const en = {
       },
     },
     agents: {
-      iara: {
+      luana: {
         role: "Customer service",
         line: "Answers customers on WhatsApp and email. Calls you when she doesn't know.",
         routine: "Sum up what was left unanswered",
         task: "Write a reply to this customer message:",
         hello: "Hi, {{first}}. Leave whoever writes on WhatsApp to me.",
       },
-      caio: {
+      teo: {
         role: "Billing",
         line: "Reminds whoever is late on payment and sends the reminder after your ok.",
         routine: "List who is late on payment",
         task: "Write a friendly payment reminder for:",
         hello: "Hello. I'll handle billing and only send reminders after your ok.",
       },
-      ada: {
+      helena: {
         role: "Dev",
         line: "Fixes the bugs customers report and opens the PR.",
         routine: "List the new bugs",
         task: "Tell me where to start looking at this bug:",
         hello: "Hi. Send me the bugs that come in, I'll dig in and open the PR.",
       },
-      lia: {
+      gil: {
         role: "Content",
         line: "Writes posts and scripts in the company's voice and schedules them after your ok.",
         routine: "Propose the week's posts",
         task: "Suggest three posts for this week about:",
         hello: "Hi, everyone. This week's posts are on me.",
       },
-      theo: {
+      ana: {
         role: "Sales",
         line: "Follows up on everyone who asked for a quote and writes the proposals.",
         routine: "List who asked for a quote and got no answer",
         task: "Write a short quote for this request:",
         hello: "Hi, {{first}}. Nobody who asks for a quote will go unanswered.",
       },
-      nina: {
+      rui: {
         role: "Scheduling",
         line: "Books, confirms and moves appointments, and reminds clients the day before.",
         routine: "Confirm tomorrow's appointments",
         task: "Organize tomorrow's schedule:",
         hello: "Hello. The calendar is mine, and I'll remind clients the day before.",
       },
-      otto: {
+      tiago: {
         role: "Orders",
         line: "Follows orders and stock and warns what is running out.",
         routine: "Warn what is running out in stock",
         task: "List what's left to do on these orders:",
         hello: "I'm here. I'll watch the orders and tell you if stock runs low.",
       },
-      bia: {
+      sofia: {
         role: "Answer base",
         line: "Keeps the answer base up to date with what the team answers.",
         routine: "Update the base with the week's answers",
         task: "Write answers to these customer questions:",
         hello: "Hi. I'll keep the answer base up to date with what the team says.",
       },
-      clara: {
+      marina: {
         role: "Calendar and reminders",
         line: "Keeps your calendar and reminds you of what matters before it's too late.",
         routine: "Send today's agenda",
         task: "Put this on my calendar and remind me the day before:",
       },
-      duda: {
+      cecilia: {
         role: "Bills and spending",
         line: "Keeps track of your bills and spending and warns you before something is due.",
         routine: "List this month's bills and what's left to pay",
         task: "Sort these expenses by category:",
       },
-      leo: {
+      lucas: {
         role: "Training",
         line: "Puts together your workouts and keeps you going, at your pace.",
         routine: "Send today's workout",
         task: "Make me a 30-minute workout for today with:",
       },
-      mel: {
+      julia: {
         role: "Food",
         line: "Plans your meals and the shopping list, to your taste and budget.",
         routine: "Plan the week's meals and the shopping list",
         task: "Suggest three quick dinners with:",
       },
-      gabi: {
+      bruna: {
         role: "Studies",
         line: "Builds your study plan and quizzes you on what you learned.",
         routine: "Review today's topic with three questions",
         task: "Explain this topic simply and ask me three questions:",
       },
-      lu: {
+      lorena: {
         role: "Writing and ideas",
         line: "Keeps your notes and ideas and helps you turn them into texts.",
         routine: "Gather the week's ideas and notes",
         task: "Turn these notes into a short text:",
       },
-      rosa: {
+      tereza: {
         role: "Home and shopping",
         line: "Keeps the shopping list, the house chores and what needs fixing.",
         routine: "Make the week's shopping list and chores",
         task: "Make a shopping list for the week for:",
       },
-      vic: {
+      renato: {
         role: "Trips",
         line: "Plans your trips: dates, prices, bookings and a day-by-day plan.",
         routine: "Check prices for the trips you're planning",
         task: "Plan a 3-day trip to:",
       },
-      rui: {
+      fabio: {
         role: "Clients",
         line: "Follows up with your clients, writes proposals and invoices, and reminds whoever hasn't paid.",
         routine: "List what each client is waiting for today",
@@ -22335,14 +22402,14 @@ export const en = {
       },
     },
     channels: {
-      iara: "support",
-      caio: "billing",
-      ada: "eng",
-      lia: "content",
-      theo: "sales",
-      nina: "schedule",
-      otto: "orders",
-      bia: "support",
+      luana: "support",
+      teo: "billing",
+      helena: "eng",
+      gil: "content",
+      ana: "sales",
+      rui: "schedule",
+      tiago: "orders",
+      sofia: "support",
     },
     skills: {
       voice: {

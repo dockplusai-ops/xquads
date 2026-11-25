@@ -1,33 +1,35 @@
 import type { TFunction } from "i18next";
 import type { Agent, AgentInput, OrgStanding, Routine } from "../api/types";
 import { billingHoldOf } from "./billing";
+import { ROLE_DEFAULTS, type RoleId, type RoleLook } from "./new-agent";
 import { AUTO } from "./providers";
 import { handleFrom } from "./text";
 
 /** The ready-made agents a new workspace is offered (in its right hand's DM, ADR 0137), in this order. */
-export const PRESETS = ["theo", "ada", "lia", "atlas"] as const;
+export const PRESETS = ["ana", "rui", "lia", "teo"] as const;
 export type Preset = (typeof PRESETS)[number];
 
-/** Each preset's own look, saved on the agent it creates (the emails draw the same faces). */
-export const PRESET_LOOK: Record<Preset, { color: string; eyes: string; accessory: string }> = {
-  theo: { color: "indigo", eyes: "round", accessory: "cap" },
-  ada: { color: "green", eyes: "wide", accessory: "headphones" },
-  lia: { color: "rose", eyes: "dots", accessory: "flower" },
-  atlas: { color: "amber", eyes: "round", accessory: "antenna" },
-};
+/** The "Criar agente" role each preset is: its name, role, instructions and look (`newAgent.roles.{role}`). */
+const PRESET_ROLE = { ana: "quotes", rui: "schedule", lia: "english", teo: "billing" } as const satisfies Record<
+  Preset,
+  RoleId
+>;
 
-/** The "Criar agente" role whose instructions each preset starts with; Lia has her own. */
-const PRESET_ROLE: Record<Preset, "pm" | "dev" | "ops" | null> = { theo: "pm", ada: "dev", lia: null, atlas: "ops" };
+/** Each preset's own look, saved on the agent it creates: its role's. */
+export const PRESET_LOOK = Object.fromEntries(PRESETS.map((p) => [p, ROLE_DEFAULTS[PRESET_ROLE[p]].look])) as Record<
+  Preset,
+  RoleLook
+>;
 
 /** A preset as the create route takes it: on Automático and the workspace's default key. */
 export function presetInput(t: TFunction, preset: Preset): AgentInput {
-  const name = t(`onboarding.presets.${preset}.name`);
   const role = PRESET_ROLE[preset];
+  const name = t(`newAgent.roles.${role}.agent`);
   return {
     name,
     handle: handleFrom(name),
-    role: t(`onboarding.presets.${preset}.role`),
-    instructions: role ? t(`newAgent.roles.${role}.instructions`) : t("onboarding.presets.lia.instructions"),
+    role: t(`newAgent.roles.${role}.name`),
+    instructions: t(`newAgent.roles.${role}.instructions`),
     model: AUTO,
     credentialId: null,
     appearance: PRESET_LOOK[preset],

@@ -97,10 +97,10 @@ describe("setup checklist", () => {
     ]);
     expect(setupTaskKeys(null)).toEqual(["agentSetup.tasks.a", "agentSetup.tasks.b"]);
     // A personal starter's own three (ADR 0164); an unknown one is a blank agent's.
-    expect(setupTaskKeys(null, "clara")).toEqual([
-      "newAgent.starters.clara.tasks.a",
-      "newAgent.starters.clara.tasks.b",
-      "newAgent.starters.clara.tasks.c",
+    expect(setupTaskKeys(null, "marina")).toEqual([
+      "newAgent.starters.marina.tasks.a",
+      "newAgent.starters.marina.tasks.b",
+      "newAgent.starters.marina.tasks.c",
     ]);
     expect(setupTaskKeys(null, "nobody")).toEqual(["agentSetup.tasks.a", "agentSetup.tasks.b"]);
   });
@@ -108,7 +108,7 @@ describe("setup checklist", () => {
   test("the apps it suggests: its card's (ADR 0164), else its role's, else its personal starter's at write", () => {
     expect(setupApps({ role: "dev", done: [], apps: { github: "read" } })).toEqual({ github: "read" });
     expect(setupApps(fresh("pm"))).toEqual(suggestedLevels("pm"));
-    expect(setupApps({ role: null, done: [], starter: "clara" })).toEqual({
+    expect(setupApps({ role: null, done: [], starter: "marina" })).toEqual({
       "google-calendar": "write",
       todoist: "write",
     });
@@ -344,15 +344,15 @@ describe("the right hand's first run (ADR 0155 §6, ADR 0162)", () => {
 
   test("the apps a team made from a template would use, the most suggested first", () => {
     const a = (handle: string) => ({ handle, setup: null });
-    expect(teamRole(a("iara-2"))).toBe("support");
+    expect(teamRole(a("luana-2"))).toBe("support");
     expect(teamRole({ handle: "zed", setup: { role: "dev", done: [] } })).toBe("dev");
     expect(teamRole(a("zed"))).toBeNull();
-    expect(firstRunApps([a("iara"), a("bia")]).slice(0, 1)).toEqual(["intercom"]);
+    expect(firstRunApps([a("luana"), a("sofia")]).slice(0, 1)).toEqual(["intercom"]);
     expect(firstRunApps([a("zed")])).toEqual([]);
     // A personal template's agents (ADR 0159): a person's calendar, lists and files.
-    expect(teamRole(a("clara"))).toBeNull();
-    expect(firstRunApps([a("clara"), a("leo-2")])).toEqual(["google-calendar", "todoist"]);
-    expect(firstRunApps([a("duda")])).toEqual(["google-sheets", "drive"]);
+    expect(teamRole(a("marina"))).toBeNull();
+    expect(firstRunApps([a("marina"), a("lucas-2")])).toEqual(["google-calendar", "todoist"]);
+    expect(firstRunApps([a("cecilia")])).toEqual(["google-sheets", "drive"]);
   });
 
   test("the apps row lists the apps that connect in one click here, not connected yet, the team's first", () => {
@@ -380,7 +380,7 @@ describe("the right hand's first run (ADR 0155 §6, ADR 0162)", () => {
       def("vendor", { soon: true }),
       def("notion"),
     ];
-    const list = firstRunAppList(defs, new Set(["notion"]), [{ handle: "iara", setup: null }]);
+    const list = firstRunAppList(defs, new Set(["notion"]), [{ handle: "luana", setup: null }]);
     expect(list.map((x) => [x.def.id, x.suggested])).toEqual([
       ["intercom", true],
       ["gmail", false],

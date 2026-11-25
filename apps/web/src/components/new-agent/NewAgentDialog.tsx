@@ -163,7 +163,8 @@ function cardLevelFor(personal: boolean, role: RoleId | null, appId: string): Ca
 const isStarter = (pick: Pick): pick is PersonalStarter["id"] => PERSONAL_STARTERS.some((s) => s.id === pick);
 const starterOf = (pick: Pick) => PERSONAL_STARTERS.find((s) => s.id === pick);
 const roleOf = (pick: Pick): RoleId | null => (pick === "zero" || pick === "proposal" || isStarter(pick) ? null : pick);
-const GROUP_ICON: Record<RoleGroupId, "code" | "members" | "layers"> = {
+const GROUP_ICON: Record<RoleGroupId, "home" | "code" | "members" | "layers"> = {
+  services: "home",
   tech: "code",
   customers: "members",
   operations: "layers",
@@ -173,8 +174,13 @@ const GROUP_ICON: Record<RoleGroupId, "code" | "members" | "layers"> = {
  * matched in the workspace's library by name, best effort.
  */
 const SKILL_SUGGESTIONS: Partial<Record<Pick, readonly string[]>> = {
-  clara: ["schedule"],
-  rui: ["proposal", "dunning"],
+  marina: ["schedule"],
+  fabio: ["proposal", "dunning"],
+  quotes: ["proposal"],
+  schedule: ["schedule"],
+  english: ["voice", "answers"],
+  billing: ["dunning"],
+  reviews: ["voice"],
   dev: ["review"],
   qa: ["review"],
   support: ["voice", "answers"],

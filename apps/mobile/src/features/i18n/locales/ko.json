@@ -755,7 +755,7 @@
     "free": "대기 중",
     "workingLabel": "{{name}}, 작업 중",
     "new": "새 에이전트",
-    "namePlaceholder": "이름, 예: Nina",
+    "namePlaceholder": "이름, 예: Ana",
     "whatPlaceholder": "예: 이메일로 고객에게 답하고 급한 일이 있으면 알려 줘",
     "create": "에이전트 만들기",
     "created": "{{name}}이(가) 팀에 합류했어요",

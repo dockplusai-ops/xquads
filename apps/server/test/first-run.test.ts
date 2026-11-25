@@ -68,5 +68,5 @@ test("a personal workspace (ADR 0159): made with its mode, its templates are for
   expect(used.status).toBe(200);
   expect(await used.json()).toMatchObject({ state: "created", error: null });
   const agents = ((await (await api("/agents")).json()) as { agents: AgentRow[] }).agents;
-  expect(agents.filter((a) => !a.builtin).map((a) => a.handle)).toEqual(expect.arrayContaining(["clara", "duda"]));
+  expect(agents.filter((a) => !a.builtin).map((a) => a.handle)).toEqual(expect.arrayContaining(["marina", "cecilia"]));
 });

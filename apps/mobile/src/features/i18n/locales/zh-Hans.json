@@ -755,7 +755,7 @@
     "free": "空闲",
     "workingLabel": "{{name}}，工作中",
     "new": "新建智能体",
-    "namePlaceholder": "名称，例如 Nina",
+    "namePlaceholder": "名称，例如 Ana",
     "whatPlaceholder": "例如：通过邮件回复客户，有紧急情况时告诉我",
     "create": "创建智能体",
     "created": "{{name}} 加入了团队",
