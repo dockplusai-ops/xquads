@@ -1,0 +1,79 @@
+name: Quick check
+
+# Every push and pull request, in one job of a few minutes: lint the changed files, typecheck the packages they
+# are in, and run the tests those changes reach (scripts/related-tests.ts). The full CI (ci.yml) runs on demand
+# before a release: `gh workflow run ci.yml --ref main -f scope=all`.
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quick-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  quick:
+    name: Lint, typecheck and tests of what changed
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version-file: package.json
+      - name: Cache Bun downloads
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-${{ runner.arch }}-
+      - run: bun install --frozen-lockfile
+      # A pull request: against its base. A push: against the commit before it, or main's for a new branch.
+      - name: Changed files
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [[ -z $BASE || $BASE =~ ^0+$ ]] || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            BASE=$(git merge-base origin/main HEAD)
+          fi
+          git diff --name-only --diff-filter=ACMR "$BASE" HEAD > changed.txt
+          cat changed.txt
+      - name: Lint
+        run: |
+          mapfile -t files < changed.txt
+          ((${#files[@]})) || exit 0
+          bunx biome check --files-ignore-unknown=true --no-errors-on-unmatched "${files[@]}"
+      - name: Typecheck
+        if: success() || failure()
+        run: |
+          # The packages the changed files are in: the nearest package.json with a typecheck script.
+          dirs=$(while read -r f; do
+            d=$(dirname "$f")
+            while [[ $d != . && ! -f $d/package.json ]]; do d=$(dirname "$d"); done
+            [[ $d != . ]] && jq -e '.scripts.typecheck' "$d/package.json" >/dev/null && echo "$d"
+          done < changed.txt | sort -u)
+          status=0
+          for d in $dirs; do
+            echo "::group::$d"
+            (cd "$d" && bun run typecheck) || { echo "::error::Typecheck failed in $d"; status=1; }
+            echo "::endgroup::"
+          done
+          exit $status
+      - name: Tests
+        if: success() || failure()
+        run: |
+          mapfile -t tests < <(bun scripts/related-tests.ts < changed.txt)
+          ((${#tests[@]})) || { echo "No tests reached"; exit 0; }
+          printf '%s\n' "${tests[@]}"
+          # Shared runners are slower than a laptop: 20 s a test, not bun's 5.
+          bun test --parallel --timeout 20000 "${tests[@]}"

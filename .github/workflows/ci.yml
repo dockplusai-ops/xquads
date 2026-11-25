@@ -1,15 +1,13 @@
 name: CI
 
-# All verification runs here: on every pull request (when it opens and on each push to it, drafts included),
-# every push to main, every `v*` release tag, and on demand (`gh workflow run CI --ref <branch>` or "Run
-# workflow" in Actions). The pull request's run gives it the "CI result" check main requires. A branch with
-# no pull request starts nothing by itself.
+# The full verification, before a release: on demand (`gh workflow run ci.yml --ref main -f scope=all` or "Run
+# workflow" in Actions) and on every `v*` release tag. Pushes and pull requests run the quick check instead
+# (quick.yml: lint, typecheck and the tests the change reaches), so day-to-day work doesn't wait on this one.
 #
-# The `changes` job narrows a run to the jobs its files touch: a pull request by the files it changes, a push
-# to main by what the push changed, a manual run on a branch by what the branch changed since it left main. A
-# manual run on main, one started with `scope: all`, and a release tag check everything.
+# The `changes` job narrows a manual run on a branch to the jobs its files touch (what the branch changed since
+# it left main). A manual run on main, one started with `scope: all`, and a release tag check everything.
 #
-# Only jobs gated on a push or a tag (the images, the release assets) write anything or read a secret.
+# Only the images (a manual run on main or a tag) and the release assets (a tag) write anything or read a secret.
 #
 # Runners: GitHub's own (4 vCPU, 16 GB on Linux), which cost a public repository nothing; no variable is set.
 # No label is written here: each job names a repository variable (Settings → Secrets and variables → Actions
@@ -21,9 +19,7 @@ name: CI
 # The tests use the cores the runner has, so a smaller runner is slower, not broken. Everything else runs
 # on x64: on ARM the backend shards took 2.5x as long (603 and 667 s against 229 and 275 s, 2026-10-26).
 on:
-  pull_request:
   push:
-    branches: [main]
     tags: ["v*"]
   workflow_dispatch:
     inputs:
@@ -610,7 +606,8 @@ jobs:
     name: Image (${{ matrix.slug }})
     needs: [changes, check, test-backend, secrets, compose]
     if: >-
-      github.event_name == 'push' && needs.changes.outputs.image == 'true' &&
+      (github.event_name == 'push' || github.ref_name == github.event.repository.default_branch) &&
+      needs.changes.outputs.image == 'true' &&
       (github.ref_type == 'tag' || !github.event.repository.private) &&
       !cancelled() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     strategy:
