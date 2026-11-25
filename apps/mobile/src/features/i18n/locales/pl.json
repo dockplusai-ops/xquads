@@ -827,7 +827,7 @@
     "free": "Wolny",
     "workingLabel": "{{name}}, pracuje",
     "new": "Nowy agent",
-    "namePlaceholder": "Nazwa, np. Nina",
+    "namePlaceholder": "Nazwa, np. Ana",
     "whatPlaceholder": "Np. odpowiadaj klientom mailowo i mów mi, gdy coś jest pilne",
     "create": "Utwórz agenta",
     "created": "{{name}} dołącza do zespołu",

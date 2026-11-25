@@ -10,7 +10,7 @@ import { useOrg } from "@/components/org-context";
  */
 
 /** The agent of the samples, the pixel face a DM has. */
-export const SAMPLE_AGENT = { color: "green" as AgentColor, name: "Ada" };
+export const SAMPLE_AGENT = { color: "sky" as AgentColor, name: "Ana" };
 
 export interface SampleLine {
   who: "me" | "agent";

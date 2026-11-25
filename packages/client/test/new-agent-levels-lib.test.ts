@@ -36,7 +36,7 @@ describe("stepAfter", () => {
 
 describe("starterApps (ADR 0164)", () => {
   test("a personal starter's apps at write, a team role's at its preset levels, none from scratch", () => {
-    expect(starterApps({ starter: "vic" })).toEqual({ "google-calendar": "write", drive: "write" });
+    expect(starterApps({ starter: "renato" })).toEqual({ "google-calendar": "write", drive: "write" });
     expect(starterApps({ role: "dev" })).toEqual({ github: "write", sentry: "read", linear: "read" });
     expect(starterApps({ role: "custom" })).toEqual({});
     expect(starterApps({})).toEqual({});

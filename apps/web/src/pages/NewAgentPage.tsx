@@ -150,7 +150,12 @@ import { useToast } from "@/lib/toast";
 import "./new-agent.css";
 
 /** The icon next to each group of roles on the first step. */
-const GROUP_ICON: Record<RoleGroupId, IconName> = { tech: "code", customers: "members", operations: "layers" };
+const GROUP_ICON: Record<RoleGroupId, IconName> = {
+  services: "home",
+  tech: "code",
+  customers: "members",
+  operations: "layers",
+};
 
 /** How long the preview keeps writing after a keystroke. */
 const TYPING_MS = 700;

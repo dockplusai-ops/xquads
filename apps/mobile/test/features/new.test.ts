@@ -119,7 +119,7 @@ describe("New: what its Create list offers", () => {
 describe("New agent: the suggested name", () => {
   test("the first name nobody uses, ignoring case and accents", () => {
     expect(suggestAgentName([])).toBe(AGENT_NAMES[0]);
-    expect(suggestAgentName(["lu", "NÍNA"])).toBe("Theo");
+    expect(suggestAgentName(["ana", "RÚI"])).toBe("Lia");
   });
 
   test("all taken: the first name with a number", () => {

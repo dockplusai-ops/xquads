@@ -19,6 +19,12 @@ export interface RolePreset {
 }
 
 const ROLE_ICON: Record<RoleId, IconName> = {
+  quotes: "document",
+  schedule: "calendar",
+  english: "comment",
+  billing: "coin",
+  reviews: "star",
+  crew: "pin",
   dev: "code",
   ops: "bolt",
   qa: "checks",

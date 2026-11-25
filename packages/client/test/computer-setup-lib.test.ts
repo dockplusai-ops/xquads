@@ -102,21 +102,21 @@ describe("the workspace's own computer (ADR 0056 §10)", () => {
   });
 
   test("the team's lines: by what the status line says, only agents on the team, the memory ones once its size is known", () => {
-    const team = [{ handle: "ada" }, { handle: "atlas" }, { handle: "marina" }];
+    const team = [{ handle: "helena" }, { handle: "rui" }, { handle: "marina" }];
     const linesOf = (patch: Partial<ComputerSetup>, who = team) =>
       setupLines(setupView(external(patch)) as SetupView, who).map((l) => l.key);
-    // Its step's, or its stage's when the stage has words; Theo isn't on this team, so his line is left out.
+    // Its step's, or its stage's when the stage has words; Ana isn't on this team, so her line is left out.
     expect(linesOf({ step: "starting" })).toEqual([
-      "computerSetup.lines.starting.atlas",
-      "computerSetup.lines.starting.ada",
+      "computerSetup.lines.starting.rui",
+      "computerSetup.lines.starting.helena",
     ]);
-    expect(linesOf({ step: "installing", stage: "updating" })).toEqual(["computerSetup.lines.updating.ada"]);
-    expect(linesOf({ step: "installing", stage: "defragmenting" })).toEqual(["computerSetup.lines.installing.ada"]);
+    expect(linesOf({ step: "installing", stage: "updating" })).toEqual(["computerSetup.lines.updating.helena"]);
+    expect(linesOf({ step: "installing", stage: "defragmenting" })).toEqual(["computerSetup.lines.installing.helena"]);
     // The computer's memory, only once its size is known.
-    expect(linesOf({ step: "installing", stage: "booting" })).toEqual(["computerSetup.lines.booting.atlas"]);
+    expect(linesOf({ step: "installing", stage: "booting" })).toEqual(["computerSetup.lines.booting.rui"]);
     expect(linesOf({ step: "installing", stage: "booting", specs: { cpus: 4, memoryGb: 8, diskGb: 100 } })).toEqual([
-      "computerSetup.lines.booting.ada",
-      "computerSetup.lines.booting.atlas",
+      "computerSetup.lines.booting.helena",
+      "computerSetup.lines.booting.rui",
     ]);
     // No step yet, a wait, or nobody the lines name: none.
     expect(linesOf({})).toEqual([]);
@@ -124,7 +124,7 @@ describe("the workspace's own computer (ADR 0056 §10)", () => {
     expect(linesOf({ step: "starting" }, [{ handle: "marina" }])).toEqual([]);
     // Each with the agent it names.
     expect(setupLines(setupView(external({ step: "reserving" })) as SetupView, team)).toEqual([
-      { key: "computerSetup.lines.reserving.atlas", agent: { handle: "atlas" } },
+      { key: "computerSetup.lines.reserving.rui", agent: { handle: "rui" } },
     ]);
   });
 

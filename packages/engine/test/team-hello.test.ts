@@ -68,9 +68,9 @@ describe("after the first plan", () => {
     await drainInTime();
     expect(await hellos()).toEqual([
       { name: "Doki", body: "Plano ativo. Vamos começar o trabalho." },
-      { name: "Iara", body: "Oi, ana. Deixa comigo quem escrever no WhatsApp." },
-      { name: "Otto", body: "Cheguei. Fico de olho nos pedidos e aviso se faltar algo no estoque." },
-      { name: "Lia", body: "Oi, pessoal. Os posts da semana ficam comigo." },
+      { name: "Luana", body: "Oi, ana. Deixa comigo quem escrever no WhatsApp." },
+      { name: "Tiago", body: "Cheguei. Fico de olho nos pedidos e aviso se faltar algo no estoque." },
+      { name: "Gil", body: "Oi, pessoal. Os posts da semana ficam comigo." },
     ]);
     // The team is in #general, answering there only when called; the right hand stays in no channel.
     const seats = await f.db
@@ -82,8 +82,8 @@ describe("after the first plan", () => {
       .from(schema.agents)
       .where(eq(schema.agents.orgId, f.org.id));
     const seat = (name: string) => seats.find((s) => s.agentId === team.find((a) => a.name === name)?.id);
-    expect(seat("Iara")?.autoReply).toBe(false);
-    expect(seat("Lia")?.autoReply).toBe(false);
+    expect(seat("Luana")?.autoReply).toBe(false);
+    expect(seat("Gil")?.autoReply).toBe(false);
     expect(seat("Doki")).toBeUndefined();
     expect(await f.db.select().from(schema.agentRuns)).toHaveLength(0);
     expect(f.provider.calls).toHaveLength(0);
@@ -116,7 +116,7 @@ describe("after the first plan", () => {
     f = await setup({ rightHand: true });
     await makeStore();
     const names = (await listAgents(f.db, f.owner.id, f.org.id)).map((a) => a.name);
-    expect(names.filter((n) => ["Iara", "Otto", "Lia"].includes(n))).toEqual(["Iara", "Otto", "Lia"]);
+    expect(names.filter((n) => ["Luana", "Tiago", "Gil"].includes(n))).toEqual(["Luana", "Tiago", "Gil"]);
     expect(names[0]).toBe("Doki");
   });
 
@@ -143,12 +143,12 @@ describe("after the first plan", () => {
     const [iara] = await f.db
       .select({ id: schema.agents.id })
       .from(schema.agents)
-      .where(and(eq(schema.agents.orgId, f.org.id), eq(schema.agents.handle, "iara")));
-    if (!iara) throw new Error("no Iara");
+      .where(and(eq(schema.agents.orgId, f.org.id), eq(schema.agents.handle, "luana")));
+    if (!iara) throw new Error("no Luana");
     await addChannelMember(f.db, f.owner.id, f.org.id, f.general.id, { agentId: iara.id, autoReply: true });
     await hold(null);
     await drainInTime();
-    expect((await hellos()).map((h) => h.name)).toEqual(["Doki", "Iara", "Otto", "Lia"]);
+    expect((await hellos()).map((h) => h.name)).toEqual(["Doki", "Luana", "Tiago", "Gil"]);
     const [seat] = await f.db
       .select({ autoReply: schema.channelMembers.autoReply })
       .from(schema.channelMembers)
@@ -172,8 +172,8 @@ describe("with no plan to wait for", () => {
     await drainInTime();
     expect(await hellos()).toEqual([
       { name: "Doki", body: "The team is here. Let's get to work." },
-      { name: "Iara", body: "Hi, ana. Leave whoever writes on WhatsApp to me." },
-      { name: "Bia", body: "Hi. I'll keep the answer base up to date with what the team says." },
+      { name: "Luana", body: "Hi, ana. Leave whoever writes on WhatsApp to me." },
+      { name: "Sofia", body: "Hi. I'll keep the answer base up to date with what the team says." },
     ]);
     // A second template team later: the hello was the workspace's start, not each team's.
     await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "store", "en");

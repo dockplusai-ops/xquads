@@ -830,7 +830,7 @@ export const featureKeysEn = {
     free: "Free",
     workingLabel: "{{name}}, working",
     new: "New agent",
-    namePlaceholder: "Name, e.g. Nina",
+    namePlaceholder: "Name, e.g. Ana",
     whatPlaceholder: "E.g. answer customers by email and tell me when something is urgent",
     create: "Create agent",
     created: "{{name}} joined the team",

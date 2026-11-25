@@ -125,12 +125,12 @@ export function GalleryPage() {
         <div className="row">
           <Button variant="primary">Aprovar merge</Button>
           <Button>Recusar</Button>
-          <Button variant="agent">Pedir à Ada</Button>
+          <Button variant="agent">Pedir à Ana</Button>
           <Button variant="danger">Revogar</Button>
           <Button variant="ghost">Ver diff</Button>
           <Button iconOnly icon="search" aria-label="Buscar" />
           <Button size="sm">Ver execuções</Button>
-          <Button disabled>Criar Iris</Button>
+          <Button disabled>Criar Lia</Button>
         </div>
       </Section>
 
@@ -279,13 +279,13 @@ export function GalleryPage() {
         <div className="row">
           <Avatar name="Marina" />
           <Avatar name="João" presence="online" />
-          <Avatar name="Ana" size="sm" presence="away" />
+          <Avatar name="Carla" size="sm" presence="away" />
           <Avatar name="Bruno" size="sm" presence="busy" />
-          <Avatar name="Lia" size="lg" presence="offline" />
-          <AgentAvatar name="Ada" presence="working" />
-          <AgentAvatar name="Atlas" initials="At" running />
+          <Avatar name="Marta" size="lg" presence="offline" />
+          <AgentAvatar name="Ana" presence="working" />
+          <AgentAvatar name="Rui" initials="Ru" running />
           <AgentAvatar name="Lia" size="lg" />
-          <AgentAvatar name="Theo" size="sm" />
+          <AgentAvatar name="Téo" size="sm" />
           <AvatarStack>
             <Avatar size="sm" name="W" />
             <Avatar size="sm" name="J" />
@@ -306,12 +306,12 @@ export function GalleryPage() {
         <div>
           <Message avatar={<Avatar name="João" />} author="João" time="10:42">
             <MessageText>
-              <Mention>@Ada</Mention> o login está devolvendo 401 desde o deploy das 9h. Consegue olhar?
+              <Mention>@Ana</Mention> o login está devolvendo 401 desde o deploy das 9h. Consegue olhar?
             </MessageText>
           </Message>
           <Message
-            avatar={<AgentAvatar name="Ada" />}
-            author="Ada"
+            avatar={<AgentAvatar name="Ana" />}
+            author="Ana"
             time="10:43"
             meta="sonnet 5.5 · 1.240 tokens · US$ 0,004"
             agent
@@ -321,8 +321,8 @@ export function GalleryPage() {
             </MessageText>
           </Message>
           <Message
-            avatar={<AgentAvatar name="Atlas" initials="At" running />}
-            author="Atlas"
+            avatar={<AgentAvatar name="Rui" initials="Ru" running />}
+            author="Rui"
             time="agora"
             meta="escrevendo…"
             agent
@@ -356,7 +356,7 @@ export function GalleryPage() {
           status="waiting"
           who={
             <>
-              <b>Ada</b> pede aprovação
+              <b>Ana</b> pede aprovação
             </>
           }
           statusLabel="Aguardando você"
@@ -379,7 +379,7 @@ export function GalleryPage() {
           status="approved"
           who={
             <>
-              <b>Ada</b> · merge do PR #42 em main
+              <b>Ana</b> · merge do PR #42 em main
             </>
           }
           statusLabel="Aprovado por você · agora"
@@ -409,7 +409,7 @@ export function GalleryPage() {
         </div>
         <Meter value={12.3} max={40} label="Orçamento usado" />
         <Steps current={2} total={4} label="Passo 2 de 4 · Contexto" />
-        <Dialog open={open} onOpenChange={setOpen} title="Permissões da Ada" closeLabel={t("common.close")}>
+        <Dialog open={open} onOpenChange={setOpen} title="Permissões da Ana" closeLabel={t("common.close")}>
           <DialogSearchList
             query={q}
             onQueryChange={setQ}

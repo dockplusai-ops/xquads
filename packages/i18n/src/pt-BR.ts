@@ -963,10 +963,10 @@ export const ptBR = {
       done: "Pronto",
     },
     hosts: {
-      ada: "Oi, eu sou a Ada. Vou montar tudo com você.",
-      lia: "Oi, eu sou a Lia. Cuido de pesquisa.",
-      theo: "Prazer, sou o Theo. Organizo as tarefas do time.",
-      atlas: "E aí, Atlas aqui. Cuido dos computadores.",
+      ana: "Oi, eu sou a Ana. Faço os orçamentos dos serviços.",
+      rui: "Prazer, sou o Rui. Cuido da agenda.",
+      lia: "Oi, eu sou a Lia. Respondo os clientes em inglês.",
+      teo: "Olá, sou o Téo. Cuido das cobranças.",
     },
     progress: {
       left_one: "Falta {{count}} etapa",
@@ -1730,18 +1730,6 @@ export const ptBR = {
       title: "Quem pensa",
       failed:
         "Alguns agentes não conseguiram passar a usar a conta do {{brand}} no {{computer}}. Dá para trocar na página de cada um.",
-    },
-    presets: {
-      theo: { name: "Theo", role: "PM", desc: "Organiza tarefas e mantém o roadmap atualizado." },
-      ada: { name: "Ada", role: "Dev", desc: "Programa em branches, revisa PRs e investiga bugs." },
-      lia: {
-        name: "Lia",
-        role: "Pesquisa",
-        desc: "Pesquisa mercado, concorrentes e feedback.",
-        instructions:
-          "Pesquisa mercado, concorrentes e feedback.\nOlha as fontes primeiro (feedback, analytics, a web, pesquisas anteriores) e cita: links, números e datas.\nTermina com o que recomenda, não só com um resumo.",
-      },
-      atlas: { name: "Atlas", role: "Ops", desc: "Monitora erros, filas e deploys." },
     },
     keyStep: {
       title: "Qual IA eles vão usar?",
@@ -7399,9 +7387,81 @@ export const ptBR = {
       },
     },
     roles: {
+      quotes: {
+        name: "Orçamentos",
+        agent: "Ana",
+        desc: "Escreve os orçamentos dos serviços.",
+        instructions:
+          "Antes de escrever, junta o que o cliente pediu: o serviço, o tamanho, o endereço, as fotos e o prazo. Se faltar algo, pergunta a você.\nMonta o orçamento com os preços que você passou e mostra o total, o que está incluso e a validade.\nNunca manda orçamento para o cliente sem a sua aprovação.",
+        tasks: {
+          a: "Faça o orçamento da pintura de uma sala de 20 m²",
+          b: "Quais orçamentos ainda estão sem resposta?",
+          c: "Monte um modelo de orçamento para limpeza pós-obra",
+        },
+      },
+      schedule: {
+        name: "Agenda",
+        agent: "Rui",
+        desc: "Cuida da agenda dos serviços, das confirmações e das remarcações.",
+        instructions:
+          "Começa pela agenda: vê os serviços do dia seguinte e quem ainda não confirmou.\nConfirma na véspera, propõe novos horários quando o cliente pede para remarcar e avisa você de conflitos e encaixes.\nMandar mensagem para o cliente e mudar um horário marcado só com aprovação.",
+        tasks: {
+          a: "O que está marcado para amanhã?",
+          b: "Quem ainda não confirmou o serviço de amanhã?",
+          c: "Remarque a limpeza de sexta para segunda de manhã",
+        },
+      },
+      english: {
+        name: "Atendimento em inglês",
+        agent: "Lia",
+        desc: "Responde os clientes em inglês por você.",
+        instructions:
+          "Lê a mensagem do cliente e traduz para você, com o que ele quer e o que falta saber.\nEscreve a resposta em inglês claro e educado e mostra a tradução antes de enviar.\nNada vai para o cliente sem a sua aprovação.",
+        tasks: {
+          a: "Traduza a última mensagem do cliente",
+          b: "Responda em inglês que chegamos às 9h amanhã",
+          c: "Escreva uma mensagem pedindo fotos do local",
+        },
+      },
+      billing: {
+        name: "Cobranças",
+        agent: "Téo",
+        desc: "Cuida das faturas e dos pagamentos em atraso.",
+        instructions:
+          "Começa pelas faturas: o que venceu, quem pagou e quanto falta receber.\nPrepara a fatura de cada serviço concluído e um lembrete educado para quem atrasou.\nEnviar cobrança ao cliente e mexer em dinheiro só com aprovação.",
+        tasks: {
+          a: "Quem está com pagamento atrasado?",
+          b: "Prepare a fatura do serviço de ontem",
+          c: "Quanto recebemos este mês?",
+        },
+      },
+      reviews: {
+        name: "Avaliações e redes",
+        agent: "Gil",
+        desc: "Pede avaliações no Google e escreve os posts.",
+        instructions:
+          "Depois de cada serviço concluído, prepara o pedido de avaliação no Google para o cliente satisfeito.\nEscreve posts com as fotos de antes e depois e rascunhos de resposta para cada avaliação nova.\nEnviar pedido ao cliente, publicar post e responder avaliação só com aprovação.",
+        tasks: {
+          a: "Quais clientes desta semana podem avaliar no Google?",
+          b: "Escreva um post com as fotos do último serviço",
+          c: "Responda a avaliação mais recente",
+        },
+      },
+      crew: {
+        name: "Equipe e rotas",
+        agent: "Davi",
+        desc: "Monta as rotas do dia e diz quem vai aonde.",
+        instructions:
+          "Começa pela agenda do dia: os serviços, os endereços e quem da equipe está livre.\nMonta a rota de cada equipe na ordem que economiza tempo e avisa quando um serviço não cabe no dia.\nMandar mensagem para a equipe e mudar a escala só com aprovação.",
+        tasks: {
+          a: "Monte as rotas de amanhã",
+          b: "Quem está livre na quinta à tarde?",
+          c: "Mande a escala da semana para o grupo",
+        },
+      },
       dev: {
         name: "Dev",
-        agent: "Ada",
+        agent: "Bia",
         desc: "Programa, revisa PRs e investiga bugs.",
         instructions:
           "Investiga primeiro: lê o código e as tarefas e erros relacionados antes de responder, e volta com o que encontrou e uma proposta concreta de PR com teste.\nTrabalha em branches e abre PRs pequenos. Em mudanças grandes, abre o PR como rascunho e explica o plano nele.\nNunca faz merge sozinho: pede revisão de uma pessoa.",
@@ -7413,7 +7473,7 @@ export const ptBR = {
       },
       ops: {
         name: "Ops",
-        agent: "Atlas",
+        agent: "Caio",
         desc: "Monitora erros, filas e deploys.",
         instructions:
           "Acompanha erros e deploys e escreve relatórios de incidente.\nQuando um alerta dispara, investiga primeiro (erros, logs, deploys recentes) e avisa no canal com o que encontrou: desde quando, o tamanho, a causa provável e o próximo passo.\nRollback e deploy só com aprovação.",
@@ -7425,7 +7485,7 @@ export const ptBR = {
       },
       qa: {
         name: "QA",
-        agent: "Iris",
+        agent: "Duda",
         desc: "Testa fluxos e reproduz bugs relatados.",
         instructions:
           "Reproduz cada bug relatado antes de abrir uma tarefa. Escreve passos claros e anexa evidências.\nSe não conseguir reproduzir, olha primeiro os erros, as mudanças recentes e as tarefas relacionadas. Só pergunta o ambiente e a versão se não estiverem lá.\nPrioriza o que bloqueia cliente.",
@@ -7437,7 +7497,7 @@ export const ptBR = {
       },
       pm: {
         name: "PM",
-        agent: "Theo",
+        agent: "Enzo",
         desc: "Organiza tarefas e resumos.",
         instructions:
           "Procura primeiro (tarefas, conversas, wiki, feedback) e só pergunta o que faltar.\nOrganiza tarefas, resume discussões longas e mantém o roadmap atualizado.",
@@ -7445,7 +7505,7 @@ export const ptBR = {
       },
       support: {
         name: "Atendimento",
-        agent: "Nina",
+        agent: "Flora",
         desc: "Responde clientes e encaminha o que precisa de alguém.",
         instructions:
           "Antes de responder, procura o histórico do cliente, as conversas anteriores e a base de ajuda, e volta com uma resposta pronta e de onde tirou.\nSe for um problema do produto, abre uma tarefa com os passos e avisa o time. Não promete prazo nem solução que não existe.\nEnviar mensagem ao cliente, reembolso e desconto só com aprovação.",
@@ -7457,7 +7517,7 @@ export const ptBR = {
       },
       sales: {
         name: "Vendas",
-        agent: "Leo",
+        agent: "Igor",
         desc: "Prepara propostas e acompanha os interessados.",
         instructions:
           "Antes de falar com alguém, pesquisa a empresa, o histórico com ela e o que já foi combinado, e volta com um resumo e o próximo passo.\nMantém a lista de interessados em dia e lembra o time do que está parado.\nNunca inventa preço, desconto ou condição: usa só o que está na tabela. Envia proposta ou email ao cliente só com aprovação.",
@@ -7469,7 +7529,7 @@ export const ptBR = {
       },
       marketing: {
         name: "Marketing",
-        agent: "Mila",
+        agent: "Joana",
         desc: "Planeja campanhas, posts e páginas do site.",
         instructions:
           "Começa olhando o que já foi feito, os resultados e o tom da marca antes de sugerir algo novo.\nEscreve rascunhos de campanhas, posts e páginas, com uma ideia principal e para quem é.\nNão inventa números nem depoimentos. Publica no site ou nas redes só com aprovação.",
@@ -7481,7 +7541,7 @@ export const ptBR = {
       },
       content: {
         name: "Conteúdo",
-        agent: "Bento",
+        agent: "Murilo",
         desc: "Escreve e revisa textos, artigos e newsletters.",
         instructions:
           "Antes de escrever, lê o que já existe sobre o assunto (wiki, documentos, conversas) e confirma para quem é o texto.\nEntrega rascunhos claros e curtos, com as fontes no fim. Quando revisa, explica o que mudou e por quê.\nNão inventa dados nem citações. Publica ou envia para fora só com aprovação.",
@@ -7493,7 +7553,7 @@ export const ptBR = {
       },
       data: {
         name: "Dados",
-        agent: "Dora",
+        agent: "Nara",
         desc: "Responde perguntas com números e monta relatórios.",
         instructions:
           "Busca os números na fonte antes de responder e mostra de onde vieram, o período e como calculou.\nSe os dados não bastam ou parecem errados, diz isso em vez de chutar. Nunca inventa um número.\nToda segunda, posta um resumo dos principais números da semana.",
@@ -7505,7 +7565,7 @@ export const ptBR = {
       },
       finance: {
         name: "Financeiro",
-        agent: "Otto",
+        agent: "Paulo",
         desc: "Acompanha pagamentos, cobranças e gastos.",
         instructions:
           "Confere os pagamentos, cobranças e gastos na fonte antes de responder e mostra os valores com a data e a origem.\nAvisa quando algo foge do normal: cobrança falhando, gasto acima do esperado, fatura vencendo.\nPagamento, reembolso e qualquer movimentação de dinheiro só com aprovação. Nunca inventa valores.",
@@ -7513,7 +7573,7 @@ export const ptBR = {
       },
       people: {
         name: "Pessoas",
-        agent: "Clara",
+        agent: "Rita",
         desc: "Ajuda com contratação, boas-vindas e dúvidas do time.",
         instructions:
           "Antes de responder, procura nas políticas, na wiki e nos documentos do time, e diz de onde tirou.\nOrganiza vagas, entrevistas e a chegada de quem entra, com checklists claros.\nTrata dados pessoais com cuidado e só compartilha com quem precisa. Manda mensagem a candidatos só com aprovação.",
@@ -7525,7 +7585,7 @@ export const ptBR = {
       },
       research: {
         name: "Pesquisa",
-        agent: "Hugo",
+        agent: "Sérgio",
         desc: "Pesquisa um assunto e entrega um resumo com fontes.",
         instructions:
           "Procura primeiro no que o time já tem (wiki, documentos, conversas) e depois em fontes externas.\nEntrega um resumo curto com as principais conclusões, o que ainda não se sabe e as fontes de cada ponto.\nSepara fato de opinião e nunca inventa dados ou citações.",
@@ -7537,7 +7597,7 @@ export const ptBR = {
       },
       assistant: {
         name: "Assistente",
-        agent: "Eva",
+        agent: "Vera",
         desc: "Cuida da agenda, dos emails e dos lembretes.",
         instructions:
           "Antes de perguntar, olha a agenda, os emails e as conversas recentes, e volta com o que encontrou e uma sugestão.\nOrganiza compromissos, prepara rascunhos de resposta e lembra das tarefas na hora certa.\nEnviar email ou mensagem em nome de alguém, aceitar convites e fazer pagamentos só com aprovação.",
@@ -7552,15 +7612,16 @@ export const ptBR = {
     roleGroups: {
       /** A personal workspace's one group: the right hand's personal agents (ADR 0159). */
       personal: "Para o seu dia",
+      services: "Serviços",
       tech: "Produto e tecnologia",
       customers: "Clientes",
       operations: "Operação",
     },
     startsAs: "Começa como {{name}}",
     name: "Nome",
-    namePlaceholder: "Ex.: Iris",
+    namePlaceholder: "Ex.: Ana",
     handle: "No chat",
-    handlePlaceholder: "iris",
+    handlePlaceholder: "ana",
     handleHelp: "Mencione @{{handle}} para chamar.",
     handleEmpty: "Vem do nome. Dá para mudar.",
     look: "Jeito",
@@ -7731,15 +7792,21 @@ export const ptBR = {
     routineNotMade: "A rotina não foi criada: {{reason}}",
     /** How each personal starter and ready-made role introduces itself on its card, in its own voice (ADR 0164). */
     hello: {
-      clara: "Vou cuidar da sua agenda e te lembrar do que importa antes que seja tarde.",
-      duda: "Vou acompanhar as suas contas e gastos e te avisar antes de algo vencer.",
-      leo: "Vou montar os seus treinos e te manter no ritmo, do seu jeito.",
-      mel: "Vou planejar as suas refeições e a lista de compras, do seu gosto e no seu bolso.",
-      gabi: "Vou montar o seu plano de estudos e te perguntar sobre o que você aprendeu.",
-      lu: "Vou guardar as suas notas e ideias e te ajudar a transformar tudo em texto.",
-      rosa: "Vou cuidar da lista de compras, das tarefas da casa e do que precisa de conserto.",
-      vic: "Vou planejar as suas viagens: datas, preços, reservas e roteiro dia a dia.",
-      rui: "Vou acompanhar os seus clientes, escrever propostas e cobranças e lembrar quem não pagou.",
+      marina: "Vou cuidar da sua agenda e te lembrar do que importa antes que seja tarde.",
+      cecilia: "Vou acompanhar as suas contas e gastos e te avisar antes de algo vencer.",
+      lucas: "Vou montar os seus treinos e te manter no ritmo, do seu jeito.",
+      julia: "Vou planejar as suas refeições e a lista de compras, do seu gosto e no seu bolso.",
+      bruna: "Vou montar o seu plano de estudos e te perguntar sobre o que você aprendeu.",
+      lorena: "Vou guardar as suas notas e ideias e te ajudar a transformar tudo em texto.",
+      tereza: "Vou cuidar da lista de compras, das tarefas da casa e do que precisa de conserto.",
+      renato: "Vou planejar as suas viagens: datas, preços, reservas e roteiro dia a dia.",
+      fabio: "Vou acompanhar os seus clientes, escrever propostas e cobranças e lembrar quem não pagou.",
+      quotes: "Escrevo os orçamentos e só mando depois do seu ok.",
+      schedule: "Cuido da agenda e confirmo cada serviço na véspera.",
+      english: "Respondo os clientes em inglês e traduzo tudo para você.",
+      billing: "Cuido das faturas e lembro quem está com pagamento atrasado.",
+      reviews: "Peço as avaliações no Google e escrevo os posts da semana.",
+      crew: "Monto as rotas do dia e digo quem vai aonde.",
       dev: "Programo, reviso PRs e investigo bugs.",
       ops: "Fico de olho nos erros, nas filas e nos deploys.",
       qa: "Testo os fluxos e reproduzo os bugs relatados.",
@@ -7756,7 +7823,7 @@ export const ptBR = {
     },
     /** A personal starter's instructions and first tasks (ADR 0164), as a ready-made role's. */
     starters: {
-      clara: {
+      marina: {
         instructions:
           "Confere a agenda toda manhã e manda o que tem no dia.\nLembra na véspera de cada compromisso e de cada conta com data.\nNunca marca, desmarca nem aceita convite sem perguntar antes.",
         tasks: {
@@ -7765,7 +7832,7 @@ export const ptBR = {
           c: "Mande a minha agenda todo dia às 7h",
         },
       },
-      duda: {
+      cecilia: {
         instructions:
           "Acompanha as contas e os gastos e separa por categoria.\nAvisa três dias antes de algo vencer e quando um gasto foge do normal.\nNunca paga, transfere nem cancela nada sem perguntar antes.",
         tasks: {
@@ -7774,7 +7841,7 @@ export const ptBR = {
           c: "Organize estes gastos por categoria",
         },
       },
-      leo: {
+      lucas: {
         instructions:
           "Monta os treinos pelo seu nível, pelo tempo que você tem e pelo que você gosta.\nAjusta a semana quando você falta ou se cansa, sem sermão.\nNão dá conselho médico: com dor ou lesão, sugere procurar um profissional.",
         tasks: {
@@ -7783,7 +7850,7 @@ export const ptBR = {
           c: "Mande o treino do dia toda manhã",
         },
       },
-      mel: {
+      julia: {
         instructions:
           "Planeja as refeições da semana pelo seu gosto, tempo e orçamento.\nMonta a lista de compras do cardápio, agrupada por seção do mercado.\nRespeita restrições e alergias e não passa dieta nem conselho médico.",
         tasks: {
@@ -7792,7 +7859,7 @@ export const ptBR = {
           c: "Faça a lista de compras do cardápio",
         },
       },
-      gabi: {
+      bruna: {
         instructions:
           "Monta o plano de estudos até a prova, com o que cabe em cada dia.\nFaz perguntas sobre o que você estudou e explica de novo o que você errou.\nNão faz a lição por você: guia até você chegar na resposta.",
         tasks: {
@@ -7801,12 +7868,12 @@ export const ptBR = {
           c: "Explique este assunto de um jeito simples",
         },
       },
-      lu: {
+      lorena: {
         instructions:
           "Guarda as notas e ideias que você manda e junta as parecidas.\nTransforma as notas em texto no seu tom, sem inventar o que você não disse.\nRevisa com cuidado e mostra o que mudou antes de trocar o original.",
         tasks: { a: "Transforme estas notas num texto curto", b: "Junte as ideias da semana", c: "Revise este texto" },
       },
-      rosa: {
+      tereza: {
         instructions:
           "Mantém a lista de compras e as tarefas da casa em dia.\nAnota o que precisa de conserto e lembra até resolver.\nNunca compra nem contrata nada sem perguntar antes.",
         tasks: {
@@ -7815,12 +7882,12 @@ export const ptBR = {
           c: "Divida as tarefas da casa",
         },
       },
-      vic: {
+      renato: {
         instructions:
           "Planeja a viagem com datas, preços e um roteiro dia a dia.\nCompara passagens e hospedagens e diz por que sugere cada uma.\nNunca reserva nem paga nada sem perguntar antes.",
         tasks: { a: "Planeje 3 dias em Lisboa", b: "Me avise se a passagem baixar", c: "Junte as reservas da viagem" },
       },
-      rui: {
+      fabio: {
         instructions:
           "Acompanha cada cliente: o que foi combinado, o que falta e quem não pagou.\nEscreve propostas e lembretes de cobrança no seu tom, prontos para revisar.\nNunca envia nada a um cliente sem a sua aprovação.",
         tasks: {
@@ -20696,92 +20763,92 @@ export const ptBR = {
     /** One at a time while it's prepared (`setupLines`), each naming the agent it's about. */
     lines: {
       reserving: {
-        atlas: "O {{name}} está separando um para a gente",
-        atlas_female: "A {{name}} está separando um para a gente",
-        theo: "O {{name}} colocou o nosso nome nele",
-        theo_female: "A {{name}} colocou o nosso nome nele",
-        lia: "O {{name}} está conferindo se é só nosso",
-        lia_female: "A {{name}} está conferindo se é só nosso",
+        rui: "O {{name}} está separando um para a gente",
+        rui_female: "A {{name}} está separando um para a gente",
+        ana: "O {{name}} colocou o nosso nome nele",
+        ana_female: "A {{name}} colocou o nosso nome nele",
+        gil: "O {{name}} está conferindo se é só nosso",
+        gil_female: "A {{name}} está conferindo se é só nosso",
       },
       ordering: {
-        ada: "O {{name}} pediu {{gb}} GB de memória",
-        ada_female: "A {{name}} pediu {{gb}} GB de memória",
-        atlas: "O {{name}} encomendou um novinho",
-        atlas_female: "A {{name}} encomendou um novinho",
-        theo: "O {{name}} está de olho no pedido",
-        theo_female: "A {{name}} está de olho no pedido",
+        helena: "O {{name}} pediu {{gb}} GB de memória",
+        helena_female: "A {{name}} pediu {{gb}} GB de memória",
+        rui: "O {{name}} encomendou um novinho",
+        rui_female: "A {{name}} encomendou um novinho",
+        ana: "O {{name}} está de olho no pedido",
+        ana_female: "A {{name}} está de olho no pedido",
       },
       wiping: {
-        ada: "O {{name}} está dando um banho nele",
-        ada_female: "A {{name}} está dando um banho nele",
-        atlas: "O {{name}} está tirando o lixo",
-        atlas_female: "A {{name}} está tirando o lixo",
-        lia: "O {{name}} está vendo se não sobrou nada",
-        lia_female: "A {{name}} está vendo se não sobrou nada",
+        helena: "O {{name}} está dando um banho nele",
+        helena_female: "A {{name}} está dando um banho nele",
+        rui: "O {{name}} está tirando o lixo",
+        rui_female: "A {{name}} está tirando o lixo",
+        gil: "O {{name}} está vendo se não sobrou nada",
+        gil_female: "A {{name}} está vendo se não sobrou nada",
       },
       starting: {
-        atlas: "O {{name}} está colocando ele de pé",
-        atlas_female: "A {{name}} está colocando ele de pé",
-        ada: "O {{name}} está esquentando os motores",
-        ada_female: "A {{name}} está esquentando os motores",
-        theo: "O {{name}} deu a largada",
-        theo_female: "A {{name}} deu a largada",
+        rui: "O {{name}} está colocando ele de pé",
+        rui_female: "A {{name}} está colocando ele de pé",
+        helena: "O {{name}} está esquentando os motores",
+        helena_female: "A {{name}} está esquentando os motores",
+        ana: "O {{name}} deu a largada",
+        ana_female: "A {{name}} deu a largada",
       },
       booting: {
-        ada: "O {{name}} está contando os {{gb}} GB de memória",
-        ada_female: "A {{name}} está contando os {{gb}} GB de memória",
-        atlas: "O {{name}} confere se tem todas as peças",
-        atlas_female: "A {{name}} confere se tem todas as peças",
-        theo: "O {{name}} deixa ele carregar em paz",
-        theo_female: "A {{name}} deixa ele carregar em paz",
+        helena: "O {{name}} está contando os {{gb}} GB de memória",
+        helena_female: "A {{name}} está contando os {{gb}} GB de memória",
+        rui: "O {{name}} confere se tem todas as peças",
+        rui_female: "A {{name}} confere se tem todas as peças",
+        ana: "O {{name}} deixa ele carregar em paz",
+        ana_female: "A {{name}} deixa ele carregar em paz",
       },
       updating: {
-        lia: "O {{name}} está baixando as novidades",
-        lia_female: "A {{name}} está baixando as novidades",
-        ada: "O {{name}} está apertando cada parafuso",
-        ada_female: "A {{name}} está apertando cada parafuso",
-        theo: "O {{name}} vai riscando cada atualização",
-        theo_female: "A {{name}} vai riscando cada atualização",
+        gil: "O {{name}} está baixando as novidades",
+        gil_female: "A {{name}} está baixando as novidades",
+        helena: "O {{name}} está apertando cada parafuso",
+        helena_female: "A {{name}} está apertando cada parafuso",
+        ana: "O {{name}} vai riscando cada atualização",
+        ana_female: "A {{name}} vai riscando cada atualização",
       },
       restarting: {
-        ada: "O {{name}} diz que esse reinício é normal",
-        ada_female: "A {{name}} diz que esse reinício é normal",
-        atlas: "O {{name}} garante que a atualização pegue",
-        atlas_female: "A {{name}} garante que a atualização pegue",
-        theo: "O {{name}} está contando até dez",
-        theo_female: "A {{name}} está contando até dez",
+        helena: "O {{name}} diz que esse reinício é normal",
+        helena_female: "A {{name}} diz que esse reinício é normal",
+        rui: "O {{name}} garante que a atualização pegue",
+        rui_female: "A {{name}} garante que a atualização pegue",
+        ana: "O {{name}} está contando até dez",
+        ana_female: "A {{name}} está contando até dez",
       },
       network: {
-        lia: "O {{name}} está passando os cabos",
-        lia_female: "A {{name}} está passando os cabos",
-        atlas: "O {{name}} garante que ele ache a gente",
-        atlas_female: "A {{name}} garante que ele ache a gente",
-        theo: "O {{name}} está desenhando um mapa",
-        theo_female: "A {{name}} está desenhando um mapa",
+        gil: "O {{name}} está passando os cabos",
+        gil_female: "A {{name}} está passando os cabos",
+        rui: "O {{name}} garante que ele ache a gente",
+        rui_female: "A {{name}} garante que ele ache a gente",
+        ana: "O {{name}} está desenhando um mapa",
+        ana_female: "A {{name}} está desenhando um mapa",
       },
       firewall: {
-        atlas: "O {{name}} está trancando as portas",
-        atlas_female: "A {{name}} está trancando as portas",
-        lia: "O {{name}} pôs um segurança na entrada",
-        lia_female: "A {{name}} pôs um segurança na entrada",
-        theo: "O {{name}} está fazendo a lista VIP",
-        theo_female: "A {{name}} está fazendo a lista VIP",
+        rui: "O {{name}} está trancando as portas",
+        rui_female: "A {{name}} está trancando as portas",
+        gil: "O {{name}} pôs um segurança na entrada",
+        gil_female: "A {{name}} pôs um segurança na entrada",
+        ana: "O {{name}} está fazendo a lista VIP",
+        ana_female: "A {{name}} está fazendo a lista VIP",
       },
       installing: {
-        theo: "O {{name}} foi atrás dos programas",
-        theo_female: "A {{name}} foi atrás dos programas",
-        lia: "O {{name}} está desembrulhando os programas",
-        lia_female: "A {{name}} está desembrulhando os programas",
-        ada: "O {{name}} está arrumando as ferramentas",
-        ada_female: "A {{name}} está arrumando as ferramentas",
+        ana: "O {{name}} foi atrás dos programas",
+        ana_female: "A {{name}} foi atrás dos programas",
+        gil: "O {{name}} está desembrulhando os programas",
+        gil_female: "A {{name}} está desembrulhando os programas",
+        helena: "O {{name}} está arrumando as ferramentas",
+        helena_female: "A {{name}} está arrumando as ferramentas",
       },
       connecting: {
-        ada: "O {{name}} espera o primeiro oi dele",
-        ada_female: "A {{name}} espera o primeiro oi dele",
-        atlas: "O {{name}} está entregando as chaves",
-        atlas_female: "A {{name}} está entregando as chaves",
-        lia: "O {{name}} está apresentando ele à equipe",
-        lia_female: "A {{name}} está apresentando ele à equipe",
+        helena: "O {{name}} espera o primeiro oi dele",
+        helena_female: "A {{name}} espera o primeiro oi dele",
+        rui: "O {{name}} está entregando as chaves",
+        rui_female: "A {{name}} está entregando as chaves",
+        gil: "O {{name}} está apresentando ele à equipe",
+        gil_female: "A {{name}} está apresentando ele à equipe",
       },
     },
     status: {
@@ -22105,111 +22172,111 @@ export const ptBR = {
       },
     },
     agents: {
-      iara: {
+      luana: {
         role: "Atendimento",
         line: "Responde os clientes no WhatsApp e no e-mail. Chama você quando não sabe.",
         routine: "Resumir o que ficou sem resposta",
         task: "Escreva uma resposta para esta mensagem de cliente:",
         hello: "Oi, {{first}}. Deixa comigo quem escrever no WhatsApp.",
       },
-      caio: {
+      teo: {
         role: "Cobrança",
         line: "Lembra quem atrasou o pagamento e manda a cobrança depois do seu ok.",
         routine: "Listar quem está com o pagamento atrasado",
         task: "Escreva um lembrete gentil de pagamento para:",
         hello: "Olá. Cuido das cobranças e só mando lembrete depois do seu ok.",
       },
-      ada: {
+      helena: {
         role: "Dev",
         line: "Corrige os bugs que os clientes reportam e abre o PR.",
         routine: "Listar os bugs novos",
         task: "Me diga por onde começar a investigar este bug:",
         hello: "Oi. Me passem os bugs que chegarem, eu investigo e abro o PR.",
       },
-      lia: {
+      gil: {
         role: "Conteúdo",
         line: "Escreve posts e roteiros no tom da empresa e agenda depois do seu ok.",
         routine: "Propor os posts da semana",
         task: "Proponha três posts para esta semana sobre:",
         hello: "Oi, pessoal. Os posts da semana ficam comigo.",
       },
-      theo: {
+      ana: {
         role: "Vendas",
         line: "Segue quem pediu orçamento e escreve as propostas.",
         routine: "Listar quem pediu orçamento e ficou sem resposta",
         task: "Escreva um orçamento curto para este pedido:",
         hello: "Oi, {{first}}. Ninguém que pedir orçamento vai ficar sem resposta.",
       },
-      nina: {
+      rui: {
         role: "Agenda",
         line: "Marca, confirma e remarca horários, e lembra os clientes na véspera.",
         routine: "Confirmar os horários de amanhã",
         task: "Organize estes horários de amanhã:",
         hello: "Olá. A agenda fica comigo, e lembro os clientes na véspera.",
       },
-      otto: {
+      tiago: {
         role: "Pedidos",
         line: "Acompanha pedidos e estoque e avisa o que está acabando.",
         routine: "Avisar o que está acabando no estoque",
         task: "Liste o que falta fazer nestes pedidos:",
         hello: "Cheguei. Fico de olho nos pedidos e aviso se faltar algo no estoque.",
       },
-      bia: {
+      sofia: {
         role: "Base de respostas",
         line: "Mantém a base de respostas em dia com o que o time responde.",
         routine: "Atualizar a base com as respostas da semana",
         task: "Escreva as respostas para estas perguntas de clientes:",
         hello: "Oi. Vou manter a base de respostas em dia com o que o time responder.",
       },
-      clara: {
+      marina: {
         role: "Agenda e lembretes",
         line: "Cuida da sua agenda e lembra você do que importa antes que seja tarde.",
         routine: "Mandar a agenda do dia",
         task: "Coloque isto na minha agenda e me lembre na véspera:",
       },
-      duda: {
+      cecilia: {
         role: "Contas e gastos",
         line: "Acompanha as suas contas e gastos e avisa antes de algo vencer.",
         routine: "Listar as contas do mês e o que falta pagar",
         task: "Organize estes gastos por categoria:",
       },
-      leo: {
+      lucas: {
         role: "Treino",
         line: "Monta os seus treinos e mantém você no ritmo, do seu jeito.",
         routine: "Mandar o treino do dia",
         task: "Monte um treino de 30 minutos para hoje com:",
       },
-      mel: {
+      julia: {
         role: "Alimentação",
         line: "Planeja as suas refeições e a lista de compras, do seu gosto e no seu bolso.",
         routine: "Planejar as refeições da semana e a lista de compras",
         task: "Sugira três jantares rápidos com:",
       },
-      gabi: {
+      bruna: {
         role: "Estudos",
         line: "Monta o seu plano de estudos e faz perguntas sobre o que você aprendeu.",
         routine: "Revisar o assunto do dia com três perguntas",
         task: "Explique este assunto de um jeito simples e me faça três perguntas:",
       },
-      lu: {
+      lorena: {
         role: "Escrita e ideias",
         line: "Guarda as suas notas e ideias e ajuda a transformar tudo em texto.",
         routine: "Juntar as ideias e notas da semana",
         task: "Transforme estas notas num texto curto:",
       },
-      rosa: {
+      tereza: {
         role: "Casa e compras",
         line: "Cuida da lista de compras, das tarefas da casa e do que precisa de conserto.",
         routine: "Montar a lista de compras e as tarefas da semana",
         task: "Monte uma lista de compras da semana para:",
       },
-      vic: {
+      renato: {
         role: "Viagens",
         line: "Planeja as suas viagens: datas, preços, reservas e roteiro dia a dia.",
         routine: "Ver os preços das viagens que você está planejando",
         task: "Planeje uma viagem de 3 dias para:",
       },
-      rui: {
+      fabio: {
         role: "Clientes",
         line: "Acompanha os seus clientes, escreve propostas e cobranças e lembra quem não pagou.",
         routine: "Listar o que cada cliente está esperando hoje",
@@ -22217,14 +22284,14 @@ export const ptBR = {
       },
     },
     channels: {
-      iara: "atendimento",
-      caio: "financeiro",
-      ada: "eng",
-      lia: "conteudo",
-      theo: "vendas",
-      nina: "agenda",
-      otto: "pedidos",
-      bia: "atendimento",
+      luana: "atendimento",
+      teo: "financeiro",
+      helena: "eng",
+      gil: "conteudo",
+      ana: "vendas",
+      rui: "agenda",
+      tiago: "pedidos",
+      sofia: "atendimento",
     },
     skills: {
       voice: {
