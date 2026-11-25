@@ -1412,7 +1412,7 @@
         "see": "Посмотреть, что перенеслось"
       },
       "otherName": "Другое приложение",
-      "agenteschatName": "agentes.chat",
+      "agenteschatName": "xquads",
       "where": {
         "openbotrun": "Перетащите openbot-import.json (из Migrator от OpenBot) или openbot-transfer.json (из переноса инстанса) либо .zip, в котором он пришёл.",
         "openmausbot": "В OpenMausBot: щелчок правой кнопкой по команде → Share team… → Save file.",

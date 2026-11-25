@@ -30,8 +30,8 @@ import { type PurposeLife, sceneAgentKey, WAKE_STEP_MS } from "@/components/purp
 /** Who is signing up: their account's name and photo (Google's, or one they set), if any. */
 export type PurposeYou = { name: string; image: string | null };
 
-/** A pixel portrait of someone on the team (anyone). */
-const TEAMMATE = "/onboarding/person-31.jpg";
+/** Someone on the team (anyone): a circle with an initial, as xquads draws a person (DESIGN.md). */
+const TEAMMATE = "Marta";
 
 export function PurposeScene({
   kind,
@@ -122,7 +122,7 @@ export function PurposeScene({
               ) : "you" in f ? (
                 <Avatar kind="person" name={you.name} imageUrl={you.image ?? undefined} size="lg" />
               ) : (
-                <Avatar kind="person" name="" imageUrl={TEAMMATE} size="lg" />
+                <Avatar kind="person" name={TEAMMATE} size="lg" />
               )}
               {life.waking && "look" in f && (
                 <span

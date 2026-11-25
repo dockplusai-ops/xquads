@@ -10539,8 +10539,8 @@ html:not([data-pointer]) .ac-filter__option:focus-visible {
   overflow: hidden;
   width: 100%;
   height: 100%;
-  /* Before the first frame: the night's own blue. */
-  background: #0b1330;
+  /* xquads: flat petrol behind the team (no night sky, DESIGN.md). */
+  background: var(--raised);
 }
 .ac-hosting__row {
   position: absolute;

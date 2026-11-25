@@ -649,7 +649,7 @@ describe("Armazenamento", () => {
 });
 
 test("the export's file name, as the web saves it", () => {
-  expect(exportFileName(new Date("2026-10-28T12:00:00.000Z"))).toBe("agentes-chat-2026-10-28.json");
+  expect(exportFileName(new Date("2026-10-28T12:00:00.000Z"))).toBe("xquads-2026-10-28.json");
 });
 
 test("Sobre o xquads in Você: on every self-hosted server, old ones too; never on xquads Cloud", () => {

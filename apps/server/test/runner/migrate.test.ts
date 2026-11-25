@@ -201,7 +201,7 @@ test("OpenBot on this computer becomes its own transfer file, with nothing that 
     left: Record<string, number>;
   };
   expect(result.ok).toBe(true);
-  expect(result.file).toBe(path.join(out, "agentes-chat-import-openbot.zip"));
+  expect(result.file).toBe(path.join(out, "xquads-import-openbot.zip"));
   expect(existsSync(`${result.file}.part`)).toBe(false);
   expect(result.counts).toMatchObject({ agents: 2, routines: 3, memories: 2, skills: 1, channels: 1, files: 1 });
   expect(result.left).toMatchObject({ secrets: 1, links: 1 });
@@ -403,7 +403,7 @@ test("workflows, answers handed on, the library's skills and messaging connectio
   expect(await migrate({ from: "openbot", out: home, json: true, noFiles: true }, run.io)).toBe(0);
   const result = JSON.parse(run.out.join("")) as { counts: Record<string, number> };
   expect(result.counts).toMatchObject({ workflows: 1, skills: 2 });
-  const zip = unzip(path.join(home, "agentes-chat-import-openbot.zip"));
+  const zip = unzip(path.join(home, "xquads-import-openbot.zip"));
   expect([...zip.keys()].sort()).toEqual([
     "agents/scout/skills/research/SKILL.md",
     "library/price-check/SKILL.md",
@@ -467,7 +467,7 @@ test("--no-files leaves the workspaces, and the skills still come", async () => 
   openbot(home);
   const run = io(home);
   expect(await migrate({ from: "openbot", out: home, json: true, noFiles: true }, run.io)).toBe(0);
-  const zip = unzip(path.join(home, "agentes-chat-import-openbot.zip"));
+  const zip = unzip(path.join(home, "xquads-import-openbot.zip"));
   expect([...zip.keys()].sort()).toEqual(["agents/scout/skills/research/SKILL.md", "openbot-transfer.json"]);
 });
 
@@ -477,7 +477,7 @@ test("with no terminal it asks nothing: the only app found, into Downloads", asy
   mkdirSync(path.join(home, "Downloads"));
   const run = io(home);
   expect(await migrate({ json: false, noFiles: false }, run.io)).toBe(0);
-  expect(existsSync(path.join(home, "Downloads", "agentes-chat-import-openbot.zip"))).toBe(true);
+  expect(existsSync(path.join(home, "Downloads", "xquads-import-openbot.zip"))).toBe(true);
   expect(run.out.join("\n")).toContain("2 agents · 3 routines · 2 memories · 1 skill · 1 channel");
   expect(run.out.join("\n")).toContain("Nothing was sent.");
 });
@@ -532,7 +532,7 @@ test("on a terminal it asks which app and where to save", async () => {
   });
   expect(await migrate({ json: false, noFiles: false }, run.io)).toBe(0);
   expect(asked).toEqual(["Which one? (1-2) ", "Where to save? (~) "]);
-  const zip = unzip(path.join(home, "exports", "agentes-chat-import-hermes.zip"));
+  const zip = unzip(path.join(home, "exports", "xquads-import-hermes.zip"));
   expect([...zip.keys()].sort()).toEqual([
     ".hermes/SOUL.md",
     ".hermes/config.yaml",

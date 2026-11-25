@@ -344,7 +344,8 @@
       "codeSessions.gitTab.label",
       "codeSessions.gitTab.commits",
       "codeTerminal.label",
-      "codeSessions.tabs.terminalN"
+      "codeSessions.tabs.terminalN",
+      "onboarding.import.agenteschatName"
     ],
     "es": [
       "hosting.cloud.name",
@@ -637,7 +638,8 @@
       "codeSessions.gitTab.label",
       "codeSessions.gitTab.commits",
       "codeTerminal.label",
-      "codeSessions.tabs.terminalN"
+      "codeSessions.tabs.terminalN",
+      "onboarding.import.agenteschatName"
     ],
     "fr": [
       "hosting.cloud.name",
@@ -1166,7 +1168,8 @@
       "codeTerminal.label",
       "codeSessions.tabs.talk",
       "codeSessions.tabs.terminalN",
-      "connectors.store.agents"
+      "connectors.store.agents",
+      "onboarding.import.agenteschatName"
     ],
     "de": [
       "hosting.cloud.name",
@@ -1672,7 +1675,8 @@
       "codeSessions.gitTab.commits",
       "cliTools.progress.subagent",
       "codeTerminal.label",
-      "codeSessions.tabs.terminalN"
+      "codeSessions.tabs.terminalN",
+      "onboarding.import.agenteschatName"
     ],
     "it": [
       "hosting.cloud.name",
@@ -2077,7 +2081,8 @@
       "codeSessions.gitTab.label",
       "codeSessions.files.count",
       "cliTools.files",
-      "connectors.store.account"
+      "connectors.store.account",
+      "onboarding.import.agenteschatName"
     ],
     "nl": [
       "hosting.cloud.name",
@@ -2762,7 +2767,8 @@
       "codeTerminal.label",
       "codeSessions.tabs.terminalN",
       "connectors.store.agents",
-      "connectors.store.account"
+      "connectors.store.account",
+      "onboarding.import.agenteschatName"
     ],
     "ja": [
       "hosting.cloud.name",
@@ -2947,7 +2953,8 @@
       "codeSessions.home.beta",
       "codeSessions.home.mode",
       "codeSessions.home.was",
-      "codeSessions.gitTab.label"
+      "codeSessions.gitTab.label",
+      "onboarding.import.agenteschatName"
     ],
     "ko": [
       "hosting.cloud.name",
@@ -3126,7 +3133,8 @@
       "codeSessions.home.beta",
       "codeSessions.home.mode",
       "codeSessions.home.was",
-      "codeSessions.gitTab.label"
+      "codeSessions.gitTab.label",
+      "onboarding.import.agenteschatName"
     ],
     "zh-Hans": [
       "hosting.cloud.name",
@@ -3294,7 +3302,8 @@
       "codeSessions.home.beta",
       "codeSessions.home.mode",
       "codeSessions.home.was",
-      "codeSessions.gitTab.label"
+      "codeSessions.gitTab.label",
+      "onboarding.import.agenteschatName"
     ],
     "id": [
       "hosting.cloud.name",
@@ -3635,7 +3644,8 @@
       "codeSessions.panel.terminal",
       "codeSessions.gitTab.label",
       "codeTerminal.label",
-      "codeSessions.tabs.terminalN"
+      "codeSessions.tabs.terminalN",
+      "onboarding.import.agenteschatName"
     ],
     "tr": [
       "hosting.cloud.name",
@@ -3857,7 +3867,8 @@
       "codeSessions.panel.terminal",
       "codeSessions.gitTab.label",
       "codeTerminal.label",
-      "codeSessions.tabs.terminalN"
+      "codeSessions.tabs.terminalN",
+      "onboarding.import.agenteschatName"
     ],
     "pl": [
       "hosting.cloud.name",
@@ -4197,7 +4208,8 @@
       "cliTools.progress.agents",
       "codeTerminal.label",
       "codeSessions.tabs.terminalN",
-      "connectors.store.agents"
+      "connectors.store.agents",
+      "onboarding.import.agenteschatName"
     ],
     "ru": [
       "hosting.cloud.name",
@@ -4378,7 +4390,8 @@
       "codeSessions.home.beta",
       "codeSessions.home.mode",
       "codeSessions.home.was",
-      "codeSessions.gitTab.label"
+      "codeSessions.gitTab.label",
+      "onboarding.import.agenteschatName"
     ]
   },
   "mobile-base": {

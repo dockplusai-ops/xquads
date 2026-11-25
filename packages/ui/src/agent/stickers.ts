@@ -74,7 +74,20 @@ export function stickerSeed(key: string): number {
  * One frame of a sticker: the agent in its mood (pose and face), its shadow on the floor and the mood's pixel props
  * in the agent's tones. `S` is the square's side in canvas pixels; `t` seconds (a seed added keeps neighbors apart).
  */
+/** Whether stickers draw the original's pixel props (hand, confetti, hearts, floor shadow): off in xquads. */
+const STICKER_PROPS = false;
+
 export function drawSticker(ctx: Ctx2D, look: StickerLook, mood: StickerMood, t: number, S: number): void {
+  if (!STICKER_PROPS) {
+    // xquads: a sticker is the agent's own flat face, centred, whatever the mood (DESIGN.md: no pixel art).
+    void mood;
+    void t;
+    const side = Math.round(S * 0.72);
+    drawAgent(ctx, Math.round((S - side) / 2), Math.round((S - side) / 2), side, {
+      color: look.color as AgentColorName | undefined,
+    });
+    return;
+  }
   const [c1, c2] = gradientOf(look.color);
   const s = Math.round(S * 0.56);
   const cell = S / 64;

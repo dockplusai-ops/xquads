@@ -534,6 +534,7 @@ export {
   type SkyFrame,
   type SkyOptions,
   SPRITE,
+  setPixelSkies,
   skiesHeld,
   startSky,
 } from "./sky/engine";

@@ -30,7 +30,7 @@ export const computerApp = (card: ComputerCard): string => SOURCES[card].app;
 export const computerChat = (card: ComputerCard): boolean => SOURCES[card].chat;
 
 /** The file `migrate` writes for a card's app. */
-export const migrateFile = (card: ComputerCard): string => `agentes-chat-import-${SOURCES[card].from}.zip`;
+export const migrateFile = (card: ComputerCard): string => `xquads-import-${SOURCES[card].from}.zip`;
 
 /** Windows asks for PowerShell; everywhere else a POSIX shell. */
 export type ComputerOs = "windows" | "unix";

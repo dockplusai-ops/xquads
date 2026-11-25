@@ -432,7 +432,7 @@ export function agentImportRoutes(deps: AppDeps) {
     async (c) => {
       const bundle = await exportBundle(deps.db, c.get("user").id, c.req.valid("param").orgId);
       const day = new Date().toISOString().slice(0, 10);
-      return c.json(bundle, 200, { "content-disposition": attachmentDisposition(`agentes-chat-${day}.json`) });
+      return c.json(bundle, 200, { "content-disposition": attachmentDisposition(`xquads-${day}.json`) });
     },
   );
 

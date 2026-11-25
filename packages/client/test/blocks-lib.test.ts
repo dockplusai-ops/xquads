@@ -88,9 +88,10 @@ describe("a block's page", () => {
     const value = (sheet: string, name: string) => new RegExp(`--${name}:\\s*([^;}]+)`).exec(sheet)?.[1];
     const app = tokens.split('[data-theme="dark"]');
     const kit = BLOCK_KIT_CSS.split("html[data-theme=dark]");
+    // xquads is dark only: the app's one block (after its dark selector) holds both themes' values.
     for (const name of "ink ink2 muted faint line line2 raised sunken ok warn danger plate".split(" "))
       for (const [ours = "", theirs = ""] of [
-        [kit[0], app[0]],
+        [kit[0], app[1]],
         [kit[1], app[1]],
       ]) {
         expect(value(ours, name)).toBeDefined();

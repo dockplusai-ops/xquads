@@ -26,8 +26,11 @@ import {
   spriteTone,
   startSky,
 } from "../src";
-import { CLEAR_PX } from "../src/sky/engine";
+import { CLEAR_PX, setPixelSkies } from "../src/sky/engine";
 import { type CalmZone, lightToward, opaque, placeSprite, riseColumn, spriteNear } from "../src/sky/math";
+
+// The engine still draws; xquads keeps its skies off in the apps (DESIGN.md), so its own tests turn them on.
+setPixelSkies(true);
 
 afterEach(() => cleanup());
 
@@ -72,13 +75,12 @@ describe("sky tones", () => {
     expect(softTones("sky", "#0a0a09").at(-1)).not.toBe(agentGradient("sky")[1]);
   });
 
-  test("eyes are white everywhere; the pixel agents' body is the agent's deep tone", () => {
-    expect(EYE).toBe("#ffffff");
-    expect(spriteTone("sky")).toBe("#04203f");
+  test("eyes are petrol everywhere; the small agents' body is a tone of the agent", () => {
+    expect(EYE).toBe("#0e1c22");
     const light = (c: string) =>
       (Number.parseInt(c.slice(1, 3), 16) + Number.parseInt(c.slice(3, 5), 16) + Number.parseInt(c.slice(5, 7), 16)) /
       3;
-    expect(light(spriteTone("rose"))).toBeLessThan(light(agentGradient("rose")[1]));
+    expect(light(spriteTone("rose"))).toBe(light(agentGradient("rose")[1]));
   });
 });
 

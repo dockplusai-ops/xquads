@@ -201,7 +201,7 @@ describe("Configurações → Importar e exportar", () => {
     await click(within(card).getByRole("button", { name: "Baixar o arquivo" }));
     expect(saved).toHaveLength(1);
     expect(saved[0]?.[0]).toBe(`/api/app/organizations/${ORG_ID}/export`);
-    expect(saved[0]?.[1]).toMatch(/^agentes-chat-\d{4}-\d{2}-\d{2}\.json$/);
+    expect(saved[0]?.[1]).toMatch(/^xquads-\d{4}-\d{2}-\d{2}\.json$/);
   });
 
   test("members don't see it", async () => {
@@ -233,7 +233,7 @@ describe("Configurações → Importar e exportar", () => {
         ["Hermes Agent", "/brands/hermes-dark.svg"],
         ["OpenClaw", "/brands/openclaw.svg"],
         ["Paperclip", "/brands/paperclip-dark.svg"],
-        ["agentes.chat", "/favicon.svg"],
+        ["xquads", "/favicon.svg"],
         // It names many apps: no one maker's logo fits.
         ["Outro app", null],
       ]);
@@ -249,7 +249,7 @@ describe("Configurações → Importar e exportar", () => {
         ["Hermes Agent", "/brands/hermes-dark.svg"],
         ["OpenClaw", "/brands/openclaw.svg"],
         ["Paperclip", "/brands/paperclip-dark.svg"],
-        ["agentes.chat", "/favicon.svg"],
+        ["xquads", "/favicon.svg"],
         ["Outro app", null],
       ]);
     } finally {
@@ -527,7 +527,7 @@ describe("Configurações → Importar e exportar", () => {
     const state = seedState();
     state.me?.organizations.push({ id: "org-north", name: "Estúdio Norte", role: "owner", showActivity: true });
     await go(state);
-    await click(button(/^agentes\.chat$/), 4);
+    await click(button(/^xquads$/), 4);
     const sheet = sheetOf("Trazer de outro workspace");
     expect([...sheet.querySelectorAll(".imp-do .ac-mediarow__head")].map((b) => b.textContent)).toEqual([
       "Baixe o arquivo do outro workspace",
@@ -844,7 +844,7 @@ describe("Configurações → Importar e exportar", () => {
     await click(button("Trocar arquivo"), 2);
 
     // The file a dot makes, dropped on the page.
-    const file = new File([JSON.stringify(exportReply("chatgpt-dots", "Meu dot"))], "agentes-chat-export.json");
+    const file = new File([JSON.stringify(exportReply("chatgpt-dots", "Meu dot"))], "xquads-export.json");
     await drop({ files: [file], items: [] });
     expect(text()).toContain("Veio do ChatGPT dots");
     expect(document.querySelector(".imp-head .imp-mark img")?.getAttribute("src")).toBe("/brands/chatgpt-dots.svg");
@@ -1094,7 +1094,7 @@ describe("Configurações → Importar e exportar", () => {
             "agents/scout/workspace/reports/week.md": "# Week\n",
           }).slice(),
         ],
-        "agentes-chat-import-openbot.zip",
+        "xquads-import-openbot.zip",
       );
     const field = (sheet: HTMLElement, label: string) => within(sheet).getByLabelText(label) as HTMLTextAreaElement;
 
@@ -1141,9 +1141,9 @@ describe("Configurações → Importar e exportar", () => {
       expect(request).toContain("Move my OpenBot agents to xquads.");
       expect(request).toContain("Ask me where to save the export file.");
       expect(request).toContain('/migrate.sh | sh -s -- --from openbot --out "<folder>" --json');
-      expect(request).toContain("agentes-chat-import-openbot.zip");
+      expect(request).toContain("xquads-import-openbot.zip");
       expect(sheet.textContent).toContain("Só leitura. Chaves, senhas e sessões do OpenBot nunca são lidas.");
-      expect(sheet.textContent).toContain("agentes-chat-import-openbot.zip, na pasta que você escolheu");
+      expect(sheet.textContent).toContain("xquads-import-openbot.zip, na pasta que você escolheu");
 
       await click(within(sheet).getByRole("radio", { name: "Windows" }), 2);
       expect(field(sheet, "Pedido para o assistente de código").value).toContain(

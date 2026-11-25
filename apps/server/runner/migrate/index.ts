@@ -194,7 +194,7 @@ export async function migrate(args: MigrateArgs, io: Io): Promise<number> {
       folder = answer ? path.resolve(expandHome(answer, io.home)) : suggested;
     }
     // A name ending in .zip is the file itself; anything else is the folder it goes in.
-    const file = /\.zip$/i.test(folder) ? folder : path.join(folder, `agentes-chat-import-${source}.zip`);
+    const file = /\.zip$/i.test(folder) ? folder : path.join(folder, `xquads-import-${source}.zip`);
     const dir = path.dirname(file);
     try {
       mkdirSync(dir, { recursive: true });

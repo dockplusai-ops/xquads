@@ -1462,7 +1462,7 @@ export const en = {
         see: "See what came",
       },
       otherName: "Another app",
-      agenteschatName: "agentes.chat",
+      agenteschatName: "xquads",
       where: {
         openbotrun:
           "Drop openbot-import.json (from Migrator by OpenBot) or openbot-transfer.json (from the instance transfer), or the .zip it came in.",

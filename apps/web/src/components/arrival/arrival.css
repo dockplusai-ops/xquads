@@ -9,8 +9,8 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-  /* Before the first frame, and without a canvas: the night's own blue. */
-  background: #0b1330;
+  /* xquads: flat petrol behind the team (no night sky, DESIGN.md). */
+  background: var(--raised);
 }
 .team-scene > .ac-sky {
   position: absolute;
