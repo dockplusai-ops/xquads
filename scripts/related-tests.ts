@@ -48,4 +48,5 @@ if (names.size) {
   }
 }
 
-console.log([...tests].sort().join("\n"));
+// Nothing printed when nothing is reached: an empty argument would make `bun test` run every file.
+if (tests.size) console.log([...tests].sort().join("\n"));

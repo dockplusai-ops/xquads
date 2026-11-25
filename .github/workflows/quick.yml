@@ -60,7 +60,7 @@ jobs:
           dirs=$(while read -r f; do
             d=$(dirname "$f")
             while [[ $d != . && ! -f $d/package.json ]]; do d=$(dirname "$d"); done
-            [[ $d != . ]] && jq -e '.scripts.typecheck' "$d/package.json" >/dev/null && echo "$d"
+            if [[ $d != . ]] && jq -e '.scripts.typecheck' "$d/package.json" >/dev/null; then echo "$d"; fi
           done < changed.txt | sort -u)
           status=0
           for d in $dirs; do
@@ -72,7 +72,7 @@ jobs:
       - name: Tests
         if: success() || failure()
         run: |
-          mapfile -t tests < <(bun scripts/related-tests.ts < changed.txt)
+          mapfile -t tests < <(bun scripts/related-tests.ts < changed.txt | grep -v '^$')
           ((${#tests[@]})) || { echo "No tests reached"; exit 0; }
           printf '%s\n' "${tests[@]}"
           # Shared runners are slower than a laptop: 20 s a test, not bun's 5.
