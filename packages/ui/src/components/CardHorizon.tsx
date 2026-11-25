@@ -1,4 +1,5 @@
 import { type RefObject, useEffect, useRef } from "react";
+import { pixelSkiesOn } from "../sky/engine";
 import { HORIZON_CELL as CELL, horizonCrest, horizonHeight, horizonTones, HORIZON_WAVE as WAVE } from "../sky/horizon";
 import { bayerAt } from "../sky/math";
 import { PAINT_ATTRS } from "../theme";
@@ -34,9 +35,13 @@ function contentBottom(holder: HTMLElement): number {
  * The agents' horizon at the foot of a card with room to spare: a low, still Bayer dither from the card's own ground
  * into the sky's light tones. It measures the room between `content`'s children and the card's bottom (the card is the
  * canvas's parent, positioned, a stacking context: the canvas sits under its text), and draws nothing when that room
- * is small, so a full card never has it.
+ * is small, so a full card never has it. Drawn only with the pixel skies (`setPixelSkies`): never in xquads (DESIGN.md).
  */
-export function CardHorizon({
+export function CardHorizon(props: Parameters<typeof PixelHorizon>[0]) {
+  return pixelSkiesOn() ? <PixelHorizon {...props} /> : null;
+}
+
+function PixelHorizon({
   content,
   color = "sky",
 }: {
