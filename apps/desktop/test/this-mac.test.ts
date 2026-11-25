@@ -110,11 +110,13 @@ test("status: only the asking server's organizations, and whether agents may wor
     agentsHere: true,
     local: false,
   });
-  expect(await answerThisMac(deps, { kind: "status", origin: "https://agents.xquads.com", agentsHere: false })).toEqual({
-    orgs: [],
-    agentsHere: false,
-    local: false,
-  });
+  expect(await answerThisMac(deps, { kind: "status", origin: "https://agents.xquads.com", agentsHere: false })).toEqual(
+    {
+      orgs: [],
+      agentsHere: false,
+      local: false,
+    },
+  );
 });
 
 test("status on the server here: its own homes point at its loopback address, whichever address the page has", async () => {

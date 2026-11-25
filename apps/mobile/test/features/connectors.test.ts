@@ -361,7 +361,9 @@ test("icons only from our own path; brand colors only as #rrggbb; monograms; htt
   expect(iconUri("https://agents.xquads.com", "https://evil.example/x.svg")).toBeNull();
   expect(iconUri("https://agents.xquads.com", null)).toBeNull();
   // A mark in its maker's colors (PayPal's, Canva's) is drawn as it is, never tinted, and only a file of ours.
-  expect(ownMarkUri("https://agents.xquads.com", "/brands/paypal.svg")).toBe("https://agents.xquads.com/brands/paypal.svg");
+  expect(ownMarkUri("https://agents.xquads.com", "/brands/paypal.svg")).toBe(
+    "https://agents.xquads.com/brands/paypal.svg",
+  );
   expect(iconUri("https://agents.xquads.com", "/brands/paypal.svg")).toBeNull();
   expect(ownMarkUri("https://agents.xquads.com", "/connectors/github.svg")).toBeNull();
   expect(ownMarkUri("https://agents.xquads.com", "/brands/../x.svg")).toBeNull();

@@ -77,7 +77,11 @@ describe("loadConfig", () => {
   test("xquads' own servers get no legal links by themselves: the bundled Terms and Privacy are the original's", () => {
     const app = loadConfig({ ...valid, PUBLIC_URL: "https://agents.xquads.com" });
     expect([app.TERMS_URL, app.PRIVACY_URL]).toEqual([undefined, undefined]);
-    const set = loadConfig({ ...valid, PUBLIC_URL: "https://agents.xquads.com", TERMS_URL: "https://xquads.com/terms" });
+    const set = loadConfig({
+      ...valid,
+      PUBLIC_URL: "https://agents.xquads.com",
+      TERMS_URL: "https://xquads.com/terms",
+    });
     expect(set.TERMS_URL).toBe("https://xquads.com/terms");
     const selfHosted = loadConfig({ ...valid, PUBLIC_URL: "https://chat.example.com" });
     expect([selfHosted.TERMS_URL, selfHosted.PRIVACY_URL]).toEqual([undefined, undefined]);
