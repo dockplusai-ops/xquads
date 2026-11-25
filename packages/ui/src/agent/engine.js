@@ -720,7 +720,10 @@ export const ACCESSORY_NAMES = ["none", ...Object.keys(ACCESSORIES)];
 /** Whether accessories are drawn: off, xquads' agents have one face. */
 const DRAW_ACCESSORIES = false;
 
-export const ACCESSORY_REACH = { top: 9 / 16, left: 1 / 16, right: 2 / 16, bottom: 7 / 16 };
+/** The room an accessory takes around the body: none in xquads, which draws none (`DRAW_ACCESSORIES`). */
+export const ACCESSORY_REACH = DRAW_ACCESSORIES
+  ? { top: 9 / 16, left: 1 / 16, right: 2 / 16, bottom: 7 / 16 }
+  : { top: 0, left: 0, right: 0, bottom: 0 };
 
 /**
  * Draws an accessory on a body of side `s` in the body's own space (inside

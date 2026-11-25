@@ -975,6 +975,22 @@ html:not([data-pointer]) .arrival-have__link:focus-visible {
   font-weight: 600;
   white-space: nowrap;
 }
+/* A phone's card has room for the title or the tag on its line, not both: the tag goes under the words. */
+.arrival-opts {
+  container-type: inline-size;
+}
+@container (max-width: 340px) {
+  .arrival-opts .ac-option:has(> .arrival-opts__tag) {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+  .arrival-opts .ac-option > .arrival-opts__tag {
+    order: 1;
+    flex-basis: 100%;
+    padding-inline-start: 60px;
+    line-height: 18px;
+  }
+}
 .arrival-opts__tile {
   display: grid;
   place-items: center;

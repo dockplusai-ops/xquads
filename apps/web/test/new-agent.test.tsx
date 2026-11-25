@@ -38,6 +38,7 @@ import {
   press,
   proceed,
   railStep,
+  roleCard,
   startAs,
   title,
   toReview,
@@ -136,7 +137,7 @@ describe("Criar agente: steps", () => {
     await typeIn(screen().getByRole("textbox", { name: "Função" }), "Pesquisa de preços");
     expect(preview()?.textContent).toContain("Pesquisa de preços");
     // A template shows it on the role step itself: QA starts as Duda.
-    await click(screen().getByRole("button", { name: /^QA/ }));
+    await click(roleCard("QA"));
     expect(preview()?.textContent).toContain("Duda");
     // Headed by its name alone. It says which step it's on: a narrow screen keeps it out of the role step.
     expect(document.querySelector(".newag__cap")?.textContent).toBe("Prévia");
@@ -292,7 +293,13 @@ describe("Criar agente: steps", () => {
     const names = (heading: string) =>
       within(within(step).getByRole("region", { name: heading }))
         .getAllByRole("button")
-        .map((b) => b.querySelector(".newag__role-name b")?.textContent);
+        // The role: the line under the name it starts as.
+        .map((b) => b.querySelector(".newag__role-name > span")?.textContent);
+    expect(
+      within(within(step).getByRole("region", { name: "Serviços" }))
+        .getAllByRole("button")
+        .map((b) => b.querySelector(".newag__role-name b")?.textContent),
+    ).toEqual(["Ana", "Rui", "Lia", "Téo", "Gil", "Davi"]);
     expect(names("Serviços")).toEqual([
       "Orçamentos",
       "Agenda",
@@ -332,7 +339,7 @@ describe("Criar agente: steps", () => {
     expect(screen().getByText("O que ele faz pelo time, ex.: Assistente de e-mails e agenda.")).toBeTruthy();
 
     // A role outside engineering fills the rest the same way.
-    await click(within(step).getByRole("button", { name: /^Atendimento(?! em)/ }));
+    await click(roleCard("Atendimento"));
     await proceed();
     expect((screen().getByLabelText("Nome") as HTMLInputElement).value).toBe("Flora");
     expect((screen().getByLabelText("No chat") as HTMLInputElement).value).toBe("flora");
@@ -480,7 +487,7 @@ describe("Criar agente: steps", () => {
 
   test("keyboard: Enter continues, ⌘/Ctrl+Enter inside the instructions, Esc goes back; visited steps are clickable", async () => {
     await open();
-    await click(screen().getByRole("button", { name: /^PM/ }));
+    await click(roleCard("PM"));
     await press(document.body, "Enter");
     expect(title()).toBe("Quem é");
     // Enter in a field continues.
@@ -1760,7 +1767,7 @@ describe("Criar agente with Criar agentes alone: an agent of my own, without app
   test("apps start without access and can't be changed here; Criar saves none, so nothing is refused", async () => {
     const state = await asMaker();
     // QA's apps (GitHub) aren't on its card: they wouldn't come with it.
-    expect(screen().getByRole("button", { name: /^QA/ }).textContent).not.toContain("GitHub");
+    expect(roleCard("QA").textContent).not.toContain("GitHub");
     await startAs("QA");
     await proceed(2);
     expect(title()).toBe("Ferramentas e acesso");
@@ -1798,7 +1805,11 @@ describe("Criar agente in a personal workspace (ADR 0159)", () => {
     // One person's starting points: the right hand's personal agents, not a company's roles (ADR 0159 §3).
     expect(screen().getByRole("heading", { name: "Para o seu dia" })).toBeTruthy();
     expect(screen().queryByRole("heading", { name: "Produto e tecnologia" })).toBeNull();
-    expect(screen().queryByRole("button", { name: /^QA/ })).toBeNull();
+    expect(
+      [...screen().queryAllByRole("button")].some(
+        (b) => b.querySelector(".newag__role-name > span")?.textContent === "QA",
+      ),
+    ).toBe(false);
     await startAs("Marina");
     expect((screen().getByLabelText("Nome") as HTMLInputElement).value).toBe("Marina");
     // Its technical steps start filled in and are passed over (ADR 0159 §3): four steps, Instruções on to Revisar.

@@ -605,9 +605,10 @@ html:not([data-pointer]) .plan-row__place--grip:focus-visible {
   display: flex;
   flex-direction: column;
 }
+/* The amount's column fits its line under it ("≈ US$ 76,00 pelo preço da API") on two lines at most. */
 .plan-source {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 150px 120px;
+  grid-template-columns: minmax(0, 1fr) 150px minmax(120px, 180px);
   align-items: center;
   gap: 14px;
   padding: 12px 0;

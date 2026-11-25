@@ -1119,8 +1119,10 @@ function NewAgentFlow({ channelId = null }: { channelId?: string | null }) {
                             size="lg"
                             className="newag__role-agent"
                           />,
+                          // As the team's cards: its name on top, the role under it (a role such as "Atendimento
+                          // em inglês" is too long for the big title beside a face).
+                          t(`newAgent.roles.${id}.agent`),
                           t(`newAgent.roles.${id}.name`),
-                          t("newAgent.startsAs", { name: t(`newAgent.roles.${id}.agent`) }),
                         )}
                         <span className="newag__role-desc">{t(`newAgent.roles.${id}.desc`)}</span>
                         {(kit.length > 0 || room) && (

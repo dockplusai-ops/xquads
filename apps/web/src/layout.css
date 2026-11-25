@@ -421,9 +421,14 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* A phone's line has room for the names, the count and the time only: the subject would be a letter and its "…". */
+/* A phone's line has room for the names, the count and the time only: the subject would be a letter and its "…". The
+   word for how it goes gives way too, before a face is cut: a live one still says so in the agent's color. */
 @container (max-width: 420px) {
   .consult-pair__subject {
+    display: none;
+  }
+  .consult-pair__row:has(.consult-pair__time)
+    :is(.consult-pair__word, .consult-pair__word + .consult-pair__sep, .consult-pair__sep:has(+ .consult-pair__word)) {
     display: none;
   }
 }
@@ -1426,24 +1431,14 @@ span.work-line {
 /* Canais arquivados: the rows alone, each a MediaRow (the kit's `.ac-mediarow`): the channel's mark and name on one line
    with Restaurar at its end, when it was archived under them. */
 .archived-channels {
+  /* The box its rows' Restaurar measures (`.ac-mediarow__end--wrap`): under 480px it goes under the date. */
+  container-type: inline-size;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 .archived-channels__row {
   padding-block: var(--row-py);
-}
-/* On a phone Restaurar goes under the date, from the row's start, as the kit's `.ac-mediarow__end--wrap` does in a
-   narrow box: a long name keeps the row's width instead of wrapping beside it. */
-@media (max-width: 640px) {
-  .archived-channels__row > .ac-mediarow__end {
-    grid-area: auto / 1 / auto / -1;
-    order: 1;
-    justify-self: start;
-  }
-  .archived-channels__row > :is(.ac-mediarow__face, .ac-mediarow__head) {
-    --mediarow-axis: var(--mediarow-face);
-  }
 }
 .member-row__you {
   display: inline-flex;
@@ -12385,12 +12380,14 @@ html:not([data-pointer]) .agp-inplace:focus-visible {
 }
 /* The pencil takes no room until the pointer or the keys are there, so "@ada ·" keeps its spacing. It stays on the
    first line of a name that wraps, in the middle of a box as tall as that line (as `.ac-captail`). */
+/* As tall as the name's line, its pen on the capitals' middle (`--cap-mid` above the line's). */
 .agp-inplace__pen {
   display: inline-flex;
   align-items: center;
   flex: none;
   width: 0;
   height: 1.25em;
+  translate: 0 calc(-1 * var(--cap-mid));
   margin-left: 0;
   overflow: hidden;
   color: var(--ink-muted);
@@ -12399,6 +12396,11 @@ html:not([data-pointer]) .agp-inplace:focus-visible {
     width 0.15s,
     margin 0.15s,
     opacity 0.15s;
+}
+@supports (top: 1lh) {
+  .agp-inplace__pen {
+    height: 1lh;
+  }
 }
 @supports (top: 1lh) {
   .agp-inplace__pen {

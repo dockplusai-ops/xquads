@@ -103,10 +103,20 @@ html:not([data-pointer]) .view-layout:focus-visible {
   font-size: 13px;
   color: var(--ink-muted);
 }
+/* Its check on the first line's capitals (`.ac-iconline`'s rule), the words wrapping under it on a phone. */
 .view-options__foot > span {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
+}
+.view-options__foot > span > .ac-icon {
+  flex: none;
+  translate: 0 calc(11px - var(--cap-mid) - 50%);
+}
+@supports (top: 1lh) {
+  .view-options__foot > span > .ac-icon {
+    translate: 0 calc(0.5lh - var(--cap-mid) - 50%);
+  }
 }
 .view-options__foot .ac-icon {
   color: var(--ok);

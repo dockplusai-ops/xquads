@@ -12,6 +12,12 @@
 .onb__body .imp-sources {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+/* A phone's step: two columns, so an app's name ("Другое приложение") has a card's room for its words. */
+@media (max-width: 640px) {
+  .onb__body .imp-sources {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 .onb__body .imp-sources > .imp-source.onb-source {
   grid-column: auto;
 }

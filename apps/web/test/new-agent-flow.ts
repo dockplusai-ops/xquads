@@ -23,9 +23,18 @@ export async function proceed(times = 1) {
   for (let i = 0; i < times; i++) await click(continueButton());
 }
 
+/**
+ * A card on the first step: a role's by its role (the line under the name it starts as, "QA" under "Duda"), else the
+ * card whose name starts with it ("Do zero").
+ */
+export const roleCard = (role: string) =>
+  ([...screen().getAllByRole("button")].find(
+    (b) => b.querySelector(".newag__role-name > span")?.textContent === role,
+  ) ?? screen().getByRole("button", { name: new RegExp(`^${role}`) })) as HTMLButtonElement;
+
 /** Picks a role on the first step and goes on to Identidade. */
 export async function startAs(role: string) {
-  await click(screen().getByRole("button", { name: new RegExp(`^${role}`) }));
+  await click(roleCard(role));
   await proceed();
 }
 
