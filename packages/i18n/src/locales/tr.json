@@ -14763,6 +14763,9 @@
       "pin_message": "Mesajı sabitle",
       "ban_member": "Üyeyi yasakla",
       "create_invite_link": "Davet bağlantısı oluştur",
+      "send_sms": "SMS gönder",
+      "send_template": "Şablon gönder",
+      "list_templates": "Şablonları listele",
       "get_my_posts": "Gönderilerimi gör",
       "get_mentions": "Bahsetmeleri gör",
       "search_recent": "Son gönderileri ara",
@@ -16070,6 +16073,7 @@
       "notRestorable": "Bu hesap artık geri yüklenemez.",
       "notOwner": "Bunu yalnızca bu hesabı veya planı bağlayan kişi yapabilir.",
       "permissionForbidden": "Bunu yalnızca hesabın sahibi, bir yönetici veya hesabı yönetebilen kişi değiştirebilir.",
+      "planOff": "Ajanlar burada bu planla düşünemez. Bunun yerine bir API anahtarı seçin.",
       "orderForbidden": "Bu hesabın sıradaki yerini yalnızca onu bağlayan kişi veya bir yönetici değiştirebilir."
     },
     "channel": {

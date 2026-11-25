@@ -14901,6 +14901,9 @@
       "pin_message": "Bericht vastzetten",
       "ban_member": "Lid verbannen",
       "create_invite_link": "Uitnodigingslink maken",
+      "send_sms": "Sms sturen",
+      "send_template": "Sjabloon sturen",
+      "list_templates": "Sjablonen tonen",
       "get_my_posts": "Mijn posts bekijken",
       "get_mentions": "Vermeldingen bekijken",
       "search_recent": "Recente posts zoeken",
@@ -16208,6 +16211,7 @@
       "notRestorable": "Dit account kan niet meer hersteld worden.",
       "notOwner": "Alleen wie dit account of abonnement heeft gekoppeld, kan dit doen.",
       "permissionForbidden": "Alleen de eigenaar van het account, een beheerder of wie het mag beheren kan dit wijzigen.",
+      "planOff": "Agenten kunnen hier niet denken met dit abonnement. Kies in plaats daarvan een API-sleutel.",
       "orderForbidden": "Alleen wie dit account heeft gekoppeld of een beheerder kan de plek in de volgorde wijzigen."
     },
     "channel": {

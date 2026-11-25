@@ -66,6 +66,7 @@ const KNOWN = {
   "account.not_owner": "errors.account.notOwner",
   "account.order_forbidden": "errors.account.orderForbidden",
   "account.permission_forbidden": "errors.account.permissionForbidden",
+  "account.plan_off": "errors.account.planOff",
   "channel.members_forbidden": "errors.channel.membersForbidden",
   "agent_proposal.not_requester": "errors.agentProposal.notRequester",
   "proposal.not_requester": "errors.agentProposal.notRequester",

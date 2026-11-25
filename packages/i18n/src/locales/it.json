@@ -15360,6 +15360,9 @@
       "pin_message": "Fissare il messaggio",
       "ban_member": "Bannare un membro",
       "create_invite_link": "Creare un link di invito",
+      "send_sms": "Invia SMS",
+      "send_template": "Invia modello",
+      "list_templates": "Elenca modelli",
       "get_my_posts": "Vedere i miei post",
       "get_mentions": "Vedere le menzioni",
       "search_recent": "Cercare post recenti",
@@ -16704,6 +16707,7 @@
       "notRestorable": "Questo account non si può più ripristinare.",
       "notOwner": "Solo chi ha collegato questo account o piano può farlo.",
       "permissionForbidden": "Solo il proprietario dell'account, un admin o chi può gestirlo può cambiarlo.",
+      "planOff": "Gli agenti non possono pensare con questo piano qui. Scegli invece una chiave API.",
       "orderForbidden": "Solo chi ha collegato questo account o un admin può cambiarne il posto nell'ordine."
     },
     "channel": {

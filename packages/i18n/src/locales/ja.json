@@ -14286,6 +14286,9 @@
       "pin_message": "メッセージをピン留め",
       "ban_member": "メンバーをBAN",
       "create_invite_link": "招待リンクを作成",
+      "send_sms": "SMS を送る",
+      "send_template": "テンプレートを送る",
+      "list_templates": "テンプレートを一覧表示",
       "get_my_posts": "自分のポストを見る",
       "get_mentions": "メンションを見る",
       "search_recent": "最近のポストを検索",
@@ -15554,6 +15557,7 @@
       "notRestorable": "このアカウントはもう復元できません。",
       "notOwner": "これができるのは、このアカウントまたはプランを接続した人だけです。",
       "permissionForbidden": "これを変更できるのは、アカウントの所有者、管理者、またはアカウントを管理できる人だけです。",
+      "planOff": "このプランでは、ここでエージェントは考えられません。代わりに API キーを選んでください。",
       "orderForbidden": "順番の中での位置を変えられるのは、このアカウントを接続した人か管理者だけです。"
     },
     "channel": {

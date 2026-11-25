@@ -36424,6 +36424,15 @@
   "toolNames.label.create_invite_link": {
     "value": "Create invite link"
   },
+  "toolNames.label.send_sms": {
+    "value": "Send text"
+  },
+  "toolNames.label.send_template": {
+    "value": "Send template"
+  },
+  "toolNames.label.list_templates": {
+    "value": "List templates"
+  },
   "toolNames.label.get_my_posts": {
     "value": "See my posts"
   },
@@ -39558,6 +39567,9 @@
   },
   "errors.account.permissionForbidden": {
     "value": "Only the account's owner, an admin or whoever may manage it can change this."
+  },
+  "errors.account.planOff": {
+    "value": "Agents can't think with this plan here. Choose an API key instead."
   },
   "errors.account.orderForbidden": {
     "value": "Only the person who connected this account or an admin can change its place in the order."

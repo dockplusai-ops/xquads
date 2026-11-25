@@ -15263,6 +15263,9 @@
       "pin_message": "Fijar mensaje",
       "ban_member": "Expulsar miembro",
       "create_invite_link": "Crear enlace de invitación",
+      "send_sms": "Enviar SMS",
+      "send_template": "Enviar plantilla",
+      "list_templates": "Listar plantillas",
       "get_my_posts": "Ver mis publicaciones",
       "get_mentions": "Ver menciones",
       "search_recent": "Buscar publicaciones recientes",
@@ -16607,6 +16610,7 @@
       "notRestorable": "Esta cuenta ya no se puede restaurar.",
       "notOwner": "Solo quien conectó esta cuenta o plan puede hacer esto.",
       "permissionForbidden": "Solo el dueño de la cuenta, un admin o quien pueda gestionarla puede cambiar esto.",
+      "planOff": "Los agentes no pueden pensar con este plan aquí. Elige una clave de API.",
       "orderForbidden": "Solo quien conectó esta cuenta o un admin puede cambiar su lugar en el orden."
     },
     "channel": {

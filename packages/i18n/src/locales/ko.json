@@ -14280,6 +14280,9 @@
       "pin_message": "메시지 고정",
       "ban_member": "멤버 차단",
       "create_invite_link": "초대 링크 만들기",
+      "send_sms": "문자 보내기",
+      "send_template": "템플릿 보내기",
+      "list_templates": "템플릿 목록",
       "get_my_posts": "내 게시물 보기",
       "get_mentions": "멘션 보기",
       "search_recent": "최근 게시물 검색",
@@ -15548,6 +15551,7 @@
       "notRestorable": "이 계정은 더 이상 복원할 수 없어요.",
       "notOwner": "이 계정이나 요금제를 연결한 사람만 할 수 있어요.",
       "permissionForbidden": "계정 소유자, 관리자 또는 계정을 관리할 수 있는 사람만 바꿀 수 있어요.",
+      "planOff": "이 요금제로는 여기서 에이전트가 생각할 수 없어요. 대신 API 키를 선택하세요.",
       "orderForbidden": "이 계정을 연결한 사람이나 관리자만 순서에서 위치를 바꿀 수 있어요."
     },
     "channel": {

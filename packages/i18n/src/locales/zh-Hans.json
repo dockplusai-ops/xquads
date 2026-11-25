@@ -14355,6 +14355,9 @@
       "pin_message": "置顶消息",
       "ban_member": "封禁成员",
       "create_invite_link": "创建邀请链接",
+      "send_sms": "发送短信",
+      "send_template": "发送模板",
+      "list_templates": "列出模板",
       "get_my_posts": "查看我的帖子",
       "get_mentions": "查看提及",
       "search_recent": "搜索最近的帖子",
@@ -15623,6 +15626,7 @@
       "notRestorable": "这个账号已无法恢复。",
       "notOwner": "只有连接此账号或套餐的人可以执行此操作。",
       "permissionForbidden": "只有账号的所有者、管理员或可以管理它的人才能更改。",
+      "planOff": "智能体无法在这里用这个套餐思考。请改选一个 API 密钥。",
       "orderForbidden": "只有连接此账号的人或管理员可以调整它在顺序中的位置。"
     },
     "channel": {

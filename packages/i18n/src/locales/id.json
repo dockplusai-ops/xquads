@@ -14345,6 +14345,9 @@
       "pin_message": "Sematkan pesan",
       "ban_member": "Blokir anggota",
       "create_invite_link": "Buat tautan undangan",
+      "send_sms": "Kirim SMS",
+      "send_template": "Kirim template",
+      "list_templates": "Daftar template",
       "get_my_posts": "Lihat postingan saya",
       "get_mentions": "Lihat sebutan",
       "search_recent": "Cari postingan terbaru",
@@ -15613,6 +15616,7 @@
       "notRestorable": "Akun ini sudah tidak bisa dipulihkan.",
       "notOwner": "Hanya orang yang menghubungkan akun atau paket ini yang bisa melakukan ini.",
       "permissionForbidden": "Hanya pemilik akun, admin, atau orang yang boleh mengelolanya yang bisa mengubah ini.",
+      "planOff": "Agen tidak bisa berpikir dengan paket ini di sini. Pilih kunci API saja.",
       "orderForbidden": "Hanya orang yang menghubungkan akun ini atau Admin yang bisa mengubah posisinya dalam urutan."
     },
     "channel": {

@@ -15206,6 +15206,9 @@ export const ptBR = {
       pin_message: "Fixar mensagem",
       ban_member: "Banir membro",
       create_invite_link: "Criar link de convite",
+      send_sms: "Enviar SMS",
+      send_template: "Enviar template",
+      list_templates: "Listar templates",
       get_my_posts: "Ver meus posts",
       get_mentions: "Ver menções",
       search_recent: "Buscar posts recentes",
@@ -16501,6 +16504,7 @@ export const ptBR = {
       notOwner: "Só quem conectou esta conta ou plano pode fazer isso.",
       /** `account.permission_forbidden`: an AI account's Gerenciar, Usar em agentes or Atender todos. */
       permissionForbidden: "Só o dono da conta, um administrador ou quem pode gerenciá-la muda isto.",
+      planOff: "Os agentes não podem pensar com este plano aqui. Escolha uma chave de API.",
       /** `account.order_forbidden`: the order of use of a provider's accounts (ADR 0041 §6). */
       orderForbidden: "Só quem conectou esta conta ou um admin pode mudar o lugar dela na ordem.",
     },

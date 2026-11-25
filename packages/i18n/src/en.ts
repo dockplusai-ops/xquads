@@ -15234,6 +15234,9 @@ export const en = {
       pin_message: "Pin message",
       ban_member: "Ban member",
       create_invite_link: "Create invite link",
+      send_sms: "Send text",
+      send_template: "Send template",
+      list_templates: "List templates",
       get_my_posts: "See my posts",
       get_mentions: "See mentions",
       search_recent: "Search recent posts",
@@ -16560,6 +16563,8 @@ export const en = {
       notOwner: "Only the person who connected this account or plan can do this.",
       /** `account.permission_forbidden`: an AI account's Gerenciar, Usar em agentes or Atender todos. */
       permissionForbidden: "Only the account's owner, an admin or whoever may manage it can change this.",
+      /** `account.plan_off`: this server lets no plan of this kind think for agents on that computer (`planSignInRefusal`). */
+      planOff: "Agents can't think with this plan here. Choose an API key instead.",
       /** `account.order_forbidden`: the order of use of a provider's accounts (ADR 0041 §6). */
       orderForbidden: "Only the person who connected this account or an admin can change its place in the order.",
     },
