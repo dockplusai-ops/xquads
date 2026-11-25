@@ -727,13 +727,13 @@ export const helpZhHans: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "在服务器上运行：",
           {
-            code: "curl -fsSL https://agentes.chat/install | sh",
+            code: "curl -fsSL https://agents.xquads.com/install | sh",
           },
           "它会装好缺少的东西，然后问几个问题：大家怎么访问、邮件、这台服务器是否也当作智能体的电脑，以及是否发送匿名使用统计。按 Enter 采用建议的答案。它装在 `/opt/agentes`（已经能用 Docker 的用户装在 `~/agentes`），第一次会下载大约 2 GB。",
           "最后它会显示服务器的地址和一个给手机用的二维码。再运行一次也没关系：它会保留你的设置，只补上缺少的部分。",
           "有 Node.js 18 或更新版本时，在空文件夹里运行 `npx @agenteschat/setup` 是同样的设置。没有 Node 的话，它可以从应用的镜像在当前文件夹里运行，最后会给出启动其余部分的命令：",
           {
-            code: 'docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/agentes-chat/agentes:latest setup',
+            code: 'docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/dockplusai-ops/xquads:latest setup',
           },
         ],
       },
@@ -790,7 +790,7 @@ export const helpZhHans: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "设置可以把这台服务器也当作智能体的电脑，它们在上面运行命令、使用浏览器、存放文件。设置会先问你，在服务器能胜任时建议选是。在 Debian 13 上，每个智能体都有自己的用户和屏幕。在 Ubuntu 上，智能体共用一个用户 `agentes`。如果你选了否，加上 `--computer yes` 再运行一次安装：",
           {
-            code: "curl -fsSL https://agentes.chat/install | sh -s -- --computer yes",
+            code: "curl -fsSL https://agents.xquads.com/install | sh -s -- --computer yes",
           },
           "其他电脑，比如装了 xquads 应用的 Mac 或另一台服务器，在 **设置\u00a0›\u00a0设备** 里连接，详见 [你的电脑和手机](/help/computers)。使用 Tailscale 时，它们要先加入你的 tailnet。",
         ],
@@ -818,7 +818,7 @@ export const helpZhHans: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "在安装文件夹里运行：",
           {
-            code: "curl -fsSLO https://agentes.chat/install/docker-compose.yml\ndocker compose pull\ndocker compose up -d",
+            code: "curl -fsSLO https://agents.xquads.com/install/docker-compose.yml\ndocker compose pull\ndocker compose up -d",
           },
           "新版本启动时，数据库会自动更新。把设置放在 `.env` 里，不要修改 `docker-compose.yml`，每次升级都会替换它。大版本跨越前先备份：被新版本更新过的数据库，旧版本打不开。",
         ],

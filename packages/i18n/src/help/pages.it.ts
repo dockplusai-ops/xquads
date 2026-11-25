@@ -745,13 +745,13 @@ export const helpIt: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "Sul server, esegui:",
           {
-            code: "curl -fsSL https://agentes.chat/install | sh",
+            code: "curl -fsSL https://agents.xquads.com/install | sh",
           },
           "Installa ciò che manca e poi fa qualche domanda: come ci arrivano le persone, l'email, se questo server è anche il computer dei tuoi agenti e se inviare statistiche d'uso anonime. Invio accetta la risposta suggerita. Si installa in `/opt/agentes` (`~/agentes` per un utente che può già usare Docker) e la prima volta scarica circa 2 GB.",
           "Alla fine mostra l'indirizzo del tuo server e un codice QR per il telefono. Eseguirlo di nuovo non rompe niente: tiene le tue impostazioni e completa solo ciò che manca.",
           "Con Node.js 18 o più recente, `npx @agenteschat/setup` in una cartella vuota è la stessa configurazione. Senza Node, gira dall'immagine dell'app, nella cartella corrente, e finisce con i comandi che avviano il resto:",
           {
-            code: 'docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/agentes-chat/agentes:latest setup',
+            code: 'docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/dockplusai-ops/xquads:latest setup',
           },
         ],
       },
@@ -808,7 +808,7 @@ export const helpIt: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "La configurazione può rendere questo server anche il computer dei tuoi agenti, dove eseguono comandi, usano un browser e tengono i loro file. Te lo chiede, e suggerisce sì dove il server può farlo bene. Su Debian 13 ogni agente ha un utente tutto suo, con uno schermo. Su Ubuntu, gli agenti condividono un solo utente, `agentes`. Se hai detto no, esegui di nuovo l'installazione con `--computer yes`:",
           {
-            code: "curl -fsSL https://agentes.chat/install | sh -s -- --computer yes",
+            code: "curl -fsSL https://agents.xquads.com/install | sh -s -- --computer yes",
           },
           "Altri computer, come un Mac con l'app xquads o un altro server, si collegano da **Impostazioni\u00a0›\u00a0Dispositivi**, come in [I tuoi computer e telefoni](/help/computers). Su Tailscale, prima entrano nella tua tailnet.",
         ],
@@ -836,7 +836,7 @@ export const helpIt: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "Nella cartella dell'installazione, esegui:",
           {
-            code: "curl -fsSLO https://agentes.chat/install/docker-compose.yml\ndocker compose pull\ndocker compose up -d",
+            code: "curl -fsSLO https://agents.xquads.com/install/docker-compose.yml\ndocker compose pull\ndocker compose up -d",
           },
           "Il database si aggiorna da solo quando parte la nuova versione. Tieni le tue impostazioni in `.env` e non modificare mai `docker-compose.yml`, che ogni aggiornamento sostituisce. Fai un backup prima di un grande salto: un database aggiornato da una versione più recente non si apre in una più vecchia.",
         ],

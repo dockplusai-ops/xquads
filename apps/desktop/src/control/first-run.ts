@@ -23,7 +23,7 @@ export const escapeAction = (screensBack: number, busy: boolean): "stay" | "back
   busy ? "stay" : screensBack > 0 ? "back" : "close";
 
 /** The one-command setup, for a server without a screen. */
-export const INSTALL_COMMAND = "curl -fsSL https://agentes.chat/install | sh";
+export const INSTALL_COMMAND = "curl -fsSL https://agents.xquads.com/install | sh";
 
 /**
  * Discovery: how long the app may take to list the candidates (this computer's ports, and `tailscale status`, which

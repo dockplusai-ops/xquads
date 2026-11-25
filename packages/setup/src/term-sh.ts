@@ -1,9 +1,9 @@
 /**
- * The agentes.chat look in POSIX sh, for the two installers: install.sh carries this text between its
+ * The xquads look in POSIX sh, for the two installers: install.sh carries this text between its
  * `# --- term.sh` lines, and the runner's installer (apps/server/runner/install-script.ts) inlines it. Tests keep
  * both copies equal, and its logo equal to term.ts's in every color depth.
  */
-export const TERM_SH = `# The agentes.chat look for the POSIX installers, as packages/setup/src/term.ts draws it: plain where a
+export const TERM_SH = `# The xquads look for the POSIX installers, as packages/setup/src/term.ts draws it: plain where a
 # terminal can't take it (no color with NO_COLOR or TERM=dumb, ASCII marks and no logo on the Linux console), and
 # no line, logo or animation when the output isn't a terminal (cloud-init, CI, the setup reading it). Only
 # function definitions, so a download cut short runs nothing.

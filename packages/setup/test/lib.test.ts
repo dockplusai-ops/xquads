@@ -81,7 +81,7 @@ const DIR = "/home/ana/agentes";
 const notRoot = (dir: string) => ({
   check: "computer",
   error: "Making this machine your agents' computer needs root: the setup adds users and a service for them.",
-  fix: `Run it as root, in this folder (curl -fsSL https://agentes.chat/install | sudo sh -s -- --dir ${dir} --computer yes), or connect a computer later in Settings › Devices.`,
+  fix: `Run it as root, in this folder (curl -fsSL https://agents.xquads.com/install | sudo sh -s -- --dir ${dir} --computer yes), or connect a computer later in Settings › Devices.`,
 });
 
 describe("options", () => {
@@ -292,7 +292,7 @@ describe("Jev's key (--typesafe-key)", () => {
       entries: { TYPESAFE_API_KEY: "ts_live_9f2c" },
       said: {
         ok: false,
-        text: "Jev: TypeSafe didn't answer, so the key wasn't checked. agentes.chat checks it when it uses it.",
+        text: "Jev: TypeSafe didn't answer, so the key wasn't checked. xquads checks it when it uses it.",
       },
     });
     expect(asked).toEqual(["ts_live_9f2c", "ts_wrong_0000", "ts_empty_5555", "ts_live_9f2c"]);
@@ -670,25 +670,25 @@ describe("Docker", () => {
     // A refused image is the cause, not the "No such image" lines Compose adds about the others.
     const refused = diagnoseCompose(
       [
-        "Image ghcr.io/agentes-chat/agentes:latest Error Head",
-        '"https://ghcr.io/v2/agentes-chat/agentes/manifests/latest": denied',
+        "Image ghcr.io/dockplusai-ops/xquads:latest Error Head",
+        '"https://ghcr.io/v2/dockplusai-ops/xquads/manifests/latest": denied',
         "Error response from daemon: No such image: pgvector/pgvector:0.8.7-pg18",
       ].join("\n"),
       "darwin",
     );
     expect(refused).toMatchObject({
       check: "image",
-      error: "Docker couldn't download ghcr.io/agentes-chat/agentes:latest: the registry refused it.",
+      error: "Docker couldn't download ghcr.io/dockplusai-ops/xquads:latest: the registry refused it.",
     });
     expect(refused?.fix).toContain("docker login ghcr.io");
     // Docker 29 says it on the image's line alone.
     expect(
       diagnoseCompose(
-        "Image ghcr.io/agentes-chat/agentes:latest Error error from registry: denied\ndenied\nError response from daemon: error from registry: denied",
+        "Image ghcr.io/dockplusai-ops/xquads:latest Error error from registry: denied\ndenied\nError response from daemon: error from registry: denied",
         "linux",
       ),
     ).toMatchObject({
-      error: "Docker couldn't download ghcr.io/agentes-chat/agentes:latest: the registry refused it.",
+      error: "Docker couldn't download ghcr.io/dockplusai-ops/xquads:latest: the registry refused it.",
     });
   });
 
@@ -699,7 +699,7 @@ describe("Docker", () => {
       check: "app.config",
       error: "The app refused its configuration: AGENTES_SECRET is required. PUBLIC_URL: Invalid URL.",
     });
-    expect(diagnoseAppLogs('{"level":"info","msg":"starting agentes.chat"}')).toBeNull();
+    expect(diagnoseAppLogs('{"level":"info","msg":"starting xquads"}')).toBeNull();
   });
 });
 
@@ -778,7 +778,7 @@ describe("the agents' computer", () => {
     // Already a computer of some server: its service would be replaced.
     for (const machine of [server, mac]) {
       expect(why({ ...machine, connected: true })?.error).toBe(
-        "This machine is already connected to agentes.chat as a computer, so it can't also be this server's own.",
+        "This machine is already connected to xquads as a computer, so it can't also be this server's own.",
       );
     }
     for (const machine of [
@@ -809,7 +809,7 @@ describe("the agents' computer", () => {
     expect(appOnThisMachine("HOST_PORT=3001\n")).toBe("http://127.0.0.1:3001");
     expect(appOnThisMachine("BIND_ADDRESS=0.0.0.0\n")).toBe("http://127.0.0.1:3000");
     expect(appOnThisMachine("BIND_ADDRESS=[::]\n")).toBe("http://127.0.0.1:3000");
-    // Published on one address only: loopback isn't it, and whatever answers there isn't agentes.chat.
+    // Published on one address only: loopback isn't it, and whatever answers there isn't xquads.
     expect(appOnThisMachine("BIND_ADDRESS=10.0.0.5\nHOST_PORT=8080\n")).toBe("http://10.0.0.5:8080");
   });
 
@@ -931,7 +931,7 @@ describe("the agents' computer", () => {
         problem: {
           check: "computer",
           error:
-            "agentes.chat doesn't start with this machine's token (HOST_COMPUTER_TOKEN in .env) and ALLOW_SIGNUP=true together.",
+            "xquads doesn't start with this machine's token (HOST_COMPUTER_TOKEN in .env) and ALLOW_SIGNUP=true together.",
           fix: "Set ALLOW_SIGNUP=false in .env, or run the setup again with --computer no.",
         },
       });
@@ -986,7 +986,7 @@ describe("the agents' computer", () => {
 
   test("whether the installed service lets agents run commands, from its own arguments", () => {
     const unit = (args: string) =>
-      `[Unit]\nDescription=agentes.chat runner\n\n[Service]\nExecStart="/opt/agentes-runner/bin/bun" "/opt/agentes-runner/agentes-runner.mjs" ${args}\n`;
+      `[Unit]\nDescription=xquads runner\n\n[Service]\nExecStart="/opt/agentes-runner/bin/bun" "/opt/agentes-runner/agentes-runner.mjs" ${args}\n`;
     expect(installedCommands(unit("host --server http://127.0.0.1:3000 --token-file /opt/agentes/t"))).toBe(true);
     expect(installedCommands(unit("host --server http://127.0.0.1:3000 --no-exec"))).toBe(false);
     const plist = (args: string[]) =>
@@ -1091,7 +1091,7 @@ describe("the end", () => {
     expect(Math.abs([...(rows[0] as string)].length - rows.length * 2)).toBeLessThanOrEqual(1);
   });
 
-  test("what it shows and returns: the link only for https, the computer's failure with agentes.chat still up", () => {
+  test("what it shows and returns: the link only for https, the computer's failure with xquads still up", () => {
     const app = { health: { status: "ok", version: "1.4.0" }, firstRun: true };
     const choices = { computer: "on" as const, telemetry: "on" as const, jev: "ok" as const };
     const tailnet = theEnd({
@@ -1276,7 +1276,7 @@ describe("the plan", () => {
     image: false,
   };
   const finishLine =
-    "finish: the address, the link that opens the agentes.chat phone or desktop app on it with its QR code, and what to do next";
+    "finish: the address, the link that opens the xquads phone or desktop app on it with its QR code, and what to do next";
 
   test("an empty directory on a tailnet: every step, in order", () => {
     expect(planSteps(base)).toEqual([
@@ -1285,8 +1285,8 @@ describe("the plan", () => {
       "Tailscale: show the admin console steps and ask for an auth key",
       "email: none for now (set SMTP_URL or MILLIONSEND_API_KEY later)",
       "agents' computer: this machine, each agent a user of its own with a screen (HOST_COMPUTER_TOKEN, also in host-computer-token)",
-      "usage statistics: sent to agentes.chat (TELEMETRY=on)",
-      "compose: download docker-compose.yml from https://agentes.chat/install/docker-compose.yml",
+      "usage statistics: sent to xquads (TELEMETRY=on)",
+      "compose: download docker-compose.yml from https://agents.xquads.com/install/docker-compose.yml",
       "start: docker compose up -d tailscale, wait until it's on the tailnet with HTTPS",
       "PUBLIC_URL: write the address Tailscale gives it (https://<device>.<tailnet>.ts.net)",
       "start: docker compose up -d, wait for the HTTPS certificate and /api/health",
@@ -1371,7 +1371,7 @@ describe("the plan", () => {
     expect(steps[at("agents' computer: curl")]).toBe(
       "agents' computer: curl -fsSL http://127.0.0.1:3000/api/machines/install.sh | runuser -u agentes -- sh -s -- --server http://127.0.0.1:3000 --host-token-file /home/agentes/host-computer-token, then wait up to 90 s for it to answer",
     );
-    // In that order, after agentes.chat is up.
+    // In that order, after xquads is up.
     expect(at("start: docker compose up -d,")).toBeLessThan(at("install for the agents"));
     expect(at("install for the agents")).toBeLessThan(at("user agentes"));
     expect(at("user agentes")).toBeLessThan(at("agents' computer: curl"));
@@ -1539,7 +1539,7 @@ describe("the compose file the setup drives", () => {
         "}\n",
       ].join("\n"),
     );
-    // Holding requests through a restart stays agentes.chat Cloud's.
+    // Holding requests through a restart stays xquads Cloud's.
     expect(file).not.toContain("lb_try_duration");
     // The compose file is downloaded alone, so the page travels inside it (`bun run sync:unavailable`).
     expect(compose.configs["unavailable-page"]?.content).toBe(
