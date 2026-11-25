@@ -7,6 +7,7 @@ import type { Proposal } from "@agenteschat/client";
 import { act, cleanup, fireEvent, within } from "@testing-library/react";
 import { ADA_ID, ATLAS_ID, createFakeApi, ENG_ID, ORG_ID, seedRoles, seedState } from "./fake-api";
 import { notification } from "./fakes/notifications";
+import { roleCard } from "./new-agent-flow";
 import { renderApp, screen, settle } from "./render";
 
 afterEach(() => cleanup());
@@ -483,7 +484,7 @@ describe("Criar agente", () => {
     expect(screen().getByRole("heading", { level: 1, name: "Qual vai ser a função?" })).toBeTruthy();
     // The page says what the button that opened it said.
     expect(document.querySelector(".newag__rail-title b")?.textContent).toBe("Criar agente");
-    await click(screen().getByRole("button", { name: /^Dev/ }));
+    await click(roleCard("Dev"));
     await click(screen().getByRole("button", { name: "Continuar" }));
     // Dev starts as Ada, and @ada is taken: renamed here.
     await type(screen().getByLabelText("Nome"), "Íris");
