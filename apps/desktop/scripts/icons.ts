@@ -224,8 +224,8 @@ const icons = appIcons();
 // The icon the app ships with is xquads' (brand/, drawn from its brand kit in the same two shapes and sizes); the
 // scenes above still draw the other icons a person may pick, and the tray.
 const brand = (file: string) => readFileSync(join(root, "brand", file));
-icons.master = brand("app-icon.png");
-icons.tile = brand("app-icon-tile.png");
+icons.master = brand("mac.png");
+icons.tile = brand("tile.png");
 icons.dock.set(APP_ICON_IDS[0], brand("dock.png"));
 icons.window.set(APP_ICON_IDS[0], brand("window.png"));
 writeFileSync(join(root, "app-icon.png"), icons.master);

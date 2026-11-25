@@ -383,7 +383,7 @@ describe("output", () => {
 
   test("a failed command's reason is its last line with words, without the mark before it", () => {
     const installer = [
-      "agentes.chat connect this computer",
+      "xquads connect this computer",
       "◇  Bun 1.4.4 (SHA-256 checked)",
       "◒  Downloading the runner from https://agents.example.com",
       "curl: (22) The requested URL returned error: 404",
