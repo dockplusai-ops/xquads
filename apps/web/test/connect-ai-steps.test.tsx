@@ -1102,7 +1102,7 @@ describe("Conectar uma IA: one picker, plans first", () => {
     // address, no clock).
     const well = panel.querySelector(".ai-panel__wait") as HTMLElement;
     expect(shownText(well)).toBe(
-      "A Ada está arrumando as ferramentasPasso 3 de 4 · Instalando os programasFaltam uns 6 minAvisamos você por e-mail quando o computador ficar pronto. Pode fechar esta página.",
+      "Passo 3 de 4 · Instalando os programasFaltam uns 6 minAvisamos você por e-mail quando o computador ficar pronto. Pode fechar esta página.",
     );
     expect(panel.textContent).not.toContain("walter@");
     // "Ready" once, in the well: the sign-in's step says nothing more of when.
@@ -1144,7 +1144,7 @@ describe("Conectar uma IA: one picker, plans first", () => {
     });
     const panel = within(dialog).getByRole("region", { name: "Seu plano do Claude" });
     expect(shownText(panel.querySelector(".ai-panel__wait") as HTMLElement)).toBe(
-      "A Ada está arrumando as ferramentasPasso 3 de 4 · Instalando os programasFaltam uns 6 minVocê entra aqui assim que o computador ficar pronto.",
+      "Passo 3 de 4 · Instalando os programasFaltam uns 6 minVocê entra aqui assim que o computador ficar pronto.",
     );
     expect(panel.textContent?.split("pronto")).toHaveLength(2);
     // A coding plan's step sends a key.

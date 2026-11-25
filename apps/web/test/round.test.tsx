@@ -346,7 +346,7 @@ describe("agent owner is optional", () => {
     expect(document.body.textContent).toContain("Os administradores recebem os avisos e aprovam as ações sensíveis.");
     expect(screen().getByRole("combobox", { name: "Responsável" }).textContent).toContain("Administradores");
     await proceed(2);
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(6);
     expect(state.calls.find((c) => c.method === "agents.create")?.args[1]).toMatchObject({ ownerUserId: null });
   });

@@ -44,7 +44,7 @@ describe("@ picker", () => {
 
   test("the right hand is in every channel: an @mention reaches it there, with nothing to add", () => {
     const lodi = { id: "rh", name: "Doki", handle: "doki", role: null, builtin: "right_hand" as const };
-    const [o] = mentionOptions({ query: "lo", agents: [...agents, lodi], people, meId: "me", members: new Set() });
+    const [o] = mentionOptions({ query: "do", agents: [...agents, lodi], people, meId: "me", members: new Set() });
     expect(o).toMatchObject({ id: "rh", inChannel: true });
   });
 

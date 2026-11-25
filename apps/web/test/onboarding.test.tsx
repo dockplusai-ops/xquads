@@ -892,9 +892,9 @@ describe("the person's own step, Sobre você (ADR 0162, amended 2026-11-12)", ()
     expect(eyebrow()).toBe("Passo 3 de 6");
     expect(document.querySelector(".onb__step[aria-current='step']")?.textContent).toContain("Sobre você");
     expect(document.querySelector(".onb__say")?.textContent).toBe("Antes do time, um pouco sobre você.");
-    // The account's name, to write properly; the photo's two ways in.
+    // The account's name, to write properly; a photo the one way in (xquads draws no pixel portraits).
     expect(nameField().value).toBe(state.me?.user.name ?? "");
-    expect(button("Criar um avatar")).toBeTruthy();
+    expect(screen().queryByRole("button", { name: "Criar um avatar" })).toBeNull();
     expect(button("Enviar uma foto")).toBeTruthy();
     // Back: what it does, as answered.
     await click(button("Voltar"), 8);
@@ -966,15 +966,6 @@ describe("the person's own step, Sobre você (ADR 0162, amended 2026-11-12)", ()
     await click(chip("Finanças"), 4);
     await click(button("Continuar"), 14);
     expect(heading()).toBe(ASK);
-  });
-
-  test("Criar um avatar opens the app's avatar builder over the step", async () => {
-    const state = unasked(settingUp({ context: "Loja online" }));
-    await renderApp("/onboarding", { api: createFakeApi(state) });
-    await settle(14);
-    await click(button("Criar um avatar"), 8);
-    expect(screen().getByRole("dialog", { name: "Seu avatar" })).toBeTruthy();
-    expect(heading()).toBe(YOU);
   });
 
   test("a personal workspace's, after For me, before its agents; no Back to a purpose it can't change", async () => {

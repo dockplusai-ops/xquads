@@ -810,7 +810,7 @@ describe("agent skills", () => {
     await click(within(step).getByRole("checkbox", { name: /Atendimento/ }));
     expect(screen().getByRole("complementary", { name: "Prévia do agente" }).textContent).toContain("Atendimento");
     await proceed(3);
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     const sent = state.calls.find((c) => c.method === "skills.setForAgent")?.args[2] as {
       skillId: string;
