@@ -433,7 +433,7 @@ describe("the computer ready email's button: its first step", () => {
   test("the steps count only those shown, in both parts", () => {
     const steps = (t: Partial<typeof base>) => renderEmail({ ...base, ...t }, art).text;
     expect(steps({})).toContain(
-      "Next steps\n\n1. Connect your AI. Sign in with your Claude or ChatGPT plan, another AI's coding plan, or an API key. Your agents think with it.\n2. Give a first task.",
+      "Next steps\n\n1. Connect your AI. Sign in with your ChatGPT plan, another AI's coding plan, or an API key. Your agents think with it.\n2. Give a first task.",
     );
     expect(steps({ needsAi: false })).toContain("Next steps\n\n1. Give a first task.");
     expect(steps({ needsAi: false })).toContain("\n2. Watch them work.");

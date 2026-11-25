@@ -228,7 +228,7 @@ export const en = {
     steps: {
       ai: [
         "Connect your AI.",
-        "Sign in with your Claude or ChatGPT plan, another AI's coding plan, or an API key. Your agents think with it.",
+        "Sign in with your ChatGPT plan, another AI's coding plan, or an API key. Your agents think with it.",
       ] as Step,
       task: ["Give a first task.", "In #general, call an agent with @ and say what you need."] as Step,
       watch: [

@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, test } from "bun:test";
+import { afterAll, afterEach, beforeAll, describe, expect, test } from "bun:test";
 import { setupDom } from "@agenteschat/ui/testing/dom";
 
 setupDom();
@@ -1402,5 +1402,42 @@ describe("the top of Doki's DM without its checklist", () => {
     expect(document.body.textContent).toContain(GREETING);
     expect(document.querySelector(".setup-cl")).toBeNull();
     expect(button("Montar o time")).toBeTruthy();
+  });
+});
+
+describe("xquads: no question about agents in another app", () => {
+  beforeAll(() => setImportOffered(false));
+  afterAll(() => setImportOffered(true));
+
+  test("a team's step opens on how to start, with no Back to a question; a template's team from there", async () => {
+    const state = newcomer(false);
+    await renderApp("/onboarding", { api: createFakeApi(state) });
+    await settle(10);
+    await forATeam();
+    await type("Nome", "Brilho Limpeza");
+    await click(button("Continuar"), 14);
+    await click(button("Limpeza de casas"), 4);
+    await click(button("Continuar"), 14);
+    expect(heading()).toBe(START);
+    expect(screen().queryByRole("button", { name: "Voltar" })).toBeNull();
+    expect(answer(/Começar do zero/).getAttribute("aria-checked")).toBe("true");
+    // Nothing saved until it is answered.
+    expect(calls(state, "orgs.saveOnboarding")).toEqual([]);
+    await readyMade();
+    expect(heading()).toBe("Seu time");
+  });
+
+  test("a personal workspace's step answers itself with no agents, on to its plan", async () => {
+    const state = newcomer(true);
+    plans(PLANS);
+    const api = createFakeApi(state);
+    api.routines = { ...api.routines, list: async () => [] };
+    await renderApp("/onboarding", { api });
+    await settle(10);
+    await click(answer(/^Para mim(?!ha)/), 4);
+    await click(button("Continuar"), 16);
+    const orgId = state.me?.organizations.at(-1)?.id;
+    expect(heading()).toBe("Ligue os seus agentes");
+    expect(calls(state, "orgs.saveOnboarding").map((c) => c.args)[0]).toEqual([orgId, { step: "agents" }]);
   });
 });

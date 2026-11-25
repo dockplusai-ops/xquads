@@ -156,7 +156,7 @@ describe("no AI connected: above the composer", () => {
     // line is a whole sentence). Jev is what understands that ask.
     expect(shownText(shown as HTMLElement)).toBe("Os agentes ainda não têm uma\u00a0IA.Conectar uma IA");
     expect(hintOf("Conectar uma IA", shown as HTMLElement).text).toBe(
-      "Você também pode pedir no chat, como “usar meu plano do Claude”.",
+      "Você também pode pedir no chat, como “usar meu plano do ChatGPT”.",
     );
     await click(within(shown as HTMLElement).getByRole("button", { name: "Conectar uma IA" }), 6);
     // For the team (ADR 0160, addendum): Ada is Walter's and has no AI, Atlas isn't his. The AIs are the list.

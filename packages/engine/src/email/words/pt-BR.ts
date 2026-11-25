@@ -188,7 +188,7 @@ export const ptBR: Words = {
     steps: {
       ai: [
         "Conecte sua IA.",
-        "Entre com o seu plano do Claude ou do ChatGPT, com o plano de código de outra IA, ou com uma chave de API. É com ela que os agentes pensam.",
+        "Entre com o seu plano do ChatGPT, com o plano de código de outra IA, ou com uma chave de API. É com ela que os agentes pensam.",
       ],
       task: ["Passe a primeira tarefa.", "No #general, chame um agente com @ e diga do que precisa."],
       watch: [
