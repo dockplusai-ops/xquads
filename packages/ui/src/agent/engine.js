@@ -5,24 +5,29 @@
  * pages that import this file as is (so it stays plain JavaScript with types
  * in engine.d.ts and no imports).
  *
- * Coordinates are fractions of the body's box (0..1, y down). The body is a
- * square with radius 29% on three corners and the cut corner at bottom-left;
- * the eyes are the logo's: two narrow white pills.
+ * Coordinates are fractions of the body's box (0..1, y down). The body is
+ * xquads' agent (DESIGN.md): a flat square with radius 28% in the agent's
+ * color, two oval eyes and a smile in petrol. It only blinks, and its eyes turn
+ * to dashes while it writes.
  */
 
-/** Top and bottom of each agent color. Sky is the landing's blue, the same in both themes. */
+/**
+ * Top and bottom of each agent color: the bottom is the color an agent is drawn in, the top a lighter step of it. The
+ * names stay the ones stored on agents; each now holds one of xquads' six agent colors (DESIGN.md): sky camelo,
+ * indigo ardósia, violet névoa, rose argila, amber areia, green and teal sálvia, graphite the strong line's slate.
+ */
 export const AGENT_GRADIENTS = {
-  sky: ["#8cc3ff", "#0063d1"],
-  indigo: ["#7d8bff", "#3f4fd6"],
-  violet: ["#ae8cf7", "#6e45d1"],
-  rose: ["#f58aa6", "#c9406a"],
-  amber: ["#f3c25c", "#c07d0b"],
-  green: ["#5fcf8b", "#1f8a4c"],
-  teal: ["#4cd0c0", "#0f8f86"],
-  graphite: ["#9a9a95", "#4a4a47"],
+  sky: ["#ddbe9c", "#c79d70"],
+  indigo: ["#b5c5cc", "#8aa3ae"],
+  violet: ["#c9d0e1", "#a9b3ce"],
+  rose: ["#e2bbac", "#cf9580"],
+  amber: ["#e5dbd5", "#d3c3b9"],
+  green: ["#bcd7c4", "#8fbb9c"],
+  teal: ["#bcd7c4", "#8fbb9c"],
+  graphite: ["#9aa7ad", "#6f8189"],
 };
 
-/** The landing's sky: what `sky` is in a workspace without an accent. */
+/** Camelo: what `sky` is in a workspace without an accent. */
 export const DEFAULT_SKY = AGENT_GRADIENTS.sky;
 
 /**
@@ -42,24 +47,39 @@ export function drawnKey(color) {
   return !color || color === "sky" ? AGENT_GRADIENTS.sky.join() : color;
 }
 
-/** Eyes are white on every agent, everywhere. */
-export const EYE_COLOR = "#ffffff";
+/** The face's ink: petrol on every agent color (DESIGN.md). */
+export const EYE_COLOR = "#0e1c22";
+/** The face's ink on a color too dark for petrol (a picked accent): the app's sand. */
+const LIGHT_INK = "#ede6e1";
 
-/** The body: radius on three corners and the cut corner (bottom-left), as fractions of the side. */
-export const BODY_RADIUS = 0.29;
-export const BODY_CUT = 0.054;
+/** The face's ink on `color`: petrol, or sand where petrol would not read (3:1). */
+export function faceInk(color) {
+  const body = gradientOf(color)[1];
+  return contrastOf(EYE_COLOR, body) >= 3 ? EYE_COLOR : LIGHT_INK;
+}
 
-/** Eye centers (x) and each eye style: size and vertical center. `arc` = happy (∩), `lid` = sleepy (half). */
-export const EYE_X = [0.375, 0.625];
+/** The body: the same radius on all four corners (28%, `--radius-agent`), as fractions of the side. */
+export const BODY_RADIUS = 0.28;
+export const BODY_CUT = 0.28;
+
+/**
+ * Eye centers (x) and each eye style: size and vertical center, the brand's ovals (`brand/assets/agentes/avatares`).
+ * Every stored style draws the same eyes: xquads' agents have one face.
+ */
+export const EYE_X = [0.359, 0.641];
+const OVAL = { w: 0.102, h: 0.141, cy: 0.453 };
 export const EYE_STYLES = {
-  round: { w: 0.093, h: 0.27, cy: 0.465 },
-  dots: { w: 0.093, h: 0.12, cy: 0.48 },
-  wide: { w: 0.12, h: 0.33, cy: 0.46 },
-  happy: { w: 0.15, h: 0.09, cy: 0.45, kind: "arc" },
-  sleepy: { w: 0.13, h: 0.07, cy: 0.52, kind: "lid" },
+  round: OVAL,
+  dots: OVAL,
+  wide: OVAL,
+  happy: OVAL,
+  sleepy: OVAL,
 };
+
+/** The smile under the eyes: a quadratic curve and its stroke, in body fractions. */
+export const SMILE = { from: [0.422, 0.625], control: [0.5, 0.6875], to: [0.578, 0.625], width: 0.047 };
 /** While words arrive the eyes are short dashes. */
-export const WRITING_EYE = { w: 0.15, h: 0.065, cy: 0.52 };
+export const WRITING_EYE = { w: 0.13, h: 0.05, cy: 0.47 };
 
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map((v) => (v + 0.5) / 16);
 
@@ -157,27 +177,19 @@ export function mentionTone(color, dark = false) {
 }
 
 /**
- * A custom color's [top, bottom], built like the presets: the bottom is the color itself, its lightness held
- * between graphite's and a level where the white eyes and text still read (luminance ≤ 0.28, about 3:1 against
- * white, which also keeps it off a dark theme's background); the top is the same hue 26 points lighter.
+ * A custom color's [top, bottom], built like the presets: the bottom is the color itself, lifted only until it reads
+ * on the petrol page (luminance 0.09, about 3:1); the top is a lighter step of it. The face's ink follows (`faceInk`):
+ * petrol, or sand on a color too dark for it.
  */
 export function customGradient(hex) {
   const [h, s, l0] = hexToHsl(hex);
-  let l = Math.max(0.28, Math.min(0.55, l0));
-  let bottom = hslToHex(h, s, l);
-  while (luminance(bottom) > 0.28 && l > 0.2) {
-    l -= 0.01;
+  let l = l0;
+  let bottom = hex;
+  while (luminance(bottom) < 0.09 && l < 1) {
+    l = Math.min(1, l + 0.01);
     bottom = hslToHex(h, s, l);
   }
-  // The top is capped too: yellow, lime or cyan 26 points lighter would be near white, washing out the body's
-  // light tones behind the eyes and vanishing on light surfaces. No custom top reads worse than amber's.
-  let lt = Math.min(0.78, l + 0.26);
-  let top = hslToHex(h, s, lt);
-  while ((luminance(top) > 0.59 || luminance(mixHex(bottom, top, 0.5)) > 0.405) && lt > l) {
-    lt -= 0.01;
-    top = hslToHex(h, s, lt);
-  }
-  return [top, bottom];
+  return [mixHex(bottom, "#ffffff", 0.3), bottom];
 }
 
 /** Where the custom color picker starts: the custom color itself, or the current preset's own tone. */
@@ -218,11 +230,9 @@ export function bodyTones(color, deep = false) {
   return [mixHex(bottom, "#000000", 0.38), bottom, mixHex(bottom, top, 0.5), top, mixHex(top, "#ffffff", 0.5)];
 }
 
-/** The small pixel agents' body: deep enough for white eyes (navy on the sky). */
+/** A small agent's body: its own color, flat (xquads draws no navy sprite). */
 export function spriteBody(color) {
-  return (!color || color === "sky") && AGENT_GRADIENTS.sky === DEFAULT_SKY
-    ? "#04203f"
-    : mixHex(gradientOf(color || "sky")[1], "#000000", 0.45);
+  return gradientOf(color || "sky")[1];
 }
 
 /** Dither cells per side for a body of `px` pixels: about 2.5–15 screen pixels per cell. */
@@ -321,7 +331,8 @@ export const EXPRESSIONS = {
  * the eyes slide toward the turn and the far one narrows (pseudo-3D).
  */
 export function eyeShapes(style = "round", pose = {}) {
-  const ex = pose.writing ? null : EXPRESSIONS[pose.expression];
+  // One face: a passing expression shows only as closed eyes (resting), never the original's hearts or stars.
+  const ex = pose.writing || pose.expression !== "closed" ? null : EXPRESSIONS.closed;
   const base = pose.writing ? { ...WRITING_EYE, kind: "pill" } : (ex ?? EYE_STYLES[style] ?? EYE_STYLES.round);
   const [lx, ly] = pose.look ?? [0, 0];
   const [tx, ty] = pose.turn ?? [0, 0];
@@ -435,7 +446,9 @@ export function drawEyes(ctx, x, y, s, shapes, color = EYE_COLOR) {
         break;
       }
       default:
-        ctx.roundRect(ex, ey, w, h, Math.min(w, h) / 2);
+        // The brand's oval; a blink or a writing dash is a flat pill.
+        if (h > w) ctx.ellipse(cx, cy, w / 2, h / 2, 0, 0, Math.PI * 2);
+        else ctx.roundRect(ex, ey, w, h, Math.min(w, h) / 2);
         ctx.fill();
     }
   }
@@ -464,16 +477,9 @@ export function idlePose(t, seed = 0, opts = {}) {
   const k = ease(Math.min(1, (at - i) * 2.4));
   const turn = [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k];
   const blink = (t + seed * 1.7) % 3.9 < 0.12;
-  const squash = Math.sin(t * (opts.active ? 4 : 2.1) + seed) * (opts.active ? 0.7 : 0.35);
-  let expression;
-  const list = opts.expressions ?? Object.keys(EXPRESSIONS);
-  if (list.length) {
-    const every = opts.every ?? 6.5;
-    const slot = Math.floor((t + seed * 5) / every);
-    const phase = (t + seed * 5) % every;
-    if (phase > every - 1.7) expression = list[Math.floor(hash(slot, seed + 2) * list.length)];
-  }
-  return { turn, blink, squash, expression };
+  // ponytail: xquads' agent only blinks (DESIGN.md); `turn` stays computed for callers that read it, never drawn.
+  void turn;
+  return { turn: [0, 0], blink, squash: 0, expression: undefined };
 }
 
 /**
@@ -508,72 +514,36 @@ const noise = (x, y) => {
  * own space (0..s) to draw on it (accessories).
  */
 export function drawAgent(ctx, x, y, s, opts = {}) {
-  const n = opts.cells ?? ditherCells(s);
-  const tones = bodyTones(opts.color, opts.deep);
   const progress = opts.progress ?? 1;
+  // Forming (the original's cells arriving from the sky): the flat face shows once it is mostly there.
+  if (progress < 0.5) return;
   const pose = opts.pose ?? {};
-  const frame = bodyFrame(pose);
-  const p = s / n;
-  // Pseudo-3D: the agent is a block with depth. Turning narrows the front face
-  // (cos) and shows the side; looking down/up shows the top/bottom. The block
-  // is drawn as stacked slices from the back to the front (a pixel extrusion).
-  const [tx, ty] = pose.turn ?? [0, 0];
-  const ax = tx * 0.62;
-  const ay = ty * 0.42;
-  const depth = s * 0.3;
-  const fw = s * Math.cos(ax);
-  const fh = s * Math.cos(ay);
-  const backX = -Math.sin(ax) * depth;
-  const backY = -Math.sin(ay) * depth;
-  // Front face placed so the whole block stays centred in the box.
-  const fx = (s - fw) / 2 - backX / 2;
-  const fy = (s - fh) / 2 - backY / 2;
+  const frame = bodyFrame({});
+  const body = gradientOf(opts.color)[1];
+  const ink = faceInk(opts.color);
   ctx.save();
-  ctx.translate(x + s / 2, y + s);
-  ctx.scale(frame.sx, frame.sy);
-  ctx.translate(-s / 2, -s);
-  const radii = (w, h) =>
-    [w * BODY_RADIUS, w * BODY_RADIUS, w * BODY_RADIUS, w * BODY_CUT].map((r) => Math.min(r, h / 2));
-  if (progress >= 1 && (Math.abs(backX) > 0.5 || Math.abs(backY) > 0.5)) {
-    const slices = Math.max(2, Math.round(Math.hypot(backX, backY) / (s / 24)));
-    for (let k = slices; k >= 1; k--) {
-      const f = k / slices;
-      // Back slices darkest; the one right behind the face catches a little light (the edge).
-      ctx.fillStyle = k === 1 ? tones[1] : k % 2 && slices > 3 ? tones[0] : mixHex(tones[0], tones[1], 0.35);
-      ctx.beginPath();
-      ctx.roundRect(fx + backX * f, fy + backY * f, fw, fh, radii(fw, fh));
-      ctx.fill();
-    }
+  ctx.translate(x, y);
+  ctx.fillStyle = body;
+  ctx.beginPath();
+  ctx.roundRect(0, 0, s, s, s * BODY_RADIUS);
+  ctx.fill();
+  if (opts.withEyes !== false) {
+    drawEyes(ctx, 0, 0, s, eyeShapes(opts.eyes, pose), ink);
+    if (!pose.writing && pose.expression !== "closed") drawSmile(ctx, s, ink);
   }
-  // The front face: the dithered body, the eyes and whatever sits on it, squeezed by the turn.
-  ctx.translate(fx, fy);
-  ctx.scale(fw / s, fh / s);
-  ctx.save();
-  if (progress >= 1) {
-    ctx.beginPath();
-    ctx.roundRect(0, 0, s, s, [s * BODY_RADIUS, s * BODY_RADIUS, s * BODY_RADIUS, s * BODY_CUT]);
-    ctx.clip();
-  }
-  for (let cy = 0; cy < n; cy++)
-    for (let cx = 0; cx < n; cx++) {
-      const u = (cx + 0.5) / n;
-      const v = (cy + 0.5) / n;
-      const tone = tones[toneAt(cx, cy, n, pose.turn)];
-      if (progress < 1) {
-        if (!inBody(u, v)) continue;
-        const order = 0.55 * noise(cx, cy) + 0.45 * ((1 - v) * 0.6 + u * 0.4);
-        const show = progress * 1.15 - order;
-        if (show <= 0) continue;
-        ctx.fillStyle = show < 0.08 ? "#eef7ff" : tone;
-      } else ctx.fillStyle = tone;
-      const x0 = Math.round(cx * p);
-      const y0 = Math.round(cy * p);
-      ctx.fillRect(x0, y0, Math.round((cx + 1) * p) - x0 + 0.5, Math.round((cy + 1) * p) - y0 + 0.5);
-    }
+  if (opts.after) opts.after(ctx, s, frame);
   ctx.restore();
-  if (opts.withEyes !== false && progress > 0.92) drawEyes(ctx, 0, 0, s, eyeShapes(opts.eyes, pose));
-  if (opts.after && progress > 0.92) opts.after(ctx, s, frame);
-  ctx.restore();
+}
+
+/** The smile (`SMILE`) on a body of side `s` drawn at (0, 0). */
+function drawSmile(ctx, s, ink) {
+  ctx.strokeStyle = ink;
+  ctx.lineCap = "round";
+  ctx.lineWidth = Math.max(1, SMILE.width * s);
+  ctx.beginPath();
+  ctx.moveTo(SMILE.from[0] * s, SMILE.from[1] * s);
+  ctx.quadraticCurveTo(SMILE.control[0] * s, SMILE.control[1] * s, SMILE.to[0] * s, SMILE.to[1] * s);
+  ctx.stroke();
 }
 
 /**
@@ -747,6 +717,9 @@ export const ACCESSORIES = {
 export const ACCESSORY_NAMES = ["none", ...Object.keys(ACCESSORIES)];
 
 /** How far an accessory reaches past the body, in body fractions: room to leave around a drawn agent. */
+/** Whether accessories are drawn: off, xquads' agents have one face. */
+const DRAW_ACCESSORIES = false;
+
 export const ACCESSORY_REACH = { top: 9 / 16, left: 1 / 16, right: 2 / 16, bottom: 7 / 16 };
 
 /**
@@ -755,7 +728,8 @@ export const ACCESSORY_REACH = { top: 9 / 16, left: 1 / 16, right: 2 / 16, botto
  * blink the antenna.
  */
 export function drawAccessory(ctx, s, name, frame, t = 0, active = false) {
-  const a = ACCESSORIES[name];
+  // xquads' agents wear nothing (DESIGN.md): the stored accessory is kept, never drawn.
+  const a = DRAW_ACCESSORIES ? ACCESSORIES[name] : undefined;
   if (!a) return;
   const u = s / 16;
   const hx = (frame?.head?.[0] ?? 0) * s;
@@ -791,6 +765,8 @@ export const SLEEP_SPOTS = [
  * motion) both show.
  */
 export function drawSleep(ctx, s, frame, color, t) {
+  // xquads: a sleeping agent shows closed eyes, no pixel zz.
+  if (!DRAW_ACCESSORIES) return;
   const u = s / 16;
   const hx = (frame?.head?.[0] ?? 0) * s;
   const hy = (frame?.head?.[1] ?? 0) * s;
@@ -807,5 +783,7 @@ export function drawSleep(ctx, s, frame, color, t) {
 
 /** A sleeping agent's pose: eyes closed, the head a little down, breathing slowly (still: no breath). */
 export function sleepPose(t, seed = 0) {
-  return { expression: "closed", turn: [0, 0.15], squash: t === undefined ? 0 : Math.sin(t * 1.1 + seed) * 0.3 };
+  void t;
+  void seed;
+  return { expression: "closed", turn: [0, 0], squash: 0 };
 }

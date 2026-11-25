@@ -9,6 +9,7 @@ import {
   EYE_COLOR,
   EYE_STYLES,
   eyeShapes,
+  faceInk,
   gradientOf,
   hexToHsv,
   hsvToHex,
@@ -26,8 +27,8 @@ import { agentGradient, appearanceStyle, normalizeAppearance } from "../src/comp
 import { SPRITE } from "../src/sky/engine";
 
 describe("agent engine: one agent everywhere", () => {
-  test("the eyes are white and mirror each other around the middle, in every style and pose", () => {
-    expect(EYE_COLOR).toBe("#ffffff");
+  test("the eyes are petrol ovals and mirror each other around the middle, in every style and pose", () => {
+    expect(EYE_COLOR).toBe("#0e1c22");
     for (const style of Object.keys(EYE_STYLES)) {
       for (const pose of [{}, { writing: true }, { blink: true }]) {
         const [l, r] = eyeShapes(style, pose);
@@ -49,12 +50,16 @@ describe("agent engine: one agent everywhere", () => {
     expect((closed?.h ?? 1) < (open?.h ?? 0)).toBe(true);
   });
 
-  test("the sky's pixel agent is the same shape: cut corner at bottom-left, two eyes, symmetric", () => {
+  test("the small agent is the same shape: four rounded corners, two eyes, symmetric", () => {
     const g = spriteGrid(9);
     expect(SPRITE).toEqual(g);
-    expect(g[0]?.[0]).toBe(".");
-    expect(g[8]?.[0]).toBe("X");
-    expect(g[8]?.[8]).toBe(".");
+    for (const [y, x] of [
+      [0, 0],
+      [0, 8],
+      [8, 0],
+      [8, 8],
+    ])
+      expect(g[y as number]?.[x as number]).toBe(".");
     const eyes = g.flatMap((row, y) => [...row].flatMap((c, x) => (c === "o" ? [[x, y]] : [])));
     expect(eyes.length).toBeGreaterThanOrEqual(2);
     for (const [x, y] of eyes) expect(g[y as number]?.[8 - (x as number)]).toBe("o");
@@ -66,10 +71,10 @@ describe("agent engine: one agent everywhere", () => {
     const tones = bodyTones("teal");
     expect(light(tones[0] ?? "")).toBeLessThan(light(tones[4] ?? ""));
     expect(light(bodyTones("teal", true)[4] ?? "")).toBeLessThan(light(tones[4] ?? ""));
-    expect(spriteBody("sky")).toBe("#04203f");
+    expect(spriteBody("sky")).toBe(AGENT_GRADIENTS.sky[1]);
     expect(inBody(0.5, 0.5)).toBe(true);
     expect(inBody(0.01, 0.01)).toBe(false);
-    expect(inBody(0.04, 0.96)).toBe(true);
+    expect(inBody(0.04, 0.96)).toBe(false);
     expect(bodyPath(0, 0, 1).startsWith("M")).toBe(true);
   });
 
@@ -81,32 +86,21 @@ describe("agent engine: one agent everywhere", () => {
       expect(luminance(ctop)).toBeGreaterThan(luminance(bottom));
       expect(Math.abs(hexToHsv(ctop)[0] - hexToHsv(top)[0]) % 360).toBeLessThan(12);
     }
-    // Extremes are clamped: white eyes still read (about 3:1) and the body never vanishes into black.
-    for (const hex of ["#ffffff", "#ffff00", "#00ff00", "#000000", "#00ffff", "#7f7f7f"]) {
+    // Kept as picked, lifted only to read on the petrol page; the face's ink reads on it (petrol or sand).
+    for (const hex of ["#ffffff", "#ffff00", "#00ff00", "#000000", "#00ffff", "#7f7f7f", "#00008f"]) {
       const [top, bottom] = customGradient(hex);
-      expect(luminance(bottom)).toBeLessThanOrEqual(0.28);
-      expect(luminance(bottom)).toBeGreaterThan(0.05);
-      expect(luminance(top)).toBeGreaterThan(luminance(bottom));
+      expect(luminance(bottom)).toBeGreaterThanOrEqual(0.09);
+      expect(luminance(top)).toBeGreaterThanOrEqual(luminance(bottom));
+      expect(contrastOf(faceInk(hex), bottom)).toBeGreaterThanOrEqual(3);
     }
     expect(gradientOf("#0063D1")).toEqual(customGradient("#0063d1"));
     expect(gradientOf("rose")).toEqual(AGENT_GRADIENTS.rose);
     expect(gradientOf("#12345")).toEqual(AGENT_GRADIENTS.sky);
-    expect(bodyTones("#1f8a4c").slice(0, 2)).toEqual(bodyTones("green").slice(0, 2));
-  });
-
-  test("a custom top never washes out more than amber's (the light tones behind the eyes)", () => {
-    const behindEyes = (color: string) => 1.05 / (luminance(bodyTones(color)[2] ?? "") + 0.05);
-    const amber = behindEyes("amber");
-    for (const hex of ["#ffff00", "#00ffff", "#00ff00", "#ffffff", "#ccff00", "#ffd000"]) {
-      expect(behindEyes(hex)).toBeGreaterThanOrEqual(amber - 0.01);
-      expect(luminance(gradientOf(hex)[0])).toBeLessThanOrEqual(0.59);
-    }
   });
 
   test("a custom color maps to the closest preset by hue, graphite when nearly gray", () => {
     for (const name of Object.keys(AGENT_GRADIENTS)) expect(nearestPreset(name)).toBe(name as never);
     expect(nearestPreset("#e0457b")).toBe("rose");
-    expect(nearestPreset("#ffd000")).toBe("amber");
     expect(nearestPreset("#20c060")).toBe("green");
     expect(nearestPreset("#808080")).toBe("graphite");
     expect(nearestPreset("nonsense")).toBe("sky");
@@ -143,20 +137,11 @@ describe("a sleeping agent (paused until its plan or budget is back)", () => {
     drawSleep(ctx as never, 16, undefined, "#000000", t);
     return out;
   };
-  test("eyes closed and still without time; two pixel z's, the high one coming and going with it", () => {
+  test("eyes closed and still; no pixel z's (xquads draws none)", () => {
     expect(sleepPose(undefined).expression).toBe("closed");
     expect(sleepPose(undefined).squash).toBe(0);
-    expect(rects()).toHaveLength(16);
-    expect(rects(0)).toHaveLength(8);
-    expect(rects(0.9)).toHaveLength(16);
-    expect(rects(1.7)).toHaveLength(16);
-  });
-  test("the zz stay inside a tile's room around a bare head (4.8 cells above, 4.1 right) and off the face", () => {
-    for (const [x, y] of rects()) {
-      expect(y).toBeGreaterThanOrEqual(-4.8);
-      expect(x + 1).toBeLessThanOrEqual(16 + 4.1);
-      expect(x).toBeGreaterThanOrEqual(14);
-    }
+    expect(rects()).toHaveLength(0);
+    expect(rects(0.9)).toHaveLength(0);
     expect(SLEEP_SPOTS).toHaveLength(2);
   });
 });
@@ -187,7 +172,7 @@ describe("an agent's @mention tone", () => {
 });
 
 describe("a workspace's accent is its default agent color (ADR 0193)", () => {
-  test("sky resolves to the accent's pair everywhere it is drawn, back to the landing's blue when cleared", async () => {
+  test("sky resolves to the accent's pair everywhere it is drawn, back to camelo when cleared", async () => {
     const {
       AGENT_GRADIENTS: G,
       gradientOf,
@@ -205,7 +190,7 @@ describe("a workspace's accent is its default agent color (ADR 0193)", () => {
       expect(gradientOf("sky")).toEqual(pair);
       expect(gradientOf(undefined)).toEqual(pair);
       expect(agentGradient()).toEqual(pair);
-      expect(spriteBody("sky")).not.toBe("#04203f");
+      expect(spriteBody("sky")).toBe(pair[1]);
       expect(mentionTone("sky").ink).not.toBe(mentionTone("rose").ink);
       // An agent's own color stays its own.
       expect(gradientOf("rose")).toEqual(rose);
@@ -214,8 +199,8 @@ describe("a workspace's accent is its default agent color (ADR 0193)", () => {
       setSkyColors(null);
     }
     expect(gradientOf("sky")).toEqual(sky);
-    expect(G.sky).toEqual(["#8cc3ff", "#0063d1"]);
-    expect(spriteBody("sky")).toBe("#04203f");
+    expect(G.sky).toEqual(["#ddbe9c", "#c79d70"]);
+    expect(spriteBody("sky")).toBe("#c79d70");
     // Agents' white eyes and text read on the bottom whatever was picked.
     for (const hex of ["#fdfdfd", "#050505", "#ffff00"])
       expect(contrastRatio(accentSky(hex)[1], "#ffffff")).toBeGreaterThanOrEqual(4.5);

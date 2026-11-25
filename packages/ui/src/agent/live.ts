@@ -261,11 +261,10 @@ function drawFramed(agent: LiveAgent, ctx: CanvasRenderingContext2D, size: numbe
     ctx.imageSmoothingEnabled = false;
     ctx.drawImage(sky, 0, 0, s, s);
   }
-  const inner = s * (look.accessory ? 0.6 : 0.66);
-  const x = (s - inner) / 2;
-  const y = s - inner - s * (look.accessory ? 0.1 : 0.14);
-  const { pose, hop } = livePose(agent, t);
-  drawAgent(ctx, x, y - hop * inner, inner, {
+  // xquads: the agent is the tile itself (its flat face fills it, DESIGN.md), and a reaction never hops out of it.
+  const inner = s;
+  const { pose } = livePose(agent, t);
+  drawAgent(ctx, 0, 0, inner, {
     color: look.color,
     eyes: look.eyes,
     pose,

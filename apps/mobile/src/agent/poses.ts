@@ -39,11 +39,13 @@ export const STILL_T = 2;
  * fewer dither cells at small sizes.
  */
 export function agentLayout(size: number, hasAccessory: boolean) {
-  const withAccessory = hasAccessory;
-  const inner = size * (withAccessory ? 0.74 : 0.86);
+  // xquads: the flat face fills its box (DESIGN.md); an accessory is kept but never drawn.
+  const withAccessory = false;
+  void hasAccessory;
+  const inner = size;
   return {
-    x: (size - inner) / 2,
-    y: size - inner,
+    x: 0,
+    y: 0,
     inner,
     withAccessory,
     cells: size <= 18 ? 9 : size <= 32 ? 12 : undefined,
@@ -55,11 +57,13 @@ export function agentLayout(size: number, hasAccessory: boolean) {
  * feet near the bottom edge, smaller with an accessory so it has room above (at every size).
  */
 export function framedLayout(size: number, hasAccessory: boolean) {
-  const withAccessory = hasAccessory;
-  const inner = size * (withAccessory ? 0.6 : 0.66);
+  // xquads: the agent is the tile itself (DESIGN.md).
+  const withAccessory = false;
+  void hasAccessory;
+  const inner = size;
   return {
-    x: (size - inner) / 2,
-    y: size - inner - size * (withAccessory ? 0.1 : 0.14),
+    x: 0,
+    y: 0,
     inner,
     withAccessory,
     cells: size <= 32 ? 12 : undefined,

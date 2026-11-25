@@ -115,6 +115,10 @@ export function nearestPreset(color: string): AgentColorName;
 export function pickerStart(color?: string): string;
 export function gradientOf(color?: AgentColorName | string | SkyPair): [string, string];
 export function bodyTones(color?: AgentColorName | string | SkyPair, deep?: boolean): string[];
+/** The face's ink on a color: petrol, or sand where petrol would not read. */
+export function faceInk(color?: AgentColorName | string): string;
+/** The smile under the eyes, in body fractions. */
+export const SMILE: { from: [number, number]; control: [number, number]; to: [number, number]; width: number };
 export function spriteBody(color?: AgentColorName | string): string;
 export function ditherCells(px: number): number;
 export function inBody(u: number, v: number): boolean;
