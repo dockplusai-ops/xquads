@@ -678,7 +678,7 @@ describe("on xquads Cloud: a restriction's kind and how to contest it, never its
   });
 
   test("only on a xquads address", () => {
-    for (const url of ["https://xquads.com", "https://app.xquads.com"]) {
+    for (const url of ["https://xquads.com", "https://agents.xquads.com"]) {
       setRestrictionNotices(url);
       expect(cloudNotice()).toEqual({ cloud: true });
     }

@@ -75,19 +75,19 @@ describe("loadConfig", () => {
   });
 
   test("xquads' own servers get no legal links by themselves: the bundled Terms and Privacy are the original's", () => {
-    const app = loadConfig({ ...valid, PUBLIC_URL: "https://app.xquads.com" });
+    const app = loadConfig({ ...valid, PUBLIC_URL: "https://agents.xquads.com" });
     expect([app.TERMS_URL, app.PRIVACY_URL]).toEqual([undefined, undefined]);
-    const set = loadConfig({ ...valid, PUBLIC_URL: "https://app.xquads.com", TERMS_URL: "https://xquads.com/terms" });
+    const set = loadConfig({ ...valid, PUBLIC_URL: "https://agents.xquads.com", TERMS_URL: "https://xquads.com/terms" });
     expect(set.TERMS_URL).toBe("https://xquads.com/terms");
     const selfHosted = loadConfig({ ...valid, PUBLIC_URL: "https://chat.example.com" });
     expect([selfHosted.TERMS_URL, selfHosted.PRIVACY_URL]).toEqual([undefined, undefined]);
   });
 
   test("xquads' own servers send from ping@xquads.com, whichever of its addresses they are at", () => {
-    for (const site of ["https://app.xquads.com", "https://xquads.com"]) {
+    for (const site of ["https://agents.xquads.com", "https://xquads.com"]) {
       expect(loadConfig({ ...valid, PUBLIC_URL: site }).EMAIL_FROM).toBe("xquads <ping@xquads.com>");
     }
-    const set = loadConfig({ ...valid, PUBLIC_URL: "https://app.xquads.com", EMAIL_FROM: "ops@xquads.com" });
+    const set = loadConfig({ ...valid, PUBLIC_URL: "https://agents.xquads.com", EMAIL_FROM: "ops@xquads.com" });
     expect(set.EMAIL_FROM).toBe("ops@xquads.com");
     // Elsewhere it stays unset: the sender is ping@ on the host of PUBLIC_URL.
     expect(loadConfig({ ...valid, PUBLIC_URL: "https://chat.example.com" }).EMAIL_FROM).toBeUndefined();
@@ -465,7 +465,7 @@ describe("phone push settings", () => {
   test("auto by default, through xquads's relay unless told otherwise; the relay only over https", () => {
     const config = loadConfig(valid);
     expect(config.PUSH_SENDER).toBe("auto");
-    expect(config.PUSH_RELAY_URL).toBe("https://app.xquads.com/api/push-relay/v1");
+    expect(config.PUSH_RELAY_URL).toBe("https://agents.xquads.com/api/push-relay/v1");
     expect(config.PUSH_RELAY_SERVE).toBe("off");
     expect(loadConfig({ ...valid, PUSH_SENDER: "off", PUSH_RELAY_SERVE: "on" })).toMatchObject({
       PUSH_SENDER: "off",

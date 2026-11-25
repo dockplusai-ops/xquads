@@ -276,14 +276,14 @@ export const envVars = {
   TERMS_URL: {
     schema: z.url().optional(),
     description:
-      "Your terms of service, linked on the sign-in and sign-up screens when `PRIVACY_URL` is set too, and where this server's /terms leads. Default on xquads Cloud (https://app.xquads.com): its /terms page.",
+      "Your terms of service, linked on the sign-in and sign-up screens when `PRIVACY_URL` is set too, and where this server's /terms leads. Default on xquads Cloud (https://agents.xquads.com): its /terms page.",
     section: "Sign-in",
     example: "https://example.com/terms",
   },
   PRIVACY_URL: {
     schema: z.url().optional(),
     description:
-      "Your privacy policy, linked on the sign-in and sign-up screens together with `TERMS_URL`, and where this server's /privacy leads. Default on xquads Cloud (https://app.xquads.com): its /privacy page.",
+      "Your privacy policy, linked on the sign-in and sign-up screens together with `TERMS_URL`, and where this server's /privacy leads. Default on xquads Cloud (https://agents.xquads.com): its /privacy page.",
     section: "Sign-in",
     example: "https://example.com/privacy",
   },
@@ -561,7 +561,7 @@ export const envVars = {
   MODEL_ENDPOINTS_PRIVATE: {
     schema: z.stringbool().optional(),
     description:
-      "Whether a workspace's own model endpoint (Settings › AI keys › Other provider) may be on this server's network or over http: an Ollama, vLLM, LM Studio or LiteLLM next to it. The other addresses a workspace names (custom MCP servers and their sign-in, its own bucket, server icons, the pages agents read) reach a private network only through `OUTBOUND_ALLOW_CIDRS` or `OUTBOUND_ALLOW_HOSTS`. Unset: allowed, except on xquads Cloud (https://app.xquads.com) and with `ALLOW_SIGNUP=true`, where only public https addresses are, checked again at every connection.",
+      "Whether a workspace's own model endpoint (Settings › AI keys › Other provider) may be on this server's network or over http: an Ollama, vLLM, LM Studio or LiteLLM next to it. The other addresses a workspace names (custom MCP servers and their sign-in, its own bucket, server icons, the pages agents read) reach a private network only through `OUTBOUND_ALLOW_CIDRS` or `OUTBOUND_ALLOW_HOSTS`. Unset: allowed, except on xquads Cloud (https://agents.xquads.com) and with `ALLOW_SIGNUP=true`, where only public https addresses are, checked again at every connection.",
     section: "Agents",
   },
   OUTBOUND_ALLOW_HOSTS: {
@@ -979,7 +979,7 @@ export const envVars = {
   EMAIL_FROM: {
     schema: z.string().optional(),
     description:
-      "Sender of transactional emails, e.g. `xquads <ping@example.com>` (its domain must be verified with your email provider). Default: `xquads <ping@HOST>`, HOST being the host of `PUBLIC_URL`. On xquads Cloud (https://app.xquads.com): `xquads <ping@agentes.chat>`.",
+      "Sender of transactional emails, e.g. `xquads <ping@example.com>` (its domain must be verified with your email provider). Default: `xquads <ping@HOST>`, HOST being the host of `PUBLIC_URL`. On xquads Cloud (https://agents.xquads.com): `xquads <ping@agentes.chat>`.",
     section: "Email",
   },
   EMAIL_ART: {
@@ -1138,7 +1138,7 @@ export const envVars = {
     schema: z
       .url()
       .refine((u) => u.startsWith("https://"), "must be an https URL")
-      .default("https://app.xquads.com/api/push-relay/v1"),
+      .default("https://agents.xquads.com/api/push-relay/v1"),
     description:
       "The push relay phone pushes go through with `PUSH_SENDER=relay` (or `auto` without the platform's own credentials).",
     section: "Push",
@@ -1367,7 +1367,7 @@ export const envVars = {
     section: "Operator",
   },
   FEEDBACK_URL: {
-    schema: z.url().default("https://app.xquads.com/api/feedback/inbox"),
+    schema: z.url().default("https://agents.xquads.com/api/feedback/inbox"),
     description: "Where `FEEDBACK_RELAY` sends a feedback (as JSON in a POST).",
     section: "Operator",
   },

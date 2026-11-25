@@ -1371,8 +1371,8 @@ mod tests {
     fn only_a_click_opens_a_notice_page() {
         // The click opens the page the notification was shown with.
         assert_eq!(
-            tapped_page(Some(&json!("https://app.xquads.com/org/o1/dm/agent/a1?m=9"))).map(|u| u.to_string()),
-            Some("https://app.xquads.com/org/o1/dm/agent/a1?m=9".to_string())
+            tapped_page(Some(&json!("https://agents.xquads.com/org/o1/dm/agent/a1?m=9"))).map(|u| u.to_string()),
+            Some("https://agents.xquads.com/org/o1/dm/agent/a1?m=9".to_string())
         );
         assert_eq!(tapped_page(None), None);
         assert_eq!(tapped_page(Some(&json!("not a page"))), None);
@@ -1381,9 +1381,9 @@ mod tests {
     #[test]
     fn in_page_moves_and_titles() {
         let go = |u: &str| go_in_page(&u.parse().unwrap());
-        assert_eq!(go("https://app.xquads.com/"), None);
+        assert_eq!(go("https://agents.xquads.com/"), None);
         assert_eq!(
-            go("https://app.xquads.com/org/o1/c/c1?m=9#x").as_deref(),
+            go("https://agents.xquads.com/org/o1/c/c1?m=9#x").as_deref(),
             Some(r#"(window.__agentesNavigate || ((p) => location.assign(p)))("/org/o1/c/c1?m=9#x")"#)
         );
         assert_eq!(window_title("#loja · Acme"), "#loja · Acme");
@@ -1407,7 +1407,7 @@ mod tests {
 
     #[test]
     fn routes_follow_the_server_open_now() {
-        for site in ["https://app.xquads.com", "https://agentes.tail1234.ts.net", "http://127.0.0.1:4310"] {
+        for site in ["https://agents.xquads.com", "https://agentes.tail1234.ts.net", "http://127.0.0.1:4310"] {
             assert_eq!(r(&format!("{site}/org/x/c/y"), site), Route::Stay);
             assert_eq!(r(&format!("{site}/desktop/sign-in?provider=google&challenge=a"), site), Route::Outside);
             assert_eq!(r(&format!("{site}/desktop/signed-in?to=%2F"), site), Route::Front);
@@ -1415,7 +1415,7 @@ mod tests {
             assert_eq!(r(&format!("blob:{site}/abc"), site), Route::Stay);
         }
         let own = "https://agentes.tail1234.ts.net";
-        assert_eq!(r("https://app.xquads.com/org/x", own), Route::Outside);
+        assert_eq!(r("https://agents.xquads.com/org/x", own), Route::Outside);
         assert_eq!(r("https://accounts.google.com/o/oauth2", own), Route::Outside);
         assert_eq!(r("http://agentes.tail1234.ts.net/", own), Route::Outside);
         assert_eq!(r("https://agentes.tail1234.ts.net.evil.com/", own), Route::Outside);
@@ -1425,14 +1425,14 @@ mod tests {
         for other in ["file:///etc/passwd", "smb://host/share", "tel:+5511", "vscode://file/x", "javascript:alert(1)"] {
             assert_eq!(r(other, own), Route::Drop, "{other}");
         }
-        let cloud = "https://app.xquads.com";
-        assert_eq!(r("https://app.xquads.com/help/memory?lang=en#learns", cloud), Route::Outside);
-        assert_eq!(r("https://app.xquads.com/org/x", cloud), Route::Stay);
+        let cloud = "https://agents.xquads.com";
+        assert_eq!(r("https://agents.xquads.com/help/memory?lang=en#learns", cloud), Route::Outside);
+        assert_eq!(r("https://agents.xquads.com/org/x", cloud), Route::Stay);
     }
 
     #[test]
     fn the_bot_check_s_frame_stays_in_the_window_and_nothing_else_of_its_host() {
-        for site in ["https://app.xquads.com", "https://agentes.tail1234.ts.net", "http://127.0.0.1:4310"] {
+        for site in ["https://agents.xquads.com", "https://agentes.tail1234.ts.net", "http://127.0.0.1:4310"] {
             let frame = "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/turnstile/if/ov2/av0/rcv/x";
             assert_eq!(r(frame, site), Route::Stay);
             assert_eq!(r("https://challenges.cloudflare.com:443/turnstile/v0/api.js", site), Route::Stay);
@@ -1446,7 +1446,7 @@ mod tests {
 
     #[test]
     fn agents_work_here_only_for_a_server_elsewhere() {
-        assert!(agents_here("https://app.xquads.com", false), "xquads too");
+        assert!(agents_here("https://agents.xquads.com", false), "xquads too");
         assert!(!agents_here("http://127.0.0.1:4310", false));
         assert!(!agents_here("http://localhost:3000", false));
         assert!(agents_here("https://agentes.tail1234.ts.net", false));

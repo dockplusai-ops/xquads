@@ -923,7 +923,7 @@ mod tests {
 
     #[test]
     fn only_new_unread_elsewhere_is_told() {
-        let open = "https://app.xquads.com";
+        let open = "https://agents.xquads.com";
         let own = "https://agentes.exemplo.com.br";
         let before = vec![server(open, true, vec![org("a", 1)]), server(own, true, vec![org("b", 2), org("c", 5)])];
         let after = vec![

@@ -13,7 +13,7 @@ use tauri::ipc::CapabilityBuilder;
 use tauri::{AppHandle, Manager, Url};
 
 /// agentes.chat Cloud.
-pub const CLOUD: &str = "https://app.xquads.com";
+pub const CLOUD: &str = "https://agents.xquads.com";
 const FILE: &str = "servers.json";
 /// Servers kept in the list; choosing another past this drops the oldest that isn't open.
 const MAX_SERVERS: usize = 20;
@@ -352,7 +352,7 @@ mod tests {
             "https://ana:secret@chat.example.com",
             "ftp://files.example.com",
             "agenteschat://connect?server=x",
-            "https://app.xquads.com/ x",
+            "https://agents.xquads.com/ x",
             "",
         ] {
             assert_eq!(origin_of(bad), None, "{bad}");

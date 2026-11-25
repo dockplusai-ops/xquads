@@ -12,7 +12,7 @@ import {
 } from "../../src/features/links/app-links";
 import { rememberLink, takeLink } from "../../src/features/links/pending";
 
-const W = "https://app.xquads.com";
+const W = "https://agents.xquads.com";
 const O = "org-1";
 /** The `/link` an address opens, as its parameters. */
 const linkOf = (url: string) => {

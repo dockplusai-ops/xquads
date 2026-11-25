@@ -864,7 +864,7 @@ describe("Add a workspace", () => {
   /** The welcome window opened by the site's "Add workspace", with xquads signed in here or not. */
   const adding = (cloud: boolean, chosen: (string | undefined)[]) => (host: FakeHost) => {
     host.welcomeMode = async () => "add";
-    host.workspaces = async () => [{ server: "https://app.xquads.com", signedIn: cloud, orgs: [] }];
+    host.workspaces = async () => [{ server: "https://agents.xquads.com", signedIn: cloud, orgs: [] }];
     host.chooseServer = async (_server, page) => {
       chosen.push(page);
     };

@@ -275,11 +275,11 @@ describe("Connect a device", () => {
     expect(chooser.textContent).toContain("Android phone");
     await click(within(chooser).getByRole("button", { name: /A server or VPS/ }));
     const dialog = screen().getByRole("dialog", { name: "Connect a server" });
-    expect(dialog.querySelector("code")?.textContent).toBe("curl -fsSL https://app.xquads.com/i/7KQ2-M9X1 | sh");
+    expect(dialog.querySelector("code")?.textContent).toBe("curl -fsSL https://agents.xquads.com/i/7KQ2-M9X1 | sh");
     expect(dialog.textContent).toContain("Works once, for 10 minutes");
     expect(dialog.textContent).toContain("Waiting for the server…");
     await click(within(dialog).getByRole("radio", { name: "Windows" }));
-    expect(dialog.querySelector("code")?.textContent).toBe("irm https://app.xquads.com/i/7KQ2-M9X1/ps | iex");
+    expect(dialog.querySelector("code")?.textContent).toBe("irm https://agents.xquads.com/i/7KQ2-M9X1/ps | iex");
     devices.setLink({ status: "asking", request: acmeDevices().requests[0] });
     await refetch(services);
     const asking = screen().getByRole("dialog", { name: "ci-runner wants to join Acme" });
@@ -313,14 +313,14 @@ describe("Connect a device", () => {
   });
 
   test("this computer, from a browser: the app opens a link to this server, asks to join, the maker lets it in", async () => {
-    servedAt("https://app.xquads.com/");
+    servedAt("https://agents.xquads.com/");
     const { state, devices, services } = await open(`/org/${ORG_ID}/settings/devices`);
     await click(screen().getByRole("button", { name: "Connect a device" }));
     await click(screen().getByRole("button", { name: /This computer/ }));
     const dialog = screen().getByRole("dialog", { name: "This computer" });
     expect(calls(state, "devices.createLink")[0]?.args).toEqual([ORG_ID, "computer"]);
     const app = within(dialog).getByRole("link", { name: "Open the xquads app" });
-    expect(app.getAttribute("href")).toBe("agenteschat://pair?server=https%3A%2F%2Fapp.xquads.com&link=7KQ2-M9X1");
+    expect(app.getAttribute("href")).toBe("agenteschat://pair?server=https%3A%2F%2Fagents.xquads.com&link=7KQ2-M9X1");
     expect(dialog.textContent).toContain("Waiting for the app on this computer…");
     expect(within(dialog).getByRole("heading", { name: "Don't have the app?" })).toBeTruthy();
     expect(dialog.textContent).toContain("After installing, press Open the xquads app again.");
@@ -337,7 +337,7 @@ describe("Connect a device", () => {
   });
 
   test("this computer without the app: one line for its terminal, or a server's", async () => {
-    servedAt("https://app.xquads.com/");
+    servedAt("https://agents.xquads.com/");
     await open(`/org/${ORG_ID}/settings/devices`);
     await click(screen().getByRole("button", { name: "Connect a device" }));
     await click(screen().getByRole("button", { name: /This computer/ }));

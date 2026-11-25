@@ -355,17 +355,17 @@ describe("the browser round trip", () => {
 });
 
 test("icons only from our own path; brand colors only as #rrggbb; monograms; https addresses", () => {
-  expect(iconUri("https://app.xquads.com", "/connectors/github.svg")).toBe(
-    "https://app.xquads.com/connectors/github.svg",
+  expect(iconUri("https://agents.xquads.com", "/connectors/github.svg")).toBe(
+    "https://agents.xquads.com/connectors/github.svg",
   );
-  expect(iconUri("https://app.xquads.com", "https://evil.example/x.svg")).toBeNull();
-  expect(iconUri("https://app.xquads.com", null)).toBeNull();
+  expect(iconUri("https://agents.xquads.com", "https://evil.example/x.svg")).toBeNull();
+  expect(iconUri("https://agents.xquads.com", null)).toBeNull();
   // A mark in its maker's colors (PayPal's, Canva's) is drawn as it is, never tinted, and only a file of ours.
-  expect(ownMarkUri("https://app.xquads.com", "/brands/paypal.svg")).toBe("https://app.xquads.com/brands/paypal.svg");
-  expect(iconUri("https://app.xquads.com", "/brands/paypal.svg")).toBeNull();
-  expect(ownMarkUri("https://app.xquads.com", "/connectors/github.svg")).toBeNull();
-  expect(ownMarkUri("https://app.xquads.com", "/brands/../x.svg")).toBeNull();
-  expect(ownMarkUri("https://app.xquads.com", "https://evil.example/brands/x.svg")).toBeNull();
+  expect(ownMarkUri("https://agents.xquads.com", "/brands/paypal.svg")).toBe("https://agents.xquads.com/brands/paypal.svg");
+  expect(iconUri("https://agents.xquads.com", "/brands/paypal.svg")).toBeNull();
+  expect(ownMarkUri("https://agents.xquads.com", "/connectors/github.svg")).toBeNull();
+  expect(ownMarkUri("https://agents.xquads.com", "/brands/../x.svg")).toBeNull();
+  expect(ownMarkUri("https://agents.xquads.com", "https://evil.example/brands/x.svg")).toBeNull();
   expect(brandOf("#1a2b3c")).toBe("#1a2b3c");
   expect(brandOf("red")).toBeNull();
   expect(monogram("Google Drive")).toBe("GD");

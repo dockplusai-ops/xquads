@@ -92,14 +92,14 @@ const pairedWith = (store: DesktopStore, orgId: string) =>
 describe("pairing from the app", () => {
   test("a pair link as Rust hands it over: the server and the stored code", () => {
     expect(parsePairLink(pairLink("ABCDEFGH"))).toEqual({ server: FAKE_SERVER, code: "ABCDEFGH" });
-    expect(parsePairLink("agenteschat://pair/?link=abcd-efgh&server=https://app.xquads.com")).toEqual({
+    expect(parsePairLink("agenteschat://pair/?link=abcd-efgh&server=https://agents.xquads.com")).toEqual({
       server: CLOUD_SERVER,
       code: "ABCDEFGH",
     });
     for (const bad of [
-      "agenteschat://connect?server=https%3A%2F%2Fapp.xquads.com",
+      "agenteschat://connect?server=https%3A%2F%2Fagents.xquads.com",
       "agenteschat://pair?server=http%3A%2F%2Fagentes.example.com&link=ABCDEFGH",
-      "agenteschat://pair?server=https%3A%2F%2Fapp.xquads.com&link=ABCDEFG",
+      "agenteschat://pair?server=https%3A%2F%2Fagents.xquads.com&link=ABCDEFG",
     ])
       expect(parsePairLink(bad)).toBeNull();
   });

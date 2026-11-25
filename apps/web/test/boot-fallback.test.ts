@@ -37,7 +37,7 @@ function boot(
   const globals = {
     window: win,
     document: doc,
-    location: { href: "https://app.xquads.com/org/acme", reload: () => void reloads++ },
+    location: { href: "https://agents.xquads.com/org/acme", reload: () => void reloads++ },
     navigator: { languages: env.languages ?? ["pt-BR"], language: env.languages?.[0] ?? "pt-BR" },
     localStorage: { getItem: (key: string) => (key === "agentes.locale" ? (env.locale ?? null) : null) },
     sessionStorage: {

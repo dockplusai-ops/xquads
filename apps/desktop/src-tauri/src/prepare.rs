@@ -305,10 +305,10 @@ mod tests {
     #[test]
     fn a_setup_left_minutes_ago_comes_back_in_its_window_and_an_old_or_odd_one_does_not() {
         let at = 1_000_000;
-        let prepare = json!({ "step": "prepare", "org": "Acme", "at": at, "page": "https://app.xquads.com/org/o1" });
+        let prepare = json!({ "step": "prepare", "org": "Acme", "at": at, "page": "https://agents.xquads.com/org/o1" });
         assert_eq!(
             resume_of(&prepare, at + 60),
-            Some(Resume { window: "welcome", page: Some("https://app.xquads.com/org/o1".parse().unwrap()) })
+            Some(Resume { window: "welcome", page: Some("https://agents.xquads.com/org/o1".parse().unwrap()) })
         );
         assert_eq!(resume_of(&json!({ "step": "prefs", "at": at }), at), Some(Resume { window: "prefs", page: None }));
         assert_eq!(resume_of(&prepare, at + RESUME_WITHIN_SECS + 1), None);

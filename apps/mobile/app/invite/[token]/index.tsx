@@ -4,7 +4,7 @@ import { InviteScreen } from "@/features/auth/InviteScreen";
 import { isInviteToken } from "@/features/auth/links";
 import { ResetPasswordScreen } from "@/features/auth/ResetPasswordScreen";
 
-/** `https://app.xquads.com/invite/{token}` opened in the app, signed in or not. */
+/** `https://agents.xquads.com/invite/{token}` opened in the app, signed in or not. */
 export default function InviteRoute() {
   const params = useLocalSearchParams<{ token?: string; [INVITATION_MAIL_PARAM]?: string }>();
   const { token } = params;

@@ -138,8 +138,8 @@ export function createFakeDevices(
         code,
         expiresAt: new Date(now().getTime() + 10 * 60_000).toISOString(),
         commands: {
-          unix: `curl -fsSL https://app.xquads.com/i/${code} | sh`,
-          windows: `irm https://app.xquads.com/i/${code}/ps | iex`,
+          unix: `curl -fsSL https://agents.xquads.com/i/${code} | sh`,
+          windows: `irm https://agents.xquads.com/i/${code}/ps | iex`,
         },
       };
       return made;

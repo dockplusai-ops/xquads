@@ -54,7 +54,7 @@ describe("server addresses", () => {
     expect(normalizeServer("agentes.tail1234.ts.net")).toBe("https://agentes.tail1234.ts.net");
     expect(normalizeServer("  https://Chat.Example.com/login?x=1 ")).toBe("https://chat.example.com");
     expect(normalizeServer("box.tail1234.ts.net:8443")).toBe("https://box.tail1234.ts.net:8443");
-    expect(normalizeServer("https://app.xquads.com/")).toBe("https://app.xquads.com");
+    expect(normalizeServer("https://agents.xquads.com/")).toBe("https://agents.xquads.com");
   });
 
   test("https only; http just for a development build on the local network", () => {
@@ -98,7 +98,7 @@ describe("server addresses", () => {
     expect(serverHost("https://box.tail1234.ts.net")).toBe("box.tail1234.ts.net");
     expect(serverHost("https://chat.example.com:8443")).toBe("chat.example.com:8443");
     expect(isTailnet("https://box.tail1234.ts.net")).toBe(true);
-    expect(isTailnet("https://app.xquads.com")).toBe(false);
+    expect(isTailnet("https://agents.xquads.com")).toBe(false);
   });
 });
 
@@ -123,9 +123,9 @@ describe("connect links", () => {
     const link = connectLink("https://box.tail1234.ts.net", { token });
     expect(link).toBe(`agenteschat://connect?server=https%3A%2F%2Fbox.tail1234.ts.net&token=${token}`);
     expect(parseConnectLink(link)).toEqual({ server: "https://box.tail1234.ts.net", token });
-    expect(parseConnectLink(connectLink("https://app.xquads.com"))).toEqual({ server: "https://app.xquads.com" });
-    expect(parseConnectLink("agenteschat:///connect?server=https://app.xquads.com")).toEqual({
-      server: "https://app.xquads.com",
+    expect(parseConnectLink(connectLink("https://agents.xquads.com"))).toEqual({ server: "https://agents.xquads.com" });
+    expect(parseConnectLink("agenteschat:///connect?server=https://agents.xquads.com")).toEqual({
+      server: "https://agents.xquads.com",
     });
   });
 
@@ -143,18 +143,18 @@ describe("connect links", () => {
   });
 
   test("a token or claim that isn't one, or a link that is too long, is no link", () => {
-    const base = "agenteschat://connect?server=https%3A%2F%2Fapp.xquads.com";
+    const base = "agenteschat://connect?server=https%3A%2F%2Fagents.xquads.com";
     expect(parseConnectLink(`${base}&token=short`)).toBeNull();
     expect(parseConnectLink(`${base}&claim=${"x".repeat(19)}`)).toBeNull();
     expect(parseConnectLink(`${base}&claim=${encodeURIComponent("<script>alert(1)</script>xxxxxxxxxx")}`)).toBeNull();
     expect(parseConnectLink(`${base}&token=${"a".repeat(201)}`)).toBeNull();
     expect(parseConnectLink(`${base}&x=${"a".repeat(2048)}`)).toBeNull();
-    expect(parseConnectLink(`${base}&token=`)).toEqual({ server: "https://app.xquads.com" });
+    expect(parseConnectLink(`${base}&token=`)).toEqual({ server: "https://agents.xquads.com" });
   });
 
   test("anything else is not a connect link", () => {
     for (const other of [
-      "https://app.xquads.com",
+      "https://agents.xquads.com",
       "agenteschat://chat/123",
       "agenteschat://connect",
       "agenteschat://connect?server=",
@@ -165,12 +165,12 @@ describe("connect links", () => {
   });
 
   test("the desktop app's pair link: the server and the connect link's code", () => {
-    expect(pairLink("https://app.xquads.com", "K7QM-4ZPA")).toBe(
-      "agenteschat://pair?server=https%3A%2F%2Fapp.xquads.com&link=K7QM-4ZPA",
+    expect(pairLink("https://agents.xquads.com", "K7QM-4ZPA")).toBe(
+      "agenteschat://pair?server=https%3A%2F%2Fagents.xquads.com&link=K7QM-4ZPA",
     );
-    expect(parseConnectLink(pairLink("https://app.xquads.com", "K7QM-4ZPA"))).toBeNull();
+    expect(parseConnectLink(pairLink("https://agents.xquads.com", "K7QM-4ZPA"))).toBeNull();
     // Only where the app takes it: https, not on this computer.
-    expect(["https://app.xquads.com", "https://chat.example.com:8443"].map(appPairsWith)).toEqual([true, true]);
+    expect(["https://agents.xquads.com", "https://chat.example.com:8443"].map(appPairsWith)).toEqual([true, true]);
     for (const other of [
       "http://192.168.1.20:3000",
       "http://chat.example.com",

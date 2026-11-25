@@ -23,7 +23,7 @@ const ASKED: Asked = {
   name: "Rafael Costa",
   email: "rafael@acme.com",
   org: "Acme",
-  server: "https://app.xquads.com",
+  server: "https://agents.xquads.com",
 };
 
 describe("asking through a link", () => {

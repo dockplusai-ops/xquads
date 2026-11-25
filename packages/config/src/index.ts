@@ -9,7 +9,7 @@ export { type Config, type EnvVarDefinition, type EnvVarName, envVars } from "./
  * xquads' own servers (the fork's Cloud): their mail goes out from xquads.com. Their legal pages aren't set for them:
  * the Terms and Privacy texts in this code are the original's (AGENTESCHAT, LLC), not xquads', until it has its own.
  */
-const OFFICIAL_HOSTS = new Set(["app.xquads.com", "xquads.com", "www.xquads.com"]);
+const OFFICIAL_HOSTS = new Set(["agents.xquads.com", "xquads.com", "www.xquads.com"]);
 
 /** Whether a VAPID public key (an uncompressed P-256 point) belongs to this private key (`d`), both base64url. */
 function vapidPairMatches(publicKey: string, privateKey: string): boolean {

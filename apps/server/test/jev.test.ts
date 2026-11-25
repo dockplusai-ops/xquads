@@ -82,7 +82,7 @@ test("only the installation's first account reaches it: signed out 401, anyone e
 });
 
 test("on agentes.chat itself nobody has it", async () => {
-  const origin = "https://app.xquads.com";
+  const origin = "https://agents.xquads.com";
   t = await createTestServer({ env: { ALLOW_SIGNUP: "true", PUBLIC_URL: origin } });
   const first = browser(t);
   const signedUp = await first("/api/auth/sign-up/email", {

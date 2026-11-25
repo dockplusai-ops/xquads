@@ -27,7 +27,7 @@ const variant = process.env.APP_VARIANT ?? "production";
 const platform = process.env.APP_PLATFORM ?? process.env.EAS_BUILD_PLATFORM;
 const version = platform === "android" ? versions.android : versions.ios;
 const suffix = variant === "production" ? "" : `.${variant}`;
-const apiUrl = process.env.EXPO_PUBLIC_API_URL ?? "https://app.xquads.com";
+const apiUrl = process.env.EXPO_PUBLIC_API_URL ?? "https://agents.xquads.com";
 // Links to this host open the app (universal links / App Links); the server publishes the matching /.well-known
 // files (apps/server/src/app-links.ts).
 const linkHost = new URL(apiUrl).host;

@@ -145,9 +145,9 @@ describe("GET /api/instance", () => {
   });
 
   test("xquads's own servers say they are the Cloud", async () => {
-    t = await createTestServer({ env: { PUBLIC_URL: "https://app.xquads.com" } });
+    t = await createTestServer({ env: { PUBLIC_URL: "https://agents.xquads.com" } });
     expect(await (await t.app.request("/api/instance")).json()).toMatchObject({
-      url: "https://app.xquads.com",
+      url: "https://agents.xquads.com",
       cloud: true,
     });
     expect(await (await browser(t)("/api/app/auth-config")).json()).toMatchObject({ cloud: true });

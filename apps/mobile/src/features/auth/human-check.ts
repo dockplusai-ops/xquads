@@ -31,8 +31,8 @@ export function humanCheckOrigins(server: string): string[] {
 
 /**
  * Whether an address the whitelist let through loads in the check's WebView (`onShouldStartLoadWithRequest`). The
- * library reads each entry as the start of an origin, so `https://app.xquads.com.evil.example` and
- * `https://app.xquads.com@evil.example` pass it: only its exact documents and origins load.
+ * library reads each entry as the start of an origin, so `https://agents.xquads.com.evil.example` and
+ * `https://agents.xquads.com@evil.example` pass it: only its exact documents and origins load.
  */
 export function humanCheckStays(server: string, url: string): boolean {
   const allowed = humanCheckOrigins(server);

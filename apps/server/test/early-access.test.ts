@@ -121,7 +121,7 @@ const shown = async (t: TestServer) => ({
   signup: ((await (await browser(t)("/api/instance")).json()) as { signup: string }).signup,
 });
 
-const CLOUD = "https://app.xquads.com";
+const CLOUD = "https://agents.xquads.com";
 
 /** A browser at agentes.chat Cloud's address: sign-in and writes check the `Origin`. */
 function cloudBrowser(t: TestServer): Browser {

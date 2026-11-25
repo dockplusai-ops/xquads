@@ -26,14 +26,14 @@ import {
 import { signUpLinkTarget } from "../../src/features/auth/links";
 import { translator } from "./fixtures";
 
-const SERVER = "https://app.xquads.com";
+const SERVER = "https://agents.xquads.com";
 const PAGE = `${SERVER}/human-check.html?k=a&a=sign-in`;
 const FRAME =
   "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/turnstile/if/ov2/av0/rcv/x1y2z/0x4AAAAAAA/light/fbE/new/normal/auto/";
 const LOOK_ALIKES = [
   "https://challenges.cloudflare.com.evil.example/x",
-  "https://app.xquads.com.evil.example/human-check.html",
-  "https://app.xquads.com@evil.example/",
+  "https://agents.xquads.com.evil.example/human-check.html",
+  "https://agents.xquads.com@evil.example/",
 ];
 
 /**
@@ -54,7 +54,7 @@ describe("the check's WebView", () => {
     expect(whitelist).toEqual([
       "about:blank",
       "about:srcdoc",
-      "https://app.xquads.com",
+      "https://agents.xquads.com",
       "https://challenges.cloudflare.com",
     ]);
     for (const url of [FRAME, PAGE, "about:srcdoc", "about:blank"]) {
@@ -78,13 +78,13 @@ describe("the check's WebView", () => {
   });
 
   test("opens the server's own page with the widget's site key, action, theme and language", () => {
-    const url = humanCheckUrl("https://app.xquads.com", {
+    const url = humanCheckUrl("https://agents.xquads.com", {
       siteKey: "1x00000000000000000000AA",
       action: "ask-code",
       theme: "dark",
       language: "pt-BR",
     });
-    expect(url).toBe("https://app.xquads.com/human-check.html?k=1x00000000000000000000AA&a=ask-code&t=dark&l=pt-BR");
+    expect(url).toBe("https://agents.xquads.com/human-check.html?k=1x00000000000000000000AA&a=ask-code&t=dark&l=pt-BR");
   });
 
   test("one box for the widget hidden or open, inside the sheet's padding, spanning the sheet on a narrow phone", () => {

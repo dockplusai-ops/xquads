@@ -58,7 +58,7 @@ describe("in the Mac app's window", () => {
       const opened = calls.find((c) => c.method === "desktopOpen");
       expect(opened?.args[0]).toMatch(KEY);
       expect(document.querySelector(".auth__codeValue")?.textContent).toBe("KQ7M-3XPF");
-      const url = new URL(assign.urls[0] ?? "", "https://app.xquads.com");
+      const url = new URL(assign.urls[0] ?? "", "https://agents.xquads.com");
       expect(url.pathname).toBe("/desktop/sign-in");
       expect(url.searchParams.get("provider")).toBe("github");
       // The request id travels through the browser, never the challenge or the verifier.
@@ -94,7 +94,7 @@ describe("in the Mac app's window", () => {
       await act(async () => fireEvent.click(screen().getByRole("button", { name: /Continuar com GitHub/ })));
       await settle(6);
       await act(async () => fireEvent.click(screen().getByRole("button", { name: "Abrir o navegador de novo" })));
-      expect(assign.urls.map((u) => new URL(u, "https://app.xquads.com").searchParams.get("access"))).toEqual([
+      expect(assign.urls.map((u) => new URL(u, "https://agents.xquads.com").searchParams.get("access"))).toEqual([
         ACCESS,
         ACCESS,
       ]);

@@ -35,7 +35,7 @@ describe("phone push without the Apple key (ADR 0178)", () => {
   });
 
   test("auto on the server that is the relay: a platform without credentials is off, never a call to itself", () => {
-    const c = config({ PUBLIC_URL: "https://app.xquads.com" });
+    const c = config({ PUBLIC_URL: "https://agents.xquads.com" });
     expect(relayIsThisServer(c)).toBe(true);
     expect(phonePushMode(c, null)).toBe("off");
     expect(phonePushMode(c, createFakePushSender())).toBe("direct");

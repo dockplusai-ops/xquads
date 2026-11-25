@@ -608,8 +608,8 @@ describe("links and notices open a file at its conversation's message", () => {
     expect(hrefFromUrl("agenteschat://drive/f1?m=m1")).toBe("/file/f1?m=m1");
     expect(hrefFromUrl("agenteschat://drive/f1")).toBe("/file/f1");
     expect(hrefFromUrl("agenteschat://drive")).toBeNull();
-    expect(appLinkFromUrl("https://app.xquads.com/org/o1/drive/f1?m=m1", "o1")).toEqual({ href: "/file/f1?m=m1" });
-    expect(appLinkFromUrl("https://app.xquads.com/org/o1/drive/f1", "o1")).toEqual({ href: "/file/f1" });
+    expect(appLinkFromUrl("https://agents.xquads.com/org/o1/drive/f1?m=m1", "o1")).toEqual({ href: "/file/f1?m=m1" });
+    expect(appLinkFromUrl("https://agents.xquads.com/org/o1/drive/f1", "o1")).toEqual({ href: "/file/f1" });
   });
 
   test("a notice about a message in a file's conversation opens the file at it, its push too", () => {

@@ -27,7 +27,7 @@ const flush = async () => {
 
 /** The page opened at `env.url`, its scripts run against fakes: fetch, timers, frames, storage, location. */
 function open(env: Env = {}) {
-  const url = new URL(env.url ?? "/org/acme/c/general?tab=files#m-1", "https://app.xquads.com");
+  const url = new URL(env.url ?? "/org/acme/c/general?tab=files#m-1", "https://agents.xquads.com");
   const doc = new DOMParser().parseFromString(PAGE, "text/html");
   let visibility = "visible";
   Object.defineProperty(doc, "cookie", { get: () => env.cookie ?? "" });

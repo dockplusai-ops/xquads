@@ -377,7 +377,7 @@ test("the instance id is made once and kept; the switch and the Cloud decide wha
   const cloud = { TELEMETRY: "off" as const, PUBLIC_URL: "https://xquads.com" };
   expect(telemetrySends(cloud, false)).toBe(true);
   expect(isAgentesCloud("https://www.xquads.com")).toBe(true);
-  expect(isAgentesCloud("https://app.xquads.com")).toBe(true);
+  expect(isAgentesCloud("https://agents.xquads.com")).toBe(true);
   expect(isAgentesCloud("https://xquads.com.example.com")).toBe(false);
   expect(isAgentesCloud("https://notxquads.com")).toBe(false);
   // The original's Cloud is someone else's server now.

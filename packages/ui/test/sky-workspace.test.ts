@@ -17,7 +17,7 @@ import {
 
 describe("which sky a server gets", () => {
   test("xquads.com and its subdomains are the Cloud's day", () => {
-    for (const host of ["xquads.com", "app.xquads.com", "XQUADS.COM", "xquads.com:443"])
+    for (const host of ["xquads.com", "agents.xquads.com", "XQUADS.COM", "xquads.com:443"])
       expect(skyHourOf(host)).toBe("day");
   });
   test("any other host is one's own: dusk", () => {

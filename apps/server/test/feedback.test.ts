@@ -183,11 +183,11 @@ test("feedback files: the hour's limit and the size are answered before the file
   expect((await upload(ana, PNG, "real.png")).status).toBe(429);
 });
 
-const INBOX_URL = "https://app.xquads.com/api/feedback/inbox";
+const INBOX_URL = "https://agents.xquads.com/api/feedback/inbox";
 /** A server with no address of its own, whose network reaches only the inbox: `inbox`'s own app. */
 async function relaying(down = false) {
   inbox = await createTestServer({
-    env: { FEEDBACK_EMAIL: "team@example.com", PUBLIC_URL: "https://app.xquads.com" },
+    env: { FEEDBACK_EMAIL: "team@example.com", PUBLIC_URL: "https://agents.xquads.com" },
   });
   const posted: string[] = [];
   const there = inbox;
@@ -265,7 +265,7 @@ test("feedback relay: the inbox takes only a feedback, pictures by their bytes, 
 
 test("feedback relay: the inbox can be turned off", async () => {
   t = await createTestServer({
-    env: { FEEDBACK_EMAIL: "team@example.com", PUBLIC_URL: "https://app.xquads.com", FEEDBACK_INBOX: "false" },
+    env: { FEEDBACK_EMAIL: "team@example.com", PUBLIC_URL: "https://agents.xquads.com", FEEDBACK_INBOX: "false" },
   });
   const feedback = { name: "Ana", email: "ana@example.com", text: "Hello", version: "1.0.0" };
   const res = await t.app.request("/api/feedback/inbox", {

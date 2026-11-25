@@ -238,7 +238,7 @@ test("download links are on PUBLIC_URL, whatever address the request came in on"
     ],
   });
   t = await createTestServer({
-    env: { DESKTOP_RELEASES_TOKEN: "ghp_test", PUBLIC_URL: "https://app.xquads.com" },
+    env: { DESKTOP_RELEASES_TOKEN: "ghp_test", PUBLIC_URL: "https://agents.xquads.com" },
     desktopFetch: fakeGithub([signed]).fetch,
   });
   const links = async (site: string) => {
@@ -247,11 +247,11 @@ test("download links are on PUBLIC_URL, whatever address the request came in on"
     return [((await latest.json()) as { url: string }).url, ((await update.json()) as { url: string }).url];
   };
   const onPublicUrl = [
-    "https://app.xquads.com/api/desktop/download/0.6.0/agentes_0.6.0_universal.dmg",
-    "https://app.xquads.com/api/desktop/download/0.6.0/agentes_0.6.0_universal.app.tar.gz",
+    "https://agents.xquads.com/api/desktop/download/0.6.0/agentes_0.6.0_universal.dmg",
+    "https://agents.xquads.com/api/desktop/download/0.6.0/agentes_0.6.0_universal.app.tar.gz",
   ];
   expect(await links("https://agentes.chat")).toEqual(onPublicUrl);
-  expect(await links("https://app.xquads.com")).toEqual(onPublicUrl);
+  expect(await links("https://agents.xquads.com")).toEqual(onPublicUrl);
 });
 
 test("a desktop download goes straight to the asset's signed address, never through the server; nothing else", async () => {

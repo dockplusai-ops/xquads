@@ -24,7 +24,7 @@ const cloud = () =>
   createFakeApi(
     seedState({
       me: null,
-      authConfig: { termsUrl: "https://app.xquads.com/terms", privacyUrl: "https://app.xquads.com/privacy" },
+      authConfig: { termsUrl: "https://agents.xquads.com/terms", privacyUrl: "https://agents.xquads.com/privacy" },
     }),
   );
 

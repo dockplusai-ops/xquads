@@ -93,7 +93,7 @@ describe("the start screen at launch", () => {
 });
 
 describe("a web link", () => {
-  const server = "https://app.xquads.com";
+  const server = "https://agents.xquads.com";
 
   test("to the workspace on screen opens its screen straight away; another's, or one to look up, goes through /link", () => {
     const channel = `${server}/org/org-1/c/c-1`;

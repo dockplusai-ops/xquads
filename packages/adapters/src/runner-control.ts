@@ -81,7 +81,7 @@ export type ControlBrowserDoing =
 /** Where the runner stands. */
 export interface ControlStatus {
   paired: boolean;
-  /** Our server, e.g. `https://app.xquads.com`. */
+  /** Our server, e.g. `https://agents.xquads.com`. */
   server?: string;
   /**
    * `logoEtag`: the organization's logo cached on this computer (absent: none);

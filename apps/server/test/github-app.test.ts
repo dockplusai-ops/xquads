@@ -538,7 +538,7 @@ test("the server's app is the environment's when set (409), and nobody's on agen
   expect(((await started.json()) as { error: { code: string } }).error.code).toBe("github_app_env");
   await t.close();
 
-  const origin = "https://app.xquads.com";
+  const origin = "https://agents.xquads.com";
   t = await createTestServer({ http, env: { ...env, ALLOW_SIGNUP: "true", PUBLIC_URL: origin } });
   const first = browser(t);
   const signedUp = await first("/api/auth/sign-up/email", {

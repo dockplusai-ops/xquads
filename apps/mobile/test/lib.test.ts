@@ -291,14 +291,14 @@ test("every icon of the design is there", () => {
 });
 
 describe("person photo", () => {
-  const base = "https://app.xquads.com";
+  const base = "https://agents.xquads.com";
   const headers = { "X-Agentes-Client": "mobile", Cookie: "s=1" };
   test("a photo uploaded here loads from the API with the session", () => {
     expect(photoSource("/api/app/avatars/u1/a.png", base, headers)).toEqual({
-      uri: "https://app.xquads.com/api/app/avatars/u1/a.png",
+      uri: "https://agents.xquads.com/api/app/avatars/u1/a.png",
       headers,
     });
-    expect(photoSource("https://app.xquads.com/api/app/avatars/u1/a.png", base, headers)?.headers).toEqual(headers);
+    expect(photoSource("https://agents.xquads.com/api/app/avatars/u1/a.png", base, headers)?.headers).toEqual(headers);
   });
   test("a provider's photo loads without our cookie", () => {
     expect(photoSource("https://lh3.googleusercontent.com/a/x", base, headers)).toEqual({
@@ -314,7 +314,7 @@ describe("person photo", () => {
 });
 
 describe("choosing a server", () => {
-  const cloud = "https://app.xquads.com";
+  const cloud = "https://agents.xquads.com";
   const box = "https://box.tail1234.ts.net";
 
   test("the one chosen, else the build's; nothing kept for the build's own", () => {

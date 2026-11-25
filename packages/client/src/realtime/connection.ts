@@ -112,7 +112,7 @@ export const MISSED_MESSAGE_GRACE_MS = 3000;
 const HEARD_LIMIT = 500;
 const OPEN = 1;
 
-/** Where the server is: the page's location (web) or the server's origin, e.g. "https://app.xquads.com" (phone app). */
+/** Where the server is: the page's location (web) or the server's origin, e.g. "https://agents.xquads.com" (phone app). */
 export type SocketBase = string | { protocol: string; host: string };
 
 /** A WebSocket address on the server: `path` with `params` as its query. */
@@ -136,7 +136,7 @@ export function framesUrl(url: string, ticket: string) {
   return `${m ? m[1] : ""}${BROWSER_FRAMES_PATH}?ticket=${encodeURIComponent(ticket)}`;
 }
 
-/** "https://app.xquads.com/x" → { protocol: "https:", host: "app.xquads.com" } (no `URL`: React Native's is partial). */
+/** "https://agents.xquads.com/x" → { protocol: "https:", host: "agents.xquads.com" } (no `URL`: React Native's is partial). */
 function originOf(base: string): { protocol: string; host: string } {
   const m = /^([a-z][a-z0-9+.-]*:)\/\/([^/?#]+)/i.exec(base.trim());
   if (!m) throw new Error(`socketUrl: not an absolute URL: ${base}`);
