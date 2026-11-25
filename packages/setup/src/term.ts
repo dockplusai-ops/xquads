@@ -1,5 +1,5 @@
 /**
- * The look every agentes.chat command line shares: the logo, a line down the left with a mark per step,
+ * The look every xquads command line shares: the logo, a line down the left with a mark per step,
  * spinners and questions. The setup uses it, and so does the runner (`@agenteschat/setup/src/term`); the
  * installers draw the same marks in POSIX sh (term-sh.ts).
  *

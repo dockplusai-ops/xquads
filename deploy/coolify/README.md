@@ -1,4 +1,4 @@
-# agentes.chat on Coolify
+# xquads on Coolify
 
 The app and Postgres with pgvector, as one Coolify resource. Coolify supplies the domain and
 every secret; nothing in this folder names a host or holds a value.
@@ -49,7 +49,7 @@ them by hand:
 | `PUBLIC_URL` | That address without the port. The exact address people open: sign-in, the only browser origin allowed to change anything, and every link the app sends. |
 | `AGENTES_SECRET` | Signs sessions and encrypts every key an organization stores (model providers, connectors, mailboxes, databases). Never change it on a running instance. |
 | `SERVICE_PASSWORD_POSTGRES` | The database password, used only inside `DATABASE_URL`. |
-| `AGENTES_IMAGE` | The image to run. Defaults to `ghcr.io/agentes-chat/agentes:latest`; a version tag or a digest holds a version. |
+| `AGENTES_IMAGE` | The image to run. Defaults to `ghcr.io/dockplusai-ops/xquads:latest`; a version tag or a digest holds a version. |
 | `AGENTES_MEMORY` | The cap on the app's memory, swap included. Defaults to `8g`. The app brakes below it: past 70% its job slots stop growing, past 85% it sheds long jobs. |
 
 Coolify writes the resource's variables into `.env` in the deployment directory and passes that
@@ -134,9 +134,9 @@ resets and budget alerts; without them those emails go to the container log inst
 for this instance's source, AGPL-3.0 §13 — set it if you run a modified version), `S3_*` (files
 in a bucket instead of the volume), `LOG_LEVEL`.
 
-Two defaults send data to the project that makes agentes.chat:
+Two defaults send data to the project that makes xquads:
 
-- `TELEMETRY=on` posts one anonymous usage report a day to `https://telemetry.agentes.chat`
+- `TELEMETRY=on` posts one anonymous usage report a day to `https://telemetry.xquads.com`
   (counts, sizes, tokens used; never messages, files, names or sites).
 - `FEEDBACK_RELAY=true` sends what someone types into the feedback form, when they press send.
 
@@ -145,7 +145,7 @@ telemetry` prints exactly what the report would contain.
 
 ## 8. Upgrade
 
-Change `AGENTES_IMAGE` to a version tag (`ghcr.io/agentes-chat/agentes:1.4.0`) or leave it on
+Change `AGENTES_IMAGE` to a version tag (`ghcr.io/dockplusai-ops/xquads:1.4.0`) or leave it on
 `latest` and redeploy. Migrations run on boot; no separate step.
 
 Coolify's **Rollback** page deploys older images of applications it built itself, which is not

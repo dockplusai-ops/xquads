@@ -14,7 +14,7 @@ body:
     attributes:
       label: Deployment
       options:
-        - agentes.chat Cloud
+        - xquads Cloud
         - Self-hosted
         - Not applicable
     validations:

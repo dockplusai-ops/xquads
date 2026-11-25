@@ -743,13 +743,13 @@ export const helpId: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "Di server, jalankan:",
           {
-            code: "curl -fsSL https://agentes.chat/install | sh",
+            code: "curl -fsSL https://agents.xquads.com/install | sh",
           },
           "Pemasang memasang yang belum ada, lalu menanyakan beberapa hal: cara orang masuk, email, apakah server ini juga jadi komputer agenmu, dan apakah mengirim statistik pemakaian anonim. Tekan Enter untuk jawaban yang disarankan. Semuanya dipasang di `/opt/agentes` (`~/agentes` untuk pengguna yang sudah bisa memakai Docker), dan pertama kali ia mengunduh sekitar 2 GB.",
           "Di akhir, ia menampilkan alamat servermu dan kode QR untuk ponselmu. Menjalankannya lagi aman: pengaturanmu tetap, dan hanya yang kurang yang dilengkapi.",
           "Dengan Node.js 18 atau lebih baru, `npx @agenteschat/setup` di folder kosong adalah penyiapan yang sama. Tanpa Node, ia berjalan dari image aplikasi, di folder saat ini, dan diakhiri dengan perintah yang menyalakan sisanya:",
           {
-            code: 'docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/agentes-chat/agentes:latest setup',
+            code: 'docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/dockplusai-ops/xquads:latest setup',
           },
         ],
       },
@@ -806,7 +806,7 @@ export const helpId: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "Penyiapan bisa menjadikan server ini juga komputer agenmu, tempat mereka menjalankan perintah, memakai browser, dan menyimpan file. Ia bertanya, dan menyarankan ya kalau server sanggup. Di Debian 13, setiap agen mendapat pengguna sendiri, dengan layar. Di Ubuntu, agen berbagi satu pengguna, `agentes`. Kalau kamu menjawab tidak, jalankan pemasangan lagi dengan `--computer yes`:",
           {
-            code: "curl -fsSL https://agentes.chat/install | sh -s -- --computer yes",
+            code: "curl -fsSL https://agents.xquads.com/install | sh -s -- --computer yes",
           },
           "Komputer lain, seperti Mac dengan aplikasi xquads atau server lain, terhubung dari **Pengaturan\u00a0›\u00a0Perangkat**, seperti di [Komputer dan ponselmu](/help/computers). Di Tailscale, komputer itu masuk ke tailnet-mu lebih dulu.",
         ],
@@ -834,7 +834,7 @@ export const helpId: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "Di folder pemasangan, jalankan:",
           {
-            code: "curl -fsSLO https://agentes.chat/install/docker-compose.yml\ndocker compose pull\ndocker compose up -d",
+            code: "curl -fsSLO https://agents.xquads.com/install/docker-compose.yml\ndocker compose pull\ndocker compose up -d",
           },
           "Database memperbarui dirinya sendiri saat versi baru menyala. Simpan pengaturanmu di `.env` dan jangan pernah mengubah `docker-compose.yml`, karena setiap pembaruan menggantinya. Buat cadangan sebelum lompatan besar: database yang diperbarui versi lebih baru tidak bisa dibuka di versi lebih lama.",
         ],

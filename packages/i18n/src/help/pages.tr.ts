@@ -745,13 +745,13 @@ export const helpTr: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "Sunucuda şunu çalıştırın:",
           {
-            code: "curl -fsSL https://agentes.chat/install | sh",
+            code: "curl -fsSL https://agents.xquads.com/install | sh",
           },
           "Eksikleri kurar, sonra birkaç soru sorar: insanların nasıl erişeceği, e-posta, bu sunucunun ajanlarınızın bilgisayarı da olup olmayacağı ve anonim kullanım istatistikleri gönderip göndermeyeceği. Önerilen cevap için Enter'a basın. `/opt/agentes` içine kurulur (Docker'ı zaten kullanabilen bir kullanıcı için `~/agentes`) ve ilk seferde yaklaşık 2 GB indirir.",
           "Sonunda sunucunuzun adresini ve telefonunuz için bir QR kodu gösterir. Tekrar çalıştırmak güvenlidir: ayarlarınızı korur ve yalnızca eksik olanı tamamlar.",
           "Node.js 18 veya daha yenisi varsa, boş bir klasörde `npx @agenteschat/setup` aynı kurulumdur. Node yoksa uygulamanın imajından, geçerli klasörde çalışır ve gerisini başlatan komutlarla biter:",
           {
-            code: 'docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/agentes-chat/agentes:latest setup',
+            code: 'docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/dockplusai-ops/xquads:latest setup',
           },
         ],
       },
@@ -808,7 +808,7 @@ export const helpTr: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "Kurulum bu sunucuyu ajanlarınızın bilgisayarı da yapabilir: komutları orada çalıştırır, bir tarayıcı kullanır ve dosyalarını orada tutarlar. Kurulum sorar ve sunucu bunu iyi kaldırabiliyorsa evet önerir. Debian 13'te her ajanın ekranı olan kendi kullanıcısı olur. Ubuntu'da ajanlar tek bir kullanıcıyı, `agentes` kullanıcısını paylaşır. Hayır dediyseniz kurulumu `--computer yes` ile yeniden çalıştırın:",
           {
-            code: "curl -fsSL https://agentes.chat/install | sh -s -- --computer yes",
+            code: "curl -fsSL https://agents.xquads.com/install | sh -s -- --computer yes",
           },
           "xquads uygulamalı bir Mac ya da başka bir sunucu gibi diğer bilgisayarlar **Ayarlar\u00a0›\u00a0Cihazlar** üzerinden bağlanır, [Bilgisayarlarınız ve telefonlarınız](/help/computers) sayfasındaki gibi. Tailscale'de önce tailnet'inize katılırlar.",
         ],
@@ -836,7 +836,7 @@ export const helpTr: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "Kurulum klasöründe şunu çalıştırın:",
           {
-            code: "curl -fsSLO https://agentes.chat/install/docker-compose.yml\ndocker compose pull\ndocker compose up -d",
+            code: "curl -fsSLO https://agents.xquads.com/install/docker-compose.yml\ndocker compose pull\ndocker compose up -d",
           },
           "Yeni sürüm başlarken veritabanı kendini günceller. Ayarlarınızı `.env` içinde tutun ve `docker-compose.yml` dosyasını asla düzenlemeyin, çünkü her güncelleme onu değiştirir. Büyük bir sıçramadan önce yedek alın: daha yeni bir sürümün güncellediği bir veritabanı eski bir sürümde açılmaz.",
         ],

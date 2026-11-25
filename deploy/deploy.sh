@@ -15,7 +15,7 @@
 # AGENTES_BACKUP_IMAGE=agentes-backup:current too), and RUN_MIGRATIONS_ON_BOOT=false: this script
 # migrates on every deploy, a restored dump included, and after a rollback the previous version runs
 # on a database the newer one may have migrated, which a boot that migrates refuses. With
-# MACHINE_PROVISIONING=external (agentes.chat Cloud), uploaded files must not live on this server's
+# MACHINE_PROVISIONING=external (xquads Cloud), uploaded files must not live on this server's
 # disk alone, so the script refuses to deploy without S3_ENDPOINT, S3_BUCKET, S3_ACCESS_KEY_ID and
 # S3_SECRET_ACCESS_KEY. Set them before the first upload: files already on the disk are not moved to
 # the bucket, and the app stops finding them once it is set. A test server that keeps its files on its disk
@@ -26,7 +26,7 @@
 # SPEECH_ENGINES. Over SSH,
 # a deploy key's line in authorized_keys can run this script alone, with the commit the caller sends:
 #   command="/srv/agentes/deploy/deploy.sh $SSH_ORIGINAL_COMMAND",restrict ssh-ed25519 AAAA...
-# With DEPLOY_IMAGE=ghcr.io/agentes-chat/agentes:edge before the script's path there, it pulls the
+# With DEPLOY_IMAGE=ghcr.io/dockplusai-ops/xquads:edge before the script's path there, it pulls the
 # image CI publishes instead of building one.
 #
 # Back by hand to the version that ran before the current one (one step; the next deploy moves on):

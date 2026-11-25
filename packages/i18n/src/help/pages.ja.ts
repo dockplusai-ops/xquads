@@ -743,13 +743,13 @@ export const helpJa: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "サーバーで次を実行します。",
           {
-            code: "curl -fsSL https://agentes.chat/install | sh",
+            code: "curl -fsSL https://agents.xquads.com/install | sh",
           },
           "足りないものを入れてから、いくつか質問します。アクセスの方法、メール、このサーバーをエージェントのコンピューターにもするか、匿名の利用統計を送るかです。Enter で提案された答えになります。インストール先は `/opt/agentes` (すでに Docker を使えるユーザーなら `~/agentes`) で、初回は約 2 GB をダウンロードします。",
           "最後に、サーバーのアドレスとスマートフォン用の QR コードが表示されます。もう一度実行しても問題ありません。設定はそのままで、足りないものだけを補います。",
           "Node.js 18 以降があれば、空のフォルダーで `npx @agenteschat/setup` を実行しても同じセットアップです。Node がなければアプリのイメージから現在のフォルダーで実行でき、最後に残りを起動するコマンドが表示されます。",
           {
-            code: 'docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/agentes-chat/agentes:latest setup',
+            code: 'docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/dockplusai-ops/xquads:latest setup',
           },
         ],
       },
@@ -806,7 +806,7 @@ export const helpJa: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "セットアップでは、このサーバーをエージェントのコンピューターにもできます。エージェントはそこでコマンドを実行し、ブラウザーを使い、ファイルを置きます。確認があり、サーバーが十分に対応できるときは「はい」が提案されます。Debian 13 では、エージェントごとに専用のユーザーと画面があります。Ubuntu では、エージェントは `agentes` という1つのユーザーを共有します。「いいえ」と答えた場合は、`--computer yes` を付けてもう一度インストールします。",
           {
-            code: "curl -fsSL https://agentes.chat/install | sh -s -- --computer yes",
+            code: "curl -fsSL https://agents.xquads.com/install | sh -s -- --computer yes",
           },
           "xquads アプリを入れた Mac や別のサーバーなど、ほかのコンピューターは **設定\u00a0›\u00a0デバイス** からつなぎます ([あなたのコンピューターとスマートフォン](/help/computers) を参照)。Tailscale の場合は、先にあなたの tailnet に入れます。",
         ],
@@ -834,7 +834,7 @@ export const helpJa: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "インストールフォルダーで次を実行します。",
           {
-            code: "curl -fsSLO https://agentes.chat/install/docker-compose.yml\ndocker compose pull\ndocker compose up -d",
+            code: "curl -fsSLO https://agents.xquads.com/install/docker-compose.yml\ndocker compose pull\ndocker compose up -d",
           },
           "新しいバージョンが起動すると、データベースは自動で更新されます。設定は `.env` に置き、`docker-compose.yml` は編集しないでください。アップデートのたびに置き換わります。大きく上げる前にはバックアップを取ってください。新しいバージョンが更新したデータベースは、古いバージョンでは開けません。",
         ],

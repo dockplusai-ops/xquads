@@ -481,7 +481,7 @@ describe("install.sh", () => {
     const piped = await plan({ ...user, docker: "down" }, [], { piped: text });
     expect(piped.out).toContain("●  Docker needs root here: downloading this installer to run it again as root");
     expect(piped.out).toContain(
-      "$ curl -fsSL --proto =https --retry 3 -o <tmp>/install.sh https://agentes.chat/install",
+      "$ curl -fsSL --proto =https --retry 3 -o <tmp>/install.sh https://agents.xquads.com/install",
     );
     expect(piped.out).toContain("$ sudo sh <tmp>/install.sh");
     expect(piped.changes).toEqual([]);
@@ -560,9 +560,9 @@ describe("install.sh", () => {
   test("a Mac without Docker, or with it stopped, is told what to install or start; --native isn't there yet", async () => {
     const none = await plan(mac);
     expect(none.code).toBe(1);
-    expect(none.err).toContain("This installer runs agentes.chat on Docker, and this Mac doesn't have it.");
+    expect(none.err).toContain("This installer runs xquads on Docker, and this Mac doesn't have it.");
     expect(none.err).toContain("Docker Desktop, OrbStack or Colima");
-    expect(none.err).toContain("Run agentes.chat on this Mac");
+    expect(none.err).toContain("Run xquads on this Mac");
     expect(none.out).not.toContain("Bun");
     expect(none.changes).toEqual([]);
 
@@ -579,7 +579,7 @@ describe("install.sh", () => {
     for (const machine of [mac, linuxRoot]) {
       const native = await plan(machine, ["--native"]);
       expect(native.code).toBe(1);
-      expect(native.err).toContain("can't run agentes.chat without Docker yet (--native)");
+      expect(native.err).toContain("can't run xquads without Docker yet (--native)");
       expect(native.calls).toEqual([]);
     }
   });

@@ -300,7 +300,7 @@ describe("what each terminal gets", () => {
 
   test("a log keeps each line whole, for grep", () => {
     const { term, text } = capture({ tty: false });
-    const long = `Agents' computer: set up, but it hasn't answered agentes.chat yet. It keeps trying. Its log: ${"x".repeat(60)}`;
+    const long = `Agents' computer: set up, but it hasn't answered xquads yet. It keeps trying. Its log: ${"x".repeat(60)}`;
     term.warn(long);
     term.info("Next", [long], "numbered");
     expect(text()).toBe(`▲  ${long}\n●  Next\n   1. ${long}\n`);
@@ -340,21 +340,21 @@ describe("what each terminal gets", () => {
 describe("waits", () => {
   test("a spinner turns with its time from 3 s on and its detail under it; what's said meanwhile goes above it", () => {
     const { term, wait, screen } = capture({ depth: 24 });
-    const s = term.spin("Starting agentes.chat (docker compose up -d)", "The first time downloads about 2 GB.");
-    expect(screen()).toBe("◒  Starting agentes.chat (docker compose up -d)\n│  The first time downloads about 2 GB.\n");
+    const s = term.spin("Starting xquads (docker compose up -d)", "The first time downloads about 2 GB.");
+    expect(screen()).toBe("◒  Starting xquads (docker compose up -d)\n│  The first time downloads about 2 GB.\n");
     wait(64);
     expect(screen()).toBe(
-      "◐  Starting agentes.chat (docker compose up -d)  1m 04s\n│  The first time downloads about 2 GB.\n",
+      "◐  Starting xquads (docker compose up -d)  1m 04s\n│  The first time downloads about 2 GB.\n",
     );
     s.update(null, "Container agentes-agentes-1  Started");
     term.info("Approve this server in your tailnet");
     expect(screen()).toBe(
-      "●  Approve this server in your tailnet\n◐  Starting agentes.chat (docker compose up -d)  1m 04s\n│  Container agentes-agentes-1  Started\n",
+      "●  Approve this server in your tailnet\n◐  Starting xquads (docker compose up -d)  1m 04s\n│  Container agentes-agentes-1  Started\n",
     );
-    s.done("agentes.chat 1.0.0 is up, on this server only");
-    expect(screen()).toBe("●  Approve this server in your tailnet\n◇  agentes.chat 1.0.0 is up, on this server only\n");
+    s.done("xquads 1.0.0 is up, on this server only");
+    expect(screen()).toBe("●  Approve this server in your tailnet\n◇  xquads 1.0.0 is up, on this server only\n");
     wait(1);
-    expect(screen()).toBe("●  Approve this server in your tailnet\n◇  agentes.chat 1.0.0 is up, on this server only\n");
+    expect(screen()).toBe("●  Approve this server in your tailnet\n◇  xquads 1.0.0 is up, on this server only\n");
   });
 
   test("a long label is cut to one line, so the spinner redraws in place", () => {

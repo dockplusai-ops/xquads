@@ -62,7 +62,7 @@ tailnet can open it: no domain, no open port, nothing on the public internet.
 4. **Install.** On the server:
 
    ```sh
-   curl -fsSL https://agentes.chat/install | sh
+   curl -fsSL https://agents.xquads.com/install | sh
    ```
 
    It installs what's missing, then runs the setup in `/opt/agentes` (`~/agentes` for a user who
@@ -110,7 +110,7 @@ it runs itself again with `sudo` before anything else when it has no access to D
 nothing. To read it before it runs:
 
 ```sh
-curl -fsSLo install.sh https://agentes.chat/install
+curl -fsSLo install.sh https://agents.xquads.com/install
 less install.sh
 sh install.sh
 ```
@@ -120,7 +120,7 @@ nothing, `--yes` installs Docker without asking, `--dir <folder>` installs elsew
 option of the setup passes through (`--network local`, `--email skip`):
 
 ```sh
-curl -fsSL https://agentes.chat/install | sh -s -- --plan
+curl -fsSL https://agents.xquads.com/install | sh -s -- --plan
 ```
 
 That's the installer's own plan: it runs nothing, not even the setup, so it can't show what the setup
@@ -135,7 +135,7 @@ Without the installer, the same setup runs with `npx @agenteschat/setup` in an e
 (Node.js 18 or newer), or from the app's image, on the current directory:
 
 ```sh
-docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/agentes-chat/agentes:latest setup
+docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/dockplusai-ops/xquads:latest setup
 ```
 
 Inside a container it can't start the others, so it ends with the three commands to run; the second
@@ -289,7 +289,7 @@ setup's plan as JSON comes from the setup itself, with `--dry-run --json`: throu
 server the installer set up, the setup command it printed, with `--dry-run --json`.
 
 ```sh
-curl -fsSL https://agentes.chat/install | AGENTES_SETUP_TAILSCALE_KEY='tskey-client-…' sh -s -- --yes --network tailscale --email skip --json
+curl -fsSL https://agents.xquads.com/install | AGENTES_SETUP_TAILSCALE_KEY='tskey-client-…' sh -s -- --yes --network tailscale --email skip --json
 ```
 
 - Every answer is a flag or an `AGENTES_SETUP_<OPTION>` variable; `--help` lists them, and a flag
@@ -355,7 +355,7 @@ A failure names the check, what happened and the fix:
 
 | `check` | What happened | Fix |
 | --- | --- | --- |
-| `docker`, `docker.compose` | Docker, or Compose v2 2.23.1 or newer, is missing | Linux: the installer installs both (`curl -fsSL https://agentes.chat/install \| sh -s -- --yes`). Mac and Windows: Docker Desktop. |
+| `docker`, `docker.compose` | Docker, or Compose v2 2.23.1 or newer, is missing | Linux: the installer installs both (`curl -fsSL https://agents.xquads.com/install \| sh -s -- --yes`). Mac and Windows: Docker Desktop. |
 | `docker.daemon`, `docker.permission` | Docker isn't running, or this user can't use it | `sudo systemctl start docker`; `sudo usermod -aG docker $USER`, then log in again. |
 | `tailscale.key` | No key, or Tailscale refused it: expired, revoked, or a one-off key already used | A new auth key, or the OAuth client secret. |
 | `tailscale.approval` | The server waits for device approval | Machines page: the server marked **Needs approval**, its **⋯** menu, **Approve**. A pre-approved key or an OAuth client secret skips this. |
@@ -490,7 +490,7 @@ The setup's **This machine only** choice runs agentes.chat at http://localhost:3
 laptop. By hand, in an empty directory:
 
 ```sh
-curl -fsSLO https://agentes.chat/install/docker-compose.yml
+curl -fsSLO https://agents.xquads.com/install/docker-compose.yml
 (umask 077 && printf 'AGENTES_SECRET=%s\nPOSTGRES_PASSWORD=%s\nPUBLIC_URL=http://localhost:3000\n' "$(openssl rand -base64 48)" "$(openssl rand -hex 24)" > .env)
 docker compose up -d
 ```
@@ -798,7 +798,7 @@ ones a self-hosted instance usually touches:
 | `EXTRA_TRUSTED_ORIGINS` | | Other addresses this instance is opened at, comma-separated, each an origin such as `http://192.168.0.10:3000` or `https://agentes.tail1234.ts.net`. Sign-in and saving work from them too; `PUBLIC_URL` is always trusted. |
 | `AGENTES_SECRET` | required | Master secret, at least 32 characters. Never change it on an instance in use. |
 | `POSTGRES_PASSWORD` | required | Database password. Read by the compose file only. |
-| `AGENTES_IMAGE` | `ghcr.io/agentes-chat/agentes:latest` | The image to run. A version tag or a digest holds a version. |
+| `AGENTES_IMAGE` | `ghcr.io/dockplusai-ops/xquads:latest` | The image to run. A version tag or a digest holds a version. |
 | `BIND_ADDRESS`, `HOST_PORT` | `127.0.0.1`, `3000` | Where the compose file publishes the app. |
 | `AGENTES_MEMORY` | `8g` | The most memory the app's container may take, swap included. Over it, the kernel stops the app alone and Docker restarts it, instead of the machine swapping until something else is killed. Before that the app brakes on its own: past 70% of it its job slots stop growing, past 85% it sheds long jobs. On a machine with less than 10 GiB of memory, the setup writes three quarters of it here instead: a limit above the machine's memory never fires. With worker processes taking the runs, `4g` (More at once: worker processes). The speech server's is `SPEECH_MEMORY` (Voice messages). |
 | `COMPOSE_PROFILES` | | How people reach it: `tailscale` (the setup's default), `https` (Caddy for `DOMAIN`), or neither (this machine only). Comma-separated, with other optional services: `backup` (Backups and restore), `speech` (Voice messages), `embeddings` (Search across languages). |
@@ -824,7 +824,7 @@ ones a self-hosted instance usually touches:
 | `LOG_LEVEL` | `info` | `debug`, `info`, `warn` or `error`. |
 | `LOG_FORMAT` | `json` | `gcp` for Google Cloud Logging (`severity` and `message`). |
 | `TELEMETRY` | `on` | `off` stops the anonymous usage report (Optional services and what they receive). |
-| `PROBLEM_REPORT_URL` | `https://telemetry.agentes.chat/v1/problem-report` | Where **Send a report** sends a report someone chose to send. `off`: it only copies it (Optional services and what they receive). |
+| `PROBLEM_REPORT_URL` | `https://telemetry.xquads.com/v1/problem-report` | Where **Send a report** sends a report someone chose to send. `off`: it only copies it (Optional services and what they receive). |
 | `FEEDBACK_RELAY` | `true` | The apps' feedback form sends what a person writes to the agentes.chat team. `false`: no form (Optional services and what they receive). |
 | `TYPESAFE_API_KEY` | | Your TypeSafe key for Jev, or an OpenRouter key (`sk-or-…`) to call the same Jev through OpenRouter (AI: plans and keys). Wins over the key added in Settings → AI and usage. |
 | `COMPOSIO_API_KEY`, `COMPOSIO_WEBHOOK_SECRET` | | Your Composio project: Gmail and Outlook mailboxes and the services connected through Composio (below). |
@@ -902,7 +902,7 @@ except one a sign-in provider confirmed, which needs email to change.
 
 **Voice messages.** People hold the microphone and send audio; agents read its words, and the audio's words stay hidden until someone opens them on that message. The microphone shows only with a speech engine. As the server's owner, pick a provider and paste its key in **Settings**, or set it in the environment: `ASSEMBLYAI_API_KEY`, `ELEVENLABS_API_KEY`, `SONIOX_API_KEY`, `GROQ_API_KEY`, `OPENAI_SPEECH_API_KEY` or `DEEPINFRA_API_KEY`, with `SPEECH_ENGINES` for the order they are tried. With any of these, the audio goes to that provider to become text. DeepInfra is the cheapest of them, with the same Whisper as Groq. `LOCAL_SPEECH_URL` points at a server of your own that speaks the OpenAI format (Speaches, a local Whisper or Parakeet), and the audio stays with you: `LOCAL_SPEECH_API_KEY` if it asks for a key, and `LOCAL_SPEECH_WARM=on` if it loads its model on demand and can start when someone presses the microphone (`POST <LOCAL_SPEECH_URL>/warm`). Every request to it names the workspace in `X-Agentes-Org`, and one that takes more than half a minute plus twice the recording goes to the next engine. A self-hosted server has no limit on minutes. Engines hear the language in the audio: the app's language goes only to Soniox, as a hint.
 
-**Voice messages on this machine.** The `speech` profile runs NVIDIA's Parakeet on this server, as agentes.chat's Cloud does: add `speech` to `COMPOSE_PROFILES` and set `LOCAL_SPEECH_URL=http://speech:8000/v1`, then `docker compose up -d`. The first pull is about 1 GB, its models included; once it has started, it needs no internet, and its network reaches only the app. Parakeet knows 25 European languages and picks the one spoken, once a language guess gives them together at least `SPEECH_LANGUAGE_MIN` (0.7); another language, an unsure guess, a recording it hears no words in, or one that arrives when every worker is taken, goes to the next engine at once, so give it one: `SPEECH_ENGINES=local,deepinfra` with `DEEPINFRA_API_KEY`, for example. Without one, a recording in another language goes out as audio with no words, and a busy server's wait for the job's retries; `SPEECH_LANGUAGE_MIN=0` then gives Parakeet every recording, unsure ones included. By default it takes up to 4 CPUs and 4 GB of memory (`SPEECH_CPUS`, `SPEECH_MEMORY`; Docker refuses more CPUs than the machine has, so set `SPEECH_CPUS=2` on a 2-CPU server), runs 2 recordings at once on 2 threads each (`SPEECH_WORKERS`, `SPEECH_THREADS`) and lets 4 more wait up to 3 seconds each (`SPEECH_QUEUE`, `SPEECH_WAIT_SECONDS`); a short note takes a few seconds. `LOCAL_SPEECH_API_KEY`, when set, is the key both sides use. The service runs `ghcr.io/agentes-chat/speech`, published with each release under the app's tags, and `AGENTES_SPEECH_IMAGE` holds a version; from a checkout, `docker build -t agentes-speech:local deploy/speech` builds it (downloading the models from Hugging Face), with `AGENTES_SPEECH_IMAGE=agentes-speech:local`.
+**Voice messages on this machine.** The `speech` profile runs NVIDIA's Parakeet on this server, as agentes.chat's Cloud does: add `speech` to `COMPOSE_PROFILES` and set `LOCAL_SPEECH_URL=http://speech:8000/v1`, then `docker compose up -d`. The first pull is about 1 GB, its models included; once it has started, it needs no internet, and its network reaches only the app. Parakeet knows 25 European languages and picks the one spoken, once a language guess gives them together at least `SPEECH_LANGUAGE_MIN` (0.7); another language, an unsure guess, a recording it hears no words in, or one that arrives when every worker is taken, goes to the next engine at once, so give it one: `SPEECH_ENGINES=local,deepinfra` with `DEEPINFRA_API_KEY`, for example. Without one, a recording in another language goes out as audio with no words, and a busy server's wait for the job's retries; `SPEECH_LANGUAGE_MIN=0` then gives Parakeet every recording, unsure ones included. By default it takes up to 4 CPUs and 4 GB of memory (`SPEECH_CPUS`, `SPEECH_MEMORY`; Docker refuses more CPUs than the machine has, so set `SPEECH_CPUS=2` on a 2-CPU server), runs 2 recordings at once on 2 threads each (`SPEECH_WORKERS`, `SPEECH_THREADS`) and lets 4 more wait up to 3 seconds each (`SPEECH_QUEUE`, `SPEECH_WAIT_SECONDS`); a short note takes a few seconds. `LOCAL_SPEECH_API_KEY`, when set, is the key both sides use. The service runs `ghcr.io/dockplusai-ops/xquads-speech`, published with each release under the app's tags, and `AGENTES_SPEECH_IMAGE` holds a version; from a checkout, `docker build -t agentes-speech:local deploy/speech` builds it (downloading the models from Hugging Face), with `AGENTES_SPEECH_IMAGE=agentes-speech:local`.
 
 Recordings are kept with your files, outside the Drive, for `VOICE_RETENTION_DAYS` (90 by default; 0 keeps them forever). A daily sweep then deletes the audio; the message and its words stay for agents and search, and the player says the recording is gone.
 
@@ -1126,7 +1126,7 @@ for another day, `--org <workspace id>` for one workspace).
 agents, machine sizes, AI tokens used and how much data the agents' browsers send and receive, never
 messages, files, names or sites. The first goes about an hour after the server first starts, then one a
 day at that time, restarts or not (one that came due while the server was off goes about 10 minutes
-after it starts again), as JSON in a POST to `TELEMETRY_URL` (`https://telemetry.agentes.chat/v1/report`).
+after it starts again), as JSON in a POST to `TELEMETRY_URL` (`https://telemetry.xquads.com/v1/report`).
 It passes through Cloudflare, which sits in front of agentes.chat and decrypts it on the way.
 A send that fails is tried again three times within about 2.5 hours, then dropped: the next day's
 report replaces it. These are all its fields:
@@ -1164,7 +1164,7 @@ either way:
 answering, an agent's run that failed, the desktop app's server that won't start) and in **Settings → General**,
 **Send a report** shows a report in full, then sends it to the agentes.chat team only when someone presses **Send**,
 so it goes even with `TELEMETRY=off`. The server posts it as JSON to `PROBLEM_REPORT_URL`
-(`https://telemetry.agentes.chat/v1/problem-report`); the desktop app posts its own (its cover and Preferences →
+(`https://telemetry.xquads.com/v1/problem-report`); the desktop app posts its own (its cover and Preferences →
 Activity) when the server is down or out of reach. Set `PROBLEM_REPORT_URL=off` and the button only copies the
 report. A report holds:
 
@@ -1197,8 +1197,8 @@ server again: the apps show no form and agents can't send any.
 
 **Downloads and updates.** Installing and updating fetch files from agentes.chat, and those requests
 carry nothing about the instance beyond what any download does: the installer
-(`curl -fsSL https://agentes.chat/install`), the compose file the setup fetches into a folder that has
-none (`https://agentes.chat/install/docker-compose.yml`), the packages that run it without Docker
+(`curl -fsSL https://agents.xquads.com/install`), the compose file the setup fetches into a folder that has
+none (`https://agents.xquads.com/install/docker-compose.yml`), the packages that run it without Docker
 (`https://app.agentes.chat/api/native/latest` names them, `/api/native/download/…` serves them), and
 the desktop app's own updates: a check at start and every 6 hours
 (`https://app.agentes.chat/api/desktop/latest`, naming its system and processor) and, when it installs
@@ -1841,7 +1841,7 @@ docker compose pull
 docker compose up -d
 ```
 
-`https://agentes.chat/install/docker-compose.yml`, the one the setup downloads, is the file of the
+`https://agents.xquads.com/install/docker-compose.yml`, the one the setup downloads, is the file of the
 build agentes.chat runs, which follows `main` and can be ahead of the latest release.
 
 Keep your settings in `.env` and never edit `docker-compose.yml`, so replacing it loses nothing.
@@ -1849,13 +1849,13 @@ Anything a variable can't set goes in a `docker-compose.override.yml` beside it,
 on its own.
 
 Migrations run when the new version starts, so that is the whole upgrade for a small instance. The
-compose file runs `ghcr.io/agentes-chat/agentes:latest`, the latest release, for amd64 and arm64;
+compose file runs `ghcr.io/dockplusai-ops/xquads:latest`, the latest release, for amd64 and arm64;
 `:1.2.3` and `:1.2` tags exist alongside it, and `:edge` is built from every push to `main` that
 passes CI. To hold a version, set `AGENTES_IMAGE` in `.env` to a version tag or a digest
-(`ghcr.io/agentes-chat/agentes@sha256:…`), and keep that version's compose file. This prints the digest you have:
+(`ghcr.io/dockplusai-ops/xquads@sha256:…`), and keep that version's compose file. This prints the digest you have:
 
 ```sh
-docker image inspect --format '{{index .RepoDigests 0}}' ghcr.io/agentes-chat/agentes:latest
+docker image inspect --format '{{index .RepoDigests 0}}' ghcr.io/dockplusai-ops/xquads:latest
 ```
 
 For a big jump, migrate first from a throwaway container. If a migration fails, the running version
@@ -1934,7 +1934,7 @@ app is up:
 
 ```yaml
   agentes-worker:
-    image: "${AGENTES_IMAGE:-ghcr.io/agentes-chat/agentes:latest}"
+    image: "${AGENTES_IMAGE:-ghcr.io/dockplusai-ops/xquads:latest}"
     env_file: .env
     environment:
       DATABASE_URL: "postgres://agentes:${POSTGRES_PASSWORD}@postgres:5432/agentes"
@@ -2003,7 +2003,7 @@ git clone https://github.com/agentes-chat/agentes-chat.git
 cd agentes-chat
 bun install
 bun run --filter '@agenteschat/setup' build
-docker build -t ghcr.io/agentes-chat/agentes:latest .
+docker build -t ghcr.io/dockplusai-ops/xquads:latest .
 mkdir -p ~/agentes && cp docker-compose.yml ~/agentes/
 AGENTES_INSTALL_SETUP=$PWD/packages/setup/dist/index.js sh install.sh --dir ~/agentes
 ```
@@ -2014,7 +2014,7 @@ compose file it finds and downloads one only when the folder has none. `AGENTES_
 install.sh run your build of the setup with its pinned Bun instead of the published package. When
 Docker needs root on Linux, run that line as `sudo env AGENTES_INSTALL_SETUP=… sh install.sh …`:
 sudo drops the variable otherwise. For the backup profile, build its image too:
-`docker build -t ghcr.io/agentes-chat/backup:latest deploy/backup`.
+`docker build -t ghcr.io/dockplusai-ops/xquads-backup:latest deploy/backup`.
 
 To upgrade, `git pull`, build the image again, copy `docker-compose.yml` again, then
 `docker compose up -d` in `~/agentes`. Skip `docker compose pull` with a local image: it replaces it
@@ -2073,7 +2073,7 @@ again keeps it. Run `docker compose up -d`: the first dump runs right away, unle
 from the last 26 hours (the interval plus 2), and `docker compose logs backup` shows each one. These
 `S3_*` values also serve file storage when `S3_BUCKET` is set, so the key then needs both buckets.
 Outside R2, set `S3_PROVIDER` to rclone's name for the store (`AWS`, `Minio`, `Other` and so on) and
-`S3_REGION` if it needs one. The service runs `ghcr.io/agentes-chat/backup`, published with each
+`S3_REGION` if it needs one. The service runs `ghcr.io/dockplusai-ops/xquads-backup`, published with each
 release under the app's tags; `AGENTES_BACKUP_IMAGE` holds a version the way `AGENTES_IMAGE` does.
 
 ```sh

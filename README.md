@@ -52,7 +52,7 @@ as Grok Bot, ChatGPT dots, OpenBot.run and OpenMausBot (all of which it imports 
 - **Your own server** (Linux):
 
   ```sh
-  curl -fsSL https://agentes.chat/install | sh
+  curl -fsSL https://agents.xquads.com/install | sh
   ```
 
   It installs what's missing (Docker, after asking), and puts agentes.chat on your Tailscale
@@ -87,7 +87,7 @@ OpenRouter) in the app.
 | Desktop app (macOS; Windows and Linux on x64 and ARM64) | Beta | agentes.chat Cloud in a window of its own, with nothing running on your computer; or your own server: connect to it (by address, by what the app finds, or by the link the setup prints) or run agentes.chat on this computer with no Docker (Mac and Linux). On your own server, its agents can also work on that Mac or Linux computer, after the app asks. Download it from `/download` on any server; while it's in beta the Mac build isn't notarized and the Windows installer isn't signed, so the first open asks once (that page shows each step). |
 | Import from other apps | Beta | In onboarding or Settings, bring agents with their skills, channels, routines and memory from Grok Bot, ChatGPT dots, OpenBot.run, OpenMausBot, Hermes Agent, OpenClaw, Paperclip or another agentes.chat workspace. Grok Bot, ChatGPT dots and any other app answer an export prompt. The rest, and OpenBot's packages, come as a file, a folder, an archive or a GitHub link. A preview comes first: skills arrive on, routines active, and keys never. A workspace exports as one file. |
 | 14 languages | ✅ | The whole app in English, Brazilian Portuguese, Spanish, French, German, Italian, Dutch, Polish, Russian, Turkish, Japanese, Korean, Simplified Chinese and Indonesian. |
-| Self-host (Docker) | ✅ | One command (`curl -fsSL https://agentes.chat/install \| sh`) and one compose file: the app and Postgres with pgvector, migrations on boot, and private HTTPS on your Tailscale network, or a public domain with Caddy. |
+| Self-host (Docker) | ✅ | One command (`curl -fsSL https://agents.xquads.com/install \| sh`) and one compose file: the app and Postgres with pgvector, migrations on boot, and private HTTPS on your Tailscale network, or a public domain with Caddy. |
 | Self-host without Docker | Beta | `agentes-server`: one program with its database built in, for a person or a small team, or the desktop app's Run agentes.chat on this computer. |
 
 ## Contributing
@@ -117,5 +117,5 @@ The agentes.chat name, logo and icons are trademarks and are not licensed under 
 
 Questions, ideas and roadmap talk live in the
 [Discussions](https://github.com/agentes-chat/agentes-chat/discussions). Bugs and feature requests
-go in [issues](https://github.com/agentes-chat/agentes-chat/issues), and security reports through
+go in [issues](https://github.com/dockplusai-ops/xquads/issues), and security reports through
 [SECURITY.md](SECURITY.md). Everyone follows the [Code of Conduct](CODE_OF_CONDUCT.md).

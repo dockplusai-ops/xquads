@@ -43,7 +43,7 @@ describe("which screen", () => {
   });
 
   test("the setup's command", () => {
-    expect(INSTALL_COMMAND).toBe("curl -fsSL https://agentes.chat/install | sh");
+    expect(INSTALL_COMMAND).toBe("curl -fsSL https://agents.xquads.com/install | sh");
   });
 
   test("Esc: back a screen, or the window closes; never while xquads is being set up here", () => {

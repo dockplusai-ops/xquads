@@ -738,13 +738,13 @@ export const helpKo: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "서버에서 다음을 실행하세요.",
           {
-            code: "curl -fsSL https://agentes.chat/install | sh",
+            code: "curl -fsSL https://agents.xquads.com/install | sh",
           },
           "없는 것을 설치한 뒤 몇 가지를 묻습니다. 사람들이 접속하는 방법, 이메일, 이 서버를 에이전트의 컴퓨터로도 쓸지, 익명 사용 통계를 보낼지입니다. Enter를 누르면 제안된 답을 고릅니다. 설치 위치는 `/opt/agentes`(이미 Docker를 쓸 수 있는 사용자라면 `~/agentes`)이고, 처음에는 약 2 GB를 내려받습니다.",
           "마지막에 서버 주소와 휴대폰용 QR 코드를 보여 줍니다. 다시 실행해도 괜찮습니다. 설정은 그대로 두고 빠진 것만 채웁니다.",
           "Node.js 18 이상이 있다면 빈 폴더에서 `npx @agenteschat/setup`을 실행해도 같은 설정입니다. Node가 없으면 앱 이미지에서 현재 폴더를 대상으로 실행할 수 있고, 마지막에 나머지를 시작하는 명령을 보여 줍니다.",
           {
-            code: 'docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/agentes-chat/agentes:latest setup',
+            code: 'docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work ghcr.io/dockplusai-ops/xquads:latest setup',
           },
         ],
       },
@@ -801,7 +801,7 @@ export const helpKo: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "설정에서 이 서버를 에이전트의 컴퓨터로도 만들 수 있습니다. 에이전트는 거기서 명령을 실행하고 브라우저를 쓰고 파일을 둡니다. 설정이 물어보며, 서버가 잘 감당할 수 있을 때 예를 제안합니다. Debian 13에서는 에이전트마다 화면이 있는 자기 사용자가 생깁니다. Ubuntu에서는 에이전트가 `agentes`라는 사용자 하나를 함께 씁니다. 아니요라고 답했다면 `--computer yes`를 붙여 설치를 다시 실행하세요.",
           {
-            code: "curl -fsSL https://agentes.chat/install | sh -s -- --computer yes",
+            code: "curl -fsSL https://agents.xquads.com/install | sh -s -- --computer yes",
           },
           "xquads 앱이 있는 Mac이나 다른 서버 같은 컴퓨터는 **설정\u00a0›\u00a0기기**에서 연결합니다([내 컴퓨터와 휴대폰](/help/computers) 참고). Tailscale을 쓴다면 먼저 내 tailnet에 들어가야 합니다.",
         ],
@@ -829,7 +829,7 @@ export const helpKo: Partial<Record<HelpSlug, HelpDocument>> = {
         blocks: [
           "설치 폴더에서 다음을 실행하세요.",
           {
-            code: "curl -fsSLO https://agentes.chat/install/docker-compose.yml\ndocker compose pull\ndocker compose up -d",
+            code: "curl -fsSLO https://agents.xquads.com/install/docker-compose.yml\ndocker compose pull\ndocker compose up -d",
           },
           "새 버전이 시작되면 데이터베이스는 알아서 업데이트됩니다. 설정은 `.env`에 두고 `docker-compose.yml`은 고치지 마세요. 업데이트할 때마다 바뀝니다. 크게 올리기 전에는 백업하세요. 새 버전이 업데이트한 데이터베이스는 이전 버전에서 열리지 않습니다.",
         ],
