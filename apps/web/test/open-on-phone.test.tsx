@@ -55,7 +55,7 @@ describe("Abrir no celular", () => {
         .map((a) => [a.textContent, a.getAttribute("href")]),
     ).toEqual([
       ["TestFlight", "https://testflight.apple.com/join/f5QtGMkg"],
-      ["Google Play", "https://play.google.com/store/apps/details?id=chat.agentes.app"],
+      ["Google Play", "https://play.google.com/store/apps/details?id=com.xquads.app"],
     ]);
     expect(within(app).queryAllByRole("button")).toEqual([]);
     expect(dialog.textContent).toContain("Quem escanear este código entra na sua conta.");
@@ -83,7 +83,7 @@ describe("Abrir no celular", () => {
         .map((b) => [b.textContent, (b as HTMLButtonElement).disabled]),
     ).toEqual([["App StoreEm breve", true]]);
     expect(within(app).getByRole("link", { name: "Google Play" }).getAttribute("href")).toBe(
-      "https://play.google.com/store/apps/details?id=chat.agentes.app",
+      "https://play.google.com/store/apps/details?id=com.xquads.app",
     );
     expect(within(tailscale).getByRole("link", { name: "Google Play" }).getAttribute("href")).toBe(
       "https://play.google.com/store/apps/details?id=com.tailscale.ipn",

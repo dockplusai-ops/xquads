@@ -306,7 +306,7 @@ describe("Configurações → Importar e exportar", () => {
     ]);
     expect([...sheet.querySelectorAll(".imp-do__n")].map((n) => n.textContent)).toEqual(["1", "2", "3", "4", "5"]);
     expect([...sheet.querySelectorAll(".machine-command__code")].map((c) => c.textContent)).toEqual([
-      `Add a custom MCP server called agentes at ${SERVER_URL}`,
+      `Add a custom MCP server called xquads at ${SERVER_URL}`,
     ]);
     const prompt = `Use o servidor MCP do xquads que você acabou de conectar (${SERVER_URL}) para trazer o que você tem para o xquads. Primeiro chame import_summary para ver o que já existe lá e não duplicar nada. Depois, para cada agente, instrução, skill e rotina que você tem, crie o equivalente com create_agent, create_skill e create_routine, e guarde o que cada agente deve lembrar com add_memory.`;
     expect((within(sheet).getByLabelText("Pedido para o seu app de IA") as HTMLTextAreaElement).value).toBe(prompt);

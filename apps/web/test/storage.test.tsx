@@ -126,7 +126,7 @@ describe("Configurações → Armazenamento", () => {
     const ours = within(section()).getByRole("radio", { name: /Armazenamento do xquads/ });
     expect(ours.getAttribute("aria-checked")).toBe("true");
     expect(text(ours.closest("label"))).toBe(
-      "Armazenamento do agentes.chatSeus arquivos ficam no nosso armazenamento, separados por workspace.Nenhum arquivo",
+      "Armazenamento do xquadsSeus arquivos ficam no nosso armazenamento, separados por workspace.Nenhum arquivo",
     );
     expect(section().textContent).not.toContain("Este servidor");
   });
