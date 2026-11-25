@@ -35,7 +35,7 @@ import { useToast } from "@/lib/toast";
 import "./ai-choice.css";
 
 /*
- * The one "Quem pensa" choice (web): Conta, then Modelo and Esforço, for every place that picks an AI (an agent, Lodi,
+ * The one "Quem pensa" choice (web): Conta, then Modelo and Esforço, for every place that picks an AI (an agent, Doki,
  * a new agent, a mission, several agents). The rows, their order and why one can't be used come from `useAiChoice`;
  * this only draws them. Conta is a searchable select: closed, one line (the name, its plan muted, its room); open, each
  * account on two lines (the name over its plan and whose it is), its room at the end and a check on the chosen one. An
@@ -46,7 +46,7 @@ import "./ai-choice.css";
 export type AiChoicePart = "account" | "model" | "effort";
 const ALL_PARTS: readonly AiChoicePart[] = ["account", "model", "effort"];
 
-/** The row a choice stands for: an account by any of its logins, a key, a mission's brain, Lodi's "A do workspace". */
+/** The row a choice stands for: an account by any of its logins, a key, a mission's brain, Doki's "A do workspace". */
 export function rowOfChoice(rows: readonly AiChoiceRow[], c: AiChoice | null | undefined): AiChoiceRow | undefined {
   if (!c) return undefined;
   return rows.find((r) => {
@@ -293,7 +293,7 @@ export function AiChoiceFields({
   const rowOptions: RowOption[] = state.rows.map((r) => ({
     value: r.key,
     label: rowName(t, r),
-    // Lodi's "A do workspace" stands first on its own, with no heading.
+    // Doki's "A do workspace" stands first on its own, with no heading.
     ...(r.group !== "workspace" ? { group: r.group } : {}),
     leading: rowMark(r),
     disabled: !r.usable && !again(r),

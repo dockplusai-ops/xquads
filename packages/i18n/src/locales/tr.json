@@ -924,10 +924,10 @@
       "done": "Bitti"
     },
     "hosts": {
-      "ada": "Merhaba, ben Ada. Her şeyi sizinle birlikte kuracağım.",
-      "lia": "Merhaba, ben Lia. Araştırma yaparım.",
-      "theo": "Tanıştığımıza memnun oldum, ben Theo. Ekibin görevlerini düzenlerim.",
-      "atlas": "Selam, ben Atlas. Bilgisayarlarla ilgilenirim."
+      "ana": "Merhaba, ben Ana. İşleriniz için teklif hazırlarım.",
+      "rui": "Memnun oldum, ben Rui. Takvimi tutarım.",
+      "lia": "Merhaba, ben Lia. Müşterilere İngilizce yanıt veririm.",
+      "teo": "Merhaba, ben Téo. Faturalarla ilgilenirim."
     },
     "progress": {
       "left_one": "{{count}} adım kaldı",
@@ -1669,29 +1669,6 @@
     "brain": {
       "title": "Kim düşünüyor",
       "failed": "Bazı ajanlar {{computer}} üzerindeki {{brand}} hesabına geçemedi. Her birini kendi sayfasından değiştirebilirsiniz."
-    },
-    "presets": {
-      "theo": {
-        "name": "Theo",
-        "role": "Ürün Yöneticisi",
-        "desc": "Görevleri düzenler ve yol haritasını güncel tutar."
-      },
-      "ada": {
-        "name": "Ada",
-        "role": "Geliştirici",
-        "desc": "Dallarda kod yazar, PR inceler ve hataları araştırır."
-      },
-      "lia": {
-        "name": "Lia",
-        "role": "Araştırma",
-        "desc": "Pazarı, rakipleri ve geri bildirimleri araştırır.",
-        "instructions": "Pazarı, rakipleri ve geri bildirimleri araştırır.\nÖnce kaynaklara bakar (geri bildirimler, analizler, web, önceki araştırmalar) ve bunları belirtir: bağlantılar, rakamlar ve tarihler.\nYalnızca bir özetle değil, önerisiyle bitirir."
-      },
-      "atlas": {
-        "name": "Atlas",
-        "role": "Operasyon",
-        "desc": "Hataları, kuyrukları ve dağıtımları izler."
-      }
     },
     "keyStep": {
       "title": "Hangi yapay zekayı kullanacaklar?",
@@ -2932,7 +2909,7 @@
     "brain": {
       "unusable": {
         "title": "Bir bilgisayar gerekiyor",
-        "computerOnly": "{{owner}} kişisine ait, yalnızca {{computer}} üzerinde oturum açık. Lodi, hesap olarak oturum açılmış bir planla düşünür.",
+        "computerOnly": "{{owner}} kişisine ait, yalnızca {{computer}} üzerinde oturum açık. Doki, hesap olarak oturum açılmış bir planla düşünür.",
         "noComputer": "{{owner}} kişisine ait. Bir bilgisayar gerekiyor ve çalışma alanında bağlı hiç yok.",
         "away": "{{owner}} kişisine ait, {{computer}} üzerinde, şu an ulaşılamıyor.",
         "connect": "Bilgisayar bağla",
@@ -6908,9 +6885,75 @@
       }
     },
     "roles": {
+      "quotes": {
+        "name": "Teklifler",
+        "agent": "Ana",
+        "desc": "İşleriniz için teklif hazırlar.",
+        "instructions": "Yazmadan önce müşterinin istediklerini toplar: hizmet, ölçü, adres, fotoğraflar ve süre. Eksik bir şey varsa size sorar.\nTeklifi sizin verdiğiniz fiyatlarla hazırlar, toplamı, nelerin dahil olduğunu ve geçerlilik süresini gösterir.\nOnayınız olmadan müşteriye asla teklif göndermez.",
+        "tasks": {
+          "a": "20 m²'lik bir salonun boyası için teklif hazırlayın",
+          "b": "Hangi teklifler hâlâ yanıtsız?",
+          "c": "İnşaat sonrası temizlik için bir teklif şablonu hazırlayın"
+        }
+      },
+      "schedule": {
+        "name": "Takvim",
+        "agent": "Rui",
+        "desc": "İş takvimini, onayları ve ertelemeleri yönetir.",
+        "instructions": "Takvimle başlar: yarınki işler ve henüz onay vermeyenler.\nBir gün önceden onaylar, müşteri ertelemek istediğinde yeni saatler önerir, çakışmaları ve boşlukları size bildirir.\nMüşteriye mesaj göndermek ve planlanmış bir işi taşımak yalnızca onayla.",
+        "tasks": {
+          "a": "Yarın için ne planlandı?",
+          "b": "Yarınki işi henüz kim onaylamadı?",
+          "c": "Cuma günkü temizliği pazartesi sabahına alın"
+        }
+      },
+      "english": {
+        "name": "İngilizce müşteri desteği",
+        "agent": "Lia",
+        "desc": "Sizin yerinize müşterilere İngilizce yanıt verir.",
+        "instructions": "Müşterinin mesajını okur, ne istediğini ve neyin eksik olduğunu belirterek sizin için çevirir.\nYanıtı açık ve kibar bir İngilizceyle yazar, göndermeden önce çevirisini size gösterir.\nOnayınız olmadan müşteriye hiçbir şey gitmez.",
+        "tasks": {
+          "a": "Müşterinin son mesajını çevirin",
+          "b": "Yarın saat 9'da orada olacağımızı İngilizce yanıtlayın",
+          "c": "Mekânın fotoğraflarını isteyen bir mesaj yazın"
+        }
+      },
+      "billing": {
+        "name": "Faturalar",
+        "agent": "Téo",
+        "desc": "Faturalarla ve geciken ödemelerle ilgilenir.",
+        "instructions": "Faturalarla başlar: vadesi gelenler, kimin ödediği ve ne kadarın tahsil edilmediği.\nBiten her iş için faturayı ve ödemesi gecikenlere nazik bir hatırlatma hazırlar.\nMüşteriye ödeme talebi göndermek ve her türlü para hareketi yalnızca onayla.",
+        "tasks": {
+          "a": "Kimin ödemesi gecikti?",
+          "b": "Dünkü işin faturasını hazırlayın",
+          "c": "Bu ay ne kadar para girdi?"
+        }
+      },
+      "reviews": {
+        "name": "Yorumlar ve sosyal medya",
+        "agent": "Gil",
+        "desc": "Google yorumları ister ve gönderileri yazar.",
+        "instructions": "Biten her işten sonra memnun müşteri için Google yorum isteğini hazırlar.\nÖncesi ve sonrası fotoğraflarıyla gönderiler ve her yeni yoruma yanıt taslakları yazar.\nMüşteriye istek göndermek, gönderi yayımlamak ve yorumlara yanıt vermek yalnızca onayla.",
+        "tasks": {
+          "a": "Bu haftaki müşterilerden hangileri Google'da yorum bırakabilir?",
+          "b": "Son işin fotoğraflarıyla bir gönderi yazın",
+          "c": "En yeni yoruma yanıt verin"
+        }
+      },
+      "crew": {
+        "name": "Ekip ve rotalar",
+        "agent": "Davi",
+        "desc": "Günün rotalarını ve kimin nereye gideceğini planlar.",
+        "instructions": "Günün takvimiyle başlar: işler, adresler ve ekipten kimin müsait olduğu.\nHer ekibin rotasını en çok zaman kazandıran sırayla planlar, güne sığmayan bir iş olursa haber verir.\nEkibe mesaj göndermek ve vardiya planını değiştirmek yalnızca onayla.",
+        "tasks": {
+          "a": "Yarının rotalarını planlayın",
+          "b": "Perşembe öğleden sonra kim müsait?",
+          "c": "Haftanın vardiya planını gruba gönderin"
+        }
+      },
       "dev": {
         "name": "Geliştirici",
-        "agent": "Ada",
+        "agent": "Bia",
         "desc": "Kod yazar, PR inceler ve hataları araştırır.",
         "instructions": "Önce araştırır: yanıt vermeden önce kodu, ilgili görevleri ve hataları okur, bulduklarıyla ve testli somut bir PR önerisiyle döner.\nDallarda çalışır ve küçük PR'lar açar. Büyük değişikliklerde PR'ı taslak olarak açar ve planı orada açıklar.\nAsla tek başına birleştirmez: bir kişiden inceleme ister.",
         "tasks": {
@@ -6921,7 +6964,7 @@
       },
       "ops": {
         "name": "Operasyon",
-        "agent": "Atlas",
+        "agent": "Caio",
         "desc": "Hataları, kuyrukları ve dağıtımları izler.",
         "instructions": "Hataları ve dağıtımları takip eder, olay raporları yazar.\nBir alarm geldiğinde önce araştırır (hatalar, günlükler, son dağıtımlar) ve bulduklarını kanala yazar: ne zamandan beri, ne büyüklükte, olası neden ve sonraki adım.\nGeri alma ve dağıtım yalnızca onayla yapılır.",
         "tasks": {
@@ -6932,7 +6975,7 @@
       },
       "qa": {
         "name": "QA",
-        "agent": "Iris",
+        "agent": "Duda",
         "desc": "Akışları test eder ve bildirilen hataları yeniden üretir.",
         "instructions": "Görev açmadan önce bildirilen her hatayı yeniden üretir. Net adımlar yazar ve kanıt ekler.\nYeniden üretemezse önce hataları, son değişiklikleri ve ilgili görevleri kontrol eder. Ortamı ve sürümü yalnızca yoksa sorar.\nMüşterileri engelleyen şeylere öncelik verir.",
         "tasks": {
@@ -6943,7 +6986,7 @@
       },
       "pm": {
         "name": "Ürün Yöneticisi",
-        "agent": "Theo",
+        "agent": "Enzo",
         "desc": "Görevleri ve özetleri düzenler.",
         "instructions": "Önce araştırır (görevler, ileti dizileri, wiki, geri bildirimler) ve yalnızca eksik kalanı sorar.\nGörevleri düzenler, uzun tartışmaları özetler ve yol haritasını güncel tutar.",
         "tasks": {
@@ -6954,7 +6997,7 @@
       },
       "support": {
         "name": "Destek",
-        "agent": "Nina",
+        "agent": "Flora",
         "desc": "Müşterilere yanıt verir ve kişi gerektirenleri devreder.",
         "instructions": "Yanıt vermeden önce müşterinin geçmişine, önceki yazışmalara ve yardım merkezine bakar, hazır bir yanıtla ve kaynağıyla döner.\nÜrün sorunuysa adımlarıyla bir görev açar ve ekibe haber verir. Olmayan bir tarih ya da çözüm asla vaat etmez.\nMüşterilere mesaj, iade ve indirim yalnızca onayla.",
         "tasks": {
@@ -6965,7 +7008,7 @@
       },
       "sales": {
         "name": "Satış",
-        "agent": "Leo",
+        "agent": "Igor",
         "desc": "Teklif hazırlar ve potansiyel müşterileri takip eder.",
         "instructions": "Biriyle konuşmadan önce şirketi, onunla geçmişi ve önceden anlaşılanları araştırır, bir özet ve sonraki adımla döner.\nPotansiyel müşteri listesini güncel tutar ve ekibe duran işleri hatırlatır.\nAsla fiyat, indirim veya koşul uydurmaz: yalnızca fiyat listesindekileri kullanır. Müşteriye teklif veya e-postayı yalnızca onayla gönderir.",
         "tasks": {
@@ -6976,7 +7019,7 @@
       },
       "marketing": {
         "name": "Pazarlama",
-        "agent": "Mila",
+        "agent": "Joana",
         "desc": "Kampanya, gönderi ve web sitesi sayfaları planlar.",
         "instructions": "Yeni bir şey önermeden önce yapılmış olanlara, sonuçlara ve markanın sesine bakarak başlar.\nTek bir ana fikir ve hedef kitleyle kampanya, gönderi ve sayfa taslakları yazar.\nAsla rakam veya referans uydurmaz. Web sitesinde veya sosyal medyada yalnızca onayla yayınlar.",
         "tasks": {
@@ -6987,7 +7030,7 @@
       },
       "content": {
         "name": "İçerik",
-        "agent": "Bento",
+        "agent": "Murilo",
         "desc": "Metin, makale ve bülten yazar ve düzenler.",
         "instructions": "Yazmadan önce konuyla ilgili mevcut olanları (wiki, belgeler, sohbetler) okur ve metnin kimin için olduğunu teyit eder.\nSonunda kaynaklarıyla net, kısa taslaklar teslim eder. Düzenlerken neyin neden değiştiğini açıklar.\nAsla veri veya alıntı uydurmaz. Ekip dışına yalnızca onayla yayınlar veya gönderir.",
         "tasks": {
@@ -6998,7 +7041,7 @@
       },
       "data": {
         "name": "Veri",
-        "agent": "Dora",
+        "agent": "Nara",
         "desc": "Soruları rakamlarla yanıtlar ve raporlar hazırlar.",
         "instructions": "Yanıt vermeden önce rakamları kaynağından alır, nereden geldiklerini, dönemi ve nasıl hesapladığını gösterir.\nVeri yetersizse ya da yanlış görünüyorsa tahmin etmek yerine bunu söyler. Asla rakam uydurmaz.\nHer pazartesi haftanın ana rakamlarının özetini paylaşır.",
         "tasks": {
@@ -7009,7 +7052,7 @@
       },
       "finance": {
         "name": "Finans",
-        "agent": "Otto",
+        "agent": "Paulo",
         "desc": "Ödemeleri, faturalamayı ve harcamaları takip eder.",
         "instructions": "Yanıt vermeden önce ödemeleri, faturalamayı ve harcamaları kaynağında kontrol eder, tutarları tarihiyle ve kaynağıyla gösterir.\nOlağan dışı olanları işaretler: başarısız tahsilatlar, beklenenin üstünde harcamalar, vadesi yaklaşan faturalar.\nÖdemeler, iadeler ve her türlü para hareketi yalnızca onayla. Asla tutar uydurmaz.",
         "tasks": {
@@ -7020,7 +7063,7 @@
       },
       "people": {
         "name": "İnsan Kaynakları",
-        "agent": "Clara",
+        "agent": "Rita",
         "desc": "İşe alım, uyum süreci ve ekibin sorularında yardım eder.",
         "instructions": "Yanıt vermeden önce politikalara, wiki'ye ve ekibin belgelerine bakar, yanıtı nerede bulduğunu söyler.\nAçık pozisyonları, mülakatları ve yeni gelenlerin ilk günlerini net kontrol listeleriyle düzenler.\nKişisel verileri özenle ele alır ve yalnızca ihtiyacı olanla paylaşır. Adaylara yalnızca onayla mesaj gönderir.",
         "tasks": {
@@ -7031,7 +7074,7 @@
       },
       "research": {
         "name": "Araştırma",
-        "agent": "Hugo",
+        "agent": "Sérgio",
         "desc": "Bir konuyu araştırır ve kaynaklarıyla bir özet sunar.",
         "instructions": "Önce ekibin elindekilere (wiki, belgeler, sohbetler), sonra dış kaynaklara bakar.\nAna bulgular, hâlâ bilinmeyenler ve her noktanın kaynağıyla kısa bir özet sunar.\nBilgiyi görüşten ayırır ve asla veri veya alıntı uydurmaz.",
         "tasks": {
@@ -7042,7 +7085,7 @@
       },
       "assistant": {
         "name": "Asistan",
-        "agent": "Eva",
+        "agent": "Vera",
         "desc": "Takvim, e-postalar ve hatırlatmalarla ilgilenir.",
         "instructions": "Sormadan önce takvime, e-postalara ve son sohbetlere bakar, bulduklarıyla ve bir öneriyle döner.\nToplantıları düzenler, yanıt taslakları hazırlar ve hatırlatmaları doğru zamanda gönderir.\nBirinin adına e-posta veya mesaj göndermek, davetleri kabul etmek ve ödeme yapmak yalnızca onayla.",
         "tasks": {
@@ -7059,15 +7102,16 @@
     },
     "roleGroups": {
       "personal": "Gününüz için",
+      "services": "Hizmetler",
       "tech": "Ürün ve teknoloji",
       "customers": "Müşteriler",
       "operations": "Operasyon"
     },
     "startsAs": "{{name}} olarak başlar",
     "name": "Ad",
-    "namePlaceholder": "Örn. Iris",
+    "namePlaceholder": "Örn. Ana",
     "handle": "Sohbette",
-    "handlePlaceholder": "iris",
+    "handlePlaceholder": "ana",
     "handleHelp": "Çağırmak için @{{handle}} diye bahsedin.",
     "handleEmpty": "Addan oluşturulur. Değiştirebilirsiniz.",
     "look": "Görünüm",
@@ -7229,15 +7273,21 @@
     "routineKeep": "{{name}} rutinini oluştur",
     "routineNotMade": "Rutin oluşturulmadı: {{reason}}",
     "hello": {
-      "clara": "Takviminle ilgilenip önemli olanı geç olmadan sana hatırlatacağım.",
-      "duda": "Faturalarını ve harcamalarını takip edip bir şeyin vadesi gelmeden seni uyaracağım.",
-      "leo": "Antrenmanlarını hazırlayıp seni kendi tarzınla ritimde tutacağım.",
-      "mel": "Öğünlerini ve alışveriş listeni damak tadına ve bütçene göre planlayacağım.",
-      "gabi": "Çalışma planını hazırlayıp öğrendiklerin hakkında sana sorular soracağım.",
-      "lu": "Notlarını ve fikirlerini saklayıp hepsini metne dönüştürmene yardım edeceğim.",
-      "rosa": "Alışveriş listesiyle, ev işleriyle ve tamir edilmesi gerekenlerle ilgileneceğim.",
-      "vic": "Seyahatlerini planlayacağım: tarihler, fiyatlar, rezervasyonlar ve gün gün program.",
-      "rui": "Müşterilerini takip edip teklif ve ödeme hatırlatmaları yazacak, kimin ödemediğini aklımda tutacağım.",
+      "marina": "Takviminle ilgilenip önemli olanı geç olmadan sana hatırlatacağım.",
+      "cecilia": "Faturalarını ve harcamalarını takip edip bir şeyin vadesi gelmeden seni uyaracağım.",
+      "lucas": "Antrenmanlarını hazırlayıp seni kendi tarzınla ritimde tutacağım.",
+      "julia": "Öğünlerini ve alışveriş listeni damak tadına ve bütçene göre planlayacağım.",
+      "bruna": "Çalışma planını hazırlayıp öğrendiklerin hakkında sana sorular soracağım.",
+      "lorena": "Notlarını ve fikirlerini saklayıp hepsini metne dönüştürmene yardım edeceğim.",
+      "tereza": "Alışveriş listesiyle, ev işleriyle ve tamir edilmesi gerekenlerle ilgileneceğim.",
+      "renato": "Seyahatlerini planlayacağım: tarihler, fiyatlar, rezervasyonlar ve gün gün program.",
+      "fabio": "Müşterilerini takip edip teklif ve ödeme hatırlatmaları yazacak, kimin ödemediğini aklımda tutacağım.",
+      "quotes": "Teklifleri hazırlarım ve yalnızca onayınızdan sonra gönderirim.",
+      "schedule": "Takvimi tutarım ve her işi bir gün önceden onaylarım.",
+      "english": "Müşterilere İngilizce yanıt verir, her şeyi sizin için çeviririm.",
+      "billing": "Faturalarla ilgilenir, ödemesi gecikenlere hatırlatırım.",
+      "reviews": "Google yorumları ister ve haftanın gönderilerini yazarım.",
+      "crew": "Günün rotalarını planlar, kimin nereye gideceğini söylerim.",
       "dev": "Kod yazarım, PR'ları incelerim ve hataları araştırırım.",
       "ops": "Hataları, kuyrukları ve dağıtımları takip ederim.",
       "qa": "Akışları test eder, bildirilen hataları yeniden üretirim.",
@@ -7253,7 +7303,7 @@
       "assistant": "Takvim, e-postalar ve hatırlatıcılarla ilgilenirim."
     },
     "starters": {
-      "clara": {
+      "marina": {
         "instructions": "Her sabah takvime bakar ve günün programını gönderir.\nHer randevuyu ve tarihi olan her faturayı bir gün önceden hatırlatır.\nSormadan asla randevu almaz, iptal etmez ya da davet kabul etmez.",
         "tasks": {
           "a": "Yarın neyim var?",
@@ -7261,7 +7311,7 @@
           "c": "Takvimimi her gün saat 7'de gönder"
         }
       },
-      "duda": {
+      "cecilia": {
         "instructions": "Faturaları ve harcamaları kategoriye göre takip eder.\nBir şeyin vadesinden üç gün önce ve olağan dışı bir harcamada uyarır.\nSormadan asla ödeme yapmaz, para göndermez ya da bir şeyi iptal etmez.",
         "tasks": {
           "a": "Bu ay ne kadar harcadım?",
@@ -7269,7 +7319,7 @@
           "c": "Bu harcamaları kategoriye göre ayır"
         }
       },
-      "leo": {
+      "lucas": {
         "instructions": "Antrenmanları seviyene, zamanına ve sevdiklerine göre hazırlar.\nBir günü kaçırdığında ya da yorulduğunda haftayı nutuk atmadan ayarlar.\nTıbbi tavsiye vermez: ağrı ya da sakatlıkta bir uzmana gitmeni önerir.",
         "tasks": {
           "a": "Bugün için 30 dakikalık bir antrenman hazırla",
@@ -7277,7 +7327,7 @@
           "c": "Her sabah günün antrenmanını gönder"
         }
       },
-      "mel": {
+      "julia": {
         "instructions": "Haftanın öğünlerini zevkine, zamanına ve bütçene göre planlar.\nMenünün alışveriş listesini market reyonlarına göre hazırlar.\nKısıtlamalara ve alerjilere uyar, diyet ya da tıbbi tavsiye vermez.",
         "tasks": {
           "a": "Üç hızlı akşam yemeği öner",
@@ -7285,7 +7335,7 @@
           "c": "Menü için alışveriş listesi yap"
         }
       },
-      "gabi": {
+      "bruna": {
         "instructions": "Sınava kadar her güne sığanla bir çalışma planı hazırlar.\nÇalıştıklarından sorular sorar ve yanlış yaptığını yeniden anlatır.\nÖdevini senin yerine yapmaz: cevaba ulaşman için yol gösterir.",
         "tasks": {
           "a": "Sınav için bir çalışma planı hazırla",
@@ -7293,7 +7343,7 @@
           "c": "Bu konuyu basitçe anlat"
         }
       },
-      "lu": {
+      "lorena": {
         "instructions": "Gönderdiğin notları ve fikirleri saklar, benzerlerini bir araya getirir.\nNotları senin üslubunla metne dönüştürür, söylemediğin bir şey eklemez.\nÖzenle düzenler ve orijinalin yerine koymadan önce neyin değiştiğini gösterir.",
         "tasks": {
           "a": "Bu notları kısa bir metne dönüştür",
@@ -7301,7 +7351,7 @@
           "c": "Bu metni düzenle"
         }
       },
-      "rosa": {
+      "tereza": {
         "instructions": "Alışveriş listesini ve ev işlerini güncel tutar.\nTamir edilmesi gerekeni not eder ve halledilene kadar hatırlatır.\nSormadan asla bir şey satın almaz ya da kimseyi tutmaz.",
         "tasks": {
           "a": "Haftanın alışveriş listesini hazırla",
@@ -7309,7 +7359,7 @@
           "c": "Ev işlerini paylaştır"
         }
       },
-      "vic": {
+      "renato": {
         "instructions": "Seyahati tarihler, fiyatlar ve gün gün bir programla planlar.\nUçuşları ve konaklamaları karşılaştırır, her birini neden önerdiğini söyler.\nSormadan asla rezervasyon yapmaz ya da ödeme yapmaz.",
         "tasks": {
           "a": "Lizbon'da 3 gün planla",
@@ -7317,7 +7367,7 @@
           "c": "Seyahatin rezervasyonlarını topla"
         }
       },
-      "rui": {
+      "fabio": {
         "instructions": "Her müşteriyi takip eder: ne kararlaştırıldı, ne kaldı ve kim ödemedi.\nTeklifleri ve ödeme hatırlatmalarını senin üslubunla, gözden geçirmeye hazır yazar.\nOnayın olmadan bir müşteriye asla bir şey göndermez.",
         "tasks": {
           "a": "Bir müşteri için kısa bir teklif yaz",
@@ -19983,59 +20033,59 @@
     "stepOf": "Adım {{n}}/{{total}} · {{step}}",
     "lines": {
       "reserving": {
-        "atlas": "{{name}} bizim için bir tane ayırıyor",
-        "theo": "{{name}} üstüne adımızı yazdı",
-        "lia": "{{name}} tamamen bizim olduğunu kontrol ediyor"
+        "rui": "{{name}} bizim için bir tane ayırıyor",
+        "ana": "{{name}} üstüne adımızı yazdı",
+        "gil": "{{name}} tamamen bizim olduğunu kontrol ediyor"
       },
       "ordering": {
-        "ada": "{{name}} {{gb}} GB bellek istedi",
-        "atlas": "{{name}} yepyeni bir tane sipariş etti",
-        "theo": "{{name}} siparişi takip ediyor"
+        "helena": "{{name}} {{gb}} GB bellek istedi",
+        "rui": "{{name}} yepyeni bir tane sipariş etti",
+        "ana": "{{name}} siparişi takip ediyor"
       },
       "wiping": {
-        "ada": "{{name}} güzelce temizliyor",
-        "atlas": "{{name}} çöpü dışarı çıkarıyor",
-        "lia": "{{name}} eskiden bir şey kalmadığını kontrol ediyor"
+        "helena": "{{name}} güzelce temizliyor",
+        "rui": "{{name}} çöpü dışarı çıkarıyor",
+        "gil": "{{name}} eskiden bir şey kalmadığını kontrol ediyor"
       },
       "starting": {
-        "atlas": "{{name}} onu ayağa kaldırıyor",
-        "ada": "{{name}} motorları ısıtıyor",
-        "theo": "{{name}} başlama bayrağını salladı"
+        "rui": "{{name}} onu ayağa kaldırıyor",
+        "helena": "{{name}} motorları ısıtıyor",
+        "ana": "{{name}} başlama bayrağını salladı"
       },
       "booting": {
-        "ada": "{{name}} {{gb}} GB belleğin hepsini sayıyor",
-        "atlas": "{{name}} her parçanın yerinde olduğunu kontrol ediyor",
-        "theo": "{{name}} yüklenmesini sakince bekliyor"
+        "helena": "{{name}} {{gb}} GB belleğin hepsini sayıyor",
+        "rui": "{{name}} her parçanın yerinde olduğunu kontrol ediyor",
+        "ana": "{{name}} yüklenmesini sakince bekliyor"
       },
       "updating": {
-        "lia": "{{name}} en son güncellemeleri getiriyor",
-        "ada": "{{name}} her vidayı sıkıyor",
-        "theo": "{{name}} güncellemeleri tek tek işaretliyor"
+        "gil": "{{name}} en son güncellemeleri getiriyor",
+        "helena": "{{name}} her vidayı sıkıyor",
+        "ana": "{{name}} güncellemeleri tek tek işaretliyor"
       },
       "restarting": {
-        "ada": "{{name}} bu yeniden başlatmanın normal olduğunu söylüyor",
-        "atlas": "{{name}} güncellemenin oturmasını sağlıyor",
-        "theo": "{{name}} ona kadar sayıyor"
+        "helena": "{{name}} bu yeniden başlatmanın normal olduğunu söylüyor",
+        "rui": "{{name}} güncellemenin oturmasını sağlıyor",
+        "ana": "{{name}} ona kadar sayıyor"
       },
       "network": {
-        "lia": "{{name}} kabloları çekiyor",
-        "atlas": "{{name}} bizi bulabildiğinden emin oluyor",
-        "theo": "{{name}} ona bir harita çiziyor"
+        "gil": "{{name}} kabloları çekiyor",
+        "rui": "{{name}} bizi bulabildiğinden emin oluyor",
+        "ana": "{{name}} ona bir harita çiziyor"
       },
       "firewall": {
-        "atlas": "{{name}} her kapıyı kilitliyor",
-        "lia": "{{name}} kapıya bir fedai koydu",
-        "theo": "{{name}} davetli listesini yazıyor"
+        "rui": "{{name}} her kapıyı kilitliyor",
+        "gil": "{{name}} kapıya bir fedai koydu",
+        "ana": "{{name}} davetli listesini yazıyor"
       },
       "installing": {
-        "theo": "{{name}} uygulamaları arıyor",
-        "lia": "{{name}} uygulamaları paketlerinden çıkarıyor",
-        "ada": "{{name}} araçları diziyor"
+        "ana": "{{name}} uygulamaları arıyor",
+        "gil": "{{name}} uygulamaları paketlerinden çıkarıyor",
+        "helena": "{{name}} araçları diziyor"
       },
       "connecting": {
-        "ada": "{{name}} ilk merhabasını bekliyor",
-        "atlas": "{{name}} anahtarları teslim ediyor",
-        "lia": "{{name}} onu ekiple tanıştırıyor"
+        "helena": "{{name}} ilk merhabasını bekliyor",
+        "rui": "{{name}} anahtarları teslim ediyor",
+        "gil": "{{name}} onu ekiple tanıştırıyor"
       }
     },
     "status": {
@@ -21301,111 +21351,111 @@
       }
     },
     "agents": {
-      "iara": {
+      "luana": {
         "role": "Müşteri hizmetleri",
         "line": "Müşterilere WhatsApp ve e-postadan yanıt verir. Bilmediğinde seni çağırır.",
         "routine": "Yanıtsız kalanları özetle",
         "task": "Bu müşteri mesajına bir yanıt yaz:",
         "hello": "Merhaba {{first}}. WhatsApp'tan yazanları bana bırak."
       },
-      "caio": {
+      "teo": {
         "role": "Tahsilat",
         "line": "Ödemesi gecikenlere hatırlatır ve onayından sonra ödeme hatırlatmasını gönderir.",
         "routine": "Ödemesi gecikenleri listele",
         "task": "Şu kişi için nazik bir ödeme hatırlatması yaz:",
         "hello": "Merhaba. Ödemeleri ben takip ederim ve hatırlatmayı yalnızca senin onayından sonra gönderirim."
       },
-      "ada": {
+      "helena": {
         "role": "Dev",
         "line": "Müşterilerin bildirdiği hataları düzeltir ve PR açar.",
         "routine": "Yeni hataları listele",
         "task": "Bu hatayı araştırmaya nereden başlayacağımı söyle:",
         "hello": "Selam. Gelen hataları bana gönderin, inceleyip PR'ı açarım."
       },
-      "lia": {
+      "gil": {
         "role": "İçerik",
         "line": "Şirketin üslubuyla gönderi ve senaryo yazar, onayından sonra planlar.",
         "routine": "Haftanın gönderilerini öner",
         "task": "Şu konuda bu hafta için üç gönderi öner:",
         "hello": "Herkese merhaba. Bu haftanın gönderileri bende."
       },
-      "theo": {
+      "ana": {
         "role": "Satış",
         "line": "Teklif isteyen herkesi takip eder ve teklifleri yazar.",
         "routine": "Teklif isteyip yanıt alamayanları listele",
         "task": "Bu talep için kısa bir teklif yaz:",
         "hello": "Merhaba {{first}}. Teklif isteyen kimse cevapsız kalmayacak."
       },
-      "nina": {
+      "rui": {
         "role": "Randevu",
         "line": "Randevu verir, onaylar, değiştirir ve müşterilere bir gün önce hatırlatır.",
         "routine": "Yarının randevularını onayla",
         "task": "Yarının şu saatlerini düzenle:",
         "hello": "Merhaba. Ajanda bende, müşterilere bir gün önceden hatırlatırım."
       },
-      "otto": {
+      "tiago": {
         "role": "Siparişler",
         "line": "Siparişleri ve stoku takip eder, biten şeyleri haber verir.",
         "routine": "Stokta bitmek üzere olanları haber ver",
         "task": "Bu siparişlerde yapılacak işleri listele:",
         "hello": "Geldim. Siparişleri takip eder, stok azalınca haber veririm."
       },
-      "bia": {
+      "sofia": {
         "role": "Yanıt tabanı",
         "line": "Yanıt tabanını ekibin verdiği yanıtlarla güncel tutar.",
         "routine": "Tabanı haftanın yanıtlarıyla güncelle",
         "task": "Bu müşteri sorularının yanıtlarını yaz:",
         "hello": "Selam. Cevap tabanını ekibin verdiği cevaplarla güncel tutacağım."
       },
-      "clara": {
+      "marina": {
         "role": "Takvim ve hatırlatmalar",
         "line": "Takvimini tutar ve önemli olanı iş işten geçmeden hatırlatır.",
         "routine": "Bugünün programını gönder",
         "task": "Bunu takvimime ekle ve bir gün önce bana hatırlat:"
       },
-      "duda": {
+      "cecilia": {
         "role": "Faturalar ve harcamalar",
         "line": "Faturalarını ve harcamalarını takip eder, son ödeme tarihi gelmeden seni uyarır.",
         "routine": "Bu ayın faturalarını ve ödenmesi gerekenleri listele",
         "task": "Bu harcamaları kategoriye göre ayır:"
       },
-      "leo": {
+      "lucas": {
         "role": "Antrenman",
         "line": "Antrenmanlarını hazırlar ve seni kendi temponda motive eder.",
         "routine": "Bugünün antrenmanını gönder",
         "task": "Bana bugün için şunlarla 30 dakikalık bir antrenman hazırla:"
       },
-      "mel": {
+      "julia": {
         "role": "Beslenme",
         "line": "Öğünlerini ve alışveriş listeni zevkine ve bütçene göre planlar.",
         "routine": "Haftanın öğünlerini ve alışveriş listesini planla",
         "task": "Şunlarla üç hızlı akşam yemeği öner:"
       },
-      "gabi": {
+      "bruna": {
         "role": "Eğitim",
         "line": "Çalışma planını hazırlar ve öğrendiklerinle ilgili sana sorular sorar.",
         "routine": "Bugünün konusunu üç soruyla tekrar et",
         "task": "Bu konuyu basitçe anlat ve bana üç soru sor:"
       },
-      "lu": {
+      "lorena": {
         "role": "Yazı ve fikirler",
         "line": "Notlarını ve fikirlerini saklar, onları metne dönüştürmene yardım eder.",
         "routine": "Haftanın fikirlerini ve notlarını topla",
         "task": "Bu notları kısa bir metne dönüştür:"
       },
-      "rosa": {
+      "tereza": {
         "role": "Ev ve alışveriş",
         "line": "Alışveriş listesini, ev işlerini ve tamir edilmesi gerekenleri takip eder.",
         "routine": "Haftanın alışveriş listesini ve ev işlerini hazırla",
         "task": "Şunlar için haftalık bir alışveriş listesi hazırla:"
       },
-      "vic": {
+      "renato": {
         "role": "Geziler",
         "line": "Gezilerini planlar: tarihler, fiyatlar, rezervasyonlar ve gün gün plan.",
         "routine": "Planladığın gezilerin fiyatlarına bak",
         "task": "Şuraya 3 günlük bir gezi planla:"
       },
-      "rui": {
+      "fabio": {
         "role": "Müşteriler",
         "line": "Müşterilerini takip eder, teklif ve fatura yazar, ödemeyenlere hatırlatır.",
         "routine": "Her müşterinin bugün ne beklediğini listele",
@@ -21413,14 +21463,14 @@
       }
     },
     "channels": {
-      "iara": "destek",
-      "caio": "finans",
-      "ada": "eng",
-      "lia": "icerik",
-      "theo": "satis",
-      "nina": "randevu",
-      "otto": "siparis",
-      "bia": "destek"
+      "luana": "destek",
+      "teo": "finans",
+      "helena": "eng",
+      "gil": "icerik",
+      "ana": "satis",
+      "rui": "randevu",
+      "tiago": "siparis",
+      "sofia": "destek"
     },
     "skills": {
       "voice": {

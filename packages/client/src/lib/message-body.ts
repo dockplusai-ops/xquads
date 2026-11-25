@@ -155,7 +155,7 @@ export function serverBody(t: TFunction, body: string, meta: Meta, locale?: stri
     const window = typeof params.window === "string" && params.window ? usageWindowText(t, params.window) : "";
     return t(`chat.body.${code}`, { ...params, window, defaultValue: body });
   }
-  // Lodi's weekly card (ADR 0137 §9): its week in the reader's words; a list without the locale keeps the body, which
+  // Doki's weekly card (ADR 0137 §9): its week in the reader's words; a list without the locale keeps the body, which
   // the server wrote in the person's language.
   if (code === "team_week")
     return locale && typeof params.from === "string" && typeof params.to === "string"

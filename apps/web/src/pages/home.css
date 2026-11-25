@@ -178,7 +178,7 @@ html:not([data-pointer]) :is(a, button).home-row:focus-visible {
 }
 
 /* The right hand's first run while a row is left (ADR 0155 §6): one line back to its checklist. */
-/* A MediaRow (the kit's `.ac-mediarow`): Lodi's face on the first line of words that wrap on a phone, the chevron at
+/* A MediaRow (the kit's `.ac-mediarow`): Doki's face on the first line of words that wrap on a phone, the chevron at
    that line's end; one line sits in the middle of the row. */
 .home-continue {
   align-content: center;

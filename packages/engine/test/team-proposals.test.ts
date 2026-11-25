@@ -494,9 +494,9 @@ describe("team templates", () => {
     const software = list.find((t) => t.id === "software");
     expect(software?.name).toBe("Software e apps");
     expect(software?.team.agents.map((a) => [a.name, a.channel])).toEqual([
-      ["Iara", "atendimento"],
-      ["Caio", "financeiro"],
-      ["Ada", "eng"],
+      ["Luana", "atendimento"],
+      ["Téo", "financeiro"],
+      ["Helena", "eng"],
     ]);
     expect(software?.team.weekly).not.toBeNull();
     expect(software?.team.skills.map((s) => s.title)).toEqual(["Tom de voz", "Régua de cobrança"]);
@@ -517,7 +517,7 @@ describe("team templates", () => {
     const card = await cardOf(f, used.messageId);
     expect(card.params.template).toBe("clinic");
     expect(card.state).toBe("created");
-    expect(card.params.agents.map((a) => a.name)).toEqual(["Nina", "Caio", "Iara"]);
+    expect(card.params.agents.map((a) => a.name)).toEqual(["Rui", "Téo", "Luana"]);
     expect(card.created?.agentIds).toHaveLength(3);
     const rows = await f.db.select().from(schema.messages).where(eq(schema.messages.channelId, used.channelId));
     expect(rows.some((m) => m.meta.replyChips)).toBe(false);
@@ -532,8 +532,8 @@ describe("team templates", () => {
     const life = list.find((t) => t.id === "life");
     expect(life?.name).toBe("Vida em ordem");
     expect(life?.team.agents.map((a) => [a.name, a.channel])).toEqual([
-      ["Clara", ""],
-      ["Duda", ""],
+      ["Marina", ""],
+      ["Cecília", ""],
     ]);
     for (const t of list) {
       expect(t.team.newChannels).toEqual([]);
@@ -570,6 +570,6 @@ describe("team templates", () => {
     f = await setup({ rightHand: true });
     const used = await useTeamTemplate({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, "health", "en");
     expect(used).toMatchObject({ state: "created", error: null });
-    expect((await cardOf(f, used.messageId)).params.agents.map((a) => a.name)).toEqual(["Léo", "Mel"]);
+    expect((await cardOf(f, used.messageId)).params.agents.map((a) => a.name)).toEqual(["Lucas", "Júlia"]);
   });
 });

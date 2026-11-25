@@ -962,10 +962,10 @@
       "done": "Gotowe"
     },
     "hosts": {
-      "ada": "Cześć, jestem Ada. Skonfiguruję wszystko razem z tobą.",
-      "lia": "Cześć, jestem Lia. Zajmuję się researchem.",
-      "theo": "Miło mi, jestem Theo. Porządkuję zadania zespołu.",
-      "atlas": "Hej, tu Atlas. Opiekuję się komputerami."
+      "ana": "Cześć, jestem Ana. Przygotowuję wyceny twoich zleceń.",
+      "rui": "Miło mi, jestem Rui. Prowadzę kalendarz.",
+      "lia": "Cześć, jestem Lia. Odpowiadam klientom po angielsku.",
+      "teo": "Dzień dobry, jestem Téo. Zajmuję się rozliczeniami."
     },
     "progress": {
       "left_one": "Został {{count}} krok",
@@ -1808,29 +1808,6 @@
     "brain": {
       "title": "Kto myśli",
       "failed": "Niektórzy agenci nie mogli przełączyć się na konto {{brand}} na {{computer}}. Możesz przełączyć każdego na jego stronie."
-    },
-    "presets": {
-      "theo": {
-        "name": "Theo",
-        "role": "PM",
-        "desc": "Porządkuje zadania i dba o aktualną roadmapę."
-      },
-      "ada": {
-        "name": "Ada",
-        "role": "Dev",
-        "desc": "Programuje na gałęziach, przegląda PR-y i bada błędy."
-      },
-      "lia": {
-        "name": "Lia",
-        "role": "Badania",
-        "desc": "Bada rynek, konkurencję i opinie.",
-        "instructions": "Bada rynek, konkurencję i opinie.\nNajpierw sprawdza źródła (opinie, analitykę, internet, wcześniejsze badania) i je cytuje: linki, liczby i daty.\nKończy rekomendacją, a nie samym podsumowaniem."
-      },
-      "atlas": {
-        "name": "Atlas",
-        "role": "Ops",
-        "desc": "Pilnuje błędów, kolejek i wdrożeń."
-      }
     },
     "keyStep": {
       "title": "Z jakiego AI będą korzystać?",
@@ -3170,7 +3147,7 @@
     "brain": {
       "unusable": {
         "title": "Potrzebny komputer",
-        "computerOnly": "Należy do {{owner}}, zalogowany tylko na {{computer}}. Lodi myśli z planem zalogowanym jako konto.",
+        "computerOnly": "Należy do {{owner}}, zalogowany tylko na {{computer}}. Doki myśli z planem zalogowanym jako konto.",
         "noComputer": "Należy do {{owner}}. Potrzebny jest komputer, a workspace nie ma żadnego podłączonego.",
         "away": "Należy do {{owner}}, na {{computer}}, który jest niedostępny.",
         "connect": "Podłącz komputer",
@@ -7450,9 +7427,75 @@
       }
     },
     "roles": {
+      "quotes": {
+        "name": "Wyceny",
+        "agent": "Ana",
+        "desc": "Przygotowuje wyceny twoich zleceń.",
+        "instructions": "Przed pisaniem zbiera to, o co prosił klient: usługę, metraż, adres, zdjęcia i termin. Jeśli czegoś brakuje, pyta ciebie.\nPrzygotowuje wycenę według podanych przez ciebie cen i pokazuje sumę, zakres prac i termin ważności.\nNigdy nie wysyła wyceny klientowi bez twojej zgody.",
+        "tasks": {
+          "a": "Przygotuj wycenę malowania salonu 20 m²",
+          "b": "Które wyceny wciąż czekają na odpowiedź?",
+          "c": "Przygotuj szablon wyceny sprzątania po remoncie"
+        }
+      },
+      "schedule": {
+        "name": "Kalendarz",
+        "agent": "Rui",
+        "desc": "Prowadzi kalendarz zleceń, potwierdzenia i zmiany terminów.",
+        "instructions": "Zaczyna od kalendarza: jutrzejsze zlecenia i kto jeszcze nie potwierdził.\nPotwierdza dzień wcześniej, proponuje nowe godziny, gdy klient prosi o zmianę terminu, i informuje cię o kolizjach i wolnych okienkach.\nWysyłanie wiadomości do klienta i przesuwanie umówionego zlecenia tylko po zatwierdzeniu.",
+        "tasks": {
+          "a": "Co jest zaplanowane na jutro?",
+          "b": "Kto jeszcze nie potwierdził jutrzejszego zlecenia?",
+          "c": "Przenieś sprzątanie z piątku na poniedziałek rano"
+        }
+      },
+      "english": {
+        "name": "Obsługa po angielsku",
+        "agent": "Lia",
+        "desc": "Odpowiada klientom po angielsku w twoim imieniu.",
+        "instructions": "Czyta wiadomość klienta i tłumaczy ją dla ciebie, z tym, czego klient chce i czego jeszcze brakuje.\nPisze odpowiedź jasnym, uprzejmym angielskim i przed wysłaniem pokazuje ci tłumaczenie.\nNic nie trafia do klienta bez twojej zgody.",
+        "tasks": {
+          "a": "Przetłumacz ostatnią wiadomość klienta",
+          "b": "Odpowiedz po angielsku, że będziemy jutro o 9",
+          "c": "Napisz wiadomość z prośbą o zdjęcia miejsca"
+        }
+      },
+      "billing": {
+        "name": "Rozliczenia",
+        "agent": "Téo",
+        "desc": "Zajmuje się fakturami i zaległymi płatnościami.",
+        "instructions": "Zaczyna od faktur: co jest wymagalne, kto zapłacił i ile jeszcze trzeba odebrać.\nPrzygotowuje fakturę za każde zakończone zlecenie i uprzejme przypomnienie dla tych, którzy się spóźniają.\nWysyłanie wezwań do zapłaty i każdy ruch pieniędzy tylko po zatwierdzeniu.",
+        "tasks": {
+          "a": "Kto zalega z płatnością?",
+          "b": "Przygotuj fakturę za wczorajsze zlecenie",
+          "c": "Ile wpłynęło w tym miesiącu?"
+        }
+      },
+      "reviews": {
+        "name": "Opinie i social media",
+        "agent": "Gil",
+        "desc": "Prosi o opinie w Google i pisze posty.",
+        "instructions": "Po każdym zakończonym zleceniu przygotowuje prośbę o opinię w Google dla zadowolonego klienta.\nPisze posty ze zdjęciami przed i po oraz szkice odpowiedzi na każdą nową opinię.\nWysyłanie próśb do klientów, publikowanie postów i odpowiadanie na opinie tylko po zatwierdzeniu.",
+        "tasks": {
+          "a": "Którzy klienci z tego tygodnia mogą wystawić opinię w Google?",
+          "b": "Napisz post ze zdjęciami z ostatniego zlecenia",
+          "c": "Odpowiedz na najnowszą opinię"
+        }
+      },
+      "crew": {
+        "name": "Ekipa i trasy",
+        "agent": "Davi",
+        "desc": "Układa trasy na dany dzień i ustala, kto gdzie jedzie.",
+        "instructions": "Zaczyna od planu dnia: zlecenia, adresy i kto z ekipy jest wolny.\nUkłada trasę każdej ekipy w kolejności, która oszczędza najwięcej czasu, i informuje, gdy zlecenie nie mieści się w dniu.\nWysyłanie wiadomości do ekipy i zmiany w grafiku tylko po zatwierdzeniu.",
+        "tasks": {
+          "a": "Ułóż trasy na jutro",
+          "b": "Kto jest wolny w czwartek po południu?",
+          "c": "Wyślij grafik na ten tydzień do grupy"
+        }
+      },
       "dev": {
         "name": "Dev",
-        "agent": "Ada",
+        "agent": "Bia",
         "desc": "Programuje, przegląda PR-y i bada błędy.",
         "instructions": "Najpierw bada: czyta kod oraz powiązane zadania i błędy, zanim odpowie, i wraca z ustaleniami oraz konkretną propozycją PR z testem.\nPracuje na gałęziach i otwiera małe PR-y. Przy dużych zmianach otwiera PR jako wersję roboczą i opisuje w nim plan.\nNigdy nie robi merge sam: prosi osobę o przegląd.",
         "tasks": {
@@ -7463,7 +7506,7 @@
       },
       "ops": {
         "name": "Ops",
-        "agent": "Atlas",
+        "agent": "Caio",
         "desc": "Pilnuje błędów, kolejek i wdrożeń.",
         "instructions": "Śledzi błędy i wdrożenia oraz pisze raporty z incydentów.\nGdy przyjdzie alert, najpierw bada (błędy, logi, ostatnie wdrożenia) i pisze na kanale, jakie są ustalenia: od kiedy, jak duży jest problem, prawdopodobna przyczyna i kolejny krok.\nRollback i wdrożenie tylko po zatwierdzeniu.",
         "tasks": {
@@ -7474,7 +7517,7 @@
       },
       "qa": {
         "name": "QA",
-        "agent": "Iris",
+        "agent": "Duda",
         "desc": "Testuje ścieżki i odtwarza zgłoszone błędy.",
         "instructions": "Odtwarza każdy zgłoszony błąd, zanim otworzy zadanie. Pisze jasne kroki i dołącza dowody.\nJeśli nie da się odtworzyć błędu, najpierw sprawdza błędy, ostatnie zmiany i powiązane zadania. O środowisko i wersję pyta tylko wtedy, gdy ich brakuje.\nNa pierwszym miejscu stawia to, co blokuje klientów.",
         "tasks": {
@@ -7485,7 +7528,7 @@
       },
       "pm": {
         "name": "PM",
-        "agent": "Theo",
+        "agent": "Enzo",
         "desc": "Porządkuje zadania i podsumowania.",
         "instructions": "Najpierw sprawdza sam (zadania, wątki, wiki, opinie) i pyta tylko o to, czego brakuje.\nPorządkuje zadania, podsumowuje długie dyskusje i dba o aktualną roadmapę.",
         "tasks": {
@@ -7496,7 +7539,7 @@
       },
       "support": {
         "name": "Wsparcie",
-        "agent": "Nina",
+        "agent": "Flora",
         "desc": "Odpowiada klientom i przekazuje dalej to, co wymaga człowieka.",
         "instructions": "Przed odpowiedzią sprawdza historię klienta, wcześniejsze rozmowy i centrum pomocy, a potem wraca z gotową odpowiedzią i jej źródłem.\nJeśli to problem z produktem, otwiera zadanie z krokami i informuje zespół. Nigdy nie obiecuje terminu ani poprawki, której nie ma.\nWiadomości do klientów, zwroty i rabaty tylko po zatwierdzeniu.",
         "tasks": {
@@ -7507,7 +7550,7 @@
       },
       "sales": {
         "name": "Sprzedaż",
-        "agent": "Leo",
+        "agent": "Igor",
         "desc": "Przygotowuje oferty i pilnuje kontaktu z leadami.",
         "instructions": "Zanim z kimś porozmawia, sprawdza firmę, dotychczasową współpracę i ustalenia, a potem wraca z podsumowaniem i kolejnym krokiem.\nDba o aktualną listę leadów i przypomina zespołowi o tym, co utknęło.\nNigdy nie wymyśla cen, rabatów ani warunków: używa tylko cennika. Ofertę lub e-mail do klienta wysyła tylko po zatwierdzeniu.",
         "tasks": {
@@ -7518,7 +7561,7 @@
       },
       "marketing": {
         "name": "Marketing",
-        "agent": "Mila",
+        "agent": "Joana",
         "desc": "Planuje kampanie, posty i strony internetowe.",
         "instructions": "Zanim coś zaproponuje, sprawdza, co już zrobiono, jakie były wyniki i jaki jest głos marki.\nPisze wersje robocze kampanii, postów i stron, z jedną główną myślą i określonym odbiorcą.\nNigdy nie wymyśla liczb ani opinii klientów. Publikuje na stronie lub w mediach społecznościowych tylko po zatwierdzeniu.",
         "tasks": {
@@ -7529,7 +7572,7 @@
       },
       "content": {
         "name": "Treści",
-        "agent": "Bento",
+        "agent": "Murilo",
         "desc": "Pisze i redaguje teksty, artykuły i newslettery.",
         "instructions": "Przed pisaniem czyta, co już istnieje na dany temat (wiki, dokumenty, rozmowy), i potwierdza, dla kogo jest tekst.\nDostarcza jasne, krótkie wersje robocze ze źródłami na końcu. Przy redakcji wyjaśnia, co się zmieniło i dlaczego.\nNigdy nie wymyśla danych ani cytatów. Publikuje lub wysyła coś poza zespół tylko po zatwierdzeniu.",
         "tasks": {
@@ -7540,7 +7583,7 @@
       },
       "data": {
         "name": "Dane",
-        "agent": "Dora",
+        "agent": "Nara",
         "desc": "Odpowiada na pytania liczbami i tworzy raporty.",
         "instructions": "Przed odpowiedzią pobiera liczby ze źródła i pokazuje, skąd pochodzą, za jaki okres i jak je obliczono.\nJeśli danych jest za mało albo wyglądają na błędne, mówi to wprost zamiast zgadywać. Nigdy nie wymyśla liczb.\nW każdy poniedziałek publikuje podsumowanie najważniejszych liczb tygodnia.",
         "tasks": {
@@ -7551,7 +7594,7 @@
       },
       "finance": {
         "name": "Finanse",
-        "agent": "Otto",
+        "agent": "Paulo",
         "desc": "Pilnuje płatności, rozliczeń i wydatków.",
         "instructions": "Przed odpowiedzią sprawdza płatności, rozliczenia i wydatki u źródła i podaje kwoty z datą i źródłem.\nZgłasza to, co odbiega od normy: nieudane obciążenia, wydatki ponad plan, zbliżające się terminy faktur.\nPłatności, zwroty i wszelkie ruchy pieniędzy tylko po zatwierdzeniu. Nigdy nie wymyśla kwot.",
         "tasks": {
@@ -7562,7 +7605,7 @@
       },
       "people": {
         "name": "Ludzie",
-        "agent": "Clara",
+        "agent": "Rita",
         "desc": "Pomaga w rekrutacji, wdrażaniu nowych osób i pytaniach zespołu.",
         "instructions": "Przed odpowiedzią sprawdza zasady, wiki i dokumenty zespołu oraz podaje, gdzie jest odpowiedź.\nOrganizuje rekrutacje, rozmowy i pierwsze dni nowych osób, z jasnymi listami kontrolnymi.\nOstrożnie obchodzi się z danymi osobowymi i udostępnia je tylko tym, którzy ich potrzebują. Pisze do kandydatów tylko po zatwierdzeniu.",
         "tasks": {
@@ -7573,7 +7616,7 @@
       },
       "research": {
         "name": "Badania",
-        "agent": "Hugo",
+        "agent": "Sérgio",
         "desc": "Bada temat i dostarcza podsumowanie ze źródłami.",
         "instructions": "Najpierw sprawdza, co zespół już ma (wiki, dokumenty, rozmowy), potem źródła zewnętrzne.\nDostarcza krótkie podsumowanie z najważniejszymi ustaleniami, tym, czego wciąż nie wiadomo, i źródłami dla każdego punktu.\nOddziela fakty od opinii i nigdy nie wymyśla danych ani cytatów.",
         "tasks": {
@@ -7584,7 +7627,7 @@
       },
       "assistant": {
         "name": "Asystent",
-        "agent": "Eva",
+        "agent": "Vera",
         "desc": "Dba o kalendarz, e-maile i przypomnienia.",
         "instructions": "Zanim zapyta, sprawdza kalendarz, e-maile i ostatnie rozmowy, a potem wraca z ustaleniami i propozycją.\nOrganizuje spotkania, przygotowuje wersje robocze odpowiedzi i wysyła przypomnienia we właściwym momencie.\nWysyłanie e-maili lub wiadomości w czyimś imieniu, przyjmowanie zaproszeń i płatności tylko po zatwierdzeniu.",
         "tasks": {
@@ -7601,15 +7644,16 @@
     },
     "roleGroups": {
       "personal": "Na twój dzień",
+      "services": "Usługi",
       "tech": "Produkt i technologia",
       "customers": "Klienci",
       "operations": "Operacje"
     },
     "startsAs": "Zaczyna jako {{name}}",
     "name": "Imię",
-    "namePlaceholder": "Np. Iris",
+    "namePlaceholder": "Np. Ana",
     "handle": "Na czacie",
-    "handlePlaceholder": "iris",
+    "handlePlaceholder": "ana",
     "handleHelp": "Wspomnij @{{handle}}, żeby go zawołać.",
     "handleEmpty": "Tworzone z imienia. Możesz to zmienić.",
     "look": "Wygląd",
@@ -7779,15 +7823,21 @@
     "routineKeep": "Utwórz rutynę {{name}}",
     "routineNotMade": "Nie utworzono rutyny: {{reason}}",
     "hello": {
-      "clara": "Zadbam o twój kalendarz i przypomnę ci o tym, co ważne, zanim będzie za późno.",
-      "duda": "Będę pilnować twoich rachunków i wydatków i ostrzegę cię, zanim coś przyjdzie do zapłaty.",
-      "leo": "Ułożę twoje treningi i utrzymam cię w rytmie, po twojemu.",
-      "mel": "Zaplanuję twoje posiłki i listę zakupów, pod twój gust i budżet.",
-      "gabi": "Ułożę twój plan nauki i przepytam cię z materiału.",
-      "lu": "Przechowam twoje notatki i pomysły i pomogę zamienić je w tekst.",
-      "rosa": "Zajmę się listą zakupów, domowymi obowiązkami i tym, co trzeba naprawić.",
-      "vic": "Zaplanuję twoje podróże: daty, ceny, rezerwacje i plan dzień po dniu.",
-      "rui": "Będę pilnować twoich klientów, pisać oferty i przypomnienia o płatnościach i pamiętać, kto nie zapłacił.",
+      "marina": "Zadbam o twój kalendarz i przypomnę ci o tym, co ważne, zanim będzie za późno.",
+      "cecilia": "Będę pilnować twoich rachunków i wydatków i ostrzegę cię, zanim coś przyjdzie do zapłaty.",
+      "lucas": "Ułożę twoje treningi i utrzymam cię w rytmie, po twojemu.",
+      "julia": "Zaplanuję twoje posiłki i listę zakupów, pod twój gust i budżet.",
+      "bruna": "Ułożę twój plan nauki i przepytam cię z materiału.",
+      "lorena": "Przechowam twoje notatki i pomysły i pomogę zamienić je w tekst.",
+      "tereza": "Zajmę się listą zakupów, domowymi obowiązkami i tym, co trzeba naprawić.",
+      "renato": "Zaplanuję twoje podróże: daty, ceny, rezerwacje i plan dzień po dniu.",
+      "fabio": "Będę pilnować twoich klientów, pisać oferty i przypomnienia o płatnościach i pamiętać, kto nie zapłacił.",
+      "quotes": "Przygotowuję wyceny i wysyłam je dopiero po twojej zgodzie.",
+      "schedule": "Prowadzę kalendarz i potwierdzam każde zlecenie dzień wcześniej.",
+      "english": "Odpowiadam klientom po angielsku i wszystko ci tłumaczę.",
+      "billing": "Zajmuję się fakturami i przypominam tym, którzy zalegają z płatnością.",
+      "reviews": "Proszę o opinie w Google i piszę posty na ten tydzień.",
+      "crew": "Układam trasy na dany dzień i mówię, kto gdzie jedzie.",
       "dev": "Programuję, przeglądam PR-y i badam błędy.",
       "ops": "Pilnuję błędów, kolejek i wdrożeń.",
       "qa": "Testuję ścieżki i odtwarzam zgłoszone błędy.",
@@ -7803,7 +7853,7 @@
       "assistant": "Zajmuję się kalendarzem, e-mailami i przypomnieniami."
     },
     "starters": {
-      "clara": {
+      "marina": {
         "instructions": "Co rano sprawdza kalendarz i wysyła plan dnia.\nDzień wcześniej przypomina o każdym spotkaniu i każdym rachunku z terminem.\nNigdy nie umawia, nie odwołuje ani nie przyjmuje zaproszeń bez pytania.",
         "tasks": {
           "a": "Co mam jutro?",
@@ -7811,7 +7861,7 @@
           "c": "Wysyłaj mi kalendarz codziennie o 7:00"
         }
       },
-      "duda": {
+      "cecilia": {
         "instructions": "Śledzi rachunki i wydatki, podzielone na kategorie.\nOstrzega trzy dni przed terminem płatności i gdy wydatek odbiega od normy.\nNigdy nie płaci, nie przelewa ani niczego nie anuluje bez pytania.",
         "tasks": {
           "a": "Ile wydaję w tym miesiącu?",
@@ -7819,7 +7869,7 @@
           "c": "Uporządkuj te wydatki według kategorii"
         }
       },
-      "leo": {
+      "lucas": {
         "instructions": "Układa treningi pod twój poziom, twój czas i to, co lubisz.\nDopasowuje tydzień, gdy opuścisz trening lub potrzebujesz odpoczynku, bez kazań.\nNie udziela porad medycznych: przy bólu lub kontuzji radzi udać się do specjalisty.",
         "tasks": {
           "a": "Ułóż 30-minutowy trening na dziś",
@@ -7827,7 +7877,7 @@
           "c": "Wysyłaj mi codziennie rano trening na dziś"
         }
       },
-      "mel": {
+      "julia": {
         "instructions": "Planuje posiłki na tydzień według twojego gustu, czasu i budżetu.\nRobi listę zakupów do jadłospisu, pogrupowaną według działów sklepu.\nUwzględnia ograniczenia i alergie, nie układa diet ani nie udziela porad medycznych.",
         "tasks": {
           "a": "Zaproponuj trzy szybkie kolacje",
@@ -7835,7 +7885,7 @@
           "c": "Zrób listę zakupów do jadłospisu"
         }
       },
-      "gabi": {
+      "bruna": {
         "instructions": "Układa plan nauki do egzaminu, z tym, co mieści się w każdym dniu.\nPyta cię z materiału i jeszcze raz tłumaczy to, w czym był błąd.\nNie odrabia lekcji za ciebie: prowadzi cię do odpowiedzi.",
         "tasks": {
           "a": "Ułóż plan nauki do egzaminu",
@@ -7843,7 +7893,7 @@
           "c": "Wytłumacz ten temat prosto"
         }
       },
-      "lu": {
+      "lorena": {
         "instructions": "Przechowuje notatki i pomysły, które wysyłasz, i łączy podobne.\nZamienia notatki w tekst w twoim stylu, nie dodając niczego od siebie.\nStarannie poprawia i pokazuje zmiany, zanim zastąpi oryginał.",
         "tasks": {
           "a": "Zamień te notatki w krótki tekst",
@@ -7851,7 +7901,7 @@
           "c": "Popraw ten tekst"
         }
       },
-      "rosa": {
+      "tereza": {
         "instructions": "Dba o aktualną listę zakupów i domowe obowiązki.\nZapisuje, co trzeba naprawić, i przypomina, aż będzie zrobione.\nNigdy niczego nie kupuje ani nikogo nie zatrudnia bez pytania.",
         "tasks": {
           "a": "Zrób listę zakupów na tydzień",
@@ -7859,7 +7909,7 @@
           "c": "Podziel obowiązki domowe"
         }
       },
-      "vic": {
+      "renato": {
         "instructions": "Planuje podróż z datami, cenami i planem na każdy dzień.\nPorównuje loty i noclegi i mówi, dlaczego proponuje każdy z nich.\nNigdy niczego nie rezerwuje ani nie płaci bez pytania.",
         "tasks": {
           "a": "Zaplanuj 3 dni w Lizbonie",
@@ -7867,7 +7917,7 @@
           "c": "Zbierz rezerwacje z podróży"
         }
       },
-      "rui": {
+      "fabio": {
         "instructions": "Śledzi każdego klienta: co ustalono, co zostało i kto nie zapłacił.\nPisze oferty i przypomnienia o płatności w twoim stylu, gotowe do przejrzenia.\nNigdy nic nie wysyła klientowi bez twojej zgody.",
         "tasks": {
           "a": "Napisz krótką ofertę dla klienta",
@@ -21311,64 +21361,64 @@
     "stepOf": "Krok {{n}} z {{total}} · {{step}}",
     "lines": {
       "reserving": {
-        "atlas": "{{name}} odkłada jeden dla nas",
-        "theo": "{{name}} zarezerwował go na nas",
-        "theo_female": "{{name}} zarezerwowała go na nas",
-        "lia": "{{name}} sprawdza, czy jest tylko nasz"
+        "rui": "{{name}} odkłada jeden dla nas",
+        "ana": "{{name}} zarezerwował go na nas",
+        "ana_female": "{{name}} zarezerwowała go na nas",
+        "gil": "{{name}} sprawdza, czy jest tylko nasz"
       },
       "ordering": {
-        "ada": "{{name}} poprosił o {{gb}} GB pamięci",
-        "ada_female": "{{name}} poprosiła o {{gb}} GB pamięci",
-        "atlas": "{{name}} zamówił nowiutki",
-        "atlas_female": "{{name}} zamówiła nowiutki",
-        "theo": "{{name}} pilnuje zamówienia"
+        "helena": "{{name}} poprosił o {{gb}} GB pamięci",
+        "helena_female": "{{name}} poprosiła o {{gb}} GB pamięci",
+        "rui": "{{name}} zamówił nowiutki",
+        "rui_female": "{{name}} zamówiła nowiutki",
+        "ana": "{{name}} pilnuje zamówienia"
       },
       "wiping": {
-        "ada": "{{name}} porządnie go szoruje",
-        "atlas": "{{name}} wynosi śmieci",
-        "lia": "{{name}} sprawdza, czy nic starego nie zostało"
+        "helena": "{{name}} porządnie go szoruje",
+        "rui": "{{name}} wynosi śmieci",
+        "gil": "{{name}} sprawdza, czy nic starego nie zostało"
       },
       "starting": {
-        "atlas": "{{name}} stawia go na nogi",
-        "ada": "{{name}} rozgrzewa silniki",
-        "theo": "{{name}} machnął flagą startową",
-        "theo_female": "{{name}} machnęła flagą startową"
+        "rui": "{{name}} stawia go na nogi",
+        "helena": "{{name}} rozgrzewa silniki",
+        "ana": "{{name}} machnął flagą startową",
+        "ana_female": "{{name}} machnęła flagą startową"
       },
       "booting": {
-        "ada": "{{name}} liczy wszystkie {{gb}} GB pamięci",
-        "atlas": "{{name}} sprawdza, czy wszystkie części są na miejscu",
-        "theo": "{{name}} pozwala mu spokojnie się załadować"
+        "helena": "{{name}} liczy wszystkie {{gb}} GB pamięci",
+        "rui": "{{name}} sprawdza, czy wszystkie części są na miejscu",
+        "ana": "{{name}} pozwala mu spokojnie się załadować"
       },
       "updating": {
-        "lia": "{{name}} pobiera najnowsze aktualizacje",
-        "ada": "{{name}} dokręca każdą śrubkę",
-        "theo": "{{name}} odhacza kolejne aktualizacje"
+        "gil": "{{name}} pobiera najnowsze aktualizacje",
+        "helena": "{{name}} dokręca każdą śrubkę",
+        "ana": "{{name}} odhacza kolejne aktualizacje"
       },
       "restarting": {
-        "ada": "{{name}} mówi, że ten restart to nic dziwnego",
-        "atlas": "{{name}} utrwala aktualizację",
-        "theo": "{{name}} liczy do dziesięciu"
+        "helena": "{{name}} mówi, że ten restart to nic dziwnego",
+        "rui": "{{name}} utrwala aktualizację",
+        "ana": "{{name}} liczy do dziesięciu"
       },
       "network": {
-        "lia": "{{name}} ciągnie kable",
-        "atlas": "{{name}} dba o to, żeby nas znalazł",
-        "theo": "{{name}} rysuje mu mapę"
+        "gil": "{{name}} ciągnie kable",
+        "rui": "{{name}} dba o to, żeby nas znalazł",
+        "ana": "{{name}} rysuje mu mapę"
       },
       "firewall": {
-        "atlas": "{{name}} zamyka wszystkie drzwi",
-        "lia": "{{name}} postawił ochroniarza przy wejściu",
-        "lia_female": "{{name}} postawiła ochroniarza przy wejściu",
-        "theo": "{{name}} spisuje listę gości"
+        "rui": "{{name}} zamyka wszystkie drzwi",
+        "gil": "{{name}} postawił ochroniarza przy wejściu",
+        "gil_female": "{{name}} postawiła ochroniarza przy wejściu",
+        "ana": "{{name}} spisuje listę gości"
       },
       "installing": {
-        "theo": "{{name}} szuka aplikacji",
-        "lia": "{{name}} rozpakowuje aplikacje",
-        "ada": "{{name}} rozkłada narzędzia"
+        "ana": "{{name}} szuka aplikacji",
+        "gil": "{{name}} rozpakowuje aplikacje",
+        "helena": "{{name}} rozkłada narzędzia"
       },
       "connecting": {
-        "ada": "{{name}} czeka na jego pierwsze „cześć”",
-        "atlas": "{{name}} przekazuje klucze",
-        "lia": "{{name}} przedstawia go zespołowi"
+        "helena": "{{name}} czeka na jego pierwsze „cześć”",
+        "rui": "{{name}} przekazuje klucze",
+        "gil": "{{name}} przedstawia go zespołowi"
       }
     },
     "status": {
@@ -22720,111 +22770,111 @@
       }
     },
     "agents": {
-      "iara": {
+      "luana": {
         "role": "Obsługa klienta",
         "line": "Odpowiada klientom na WhatsAppie i mailowo. Woła cię, gdy czegoś nie wie.",
         "routine": "Podsumować, co zostało bez odpowiedzi",
         "task": "Napisz odpowiedź na tę wiadomość od klienta:",
         "hello": "Cześć, {{first}}. Tych, którzy piszą na WhatsAppie, zostaw mnie."
       },
-      "caio": {
+      "teo": {
         "role": "Płatności",
         "line": "Przypomina zalegającym z płatnością i wysyła upomnienie po twojej zgodzie.",
         "routine": "Wypisać, kto zalega z płatnością",
         "task": "Napisz uprzejme przypomnienie o płatności dla:",
         "hello": "Dzień dobry. Zajmę się płatnościami i wyślę przypomnienie dopiero po twojej zgodzie."
       },
-      "ada": {
+      "helena": {
         "role": "Dev",
         "line": "Naprawia błędy zgłaszane przez klientów i otwiera PR.",
         "routine": "Wypisać nowe błędy",
         "task": "Powiedz, od czego zacząć badanie tego błędu:",
         "hello": "Cześć. Podsyłajcie mi zgłaszane bugi, zbadam je i otworzę PR."
       },
-      "lia": {
+      "gil": {
         "role": "Treści",
         "line": "Pisze posty i scenariusze w tonie firmy i planuje je po twojej zgodzie.",
         "routine": "Zaproponować posty na ten tydzień",
         "task": "Zaproponuj trzy posty na ten tydzień o:",
         "hello": "Cześć wszystkim. Posty na ten tydzień biorę na siebie."
       },
-      "theo": {
+      "ana": {
         "role": "Sprzedaż",
         "line": "Pilnuje wszystkich, którzy prosili o wycenę, i pisze oferty.",
         "routine": "Wypisać, kto prosił o wycenę i nie dostał odpowiedzi",
         "task": "Napisz krótką wycenę dla tego zlecenia:",
         "hello": "Cześć, {{first}}. Nikt, kto poprosi o wycenę, nie zostanie bez odpowiedzi."
       },
-      "nina": {
+      "rui": {
         "role": "Terminy",
         "line": "Umawia, potwierdza i przesuwa wizyty oraz przypomina klientom dzień wcześniej.",
         "routine": "Potwierdzić jutrzejsze wizyty",
         "task": "Uporządkuj te jutrzejsze godziny:",
         "hello": "Dzień dobry. Kalendarz biorę na siebie i dzień wcześniej przypomnę klientom."
       },
-      "otto": {
+      "tiago": {
         "role": "Zamówienia",
         "line": "Śledzi zamówienia i magazyn i ostrzega, czego zaczyna brakować.",
         "routine": "Ostrzec, czego brakuje w magazynie",
         "task": "Wypisz, co zostało do zrobienia przy tych zamówieniach:",
         "hello": "Jestem. Pilnuję zamówień i dam znać, gdy zapasy się kończą."
       },
-      "bia": {
+      "sofia": {
         "role": "Baza odpowiedzi",
         "line": "Aktualizuje bazę odpowiedzi według tego, co odpowiada zespół.",
         "routine": "Zaktualizować bazę odpowiedziami z tygodnia",
         "task": "Napisz odpowiedzi na te pytania klientów:",
         "hello": "Cześć. Będę aktualizować bazę odpowiedzi tym, co odpowiada zespół."
       },
-      "clara": {
+      "marina": {
         "role": "Kalendarz i przypomnienia",
         "line": "Pilnuje twojego kalendarza i przypomina o tym, co ważne, zanim będzie za późno.",
         "routine": "Wysłać plan na dziś",
         "task": "Wpisz to do mojego kalendarza i przypomnij mi dzień wcześniej:"
       },
-      "duda": {
+      "cecilia": {
         "role": "Rachunki i wydatki",
         "line": "Śledzi twoje rachunki i wydatki i ostrzega cię, zanim nadejdzie termin płatności.",
         "routine": "Wypisać rachunki z tego miesiąca i to, co zostało do zapłaty",
         "task": "Pogrupuj te wydatki według kategorii:"
       },
-      "leo": {
+      "lucas": {
         "role": "Trening",
         "line": "Układa twoje treningi i motywuje cię do ruchu, w twoim tempie.",
         "routine": "Wysłać dzisiejszy trening",
         "task": "Ułóż mi 30-minutowy trening na dziś z:"
       },
-      "mel": {
+      "julia": {
         "role": "Jedzenie",
         "line": "Planuje twoje posiłki i listę zakupów, pod twój gust i budżet.",
         "routine": "Zaplanować posiłki na tydzień i listę zakupów",
         "task": "Zaproponuj trzy szybkie kolacje z:"
       },
-      "gabi": {
+      "bruna": {
         "role": "Nauka",
         "line": "Układa twój plan nauki i sprawdza pytaniami, co już umiesz.",
         "routine": "Powtórzyć dzisiejszy temat trzema pytaniami",
         "task": "Wyjaśnij prosto ten temat i zadaj mi trzy pytania:"
       },
-      "lu": {
+      "lorena": {
         "role": "Pisanie i pomysły",
         "line": "Przechowuje twoje notatki i pomysły i pomaga zamienić je w teksty.",
         "routine": "Zebrać pomysły i notatki z tygodnia",
         "task": "Zamień te notatki w krótki tekst:"
       },
-      "rosa": {
+      "tereza": {
         "role": "Dom i zakupy",
         "line": "Pilnuje listy zakupów, domowych obowiązków i tego, co trzeba naprawić.",
         "routine": "Przygotować listę zakupów i obowiązki na tydzień",
         "task": "Zrób listę zakupów na tydzień dla:"
       },
-      "vic": {
+      "renato": {
         "role": "Wyjazdy",
         "line": "Planuje twoje wyjazdy: daty, ceny, rezerwacje i plan dzień po dniu.",
         "routine": "Sprawdzić ceny wyjazdów, które planujesz",
         "task": "Zaplanuj 3-dniowy wyjazd do:"
       },
-      "rui": {
+      "fabio": {
         "role": "Klienci",
         "line": "Pilnuje twoich klientów, pisze oferty i faktury oraz przypomina tym, którzy nie zapłacili.",
         "routine": "Wypisać, na co dziś czeka każdy klient",
@@ -22832,14 +22882,14 @@
       }
     },
     "channels": {
-      "iara": "wsparcie",
-      "caio": "finanse",
-      "ada": "eng",
-      "lia": "tresci",
-      "theo": "sprzedaz",
-      "nina": "terminy",
-      "otto": "zamowienia",
-      "bia": "wsparcie"
+      "luana": "wsparcie",
+      "teo": "finanse",
+      "helena": "eng",
+      "gil": "tresci",
+      "ana": "sprzedaz",
+      "rui": "terminy",
+      "tiago": "zamowienia",
+      "sofia": "wsparcie"
     },
     "skills": {
       "voice": {

@@ -516,7 +516,7 @@ test("a locked-down turn goes past the room check down to its own floor, and a l
 
   // Below the floor everyone else keeps: the agents' turn waits, the locked-down one runs.
   turn("work", false);
-  turn("lodi", true);
+  turn("doki", true);
   expect(refused()).toEqual(["work"]);
   expect(runner.size).toBe(1);
 

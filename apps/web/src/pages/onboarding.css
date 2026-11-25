@@ -1,5 +1,5 @@
 /*
- * The onboarding (ADR 0162), the parts only that screen draws: the progress, Lodi on the horizon, each step's column,
+ * The onboarding (ADR 0162), the parts only that screen draws: the progress, Doki on the horizon, each step's column,
  * the plan card and the sidebar's preview. The rail, its steps and the step headings stay in layout.css (Criar agente
  * uses them too). Unlayered, so these win over layout.css's base layer.
  */
@@ -74,7 +74,7 @@ html:not([data-pointer]) .onb__me:focus-visible {
   position: absolute;
   inset: 0;
 }
-/* Lodi on the horizon, what it says now over its face; the horizon's agents keep off it (`clear`). */
+/* Doki on the horizon, what it says now over its face; the horizon's agents keep off it (`clear`). */
 .onb__lodi {
   position: absolute;
   left: var(--space-4);
@@ -125,7 +125,7 @@ html:not([data-pointer]) .onb__me:focus-visible {
 }
 /*
  * A wide window: one stage in its middle instead of a rail on its edge and a column adrift in the rest. The rail is a
- * card the window's height (28px from each edge) with its steps on top and Lodi on its own horizon at its foot; the
+ * card the window's height (28px from each edge) with its steps on top and Doki on its own horizon at its foot; the
  * question and the preview stand beside it, the preview's frame on the card's top line. 72px from the card to the
  * question and 56px from the question to the preview, the body's gutter included. Below this width, the rail on the
  * edge as before.
@@ -363,8 +363,8 @@ html:not([data-pointer]) .onb__logo:focus-visible {
   place-items: center;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #4b93ff, #2b74e6);
-  color: #fff;
+  background: var(--agent);
+  color: var(--on-agent);
   font-size: 20px;
   font-weight: 700;
 }
@@ -550,7 +550,7 @@ html:not([data-pointer]) .onb__logo:focus-visible {
   min-width: 0;
   color: var(--ink);
 }
-/* Phone: the rail is the step bar; the progress and Lodi's line lead the column. */
+/* Phone: the rail is the step bar; the progress and Doki's line lead the column. */
 .onb__phone-top {
   display: flex;
   flex-direction: column;

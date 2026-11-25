@@ -10,7 +10,7 @@ import {
 } from "@agenteschat/engine";
 import { browser, createTestServer, joinByInvitation, seedOrg, signUp, type TestServer } from "./harness";
 
-/** Lodi's weekly card (ADR 0137 §9) over HTTP: my own schedule, and a row applied as me, never as someone else. */
+/** Doki's weekly card (ADR 0137 §9) over HTTP: my own schedule, and a row applied as me, never as someone else. */
 
 let t: TestServer;
 beforeEach(async () => {
@@ -248,7 +248,7 @@ test("one suggestion put away alone is not the card put away, and its proposal s
   expect(agent?.archivedAt).toBeNull();
   const after = await saved();
   expect(after.dismissedAt).toBeNull();
-  // Put away is kept apart from applied: a build from before reads any row in `done` as applied ("Asked Lodi").
+  // Put away is kept apart from applied: a build from before reads any row in `done` as applied ("Asked Doki").
   expect(Object.keys(after.skipped).sort()).toEqual([`retire:${agentId}`, unanswered].sort());
   expect(after.done).toEqual({});
   // And it is not applied afterwards, from a build that still draws its button.

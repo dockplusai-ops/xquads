@@ -122,12 +122,12 @@ describe("@mention autocomplete", () => {
 
   test("the right hand is in every channel: no note, and picking it offers nothing to add", async () => {
     const { state } = await go(`c/${GENERAL_ID}`, withRightHand(seedState()));
-    await typeIn(composer(), "@lod");
+    await typeIn(composer(), "@dok");
     const list = screen().getByRole("listbox", { name: "Pessoas e agentes" });
-    const lodi = within(list).getByRole("option", { name: /Lodi/ });
+    const lodi = within(list).getByRole("option", { name: /Doki/ });
     expect(lodi.textContent).not.toContain("não está no canal");
     await click(lodi);
-    expect(composer().value).toBe("@lodi ");
+    expect(composer().value).toBe("@doki ");
     expect(document.querySelector(".mention-offer")).toBeNull();
     expect(state.calls.some((c) => c.method === "chat.addMember")).toBe(false);
   });

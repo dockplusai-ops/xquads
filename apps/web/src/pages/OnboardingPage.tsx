@@ -91,7 +91,7 @@ const AI_POLL_MS = 10_000;
 const TEAM_POLL_MS = 5000;
 
 /**
- * The onboarding (ADR 0162): the blue rail with Lodi on its horizon, one step at a time, read from the workspace's own
+ * The onboarding (ADR 0162): the blue rail with Doki on its horizon, one step at a time, read from the workspace's own
  * data so a workspace left at any step resumes there. First what the workspace is for (ADR 0159). A company or team
  * goes on with its name (which creates it), what it does, its team (agents brought from another app, a template made
  * in one click, or none for now: its right hand alone), the plan where the workspace waits for its first one, an AI
@@ -532,7 +532,7 @@ export function OnboardingPage() {
   // No agents besides the right hand (the team step left with none, ADR 0162 amended 2026-11-11, or a personal
   // workspace's "no agents yet"): the plan and AI steps speak of it, never of a team that isn't there.
   const alone = team.length === 0;
-  // The team step's heading and Lodi's line from its source, until the team is made; then words for a team that
+  // The team step's heading and Doki's line from its source, until the team is made; then words for a team that
   // exists (back from a later step), never the template's.
   const teamHead = step === "team" && !teamList ? source.head(t, name) : null;
   const aiLabel = aiNamed && aiNamed !== "key" ? planLabel(t, aiNamed) : null;

@@ -17,16 +17,17 @@ export interface BadgeCell {
   tone: BadgeTone;
 }
 
+// xquads: a round badge (the original's was its agent's body with the cut corner).
 const SHAPE = [
+  "..#####..",
   ".#######.",
   "#########",
   "#########",
   "#########",
   "#########",
   "#########",
-  "#########",
-  "#########",
-  "########.",
+  ".#######.",
+  "..#####..",
 ];
 const N = SHAPE.length;
 const MARKS: Partial<Record<BadgePresence, readonly (readonly [number, number])[]>> = {

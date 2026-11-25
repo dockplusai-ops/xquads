@@ -739,7 +739,7 @@ export async function decideProposal(
           target: p.target,
           proposedByAgentId: p.proposedByAgentId,
           ...(review ? { review: review.why } : {}),
-          // "Ver o que o Lodi fez": what a person applied from its cards (ADR 0137).
+          // "Ver o que o Doki fez": what a person applied from its cards (ADR 0137).
           ...(p.target === "agent_settings" ? { via: p.proposedByAgentId, settings: p.settings } : {}),
         },
       });
@@ -1200,7 +1200,7 @@ async function cardOf(db: Executor, p: Proposal) {
     .orderBy(asc(messages.createdAt))
     .limit(1);
   if (!message) return null;
-  // Lodi's weekly card (ADR 0137 §9) is posted by no run: its receipts carry none and no notice follows a decision.
+  // Doki's weekly card (ADR 0137 §9) is posted by no run: its receipts carry none and no notice follows a decision.
   const at = { runId: message.agentRunId, messageId: message.id, channelId: message.channelId };
   const listed = (message.meta.actionCard as { proposalIds?: unknown } | undefined)?.proposalIds;
   if (Array.isArray(listed)) return { ...at, ids: listed.filter((id): id is string => typeof id === "string") };

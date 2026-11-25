@@ -202,7 +202,7 @@ describe("in the channel", () => {
     state.messages.push(
       // The right hand stopped it at my word: its name, never "Você parou", and Continuar still mine (the latest, so
       // the agent has not gone on after it).
-      fromAda("m-lodi", "Comecei o relatório.\n\n_Stopped by Lodi for Walter._", "r-lodi", 1, {
+      fromAda("m-lodi", "Comecei o relatório.\n\n_Stopped by Doki for Walter._", "r-lodi", 1, {
         canceled: {
           byUserId: "u-walter",
           byAgentId: "00000000-0000-4000-8000-0000000000a9",
@@ -227,7 +227,7 @@ describe("in the channel", () => {
     const lineOf = (text: string) =>
       (screen().getByText(text).closest(".ac-msg") as HTMLElement).querySelector(".run-canceled") as HTMLElement;
     const lodi = lineOf("Comecei o relatório.");
-    expect(lodi.textContent).toContain("Lodi parou a Ada");
+    expect(lodi.textContent).toContain("Doki parou a Ada");
     expect(lodi.textContent).not.toContain("Você");
     expect(within(lodi).getByRole("button", { name: "Continuar" })).toBeTruthy();
     expect(lineOf("Comecei os testes.").textContent).toContain("João parou a Ada");

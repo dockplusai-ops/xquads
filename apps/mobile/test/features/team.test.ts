@@ -26,14 +26,14 @@ const input = {
   agents: [
     agent("Ada", { ownerUserId: "u-lukas", channelIds: ["c-eng"] }),
     agent("Milo", { channelIds: ["c-fin"] }),
-    agent("Lodi"),
+    agent("Doki"),
   ],
   groups: [
     { id: "g-eng", name: "Engenharia", agentIds: ["Ada"], leadUserId: "u-lukas", backupUserId: "u-gone" },
   ] as AgentGroup[],
   members: [member("u-lukas", "Lukas")],
   channels: [channel("c-fin", "financeiro"), channel("c-eng", "engenharia")],
-  rightHandId: "Lodi",
+  rightHandId: "Doki",
 };
 const shape = (view: "list" | "chart" | "map") =>
   teamSections(view, input).map((s) => [s.title, s.agents.map((a) => a.name)]);

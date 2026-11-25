@@ -216,7 +216,7 @@ function ChartLine({ node, line }: { node: ChartNode; line?: ReturnType<typeof u
   );
 }
 
-/** Lodi beside the workspace, out of the line: its face, its name and that it follows everything with you. */
+/** Doki beside the workspace, out of the line: its face, its name and that it follows everything with you. */
 function LodiChip({ lodi }: { lodi: NonNullable<ReturnType<typeof useTeamLookups>["lodi"]> }) {
   const { t } = useTranslation();
   const { org } = useOrg();

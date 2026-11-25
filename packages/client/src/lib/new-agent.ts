@@ -27,6 +27,12 @@ export function stepAfter(index: number, dir: 1 | -1, skipped: readonly NewAgent
 }
 
 export const ROLE_IDS = [
+  "quotes",
+  "schedule",
+  "english",
+  "billing",
+  "reviews",
+  "crew",
   "dev",
   "ops",
   "qa",
@@ -46,6 +52,7 @@ export type RoleId = (typeof ROLE_IDS)[number];
 
 /** The role step in groups, in order (titles in i18n: `newAgent.roleGroups.{id}`); "custom" stays apart, last. */
 export const ROLE_GROUPS = [
+  { id: "services", roles: ["quotes", "schedule", "english", "billing", "reviews", "crew"] },
   { id: "tech", roles: ["dev", "ops", "qa", "pm"] },
   { id: "customers", roles: ["support", "sales", "marketing", "content"] },
   { id: "operations", roles: ["data", "finance", "people", "research", "assistant"] },
@@ -74,6 +81,38 @@ const starts = <const L extends RoleLook>(d: RoleDefaults<L>) => d;
 
 /** Picking a role fills the rest (name and instructions come from i18n: `newAgent.roles.{id}`). */
 export const ROLE_DEFAULTS = {
+  // Services: xquads' own agents for a home-services business, first. Texting a customer or the crew (Twilio SMS,
+  // WhatsApp through Datafy) always asks a person first, and money only moves with approval.
+  quotes: starts({
+    look: { color: "sky", eyes: "round", accessory: "none" },
+    levels: { "google-docs": "write", "google-sheets": "read", drive: "read", datafy: "write", twilio: "write" },
+    channels: ["orcamentos", "quotes", "estimates", "vendas", "sales", "clientes", "customers"],
+  }),
+  schedule: starts({
+    look: { color: "indigo", eyes: "round", accessory: "none" },
+    levels: { "google-calendar": "write", twilio: "write", datafy: "write" },
+    channels: ["agenda", "schedule", "calendar", "agendamentos", "jobs", "servicos"],
+  }),
+  english: starts({
+    look: { color: "amber", eyes: "round", accessory: "none" },
+    levels: { twilio: "write", datafy: "write", "google-docs": "read" },
+    channels: ["clientes", "customers", "atendimento", "support", "english", "ingles"],
+  }),
+  billing: starts({
+    look: { color: "green", eyes: "round", accessory: "none" },
+    levels: { stripe: "read", square: "read", paypal: "read", "google-sheets": "read", twilio: "write" },
+    channels: ["cobrancas", "billing", "financeiro", "finance", "pagamentos", "payments", "invoices"],
+  }),
+  reviews: starts({
+    look: { color: "rose", eyes: "round", accessory: "none" },
+    levels: { instagram: "read", facebook: "read", datafy: "write", twilio: "write" },
+    channels: ["avaliacoes", "reviews", "marketing", "redes", "social"],
+  }),
+  crew: starts({
+    look: { color: "violet", eyes: "round", accessory: "none" },
+    levels: { "google-calendar": "read", "google-sheets": "write", twilio: "write" },
+    channels: ["equipe", "crew", "team", "time", "rotas", "routes", "campo", "field"],
+  }),
   dev: starts({
     look: { color: "green", eyes: "wide", accessory: "headphones" },
     levels: { github: "write", sentry: "read", linear: "read" },
@@ -150,15 +189,15 @@ export const ROLE_DEFAULTS = {
  * `teamTemplates.agents.{id}` (`role`, `line`). One starts from scratch with its name, look, role and line filled in.
  */
 export const PERSONAL_STARTERS = [
-  { id: "clara", name: "Clara", look: { color: "violet", eyes: "happy", accessory: "bow" } },
-  { id: "duda", name: "Duda", look: { color: "green", eyes: "round", accessory: "cap" } },
-  { id: "leo", name: "Léo", look: { color: "amber", eyes: "wide", accessory: "headphones" } },
-  { id: "mel", name: "Mel", look: { color: "rose", eyes: "dots", accessory: "scarf" } },
-  { id: "gabi", name: "Gabi", look: { color: "indigo", eyes: "wide", accessory: "antenna" } },
-  { id: "lu", name: "Lu", look: { color: "violet", eyes: "sleepy", accessory: "beanie" } },
-  { id: "rosa", name: "Rosa", look: { color: "teal", eyes: "happy", accessory: "flower" } },
-  { id: "vic", name: "Vic", look: { color: "sky", eyes: "dots", accessory: "hat" } },
-  { id: "rui", name: "Rui", look: { color: "graphite", eyes: "round", accessory: "headset" } },
+  { id: "marina", name: "Marina", look: { color: "indigo", eyes: "round", accessory: "none" } },
+  { id: "cecilia", name: "Cecília", look: { color: "green", eyes: "round", accessory: "none" } },
+  { id: "lucas", name: "Lucas", look: { color: "amber", eyes: "round", accessory: "none" } },
+  { id: "julia", name: "Júlia", look: { color: "rose", eyes: "round", accessory: "none" } },
+  { id: "bruna", name: "Bruna", look: { color: "violet", eyes: "round", accessory: "none" } },
+  { id: "lorena", name: "Lorena", look: { color: "teal", eyes: "round", accessory: "none" } },
+  { id: "tereza", name: "Tereza", look: { color: "sky", eyes: "round", accessory: "none" } },
+  { id: "renato", name: "Renato", look: { color: "graphite", eyes: "round", accessory: "none" } },
+  { id: "fabio", name: "Fábio", look: { color: "sky", eyes: "round", accessory: "none" } },
 ] as const satisfies readonly { id: string; name: string; look: RoleLook }[];
 export type PersonalStarter = (typeof PERSONAL_STARTERS)[number];
 
@@ -167,15 +206,15 @@ export type PersonalStarter = (typeof PERSONAL_STARTERS)[number];
  * packages/engine/src/team-templates.ts): a person's calendar, files and lists rather than a team's tools.
  */
 export const PERSONAL_STARTER_APPS: Record<string, readonly string[]> = {
-  clara: ["google-calendar", "todoist"],
-  duda: ["google-sheets", "drive"],
-  leo: ["google-calendar"],
-  mel: ["todoist", "google-docs"],
-  gabi: ["notion", "google-docs"],
-  lu: ["google-docs", "notion"],
-  rosa: ["todoist", "google-calendar"],
-  vic: ["google-calendar", "drive"],
-  rui: ["google-calendar", "google-docs", "google-sheets"],
+  marina: ["google-calendar", "todoist"],
+  cecilia: ["google-sheets", "drive"],
+  lucas: ["google-calendar"],
+  julia: ["todoist", "google-docs"],
+  bruna: ["notion", "google-docs"],
+  lorena: ["google-docs", "notion"],
+  tereza: ["todoist", "google-calendar"],
+  renato: ["google-calendar", "drive"],
+  fabio: ["google-calendar", "google-docs", "google-sheets"],
 };
 
 /** An app's level on a new agent's card (ADR 0164): it reads, or reads and writes. */
@@ -251,7 +290,7 @@ export function handleProblem(handle: string, taken: Set<string>): HandleProblem
   return null;
 }
 
-/** "ada" → "ada-2" (the first free one). */
+/** "ana" → "ana-2" (the first free one). */
 export function freeHandle(handle: string, taken: Set<string>) {
   const base = handle.slice(0, 29).replace(/[-_]+$/, "") || "agente";
   for (let n = 2; n < 1000; n++) {

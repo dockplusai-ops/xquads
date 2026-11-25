@@ -203,8 +203,8 @@ export const tracking = {
 /** Font families (the first family of each CSS stack; display and dot come from the brand pages). */
 export const fonts = {
   sans: "Onest",
-  display: "Funnel Display",
-  dot: "Doto",
+  display: "Onest",
+  dot: "Onest",
   mono: "Martian Mono",
 } as const;
 

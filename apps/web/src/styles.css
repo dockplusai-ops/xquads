@@ -32,9 +32,9 @@
   /* A dialog title's capitals' middle above its line's middle (18px on 24px, 650), measured in this face. A title in
      another type measures its own. */
   --title-cap-mid: 0.37px;
-  /* The wordmark, and its dot-matrix ".chat". */
-  --font-brand: "Funnel Display", var(--font-sans);
-  --font-dot: "Doto", var(--font-mono);
+  /* xquads has one face (DESIGN.md): the brand and the counts read in Onest too. */
+  --font-brand: var(--font-sans);
+  --font-dot: var(--font-sans);
 }
 
 /* Japanese, Korean and Chinese read in each system's own face after the Latin one (no web font to download). Russian

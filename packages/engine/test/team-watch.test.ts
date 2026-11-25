@@ -1184,10 +1184,10 @@ describe("what it reminds of", () => {
       renderPush("en", {
         kind: "team_watch",
         waiting: true,
-        actorName: "Lodi",
+        actorName: "Doki",
         actorType: "agent",
         text: "The sign-in for Work ended.",
       }),
-    ).toEqual({ title: "Lodi", body: "The sign-in for Work ended." });
+    ).toEqual({ title: "Doki", body: "The sign-in for Work ended." });
   });
 });

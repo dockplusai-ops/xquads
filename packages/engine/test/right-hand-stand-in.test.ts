@@ -49,7 +49,7 @@ const statusOf = (id: string, over: Partial<MachineStatus> = {}): MachineStatus 
   ...over,
 });
 
-/** Acme with Lodi, Walter's MacBook (he is the owner), João a member, and the fixture's API key ("main"). */
+/** Acme with Doki, Walter's MacBook (he is the owner), João a member, and the fixture's API key ("main"). */
 async function world() {
   const fx = await setup({ rightHand: true });
   f = fx;
@@ -88,7 +88,7 @@ async function world() {
   return { fx, pair, laptop, joao, account, lodi, lines, cards };
 }
 
-test("a computer's own sign-in only, plus a key: Lodi answers on the key, shows ready, and says why once in 6h", async () => {
+test("a computer's own sign-in only, plus a key: Doki answers on the key, shows ready, and says why once in 6h", async () => {
   const { fx, lodi, lines, cards } = await world();
   // Its brain left on a plan with no account behind it: that names no computer, so it can't think there.
   await fx.db

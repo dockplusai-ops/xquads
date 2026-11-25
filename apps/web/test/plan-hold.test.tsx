@@ -253,7 +253,7 @@ describe("the other places a plan is chosen", () => {
     expect(screen().queryByRole("button", { name: /^Adicionar conta/ })).toBeNull();
   });
 
-  test("Lodi's settings: why and the way on in place of the plan row", async () => {
+  test("Doki's settings: why and the way on in place of the plan row", async () => {
     await open("owner", `/org/${ORG_ID}/settings/right_hand`);
     const body = document.querySelector(".page") as HTMLElement;
     expect(shownText(body)).toContain(WHY);

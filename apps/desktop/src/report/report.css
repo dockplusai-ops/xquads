@@ -8,13 +8,13 @@
   overflow: auto;
   padding: 24px;
   border-radius: 14px;
-  background: #fff;
-  color: #151514;
+  background: #15282f;
+  color: #ede6e1;
   text-align: left;
   user-select: text;
   -webkit-user-select: text;
   pointer-events: auto;
-  box-shadow: 0 24px 56px -16px rgba(4, 32, 63, 0.5);
+  box-shadow: 0 24px 56px -16px rgba(0, 0, 0, 0.6);
 }
 .dk-report__title {
   margin: 0;
@@ -25,19 +25,19 @@
 .dk-report__help,
 .dk-report__error {
   margin: 0;
-  color: #5c5c58;
+  color: #beb5b0;
 }
 .dk-report__help.is-bad,
 .dk-report__error {
-  color: #b42a20;
+  color: #e08476;
 }
 .dk-report__notes {
   margin: 0;
   padding: 12px;
   list-style: none;
   border-radius: 10px;
-  background: #f3f3f0;
-  color: #5c5c58;
+  background: #0a161b;
+  color: #beb5b0;
 }
 .dk-report__label {
   margin-top: 8px;
@@ -47,15 +47,15 @@
   font: inherit;
   color: inherit;
   padding: 8px 12px;
-  border: 1px solid rgba(23, 23, 22, 0.12);
+  border: 1px solid rgba(237, 230, 225, 0.16);
   border-radius: 10px;
-  background: #fff;
+  background: #15282f;
   resize: vertical;
 }
 .dk-report__all summary {
   margin-top: 8px;
   font-weight: 600;
-  color: #5c5c58;
+  color: #beb5b0;
   cursor: pointer;
 }
 .dk-report__text {
@@ -64,7 +64,7 @@
   padding: 12px;
   overflow: auto;
   border-radius: 10px;
-  background: #f3f3f0;
+  background: #0a161b;
   font:
     12px / 1.5 ui-monospace,
     "JetBrains Mono",
@@ -84,16 +84,16 @@
   font-weight: 600;
   height: 40px;
   padding: 0 16px;
-  border: 1px solid rgba(23, 23, 22, 0.12);
+  border: 1px solid rgba(237, 230, 225, 0.16);
   border-radius: 12px;
-  background: #fff;
-  color: #151514;
+  background: #15282f;
+  color: #ede6e1;
   cursor: pointer;
 }
 .dk-report__acts button.is-primary {
-  border-color: #0063d1;
-  background: #0063d1;
-  color: #fff;
+  border-color: #c79d70;
+  background: #c79d70;
+  color: #15282f;
 }
 .dk-report__acts button:disabled {
   opacity: 0.5;
@@ -101,29 +101,29 @@
 }
 .dk-report__acts button:focus-visible,
 .dk-report__input:focus-visible {
-  outline: 2px solid #0063d1;
+  outline: 2px solid #c79d70;
   outline-offset: 2px;
 }
 @media (prefers-color-scheme: dark) {
   .dk-report {
-    background: #1c1c1b;
-    color: #f2f2ef;
+    background: #15282f;
+    color: #ede6e1;
   }
   .dk-report__lead,
   .dk-report__help,
   .dk-report__notes,
   .dk-report__all summary {
-    color: #a6a6a0;
+    color: #beb5b0;
   }
   .dk-report__notes,
   .dk-report__text {
-    background: #0a0a09;
+    background: #0a161b;
   }
   .dk-report__input,
   .dk-report__acts button {
-    background: #242423;
+    background: #1f353d;
     color: inherit;
-    border-color: rgba(255, 255, 255, 0.14);
+    border-color: rgba(237, 230, 225, 0.16);
   }
 }
 /* Preferences: the panel over the window, on a scrim. */
@@ -133,7 +133,7 @@
   z-index: 50;
   display: grid;
   place-items: center;
-  background: rgba(10, 10, 10, 0.32);
+  background: rgba(4, 10, 13, 0.6);
 }
 .dk-report-scrim:empty {
   display: none;

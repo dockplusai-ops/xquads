@@ -101,7 +101,7 @@ test("its greeting as the web's: its own role, no help asked over a card all don
   // It asks for help only while something is left, latched once the checklist is read.
   expect(card).toContain("if (asks === null && progress.ready) setAsks(!progress.all);");
   expect(card).toContain('asks ? t("agentSetup.lead") : null');
-  // "Agora não" to apps on Lodi's card is the team's.
+  // "Agora não" to apps on Doki's card is the team's.
   expect(card).toContain('dir.agents.find(isRightHand)?.setup?.done.includes("apps")');
   // No article before the workspace's name ("de Acme"): the app can't know its gender.
   const t = await translator("pt-BR");

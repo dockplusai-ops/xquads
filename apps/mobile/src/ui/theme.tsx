@@ -42,10 +42,10 @@ export const boxShadow = (layers: readonly ShadowLayer[]) =>
  * Body and UI text use the system font (SF Pro / Roboto) through `Text` and `systemText`, with `weights`.
  */
 export const fonts = {
-  /** Funnel Display Light: large titles. */
-  display: "FunnelDisplay-Light",
-  /** Doto, ROND 100 instance (weight 600): only a rare large hero number (`Count hero`). */
-  dot: "Doto",
+  /** Onest: large titles. */
+  display: "Onest",
+  /** Onest too: a rare large hero number (`Count hero`), no dot type in xquads. */
+  dot: "Onest",
   /** Code only. */
   mono: Platform.select({ ios: "Menlo", default: "monospace" }),
 } as const;

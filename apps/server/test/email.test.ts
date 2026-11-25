@@ -204,7 +204,6 @@ test("a server people outside can't reach attaches the pictures to each email", 
   expect(sent?.html).not.toContain(`${ORIGIN}/email/`);
   expect(sent?.inline?.map((p) => [p.cid, p.filename, p.contentType])).toEqual([
     ["logo-bone@agentes.chat", "logo-bone.png", "image/png"],
-    ["sky-band@agentes.chat", "sky-band.png", "image/png"],
   ]);
 });
 

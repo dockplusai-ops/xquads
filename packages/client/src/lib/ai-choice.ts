@@ -29,7 +29,7 @@ import { AUTO, isAuto } from "./providers";
 /** What is being chosen for. */
 export type AiChoiceTarget =
   | { kind: "agent"; agentId: string }
-  /** Lodi: the viewer's own AI (`mine`, "A do workspace" first) or the workspace's (admins). */
+  /** Doki: the viewer's own AI (`mine`, "A do workspace" first) or the workspace's (admins). */
   | { kind: "lodi"; agentId: string; scope: BrainScope }
   /** An agent still being created: the choice is the caller's to apply once it exists. */
   | { kind: "newAgent" }
@@ -53,7 +53,7 @@ export interface AiChoice {
   effort?: BrainEffortSetting | null;
 }
 
-/** The picker's sections, in order: Lodi's "A do workspace", the viewer's accounts, others' accounts, API keys. */
+/** The picker's sections, in order: Doki's "A do workspace", the viewer's accounts, others' accounts, API keys. */
 export type AiChoiceGroup = "workspace" | "yours" | "others" | "keys";
 export const AI_CHOICE_GROUPS: readonly AiChoiceGroup[] = ["workspace", "yours", "others", "keys"];
 
@@ -101,7 +101,7 @@ export function hubAccountsInOrder<A extends AiHubAccount>(accounts: readonly A[
   );
 }
 
-/** The target thinks with keys too: not Lodi's own AI (its "A do workspace" is the workspace's key). */
+/** The target thinks with keys too: not Doki's own AI (its "A do workspace" is the workspace's key). */
 const takesKeys = (t: AiChoiceTarget) => t.kind !== "mission" && !(t.kind === "lodi" && t.scope === "mine");
 
 /** Why an account can't think for the target, or null when it can. */
@@ -114,7 +114,7 @@ function blocked(a: AiHubAccount, ctx: AiChoiceContext): AccountUseReason | null
 }
 
 /**
- * The rows of the "Conta" select for a target, in the picker's order: Lodi's "A do workspace" first, then the viewer's
+ * The rows of the "Conta" select for a target, in the picker's order: Doki's "A do workspace" first, then the viewer's
  * own accounts, others' accounts, then the API keys. Accounts by maker, then in the order of use (`compareInOrder`, the
  * viewer's own first); the logins of one account (`sameAs`) are one row. Accounts the target can't think with stay,
  * dimmed, with why. `autoTier`: that provider's keys only.
@@ -228,13 +228,13 @@ export function aiChoiceModels(
   );
 }
 
-/** The "Esforço" select for a row: the plan's levels or the API's; none for Lodi's "A do workspace". */
+/** The "Esforço" select for a row: the plan's levels or the API's; none for Doki's "A do workspace". */
 export const aiChoiceEfforts = (row: AiChoiceRow): readonly EffortLevel[] =>
   row.type === "workspace" ? [] : effortLevelsOf(row.brain);
 
 /** The choice a row makes, keeping the model and effort when the brain stays. */
 export function aiChoiceOf(row: AiChoiceRow, current: AiChoice | null): AiChoice {
-  // Lodi's "A do workspace": the workspace's own AI, nothing of the person's to carry.
+  // Doki's "A do workspace": the workspace's own AI, nothing of the person's to carry.
   if (row.type === "workspace") return { brain: "model" };
   const keep = current?.brain === row.brain;
   const rest = keep
@@ -247,7 +247,7 @@ export function aiChoiceOf(row: AiChoiceRow, current: AiChoice | null): AiChoice
   return { brain: row.brain, ...rest };
 }
 
-/** What an agent's or Lodi's "Quem pensa" saves for a choice (`PUT …/agents/{id}/brain`). */
+/** What an agent's or Doki's "Quem pensa" saves for a choice (`PUT …/agents/{id}/brain`). */
 export function aiChoiceBrainInput(choice: AiChoice, scope?: BrainScope): AgentBrainInput {
   return {
     ...(scope ? { scope } : {}),

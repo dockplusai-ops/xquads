@@ -52,7 +52,7 @@ const SUPORTE = "role-suporte";
 const SUPORTE_CH = "00000000-0000-4000-8000-0000000000c3";
 const MAX_ID = "00000000-0000-4000-8000-0000000000a3";
 
-/** Acme with a "Suporte" cargo: a private #suporte limited to it, and Max, who answers only Suporte; and Lodi. */
+/** Acme with a "Suporte" cargo: a private #suporte limited to it, and Max, who answers only Suporte; and Doki. */
 function withSupport(state = seedState()) {
   const [admin, everyone] = seedRoles() as [OrgRole, OrgRole];
   state.roles = [
@@ -214,14 +214,14 @@ describe("the invite dialog, one screen", () => {
     expect(hintOf("Agentes", invite).text).toBe(
       "Com quem a pessoa trabalha. Ficam no topo da lista dela. Um agente restrito passa a responder a ela.",
     );
-    // Todos' "Membro" with no cargo; #general and Lodi stay, each saying why.
+    // Todos' "Membro" with no cargo; #general and Doki stay, each saying why.
     expect(within(invite).getByRole("button", { name: /^Cargo/ }).textContent).toBe("Membro");
     expect(tokensOf("invite-channels")).toEqual(["general"]);
-    expect(tokensOf("invite-agents")).toEqual(["Lodi"]);
+    expect(tokensOf("invite-agents")).toEqual(["Doki"]);
     expect(within(invite).queryByRole("button", { name: "Remover #general" })).toBeNull();
-    expect(within(invite).queryByRole("button", { name: "Remover Lodi" })).toBeNull();
+    expect(within(invite).queryByRole("button", { name: "Remover Doki" })).toBeNull();
     expect(invite.textContent).toContain("Todo mundo entra no #general.");
-    expect(invite.textContent).toContain("Todo mundo tem o Lodi.");
+    expect(invite.textContent).toContain("Todo mundo tem o Doki.");
     // Nothing to send yet; Para has the focus.
     expect(within(invite).getByRole("button", { name: "Convidar" }).hasAttribute("disabled")).toBe(true);
     expect(document.activeElement === within(invite).getByLabelText("Para")).toBe(true);
@@ -236,12 +236,12 @@ describe("the invite dialog, one screen", () => {
     expect(within(dialog()).getByRole("button", { name: /^Cargo/ }).textContent).toBe("Suporte");
     // Its channel and its agent come in, fading in, each saying where it came from.
     expect(tokensOf("invite-channels")).toEqual(["general", "suporte"]);
-    expect(tokensOf("invite-agents")).toEqual(["Lodi", "Max"]);
+    expect(tokensOf("invite-agents")).toEqual(["Doki", "Max"]);
     const suporte = within(dialog()).getByText("suporte").closest(".ac-token") as HTMLElement;
     expect(suporte.hasAttribute("data-fresh")).toBe(true);
     expect(suporte.textContent).toContain("Vem com o cargo Suporte.");
     await click(within(dialog()).getByRole("button", { name: "Remover Max" }));
-    expect(tokensOf("invite-agents")).toEqual(["Lodi"]);
+    expect(tokensOf("invite-agents")).toEqual(["Doki"]);
     // ⌘↵ sends.
     await key(within(dialog()).getByLabelText("Para"), "Enter", { metaKey: true });
     await settle(6);
@@ -256,7 +256,7 @@ describe("the invite dialog, one screen", () => {
     await settle(4);
     expect(within(dialog()).getByRole("button", { name: /^Cargo/ }).textContent).toBe("Suporte");
     expect(tokensOf("invite-channels")).toEqual(["general", "suporte"]);
-    expect(tokensOf("invite-agents")).toEqual(["Lodi"]);
+    expect(tokensOf("invite-agents")).toEqual(["Doki"]);
   });
 
   test("Para: a pasted address book, who is in, invited or no address said on their tokens; only good ones count", async () => {
@@ -303,13 +303,13 @@ describe("the invite dialog, one screen", () => {
     await settle(4);
     const list = screen().getByRole("listbox", { name: "Agentes" });
     const row = (name: string) => within(list).getByRole("option", { name: new RegExp(`^${name}`) });
-    expect(row("Lodi").getAttribute("aria-disabled")).toBe("true");
-    expect(row("Lodi").textContent).toContain("Todo mundo tem o Lodi");
+    expect(row("Doki").getAttribute("aria-disabled")).toBe("true");
+    expect(row("Doki").textContent).toContain("Todo mundo tem o Doki");
     expect(row("Atlas").textContent).toContain("Restrito · você libera");
     expect(row("Max").textContent).toContain("Restrito · você libera");
     expect(row("Ada").textContent).toContain("Lê o e-mail de João");
     await click(row("Atlas"));
-    expect(tokensOf("invite-agents")).toEqual(["Lodi", "Atlas"]);
+    expect(tokensOf("invite-agents")).toEqual(["Doki", "Atlas"]);
     expect(dialog().textContent).toContain("Atlas passa a responder a quem entrar por este convite.");
     // A mailbox is never taken unasked: Ada's row opens her page, where that is decided.
     await click(row("Ada"));
@@ -701,7 +701,7 @@ describe("People › Convites", () => {
           ?.closest(".ac-chipfield")
           ?.querySelectorAll(".ac-token__label") ?? []),
       ].map((l) => l.textContent),
-    ).toEqual(["Lodi"]);
+    ).toEqual(["Doki"]);
     await click(within(edit).getByRole("button", { name: "Remover #suporte" }));
     await click(within(edit).getByRole("button", { name: "Salvar" }));
     await settle(4);

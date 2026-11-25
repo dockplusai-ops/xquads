@@ -750,7 +750,7 @@ export interface ApiClient {
     requestMoreUsage(orgId: string): Promise<{ requestedAt: string }>;
     raisePersonLimit(orgId: string, userId: string, limitUsd: number): Promise<void>;
     refuseMoreUsage(orgId: string, userId: string): Promise<void>;
-    /** Lodi's weekly card (ADR 0137 §9): when mine comes, or that it is off. */
+    /** Doki's weekly card (ADR 0137 §9): when mine comes, or that it is off. */
     teamWeek(orgId: string): Promise<LodiPrefs>;
     setTeamWeek(orgId: string, patch: LodiPrefsPatch | LegacyPrefsPatch): Promise<LodiPrefs>;
     /** A row of my weekly card applied as me (a routine, a message), or "Agora não". */

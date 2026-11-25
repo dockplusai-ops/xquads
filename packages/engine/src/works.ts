@@ -1116,7 +1116,7 @@ export async function endWork(
       const byUserId = stop?.userId ?? null;
       const locale = await lineLocale(tx, work.orgId, work.requestedByUserId, run.id);
       const last = status !== "done" && work.updateSeq > 0 ? work.lastUpdateText : null;
-      // "Stopped by Lodi" when the right hand stopped it at someone's word, else the person who stopped it.
+      // "Stopped by Doki" when the right hand stopped it at someone's word, else the person who stopped it.
       const [by] = stop?.agentId
         ? await tx.select({ name: schema.agents.name }).from(schema.agents).where(eq(schema.agents.id, stop.agentId))
         : byUserId

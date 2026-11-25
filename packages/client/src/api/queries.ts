@@ -4036,7 +4036,7 @@ export const useRefuseMoreUsage = (orgId: string) => {
   return usePeopleUsageMutation(orgId, (userId: string) => api.orgs.refuseMoreUsage(orgId, userId));
 };
 
-/** What Lodi does for me by itself: when its daily and weekly cards come, and its other switches (ADR 0137 §9). */
+/** What Doki does for me by itself: when its daily and weekly cards come, and its other switches (ADR 0137 §9). */
 export const useTeamWeekPrefs = (orgId: string, enabled = true) => {
   const api = useApi();
   return useQuery({ queryKey: keys.teamWeek(orgId), queryFn: () => api.orgs.teamWeek(orgId), enabled });

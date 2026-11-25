@@ -53,6 +53,19 @@ async function readyWorkspace(path: string, patch: Partial<Machine> = {}) {
 }
 
 /** The app at `path` where the workspace gets its own computer (`setup`), or where people pair theirs (null). */
+/** The seed with the agents the setup's lines name (xquads' handles): Ada as Helena, Atlas as Rui. */
+const crewState = () => {
+  const state = seedState();
+  state.agents = state.agents.map((a) =>
+    a.name === "Ada"
+      ? { ...a, name: "Helena", handle: "helena" }
+      : a.name === "Atlas"
+        ? { ...a, name: "Rui", handle: "rui" }
+        : a,
+  );
+  return state;
+};
+
 async function open(
   path: string,
   setup: Partial<ComputerSetup> | null,
@@ -277,7 +290,7 @@ describe("no AI yet while the workspace's computer is on its way", () => {
 
 describe("Configurações → Computadores: the workspace's own computer", () => {
   test("on hold with none ready: paused, nothing on its way and no notice; active again, its wait shows", async () => {
-    const state = seedState();
+    const state = crewState();
     const me = state.me;
     if (!me) throw new Error("no me");
     me.organizations = me.organizations.map((o) => ({ ...o, standing: { state: "hold", reason: null } }));
@@ -301,21 +314,21 @@ describe("Configurações → Computadores: the workspace's own computer", () =>
     );
     await settle(8);
     expect(card()).toContain("Sendo preparado");
-    expect(card()).toContain("O Atlas está separando um para a gente");
+    expect(card()).toContain("O Rui está separando um para a gente");
     expect(card()).toContain("Passo 1 de 4 · Reservando o computador");
     // The notice's See leads here, where the card says it all: no notice on this page.
     expect(screen().queryByRole("region", { name: NOTICE })).toBeNull();
   });
 
   test("its card: steps, size, one user per agent; ready, online with its agents", async () => {
-    const { push, machines } = await open(`/org/${ORG_ID}/settings/computers`, {
-      state: "preparing",
-      step: "starting",
-      specs: SPECS,
-    });
+    const { push, machines } = await open(
+      `/org/${ORG_ID}/settings/computers`,
+      { state: "preparing", step: "starting", specs: SPECS },
+      crewState(),
+    );
     const card = () => screen().getByRole("region", { name: "Computador da Acme" });
     // The team's line over the steps; "Sendo preparado" is the head's chip alone, never again over the steps.
-    expect(card().querySelector(".setup-say[data-on]")?.textContent).toBe("O Atlas está colocando ele de pé");
+    expect(card().querySelector(".setup-say[data-on]")?.textContent).toBe("O Rui está colocando ele de pé");
     expect(card().textContent?.split("Sendo preparado")).toHaveLength(2);
     expect(card().textContent).toContain("Passo 2 de 4 · Iniciando");
     expect(card().textContent).toContain(
@@ -479,24 +492,27 @@ describe("Configurações → Computadores: the workspace's own computer", () =>
     const card = () => screen().getByRole("region", { name: "Computador da Acme" });
     const shown = () => card().querySelector(".setup-say[data-on]")?.textContent;
     // Reduced motion (the screen tests' own): the first line holds, and the next stage brings its own.
-    const { push } = await open(`/org/${ORG_ID}/settings/computers`, { state: "preparing", step: "starting" });
-    expect(shown()).toBe("O Atlas está colocando ele de pé");
+    const { push } = await open(
+      `/org/${ORG_ID}/settings/computers`,
+      { state: "preparing", step: "starting" },
+      crewState(),
+    );
+    expect(shown()).toBe("O Rui está colocando ele de pé");
     expect(card().querySelector(".setup-says")?.getAttribute("aria-hidden")).toBe("true");
     await push({ step: "installing", stage: "booting" });
-    expect(shown()).toBe("A Ada está contando os 8 GB de memória");
+    expect(shown()).toBe("A Helena está contando os 8 GB de memória");
     cleanup();
 
     // Its size said only now, within the same stage: the line shown stays, and the memory's waits for its turn.
-    const sized = await open(`/org/${ORG_ID}/settings/computers`, {
-      state: "preparing",
-      step: "reserving",
-      stage: "ordering",
-      specs: null,
-    });
-    expect(shown()).toBe("O Atlas encomendou um novinho");
+    const sized = await open(
+      `/org/${ORG_ID}/settings/computers`,
+      { state: "preparing", step: "reserving", stage: "ordering", specs: null },
+      crewState(),
+    );
+    expect(shown()).toBe("O Rui encomendou um novinho");
     await sized.push({ step: "reserving", stage: "ordering" });
-    expect(card().textContent).toContain("A Ada pediu 8 GB de memória");
-    expect(shown()).toBe("O Atlas encomendou um novinho");
+    expect(card().textContent).toContain("A Helena pediu 8 GB de memória");
+    expect(shown()).toBe("O Rui encomendou um novinho");
     cleanup();
 
     // Motion allowed: the next line every 3.5 s, round again.
@@ -508,12 +524,12 @@ describe("Configurações → Computadores: the workspace's own computer", () =>
     }) as unknown as typeof setInterval);
     device.prefersReducedMotion = "no-preference";
     try {
-      await open(`/org/${ORG_ID}/settings/computers`, { state: "preparing", step: "starting" });
-      expect(shown()).toBe("O Atlas está colocando ele de pé");
+      await open(`/org/${ORG_ID}/settings/computers`, { state: "preparing", step: "starting" }, crewState());
+      expect(shown()).toBe("O Rui está colocando ele de pé");
       await act(async () => ticks.at(-1)?.());
-      expect(shown()).toBe("A Ada está esquentando os motores");
+      expect(shown()).toBe("A Helena está esquentando os motores");
       await act(async () => ticks.at(-1)?.());
-      expect(shown()).toBe("O Atlas está colocando ele de pé");
+      expect(shown()).toBe("O Rui está colocando ele de pé");
     } finally {
       device.prefersReducedMotion = "reduce";
       timers.mockRestore();

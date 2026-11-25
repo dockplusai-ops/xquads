@@ -16,7 +16,7 @@ import { resources } from "@agenteschat/i18n";
 import i18next, { type TFunction } from "i18next";
 
 /**
- * Lodi's weekly card on the phone (ADR 0137 §9), as on the web: the same card (rows that open a place, then the
+ * Doki's weekly card on the phone (ADR 0137 §9), as on the web: the same card (rows that open a place, then the
  * suggestions marked under each agent's face and one button for them), and its schedule in Settings.
  */
 
@@ -173,7 +173,7 @@ test("a day's card on the phone: what waits opens a place, the how-tos marked un
   expect(rows.filter(skipsAlone).map((r) => r.id)).toEqual(["retire:infra"]);
 });
 
-test("Configurações › Lodi: Resumo do dia and its hour for anyone, the week's day and hour for admins", () => {
+test("Configurações › Doki: Resumo do dia and its hour for anyone, the week's day and hour for admins", () => {
   const screen = src("right-hand/SettingsScreen.tsx");
   expect(screen).toContain("<OwnRows name={agent.name} />");
   expect(screen).toContain('can(org, "administrator")');
@@ -316,7 +316,7 @@ test("the day's card: what waits opens Atividade, what is stuck its conversation
   });
 });
 
-test("suggestions: Lodi's own fixes are its review's, and the ones that can be put away alone have Dismiss", () => {
+test("suggestions: Doki's own fixes are its review's, and the ones that can be put away alone have Dismiss", () => {
   const card = src("right-hand/TeamWeekCard.tsx");
   // A fix is a proposal its review applies or leaves out (ADR 0219): never marked, applied or accepted from the card.
   expect(card).toContain('const isFix = (row: TeamWeekRow): row is FixRowData => "proposalId" in row;');

@@ -258,7 +258,7 @@ describe("silence", () => {
 
 describe("while they are new", () => {
   const block = (fx: Fixture, personId: string) =>
-    newcomerBlock(fx.db, { orgId: fx.org.id, agentId: "lodi", personId });
+    newcomerBlock(fx.db, { orgId: fx.org.id, agentId: "doki", personId });
 
   test("its prompt says so in their DM: one agent, their own area, nobody else's data", async () => {
     f = await setup({ rightHand: true });

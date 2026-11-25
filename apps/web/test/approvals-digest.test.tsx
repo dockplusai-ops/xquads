@@ -36,7 +36,7 @@ const ask = (state: FakeState, id: string, detail: string, routine: boolean): Ap
   return a;
 };
 
-/** Lodi's digest card in its DM listing `ids`. */
+/** Doki's digest card in its DM listing `ids`. */
 const withDigest = (state: FakeState, ids: string[]) => {
   withRightHand(state);
   seedDm(state, { type: "agent", id: LODI_ID });
@@ -207,7 +207,7 @@ test("out of view, the conversation's bar says who asks: the right hand, with wh
     await go(withDigest(state, ["ap-a", "ap-b"]));
     const bar = document.querySelector(".ac-typing") as HTMLElement;
     expect(bar.hasAttribute("data-ask")).toBe(true);
-    expect(bar.textContent).toContain("Lodi espera sua aprovação");
+    expect(bar.textContent).toContain("Doki espera sua aprovação");
     expect(bar.textContent).toContain("2 pedidos de rotina");
     expect(bar.textContent).not.toContain("Agente");
   } finally {

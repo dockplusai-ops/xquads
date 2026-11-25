@@ -2300,17 +2300,17 @@
   "onboarding.stepNames.done": {
     "value": "Done"
   },
-  "onboarding.hosts.ada": {
-    "value": "Hi, I'm Ada. I'll set everything up with you."
+  "onboarding.hosts.ana": {
+    "value": "Hi, I'm Ana. I write the quotes for your jobs."
+  },
+  "onboarding.hosts.rui": {
+    "value": "Nice to meet you, I'm Rui. I keep the calendar."
   },
   "onboarding.hosts.lia": {
-    "value": "Hi, I'm Lia. I do research."
+    "value": "Hi, I'm Lia. I answer customers in English."
   },
-  "onboarding.hosts.theo": {
-    "value": "Nice to meet you, I'm Theo. I organize the team's tasks."
-  },
-  "onboarding.hosts.atlas": {
-    "value": "Hey, Atlas here. I look after the computers."
+  "onboarding.hosts.teo": {
+    "value": "Hello, I'm Téo. I handle billing."
   },
   "onboarding.progress.left": {
     "value": {
@@ -4120,45 +4120,6 @@
   },
   "onboarding.brain.failed": {
     "value": "Some agents couldn't switch to the {{brand}} account on {{computer}}. You can switch each one on its page."
-  },
-  "onboarding.presets.theo.name": {
-    "value": "Theo"
-  },
-  "onboarding.presets.theo.role": {
-    "value": "PM"
-  },
-  "onboarding.presets.theo.desc": {
-    "value": "Organizes tasks and keeps the roadmap up to date."
-  },
-  "onboarding.presets.ada.name": {
-    "value": "Ada"
-  },
-  "onboarding.presets.ada.role": {
-    "value": "Dev"
-  },
-  "onboarding.presets.ada.desc": {
-    "value": "Codes in branches, reviews PRs and investigates bugs."
-  },
-  "onboarding.presets.lia.name": {
-    "value": "Lia"
-  },
-  "onboarding.presets.lia.role": {
-    "value": "Research"
-  },
-  "onboarding.presets.lia.desc": {
-    "value": "Researches the market, competitors and feedback."
-  },
-  "onboarding.presets.lia.instructions": {
-    "value": "Researches the market, competitors and feedback.\nLooks at the sources first (feedback, analytics, the web, earlier research) and cites them: links, numbers and dates.\nEnds with what it recommends, not just a summary."
-  },
-  "onboarding.presets.atlas.name": {
-    "value": "Atlas"
-  },
-  "onboarding.presets.atlas.role": {
-    "value": "Ops"
-  },
-  "onboarding.presets.atlas.desc": {
-    "value": "Watches errors, queues and deploys."
   },
   "onboarding.keyStep.title": {
     "value": "Which AI will they use?"
@@ -7308,7 +7269,7 @@
     "value": "Needs a computer"
   },
   "rightHand.brain.unusable.computerOnly": {
-    "value": "{{owner}}'s, signed in on {{computer}} only. Lodi thinks with a plan signed in as an account."
+    "value": "{{owner}}'s, signed in on {{computer}} only. Doki thinks with a plan signed in as an account."
   },
   "rightHand.brain.unusable.noComputer": {
     "value": "{{owner}}'s. It needs a computer, and the workspace has none connected."
@@ -17067,11 +17028,137 @@
   "newAgent.steps.review.title": {
     "value": "All good with {{name}}?"
   },
+  "newAgent.roles.quotes.name": {
+    "value": "Quotes"
+  },
+  "newAgent.roles.quotes.agent": {
+    "value": "Ana"
+  },
+  "newAgent.roles.quotes.desc": {
+    "value": "Writes the estimates for your jobs."
+  },
+  "newAgent.roles.quotes.instructions": {
+    "value": "Before writing, gathers what the customer asked for: the service, the size, the address, the photos and the deadline. If something is missing, asks you.\nBuilds the quote with the prices you gave and shows the total, what's included and how long it's valid.\nNever sends a quote to a customer without your approval."
+  },
+  "newAgent.roles.quotes.tasks.a": {
+    "value": "Quote painting a 200 sq ft living room"
+  },
+  "newAgent.roles.quotes.tasks.b": {
+    "value": "Which quotes haven't heard back yet?"
+  },
+  "newAgent.roles.quotes.tasks.c": {
+    "value": "Draft a quote template for post-construction cleaning"
+  },
+  "newAgent.roles.schedule.name": {
+    "value": "Schedule"
+  },
+  "newAgent.roles.schedule.agent": {
+    "value": "Rui"
+  },
+  "newAgent.roles.schedule.desc": {
+    "value": "Keeps the job calendar, confirmations and reschedules."
+  },
+  "newAgent.roles.schedule.instructions": {
+    "value": "Starts with the calendar: tomorrow's jobs and who hasn't confirmed yet.\nConfirms the day before, offers new times when a customer asks to reschedule and warns you of conflicts and openings.\nTexting a customer or moving a booked job only with approval."
+  },
+  "newAgent.roles.schedule.tasks.a": {
+    "value": "What's booked for tomorrow?"
+  },
+  "newAgent.roles.schedule.tasks.b": {
+    "value": "Who hasn't confirmed tomorrow's job?"
+  },
+  "newAgent.roles.schedule.tasks.c": {
+    "value": "Move Friday's cleaning to Monday morning"
+  },
+  "newAgent.roles.english.name": {
+    "value": "English support"
+  },
+  "newAgent.roles.english.agent": {
+    "value": "Lia"
+  },
+  "newAgent.roles.english.desc": {
+    "value": "Answers customers in English for you."
+  },
+  "newAgent.roles.english.instructions": {
+    "value": "Reads the customer's message and translates it for you, with what they want and what's still missing.\nWrites the reply in clear, polite English and shows you the translation before sending.\nNothing goes to a customer without your approval."
+  },
+  "newAgent.roles.english.tasks.a": {
+    "value": "Translate the customer's last message"
+  },
+  "newAgent.roles.english.tasks.b": {
+    "value": "Reply in English that we'll be there at 9 tomorrow"
+  },
+  "newAgent.roles.english.tasks.c": {
+    "value": "Write a message asking for photos of the place"
+  },
+  "newAgent.roles.billing.name": {
+    "value": "Billing"
+  },
+  "newAgent.roles.billing.agent": {
+    "value": "Téo"
+  },
+  "newAgent.roles.billing.desc": {
+    "value": "Handles invoices and late payments."
+  },
+  "newAgent.roles.billing.instructions": {
+    "value": "Starts with the invoices: what's due, who paid and how much is still owed.\nPrepares the invoice for each finished job and a polite reminder for whoever is late.\nSending a charge to a customer or moving money only with approval."
+  },
+  "newAgent.roles.billing.tasks.a": {
+    "value": "Who's behind on payment?"
+  },
+  "newAgent.roles.billing.tasks.b": {
+    "value": "Prepare the invoice for yesterday's job"
+  },
+  "newAgent.roles.billing.tasks.c": {
+    "value": "How much came in this month?"
+  },
+  "newAgent.roles.reviews.name": {
+    "value": "Reviews and social"
+  },
+  "newAgent.roles.reviews.agent": {
+    "value": "Gil"
+  },
+  "newAgent.roles.reviews.desc": {
+    "value": "Asks for Google reviews and writes the posts."
+  },
+  "newAgent.roles.reviews.instructions": {
+    "value": "After each finished job, prepares a Google review request for the happy customer.\nWrites posts with the before-and-after photos and draft replies to each new review.\nSending a request to a customer, publishing a post or replying to a review only with approval."
+  },
+  "newAgent.roles.reviews.tasks.a": {
+    "value": "Which customers this week could leave a Google review?"
+  },
+  "newAgent.roles.reviews.tasks.b": {
+    "value": "Write a post with photos from the last job"
+  },
+  "newAgent.roles.reviews.tasks.c": {
+    "value": "Reply to the latest review"
+  },
+  "newAgent.roles.crew.name": {
+    "value": "Crew and routes"
+  },
+  "newAgent.roles.crew.agent": {
+    "value": "Davi"
+  },
+  "newAgent.roles.crew.desc": {
+    "value": "Plans the day's routes and who goes where."
+  },
+  "newAgent.roles.crew.instructions": {
+    "value": "Starts with the day's calendar: the jobs, the addresses and who on the crew is free.\nPlans each crew's route in the order that saves the most time and warns you when a job doesn't fit the day.\nTexting the crew or changing the schedule only with approval."
+  },
+  "newAgent.roles.crew.tasks.a": {
+    "value": "Plan tomorrow's routes"
+  },
+  "newAgent.roles.crew.tasks.b": {
+    "value": "Who's free Thursday afternoon?"
+  },
+  "newAgent.roles.crew.tasks.c": {
+    "value": "Send the week's schedule to the group"
+  },
   "newAgent.roles.dev.name": {
     "value": "Dev"
   },
   "newAgent.roles.dev.agent": {
-    "value": "Ada"
+    "value": "Bia"
   },
   "newAgent.roles.dev.desc": {
     "value": "Codes, reviews PRs and investigates bugs."
@@ -17092,7 +17179,7 @@
     "value": "Ops"
   },
   "newAgent.roles.ops.agent": {
-    "value": "Atlas"
+    "value": "Caio"
   },
   "newAgent.roles.ops.desc": {
     "value": "Watches errors, queues and deploys."
@@ -17113,7 +17200,7 @@
     "value": "QA"
   },
   "newAgent.roles.qa.agent": {
-    "value": "Iris"
+    "value": "Duda"
   },
   "newAgent.roles.qa.desc": {
     "value": "Tests flows and reproduces reported bugs."
@@ -17134,7 +17221,7 @@
     "value": "PM"
   },
   "newAgent.roles.pm.agent": {
-    "value": "Theo"
+    "value": "Enzo"
   },
   "newAgent.roles.pm.desc": {
     "value": "Organizes tasks and summaries."
@@ -17155,7 +17242,7 @@
     "value": "Support"
   },
   "newAgent.roles.support.agent": {
-    "value": "Nina"
+    "value": "Flora"
   },
   "newAgent.roles.support.desc": {
     "value": "Answers customers and hands off what needs a person."
@@ -17176,7 +17263,7 @@
     "value": "Sales"
   },
   "newAgent.roles.sales.agent": {
-    "value": "Leo"
+    "value": "Igor"
   },
   "newAgent.roles.sales.desc": {
     "value": "Prepares proposals and follows up with leads."
@@ -17197,7 +17284,7 @@
     "value": "Marketing"
   },
   "newAgent.roles.marketing.agent": {
-    "value": "Mila"
+    "value": "Joana"
   },
   "newAgent.roles.marketing.desc": {
     "value": "Plans campaigns, posts and website pages."
@@ -17218,7 +17305,7 @@
     "value": "Content"
   },
   "newAgent.roles.content.agent": {
-    "value": "Bento"
+    "value": "Murilo"
   },
   "newAgent.roles.content.desc": {
     "value": "Writes and edits texts, articles and newsletters."
@@ -17239,7 +17326,7 @@
     "value": "Data"
   },
   "newAgent.roles.data.agent": {
-    "value": "Dora"
+    "value": "Nara"
   },
   "newAgent.roles.data.desc": {
     "value": "Answers questions with numbers and builds reports."
@@ -17260,7 +17347,7 @@
     "value": "Finance"
   },
   "newAgent.roles.finance.agent": {
-    "value": "Otto"
+    "value": "Paulo"
   },
   "newAgent.roles.finance.desc": {
     "value": "Keeps track of payments, billing and spending."
@@ -17281,7 +17368,7 @@
     "value": "People"
   },
   "newAgent.roles.people.agent": {
-    "value": "Clara"
+    "value": "Rita"
   },
   "newAgent.roles.people.desc": {
     "value": "Helps with hiring, onboarding and the team's questions."
@@ -17302,7 +17389,7 @@
     "value": "Research"
   },
   "newAgent.roles.research.agent": {
-    "value": "Hugo"
+    "value": "Sérgio"
   },
   "newAgent.roles.research.desc": {
     "value": "Researches a subject and delivers a summary with sources."
@@ -17323,7 +17410,7 @@
     "value": "Assistant"
   },
   "newAgent.roles.assistant.agent": {
-    "value": "Eva"
+    "value": "Vera"
   },
   "newAgent.roles.assistant.desc": {
     "value": "Takes care of the calendar, emails and reminders."
@@ -17352,6 +17439,9 @@
   "newAgent.roleGroups.personal": {
     "value": "For your day"
   },
+  "newAgent.roleGroups.services": {
+    "value": "Services"
+  },
   "newAgent.roleGroups.tech": {
     "value": "Product and tech"
   },
@@ -17368,13 +17458,13 @@
     "value": "Name"
   },
   "newAgent.namePlaceholder": {
-    "value": "E.g. Iris"
+    "value": "E.g. Ana"
   },
   "newAgent.handle": {
     "value": "In chat"
   },
   "newAgent.handlePlaceholder": {
-    "value": "iris"
+    "value": "ana"
   },
   "newAgent.handleHelp": {
     "value": "Mention @{{handle}} to call it."
@@ -17797,32 +17887,50 @@
   "newAgent.routineNotMade": {
     "value": "The routine wasn't created: {{reason}}"
   },
-  "newAgent.hello.clara": {
+  "newAgent.hello.marina": {
     "value": "I'll look after your calendar and remind you of what matters before it's too late."
   },
-  "newAgent.hello.duda": {
+  "newAgent.hello.cecilia": {
     "value": "I'll keep track of your bills and spending and warn you before anything is due."
   },
-  "newAgent.hello.leo": {
+  "newAgent.hello.lucas": {
     "value": "I'll plan your workouts and keep you on pace, your way."
   },
-  "newAgent.hello.mel": {
+  "newAgent.hello.julia": {
     "value": "I'll plan your meals and shopping list, to your taste and your budget."
   },
-  "newAgent.hello.gabi": {
+  "newAgent.hello.bruna": {
     "value": "I'll build your study plan and quiz you on what you learned."
   },
-  "newAgent.hello.lu": {
+  "newAgent.hello.lorena": {
     "value": "I'll keep your notes and ideas and help you turn them into writing."
   },
-  "newAgent.hello.rosa": {
+  "newAgent.hello.tereza": {
     "value": "I'll take care of the shopping list, the chores and what needs fixing."
   },
-  "newAgent.hello.vic": {
+  "newAgent.hello.renato": {
     "value": "I'll plan your trips: dates, prices, bookings and a day-by-day itinerary."
   },
-  "newAgent.hello.rui": {
+  "newAgent.hello.fabio": {
     "value": "I'll follow up with your clients, write proposals and invoices and remember who hasn't paid."
+  },
+  "newAgent.hello.quotes": {
+    "value": "I write the quotes and send them only after your OK."
+  },
+  "newAgent.hello.schedule": {
+    "value": "I keep the calendar and confirm every job the day before."
+  },
+  "newAgent.hello.english": {
+    "value": "I answer customers in English and translate everything for you."
+  },
+  "newAgent.hello.billing": {
+    "value": "I handle the invoices and remind whoever is late on payment."
+  },
+  "newAgent.hello.reviews": {
+    "value": "I ask for Google reviews and write the week's posts."
+  },
+  "newAgent.hello.crew": {
+    "value": "I plan the day's routes and say who goes where."
   },
   "newAgent.hello.dev": {
     "value": "I write code, review PRs and dig into bugs."
@@ -17863,112 +17971,112 @@
   "newAgent.hello.assistant": {
     "value": "I take care of the calendar, emails and reminders."
   },
-  "newAgent.starters.clara.instructions": {
+  "newAgent.starters.marina.instructions": {
     "value": "Checks the calendar every morning and sends what's on for the day.\nReminds the day before each appointment and each bill with a date.\nNever books, cancels or accepts an invite without asking first."
   },
-  "newAgent.starters.clara.tasks.a": {
+  "newAgent.starters.marina.tasks.a": {
     "value": "What do I have tomorrow?"
   },
-  "newAgent.starters.clara.tasks.b": {
+  "newAgent.starters.marina.tasks.b": {
     "value": "Remind me to pay the rent every 5th"
   },
-  "newAgent.starters.clara.tasks.c": {
+  "newAgent.starters.marina.tasks.c": {
     "value": "Send me my agenda every day at 7am"
   },
-  "newAgent.starters.duda.instructions": {
+  "newAgent.starters.cecilia.instructions": {
     "value": "Keeps track of bills and spending, sorted by category.\nWarns three days before anything is due and when a spend is out of the ordinary.\nNever pays, transfers or cancels anything without asking first."
   },
-  "newAgent.starters.duda.tasks.a": {
+  "newAgent.starters.cecilia.tasks.a": {
     "value": "How much did I spend this month?"
   },
-  "newAgent.starters.duda.tasks.b": {
+  "newAgent.starters.cecilia.tasks.b": {
     "value": "Which bills are due this week?"
   },
-  "newAgent.starters.duda.tasks.c": {
+  "newAgent.starters.cecilia.tasks.c": {
     "value": "Sort these expenses by category"
   },
-  "newAgent.starters.leo.instructions": {
+  "newAgent.starters.lucas.instructions": {
     "value": "Plans workouts for your level, the time you have and what you enjoy.\nAdjusts the week when you miss a day or feel tired, no lecturing.\nGives no medical advice: with pain or an injury, suggests seeing a professional."
   },
-  "newAgent.starters.leo.tasks.a": {
+  "newAgent.starters.lucas.tasks.a": {
     "value": "Plan a 30-minute workout for today"
   },
-  "newAgent.starters.leo.tasks.b": {
+  "newAgent.starters.lucas.tasks.b": {
     "value": "Plan my running week"
   },
-  "newAgent.starters.leo.tasks.c": {
+  "newAgent.starters.lucas.tasks.c": {
     "value": "Send me the day's workout every morning"
   },
-  "newAgent.starters.mel.instructions": {
+  "newAgent.starters.julia.instructions": {
     "value": "Plans the week's meals around your taste, time and budget.\nBuilds the shopping list for the menu, grouped by store aisle.\nRespects restrictions and allergies, and gives no diet or medical advice."
   },
-  "newAgent.starters.mel.tasks.a": {
+  "newAgent.starters.julia.tasks.a": {
     "value": "Suggest three quick dinners"
   },
-  "newAgent.starters.mel.tasks.b": {
+  "newAgent.starters.julia.tasks.b": {
     "value": "Plan this week's menu"
   },
-  "newAgent.starters.mel.tasks.c": {
+  "newAgent.starters.julia.tasks.c": {
     "value": "Make the shopping list for the menu"
   },
-  "newAgent.starters.gabi.instructions": {
+  "newAgent.starters.bruna.instructions": {
     "value": "Builds a study plan up to the exam, with what fits in each day.\nQuizzes you on what you studied and explains again what you got wrong.\nDoesn't do the homework for you: guides you to the answer."
   },
-  "newAgent.starters.gabi.tasks.a": {
+  "newAgent.starters.bruna.tasks.a": {
     "value": "Make a study plan for the exam"
   },
-  "newAgent.starters.gabi.tasks.b": {
+  "newAgent.starters.bruna.tasks.b": {
     "value": "Ask me 3 questions about what I studied"
   },
-  "newAgent.starters.gabi.tasks.c": {
+  "newAgent.starters.bruna.tasks.c": {
     "value": "Explain this topic simply"
   },
-  "newAgent.starters.lu.instructions": {
+  "newAgent.starters.lorena.instructions": {
     "value": "Keeps the notes and ideas you send and groups the similar ones.\nTurns notes into writing in your voice, never adding what you didn't say.\nEdits with care and shows what changed before replacing the original."
   },
-  "newAgent.starters.lu.tasks.a": {
+  "newAgent.starters.lorena.tasks.a": {
     "value": "Turn these notes into a short text"
   },
-  "newAgent.starters.lu.tasks.b": {
+  "newAgent.starters.lorena.tasks.b": {
     "value": "Gather this week's ideas"
   },
-  "newAgent.starters.lu.tasks.c": {
+  "newAgent.starters.lorena.tasks.c": {
     "value": "Edit this text"
   },
-  "newAgent.starters.rosa.instructions": {
+  "newAgent.starters.tereza.instructions": {
     "value": "Keeps the shopping list and the house chores up to date.\nNotes what needs fixing and keeps reminding until it's done.\nNever buys or hires anything without asking first."
   },
-  "newAgent.starters.rosa.tasks.a": {
+  "newAgent.starters.tereza.tasks.a": {
     "value": "Make this week's shopping list"
   },
-  "newAgent.starters.rosa.tasks.b": {
+  "newAgent.starters.tereza.tasks.b": {
     "value": "What needs fixing at home?"
   },
-  "newAgent.starters.rosa.tasks.c": {
+  "newAgent.starters.tereza.tasks.c": {
     "value": "Split up the chores"
   },
-  "newAgent.starters.vic.instructions": {
+  "newAgent.starters.renato.instructions": {
     "value": "Plans the trip with dates, prices and a day-by-day itinerary.\nCompares flights and places to stay and says why it suggests each one.\nNever books or pays for anything without asking first."
   },
-  "newAgent.starters.vic.tasks.a": {
+  "newAgent.starters.renato.tasks.a": {
     "value": "Plan 3 days in Lisbon"
   },
-  "newAgent.starters.vic.tasks.b": {
+  "newAgent.starters.renato.tasks.b": {
     "value": "Tell me if the fare drops"
   },
-  "newAgent.starters.vic.tasks.c": {
+  "newAgent.starters.renato.tasks.c": {
     "value": "Gather the trip's bookings"
   },
-  "newAgent.starters.rui.instructions": {
+  "newAgent.starters.fabio.instructions": {
     "value": "Follows each client: what was agreed, what's left and who hasn't paid.\nWrites proposals and payment reminders in your voice, ready to review.\nNever sends anything to a client without your approval."
   },
-  "newAgent.starters.rui.tasks.a": {
+  "newAgent.starters.fabio.tasks.a": {
     "value": "Write a short proposal for a client"
   },
-  "newAgent.starters.rui.tasks.b": {
+  "newAgent.starters.fabio.tasks.b": {
     "value": "Who hasn't paid yet?"
   },
-  "newAgent.starters.rui.tasks.c": {
+  "newAgent.starters.fabio.tasks.c": {
     "value": "What is each client waiting for today?"
   },
   "newAgentCard.title": {
@@ -49113,103 +49221,103 @@
   "computerSetup.stepOf": {
     "value": "Step {{n}} of {{total}} · {{step}}"
   },
-  "computerSetup.lines.reserving.atlas": {
+  "computerSetup.lines.reserving.rui": {
     "value": "{{name}} is setting one aside for us"
   },
-  "computerSetup.lines.reserving.theo": {
+  "computerSetup.lines.reserving.ana": {
     "value": "{{name}} put our name on it"
   },
-  "computerSetup.lines.reserving.lia": {
+  "computerSetup.lines.reserving.gil": {
     "value": "{{name}} is checking it's all ours"
   },
-  "computerSetup.lines.ordering.ada": {
+  "computerSetup.lines.ordering.helena": {
     "value": "{{name}} asked for {{gb}} GB of memory"
   },
-  "computerSetup.lines.ordering.atlas": {
+  "computerSetup.lines.ordering.rui": {
     "value": "{{name}} ordered a brand new one"
   },
-  "computerSetup.lines.ordering.theo": {
+  "computerSetup.lines.ordering.ana": {
     "value": "{{name}} is keeping an eye on the order"
   },
-  "computerSetup.lines.wiping.ada": {
+  "computerSetup.lines.wiping.helena": {
     "value": "{{name}} is giving it a good scrub"
   },
-  "computerSetup.lines.wiping.atlas": {
+  "computerSetup.lines.wiping.rui": {
     "value": "{{name}} is taking out the trash"
   },
-  "computerSetup.lines.wiping.lia": {
+  "computerSetup.lines.wiping.gil": {
     "value": "{{name}} is checking nothing old is left"
   },
-  "computerSetup.lines.starting.atlas": {
+  "computerSetup.lines.starting.rui": {
     "value": "{{name}} is getting it on its feet"
   },
-  "computerSetup.lines.starting.ada": {
+  "computerSetup.lines.starting.helena": {
     "value": "{{name}} is warming up the engines"
   },
-  "computerSetup.lines.starting.theo": {
+  "computerSetup.lines.starting.ana": {
     "value": "{{name}} waved the starting flag"
   },
-  "computerSetup.lines.booting.ada": {
+  "computerSetup.lines.booting.helena": {
     "value": "{{name}} is counting all {{gb}} GB of memory"
   },
-  "computerSetup.lines.booting.atlas": {
+  "computerSetup.lines.booting.rui": {
     "value": "{{name}} is checking every part is there"
   },
-  "computerSetup.lines.booting.theo": {
+  "computerSetup.lines.booting.ana": {
     "value": "{{name}} is letting it load in peace"
   },
-  "computerSetup.lines.updating.lia": {
+  "computerSetup.lines.updating.gil": {
     "value": "{{name}} is fetching the latest updates"
   },
-  "computerSetup.lines.updating.ada": {
+  "computerSetup.lines.updating.helena": {
     "value": "{{name}} is tightening every screw"
   },
-  "computerSetup.lines.updating.theo": {
+  "computerSetup.lines.updating.ana": {
     "value": "{{name}} is ticking off each update"
   },
-  "computerSetup.lines.restarting.ada": {
+  "computerSetup.lines.restarting.helena": {
     "value": "{{name}} says this restart is normal"
   },
-  "computerSetup.lines.restarting.atlas": {
+  "computerSetup.lines.restarting.rui": {
     "value": "{{name}} is making the update stick"
   },
-  "computerSetup.lines.restarting.theo": {
+  "computerSetup.lines.restarting.ana": {
     "value": "{{name}} is counting to ten"
   },
-  "computerSetup.lines.network.lia": {
+  "computerSetup.lines.network.gil": {
     "value": "{{name}} is running the cables"
   },
-  "computerSetup.lines.network.atlas": {
+  "computerSetup.lines.network.rui": {
     "value": "{{name}} is making sure it finds us"
   },
-  "computerSetup.lines.network.theo": {
+  "computerSetup.lines.network.ana": {
     "value": "{{name}} is drawing it a map"
   },
-  "computerSetup.lines.firewall.atlas": {
+  "computerSetup.lines.firewall.rui": {
     "value": "{{name}} is locking every door"
   },
-  "computerSetup.lines.firewall.lia": {
+  "computerSetup.lines.firewall.gil": {
     "value": "{{name}} put a bouncer out front"
   },
-  "computerSetup.lines.firewall.theo": {
+  "computerSetup.lines.firewall.ana": {
     "value": "{{name}} is writing the guest list"
   },
-  "computerSetup.lines.installing.theo": {
+  "computerSetup.lines.installing.ana": {
     "value": "{{name}} is looking for the apps"
   },
-  "computerSetup.lines.installing.lia": {
+  "computerSetup.lines.installing.gil": {
     "value": "{{name}} is unpacking the apps"
   },
-  "computerSetup.lines.installing.ada": {
+  "computerSetup.lines.installing.helena": {
     "value": "{{name}} is laying out the tools"
   },
-  "computerSetup.lines.connecting.ada": {
+  "computerSetup.lines.connecting.helena": {
     "value": "{{name}} is waiting for its first hello"
   },
-  "computerSetup.lines.connecting.atlas": {
+  "computerSetup.lines.connecting.rui": {
     "value": "{{name}} is handing over the keys"
   },
-  "computerSetup.lines.connecting.lia": {
+  "computerSetup.lines.connecting.gil": {
     "value": "{{name}} is introducing it to the team"
   },
   "computerSetup.status.preparing": {
@@ -52183,256 +52291,256 @@
   "teamTemplates.hello.lodiNoAi.created": {
     "value": "The team is here. Connect an AI and we'll get to work."
   },
-  "teamTemplates.agents.iara.role": {
+  "teamTemplates.agents.luana.role": {
     "value": "Customer service"
   },
-  "teamTemplates.agents.iara.line": {
+  "teamTemplates.agents.luana.line": {
     "value": "Answers customers on WhatsApp and email. Calls you when she doesn't know."
   },
-  "teamTemplates.agents.iara.routine": {
+  "teamTemplates.agents.luana.routine": {
     "value": "Sum up what was left unanswered"
   },
-  "teamTemplates.agents.iara.task": {
+  "teamTemplates.agents.luana.task": {
     "value": "Write a reply to this customer message:"
   },
-  "teamTemplates.agents.iara.hello": {
+  "teamTemplates.agents.luana.hello": {
     "value": "Hi, {{first}}. Leave whoever writes on WhatsApp to me."
   },
-  "teamTemplates.agents.caio.role": {
+  "teamTemplates.agents.teo.role": {
     "value": "Billing"
   },
-  "teamTemplates.agents.caio.line": {
+  "teamTemplates.agents.teo.line": {
     "value": "Reminds whoever is late on payment and sends the reminder after your ok."
   },
-  "teamTemplates.agents.caio.routine": {
+  "teamTemplates.agents.teo.routine": {
     "value": "List who is late on payment"
   },
-  "teamTemplates.agents.caio.task": {
+  "teamTemplates.agents.teo.task": {
     "value": "Write a friendly payment reminder for:"
   },
-  "teamTemplates.agents.caio.hello": {
+  "teamTemplates.agents.teo.hello": {
     "value": "Hello. I'll handle billing and only send reminders after your ok."
   },
-  "teamTemplates.agents.ada.role": {
+  "teamTemplates.agents.helena.role": {
     "value": "Dev"
   },
-  "teamTemplates.agents.ada.line": {
+  "teamTemplates.agents.helena.line": {
     "value": "Fixes the bugs customers report and opens the PR."
   },
-  "teamTemplates.agents.ada.routine": {
+  "teamTemplates.agents.helena.routine": {
     "value": "List the new bugs"
   },
-  "teamTemplates.agents.ada.task": {
+  "teamTemplates.agents.helena.task": {
     "value": "Tell me where to start looking at this bug:"
   },
-  "teamTemplates.agents.ada.hello": {
+  "teamTemplates.agents.helena.hello": {
     "value": "Hi. Send me the bugs that come in, I'll dig in and open the PR."
   },
-  "teamTemplates.agents.lia.role": {
+  "teamTemplates.agents.gil.role": {
     "value": "Content"
   },
-  "teamTemplates.agents.lia.line": {
+  "teamTemplates.agents.gil.line": {
     "value": "Writes posts and scripts in the company's voice and schedules them after your ok."
   },
-  "teamTemplates.agents.lia.routine": {
+  "teamTemplates.agents.gil.routine": {
     "value": "Propose the week's posts"
   },
-  "teamTemplates.agents.lia.task": {
+  "teamTemplates.agents.gil.task": {
     "value": "Suggest three posts for this week about:"
   },
-  "teamTemplates.agents.lia.hello": {
+  "teamTemplates.agents.gil.hello": {
     "value": "Hi, everyone. This week's posts are on me."
   },
-  "teamTemplates.agents.theo.role": {
+  "teamTemplates.agents.ana.role": {
     "value": "Sales"
   },
-  "teamTemplates.agents.theo.line": {
+  "teamTemplates.agents.ana.line": {
     "value": "Follows up on everyone who asked for a quote and writes the proposals."
   },
-  "teamTemplates.agents.theo.routine": {
+  "teamTemplates.agents.ana.routine": {
     "value": "List who asked for a quote and got no answer"
   },
-  "teamTemplates.agents.theo.task": {
+  "teamTemplates.agents.ana.task": {
     "value": "Write a short quote for this request:"
   },
-  "teamTemplates.agents.theo.hello": {
+  "teamTemplates.agents.ana.hello": {
     "value": "Hi, {{first}}. Nobody who asks for a quote will go unanswered."
   },
-  "teamTemplates.agents.nina.role": {
+  "teamTemplates.agents.rui.role": {
     "value": "Scheduling"
   },
-  "teamTemplates.agents.nina.line": {
+  "teamTemplates.agents.rui.line": {
     "value": "Books, confirms and moves appointments, and reminds clients the day before."
   },
-  "teamTemplates.agents.nina.routine": {
+  "teamTemplates.agents.rui.routine": {
     "value": "Confirm tomorrow's appointments"
   },
-  "teamTemplates.agents.nina.task": {
+  "teamTemplates.agents.rui.task": {
     "value": "Organize tomorrow's schedule:"
   },
-  "teamTemplates.agents.nina.hello": {
+  "teamTemplates.agents.rui.hello": {
     "value": "Hello. The calendar is mine, and I'll remind clients the day before."
   },
-  "teamTemplates.agents.otto.role": {
+  "teamTemplates.agents.tiago.role": {
     "value": "Orders"
   },
-  "teamTemplates.agents.otto.line": {
+  "teamTemplates.agents.tiago.line": {
     "value": "Follows orders and stock and warns what is running out."
   },
-  "teamTemplates.agents.otto.routine": {
+  "teamTemplates.agents.tiago.routine": {
     "value": "Warn what is running out in stock"
   },
-  "teamTemplates.agents.otto.task": {
+  "teamTemplates.agents.tiago.task": {
     "value": "List what's left to do on these orders:"
   },
-  "teamTemplates.agents.otto.hello": {
+  "teamTemplates.agents.tiago.hello": {
     "value": "I'm here. I'll watch the orders and tell you if stock runs low."
   },
-  "teamTemplates.agents.bia.role": {
+  "teamTemplates.agents.sofia.role": {
     "value": "Answer base"
   },
-  "teamTemplates.agents.bia.line": {
+  "teamTemplates.agents.sofia.line": {
     "value": "Keeps the answer base up to date with what the team answers."
   },
-  "teamTemplates.agents.bia.routine": {
+  "teamTemplates.agents.sofia.routine": {
     "value": "Update the base with the week's answers"
   },
-  "teamTemplates.agents.bia.task": {
+  "teamTemplates.agents.sofia.task": {
     "value": "Write answers to these customer questions:"
   },
-  "teamTemplates.agents.bia.hello": {
+  "teamTemplates.agents.sofia.hello": {
     "value": "Hi. I'll keep the answer base up to date with what the team says."
   },
-  "teamTemplates.agents.clara.role": {
+  "teamTemplates.agents.marina.role": {
     "value": "Calendar and reminders"
   },
-  "teamTemplates.agents.clara.line": {
+  "teamTemplates.agents.marina.line": {
     "value": "Keeps your calendar and reminds you of what matters before it's too late."
   },
-  "teamTemplates.agents.clara.routine": {
+  "teamTemplates.agents.marina.routine": {
     "value": "Send today's agenda"
   },
-  "teamTemplates.agents.clara.task": {
+  "teamTemplates.agents.marina.task": {
     "value": "Put this on my calendar and remind me the day before:"
   },
-  "teamTemplates.agents.duda.role": {
+  "teamTemplates.agents.cecilia.role": {
     "value": "Bills and spending"
   },
-  "teamTemplates.agents.duda.line": {
+  "teamTemplates.agents.cecilia.line": {
     "value": "Keeps track of your bills and spending and warns you before something is due."
   },
-  "teamTemplates.agents.duda.routine": {
+  "teamTemplates.agents.cecilia.routine": {
     "value": "List this month's bills and what's left to pay"
   },
-  "teamTemplates.agents.duda.task": {
+  "teamTemplates.agents.cecilia.task": {
     "value": "Sort these expenses by category:"
   },
-  "teamTemplates.agents.leo.role": {
+  "teamTemplates.agents.lucas.role": {
     "value": "Training"
   },
-  "teamTemplates.agents.leo.line": {
+  "teamTemplates.agents.lucas.line": {
     "value": "Puts together your workouts and keeps you going, at your pace."
   },
-  "teamTemplates.agents.leo.routine": {
+  "teamTemplates.agents.lucas.routine": {
     "value": "Send today's workout"
   },
-  "teamTemplates.agents.leo.task": {
+  "teamTemplates.agents.lucas.task": {
     "value": "Make me a 30-minute workout for today with:"
   },
-  "teamTemplates.agents.mel.role": {
+  "teamTemplates.agents.julia.role": {
     "value": "Food"
   },
-  "teamTemplates.agents.mel.line": {
+  "teamTemplates.agents.julia.line": {
     "value": "Plans your meals and the shopping list, to your taste and budget."
   },
-  "teamTemplates.agents.mel.routine": {
+  "teamTemplates.agents.julia.routine": {
     "value": "Plan the week's meals and the shopping list"
   },
-  "teamTemplates.agents.mel.task": {
+  "teamTemplates.agents.julia.task": {
     "value": "Suggest three quick dinners with:"
   },
-  "teamTemplates.agents.gabi.role": {
+  "teamTemplates.agents.bruna.role": {
     "value": "Studies"
   },
-  "teamTemplates.agents.gabi.line": {
+  "teamTemplates.agents.bruna.line": {
     "value": "Builds your study plan and quizzes you on what you learned."
   },
-  "teamTemplates.agents.gabi.routine": {
+  "teamTemplates.agents.bruna.routine": {
     "value": "Review today's topic with three questions"
   },
-  "teamTemplates.agents.gabi.task": {
+  "teamTemplates.agents.bruna.task": {
     "value": "Explain this topic simply and ask me three questions:"
   },
-  "teamTemplates.agents.lu.role": {
+  "teamTemplates.agents.lorena.role": {
     "value": "Writing and ideas"
   },
-  "teamTemplates.agents.lu.line": {
+  "teamTemplates.agents.lorena.line": {
     "value": "Keeps your notes and ideas and helps you turn them into texts."
   },
-  "teamTemplates.agents.lu.routine": {
+  "teamTemplates.agents.lorena.routine": {
     "value": "Gather the week's ideas and notes"
   },
-  "teamTemplates.agents.lu.task": {
+  "teamTemplates.agents.lorena.task": {
     "value": "Turn these notes into a short text:"
   },
-  "teamTemplates.agents.rosa.role": {
+  "teamTemplates.agents.tereza.role": {
     "value": "Home and shopping"
   },
-  "teamTemplates.agents.rosa.line": {
+  "teamTemplates.agents.tereza.line": {
     "value": "Keeps the shopping list, the house chores and what needs fixing."
   },
-  "teamTemplates.agents.rosa.routine": {
+  "teamTemplates.agents.tereza.routine": {
     "value": "Make the week's shopping list and chores"
   },
-  "teamTemplates.agents.rosa.task": {
+  "teamTemplates.agents.tereza.task": {
     "value": "Make a shopping list for the week for:"
   },
-  "teamTemplates.agents.vic.role": {
+  "teamTemplates.agents.renato.role": {
     "value": "Trips"
   },
-  "teamTemplates.agents.vic.line": {
+  "teamTemplates.agents.renato.line": {
     "value": "Plans your trips: dates, prices, bookings and a day-by-day plan."
   },
-  "teamTemplates.agents.vic.routine": {
+  "teamTemplates.agents.renato.routine": {
     "value": "Check prices for the trips you're planning"
   },
-  "teamTemplates.agents.vic.task": {
+  "teamTemplates.agents.renato.task": {
     "value": "Plan a 3-day trip to:"
   },
-  "teamTemplates.agents.rui.role": {
+  "teamTemplates.agents.fabio.role": {
     "value": "Clients"
   },
-  "teamTemplates.agents.rui.line": {
+  "teamTemplates.agents.fabio.line": {
     "value": "Follows up with your clients, writes proposals and invoices, and reminds whoever hasn't paid."
   },
-  "teamTemplates.agents.rui.routine": {
+  "teamTemplates.agents.fabio.routine": {
     "value": "List what each client is waiting for today"
   },
-  "teamTemplates.agents.rui.task": {
+  "teamTemplates.agents.fabio.task": {
     "value": "Write a short proposal for this client:"
   },
-  "teamTemplates.channels.iara": {
+  "teamTemplates.channels.luana": {
     "value": "support"
   },
-  "teamTemplates.channels.caio": {
+  "teamTemplates.channels.teo": {
     "value": "billing"
   },
-  "teamTemplates.channels.ada": {
+  "teamTemplates.channels.helena": {
     "value": "eng"
   },
-  "teamTemplates.channels.lia": {
+  "teamTemplates.channels.gil": {
     "value": "content"
   },
-  "teamTemplates.channels.theo": {
+  "teamTemplates.channels.ana": {
     "value": "sales"
   },
-  "teamTemplates.channels.nina": {
+  "teamTemplates.channels.rui": {
     "value": "schedule"
   },
-  "teamTemplates.channels.otto": {
+  "teamTemplates.channels.tiago": {
     "value": "orders"
   },
-  "teamTemplates.channels.bia": {
+  "teamTemplates.channels.sofia": {
     "value": "support"
   },
   "teamTemplates.skills.voice.name": {

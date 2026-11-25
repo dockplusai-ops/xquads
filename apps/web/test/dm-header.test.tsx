@@ -148,7 +148,7 @@ describe("the DM's search is the channel's, held to the DM", () => {
   });
 });
 
-describe("where Lodi's name comes from", () => {
+describe("where Doki's name comes from", () => {
   const story = "O nome vem de lodestar, a estrela que guia os navegantes.";
   const cardOf = async (state: FakeState) => {
     seedDm(state, { type: "agent", id: LODI_ID });
@@ -162,7 +162,7 @@ describe("where Lodi's name comes from", () => {
     expect(card.textContent).toContain(story);
     cleanup();
     const header = await go(withRightHand(seedState()), `dm/agent/${LODI_ID}`);
-    await click(within(header).getByRole("button", { name: "Perfil de Lodi" }));
+    await click(within(header).getByRole("button", { name: "Perfil de Doki" }));
     expect(document.body.textContent).toContain(story);
   });
 
@@ -221,13 +221,13 @@ describe("the profile in the panel closes", () => {
     expect(screen().queryByRole("complementary", PANEL)).toBeNull();
   });
 
-  test("Lodi's, for an admin (its settings, no tabs): its × and Esc close it", async () => {
+  test("Doki's, for an admin (its settings, no tabs): its × and Esc close it", async () => {
     const state = withRightHand(seedState());
     seedDm(state, { type: "agent", id: LODI_ID });
     const header = await go(state, `dm/agent/${LODI_ID}`);
-    const trigger = within(header).getByRole("button", { name: "Perfil de Lodi" });
+    const trigger = within(header).getByRole("button", { name: "Perfil de Doki" });
     await click(trigger);
-    const panel = () => screen().queryByRole("complementary", { name: /Lodi/ });
+    const panel = () => screen().queryByRole("complementary", { name: /Doki/ });
     await click(within(panel() as HTMLElement).getByRole("button", { name: "Fechar" }));
     expect(panel()).toBeNull();
     await click(trigger);

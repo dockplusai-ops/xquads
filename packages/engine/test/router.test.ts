@@ -71,17 +71,17 @@ describe("selectAgents (policy)", () => {
   });
 
   test("the right hand answers a message for every agent only when it fits best", () => {
-    const candidates = [cand("dev"), { ...cand("lodi"), rightHand: true }];
+    const candidates = [cand("dev"), { ...cand("doki"), rightHand: true }];
     const result = (dev: number, lodi: number) => ({
       agents: [
         { agentId: "dev", score: dev },
-        { agentId: "lodi", score: lodi },
+        { agentId: "doki", score: lodi },
       ],
       needsAgent: 0.9,
       forEveryone: 0.9,
     });
     expect(selectAgents(candidates, result(0.9, 0.7), policy)).toEqual(["dev"]);
-    expect(selectAgents(candidates, result(0.7, 0.9), policy)).toEqual(["lodi", "dev"]);
+    expect(selectAgents(candidates, result(0.7, 0.9), policy)).toEqual(["doki", "dev"]);
   });
 
   test("a low need-any-agent score means nobody", () => {
@@ -659,14 +659,14 @@ describe("routeMessage", () => {
       (await f.db.select().from(schema.routingDecisions)).find((d) => d.messageId === messageId);
 
     // It fits best: it answers, as any agent the router picks.
-    const fits = fixedStrategy({ lodi: 0.9, dev: 0.3 });
+    const fits = fixedStrategy({ doki: 0.9, dev: 0.3 });
     const setUp = await route(fits.strategy, "how do I add a teammate here?");
     expect(fits.seen[0]?.find((c) => c.agentId === lodi.id)).toMatchObject({ rightHand: true });
     expect(setUp.runs.map((r) => [r.agentId, r.trigger])).toEqual([[lodi.id, "router"]]);
     expect(setUp.seenBy?.sort()).toEqual([lodi.id, f.agent.id].sort());
 
     // The channel's agent fits best: the right hand stays out of what the message shows as read.
-    const work = await route(fixedStrategy({ lodi: 0.3, dev: 0.9 }).strategy, "the build is red again, can you look?");
+    const work = await route(fixedStrategy({ doki: 0.3, dev: 0.9 }).strategy, "the build is red again, can you look?");
     expect(work.selected).toEqual([f.agent.id]);
     expect(work.seenBy).toEqual([f.agent.id]);
     const [run] = work.runs;
@@ -681,7 +681,7 @@ describe("routeMessage", () => {
       .update(schema.channelMembers)
       .set({ autoReply: false })
       .where(eq(schema.channelMembers.agentId, f.agent.id));
-    const empty = fixedStrategy({ lodi: 1 });
+    const empty = fixedStrategy({ doki: 1 });
     expect((await route(empty.strategy, "how do I add a teammate here?")).skipped).toBe("no_candidates");
     expect(empty.seen).toHaveLength(0);
   });

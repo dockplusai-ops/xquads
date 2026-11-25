@@ -742,12 +742,12 @@ describe("the task manager page", () => {
     const rows = [...document.querySelectorAll<HTMLElement>(".tm-row--ended")];
     const row = (label: string) => rows.find((r) => r.textContent?.includes(label)) as HTMLElement;
     expect(row("Limpar os logs").textContent).toContain("Parada");
-    expect(row("Fechar o mês").textContent).toContain("Lodi parou");
+    expect(row("Fechar o mês").textContent).toContain("Doki parou");
     expect(rows.map((r) => r.textContent).join()).not.toContain("Você parou");
     await click(within(row("Fechar o mês")).getByRole("button", { name: "Fechar o mês" }));
     await settle(4);
     const panel = screen().getByRole("complementary", { name: "Fechar o mês" });
-    expect(panel.textContent).toContain("Lodi parou o Atlas");
+    expect(panel.textContent).toContain("Doki parou o Atlas");
     // Stopped at my word: I still say why.
     expect(within(panel).getByPlaceholderText("Quer dizer por quê? (opcional)")).toBeTruthy();
   });

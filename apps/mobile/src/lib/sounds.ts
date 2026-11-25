@@ -1,5 +1,13 @@
 import { type SoundName, setSoundPlayer } from "@agenteschat/client/lib/sounds";
-import { DEFAULT_SOUND_STYLE, isSoundStyle, renderSound, SOUNDS, type SoundStyle, wavBytes } from "@agenteschat/ui/sfx";
+import {
+  DEFAULT_SOUND_STYLE,
+  isSoundStyle,
+  OFFERED_SOUND_STYLES,
+  renderSound,
+  SOUNDS,
+  type SoundStyle,
+  wavBytes,
+} from "@agenteschat/ui/sfx";
 import { type AudioPlayer, createAudioPlayer } from "expo-audio";
 import { File, Paths } from "expo-file-system";
 import { useEffect, useSyncExternalStore } from "react";
@@ -21,7 +29,7 @@ const REPEAT_MS = 150;
 
 const read = (): SoundChoice => {
   const saved = readValueSync(STORED.sounds);
-  return saved === "off" || isSoundStyle(saved) ? saved : DEFAULT_SOUND_STYLE;
+  return saved === "off" || (isSoundStyle(saved) && OFFERED_SOUND_STYLES.includes(saved)) ? saved : DEFAULT_SOUND_STYLE;
 };
 let choice: SoundChoice = read();
 const listeners = new Set<() => void>();

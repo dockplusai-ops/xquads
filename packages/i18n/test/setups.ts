@@ -122,7 +122,7 @@ export const SHOWN_ONLY: Record<Condition, readonly string[]> = {
     "browser.inCard.noComputer",
     "browser.live.noComputer",
     "computers.hostMissing",
-    // Lodi's computer row on a self-hosted server (`rightHandNoComputer` with `selfHosted`).
+    // Doki's computer row on a self-hosted server (`rightHandNoComputer` with `selfHosted`).
     "rightHand.computerNoHomeServer",
     "connectAi.wait.connecting",
     "errors.mission.unavailable",

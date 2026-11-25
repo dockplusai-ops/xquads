@@ -324,9 +324,9 @@ export interface FakeState {
   /** A person's month by id; unset: an empty month. */
   personUsage?: Record<string, PersonUsage>;
   personLimits?: PersonLimits;
-  /** What Lodi does by itself for the signed-in person; unset: both cards on, no other switch. */
+  /** What Doki does by itself for the signed-in person; unset: both cards on, no other switch. */
   teamWeek?: Partial<LodiPrefs>;
-  /** The workspace's own switches of Lodi; unset: on. */
+  /** The workspace's own switches of Doki; unset: on. */
   lodiSwitches?: { teamWatch?: boolean; welcomePeople?: boolean };
   /** The workspace's approvals level (ADR 0173); unset: `risky`. */
   approvalsLevel?: "always" | "risky" | "never";
@@ -717,7 +717,7 @@ export const FAKE_GIFS: Gif[] = [
   { id: "gif-coffee", title: "coffee time", width: 360, height: 480 },
 ];
 
-/** What Lodi does by itself for the signed-in person, as the server sends it (defaults: both cards on). */
+/** What Doki does by itself for the signed-in person, as the server sends it (defaults: both cards on). */
 const lodiPrefs = (state: FakeState): LodiPrefs =>
   lodiPrefsOf({ weekOff: false, dayOff: false, timezone: "America/Sao_Paulo", ...state.teamWeek });
 
@@ -742,12 +742,12 @@ function mediaSettings(state: FakeState): Pick<OrgSettings, MediaSetting> {
  */
 export const LODI_ID = "00000000-0000-4000-8000-0000000000a9";
 
-/** The workspace's right hand (ADR 0137), as the server makes it: Lodi, teal, owned by the workspace owner. */
+/** The workspace's right hand (ADR 0137), as the server makes it: Doki, teal, owned by the workspace owner. */
 export function withRightHand(state: FakeState, extra: Partial<Agent> = {}) {
   state.agents.push({
     id: LODI_ID,
-    name: "Lodi",
-    handle: "lodi",
+    name: "Doki",
+    handle: "doki",
     role: "",
     instructions: "",
     model: "auto",

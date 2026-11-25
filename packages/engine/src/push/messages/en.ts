@@ -66,7 +66,7 @@ export interface PushStrings {
   usageRaisedTitle: (admin: string) => string;
   usageRaisedBody: string;
   usageRefusedTitle: (admin: string) => string;
-  /** Lodi's weekly card (ADR 0137 §9): its message's text, so the push and the conversation list read it. */
+  /** Doki's weekly card (ADR 0137 §9): its message's text, so the push and the conversation list read it. */
   /** Bring your own devices: `agent` works for `person` on this person's `device`. */
   deviceInUseTitle: (agent: string, person: string, device: string) => string;
   deviceInUseBody: string;
@@ -89,7 +89,7 @@ export interface PushStrings {
   deviceWaitingTitle: (person: string, device: string) => string;
   deviceWaitingBody: string;
   teamWeekReady: string;
-  /** Lodi's daily card ("Resumo do dia") came. */
+  /** Doki's daily card ("Resumo do dia") came. */
   teamDayReady: string;
   /**
    * A personal workspace's words (ADR 0159), where the team's would speak of a workspace, a team or its admins: one

@@ -37,7 +37,7 @@ function claudeMax(over: Partial<PlanAccountUsage> = {}): PlanAccountUsage {
           usedPercent: 86,
           resetsAt: soon(2),
           agents: [
-            { agentId: LODI_ID, name: "Lodi", percent: 44 },
+            { agentId: LODI_ID, name: "Doki", percent: 44 },
             { agentId: ADA_ID, name: "Ada", percent: 27 },
             { agentId: ATLAS_ID, name: "Atlas", percent: 15 },
           ],
@@ -47,7 +47,7 @@ function claudeMax(over: Partial<PlanAccountUsage> = {}): PlanAccountUsage {
           usedPercent: 71,
           resetsAt: soon(72),
           agents: [
-            { agentId: LODI_ID, name: "Lodi", percent: 33 },
+            { agentId: LODI_ID, name: "Doki", percent: 33 },
             { agentId: ADA_ID, name: "Ada", percent: 24 },
             { agentId: ATLAS_ID, name: "Atlas", percent: 14 },
           ],
@@ -57,7 +57,7 @@ function claudeMax(over: Partial<PlanAccountUsage> = {}): PlanAccountUsage {
       at: new Date().toISOString(),
     },
     agents: [
-      { agentId: LODI_ID, name: "Lodi", tokens: 6_200_000, now: true },
+      { agentId: LODI_ID, name: "Doki", tokens: 6_200_000, now: true },
       { agentId: ADA_ID, name: "Ada", tokens: 4_500_000, now: true },
       { agentId: ATLAS_ID, name: "Atlas", tokens: 2_600_000, now: true },
     ],

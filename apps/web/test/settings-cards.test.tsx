@@ -34,7 +34,7 @@ afterEach(() => {
 const HOUR = 3_600_000;
 const DM = `dm-${LODI_ID}`;
 
-/** Lodi's card changing Ada's model and budget, asked for by me (Walter). */
+/** Doki's card changing Ada's model and budget, asked for by me (Walter). */
 const settingsRow = (over: Partial<Proposal> = {}): Proposal => ({
   id: "set-1",
   agentId: ADA_ID,
@@ -68,11 +68,11 @@ const settingsRow = (over: Partial<Proposal> = {}): Proposal => ({
   ...over,
 });
 
-/** What Lodi's review decided (ADR 0219): applied, and the viewer may undo it, unless `over` says otherwise. */
+/** What Doki's review decided (ADR 0219): applied, and the viewer may undo it, unless `over` says otherwise. */
 const byReview = (over: Partial<Proposal> = {}): Partial<Proposal> => ({
   status: "accepted",
   reviewed: true,
-  decidedByAgent: { agentId: LODI_ID, name: "Lodi" },
+  decidedByAgent: { agentId: LODI_ID, name: "Doki" },
   review: "Pedido por quem cuida da Ada.",
   undoable: true,
   decidedAt: NOW.toISOString(),
@@ -192,7 +192,7 @@ describe("a teammate's settings, on the right hand's card", () => {
       "Modelo",
       "Orçamento mensal",
     ]);
-    expect(ending(applied)).toBe("Aplicado pelo Lodi");
+    expect(ending(applied)).toBe("Aplicado pelo Doki");
     expect(applied.querySelector(".rq__answer-note")?.textContent).toBe("Pedido por quem cuida da Ada.");
     noDecision(applied);
     await click(within(applied).getByRole("button", { name: "Desfazer" }));
@@ -236,7 +236,7 @@ describe("a teammate's settings, on the right hand's card", () => {
   test("a member reads how it ended the same, with Undo only when the server says they may put it back", async () => {
     await go(asMember(withCard(seedState(), settingsRow(byReview({ canDecide: false, undoable: false })))));
     const c = card("Mudar as configurações da Ada");
-    expect(ending(c)).toBe("Aplicado pelo Lodi");
+    expect(ending(c)).toBe("Aplicado pelo Doki");
     expect(within(c).queryByRole("button", { name: "Desfazer" })).toBeNull();
     noDecision(c);
   });
@@ -312,7 +312,7 @@ describe("a teammate's settings, on the right hand's card", () => {
     await click(row);
     const read = document.querySelector(".ib-read") as HTMLElement;
     const c = within(read).getByRole("group", { name: "Mudar as configurações da Ada" });
-    expect(ending(c)).toBe("Aplicado pelo Lodi");
+    expect(ending(c)).toBe("Aplicado pelo Doki");
     noDecision(c);
   });
 
@@ -378,10 +378,10 @@ describe("archiving several agents, on one card", () => {
     const state = withRemoval(seedState(), byReview({ review: "Ninguém fala com ele há um mês." }));
     await go(state);
     const c = card("Arquivar 2 agentes?");
-    expect(c.querySelector(".rq__answer-text")?.textContent).toBe("Aplicado pelo Lodi");
+    expect(c.querySelector(".rq__answer-text")?.textContent).toBe("Aplicado pelo Doki");
     expect([...c.querySelectorAll(".proposal-row__status")].map((x) => x.textContent)).toEqual([
-      "Aplicado pelo Lodi",
-      "Aplicado pelo Lodi",
+      "Aplicado pelo Doki",
+      "Aplicado pelo Doki",
     ]);
     expect(c.textContent).toContain("Ninguém fala com ele há um mês.");
     noDecision(c);
@@ -391,7 +391,7 @@ describe("archiving several agents, on one card", () => {
     expect(state.calls.filter((x) => x.method === "proposals.undo").map((x) => x.args[1])).toEqual(["rm-1"]);
     expect(
       [...card("Arquivar 2 agentes?").querySelectorAll(".proposal-row__status")].map((x) => x.textContent),
-    ).toEqual(["Aplicado pelo Lodi", "Desfeito por você"]);
+    ).toEqual(["Aplicado pelo Doki", "Desfeito por você"]);
   });
 
   test("deleted for good by its review: no row has Undo, a deleted agent doesn't come back", async () => {
@@ -402,7 +402,7 @@ describe("archiving several agents, on one card", () => {
       }),
     );
     const c = card("Apagar 2 agentes para sempre?");
-    expect(c.querySelector(".rq__answer-text")?.textContent).toBe("Aplicado pelo Lodi");
+    expect(c.querySelector(".rq__answer-text")?.textContent).toBe("Aplicado pelo Doki");
     expect(within(c).queryByRole("button", { name: "Desfazer" })).toBeNull();
     noDecision(c);
   });
@@ -445,7 +445,7 @@ describe("archiving several agents, on one card", () => {
 describe("a new agent, on the right hand's card", () => {
   test("Criar e testar creates it and opens its DM with the first task in the composer, unsent; Editar antes and Descartar beside it", async () => {
     const { state, router } = await go(withAgentCard(seedState(), agentCard()));
-    const c = card("Lodi propõe um novo agente");
+    const c = card("Doki propõe um novo agente");
     expect(within(c).getByRole("button", { name: "Editar antes" })).toBeTruthy();
     expect(within(c).getByRole("button", { name: "Descartar" })).toBeTruthy();
     await click(within(c).getByRole("button", { name: "Criar e testar" }), 10);
@@ -462,7 +462,7 @@ describe("a new agent, on the right hand's card", () => {
 
   test("someone it wasn't written for (an admin, from the inbox) gets the plain Criar", async () => {
     await go(withAgentCard(seedState(), agentCard({ forUserId: "u-joao" })));
-    const c = card("Lodi propõe um novo agente");
+    const c = card("Doki propõe um novo agente");
     expect(within(c).queryByRole("button", { name: "Criar e testar" })).toBeNull();
     expect(within(c).getByRole("button", { name: "Criar Iara" })).toBeTruthy();
   });
@@ -486,11 +486,11 @@ describe("a new agent, on the right hand's card", () => {
   test("a member who can't create agents asks an admin, then reads whom it went to", async () => {
     const state = asMember(withAgentCard(seedState(), agentCard()));
     await go(state);
-    const c = card("Lodi propõe um novo agente");
+    const c = card("Doki propõe um novo agente");
     expect(c.textContent).toContain("Só admins criam agentes");
     expect(within(c).queryByRole("button", { name: "Criar e testar" })).toBeNull();
     await click(within(c).getByRole("button", { name: "Pedir a um admin" }));
     expect(state.calls.some((x) => x.method === "agents.askProposal" && x.args[1] === "m-iara")).toBe(true);
-    expect(card("Lodi propõe um novo agente").textContent).toContain("Enviado para João");
+    expect(card("Doki propõe um novo agente").textContent).toContain("Enviado para João");
   });
 });

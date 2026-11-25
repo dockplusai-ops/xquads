@@ -365,7 +365,7 @@ export async function createOrganization(
       await tx.insert(schema.organizationSettings).values({ orgId: organization.id, mode: "personal" });
     await createDefaultRoles(tx, organization.id);
     await assignHandle(tx, organization.id, userId);
-    // The team's right hand comes with the workspace (ADR 0137), after the owner's handle so `@lodi` stays theirs if
+    // The team's right hand comes with the workspace (ADR 0137), after the owner's handle so `@doki` stays theirs if
     // it is their own.
     await ensureRightHand(tx, organization.id);
     const [general] = await tx

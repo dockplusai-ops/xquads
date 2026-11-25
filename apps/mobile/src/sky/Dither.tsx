@@ -54,7 +54,17 @@ export interface DitherProps {
  * callback and is not drawn again. With reduced motion it is drawn once at t = 0. If the shader can't compile, the
  * first tone fills the box.
  */
-export function Dither({
+/**
+ * The pixel scenery kinds xquads leaves out (DESIGN.md: flat petrol surfaces, no scenery): skies, the workspace's,
+ * the computer's and a picture forming. Their place stays, empty. The bars (fuse, plan track, spend) still draw.
+ */
+const SCENERY: ReadonlySet<DitherKind> = new Set(["sky", "workspace", "computer", "forming"]);
+
+export function Dither(props: DitherProps) {
+  return SCENERY.has(props.kind) ? <View style={props.style} pointerEvents="none" /> : <DitherDrawing {...props} />;
+}
+
+function DitherDrawing({
   kind,
   tones,
   pixel,

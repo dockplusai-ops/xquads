@@ -62,7 +62,7 @@ const lodiOf = async (fx: Fixture) => {
   return lodi;
 };
 
-/** A run of Lodi on what `userId` wrote in their DM with it; `outside`: their message relays outside content. */
+/** A run of Doki on what `userId` wrote in their DM with it; `outside`: their message relays outside content. */
 async function lodiRun(fx: Fixture, userId: string, body: string, outside = false): Promise<ToolContext> {
   const lodi = await lodiOf(fx);
   const dm = await openPersonAgentDm(fx.db, fx.org.id, userId, lodi.id);
@@ -98,7 +98,7 @@ async function act(fx: Fixture, ctx: ToolContext, input: Record<string, unknown>
   return res.output;
 }
 
-/** Lodi's reply to the run, carrying its receipts. */
+/** Doki's reply to the run, carrying its receipts. */
 async function reply(fx: Fixture, ctx: ToolContext) {
   const message = await insertMessage(fx.db, {
     orgId: fx.org.id,
@@ -717,7 +717,7 @@ describe("the rest of the app through the right hand", () => {
     const notices = await f.db.select().from(schema.messages).where(eq(schema.messages.orgId, f.org.id));
     const told = notices.find((m) => (m.meta.notice as { kind?: string } | undefined)?.kind === "run_stopped");
     expect(told?.body).toStartWith(`${lodi.name}, at ana's word, stopped your task`);
-    const self = await act(f, ctx, { action: "stop_work", input: { agent: "@lodi" } });
+    const self = await act(f, ctx, { action: "stop_work", input: { agent: "@doki" } });
     expect(self).toMatchObject({ isError: true, content: "That is you: say so, and stop nothing." });
     const none = await act(f, ctx, { action: "continue_work", input: { agent: "@dev" } });
     expect(none.isError).toBe(true);
@@ -1139,7 +1139,7 @@ describe("cards that must be read: inviting people and removing an API key", () 
     expect(f.provider.calls).toHaveLength(0);
   });
 
-  test("Lodi's offer_invites posts that card, and it is the turn's one ask", async () => {
+  test("Doki's offer_invites posts that card, and it is the turn's one ask", async () => {
     f = await setup({ rightHand: true });
     await createRole(f.db, f.owner.id, f.org.id, { name: "Vendas" });
     const ctx = await lodiRun(f, f.owner.id, "convida a ana");
@@ -1225,7 +1225,7 @@ describe("cards that must be read: inviting people and removing an API key", () 
       decideWorkspaceAction(deps, bia.id, f.org.id, posted.id, "apply", "invite_people"),
     ).rejects.toMatchObject({ name: "ForbiddenError" });
     expect((await cardNow(f, posted.id)).params.refused).toBe(true);
-    // Nobody else reads her conversation with Lodi until she sends the card.
+    // Nobody else reads her conversation with Doki until she sends the card.
     await expect(getWorkspaceActionCard(f.db, caio.id, f.org.id, posted.id)).rejects.toThrow();
     expect(await inbox(f)).toEqual([]);
     await askWorkspaceAction(deps, bia.id, f.org.id, posted.id);

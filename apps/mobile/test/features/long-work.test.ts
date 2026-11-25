@@ -85,7 +85,7 @@ describe("the line under 'Vou cuidar disso' (phone and web share it)", () => {
       canceledByUserId: "u",
       canceledByAgentId: "lodi",
     });
-    expect(workLine(t, byRightHand, { ...ctx, agentNameOf: () => "Lodi" }).text).toBe("Parado por Lodi aos 12 min");
+    expect(workLine(t, byRightHand, { ...ctx, agentNameOf: () => "Doki" }).text).toBe("Parado por Doki aos 12 min");
     expect(workLine(t, byRightHand, ctx).text).toBe("Parado aos 12 min");
   });
 

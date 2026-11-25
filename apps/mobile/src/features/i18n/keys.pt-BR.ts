@@ -807,7 +807,7 @@ export const featureKeysPtBR = {
     free: "Livre",
     workingLabel: "{{name}}, trabalhando",
     new: "Novo agente",
-    namePlaceholder: "Nome, ex.: Nina",
+    namePlaceholder: "Nome, ex.: Ana",
     whatPlaceholder: "Ex.: responder clientes no e-mail e me avisar quando algo for urgente",
     create: "Criar agente",
     created: "{{name}} chegou na equipe",
@@ -3304,7 +3304,7 @@ export const featureKeysPtBR = {
     use: "Usar em agentes",
     useSub: "Escolher em Quem pensa",
     useHint:
-      "De quem são os agentes que podem pensar com esta conta, e o Lodi de quem. Quem gerencia a conta muda isto.",
+      "De quem são os agentes que podem pensar com esta conta, e o Doki de quem. Quem gerencia a conta muda isto.",
     reply: "Atender todos",
     replySub: "Com quem os agentes falam",
     replyHint:

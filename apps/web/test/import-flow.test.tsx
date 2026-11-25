@@ -221,18 +221,18 @@ describe("Configurações → Importar e exportar", () => {
         card.querySelector(".imp-mark img")?.getAttribute("src") ?? null,
       ]);
     try {
-      // The system is dark, but the app is set to light: the light files.
+      // xquads is dark only, whatever is set: the makers' dark files where they have one.
       device.prefersColorScheme = "dark";
       localStorage.setItem("agentes.theme", "light");
       await go();
       expect(logos()).toEqual([
-        ["Grok Bot", "/brands/grok-bot.svg"],
+        ["Grok Bot", "/brands/grok-bot-dark.svg"],
         ["ChatGPT dots", "/brands/chatgpt-dots.svg"],
         ["OpenBot.run", "/brands/openbotrun.svg"],
         ["OpenMausBot", "/brands/openmausbot.svg"],
-        ["Hermes Agent", "/brands/hermes.svg"],
+        ["Hermes Agent", "/brands/hermes-dark.svg"],
         ["OpenClaw", "/brands/openclaw.svg"],
-        ["Paperclip", "/brands/paperclip.svg"],
+        ["Paperclip", "/brands/paperclip-dark.svg"],
         ["agentes.chat", "/favicon.svg"],
         // It names many apps: no one maker's logo fits.
         ["Outro app", null],
@@ -840,7 +840,7 @@ describe("Configurações → Importar e exportar", () => {
     // A Grok Bot reply pasted in the file sheet: from Grok Bot, by its logo.
     await pasteReply(exportReply("grok-bot", "Minhas automações"));
     expect(text()).toContain("Veio do Grok Bot");
-    expect(document.querySelector(".imp-head .imp-mark img")?.getAttribute("src")).toBe("/brands/grok-bot.svg");
+    expect(document.querySelector(".imp-head .imp-mark img")?.getAttribute("src")).toBe("/brands/grok-bot-dark.svg");
     await click(button("Trocar arquivo"), 2);
 
     // The file a dot makes, dropped on the page.

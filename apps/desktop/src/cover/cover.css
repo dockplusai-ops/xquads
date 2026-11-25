@@ -1,12 +1,12 @@
-/* The main window's cover (cover.rs): the boot sky with the agent, over the site. */
+/* The main window's cover (cover.rs): petrol with the agent, over the site (xquads: no sky). */
 .cover {
   position: fixed;
   inset: 0;
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: #0a3f9c;
-  color: #fff;
+  background: #0e1c22;
+  color: #ede6e1;
   font:
     500 13.5px / 1.5 "Onest Variable",
     -apple-system,
@@ -42,7 +42,7 @@
 }
 .cover__word {
   margin: 0;
-  font-family: "Funnel Display", "Onest Variable", sans-serif;
+  font-family: "Onest Variable", sans-serif;
   font-weight: 300;
   font-size: 30px;
   letter-spacing: -0.01em;
@@ -81,21 +81,21 @@
 .cover__acts button {
   font: inherit;
   font-weight: 600;
-  color: #0a3f9c;
-  background: #fff;
+  color: #0e1c22;
+  background: #c79d70;
   border: 0;
   border-radius: 10px;
   padding: 7px 14px;
   cursor: pointer;
-  box-shadow: 0 1px 8px rgba(4, 32, 63, 0.35);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
 }
 .cover__acts button + button {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.16);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  color: #ede6e1;
+  background: #1f353d;
+  box-shadow: inset 0 0 0 1px rgba(237, 230, 225, 0.16);
 }
 .cover__acts button:focus-visible {
-  outline: 2px solid #fff;
+  outline: 2px solid #c79d70;
   outline-offset: 2px;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -109,7 +109,7 @@
   inset: 0;
   display: grid;
   place-items: center;
-  background: rgba(4, 32, 63, 0.45);
+  background: rgba(4, 10, 13, 0.6);
   pointer-events: auto;
 }
 .cover__report:empty {

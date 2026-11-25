@@ -973,12 +973,12 @@ textarea.ac-input:not(:hover, :focus-visible) {
 .ac-icon .ac-brain-cx {
   stroke: #1d7a82;
 }
-/* The agent's outline in the agents' sky (fixed, like the pixel agents), not the --agent accent token. */
+/* The agent's outline in xquads' camel (fixed, like the agents), not the --agent accent token. */
 .ac-icon .ac-brain-body {
-  stroke: #0063d1;
+  stroke: #c79d70;
 }
 .ac-icon .ac-brain-eye {
-  fill: #0063d1;
+  fill: #c79d70;
   stroke: none;
 }
 [data-theme="dark"] .ac-icon .ac-brain-cc {
@@ -1129,14 +1129,13 @@ textarea.ac-input:not(:hover, :focus-visible) {
 .ac-presence__base {
   fill: var(--presence);
 }
-.ac-presence__light {
-  fill: color-mix(in srgb, var(--presence) 60%, #ffffff);
-}
+/* One flat tone (DESIGN.md: no dither): the light and deep cells take the base color. */
+.ac-presence__light,
 .ac-presence__deep {
-  fill: color-mix(in srgb, var(--presence) 75%, #000000);
+  fill: var(--presence);
 }
 .ac-presence__mark {
-  fill: #ffffff;
+  fill: var(--bg);
 }
 .ac-presence__ring {
   fill: var(--presence-ring, var(--raised));
@@ -5161,7 +5160,17 @@ html:not([data-pointer]) .ac-switch:focus-visible {
 .ac-pixspin {
   display: inline-block;
   flex: none;
-  image-rendering: pixelated;
+}
+/* The ring turns (xquads' spinner, drawn once by `PixelSpinner`); still under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .ac-pixspin {
+    animation: ac-spin 0.9s linear infinite;
+  }
+}
+@keyframes ac-spin {
+  to {
+    rotate: 360deg;
+  }
 }
 /*
  * In a line of text the pixel marks centre on the capitals, as an `.ac-iconline` lead does (a flex or grid item

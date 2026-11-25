@@ -9,14 +9,14 @@ import { ADA_ID, ATLAS_ID, createFakeApi, LODI_ID, ORG_ID, seedDm, seedState, wi
 import { renderApp, screen, settle, showIn } from "./render";
 
 /*
- * ADR 0137 §7, amended 2026-11-15: Lodi answers with another AI while its plan can't, with one quiet line under the
- * reply and "Change"; the dialog that picks its AI dims the plans it can't think with, each with why. No Lodi-only
+ * ADR 0137 §7, amended 2026-11-15: Doki answers with another AI while its plan can't, with one quiet line under the
+ * reply and "Change"; the dialog that picks its AI dims the plans it can't think with, each with why. No Doki-only
  * button to give it a computer.
  */
 
 const LINE = "Answered with Acme OpenAI: Claude Max needs a computer.";
 
-test("the stand-in line under Lodi's reply: a quiet pill with Change, Lodi shown ready, no no-AI card", async () => {
+test("the stand-in line under Doki's reply: a quiet pill with Change, Doki shown ready, no no-AI card", async () => {
   const state = withRightHand(
     seedState({
       aiStatus: {
@@ -81,6 +81,6 @@ test("the stand-in line under Lodi's reply: a quiet pill with Change, Lodi shown
   expect(screen().getAllByText(LINE)).toHaveLength(1);
   expect(within(pill as HTMLElement).getByRole("button", { name: "Change" })).toBeTruthy();
   expect(document.querySelector(".noai-banner")).toBeNull();
-  expect(screen().queryByText(/Give Lodi a computer/)).toBeNull();
+  expect(screen().queryByText(/Give Doki a computer/)).toBeNull();
   cleanup();
 });

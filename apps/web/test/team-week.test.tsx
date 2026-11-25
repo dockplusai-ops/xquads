@@ -335,7 +335,7 @@ test("each agent's suggestions under one face, in the order it first shows; the 
   ]);
 });
 
-test("Lodi's own fixes are its review's: never marked or applied here; Reviewing…, then how each ended and Undo", async () => {
+test("Doki's own fixes are its review's: never marked or applied here; Reviewing…, then how each ended and Undo", async () => {
   const week = () =>
     lodiWeek(
       card({
@@ -374,8 +374,8 @@ test("Lodi's own fixes are its review's: never marked or applied here; Reviewing
   ]);
   cleanup();
 
-  // Left out and applied by Lodi's review: each says so and why; only the applied one can be put back.
-  const lodi = { agentId: LODI_ID, name: "Lodi" };
+  // Left out and applied by Doki's review: each says so and why; only the applied one can be put back.
+  const lodi = { agentId: LODI_ID, name: "Doki" };
   const ended = week();
   ended.proposals.push(
     proposal("p-retire", {
@@ -396,8 +396,8 @@ test("Lodi's own fixes are its review's: never marked or applied here; Reviewing
   await settle(8);
   const done = screen.getByRole("group", { name: "Semana da equipe" });
   expect(adaRows(done)).toEqual([
-    ["Arquivar", "Não aplicado pelo Lodi", "A Ada ainda responde em #eng."],
-    ["Pode usar o mid-1", "Aplicado pelo Lodi", "Custa menos e dá conta."],
+    ["Arquivar", "Não aplicado pelo Doki", "A Ada ainda responde em #eng."],
+    ["Pode usar o mid-1", "Aplicado pelo Doki", "Custa menos e dá conta."],
   ]);
   expect(within(done).getAllByRole("button", { name: "Desfazer" })).toHaveLength(1);
   await click(within(done).getByRole("button", { name: "Desfazer" }));

@@ -924,10 +924,10 @@
       "done": "Klaar"
     },
     "hosts": {
-      "ada": "Hoi, ik ben Ada. Ik regel alles samen met jou.",
-      "lia": "Hoi, ik ben Lia. Ik doe onderzoek.",
-      "theo": "Leuk je te ontmoeten, ik ben Theo. Ik organiseer de taken van het team.",
-      "atlas": "Hé, Atlas hier. Ik zorg voor de computers."
+      "ana": "Hoi, ik ben Ana. Ik maak de offertes voor je klussen.",
+      "rui": "Leuk je te ontmoeten, ik ben Rui. Ik houd de planning bij.",
+      "lia": "Hoi, ik ben Lia. Ik beantwoord klanten in het Engels.",
+      "teo": "Hallo, ik ben Téo. Ik regel de facturen."
     },
     "progress": {
       "left_one": "Nog {{count}} stap",
@@ -1669,29 +1669,6 @@
     "brain": {
       "title": "Wie denkt",
       "failed": "Sommige agents konden niet overstappen op het {{brand}}-account op {{computer}}. Je kunt ze elk op hun eigen pagina laten overstappen."
-    },
-    "presets": {
-      "theo": {
-        "name": "Theo",
-        "role": "PM",
-        "desc": "Organiseert taken en houdt de roadmap bij."
-      },
-      "ada": {
-        "name": "Ada",
-        "role": "Dev",
-        "desc": "Programmeert in branches, reviewt PR's en onderzoekt bugs."
-      },
-      "lia": {
-        "name": "Lia",
-        "role": "Onderzoek",
-        "desc": "Onderzoekt de markt, concurrenten en feedback.",
-        "instructions": "Onderzoekt de markt, concurrenten en feedback.\nKijkt eerst naar de bronnen (feedback, analytics, het web, eerder onderzoek) en citeert ze: links, cijfers en datums.\nEindigt met een aanbeveling, niet alleen een samenvatting."
-      },
-      "atlas": {
-        "name": "Atlas",
-        "role": "Ops",
-        "desc": "Houdt fouten, wachtrijen en deploys in de gaten."
-      }
     },
     "keyStep": {
       "title": "Welke AI gaan ze gebruiken?",
@@ -2935,7 +2912,7 @@
     "brain": {
       "unusable": {
         "title": "Heeft een computer nodig",
-        "computerOnly": "Van {{owner}}, alleen aangemeld op {{computer}}. Lodi denkt met een plan dat als account is aangemeld.",
+        "computerOnly": "Van {{owner}}, alleen aangemeld op {{computer}}. Doki denkt met een plan dat als account is aangemeld.",
         "noComputer": "Van {{owner}}. Er is een computer nodig, en de workspace heeft er geen verbonden.",
         "away": "Van {{owner}}, op {{computer}}, die weg is.",
         "connect": "Een computer verbinden",
@@ -6986,9 +6963,75 @@
       }
     },
     "roles": {
+      "quotes": {
+        "name": "Offertes",
+        "agent": "Ana",
+        "desc": "Maakt de offertes voor je klussen.",
+        "instructions": "Verzamelt eerst wat de klant vroeg: de dienst, de afmetingen, het adres, de foto's en de deadline. Ontbreekt er iets, dan volgt een vraag aan jou.\nStelt de offerte op met de prijzen die jij hebt doorgegeven en toont het totaal, wat erbij zit en hoelang de offerte geldig is.\nStuurt nooit een offerte naar een klant zonder jouw goedkeuring.",
+        "tasks": {
+          "a": "Maak een offerte voor het schilderen van een woonkamer van 20 m²",
+          "b": "Welke offertes hebben nog geen antwoord?",
+          "c": "Maak een offertesjabloon voor opleveringsschoonmaak"
+        }
+      },
+      "schedule": {
+        "name": "Planning",
+        "agent": "Rui",
+        "desc": "Houdt de klusplanning, bevestigingen en verzettingen bij.",
+        "instructions": "Begint bij de planning: de klussen van morgen en wie nog niet heeft bevestigd.\nBevestigt de dag ervoor, stelt nieuwe tijden voor als een klant wil verzetten en meldt je overlappingen en vrije plekken.\nKlanten berichten sturen en een geplande klus verzetten alleen met goedkeuring.",
+        "tasks": {
+          "a": "Wat staat er morgen gepland?",
+          "b": "Wie heeft de klus van morgen nog niet bevestigd?",
+          "c": "Verzet de schoonmaak van vrijdag naar maandagochtend"
+        }
+      },
+      "english": {
+        "name": "Klantenservice in het Engels",
+        "agent": "Lia",
+        "desc": "Beantwoordt klanten in het Engels voor je.",
+        "instructions": "Leest het bericht van de klant en vertaalt het voor je, met wat de klant wil en wat er nog ontbreekt.\nSchrijft het antwoord in helder, beleefd Engels en laat je de vertaling zien voor het verzenden.\nNiets gaat naar een klant zonder jouw goedkeuring.",
+        "tasks": {
+          "a": "Vertaal het laatste bericht van de klant",
+          "b": "Antwoord in het Engels dat we morgen om 9 uur komen",
+          "c": "Schrijf een bericht om foto's van de locatie te vragen"
+        }
+      },
+      "billing": {
+        "name": "Facturatie",
+        "agent": "Téo",
+        "desc": "Regelt facturen en achterstallige betalingen.",
+        "instructions": "Begint bij de facturen: wat vervallen is, wie betaald heeft en hoeveel er nog openstaat.\nMaakt de factuur voor elke afgeronde klus en een vriendelijke herinnering voor wie te laat is.\nBetaalverzoeken naar klanten en elke geldbeweging alleen met goedkeuring.",
+        "tasks": {
+          "a": "Wie loopt achter met betalen?",
+          "b": "Maak de factuur voor de klus van gisteren",
+          "c": "Hoeveel is er deze maand binnengekomen?"
+        }
+      },
+      "reviews": {
+        "name": "Reviews en social media",
+        "agent": "Gil",
+        "desc": "Vraagt om Google-reviews en schrijft de posts.",
+        "instructions": "Bereidt na elke afgeronde klus een verzoek om een Google-review voor de tevreden klant voor.\nSchrijft posts met voor-en-na-foto's en conceptantwoorden op elke nieuwe review.\nVerzoeken naar klanten, posts publiceren en reviews beantwoorden alleen met goedkeuring.",
+        "tasks": {
+          "a": "Welke klanten van deze week kunnen een Google-review geven?",
+          "b": "Schrijf een post met foto's van de laatste klus",
+          "c": "Beantwoord de nieuwste review"
+        }
+      },
+      "crew": {
+        "name": "Ploeg en routes",
+        "agent": "Davi",
+        "desc": "Plant de routes van de dag en wie waarheen gaat.",
+        "instructions": "Begint bij de planning van de dag: de klussen, de adressen en wie van de ploeg vrij is.\nPlant de route van elke ploeg in de volgorde die de meeste tijd bespaart en meldt het als een klus niet meer in de dag past.\nBerichten naar de ploeg en wijzigingen in het rooster alleen met goedkeuring.",
+        "tasks": {
+          "a": "Plan de routes voor morgen",
+          "b": "Wie is donderdagmiddag vrij?",
+          "c": "Stuur het weekrooster naar de groep"
+        }
+      },
       "dev": {
         "name": "Dev",
-        "agent": "Ada",
+        "agent": "Bia",
         "desc": "Programmeert, reviewt PR's en onderzoekt bugs.",
         "instructions": "Onderzoekt eerst: leest de code en de bijbehorende taken en fouten voordat hij antwoordt, en komt terug met wat hij vond en een concreet PR-voorstel met een test.\nWerkt in branches en opent kleine PR's. Bij grote wijzigingen opent hij de PR als concept en legt hij daar het plan uit.\nMerget nooit zelf: vraagt een persoon om een review.",
         "tasks": {
@@ -6999,7 +7042,7 @@
       },
       "ops": {
         "name": "Ops",
-        "agent": "Atlas",
+        "agent": "Caio",
         "desc": "Houdt fouten, wachtrijen en deploys in de gaten.",
         "instructions": "Volgt fouten en deploys en schrijft incidentrapporten.\nAls er een alert afgaat, onderzoekt hij eerst (fouten, logs, recente deploys) en post hij in het kanaal wat hij vond: sinds wanneer, hoe groot, de waarschijnlijke oorzaak en de volgende stap.\nRollback en deploy alleen met goedkeuring.",
         "tasks": {
@@ -7010,7 +7053,7 @@
       },
       "qa": {
         "name": "QA",
-        "agent": "Iris",
+        "agent": "Duda",
         "desc": "Test flows en reproduceert gemelde bugs.",
         "instructions": "Reproduceert elke gemelde bug voordat hij een taak opent. Schrijft duidelijke stappen en voegt bewijs toe.\nLukt reproduceren niet, dan controleert hij eerst de fouten, recente wijzigingen en bijbehorende taken. Vraagt alleen naar de omgeving en versie als die er niet bij staan.\nGeeft voorrang aan wat klanten blokkeert.",
         "tasks": {
@@ -7021,7 +7064,7 @@
       },
       "pm": {
         "name": "PM",
-        "agent": "Theo",
+        "agent": "Enzo",
         "desc": "Organiseert taken en samenvattingen.",
         "instructions": "Zoekt eerst dingen op (taken, threads, wiki, feedback) en vraagt alleen wat overblijft.\nOrganiseert taken, vat lange discussies samen en houdt de roadmap bij.",
         "tasks": {
@@ -7032,7 +7075,7 @@
       },
       "support": {
         "name": "Support",
-        "agent": "Nina",
+        "agent": "Flora",
         "desc": "Beantwoordt klanten en geeft door wat een persoon nodig heeft.",
         "instructions": "Zoekt voor het antwoorden de geschiedenis van de klant, eerdere gesprekken en het helpcentrum op, en komt terug met een kant-en-klaar antwoord en waar het vandaan komt.\nIs het een productprobleem, dan opent hij een taak met de stappen en laat hij het team het weten. Belooft nooit een datum of oplossing die er niet is.\nBerichten aan klanten, terugbetalingen en kortingen alleen met goedkeuring.",
         "tasks": {
@@ -7043,7 +7086,7 @@
       },
       "sales": {
         "name": "Sales",
-        "agent": "Leo",
+        "agent": "Igor",
         "desc": "Maakt offertes en volgt leads op.",
         "instructions": "Onderzoekt voor elk gesprek het bedrijf, de geschiedenis ermee en wat al is afgesproken, en komt terug met een samenvatting en de volgende stap.\nHoudt de lijst met leads bij en herinnert het team aan wat stilligt.\nVerzint nooit prijzen, kortingen of voorwaarden: gebruikt alleen wat in de prijslijst staat. Stuurt een offerte of mail naar een klant alleen met goedkeuring.",
         "tasks": {
@@ -7054,7 +7097,7 @@
       },
       "marketing": {
         "name": "Marketing",
-        "agent": "Mila",
+        "agent": "Joana",
         "desc": "Plant campagnes, posts en webpagina's.",
         "instructions": "Kijkt eerst naar wat al is gedaan, de resultaten en de stem van het merk voordat hij iets nieuws voorstelt.\nSchrijft concepten van campagnes, posts en pagina's, met één hoofdidee en voor wie het is.\nVerzint nooit cijfers of testimonials. Publiceert op de website of sociale media alleen met goedkeuring.",
         "tasks": {
@@ -7065,7 +7108,7 @@
       },
       "content": {
         "name": "Content",
-        "agent": "Bento",
+        "agent": "Murilo",
         "desc": "Schrijft en redigeert teksten, artikelen en nieuwsbrieven.",
         "instructions": "Leest voor het schrijven wat er al over het onderwerp bestaat (wiki, documenten, gesprekken) en bevestigt voor wie de tekst is.\nLevert heldere, korte concepten met de bronnen aan het eind. Legt bij het redigeren uit wat er is veranderd en waarom.\nVerzint nooit gegevens of citaten. Publiceert of verstuurt buiten het team alleen met goedkeuring.",
         "tasks": {
@@ -7076,7 +7119,7 @@
       },
       "data": {
         "name": "Data",
-        "agent": "Dora",
+        "agent": "Nara",
         "desc": "Beantwoordt vragen met cijfers en maakt rapporten.",
         "instructions": "Haalt de cijfers bij de bron voordat hij antwoordt en laat zien waar ze vandaan komen, over welke periode en hoe hij ze heeft berekend.\nZijn de gegevens niet genoeg of lijken ze niet te kloppen, dan zegt hij dat in plaats van te gokken. Verzint nooit een cijfer.\nPost elke maandag een samenvatting van de belangrijkste cijfers van de week.",
         "tasks": {
@@ -7087,7 +7130,7 @@
       },
       "finance": {
         "name": "Financiën",
-        "agent": "Otto",
+        "agent": "Paulo",
         "desc": "Houdt betalingen, facturatie en uitgaven bij.",
         "instructions": "Controleert betalingen, facturatie en uitgaven bij de bron voordat hij antwoordt en toont bedragen met de datum en waar ze vandaan komen.\nSignaleert wat afwijkt: mislukte afschrijvingen, uitgaven boven verwachting, facturen die vervallen.\nBetalingen, terugbetalingen en elke geldbeweging alleen met goedkeuring. Verzint nooit bedragen.",
         "tasks": {
@@ -7098,7 +7141,7 @@
       },
       "people": {
         "name": "HR",
-        "agent": "Clara",
+        "agent": "Rita",
         "desc": "Helpt met werving, onboarding en de vragen van het team.",
         "instructions": "Zoekt voor het antwoorden in het beleid, de wiki en de documenten van het team, en zegt waar hij het antwoord vond.\nOrganiseert vacatures, sollicitatiegesprekken en de eerste dagen van nieuwe collega's, met duidelijke checklists.\nGaat zorgvuldig om met persoonsgegevens en deelt ze alleen met wie ze nodig heeft. Stuurt kandidaten alleen berichten met goedkeuring.",
         "tasks": {
@@ -7109,7 +7152,7 @@
       },
       "research": {
         "name": "Onderzoek",
-        "agent": "Hugo",
+        "agent": "Sérgio",
         "desc": "Onderzoekt een onderwerp en levert een samenvatting met bronnen.",
         "instructions": "Kijkt eerst naar wat het team al heeft (wiki, documenten, gesprekken), daarna naar externe bronnen.\nLevert een korte samenvatting met de belangrijkste bevindingen, wat nog onbekend is en de bronnen bij elk punt.\nHoudt feiten en meningen gescheiden en verzint nooit gegevens of citaten.",
         "tasks": {
@@ -7120,7 +7163,7 @@
       },
       "assistant": {
         "name": "Assistent",
-        "agent": "Eva",
+        "agent": "Vera",
         "desc": "Regelt de agenda, mails en herinneringen.",
         "instructions": "Bekijkt voor het vragen de agenda, de mails en recente gesprekken, en komt terug met wat hij vond en een voorstel.\nPlant vergaderingen, schrijft conceptantwoorden en stuurt herinneringen op het juiste moment.\nMails of berichten namens iemand versturen, uitnodigingen accepteren en betalingen doen alleen met goedkeuring.",
         "tasks": {
@@ -7137,15 +7180,16 @@
     },
     "roleGroups": {
       "personal": "Voor je dag",
+      "services": "Diensten",
       "tech": "Product en tech",
       "customers": "Klanten",
       "operations": "Operatie"
     },
     "startsAs": "Start als {{name}}",
     "name": "Naam",
-    "namePlaceholder": "Bijv. Iris",
+    "namePlaceholder": "Bijv. Ana",
     "handle": "In de chat",
-    "handlePlaceholder": "iris",
+    "handlePlaceholder": "ana",
     "handleHelp": "Vermeld @{{handle}} om hem erbij te halen.",
     "handleEmpty": "Gemaakt van de naam. Je kunt het wijzigen.",
     "look": "Uiterlijk",
@@ -7312,15 +7356,21 @@
     "routineKeep": "De routine {{name}} maken",
     "routineNotMade": "De routine is niet gemaakt: {{reason}}",
     "hello": {
-      "clara": "Ik let op je agenda en herinner je aan wat belangrijk is voordat het te laat is.",
-      "duda": "Ik houd je rekeningen en uitgaven bij en waarschuw je voordat er iets vervalt.",
-      "leo": "Ik stel je trainingen samen en houd je in het ritme, op jouw manier.",
-      "mel": "Ik plan je maaltijden en boodschappenlijst, naar jouw smaak en budget.",
-      "gabi": "Ik maak je studieplan en overhoor je over wat je hebt geleerd.",
-      "lu": "Ik bewaar je notities en ideeën en help je er tekst van te maken.",
-      "rosa": "Ik zorg voor de boodschappenlijst, het huishouden en wat er gerepareerd moet worden.",
-      "vic": "Ik plan je reizen: data, prijzen, boekingen en een dag-voor-dag-schema.",
-      "rui": "Ik volg je klanten, schrijf offertes en herinneringen en onthoud wie nog niet heeft betaald.",
+      "marina": "Ik let op je agenda en herinner je aan wat belangrijk is voordat het te laat is.",
+      "cecilia": "Ik houd je rekeningen en uitgaven bij en waarschuw je voordat er iets vervalt.",
+      "lucas": "Ik stel je trainingen samen en houd je in het ritme, op jouw manier.",
+      "julia": "Ik plan je maaltijden en boodschappenlijst, naar jouw smaak en budget.",
+      "bruna": "Ik maak je studieplan en overhoor je over wat je hebt geleerd.",
+      "lorena": "Ik bewaar je notities en ideeën en help je er tekst van te maken.",
+      "tereza": "Ik zorg voor de boodschappenlijst, het huishouden en wat er gerepareerd moet worden.",
+      "renato": "Ik plan je reizen: data, prijzen, boekingen en een dag-voor-dag-schema.",
+      "fabio": "Ik volg je klanten, schrijf offertes en herinneringen en onthoud wie nog niet heeft betaald.",
+      "quotes": "Ik maak de offertes en stuur ze pas na jouw akkoord.",
+      "schedule": "Ik houd de planning bij en bevestig elke klus de dag ervoor.",
+      "english": "Ik beantwoord klanten in het Engels en vertaal alles voor je.",
+      "billing": "Ik regel de facturen en herinner wie te laat is met betalen.",
+      "reviews": "Ik vraag om Google-reviews en schrijf de posts van de week.",
+      "crew": "Ik plan de routes van de dag en zeg wie waarheen gaat.",
       "dev": "Ik programmeer, review PR's en zoek bugs uit.",
       "ops": "Ik houd fouten, wachtrijen en deploys in de gaten.",
       "qa": "Ik test flows en reproduceer gemelde bugs.",
@@ -7336,7 +7386,7 @@
       "assistant": "Ik zorg voor de agenda, de e-mails en de herinneringen."
     },
     "starters": {
-      "clara": {
+      "marina": {
         "instructions": "Kijkt elke ochtend in de agenda en stuurt wat er die dag is.\nHerinnert de dag ervoor aan elke afspraak en elke rekening met een datum.\nPlant, annuleert of accepteert nooit een uitnodiging zonder eerst te vragen.",
         "tasks": {
           "a": "Wat heb ik morgen?",
@@ -7344,7 +7394,7 @@
           "c": "Stuur me elke dag om 7 uur mijn agenda"
         }
       },
-      "duda": {
+      "cecilia": {
         "instructions": "Houdt rekeningen en uitgaven bij, per categorie.\nWaarschuwt drie dagen voordat iets vervalt en als een uitgave uit de toon valt.\nBetaalt, maakt over of zegt nooit iets op zonder eerst te vragen.",
         "tasks": {
           "a": "Hoeveel heb ik deze maand uitgegeven?",
@@ -7352,7 +7402,7 @@
           "c": "Sorteer deze uitgaven per categorie"
         }
       },
-      "leo": {
+      "lucas": {
         "instructions": "Stelt trainingen samen op jouw niveau, met jouw tijd en wat je leuk vindt.\nPast de week aan als je een dag overslaat of moe bent, zonder preek.\nGeeft geen medisch advies: bij pijn of een blessure raadt hij een professional aan.",
         "tasks": {
           "a": "Stel een training van 30 minuten voor vandaag samen",
@@ -7360,7 +7410,7 @@
           "c": "Stuur me elke ochtend de training van de dag"
         }
       },
-      "mel": {
+      "julia": {
         "instructions": "Plant de maaltijden van de week naar jouw smaak, tijd en budget.\nMaakt de boodschappenlijst bij het menu, per afdeling van de winkel.\nHoudt rekening met beperkingen en allergieën en geeft geen dieet- of medisch advies.",
         "tasks": {
           "a": "Stel drie snelle avondmaaltijden voor",
@@ -7368,7 +7418,7 @@
           "c": "Maak de boodschappenlijst voor het menu"
         }
       },
-      "gabi": {
+      "bruna": {
         "instructions": "Maakt het studieplan tot het examen, met wat er per dag past.\nOverhoort je over wat je hebt geleerd en legt opnieuw uit wat je fout had.\nMaakt je huiswerk niet voor je: helpt je naar het antwoord.",
         "tasks": {
           "a": "Maak een studieplan voor het examen",
@@ -7376,7 +7426,7 @@
           "c": "Leg dit onderwerp eenvoudig uit"
         }
       },
-      "lu": {
+      "lorena": {
         "instructions": "Bewaart de notities en ideeën die je stuurt en voegt vergelijkbare samen.\nMaakt van notities tekst in jouw toon, zonder iets toe te voegen wat je niet zei.\nRedigeert zorgvuldig en laat zien wat er veranderd is voordat hij het origineel vervangt.",
         "tasks": {
           "a": "Maak van deze notities een korte tekst",
@@ -7384,7 +7434,7 @@
           "c": "Redigeer deze tekst"
         }
       },
-      "rosa": {
+      "tereza": {
         "instructions": "Houdt de boodschappenlijst en het huishouden bij.\nNoteert wat er gerepareerd moet worden en herinnert eraan tot het gedaan is.\nKoopt of huurt nooit iets in zonder eerst te vragen.",
         "tasks": {
           "a": "Maak de boodschappenlijst van de week",
@@ -7392,7 +7442,7 @@
           "c": "Verdeel de huishoudtaken"
         }
       },
-      "vic": {
+      "renato": {
         "instructions": "Plant de reis met data, prijzen en een dag-voor-dag-schema.\nVergelijkt vluchten en verblijven en zegt waarom hij welke voorstelt.\nBoekt of betaalt nooit iets zonder eerst te vragen.",
         "tasks": {
           "a": "Plan 3 dagen Lissabon",
@@ -7400,7 +7450,7 @@
           "c": "Verzamel de boekingen van de reis"
         }
       },
-      "rui": {
+      "fabio": {
         "instructions": "Volgt elke klant: wat is afgesproken, wat nog openstaat en wie niet heeft betaald.\nSchrijft offertes en betalingsherinneringen in jouw toon, klaar om na te lezen.\nStuurt een klant nooit iets zonder jouw goedkeuring.",
         "tasks": {
           "a": "Schrijf een korte offerte voor een klant",
@@ -20180,92 +20230,92 @@
     "stepOf": "Stap {{n}} van {{total}} · {{step}}",
     "lines": {
       "reserving": {
-        "atlas": "{{name}} legt er een voor ons apart",
-        "atlas_female": "{{name}} legt er een voor ons apart",
-        "theo": "{{name}} heeft onze naam erop gezet",
-        "theo_female": "{{name}} heeft onze naam erop gezet",
-        "lia": "{{name}} checkt of hij helemaal van ons is",
-        "lia_female": "{{name}} checkt of hij helemaal van ons is"
+        "rui": "{{name}} legt er een voor ons apart",
+        "rui_female": "{{name}} legt er een voor ons apart",
+        "ana": "{{name}} heeft onze naam erop gezet",
+        "ana_female": "{{name}} heeft onze naam erop gezet",
+        "gil": "{{name}} checkt of hij helemaal van ons is",
+        "gil_female": "{{name}} checkt of hij helemaal van ons is"
       },
       "ordering": {
-        "ada": "{{name}} heeft om {{gb}} GB geheugen gevraagd",
-        "ada_female": "{{name}} heeft om {{gb}} GB geheugen gevraagd",
-        "atlas": "{{name}} heeft een gloednieuwe besteld",
-        "atlas_female": "{{name}} heeft een gloednieuwe besteld",
-        "theo": "{{name}} houdt de bestelling in de gaten",
-        "theo_female": "{{name}} houdt de bestelling in de gaten"
+        "helena": "{{name}} heeft om {{gb}} GB geheugen gevraagd",
+        "helena_female": "{{name}} heeft om {{gb}} GB geheugen gevraagd",
+        "rui": "{{name}} heeft een gloednieuwe besteld",
+        "rui_female": "{{name}} heeft een gloednieuwe besteld",
+        "ana": "{{name}} houdt de bestelling in de gaten",
+        "ana_female": "{{name}} houdt de bestelling in de gaten"
       },
       "wiping": {
-        "ada": "{{name}} geeft hem een flinke poetsbeurt",
-        "ada_female": "{{name}} geeft hem een flinke poetsbeurt",
-        "atlas": "{{name}} brengt het afval buiten",
-        "atlas_female": "{{name}} brengt het afval buiten",
-        "lia": "{{name}} checkt of er niets ouds is achtergebleven",
-        "lia_female": "{{name}} checkt of er niets ouds is achtergebleven"
+        "helena": "{{name}} geeft hem een flinke poetsbeurt",
+        "helena_female": "{{name}} geeft hem een flinke poetsbeurt",
+        "rui": "{{name}} brengt het afval buiten",
+        "rui_female": "{{name}} brengt het afval buiten",
+        "gil": "{{name}} checkt of er niets ouds is achtergebleven",
+        "gil_female": "{{name}} checkt of er niets ouds is achtergebleven"
       },
       "starting": {
-        "atlas": "{{name}} helpt hem op de been",
-        "atlas_female": "{{name}} helpt hem op de been",
-        "ada": "{{name}} laat de motoren warmdraaien",
-        "ada_female": "{{name}} laat de motoren warmdraaien",
-        "theo": "{{name}} heeft de startvlag gezwaaid",
-        "theo_female": "{{name}} heeft de startvlag gezwaaid"
+        "rui": "{{name}} helpt hem op de been",
+        "rui_female": "{{name}} helpt hem op de been",
+        "helena": "{{name}} laat de motoren warmdraaien",
+        "helena_female": "{{name}} laat de motoren warmdraaien",
+        "ana": "{{name}} heeft de startvlag gezwaaid",
+        "ana_female": "{{name}} heeft de startvlag gezwaaid"
       },
       "booting": {
-        "ada": "{{name}} telt alle {{gb}} GB geheugen",
-        "ada_female": "{{name}} telt alle {{gb}} GB geheugen",
-        "atlas": "{{name}} checkt of elk onderdeel er is",
-        "atlas_female": "{{name}} checkt of elk onderdeel er is",
-        "theo": "{{name}} laat hem rustig laden",
-        "theo_female": "{{name}} laat hem rustig laden"
+        "helena": "{{name}} telt alle {{gb}} GB geheugen",
+        "helena_female": "{{name}} telt alle {{gb}} GB geheugen",
+        "rui": "{{name}} checkt of elk onderdeel er is",
+        "rui_female": "{{name}} checkt of elk onderdeel er is",
+        "ana": "{{name}} laat hem rustig laden",
+        "ana_female": "{{name}} laat hem rustig laden"
       },
       "updating": {
-        "lia": "{{name}} haalt de nieuwste updates op",
-        "lia_female": "{{name}} haalt de nieuwste updates op",
-        "ada": "{{name}} draait elke schroef aan",
-        "ada_female": "{{name}} draait elke schroef aan",
-        "theo": "{{name}} vinkt elke update af",
-        "theo_female": "{{name}} vinkt elke update af"
+        "gil": "{{name}} haalt de nieuwste updates op",
+        "gil_female": "{{name}} haalt de nieuwste updates op",
+        "helena": "{{name}} draait elke schroef aan",
+        "helena_female": "{{name}} draait elke schroef aan",
+        "ana": "{{name}} vinkt elke update af",
+        "ana_female": "{{name}} vinkt elke update af"
       },
       "restarting": {
-        "ada": "{{name}} zegt dat deze herstart normaal is",
-        "ada_female": "{{name}} zegt dat deze herstart normaal is",
-        "atlas": "{{name}} zorgt dat de update blijft hangen",
-        "atlas_female": "{{name}} zorgt dat de update blijft hangen",
-        "theo": "{{name}} telt tot tien",
-        "theo_female": "{{name}} telt tot tien"
+        "helena": "{{name}} zegt dat deze herstart normaal is",
+        "helena_female": "{{name}} zegt dat deze herstart normaal is",
+        "rui": "{{name}} zorgt dat de update blijft hangen",
+        "rui_female": "{{name}} zorgt dat de update blijft hangen",
+        "ana": "{{name}} telt tot tien",
+        "ana_female": "{{name}} telt tot tien"
       },
       "network": {
-        "lia": "{{name}} legt de kabels",
-        "lia_female": "{{name}} legt de kabels",
-        "atlas": "{{name}} zorgt dat hij ons kan vinden",
-        "atlas_female": "{{name}} zorgt dat hij ons kan vinden",
-        "theo": "{{name}} tekent een kaartje voor hem",
-        "theo_female": "{{name}} tekent een kaartje voor hem"
+        "gil": "{{name}} legt de kabels",
+        "gil_female": "{{name}} legt de kabels",
+        "rui": "{{name}} zorgt dat hij ons kan vinden",
+        "rui_female": "{{name}} zorgt dat hij ons kan vinden",
+        "ana": "{{name}} tekent een kaartje voor hem",
+        "ana_female": "{{name}} tekent een kaartje voor hem"
       },
       "firewall": {
-        "atlas": "{{name}} doet elke deur op slot",
-        "atlas_female": "{{name}} doet elke deur op slot",
-        "lia": "{{name}} heeft een uitsmijter bij de deur gezet",
-        "lia_female": "{{name}} heeft een uitsmijter bij de deur gezet",
-        "theo": "{{name}} schrijft de gastenlijst",
-        "theo_female": "{{name}} schrijft de gastenlijst"
+        "rui": "{{name}} doet elke deur op slot",
+        "rui_female": "{{name}} doet elke deur op slot",
+        "gil": "{{name}} heeft een uitsmijter bij de deur gezet",
+        "gil_female": "{{name}} heeft een uitsmijter bij de deur gezet",
+        "ana": "{{name}} schrijft de gastenlijst",
+        "ana_female": "{{name}} schrijft de gastenlijst"
       },
       "installing": {
-        "theo": "{{name}} zoekt de apps op",
-        "theo_female": "{{name}} zoekt de apps op",
-        "lia": "{{name}} pakt de apps uit",
-        "lia_female": "{{name}} pakt de apps uit",
-        "ada": "{{name}} legt het gereedschap klaar",
-        "ada_female": "{{name}} legt het gereedschap klaar"
+        "ana": "{{name}} zoekt de apps op",
+        "ana_female": "{{name}} zoekt de apps op",
+        "gil": "{{name}} pakt de apps uit",
+        "gil_female": "{{name}} pakt de apps uit",
+        "helena": "{{name}} legt het gereedschap klaar",
+        "helena_female": "{{name}} legt het gereedschap klaar"
       },
       "connecting": {
-        "ada": "{{name}} wacht op zijn eerste hallo",
-        "ada_female": "{{name}} wacht op zijn eerste hallo",
-        "atlas": "{{name}} geeft de sleutels af",
-        "atlas_female": "{{name}} geeft de sleutels af",
-        "lia": "{{name}} stelt hem voor aan het team",
-        "lia_female": "{{name}} stelt hem voor aan het team"
+        "helena": "{{name}} wacht op zijn eerste hallo",
+        "helena_female": "{{name}} wacht op zijn eerste hallo",
+        "rui": "{{name}} geeft de sleutels af",
+        "rui_female": "{{name}} geeft de sleutels af",
+        "gil": "{{name}} stelt hem voor aan het team",
+        "gil_female": "{{name}} stelt hem voor aan het team"
       }
     },
     "status": {
@@ -21560,111 +21610,111 @@
       }
     },
     "agents": {
-      "iara": {
+      "luana": {
         "role": "Klantenservice",
         "line": "Beantwoordt klanten via WhatsApp en e-mail. Roept je als ze het niet weet.",
         "routine": "Samenvatten wat onbeantwoord bleef",
         "task": "Schrijf een antwoord op dit klantbericht:",
         "hello": "Hoi {{first}}. Wie via WhatsApp schrijft, laat je aan mij over."
       },
-      "caio": {
+      "teo": {
         "role": "Facturen",
         "line": "Herinnert wie te laat betaalt en stuurt de herinnering na jouw ok.",
         "routine": "Opsommen wie te laat betaalt",
         "task": "Schrijf een vriendelijke betalingsherinnering voor:",
         "hello": "Hallo. Ik doe de betalingen en stuur pas een herinnering na jouw oké."
       },
-      "ada": {
+      "helena": {
         "role": "Dev",
         "line": "Lost de bugs op die klanten melden en opent de PR.",
         "routine": "De nieuwe bugs opsommen",
         "task": "Vertel me waar ik moet beginnen met deze bug:",
         "hello": "Hoi. Stuur me de bugs die binnenkomen, ik zoek het uit en open de PR."
       },
-      "lia": {
+      "gil": {
         "role": "Content",
         "line": "Schrijft posts en scripts in de toon van het bedrijf en plant ze na jouw ok.",
         "routine": "De posts van de week voorstellen",
         "task": "Stel drie posts voor deze week voor over:",
         "hello": "Hoi allemaal. De posts van deze week zijn voor mij."
       },
-      "theo": {
+      "ana": {
         "role": "Verkoop",
         "line": "Volgt iedereen op die een offerte vroeg en schrijft de voorstellen.",
         "routine": "Opsommen wie een offerte vroeg en geen antwoord kreeg",
         "task": "Schrijf een korte offerte voor deze aanvraag:",
         "hello": "Hoi {{first}}. Niemand die om een offerte vraagt, blijft zonder antwoord."
       },
-      "nina": {
+      "rui": {
         "role": "Agenda",
         "line": "Plant, bevestigt en verzet afspraken en herinnert klanten de dag ervoor.",
         "routine": "De afspraken van morgen bevestigen",
         "task": "Orden deze tijden van morgen:",
         "hello": "Hallo. De agenda is van mij, en ik herinner klanten de dag ervoor."
       },
-      "otto": {
+      "tiago": {
         "role": "Bestellingen",
         "line": "Volgt bestellingen en voorraad en waarschuwt wat opraakt.",
         "routine": "Waarschuwen wat opraakt in de voorraad",
         "task": "Noem wat er nog moet gebeuren bij deze bestellingen:",
         "hello": "Ik ben er. Ik hou de bestellingen in de gaten en meld het als de voorraad opraakt."
       },
-      "bia": {
+      "sofia": {
         "role": "Antwoordenbank",
         "line": "Houdt de antwoordenbank bij met wat het team antwoordt.",
         "routine": "De bank bijwerken met de antwoorden van de week",
         "task": "Schrijf de antwoorden op deze klantvragen:",
         "hello": "Hoi. Ik hou de antwoordbank bij met wat het team antwoordt."
       },
-      "clara": {
+      "marina": {
         "role": "Agenda en herinneringen",
         "line": "Houdt je agenda bij en herinnert je aan wat belangrijk is voordat het te laat is.",
         "routine": "De agenda van vandaag sturen",
         "task": "Zet dit in mijn agenda en herinner me er de dag ervoor aan:"
       },
-      "duda": {
+      "cecilia": {
         "role": "Rekeningen en uitgaven",
         "line": "Houdt je rekeningen en uitgaven bij en waarschuwt je voordat er iets betaald moet worden.",
         "routine": "De rekeningen van deze maand opsommen en wat nog betaald moet worden",
         "task": "Sorteer deze uitgaven per categorie:"
       },
-      "leo": {
+      "lucas": {
         "role": "Training",
         "line": "Stelt je trainingen samen en houdt je gemotiveerd, in jouw tempo.",
         "routine": "De training van vandaag sturen",
         "task": "Maak een training van 30 minuten voor vandaag met:"
       },
-      "mel": {
+      "julia": {
         "role": "Voeding",
         "line": "Plant je maaltijden en de boodschappenlijst, naar je smaak en budget.",
         "routine": "De maaltijden van de week en de boodschappenlijst plannen",
         "task": "Stel drie snelle avondmaaltijden voor met:"
       },
-      "gabi": {
+      "bruna": {
         "role": "Studie",
         "line": "Maakt je studieplan en overhoort je over wat je hebt geleerd.",
         "routine": "Het onderwerp van vandaag herhalen met drie vragen",
         "task": "Leg dit onderwerp eenvoudig uit en stel me drie vragen:"
       },
-      "lu": {
+      "lorena": {
         "role": "Schrijven en ideeën",
         "line": "Bewaart je notities en ideeën en helpt je er teksten van te maken.",
         "routine": "De ideeën en notities van de week verzamelen",
         "task": "Maak van deze notities een korte tekst:"
       },
-      "rosa": {
+      "tereza": {
         "role": "Huis en boodschappen",
         "line": "Houdt de boodschappenlijst bij, de klusjes in huis en wat er gerepareerd moet worden.",
         "routine": "De boodschappenlijst en de klusjes van de week maken",
         "task": "Maak een boodschappenlijst voor de week voor:"
       },
-      "vic": {
+      "renato": {
         "role": "Reizen",
         "line": "Plant je reizen: data, prijzen, boekingen en een dagprogramma.",
         "routine": "De prijzen checken van de reizen die je plant",
         "task": "Plan een reis van 3 dagen naar:"
       },
-      "rui": {
+      "fabio": {
         "role": "Klanten",
         "line": "Volgt je klanten op, schrijft voorstellen en facturen en herinnert wie nog niet heeft betaald.",
         "routine": "Opsommen waar elke klant vandaag op wacht",
@@ -21672,14 +21722,14 @@
       }
     },
     "channels": {
-      "iara": "support",
-      "caio": "financien",
-      "ada": "eng",
-      "lia": "content",
-      "theo": "verkoop",
-      "nina": "agenda",
-      "otto": "bestellingen",
-      "bia": "support"
+      "luana": "support",
+      "teo": "financien",
+      "helena": "eng",
+      "gil": "content",
+      "ana": "verkoop",
+      "rui": "agenda",
+      "tiago": "bestellingen",
+      "sofia": "support"
     },
     "skills": {
       "voice": {

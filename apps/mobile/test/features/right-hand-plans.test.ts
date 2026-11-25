@@ -22,7 +22,7 @@ test("Connect for it offers every plan the phone offers, ChatGPT's too, and its 
   expect(steps).toContain("options={PLAN_CHOICES.map((c) => ({");
 });
 
-test("Sua IA is the one choice, or the call to connect a plan; Lodi's settings open with it", () => {
+test("Sua IA is the one choice, or the call to connect a plan; Doki's settings open with it", () => {
   const screen = readFileSync(join(import.meta.dir, "../../src/features/right-hand/SettingsScreen.tsx"), "utf8");
   const profile = readFileSync(join(import.meta.dir, "../../src/features/agents/AgentProfileScreen.tsx"), "utf8");
   // The four states come from the client's rule, as on the web (ADR 0137 §11).
@@ -62,7 +62,7 @@ test("Sua IA is the one choice, or the call to connect a plan; Lodi's settings o
   );
 });
 
-test("Lodi's settings: the workspace's plan has no lending switch, since a plan serves the whole workspace", () => {
+test("Doki's settings: the workspace's plan has no lending switch, since a plan serves the whole workspace", () => {
   const screen = readFileSync(join(import.meta.dir, "../../src/features/right-hand/SettingsScreen.tsx"), "utf8");
   // The workspace's AI is read and saved as such; the look opens from the row, with no "Mudar visual" on it.
   expect(screen).toContain('useAgentBrain(orgId, agent.id, true, false, "workspace")');
@@ -81,7 +81,7 @@ test("Lodi's settings: the workspace's plan has no lending switch, since a plan 
   expect(screen).not.toContain("workspacePlan");
 });
 
-test("Connect is everyone's for Lodi, and its own AI has no Atende outras pessoas", () => {
+test("Connect is everyone's for Doki, and its own AI has no Atende outras pessoas", () => {
   const sheet = source("ConnectAi.tsx");
   expect(sheet).toContain("a.ownerUserId === meId || isRightHand(a)");
   const steps = source("ConnectAiSteps.tsx");
@@ -101,9 +101,9 @@ test("another AI answered for its plan: a quiet pill with Change, and its dimmed
   expect(screen).toContain("rightHandUnusable(aiAccounts, view?.account)");
   expect(screen).toContain('t("rightHand.unusable.title", g)');
   expect(screen).toContain('t("rightHand.unusable.computerOnly"');
-  // The way out is the workspace's computers, for who may connect one: no button of Lodi's own.
+  // The way out is the workspace's computers, for who may connect one: no button of Doki's own.
   expect(screen).toContain('can(org, "pair_computers") && edition !== "cloud" && cant.some((u) => u.why === "away")');
-  expect(`${card}${screen}`).not.toContain("Give Lodi a computer");
+  expect(`${card}${screen}`).not.toContain("Give Doki a computer");
 });
 
 test("the workspace's plans it can't think with now list each account once, as on the web", () => {

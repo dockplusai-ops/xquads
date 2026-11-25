@@ -271,8 +271,6 @@ export function AccountSection() {
                 onValueChange={(v) => setSoundChoice(v as SoundChoice)}
                 options={[
                   { value: "tactile", label: t("shell.soundTactile") },
-                  { value: "sky", label: t("shell.soundSky") },
-                  { value: "pixel", label: t("shell.soundPixel") },
                   { value: "off", label: t("shell.soundOff") },
                 ]}
               />

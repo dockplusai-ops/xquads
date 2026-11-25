@@ -188,7 +188,7 @@ describe("the team step's question", () => {
     // Only past the question: the team step still waits for its team.
     expect(calls(state, "orgs.saveOnboarding").map((c) => c.args)).toEqual([[ORG_ID, { step: "import" }]]);
     expect(heading()).toBe("Como você quer começar o time?");
-    expect(button("Seguir só com o Lodi")).toBeTruthy();
+    expect(button("Seguir só com o Doki")).toBeTruthy();
     await click(button("Voltar"), 6);
     expect(heading()).toBe(ASK);
   });
@@ -229,7 +229,7 @@ describe("bringing the team from an app that answers in its chat", () => {
     expect(heading()).toBe(CONNECT);
   });
 
-  test("an app that hands back a file: the import's picker, Lodi saying to send it the request first", async () => {
+  test("an app that hands back a file: the import's picker, Doki saying to send it the request first", async () => {
     await open(settingUp());
     await click(answer("ChatGPT dots"), 4);
     await click(button("Trazer do ChatGPT dots"), 10);
@@ -239,7 +239,7 @@ describe("bringing the team from an app that answers in its chat", () => {
     );
   });
 
-  test("an app that takes MCP: its steps in the sheet, Lodi saying so, and the agents it creates move the rail on with no socket", async () => {
+  test("an app that takes MCP: its steps in the sheet, Doki saying so, and the agents it creates move the rail on with no socket", async () => {
     const polls: (() => void)[] = [];
     const realSetInterval = globalThis.setInterval;
     globalThis.setInterval = ((fn: () => void, ms?: number) => {
@@ -305,7 +305,7 @@ describe("bringing the team from an app that answers in its chat", () => {
     expect(document.querySelector(".onb__say")?.textContent).toBe("Solte aqui o que o app exportou. O resto é comigo.");
   });
 
-  test("with MCP switched to the request, Lodi says to drop what the app gives back", async () => {
+  test("with MCP switched to the request, Doki says to drop what the app gives back", async () => {
     await open(settingUp());
     await click(answer("Outro app"), 4);
     await click(button("Continuar"), 10);

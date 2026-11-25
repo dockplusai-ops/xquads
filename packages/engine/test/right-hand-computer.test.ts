@@ -159,7 +159,7 @@ test("one seat per person, and two people's OS user names differ", async () => {
   const listed = await machineAgents(f.db, f.org.id, machineId);
   expect(listed.find((a) => a.id === hers)).toMatchObject({
     handle: lodi.handle,
-    name: "Lodi (Bia)",
+    name: "Doki (Bia)",
     containers: true,
   });
   expect(listed.some((a) => a.id === first?.id)).toBe(true);

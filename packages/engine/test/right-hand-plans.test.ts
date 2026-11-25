@@ -59,7 +59,7 @@ const statusOf = (id: string, over: Partial<MachineStatus> = {}): MachineStatus 
   ...over,
 });
 
-/** Lodi, Ana's computer with her Claude account and Caio's (an admin), Bia a member. */
+/** Doki, Ana's computer with her Claude account and Caio's (an admin), Bia a member. */
 async function world() {
   const fx = await setup({ rightHand: true });
   f = fx;
@@ -88,7 +88,7 @@ async function world() {
     if (!row) throw new Error("no right hand");
     return row;
   };
-  /** Nothing can stand in for Lodi's plan (ADR 0137 §7, amended): no API key, and Caio's plan serves only him. */
+  /** Nothing can stand in for Doki's plan (ADR 0137 §7, amended): no API key, and Caio's plan serves only him. */
   const noStandIn = async () => {
     await fx.db.update(schema.providerCredentials).set({ revokedAt: new Date() });
     await fx.db
@@ -101,7 +101,7 @@ async function world() {
 
 const codeOf = (p: Promise<unknown>) => p.then(() => null).catch((e: { code?: string }) => e.code);
 
-test("Lodi takes a Claude plan signed in as an account, never a computer's own sign-in, and stays on no computer", async () => {
+test("Doki takes a Claude plan signed in as an account, never a computer's own sign-in, and stays on no computer", async () => {
   const { fx, deps, machineId, caio, lodi } = await world();
   const id = (await lodi()).id;
   expect(await codeOf(setAgentBrain(deps, fx.owner.id, fx.org.id, id, { brain: "claude_code" }))).toBe(
@@ -130,7 +130,7 @@ test("Lodi takes a Claude plan signed in as an account, never a computer's own s
   expect(await codeOf(setAgentBrain(deps, caio.id, fx.org.id, id, { account: ANAS, onlyOwner: true }))).toBeNull();
   await setAgentBrain(deps, fx.owner.id, fx.org.id, id, { onlyOwner: false });
   expect((await lodi()).planForOthers).toBe(true);
-  // Anyone who sets Lodi's AI takes it back to a key.
+  // Anyone who sets Doki's AI takes it back to a key.
   await setAgentBrain(deps, caio.id, fx.org.id, id, { brain: "model" });
   expect(await lodi()).toMatchObject({ brain: "model", brainAccountId: null, machineId: null });
   // Caio gives it his own.
@@ -138,7 +138,7 @@ test("Lodi takes a Claude plan signed in as an account, never a computer's own s
   expect(await lodi()).toMatchObject({ brainAccountId: CAIOS, planForOthers: false });
 });
 
-test("a plan given to Lodi starts with its switch off, whatever was set before it", async () => {
+test("a plan given to Doki starts with its switch off, whatever was set before it", async () => {
   const { fx, deps, caio, lodi } = await world();
   const id = (await lodi()).id;
   await setAgentBrain(deps, fx.owner.id, fx.org.id, id, { brain: "claude_code", account: ANAS });
@@ -436,7 +436,7 @@ test("its turn goes to the runner as the locked-down chat profile, with no check
   const brain = createClaudeCodeBrain({
     hub: hub as never,
     pubsub: { publish: async () => {}, subscribe: () => () => {} } as never,
-    agentScope: async () => ({ id: "a", handle: "lodi" }),
+    agentScope: async () => ({ id: "a", handle: "doki" }),
     permissions: () => RIGHT_HAND_TURN,
     personalMcp: () => true,
     prepare: async () => {
@@ -451,7 +451,7 @@ test("its turn goes to the runner as the locked-down chat profile, with no check
     agentId: "a",
     channelId: "c",
     threadRootId: null,
-    system: "You are Lodi.",
+    system: "You are Doki.",
     messages: [{ role: "user", content: "oi" }],
     tools: [],
     trigger: "oi",
@@ -602,7 +602,7 @@ test("an OpenCode turn of it goes out as the chat profile with no checkout; an o
     agentId: "a",
     channelId: "c",
     threadRootId: null,
-    system: "You are Lodi.",
+    system: "You are Doki.",
     messages: [{ role: "user", content: "oi" }],
     tools: [],
     trigger: "oi",

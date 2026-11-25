@@ -4703,7 +4703,7 @@ export const TimelineMessage = memo(function TimelineMessage({
   const noAi = m.author.type === "agent" && noAiCardOf(meta) !== null;
   // An agent's card whose button opens the app's own dialog, filled in ("Conectar uma IA para Ada").
   const actionCard = m.author.type === "agent" && actionCardOf(meta) !== null;
-  // Lodi's weekly card opens with its week in words: the message's text, in a bubble where words go, the card under it.
+  // Doki's weekly card opens with its week in words: the message's text, in a bubble where words go, the card under it.
   const weekCard = actionCard && actionCardOf(meta)?.kind === "team_week";
   // "I'll answer when the plan resets": "Don't run it" while that run still waits.
   const usageWait = m.author.type === "agent" ? usageWaitOf(meta) : null;

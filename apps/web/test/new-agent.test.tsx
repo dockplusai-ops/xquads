@@ -135,9 +135,9 @@ describe("Criar agente: steps", () => {
     expect(preview()).toBeNull();
     await typeIn(screen().getByRole("textbox", { name: "Função" }), "Pesquisa de preços");
     expect(preview()?.textContent).toContain("Pesquisa de preços");
-    // A template shows it on the role step itself: QA starts as Iris.
+    // A template shows it on the role step itself: QA starts as Duda.
     await click(screen().getByRole("button", { name: /^QA/ }));
-    expect(preview()?.textContent).toContain("Iris");
+    expect(preview()?.textContent).toContain("Duda");
     // Headed by its name alone. It says which step it's on: a narrow screen keeps it out of the role step.
     expect(document.querySelector(".newag__cap")?.textContent).toBe("Prévia");
     expect(preview()?.getAttribute("data-step")).toBe("role");
@@ -149,24 +149,24 @@ describe("Criar agente: steps", () => {
     await open();
     await startAs("QA");
     await proceed();
-    expect(title()).toBe("O que a Iris faz");
+    expect(title()).toBe("O que a Duda faz");
     const hint = (name: string) =>
       document.getElementById(screen().getByRole("button", { name }).getAttribute("aria-describedby") ?? "")
         ?.textContent;
     // On the field's own label, never in the step's big title.
     expect(screen().getByRole("heading", { level: 1 }).closest(".ac-hintline")).toBeNull();
     expect(hint("Sobre Instruções")).toBe(
-      "O contexto da Acme (o que a empresa faz, regras da casa) entra antes destas instruções em toda conversa: escreva aqui só o que é da Iris.",
+      "O contexto da Acme (o que a empresa faz, regras da casa) entra antes destas instruções em toda conversa: escreva aqui só o que é da Duda.",
     );
     expect(document.querySelector(".newag__note")).toBeNull();
     await proceed();
-    expect(document.querySelector(".onb__lead")?.textContent).toBe("Escolha até onde a Iris vai em cada app.");
+    expect(document.querySelector(".onb__lead")?.textContent).toBe("Escolha até onde a Duda vai em cada app.");
     expect(document.querySelector(".newag__note")?.textContent).toBe(
       "Merge, deploy e rollback pedem aprovação no chat, a não ser que o agente nunca pergunte. Quem aprova é Walter.",
     );
     await proceed(2);
     expect(title()).toBe("Modelo e orçamento");
-    expect(hint("Sobre Orçamento mensal")).toBe("Ao atingir o limite, a Iris para e avisa. Avisamos Walter aos 80%.");
+    expect(hint("Sobre Orçamento mensal")).toBe("Ao atingir o limite, a Duda para e avisa. Avisamos Walter aos 80%.");
     expect(screen().getByText(/^Vazio: o padrão do workspace/).textContent).toBe(
       "Vazio: o padrão do workspace (US$\u00a050).",
     );
@@ -210,8 +210,8 @@ describe("Criar agente: steps", () => {
 
     await startAs("QA");
     expect(title()).toBe("Quem é");
-    expect((screen().getByLabelText("Nome") as HTMLInputElement).value).toBe("Iris");
-    expect((screen().getByLabelText("No chat") as HTMLInputElement).value).toBe("iris");
+    expect((screen().getByLabelText("Nome") as HTMLInputElement).value).toBe("Duda");
+    expect((screen().getByLabelText("No chat") as HTMLInputElement).value).toBe("duda");
     expect(screen().getByRole("button", { name: "Violeta" }).getAttribute("aria-pressed")).toBe("true");
     expect(
       screen()
@@ -219,11 +219,11 @@ describe("Criar agente: steps", () => {
         .getAttribute("aria-pressed"),
     ).toBe("true");
     const preview = screen().getByRole("complementary", { name: "Prévia do agente" });
-    expect(preview.textContent).toContain("Iris");
-    expect(preview.textContent).toContain("@iris");
+    expect(preview.textContent).toContain("Duda");
+    expect(preview.textContent).toContain("@duda");
 
     await proceed();
-    expect(title()).toBe("O que a Iris faz");
+    expect(title()).toBe("O que a Duda faz");
     expect((screen().getByLabelText("Instruções") as HTMLTextAreaElement).value).toStartWith(
       "Reproduz cada bug relatado antes de abrir uma tarefa.",
     );
@@ -259,13 +259,13 @@ describe("Criar agente: steps", () => {
     await press(screen().getByRole("combobox", { name: "Buscar modelos" }), "Escape");
 
     await proceed();
-    expect(title()).toBe("Tudo certo com a Iris?");
+    expect(title()).toBe("Tudo certo com a Duda?");
     expect(document.querySelector(".newag__review")?.textContent).toContain("Automático ·");
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     expect(createdWith(state)).toMatchObject({
-      name: "Iris",
-      handle: "iris",
+      name: "Duda",
+      handle: "duda",
       role: "QA",
       model: "auto",
       appearance: { color: "violet", eyes: "round", accessory: "headset" },
@@ -281,18 +281,26 @@ describe("Criar agente: steps", () => {
     expect(screen().getByRole("checkbox", { name: "#general" }).getAttribute("aria-checked")).toBe("true");
   });
 
-  test("roles for any team, in groups (tech, customers, operations); Do zero first", async () => {
+  test("roles for any team, in groups (services, tech, customers, operations); Do zero first", async () => {
     await open();
     const step = screen().getByRole("group", { name: "Função" });
     expect(
       within(step)
         .getAllByRole("heading", { level: 2 })
         .map((h) => h.textContent),
-    ).toEqual(["Produto e tecnologia", "Clientes", "Operação"]);
+    ).toEqual(["Serviços", "Produto e tecnologia", "Clientes", "Operação"]);
     const names = (heading: string) =>
       within(within(step).getByRole("region", { name: heading }))
         .getAllByRole("button")
         .map((b) => b.querySelector(".newag__role-name b")?.textContent);
+    expect(names("Serviços")).toEqual([
+      "Orçamentos",
+      "Agenda",
+      "Atendimento em inglês",
+      "Cobranças",
+      "Avaliações e redes",
+      "Equipe e rotas",
+    ]);
     expect(names("Produto e tecnologia")).toEqual(["Dev", "Ops", "QA", "PM"]);
     expect(names("Clientes")).toEqual(["Atendimento", "Vendas", "Marketing", "Conteúdo"]);
     expect(names("Operação")).toEqual(["Dados", "Financeiro", "Pessoas", "Pesquisa", "Assistente"]);
@@ -324,12 +332,12 @@ describe("Criar agente: steps", () => {
     expect(screen().getByText("O que ele faz pelo time, ex.: Assistente de e-mails e agenda.")).toBeTruthy();
 
     // A role outside engineering fills the rest the same way.
-    await click(within(step).getByRole("button", { name: /^Atendimento/ }));
+    await click(within(step).getByRole("button", { name: /^Atendimento(?! em)/ }));
     await proceed();
-    expect((screen().getByLabelText("Nome") as HTMLInputElement).value).toBe("Nina");
-    expect((screen().getByLabelText("No chat") as HTMLInputElement).value).toBe("nina");
+    expect((screen().getByLabelText("Nome") as HTMLInputElement).value).toBe("Flora");
+    expect((screen().getByLabelText("No chat") as HTMLInputElement).value).toBe("flora");
     await proceed();
-    expect(title()).toBe("O que a Nina faz");
+    expect(title()).toBe("O que a Flora faz");
     expect((screen().getByLabelText("Instruções") as HTMLTextAreaElement).value).toContain(
       "Enviar mensagem ao cliente, reembolso e desconto só com aprovação.",
     );
@@ -414,36 +422,46 @@ describe("Criar agente: steps", () => {
     expect(title()).not.toBe("Quem é");
   });
 
-  test("Dev starts as Ada, whose @ is taken: the error suggests a free one and blocks the step", async () => {
-    await open();
+  test("Dev starts as Bia, whose @ is taken: the error suggests a free one and blocks the step", async () => {
+    // The workspace already has a Bia: its Dev, renamed.
+    const state = seedState();
+    const dev = state.agents.find((a) => a.handle === "ada");
+    if (dev) Object.assign(dev, { name: "Bia", handle: "bia" });
+    await open(state);
     await startAs("Dev");
-    expect((screen().getByLabelText("No chat") as HTMLInputElement).value).toBe("ada");
-    expect(document.body.textContent).toContain("@ada já é de outro agente ou pessoa. Que tal @ada-2?");
+    expect((screen().getByLabelText("No chat") as HTMLInputElement).value).toBe("bia");
+    expect(document.body.textContent).toContain("@bia já é de outro agente ou pessoa. Que tal @bia-2?");
     await click(continueButton());
     expect(title()).toBe("Quem é");
-    await typeIn(screen().getByLabelText("No chat"), "Ada 2!");
-    expect((screen().getByLabelText("No chat") as HTMLInputElement).value).toBe("ada2");
+    await typeIn(screen().getByLabelText("No chat"), "Bia 2!");
+    expect((screen().getByLabelText("No chat") as HTMLInputElement).value).toBe("bia2");
     // A person's @ is taken too.
     await typeIn(screen().getByLabelText("No chat"), "joao");
     expect(document.body.textContent).toContain("@joao já é de outro agente ou pessoa.");
     await typeIn(screen().getByLabelText("No chat"), "-x");
     expect(document.body.textContent).toContain("Use de 2 a 32 letras minúsculas");
-    await typeIn(screen().getByLabelText("No chat"), "ada-dev");
+    await typeIn(screen().getByLabelText("No chat"), "bia-dev");
     // The name no longer drives a handle someone edited.
-    await typeIn(screen().getByLabelText("Nome"), "Ada Maria");
-    expect((screen().getByLabelText("No chat") as HTMLInputElement).value).toBe("ada-dev");
+    await typeIn(screen().getByLabelText("Nome"), "Bia Maria");
+    expect((screen().getByLabelText("No chat") as HTMLInputElement).value).toBe("bia-dev");
     await proceed();
-    expect(title()).toBe("O que a Ada Maria faz");
+    expect(title()).toBe("O que a Bia Maria faz");
   });
 
-  test("someone else's private Ada, unlisted to me, still holds @ada: Dev starts as @ada-2's suggestion", async () => {
+  test("someone else's private Bia, unlisted to me, still holds @bia: Dev starts as @bia-2's suggestion", async () => {
     const state = seedState();
     meWithRole(state, ["create_agents"]);
-    const ada = state.agents.find((a) => a.handle === "ada");
-    if (ada) Object.assign(ada, { ownerUserId: "u-other", audience: { mode: "owner", userIds: [] } });
+    const bia = state.agents.find((a) => a.handle === "ada");
+    if (bia)
+      Object.assign(bia, {
+        name: "Bia",
+        handle: "bia",
+        ownerUserId: "u-other",
+        audience: { mode: "owner", userIds: [] },
+      });
     await open(state);
     await startAs("Dev");
-    expect(document.body.textContent).toContain("@ada já é de outro agente ou pessoa. Que tal @ada-2?");
+    expect(document.body.textContent).toContain("@bia já é de outro agente ou pessoa. Que tal @bia-2?");
   });
 
   test("an empty name and @ only complain after trying to go on", async () => {
@@ -467,16 +485,16 @@ describe("Criar agente: steps", () => {
     expect(title()).toBe("Quem é");
     // Enter in a field continues.
     await press(screen().getByLabelText("Nome"), "Enter");
-    expect(title()).toBe("O que o Theo faz");
+    expect(title()).toBe("O que o Enzo faz");
     // A plain Enter in the instructions is a new line; ⌘↵ / Ctrl+↵ continues.
     const ta = screen().getByLabelText("Instruções");
     await press(ta, "Enter");
-    expect(title()).toBe("O que o Theo faz");
+    expect(title()).toBe("O que o Enzo faz");
     await press(ta, "Enter", { ctrlKey: true });
     expect(title()).toBe("Ferramentas e acesso");
     // Esc in a field only leaves it; Esc elsewhere goes back.
     await press(screen().getByRole("heading", { level: 1 }), "Escape");
-    expect(title()).toBe("O que o Theo faz");
+    expect(title()).toBe("O que o Enzo faz");
     // Steps already reached are on the rail; later ones aren't yet.
     expect(railStep("Ferramentas e acesso").disabled).toBe(false);
     expect(railStep("Onde e quem").disabled).toBe(true);
@@ -495,7 +513,7 @@ describe("Criar agente: steps", () => {
     await open();
     await startAs("PM");
     await proceed();
-    expect(title()).toBe("O que o Theo faz");
+    expect(title()).toBe("O que o Enzo faz");
     const hint = document.querySelector(".newag__hint");
     expect(hint?.querySelectorAll(":scope > kbd.ac-kbd")).toHaveLength(2);
     expect(hint?.textContent).toContain("continua daqui");
@@ -509,16 +527,16 @@ describe("Criar agente: steps", () => {
     await startAs("PM");
     await toReview();
     const content = () => screen().getByRole("heading", { level: 1 }).closest(".newag__content") as HTMLElement;
-    expect(title()).toBe("Tudo certo com o Theo?");
+    expect(title()).toBe("Tudo certo com o Enzo?");
     expect(content().textContent).toContain("PM · Organiza tarefas e resumos.");
-    expect(content().textContent).toContain("@theo");
+    expect(content().textContent).toContain("@enzo");
     // The title says it all: no lead, and no note under the summary.
     expect(content().querySelector(".onb__lead, .newag__note")).toBeNull();
     await click(within(content()).getByRole("button", { name: "Editar Modelo e custo" }));
     expect(title()).toBe("Modelo e orçamento");
     await proceed();
     await click(within(content()).getByRole("button", { name: "Editar Instruções" }));
-    expect(title()).toBe("O que o Theo faz");
+    expect(title()).toBe("O que o Enzo faz");
   });
 });
 
@@ -536,7 +554,7 @@ describe("Criar agente: what gets created", () => {
       "Pede aprovação: Fazer merge",
     );
     await proceed(3);
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     const puts = state.calls.filter((c) => c.method === "access.set");
     expect(puts).toHaveLength(1);
@@ -553,7 +571,7 @@ describe("Criar agente: what gets created", () => {
     expect(brainBox().textContent).toStartWith("Claude Sonnet 5.5");
     await proceed();
     expect(document.querySelector(".newag__review")?.textContent).toContain("Claude Sonnet 5.5 ·");
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
     expect(createdWith(state)?.model).toBe("claude-sonnet-5-5");
   });
@@ -571,7 +589,7 @@ describe("Criar agente: what gets created", () => {
     ).toEqual(["Z.ai: GLM Latest", "DeepSeek: DeepSeek Flash Latest", "Claude Sonnet Latest"]);
     await click(screen().getByRole("option", { name: /^Z\.ai: GLM Latest/ }));
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
     expect(createdWith(state)?.model).toBe("~z-ai/glm-latest");
   });
@@ -637,14 +655,14 @@ describe("Criar agente: what gets created", () => {
     // In the words of the switch it points to, "Atende outras pessoas".
     expect(
       screen().getByText(
-        "No plano, a Eva começa atendendo só você. Na página da Eva, você pode escolher se ela atende outras pessoas.",
+        "No plano, a Vera começa atendendo só você. Na página da Vera, você pode escolher se ela atende outras pessoas.",
       ),
     ).toBeTruthy();
     await proceed();
     expect(document.querySelector(".newag__review")?.textContent).toContain("Plano do Claude");
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
-    const agentId = state.agents.find((a) => a.handle === "eva")?.id;
+    const agentId = state.agents.find((a) => a.handle === "vera")?.id;
     expect(state.calls.find((c) => c.method === "sandbox.setTarget")?.args).toEqual([ORG_ID, agentId, "machine_mini"]);
     expect(state.calls.find((c) => c.method === "agents.setBrain")?.args).toEqual([
       ORG_ID,
@@ -828,10 +846,10 @@ describe("Criar agente: what gets created", () => {
     await open(state);
     await startAs("Assistente");
     await proceed(5);
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
-    expect(createdWith(state)?.name).toBe("Eva");
-    expect(screen().getByRole("dialog", { name: "Conectar uma IA para a Eva" })).toBeTruthy();
+    expect(createdWith(state)?.name).toBe("Vera");
+    expect(screen().getByRole("dialog", { name: "Conectar uma IA para a Vera" })).toBeTruthy();
   });
 
   test("no AI yet but a plan of theirs on a computer: it thinks with that plan", async () => {
@@ -879,9 +897,9 @@ describe("Criar agente: what gets created", () => {
     expect(brainBox().textContent).toStartWith("Plano do Claude");
     expect(screen().queryByText(NO_AI)).toBeNull();
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
-    const agentId = state.agents.find((a) => a.handle === "eva")?.id;
+    const agentId = state.agents.find((a) => a.handle === "vera")?.id;
     expect(state.calls.find((c) => c.method === "agents.setBrain")?.args).toEqual([
       ORG_ID,
       agentId,
@@ -922,9 +940,9 @@ describe("Criar agente: what gets created", () => {
     await proceed(4);
     expect(brainBox().textContent).toStartWith("Plano do Claude");
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
-    const agentId = state.agents.find((a) => a.handle === "eva")?.id;
+    const agentId = state.agents.find((a) => a.handle === "vera")?.id;
     expect(state.calls.find((c) => c.method === "agents.setBrain")?.args).toEqual([
       ORG_ID,
       agentId,
@@ -1029,9 +1047,9 @@ describe("Criar agente: what gets created", () => {
     // What its account must allow, before it's created.
     expect(screen().getByText(/Ligue a região Global no OpenCode/)).toBeTruthy();
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
-    const agentId = state.agents.find((a) => a.handle === "eva")?.id;
+    const agentId = state.agents.find((a) => a.handle === "vera")?.id;
     expect(state.calls.find((c) => c.method === "agents.setBrain")?.args).toEqual([
       ORG_ID,
       agentId,
@@ -1061,11 +1079,11 @@ describe("Criar agente: what gets created", () => {
     await click(models[0] as HTMLElement);
     expect(brainBox().textContent).toStartWith("OpenCode Go");
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
     expect(createdWith(state)?.model).toBe("auto");
     expect(state.calls.some((c) => c.method === "agents.setBrain")).toBe(false);
-    expect(screen().getByRole("dialog", { name: /^Conectar uma IA para .*Eva$/ })).toBeTruthy();
+    expect(screen().getByRole("dialog", { name: /^Conectar uma IA para .*Vera$/ })).toBeTruthy();
   });
 
   test("plan: Codex on the workspace's computer, whose own sign-in thinks for nobody: ChatGPT's sign-in opens once it's created", async () => {
@@ -1088,16 +1106,16 @@ describe("Criar agente: what gets created", () => {
     expect(groupNames(list)).toContain("Plano do ChatGPT");
     await click(optionsIn(list, "Plano do ChatGPT")[0] as HTMLElement);
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
-    const agentId = state.agents.find((a) => a.handle === "eva")?.id;
+    const agentId = state.agents.find((a) => a.handle === "vera")?.id;
     expect(state.calls.find((c) => c.method === "agents.setBrain")?.args).toEqual([
       ORG_ID,
       agentId,
       { brain: "codex" },
     ]);
-    // Nobody signed in to ChatGPT there: Connect an AI for Eva, on ChatGPT, over the moment she's created.
-    const d = screen().getByRole("dialog", { name: /^Conectar uma IA para .*Eva$/ });
+    // Nobody signed in to ChatGPT there: Connect an AI for Vera, on ChatGPT, over the moment she's created.
+    const d = screen().getByRole("dialog", { name: /^Conectar uma IA para .*Vera$/ });
     expect(aiSelect(d).textContent).toBe("ChatGPT");
   });
 
@@ -1132,9 +1150,9 @@ describe("Criar agente: what gets created", () => {
     expect(brainBox().textContent).toBe("Claude Code · Claude");
     expect(screen().getByText("Começa com a última escolha: Opus pelo plano do Claude · Esforço alto.")).toBeTruthy();
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
-    const agentId = state.agents.find((a) => a.handle === "eva")?.id;
+    const agentId = state.agents.find((a) => a.handle === "vera")?.id;
     expect(state.calls.find((c) => c.method === "agents.setBrain")?.args).toEqual([
       ORG_ID,
       agentId,
@@ -1200,9 +1218,9 @@ describe("Criar agente: what gets created", () => {
     // Another model: no longer the last setup.
     expect(screen().queryByText(/^Começa com a última escolha/)).toBeNull();
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
-    const agentId = state.agents.find((a) => a.handle === "eva")?.id;
+    const agentId = state.agents.find((a) => a.handle === "vera")?.id;
     expect(state.calls.find((c) => c.method === "agents.setBrain")?.args).toEqual([
       ORG_ID,
       agentId,
@@ -1240,10 +1258,10 @@ describe("Criar agente: what gets created", () => {
     expect(brainBox().textContent).toStartWith("Claude Opus 5.5");
     expect(screen().getByText("Começa com a última escolha: Claude Opus 5.5.")).toBeTruthy();
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
     expect(createdWith(state)).toMatchObject({ model: "claude-opus-5-5", credentialId: "cred-1" });
-    const agentId = state.agents.find((a) => a.handle === "eva")?.id;
+    const agentId = state.agents.find((a) => a.handle === "vera")?.id;
     expect(state.calls.find((c) => c.method === "agents.setBrain")?.args).toEqual([
       ORG_ID,
       agentId,
@@ -1305,7 +1323,7 @@ describe("Criar agente: what gets created", () => {
     const [review, preview] = modelAndCost();
     expect(review).toContain("Claude Opus 5.5 · Autonomia: Não pergunta");
     expect(preview).toContain("Autonomia: Não pergunta");
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
     expect(createdWith(state)).toMatchObject({ model: "claude-opus-5-5", autonomy: "never" });
     cleanup();
@@ -1324,7 +1342,7 @@ describe("Criar agente: what gets created", () => {
     await chooseBrain(/^Claude Sonnet 5\.5/);
     expect(screen().queryByText(/^Começa com a última escolha/)).toBeNull();
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
     expect(createdWith(other)?.model).toBe("claude-sonnet-5-5");
     expect(createdWith(other)).not.toHaveProperty("autonomy");
@@ -1347,7 +1365,7 @@ describe("Criar agente: what gets created", () => {
     const lines = modelAndCost();
     expect(lines).toEqual([expect.stringContaining("Automático"), expect.stringContaining("Automático")]);
     for (const line of lines) expect(line).not.toContain("Autonomia");
-    await click(screen().getByRole("button", { name: "Criar Eva" }));
+    await click(screen().getByRole("button", { name: "Criar Vera" }));
     await settle(8);
     expect(createdWith(state)?.model).toBe("auto");
     expect(createdWith(state)).not.toHaveProperty("autonomy");
@@ -1372,7 +1390,7 @@ describe("Criar agente: what gets created", () => {
     expect(screen().getByRole("button", { name: "US$\u00a030" }).getAttribute("aria-pressed")).toBe("true");
     await click(screen().getByRole("button", { name: "Padrão do workspace (US$\u00a050)" }));
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     expect(createdWith(state)?.monthlyBudgetUsd).toBeNull();
   });
@@ -1419,7 +1437,7 @@ describe("Criar agente: what gets created", () => {
     expect(within(mine).getByRole("radio", { name: "Sem acesso" }).getAttribute("aria-checked")).toBe("true");
     await click(within(mine).getByRole("radio", { name: "Ler" }));
     await proceed(3);
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     const saved = state.calls.find((c) => c.method === "mail.setAgent");
     expect(saved?.args.slice(2)).toEqual(["mail-1", expect.objectContaining({ level: "read", canDelete: false })]);
@@ -1432,7 +1450,7 @@ describe("Criar agente: what gets created", () => {
     expect(screen().getByRole("combobox", { name: "Chave" }).textContent).toContain("Chave padrão do workspace");
     await typeIn(screen().getByLabelText("Orçamento mensal (US$)"), "25,5");
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     expect(createdWith(state)).toMatchObject({ monthlyBudgetUsd: 25.5, credentialId: null });
   });
@@ -1444,7 +1462,7 @@ describe("Criar agente: what gets created", () => {
     expect(title()).toBe("Onde trabalha e com quem");
     await click(screen().getByRole("checkbox", { name: "#general" }));
     await pick(screen().getByRole("combobox", { name: "Responsável" }), /^João/);
-    const audience = screen().getByRole("radiogroup", { name: "Quem pode falar com a Iris" });
+    const audience = screen().getByRole("radiogroup", { name: "Quem pode falar com a Duda" });
     expect(
       within(audience)
         .getByRole("radio", { name: /^Todos do workspace/ })
@@ -1471,7 +1489,7 @@ describe("Criar agente: what gets created", () => {
       ["Quem pode falar", "Walter e João"],
     ]);
     expect(screen().getByRole("complementary", { name: "Prévia do agente" }).textContent).not.toContain("Responde a");
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     expect(createdWith(state)).toMatchObject({
       ownerUserId: "u-joao",
@@ -1493,7 +1511,7 @@ describe("Criar agente: what gets created", () => {
     expect(none.querySelector(".ac-menu__desc")).toBeNull();
     expect(none.querySelector(".ac-menu__hint")?.textContent).toBe("Recebem os avisos e aprovam");
     await pick(owner, /Administradores/);
-    const audience = screen().getByRole("radiogroup", { name: "Quem pode falar com a Iris" });
+    const audience = screen().getByRole("radiogroup", { name: "Quem pode falar com a Duda" });
     await click(within(audience).getByRole("radio", { name: /^Só o responsável/ }));
     await click(continueButton());
     expect(title()).toBe("Onde trabalha e com quem");
@@ -1507,11 +1525,11 @@ describe("Criar agente: what gets created", () => {
     const state = await open();
     await startAs("QA");
     await toReview();
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     const agentId = state.agents.at(-1)?.id;
-    expect(screen().getByRole("heading", { name: "Iris entrou no time" })).toBeTruthy();
-    expect(document.body.textContent).toContain("Já está em #eng. Mencione @iris numa conversa para começar.");
+    expect(screen().getByRole("heading", { name: "Duda entrou no time" })).toBeTruthy();
+    expect(document.body.textContent).toContain("Já está em #eng. Mencione @duda numa conversa para começar.");
     expect(screen().getByRole("link", { name: "Ir para o #eng" }).getAttribute("href")).toBe(
       `/org/${ORG_ID}/c/${ENG_ID}`,
     );
@@ -1539,18 +1557,18 @@ describe("Criar agente: what gets created", () => {
     await open(state, api);
     await startAs("QA");
     await toReview();
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     expect(document.querySelector(".ac-toasts")?.textContent).toContain(
-      "A Iris já existe, mas parte do que você escolheu não foi salva. Você não tem permissão para isso.",
+      "A Duda já existe, mas parte do que você escolheu não foi salva. Você não tem permissão para isso.",
     );
-    expect(screen().getByRole("heading", { name: "Iris entrou no time" })).toBeTruthy();
+    expect(screen().getByRole("heading", { name: "Duda entrou no time" })).toBeTruthy();
     expect(document.body.textContent).toContain(
-      "Adicione Iris a um canal e mencione @iris numa conversa para começar.",
+      "Adicione Duda a um canal e mencione @duda numa conversa para começar.",
     );
     // What came after the channels was still saved.
     expect(state.calls.some((c) => c.method === "access.set")).toBe(true);
-    expect(state.agents.filter((a) => a.handle === "iris")).toHaveLength(1);
+    expect(state.agents.filter((a) => a.handle === "duda")).toHaveLength(1);
   });
 });
 
@@ -1582,7 +1600,7 @@ describe("Criar agente: nothing leaves the steps", () => {
     expect(within(step).queryByRole("link", { name: /Conectar outro app/ })).toBeNull();
     expect(step.textContent).not.toContain("abre Conectores");
     await click(within(step).getByRole("button", { name: "Conectar outro app" }));
-    const picker = screen().getByRole("dialog", { name: "Apps da Iris" });
+    const picker = screen().getByRole("dialog", { name: "Apps da Duda" });
     expect(picker.textContent).toContain("Um app conectado entra na lista na hora. Os outros você conecta aqui mesmo.");
     expect(picker.textContent).toContain("Na lista");
     expect(picker.textContent).not.toContain("cartão");
@@ -1590,7 +1608,7 @@ describe("Criar agente: nothing leaves the steps", () => {
     // Connecting one keeps every step for the way back from the app's own sign-in page.
     await click(within(picker).getAllByRole("button", { name: "Conectar" })[0] as HTMLElement);
     const kept = JSON.parse(sessionStorage.getItem("agentes.newAgent.draft") ?? "null");
-    expect(kept.draft).toMatchObject({ index: 3, role: "qa", name: "Iris", handle: "iris" });
+    expect(kept.draft).toMatchObject({ index: 3, role: "qa", name: "Duda", handle: "duda" });
     expect(stepBehind()).toBe("Ferramentas e acesso");
   });
 
@@ -1643,7 +1661,7 @@ describe("Criar agente: nothing leaves the steps", () => {
     await startAs("QA");
     await proceed(2);
     const skills = screen().getByRole("region", { name: /^Skills do workspace/ });
-    expect(hintOf("Skills do workspace", skills).text).toBe("Manuais que a Iris abre quando precisa.");
+    expect(hintOf("Skills do workspace", skills).text).toBe("Manuais que a Duda abre quando precisa.");
     expect(skills.querySelector(".newag__sect > .small")).toBeNull();
     await click(within(skills).getByRole("button", { name: "Instalar skill" }));
     const dialog = screen().getByRole("dialog", { name: "Instalar skill" });
@@ -1718,10 +1736,10 @@ describe("Criar agente with Criar agentes alone: an agent of my own, without app
       "Quem cria o agente é o responsável. Um admin pode passar para outra pessoa depois. Recebe os avisos de orçamento e aprova as ações sensíveis.",
     );
     await proceed(2);
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     expect(createdWith(state)?.ownerUserId).toBe("u-walter");
-    expect(screen().getByRole("heading", { name: "Iris entrou no time" })).toBeTruthy();
+    expect(screen().getByRole("heading", { name: "Duda entrou no time" })).toBeTruthy();
   });
 
   test("the budget is the workspace's default, said in one line, with no field to raise it", async () => {
@@ -1734,7 +1752,7 @@ describe("Criar agente with Criar agentes alone: an agent of my own, without app
       /^Usa o padrão do workspace( \(US\$\u00a050\))?\. Só um admin aumenta\.$/,
     );
     await proceed();
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     expect(createdWith(state)?.monthlyBudgetUsd).toBeNull();
   });
@@ -1746,7 +1764,7 @@ describe("Criar agente with Criar agentes alone: an agent of my own, without app
     await startAs("QA");
     await proceed(2);
     expect(title()).toBe("Ferramentas e acesso");
-    expect(document.querySelector(".onb__lead")?.textContent).toBe("A Iris começa sem acesso aos apps do workspace.");
+    expect(document.querySelector(".onb__lead")?.textContent).toBe("A Duda começa sem acesso aos apps do workspace.");
     expect(hintOf("Ferramentas e acesso").text).toBe(
       "Só admins dão acesso a apps e caixas de email. Depois de criar, peça a um admin.",
     );
@@ -1757,11 +1775,11 @@ describe("Criar agente with Criar agentes alone: an agent of my own, without app
     expect(document.querySelector(".newag__quick")).toBeNull();
     expect(screen().queryByRole("link", { name: /Conectar outro app/ })).toBeNull();
     await proceed(3);
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     expect(state.calls.some((c) => c.method === "access.set" || c.method === "mail.setAgent")).toBe(false);
     expect(document.querySelector(".ac-toasts")?.textContent ?? "").not.toContain("não foi salva");
-    expect(screen().getByRole("heading", { name: "Iris entrou no time" })).toBeTruthy();
+    expect(screen().getByRole("heading", { name: "Duda entrou no time" })).toBeTruthy();
   });
 });
 
@@ -1781,8 +1799,8 @@ describe("Criar agente in a personal workspace (ADR 0159)", () => {
     expect(screen().getByRole("heading", { name: "Para o seu dia" })).toBeTruthy();
     expect(screen().queryByRole("heading", { name: "Produto e tecnologia" })).toBeNull();
     expect(screen().queryByRole("button", { name: /^QA/ })).toBeNull();
-    await startAs("Clara");
-    expect((screen().getByLabelText("Nome") as HTMLInputElement).value).toBe("Clara");
+    await startAs("Marina");
+    expect((screen().getByLabelText("Nome") as HTMLInputElement).value).toBe("Marina");
     // Its technical steps start filled in and are passed over (ADR 0159 §3): four steps, Instruções on to Revisar.
     expect(screen().getByText("Passo 2 de 4")).toBeTruthy();
     await proceed(2);
@@ -1791,19 +1809,19 @@ describe("Criar agente in a personal workspace (ADR 0159)", () => {
     await click(screen().getByRole("button", { name: "Editar Canais" }));
     expect(title()).toBe("Onde trabalha e com quem");
     expect(screen().queryByRole("combobox", { name: "Responsável" })).toBeNull();
-    expect(screen().queryByRole("radiogroup", { name: "Quem pode falar com a Clara" })).toBeNull();
+    expect(screen().queryByRole("radiogroup", { name: "Quem pode falar com a Marina" })).toBeNull();
     await proceed(1);
     const review = document.querySelector(".newag__review")?.textContent ?? "";
     expect(review).not.toContain("Responsável");
     expect(review).not.toContain("Quem pode falar");
-    await click(screen().getByRole("button", { name: "Criar Clara" }));
+    await click(screen().getByRole("button", { name: "Criar Marina" }));
     await settle(8);
     expect(createdWith(state)).toMatchObject({ ownerUserId: "u-walter", audience: { mode: "owner" } });
   });
 
   test("with family: only the owner at first, in plain words; people to pick, without a Roles group", async () => {
     const state = await open(personal(false));
-    await startAs("Clara");
+    await startAs("Marina");
     await proceed(2);
     await click(screen().getByRole("button", { name: "Editar Canais" }));
     // The owner's list names each person without their role.
@@ -1813,7 +1831,7 @@ describe("Criar agente in a personal workspace (ADR 0159)", () => {
     expect(screen().getByRole("option", { name: /^João/ }).querySelector(".ac-menu__desc")).toBeNull();
     // Closed on the same choice: still me.
     await click(screen().getByRole("option", { name: /^Walter/ }));
-    const audience = screen().getByRole("radiogroup", { name: "Quem pode falar com a Clara" });
+    const audience = screen().getByRole("radiogroup", { name: "Quem pode falar com a Marina" });
     expect(
       within(audience)
         .getByRole("radio", { name: /^Só o responsável/ })
@@ -1826,7 +1844,7 @@ describe("Criar agente in a personal workspace (ADR 0159)", () => {
     expect(within(results).queryByText("Cargos")).toBeNull();
     await click(within(results).getByLabelText(/João/));
     await proceed(1);
-    await click(screen().getByRole("button", { name: "Criar Clara" }));
+    await click(screen().getByRole("button", { name: "Criar Marina" }));
     await settle(8);
     expect(createdWith(state)).toMatchObject({
       ownerUserId: "u-walter",
@@ -1899,8 +1917,8 @@ describe("new-agent rules", () => {
   test("what each step needs", () => {
     const base = {
       role: "qa" as const,
-      name: "Iris",
-      handle: "iris",
+      name: "Duda",
+      handle: "duda",
       taken,
       ownerUserId: "u1",
       audience: { mode: "everyone" as const, userIds: [] },

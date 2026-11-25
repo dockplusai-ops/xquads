@@ -72,7 +72,7 @@ export function useTeamWeekNames(): TeamWeekNames {
 }
 
 /**
- * Lodi's weekly card (ADR 0137 §9) in the admin's DM: four numbers and what worked, then its rows. A row that opens a
+ * Doki's weekly card (ADR 0137 §9) in the admin's DM: four numbers and what worked, then its rows. A row that opens a
  * place (approvals, what waits on its reader, an agent that stopped) is one tap with a chevron. A fix to an agent's
  * settings is the agents' own to weigh and apply (ADR 0219): its row says how it ended, with Undo. Every other row is a
  * suggestion, marked as the card shows and grouped under its agent's face; the footer's one button applies the marked

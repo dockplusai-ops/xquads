@@ -326,7 +326,7 @@ describe("the page Caddy serves while the app is down", () => {
     const refs = [...PAGE.matchAll(attributes), ...PAGE.replace(attributes, "").matchAll(/url\("?([^")]*)"?\)/g)].map(
       (m) => m[1] ?? "",
     );
-    expect(refs.length).toBeGreaterThan(4);
+    expect(refs.length).toBeGreaterThan(0);
     for (const ref of refs) {
       expect(ref === "" || ref.startsWith("data:") || ref.startsWith("#")).toBe(true);
       expect(ref.replaceAll(svgNamespace, "")).not.toMatch(/https?:|\/\//);
@@ -348,7 +348,7 @@ describe("the page Caddy serves while the app is down", () => {
     }
   });
 
-  test("its colors are the design system's, in both themes", () => {
+  test("its colors are the design system's: xquads' one dark theme", () => {
     const style = PAGE.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? "";
     const declarations = (block: string) =>
       Object.fromEntries(
@@ -357,16 +357,11 @@ describe("the page Caddy serves while the app is down", () => {
     const rule = (css: string, selector: RegExp) =>
       declarations(selector.exec(css.replace(/\/\*[\s\S]*?\*\//g, ""))?.[1] ?? "");
     const shared = rule(TOKENS, /:root,\s*\[data-theme\]\s*\{([^}]*)\}/);
-    const light = { ...shared, ...rule(TOKENS, /:root,\s*\[data-theme="light"\]\s*\{([^}]*)\}/) };
-    const dark = { ...shared, ...rule(TOKENS, /\[data-theme="dark"\]\s*\{([^}]*)\}/) };
-
-    const pageLight = rule(style, /^:root\{([^}]*)\}/m);
-    const pageDark = rule(style, /^\[data-theme=dark\]\{([^}]*)\}/m);
-    const pageSystemDark = rule(style, /:root:not\(\[data-theme=light\]\)\{([^}]*)\}/);
-    expect(Object.keys(pageLight)).toEqual(expect.arrayContaining(["--bg", "--ink", "--muted", "--agent-soft"]));
-    for (const [name, value] of Object.entries(pageLight)) expect([name, value]).toEqual([name, light[name]]);
-    expect(pageSystemDark).toEqual(pageDark);
-    expect(Object.keys(pageDark).length).toBeGreaterThan(6);
-    for (const [name, value] of Object.entries(pageDark)) expect([name, value]).toEqual([name, dark[name]]);
+    const theme = { ...shared, ...rule(TOKENS, /\[data-theme="dark"\]\s*\{([^}]*)\}/) };
+    const page = rule(style, /^:root\{([^}]*)\}/m);
+    expect(Object.keys(page)).toEqual(expect.arrayContaining(["--bg", "--ink", "--muted", "--agent"]));
+    for (const [name, value] of Object.entries(page)) expect([name, value]).toEqual([name, theme[name]]);
+    // One theme: no light or dark block of its own.
+    expect(style).not.toContain("[data-theme=dark]{");
   });
 });

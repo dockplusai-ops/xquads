@@ -183,14 +183,14 @@ describe("the members column", () => {
       act(async () =>
         sockets.last().push({ type: "event", channelId: ENG_ID, event: { type, channelId: ENG_ID, member } }),
       );
-    expect(names()).not.toContain("Lodi");
+    expect(names()).not.toContain("Doki");
     // Made a moment ago in another browser: the app doesn't know it yet, so the agents are read again too.
-    const lodi = { ...(state.agents[0] as (typeof state.agents)[number]), id: "a-lodi", name: "Lodi", handle: "lodi" };
+    const lodi = { ...(state.agents[0] as (typeof state.agents)[number]), id: "a-lodi", name: "Doki", handle: "lodi" };
     state.agents.push(lodi);
     state.channelMembers[ENG_ID]?.push({ type: "agent", id: "a-lodi" });
     await channelEvent("channel.member_added", { type: "agent", id: "a-lodi" });
     await settle(4);
-    expect(names()).toContain("Lodi");
+    expect(names()).toContain("Doki");
     // A newcomer to the workspace, placed here by their invitation: `org.members` reads who is where again.
     const bia = {
       ...(state.members[1] as (typeof state.members)[number]),
@@ -210,7 +210,7 @@ describe("the members column", () => {
     // A second change to the same list this soon is read when the gap between two reads ends.
     await act(() => new Promise((r) => setTimeout(r, 600)));
     await settle(4);
-    expect(names()).not.toContain("Lodi");
+    expect(names()).not.toContain("Doki");
     expect(names()).not.toContain("Bia");
   });
 
@@ -354,7 +354,7 @@ describe("the members column", () => {
     expect(within(panel).getByRole("button", { name: "Configurações do canal" })).toBeTruthy();
     expect(within(panel).getByRole("button", { name: "Mensagens fixadas" })).toBeTruthy();
     expect(within(panel).getByRole("button", { name: /^Threads/ })).toBeTruthy();
-    expect(row(panel, "Lodi")).toBeNull();
+    expect(row(panel, "Doki")).toBeNull();
     await act(async () =>
       fireEvent.change(within(panel).getByRole("searchbox", { name: "Buscar pessoas e agentes" }), {
         target: { value: "atl" },
@@ -397,7 +397,7 @@ describe("Adicionar pessoa ou agente at the bottom", () => {
     );
     await settle(4);
     const add = screen().getByRole("dialog", { name: "Adicionar a #eng" });
-    expect(within(add).queryByText("Lodi")).toBeNull();
+    expect(within(add).queryByText("Doki")).toBeNull();
     expect(within(add).getByText("Theo")).toBeTruthy();
   });
 

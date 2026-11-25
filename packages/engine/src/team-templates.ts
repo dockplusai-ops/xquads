@@ -42,133 +42,59 @@ export type TeamTemplateId = (typeof TEAM_TEMPLATES)[number];
 export const isTeamTemplate = (v: unknown): v is TeamTemplateId => TEAM_TEMPLATES.includes(v as TeamTemplateId);
 const isPersonalTemplate = (id: TeamTemplateId) => (PERSONAL_TEMPLATES as readonly string[]).includes(id);
 
-type BusinessMember = "iara" | "caio" | "ada" | "lia" | "theo" | "nina" | "otto" | "bia";
-type PersonalMember = "clara" | "duda" | "leo" | "mel" | "gabi" | "lu" | "rosa" | "vic" | "rui";
+type BusinessMember = "luana" | "teo" | "helena" | "gil" | "ana" | "rui" | "tiago" | "sofia";
+type PersonalMember = "marina" | "cecilia" | "lucas" | "julia" | "bruna" | "lorena" | "tereza" | "renato" | "fabio";
 type Member = BusinessMember | PersonalMember;
 type SkillKey = "voice" | "dunning" | "answers" | "proposal" | "schedule" | "review";
 
-/** Each agent of the templates: its fixed name and look, its routine's schedule (cron, read as a rule) and skill. */
+/** A template agent's look: its xquads colour, the plain face. */
+const face = (color: AgentAppearance["color"]): AgentAppearance => ({ color, eyes: "round", accessory: "none" });
+
+/**
+ * Each agent of the templates: its fixed name (its id is the handle that name gives) and look, its routine's schedule
+ * (cron, read as a rule) and skill. Ana, Rui, Téo and Gil are xquads' own agents for those jobs, in their colours.
+ */
 const MEMBERS: Record<Member, { name: string; look: AgentAppearance; cron: string; skill: SkillKey | null }> = {
-  iara: {
-    name: "Iara",
-    look: { color: "rose", eyes: "happy", accessory: "flower" },
-    cron: "0 9 * * *",
-    skill: "voice",
-  },
-  caio: {
-    name: "Caio",
-    look: { color: "amber", eyes: "round", accessory: "hat" },
-    cron: "0 8 * * 1",
-    skill: "dunning",
-  },
-  ada: {
-    name: "Ada",
-    look: { color: "green", eyes: "wide", accessory: "headphones" },
-    cron: "0 9 * * *",
-    skill: "review",
-  },
-  lia: { name: "Lia", look: { color: "violet", eyes: "dots", accessory: "bow" }, cron: "0 10 * * 1", skill: "voice" },
-  theo: {
-    name: "Theo",
-    look: { color: "indigo", eyes: "round", accessory: "cap" },
-    cron: "0 17 * * *",
-    skill: "proposal",
-  },
-  nina: {
-    name: "Nina",
-    look: { color: "sky", eyes: "happy", accessory: "scarf" },
-    cron: "0 18 * * *",
-    skill: "schedule",
-  },
-  otto: {
-    name: "Otto",
-    look: { color: "graphite", eyes: "sleepy", accessory: "beanie" },
-    cron: "0 8 * * *",
-    skill: null,
-  },
-  bia: {
-    name: "Bia",
-    look: { color: "teal", eyes: "dots", accessory: "headset" },
-    cron: "0 16 * * 5",
-    skill: "answers",
-  },
+  luana: { name: "Luana", look: face("amber"), cron: "0 9 * * *", skill: "voice" },
+  teo: { name: "Téo", look: face("green"), cron: "0 8 * * 1", skill: "dunning" },
+  helena: { name: "Helena", look: face("violet"), cron: "0 9 * * *", skill: "review" },
+  gil: { name: "Gil", look: face("rose"), cron: "0 10 * * 1", skill: "voice" },
+  ana: { name: "Ana", look: face("sky"), cron: "0 17 * * *", skill: "proposal" },
+  rui: { name: "Rui", look: face("indigo"), cron: "0 18 * * *", skill: "schedule" },
+  tiago: { name: "Tiago", look: face("graphite"), cron: "0 8 * * *", skill: null },
+  sofia: { name: "Sofia", look: face("teal"), cron: "0 16 * * 5", skill: "answers" },
   // A personal workspace's agents (ADR 0159): routines on one person's clock.
-  clara: {
-    name: "Clara",
-    look: { color: "violet", eyes: "happy", accessory: "bow" },
-    // Every morning, before the day starts.
-    cron: "0 7 * * *",
-    skill: null,
-  },
-  duda: {
-    name: "Duda",
-    look: { color: "green", eyes: "round", accessory: "cap" },
-    // On the 5th of each month, when most bills come.
-    cron: "0 9 5 * *",
-    skill: null,
-  },
-  leo: {
-    name: "Léo",
-    look: { color: "amber", eyes: "wide", accessory: "headphones" },
-    // Monday, Wednesday and Friday, early.
-    cron: "0 6 * * 1,3,5",
-    skill: null,
-  },
-  mel: {
-    name: "Mel",
-    look: { color: "rose", eyes: "dots", accessory: "scarf" },
-    // Sunday morning, before the week's shopping.
-    cron: "0 10 * * 0",
-    skill: null,
-  },
-  gabi: {
-    name: "Gabi",
-    look: { color: "indigo", eyes: "wide", accessory: "antenna" },
-    // Weekday evenings.
-    cron: "0 19 * * 1-5",
-    skill: null,
-  },
-  lu: {
-    name: "Lu",
-    look: { color: "violet", eyes: "sleepy", accessory: "beanie" },
-    cron: "0 18 * * 0",
-    skill: null,
-  },
-  rosa: {
-    name: "Rosa",
-    look: { color: "teal", eyes: "happy", accessory: "flower" },
-    // Saturday morning.
-    cron: "0 9 * * 6",
-    skill: null,
-  },
-  vic: {
-    name: "Vic",
-    look: { color: "sky", eyes: "dots", accessory: "hat" },
-    cron: "0 8 * * 1",
-    skill: null,
-  },
-  rui: {
-    name: "Rui",
-    look: { color: "graphite", eyes: "round", accessory: "headset" },
-    // Every weekday morning.
-    cron: "0 9 * * 1-5",
-    skill: null,
-  },
+  // Every morning, before the day starts.
+  marina: { name: "Marina", look: face("indigo"), cron: "0 7 * * *", skill: null },
+  // On the 5th of each month, when most bills come.
+  cecilia: { name: "Cecília", look: face("green"), cron: "0 9 5 * *", skill: null },
+  // Monday, Wednesday and Friday, early.
+  lucas: { name: "Lucas", look: face("amber"), cron: "0 6 * * 1,3,5", skill: null },
+  // Sunday morning, before the week's shopping.
+  julia: { name: "Júlia", look: face("rose"), cron: "0 10 * * 0", skill: null },
+  // Weekday evenings.
+  bruna: { name: "Bruna", look: face("violet"), cron: "0 19 * * 1-5", skill: null },
+  lorena: { name: "Lorena", look: face("teal"), cron: "0 18 * * 0", skill: null },
+  // Saturday morning.
+  tereza: { name: "Tereza", look: face("sky"), cron: "0 9 * * 6", skill: null },
+  renato: { name: "Renato", look: face("graphite"), cron: "0 8 * * 1", skill: null },
+  // Every weekday morning.
+  fabio: { name: "Fábio", look: face("sky"), cron: "0 9 * * 1-5", skill: null },
 };
 
 const TEAMS: Record<TeamTemplateId, Member[]> = {
-  agency: ["lia", "theo", "iara"],
-  store: ["iara", "otto", "lia"],
-  clinic: ["nina", "caio", "iara"],
-  software: ["iara", "caio", "ada"],
-  support: ["iara", "bia"],
-  services: ["nina", "theo", "caio"],
-  life: ["clara", "duda"],
-  health: ["leo", "mel"],
-  studies: ["gabi", "lu"],
-  home: ["rosa", "duda"],
-  travel: ["vic", "clara"],
-  freelance: ["rui", "duda", "clara"],
+  agency: ["gil", "ana", "luana"],
+  store: ["luana", "tiago", "gil"],
+  clinic: ["rui", "teo", "luana"],
+  software: ["luana", "teo", "helena"],
+  support: ["luana", "sofia"],
+  services: ["rui", "ana", "teo"],
+  life: ["marina", "cecilia"],
+  health: ["lucas", "julia"],
+  studies: ["bruna", "lorena"],
+  home: ["tereza", "cecilia"],
+  travel: ["renato", "marina"],
+  freelance: ["fabio", "cecilia", "marina"],
 };
 
 /** The agents of the business templates: the only ones with a channel each. */
@@ -200,7 +126,7 @@ async function blockedChannels(db: Database, orgId: string, userId: string, loca
 }
 
 /**
- * The tool's input for a template, in `locale`, with a free handle for each agent (`iara-2` when Iara is taken) and a
+ * The tool's input for a template, in `locale`, with a free handle for each agent (`luana-2` when Luana is taken) and a
  * usable channel name (`financeiro-2` when #financeiro is a private channel this person isn't in). A personal
  * template's agents get no channel: each lives in its DM with the person (ADR 0159).
  */
@@ -343,7 +269,7 @@ export async function useTeamTemplate(
 /** Between two lines in #general: one after the other, as people type. */
 export const HELLO_GAP_MS = 1100;
 
-/** The template agent an agent is, by its handle (`iara-2` is Iara's), or null for any other. */
+/** The template agent an agent is, by its handle (`luana-2` is Luana's), or null for any other. */
 const memberOf = (handle: string): Member | null => {
   const m = handle.replace(/-\d+$/, "");
   return m in MEMBERS ? (m as Member) : null;

@@ -504,7 +504,7 @@ describe("Agentes and Quem fala com", () => {
 
   test("the right hand and agents gone aren't listed; who talks to each, in words", async () => {
     const t = await translator("pt-BR");
-    const lodi = agent({ id: "lodi", name: "Lodi", builtin: "right_hand" });
+    const lodi = agent({ id: "lodi", name: "Doki", builtin: "right_hand" });
     const gone = agent({ id: "old", name: "Old", former: "archived" });
     expect(listedAgents([max, lodi, gone, agent({ id: "ada", name: "Ada" })]).map((a) => a.name)).toEqual([
       "Ada",

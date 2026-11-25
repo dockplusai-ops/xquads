@@ -12,11 +12,11 @@ const { agents } = schema;
 
 /**
  * "Responde a" (ADR 0148 addendum): an agent's line to the agent it reports to. It says where news goes by default and
- * who may always call whom (`inLine`); it grants nothing. Lodi stays out of it at either end: it reaches what each
+ * who may always call whom (`inLine`); it grants nothing. Doki stays out of it at either end: it reaches what each
  * person reaches already.
  */
 
-/** Agents in one line, top to bottom: Lodi, then this many, then a specialist fit `MAX_CONSULTATION_CHAIN`. */
+/** Agents in one line, top to bottom: Doki, then this many, then a specialist fit `MAX_CONSULTATION_CHAIN`. */
 export const MAX_LINE_DEPTH = 3;
 
 export interface ReportsToChange {
@@ -31,7 +31,7 @@ interface LineRow {
 }
 
 /**
- * Why `agentId` can't report to `to` given the lines in `rows` (null: it can). Refused: itself, Lodi at either end, an
+ * Why `agentId` can't report to `to` given the lines in `rows` (null: it can). Refused: itself, Doki at either end, an
  * agent not here, a loop, or a line deeper than `MAX_LINE_DEPTH` agents.
  */
 export function lineRefusal(rows: ReadonlyMap<string, LineRow>, agentId: string, to: string | null): string | null {

@@ -511,7 +511,7 @@ export interface ProposalOutcome {
   reviewing: boolean;
   /** Applied and still in effect: the card's check. */
   applied: boolean;
-  /** "Reviewing…", or how it ended and who did it ("Applied by Lodi", "Undone by you"). */
+  /** "Reviewing…", or how it ended and who did it ("Applied by Doki", "Undone by you"). */
   words: string;
   /** The review's line: why it was applied or left out, in the language of the text it changed. */
   why: string | null;

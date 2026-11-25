@@ -236,7 +236,13 @@ interface Sprite {
 }
 
 /** Starts a sky on `canvas` (sized to its parent); `get` is read on every frame. Returns the cleanup. */
+/** Whether pixel skies draw at all: off in xquads. */
+const DRAW_SKIES = false;
+
 export function startSky(canvas: HTMLCanvasElement, get: () => SkyOptions): () => void {
+  // xquads draws no pixel sky anywhere (DESIGN.md: flat petrol surfaces): every caller, the desktop's cover included,
+  // keeps its canvas empty.
+  if (!DRAW_SKIES) return () => {};
   const ctx = context2d(canvas);
   const parent = canvas.parentElement;
   if (!ctx || !parent) return () => {};

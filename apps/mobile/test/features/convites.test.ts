@@ -59,7 +59,7 @@ const agent = (over: Partial<Agent> & { id: string; name: string }) =>
 const people = (roleIds: string[] = [], userIds: string[] = []) =>
   ({ audienceMode: "people", audience: { mode: "people", userIds, roleIds } }) as Partial<Agent>;
 const AGENTS = [
-  agent({ id: "lodi", name: "Lodi", builtin: "right_hand" }),
+  agent({ id: "lodi", name: "Doki", builtin: "right_hand" }),
   agent({ id: "ada", name: "Ada", role: "Dev" }),
   agent({ id: "max", name: "Max", ...people(["suporte"]) }),
   agent({ id: "fin", name: "Fin", ownerUserId: "u-me", ...people() }),

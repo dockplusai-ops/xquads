@@ -242,7 +242,7 @@ describe("what ended today", () => {
     expect(endedText(t, ended({ runId: "e", status: "canceled" }), "me")).toBe("Parada");
     // The right hand stopped it at my word: its name, never "Você parou".
     const byLodi = ended({ runId: "f", status: "canceled", stoppedBy: { userId: "me", name: "Bia", agentId: "lodi" } });
-    expect(endedText(t, byLodi, "me", (id) => (id === "lodi" ? "Lodi" : undefined))).toBe("Lodi parou");
+    expect(endedText(t, byLodi, "me", (id) => (id === "lodi" ? "Doki" : undefined))).toBe("Doki parou");
   });
 
   test("the latest first", () => {

@@ -53,17 +53,17 @@ describe("the row in Notificações", () => {
     const t = await translator("en");
     const none = surfaceRowOf(links([]), NOW);
     if (none.kind === "hidden") throw new Error("hidden");
-    expect(surfaceRowText(t, none, "Lodi")).toEqual({ hint: "Lodi can message you there", value: "Link" });
+    expect(surfaceRowText(t, none, "Doki")).toEqual({ hint: "Doki can message you there", value: "Link" });
     expect(surfaceRowText(t, none, null)).toEqual({ value: "Link" });
 
     const pending = surfaceRowOf(links([link()]), NOW);
     if (pending.kind === "hidden") throw new Error("hidden");
     expect(pending.kind).toBe("pending");
-    expect(surfaceRowText(t, pending, "Lodi")).toEqual({ sub: "A sender is waiting for you to confirm" });
+    expect(surfaceRowText(t, pending, "Doki")).toEqual({ sub: "A sender is waiting for you to confirm" });
 
     const active = surfaceRowOf(links([link({ status: "active", expiresAt: null })]), NOW);
     if (active.kind === "hidden") throw new Error("hidden");
-    expect(surfaceRowText(t, active, "Lodi")).toEqual({ sub: "+55 (11) 90000-0001", below: "Ana", value: "On" });
+    expect(surfaceRowText(t, active, "Doki")).toEqual({ sub: "+55 (11) 90000-0001", below: "Ana", value: "On" });
   });
 
   test("the sheet's confirm step names the sender formatted, and only through the shared helper", () => {
@@ -84,8 +84,8 @@ describe("the row in Notificações", () => {
     );
     if (row.kind !== "active") throw new Error(row.kind);
     expect(row.surface).toBe(LONG_SURFACE);
-    expect(surfaceRowText(t, row, "Lodi")).toEqual({ sub: LONG_DISPLAY, below: LONG_PROFILE, value: "On" });
-    expect(surfaceRowText(t, { ...row, link: { ...row.link, display: null } }, "Lodi")).toEqual({
+    expect(surfaceRowText(t, row, "Doki")).toEqual({ sub: LONG_DISPLAY, below: LONG_PROFILE, value: "On" });
+    expect(surfaceRowText(t, { ...row, link: { ...row.link, display: null } }, "Doki")).toEqual({
       sub: LONG_PROFILE,
       value: "On",
     });
@@ -105,8 +105,8 @@ describe("the row in Notificações", () => {
   test("unlink says the web's words, naming the right hand", async () => {
     const t = await translator("en");
     expect(t("surface.row.unlinkTitle", { surface: SURFACE })).toBe("Unlink Example Chat?");
-    expect(t("surface.row.unlinkText", { assistant: "Lodi" })).toBe(
-      "Lodi stops answering you there. You can link it again any time.",
+    expect(t("surface.row.unlinkText", { assistant: "Doki" })).toBe(
+      "Doki stops answering you there. You can link it again any time.",
     );
     const src = readFileSync(join(import.meta.dir, "../../src/features/me/SurfaceLink.tsx"), "utf8");
     expect(src).toContain('t("surface.row.unlinkText", { assistant: assistant ?? t("rightHand.labelCapitalized") })');
@@ -153,11 +153,11 @@ describe("the sheet", () => {
     expect(confirm).toBeGreaterThan(consent);
     expect(src.slice(consent, confirm)).not.toMatch(/<Text/);
     const en = await translator("en");
-    expect(en("surface.link.consent", { assistant: "Lodi", surface: SURFACE })).toBe(
-      "Lodi by xquads may message you on Example Chat about your workspaces, and call you only when something is urgent and you allow it. Write stop to turn this off.",
+    expect(en("surface.link.consent", { assistant: "Doki", surface: SURFACE })).toBe(
+      "Doki by xquads may message you on Example Chat about your workspaces, and call you only when something is urgent and you allow it. Write stop to turn this off.",
     );
     const pt = await translator("pt-BR");
-    expect(pt("surface.link.consent", { assistant: "Lodi", surface: SURFACE })).toContain("Escreva parar");
+    expect(pt("surface.link.consent", { assistant: "Doki", surface: SURFACE })).toContain("Escreva parar");
   });
 
   test("a link confirmed on another device while the sheet is open ends it as linked", () => {
@@ -176,9 +176,9 @@ describe("the sheet", () => {
   });
 
   test("the confirm step waits only while the agents load, then names the right hand or the generic label", () => {
-    const lodi = [{ builtin: "right_hand" as const, name: "Lodi" }];
+    const lodi = [{ builtin: "right_hand" as const, name: "Doki" }];
     expect(linkAssistant({ isPending: true, data: undefined }, "Your right hand")).toBeNull();
-    expect(linkAssistant({ isPending: false, data: lodi }, "Your right hand")).toBe("Lodi");
+    expect(linkAssistant({ isPending: false, data: lodi }, "Your right hand")).toBe("Doki");
     // No right hand in that workspace, or the agents failed: the server's confirm says why if it refuses.
     expect(linkAssistant({ isPending: false, data: [{ builtin: null, name: "Theo" }] }, "Your right hand")).toBe(
       "Your right hand",

@@ -4,7 +4,7 @@ import { keepWhole } from "./format";
 import { agentGrammar } from "./grammar";
 
 /**
- * Lodi's weekly card (ADR 0137 §9, `meta.actionCard` of kind `team_week`): the week's numbers, what worked and a row
+ * Doki's weekly card (ADR 0137 §9, `meta.actionCard` of kind `team_week`): the week's numbers, what worked and a row
  * per fix, each applied as whoever clicks through the path its own card uses. Mirrors
  * packages/engine/src/team-week.ts.
  */

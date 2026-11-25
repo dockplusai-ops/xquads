@@ -134,7 +134,7 @@ export function grokConfig(input: { command?: string[]; url?: string }): string 
 
 /**
  * What a turn could plant in `GROK_HOME` (the `workspace` sandbox lets its shell write there, and an account's turns
- * of several agents and Lodi share it) that a later turn would load as trusted, outside every tool and the chat guard:
+ * of several agents and Doki share it) that a later turn would load as trusted, outside every tool and the chat guard:
  * a fleet config with hooks, MCP servers and plugins, the folder-trust store, user LSP servers and auto-trusted user
  * plugins (Grok Build 1.0.34's docs `10-hooks.md`, `26-config-reference.md`, `05-configuration.md`, `09-plugins.md`).
  * Removed before every turn. Its `hooks/` the sandbox itself keeps read-only, and `requirements.toml` only counts signed.

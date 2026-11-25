@@ -205,7 +205,7 @@ export interface StopWho {
 }
 
 /**
- * A stopped task as one pill: "You stopped Ada" only for who stopped it, "Ana stopped Ada" for anyone else, "Lodi
+ * A stopped task as one pill: "You stopped Ada" only for who stopped it, "Ana stopped Ada" for anyone else, "Doki
  * stopped Ada" when the right hand did at someone's word (with the reason once said), its time, and its actions:
  * Continuar (`cont`, where the task can pick up again) and, for who stopped it (or asked for it) while it has no
  * reason, "Add a reason" opening a field under it; the agent reads the reason on its next turn. `fallback`: its words
