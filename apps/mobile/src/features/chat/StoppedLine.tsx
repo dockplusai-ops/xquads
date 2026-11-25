@@ -19,7 +19,7 @@ import { useStoppedRun } from "./stopped-runs";
 
 /**
  * A stopped task as one pill (ADR 0128): "You stopped Ada" only for who stopped it, "Ana stopped Ada" for anyone else,
- * "Lodi stopped Ada" when the right hand did at someone's word (with the reason once said), the stop's time, and its
+ * "Doki stopped Ada" when the right hand did at someone's word (with the reason once said), the stop's time, and its
  * actions: Continue (`cont`, where the task can pick up again) and, for who stopped it (or asked for it) while it has
  * no reason, "Add a reason", which opens a short field under the pill; the agent reads it on its next turn.
  * `fallback`: its words when no person stopped it (the step limit, stuck, its cause) or nobody is known. Under the

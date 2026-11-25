@@ -1,4 +1,4 @@
-/* Lodi's weekly card (TeamWeekCard): its numbers, what worked, the rows to open or to mark, the footer with the
+/* Doki's weekly card (TeamWeekCard): its numbers, what worked, the rows to open or to mark, the footer with the
    schedule. */
 .tw {
   max-width: var(--msg-card-w);
@@ -319,7 +319,7 @@ label.tw__mark {
     white-space: normal;
   }
 }
-/* Settings › Lodi: the card's day and hour beside its name, before the row's switch. */
+/* Settings › Doki: the card's day and hour beside its name, before the row's switch. */
 .rh-set__week {
   display: inline-flex;
   flex-wrap: wrap;

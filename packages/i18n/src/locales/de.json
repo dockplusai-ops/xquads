@@ -2936,7 +2936,7 @@
     "brain": {
       "unusable": {
         "title": "Braucht einen Computer",
-        "computerOnly": "Von {{owner}}, nur auf {{computer}} angemeldet. Lodi denkt mit einem Plan, der als Konto angemeldet ist.",
+        "computerOnly": "Von {{owner}}, nur auf {{computer}} angemeldet. Doki denkt mit einem Plan, der als Konto angemeldet ist.",
         "noComputer": "Von {{owner}}. Braucht einen Computer, und der Workspace hat keinen verbunden.",
         "away": "Von {{owner}}, auf {{computer}}, der gerade weg ist.",
         "connect": "Computer verbinden",

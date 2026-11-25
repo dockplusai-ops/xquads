@@ -19,7 +19,7 @@ export interface AiChoiceLink {
 }
 
 /**
- * "Quem pensa" as one dialog for an agent's header and for Lodi: the agent under its sky with the AI's mark at the
+ * "Quem pensa" as one dialog for an agent's header and for Doki: the agent under its sky with the AI's mark at the
  * trail's end, the title, the one picker (Conta, Modelo, Esforço; each change saved at once), a line or two that lead
  * elsewhere, and who the choice is for in the footer. The account list's foot: "Adicionar conta" where the caller has a
  * way to add one (`onAdd`, after this dialog closes), and "Gerenciar contas" (Settings, Contas de IA).

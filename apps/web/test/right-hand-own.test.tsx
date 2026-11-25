@@ -8,7 +8,7 @@ import { createFakeApi, type FakeState, LODI_ID, ORG_ID, seedState, withRightHan
 import { renderApp, screen, settle } from "./render";
 
 /**
- * What Lodi does by itself, on its page (ADR 0177): the daily card for everyone and the weekly one for admins, each
+ * What Doki does by itself, on its page (ADR 0177): the daily card for everyone and the weekly one for admins, each
  * with when it comes, then a switch per feature the server has built, and none for one it has not.
  */
 
@@ -21,7 +21,7 @@ const open = async (state: FakeState) => {
   await renderApp(`/org/${ORG_ID}/agents/${LODI_ID}`, { api: createFakeApi(state) });
   await settle(8);
   const heading = [...document.querySelectorAll(".rh-group .ac-grouphead__title")].find(
-    (h) => h.textContent === "O que o Lodi faz por conta própria",
+    (h) => h.textContent === "O que o Doki faz por conta própria",
   );
   return within(heading?.closest(".rh-group") as HTMLElement);
 };

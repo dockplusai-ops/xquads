@@ -3051,7 +3051,7 @@
     "brain": {
       "unusable": {
         "title": "Necesita un ordenador",
-        "computerOnly": "De {{owner}}, conectado solo en {{computer}}. Lodi piensa con un plan conectado como cuenta.",
+        "computerOnly": "De {{owner}}, conectado solo en {{computer}}. Doki piensa con un plan conectado como cuenta.",
         "noComputer": "De {{owner}}. Necesita un ordenador y el espacio de trabajo no tiene ninguno conectado.",
         "away": "De {{owner}}, en {{computer}}, que está ausente.",
         "connect": "Conectar un ordenador",

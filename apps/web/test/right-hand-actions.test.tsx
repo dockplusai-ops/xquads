@@ -29,7 +29,7 @@ afterEach(() => {
 
 const DM = `dm-${LODI_ID}`;
 
-/** A card of Lodi's in its DM, `ago` ms old. A second card joins the same DM: Lodi and the DM are seeded once. */
+/** A card of Doki's in its DM, `ago` ms old. A second card joins the same DM: Doki and the DM are seeded once. */
 const withLodiCard = (
   state: FakeState,
   actionCard: Record<string, unknown> | WorkspaceActionCard,

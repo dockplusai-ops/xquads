@@ -37,7 +37,7 @@ import { agentSecrets } from "./secrets";
  * Flags and shapes as antigravity.google/docs/cli/headless and cli/reference list them, read 2026-11-04.
  *
  * - Always an account, on Linux: its folder is the CLI's whole `HOME` (`agy-home.ts`), prepared before every turn
- *   (settings, our MCP server alone, Lodi's agent; anything an earlier turn planted removed). The run and its token
+ *   (settings, our MCP server alone, Doki's agent; anything an earlier turn planted removed). The run and its token
  *   reach our server through the env it inherits, so the account's turns of several agents share one config. One
  *   root keeps for all agents (protocol 58) is the agent's own folder for it instead, with a copy of root's sign-in
  *   for as long as the agent's turns on it run (a worker killed mid-turn leaves it until the agent's next one starts).
@@ -253,7 +253,7 @@ export async function runAntigravityTurn(input: AntigravityTurnInput, opts: Anti
   try {
     prepareAgyHome(input.account.home, opts.mcpCommand);
     if (input.chat) {
-      // Nothing of the workspace's own config (`.agents/`, `.gemini/`) in Lodi's folder.
+      // Nothing of the workspace's own config (`.agents/`, `.gemini/`) in Doki's folder.
       for (const name of [".agents", ".gemini"]) rmSync(path.join(input.cwd, name), { recursive: true, force: true });
       mkdirSync(input.cwd, { recursive: true });
     }

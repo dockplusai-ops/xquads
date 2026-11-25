@@ -76,7 +76,7 @@ export const MAX_ROUTINES_PER_AGENT = 3;
 export const MAX_ANSWER_CHOICES = 8;
 /** "Desfazer" on a created team works this long. */
 export const TEAM_UNDO_MS = 24 * 3600_000;
-/** Lodi's weekly check (concept C) is one of the team's routines: Fridays at 17h in the person's time zone. */
+/** Doki's weekly check (concept C) is one of the team's routines: Fridays at 17h in the person's time zone. */
 export const WEEKLY_CHECK_CRON = "0 17 * * 5";
 const WEEKLY_CHECK_PROMPT =
   "Write this week's check of the team for the person in this conversation, in their language: four numbers (runs, failed runs, approvals waiting, questions nobody answered), what worked, then one fix per problem (an agent stuck or in no channel, a budget near its limit, a request made by hand more than once), each as one of your cards. When there is nothing to say, write one short line.";

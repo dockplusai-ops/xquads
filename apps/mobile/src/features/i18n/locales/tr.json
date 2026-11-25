@@ -3216,7 +3216,7 @@
     "manageHint": "Bu hesabı kimin yeniden adlandırabileceği, tekrar giriş yapabileceği ve kaldırabileceği. Bunu yalnızca hesabı bağlayan kişi değiştirir.",
     "use": "Ajanlarda kullan",
     "useSub": "Düşünen yapay zekada seç",
-    "useHint": "Kimin ajanlarının bu hesapla düşünebileceği ve kimin Lodi'sinin. Hesabı yöneten kişi değiştirir.",
+    "useHint": "Kimin ajanlarının bu hesapla düşünebileceği ve kimin Doki'sinin. Hesabı yöneten kişi değiştirir.",
     "reply": "Herkese yanıt ver",
     "replySub": "Ajanların kiminle konuştuğu",
     "replyHint": "Bu hesaptaki bir ajanın kendi sahibi dışında kime yanıt verdiği. Claude'un koşulları, bir planın parasını ödeyen kişi tarafından kullanılmasını ister: herkese açmadan önce kontrol edin.",

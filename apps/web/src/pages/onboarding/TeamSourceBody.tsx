@@ -43,7 +43,7 @@ import type { TeamSourceFacts, TeamSourceState } from "./TeamSource";
 /*
  * The team step's own views of the import (ADR 0162 amended 2026-11-10, ADR 0055), loaded only once the step shows
  * them (`TeamSource`). The import's hook lives here, in the one component the step keeps mounted from the question to
- * the report, and tells the page what it holds (`link.publish`) for the heading, Lodi's line and the preview.
+ * the report, and tells the page what it holds (`link.publish`) for the heading, Doki's line and the preview.
  */
 
 /**

@@ -137,7 +137,7 @@ describe("a template agent's greeting", () => {
       state.agents.push({
         ...ada,
         id: "lodi-x",
-        name: "Lodi",
+        name: "Doki",
         handle: "lodi",
         builtin: "right_hand",
         setup: { role: null, done: ["apps"] },

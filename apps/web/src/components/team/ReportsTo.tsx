@@ -55,7 +55,7 @@ export function useSetReportsTo() {
 }
 
 /**
- * The agents `agent` may report to, as the chart sees it: not Lodi (`lodiId`), not itself, not into its own line, and
+ * The agents `agent` may report to, as the chart sees it: not Doki (`lodiId`), not itself, not into its own line, and
  * only ones the person manages (putting an agent under another changes that one too, ADR 0085 addendum of
  * 2026-11-17), its current supervisor kept so the picker still names it.
  */

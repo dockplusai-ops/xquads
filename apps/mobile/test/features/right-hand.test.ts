@@ -26,7 +26,7 @@ import { SETTINGS_SECTIONS } from "../../src/features/settings/logic";
 import { chatScreenSource } from "./chat-screen-source";
 import { agent, at } from "./fixtures";
 
-const lodi = agent({ id: "a-lodi", name: "Lodi", builtin: "right_hand" });
+const lodi = agent({ id: "a-lodi", name: "Doki", builtin: "right_hand" });
 const theo = agent({ id: "a-theo", name: "Theo" });
 const dm = (a: { id: string; name: string; handle: string }, minutesAgo: number, unread = 0): DirectMessage => ({
   channelId: `d-${a.id}`,
@@ -310,6 +310,6 @@ test("its wave moves, then ends on its still frame, so stopping shows no jump", 
 test("its profile tells where its name comes from only while it keeps it, and only for the right hand", () => {
   expect(tellsNameStory(lodi)).toBe(true);
   expect(tellsNameStory({ ...lodi, name: "Tuca" })).toBe(false);
-  expect(tellsNameStory(agent({ id: "a-other", name: "Lodi" }))).toBe(false);
+  expect(tellsNameStory(agent({ id: "a-other", name: "Doki" }))).toBe(false);
   expect(tellsNameStory(undefined)).toBe(false);
 });

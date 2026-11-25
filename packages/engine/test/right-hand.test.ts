@@ -49,12 +49,12 @@ const rightHandOf = async (orgId: string) =>
     .from(schema.agents)
     .where(and(eq(schema.agents.orgId, orgId), eq(schema.agents.builtin, RIGHT_HAND)));
 
-test("every workspace comes with one right hand, Lodi, owned by its owner", async () => {
+test("every workspace comes with one right hand, Doki, owned by its owner", async () => {
   f = await setup({ rightHand: true });
   const [lodi, ...more] = await rightHandOf(f.org.id);
   expect(more).toEqual([]);
   expect(lodi).toMatchObject({
-    name: "Lodi",
+    name: "Doki",
     handle: "lodi",
     model: "auto",
     ownerUserId: f.owner.id,
@@ -71,7 +71,7 @@ test("every workspace comes with one right hand, Lodi, owned by its owner", asyn
 test("the boot backfill gives older workspaces theirs, not one being deleted, and takes the next free handle", async () => {
   f = await setup();
   // `setup` leaves the workspace without it, as one made before it; `@lodi` is taken there.
-  await createAgent(f.db, f.owner.id, f.org.id, { name: "Lodi", handle: "lodi" }, { model: "claude-sonnet-5-5" });
+  await createAgent(f.db, f.owner.id, f.org.id, { name: "Doki", handle: "lodi" }, { model: "claude-sonnet-5-5" });
   const other = await addUser(f.db, "bia");
   const { organization: closing } = await createOrganization(f.db, other.id, { name: "Closing" });
   await f.db.delete(schema.agents).where(eq(schema.agents.orgId, closing.id));
@@ -209,7 +209,7 @@ test("its prompt says what the person may do, and shows only the agents they may
   const prompt = (personId: string) =>
     rightHandPrompt({ db: f.db }, { orgId: f.org.id, agent: lodi, personId, inDm: true });
   const owner = await prompt(f.owner.id);
-  expect(owner).toContain("You are Lodi (@lodi)");
+  expect(owner).toContain("You are Doki (@lodi)");
   expect(owner).toContain("an owner of this workspace");
   // "Edit agents" and "Create routines" reach the agents a person talks to (ADR 0085 addendum of 2026-11-17).
   expect(owner).toContain(

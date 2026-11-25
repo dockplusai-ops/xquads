@@ -72,16 +72,16 @@ const REACH = 6;
 /** A row applied while the card shows fades into its done line (one done before it mounts just shows). */
 const DONE_IN = FadeIn.duration(160);
 
-/** One of Lodi's own fixes: a settings proposal its review applies or leaves out (ADR 0219). */
+/** One of Doki's own fixes: a settings proposal its review applies or leaves out (ADR 0219). */
 type FixRowData = Extract<TeamWeekRow, { proposalId: string }>;
 const isFix = (row: TeamWeekRow): row is FixRowData => "proposalId" in row;
 
 /**
- * Lodi's weekly card (ADR 0137 §9), as on the web: the four numbers two by two, what worked, then what needs doing. A
+ * Doki's weekly card (ADR 0137 §9), as on the web: the four numbers two by two, what worked, then what needs doing. A
  * row that opens a place (approvals to decide, what waits on the reader, an agent that stopped) opens it on a tap;
- * Lodi's own fixes (a budget, a channel, a model, archiving an agent) are its review's to apply (ADR 0219), so each
+ * Doki's own fixes (a budget, a channel, a model, archiving an agent) are its review's to apply (ADR 0219), so each
  * says how that went, with Undo; every other suggestion comes marked, under its agent's face, and the card's one
- * button applies the marked ones as whoever taps. "Not now", and the day and hour, changed in Settings › Lodi. The
+ * button applies the marked ones as whoever taps. "Not now", and the day and hour, changed in Settings › Doki. The
  * day's card (ADR 0177 §2) is led by what waits on its reader and what is stuck.
  */
 export function TeamWeek({ message: m }: { message: Message }) {
@@ -134,7 +134,7 @@ function WeekCard({ message, card }: { message: Message; card: TeamWeekCard }) {
     }),
   }));
   const stateOf = new Map(rows.map((r) => [r.row.id, r.state] as const));
-  // Lodi's fixes are never the reader's to apply (ADR 0219): what is open is the rest.
+  // Doki's fixes are never the reader's to apply (ADR 0219): what is open is the rest.
   const open = rows.filter((r) => r.state === "open" && !isFix(r.row));
   const isMarked = (row: TeamWeekRow) => marks[row.id] ?? markedAtFirst(row);
   // What the card's one button applies: the open suggestions still marked.
@@ -145,7 +145,7 @@ function WeekCard({ message, card }: { message: Message; card: TeamWeekCard }) {
   const groups = teamWeekGroups(card.rows);
   const dismissed = !!card.dismissedAt;
   const lodi = dir.agents.find(isRightHand);
-  const lodiName = lodi?.name ?? "Lodi";
+  const lodiName = lodi?.name ?? "Doki";
   const apply = async (row: TeamWeekRow) => {
     const place = teamWeekRowPlace(row);
     if (place)
@@ -550,7 +550,7 @@ function MarkRow({
 }
 
 /**
- * One of Lodi's fixes, under its agent's face: never marked, as its review applies it or leaves it out (ADR 0219).
+ * One of Doki's fixes, under its agent's face: never marked, as its review applies it or leaves it out (ADR 0219).
  * "Reviewing…" for the few seconds before, then how it ended with the review's why, and Undo while the reader may put
  * it back. One put back from its receipt (an older card's Undo) reads undone, with nothing left to undo.
  */

@@ -124,7 +124,7 @@ describe("@mention autocomplete", () => {
     const { state } = await go(`c/${GENERAL_ID}`, withRightHand(seedState()));
     await typeIn(composer(), "@lod");
     const list = screen().getByRole("listbox", { name: "Pessoas e agentes" });
-    const lodi = within(list).getByRole("option", { name: /Lodi/ });
+    const lodi = within(list).getByRole("option", { name: /Doki/ });
     expect(lodi.textContent).not.toContain("não está no canal");
     await click(lodi);
     expect(composer().value).toBe("@lodi ");

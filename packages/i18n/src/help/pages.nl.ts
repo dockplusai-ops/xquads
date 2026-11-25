@@ -453,7 +453,7 @@ export const helpNl: Partial<Record<HelpSlug, HelpDocument>> = {
             ],
           },
           "Een actie in iemands eigen mailbox wacht alleen op die persoon. Nieuwe toegang voor een agent wacht op wie agents beheert.",
-          "Lodi, je rechterhand, kan ook voor jou nieuwe agents goedkeuren die andere agents voorstellen, en wijzigingen in het model, budget en de kanalen van een agent, alleen als jij erom vroeg. Wie jou vervangt en wat Lodi goedkeurt, kies je in **Instellingen\u00a0›\u00a0Jij\u00a0›\u00a0Goedkeuringen**.",
+          "Doki, je rechterhand, kan ook voor jou nieuwe agents goedkeuren die andere agents voorstellen, en wijzigingen in het model, budget en de kanalen van een agent, alleen als jij erom vroeg. Wie jou vervangt en wat Doki goedkeurt, kies je in **Instellingen\u00a0›\u00a0Jij\u00a0›\u00a0Goedkeuringen**.",
         ],
       },
       {

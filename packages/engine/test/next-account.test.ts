@@ -1299,7 +1299,7 @@ test("work another agent handed it at its plan's limit goes on with the next acc
   expect(home).toMatchObject({ channelId: fx.general.id, body: "Feito.", agentRunId: run?.id });
 });
 
-test("Lodi goes on only with the person's own accounts that may answer them", async () => {
+test("Doki goes on only with the person's own accounts that may answer them", async () => {
   f = await setup({ rightHand: true });
   const fx = f;
   const { machineId } = await pairMachine({ db: fx.db, pubsub: fx.pubsub }, fx.owner.id, fx.org.id, {
@@ -1368,7 +1368,7 @@ test("Lodi goes on only with the person's own accounts that may answer them", as
   ).toBe(OWN3);
 });
 
-test("Lodi on its person's plan at the limit goes on with their next account instead of its no-AI line", async () => {
+test("Doki on its person's plan at the limit goes on with their next account instead of its no-AI line", async () => {
   f = await setup({ rightHand: true });
   const fx = f;
   const { machineId } = await pairMachine({ db: fx.db, pubsub: fx.pubsub }, fx.owner.id, fx.org.id, {
@@ -1407,7 +1407,7 @@ test("Lodi on its person's plan at the limit goes on with their next account ins
   expect(said.filter((m) => m.meta.bodyCode === STAND_IN_LINE)).toEqual([]);
 });
 
-test("Lodi at its person's limit with no other account of theirs: a plan that serves everyone stands in, with its line", async () => {
+test("Doki at its person's limit with no other account of theirs: a plan that serves everyone stands in, with its line", async () => {
   // ADR 0137 §7 (amended 2026-11-15) over ADR 0041 §6 for the right hand: it moves only onto the person's accounts, and
   // with none it is answered by what can think for them rather than failing on its no-AI line.
   f = await setup({ rightHand: true });
@@ -1460,7 +1460,7 @@ test("Lodi at its person's limit with no other account of theirs: a plan that se
   ]);
 });
 
-test("Lodi's long work on its person's other account it moved to stops at that plan's line, though its paid extra usage is open", async () => {
+test("Doki's long work on its person's other account it moved to stops at that plan's line, though its paid extra usage is open", async () => {
   f = await setup({ rightHand: true, ...goesOn });
   const fx = f;
   const { machineId } = await pairMachine({ db: fx.db, pubsub: fx.pubsub }, fx.owner.id, fx.org.id, {

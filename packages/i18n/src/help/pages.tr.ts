@@ -455,7 +455,7 @@ export const helpTr: Partial<Record<HelpSlug, HelpDocument>> = {
             ],
           },
           "Birinin kendi posta kutusundaki bir işlem yalnızca o kişiyi bekler. Bir ajan için yeni erişim, ajanları yönetenleri bekler.",
-          "Sağ kolunuz Lodi de diğer ajanların önerdiği yeni ajanları ve bir ajanın modeli, bütçesi ve kanallarındaki değişiklikleri, yalnızca siz istediyseniz, sizin yerinize onaylayabilir. Kimin sizin yerinize baktığını ve Lodi’nin neyi onaylayacağını **Ayarlar\u00a0›\u00a0Siz\u00a0›\u00a0Onaylar** bölümünden seçersiniz.",
+          "Sağ kolunuz Doki de diğer ajanların önerdiği yeni ajanları ve bir ajanın modeli, bütçesi ve kanallarındaki değişiklikleri, yalnızca siz istediyseniz, sizin yerinize onaylayabilir. Kimin sizin yerinize baktığını ve Doki’nin neyi onaylayacağını **Ayarlar\u00a0›\u00a0Siz\u00a0›\u00a0Onaylar** bölümünden seçersiniz.",
         ],
       },
       {

@@ -54,7 +54,7 @@ const lodiOf = async () => {
   return lodi;
 };
 
-/** A turn of Lodi on what `userId` wrote in their DM with it, already ended. */
+/** A turn of Doki on what `userId` wrote in their DM with it, already ended. */
 async function lodiTurn(userId: string, body: string) {
   const lodi = await lodiOf();
   const dm = await openPersonAgentDm(f.db, f.org.id, userId, lodi.id);
@@ -81,7 +81,7 @@ async function lodiTurn(userId: string, body: string) {
   return { lodi, dm, run };
 }
 
-/** `userId` asks Lodi, and Lodi hands a task everyone sees to @dev for them. Nothing of it is left to run. */
+/** `userId` asks Doki, and Doki hands a task everyone sees to @dev for them. Nothing of it is left to run. */
 async function handOver(userId = f.owner.id, title = "Campanha de Natal") {
   const { lodi, dm, run } = await lodiTurn(userId, `pede pro dev: ${title}`);
   const made = await createIssue(deps(), person(userId), f.org.id, { title });
@@ -124,7 +124,7 @@ const noticesIn = async (channelId: string) =>
     (m) => (m.meta.notice as { refs?: { task?: string } } | undefined)?.refs?.task,
   );
 
-/** What a notice tells Lodi. */
+/** What a notice tells Doki. */
 const said = (m: { meta: Record<string, unknown> } | undefined) =>
   (m?.meta.notice as { text?: string } | undefined)?.text ?? "";
 
@@ -141,7 +141,7 @@ describe("the lane", () => {
     expect(Object.keys(f.handlers)).toEqual(expect.arrayContaining([TASK_CHECK_JOB, TASK_END_JOB]));
   });
 
-  test("a task handed over by Lodi gets its first look a day later, once; one a person hands over gets none", async () => {
+  test("a task handed over by Doki gets its first look a day later, once; one a person hands over gets none", async () => {
     f = await setup({ rightHand: true });
     const { c } = await handOver();
     const [job] = await jobsOf(TASK_CHECK_JOB);
@@ -154,17 +154,17 @@ describe("the lane", () => {
     expect(wait).toBeGreaterThan(DAY - 60_000);
     expect(wait).toBeLessThanOrEqual(DAY);
 
-    const mine = await createIssue(deps(), person(f.owner.id), f.org.id, { title: "Sem o Lodi" });
+    const mine = await createIssue(deps(), person(f.owner.id), f.org.id, { title: "Sem o Doki" });
     await askAgentToImplement(deps(), f.owner.id, f.org.id, mine.id, f.agent.id);
     expect(await jobsOf(TASK_CHECK_JOB)).toHaveLength(1);
-    // And its end queues nothing: Lodi never had it.
+    // And its end queues nothing: Doki never had it.
     await updateIssue(deps(), person(f.owner.id), f.org.id, mine.id, { status: "done" });
     expect(await jobsOf(TASK_END_JOB)).toEqual([]);
   });
 });
 
 describe("a handed task that ends after its report", () => {
-  test("wakes Lodi once in the requester's DM, as their own turn, with a notice only it reads", async () => {
+  test("wakes Doki once in the requester's DM, as their own turn, with a notice only it reads", async () => {
     f = await setup({ rightHand: true });
     const bea = await addMember(f.db, f.org.id, "member", "bea");
     const other = await lodiTurn(bea.id, "oi");
@@ -190,7 +190,7 @@ describe("a handed task that ends after its report", () => {
     expect(notice?.body).not.toContain("@");
     expect(notice?.mentionedAgentIds).toEqual([]);
 
-    // One turn of Lodi, in that DM, on the notice: the requester's own (their AI, their permissions).
+    // One turn of Doki, in that DM, on the notice: the requester's own (their AI, their permissions).
     const woken = (await f.db.select().from(schema.agentRuns).where(eq(schema.agentRuns.channelId, dm.id))).filter(
       (r) => r.id !== run.id,
     );
@@ -209,7 +209,7 @@ describe("a handed task that ends after its report", () => {
     expect(rows).toHaveLength(1);
     expect(rows[0]?.readAt).not.toBeNull();
     expect(rows[0]?.doneAt).toBeNull();
-    // Nothing reached anyone else's DM with Lodi.
+    // Nothing reached anyone else's DM with Doki.
     expect(await noticesIn(other.dm.id)).toEqual([]);
 
     // Reopened and done again, and the job of each change running late: never said twice.
@@ -220,21 +220,21 @@ describe("a handed task that ends after its report", () => {
     for (const job of jobs) expect(await tellTaskEnd(deps(), f.org.id, job.payload)).toBe(false);
     expect(await noticesIn(dm.id)).toHaveLength(1);
 
-    // The turn it started is the one model call of it all, with its tokens and cost on the workspace and on Lodi.
+    // The turn it started is the one model call of it all, with its tokens and cost on the workspace and on Doki.
     await drainOutbox(f.db, f.handlers);
     expect(f.provider.calls.length - callsBefore).toBe(1);
     const usage = await f.db.select().from(schema.usageRecords).where(eq(schema.usageRecords.runId, woken[0].id));
     expect(usage).toHaveLength(1);
     expect(usage[0]).toMatchObject({ orgId: f.org.id, agentId: lodi.id, kind: "agent" });
     expect(usage[0]?.costNanoUsd).toBeGreaterThan(0);
-    // The notice itself reached nobody's inbox: what is there is the task's own rows and Lodi's one answer.
+    // The notice itself reached nobody's inbox: what is there is the task's own rows and Doki's one answer.
     const inbox = await f.db.select().from(schema.notifications);
     expect([...new Set(inbox.map((r) => r.kind))].sort()).toEqual(["agent_reply", "issue_comment", "issue_status"]);
     expect(inbox.filter((r) => r.kind === "agent_reply")).toHaveLength(1);
     expect(JSON.stringify(inbox)).not.toContain(notice?.id ?? "no notice");
   });
 
-  test("the day's card leaves out a task whose end Lodi holds for them, and counts one Lodi was not told", async () => {
+  test("the day's card leaves out a task whose end Doki holds for them, and counts one Doki was not told", async () => {
     f = await setup({ rightHand: true });
     const bea = await addMember(f.db, f.org.id, "member", "bea");
     /** The tasks @dev closed, as the day's card of `userId` counts them. */
@@ -258,21 +258,21 @@ describe("a handed task that ends after its report", () => {
         { status: "done" },
       );
 
-    // The owner's task: Lodi is told its end, in their DM with it, so their card does not say it again.
+    // The owner's task: Doki is told its end, in their DM with it, so their card does not say it again.
     const told = await handOver();
     await reported(told.c);
     await devCloses(told);
     expect(await noticesIn(told.dm.id)).toHaveLength(1);
     expect(await closedOnCard(f.owner.id)).toEqual([]);
 
-    // Bea turned the reports off: Lodi is told nothing, and her card is what counts the task.
+    // Bea turned the reports off: Doki is told nothing, and her card is what counts the task.
     await setLodiPrefs(f.db, f.org.id, bea.id, { remindOff: true });
     const untold = await handOver(bea.id, "Sem aviso");
     await reported(untold.c);
     await devCloses(untold);
     expect(await noticesIn(untold.dm.id)).toEqual([]);
     expect(await closedOnCard(bea.id)).toEqual([{ kind: "tasks", agentId: f.agent.id, count: 1 }]);
-    // What Lodi holds for the owner is theirs alone: it hides nothing on anyone else's card.
+    // What Doki holds for the owner is theirs alone: it hides nothing on anyone else's card.
     expect(await closedOnCard(f.owner.id)).toEqual([]);
     expect(f.provider.calls).toHaveLength(0);
   });
@@ -296,7 +296,7 @@ describe("a handed task that ends after its report", () => {
     expect(rows[0]?.readAt).not.toBeNull();
   });
 
-  test("a canceled task is told too, and @dev closing it in the run Lodi started still counts as news", async () => {
+  test("a canceled task is told too, and @dev closing it in the run Doki started still counts as news", async () => {
     f = await setup({ rightHand: true });
     const { dm, c, issue, conversationId } = await handOver();
     await reported(c);
@@ -355,13 +355,13 @@ describe("a handed task that ends after its report", () => {
     expect(await noticesIn(dm.id)).toHaveLength(1);
   });
 
-  test("nobody is woken when the requester made the change, Lodi did it for them, or they asked the run that did, by themselves or through Lodi", async () => {
+  test("nobody is woken when the requester made the change, Doki did it for them, or they asked the run that did, by themselves or through Doki", async () => {
     f = await setup({ rightHand: true });
     const own = await handOver(f.owner.id, "Eu mesma fecho");
     await reported(own.c);
     await updateIssue(deps(), person(f.owner.id), f.org.id, own.issue.id, { status: "done" });
 
-    const forMe = await handOver(f.owner.id, "Lodi fecha por mim");
+    const forMe = await handOver(f.owner.id, "Doki fecha por mim");
     await reported(forMe.c);
     const asked = await lodiTurn(f.owner.id, "fecha a tarefa do natal");
     await updateIssue(
@@ -402,7 +402,7 @@ describe("a handed task that ends after its report", () => {
       { status: "done" },
     );
 
-    // "Ask @dev to close it": Lodi asks in a turn of theirs, and @dev's run on that ask closes the task.
+    // "Ask @dev to close it": Doki asks in a turn of theirs, and @dev's run on that ask closes the task.
     const closedBy = async (h: Awaited<ReturnType<typeof handOver>>, askerId: string) => {
       const turn = await lodiTurn(askerId, "pede pro dev fechar a tarefa");
       const ask = await insertMessage(f.db, {
@@ -433,7 +433,7 @@ describe("a handed task that ends after its report", () => {
         { status: "done" },
       );
     };
-    const viaLodi = await handOver(f.owner.id, "Pedi ao Lodi");
+    const viaLodi = await handOver(f.owner.id, "Pedi ao Doki");
     await reported(viaLodi.c);
     await closedBy(viaLodi, f.owner.id);
 
@@ -442,9 +442,9 @@ describe("a handed task that ends after its report", () => {
     expect(await noticesIn(own.dm.id)).toEqual([]);
     expect(f.provider.calls).toHaveLength(0);
 
-    // Someone else asking through their own Lodi is news to the requester.
+    // Someone else asking through their own Doki is news to the requester.
     const bea = await addMember(f.db, f.org.id, "member", "bea");
-    const viaBea = await handOver(f.owner.id, "A Bea pediu ao Lodi");
+    const viaBea = await handOver(f.owner.id, "A Bea pediu ao Doki");
     await reported(viaBea.c);
     await closedBy(viaBea, bea.id);
     expect((await noticesIn(own.dm.id)).map(said)).toEqual([expect.stringContaining("is now done: @dev marked it.")]);
@@ -635,7 +635,7 @@ describe("the daily look at a handed task", () => {
     expect(woken).toHaveLength(1);
     // The look called no model: the one call is the turn it started.
     expect(f.provider.calls).toHaveLength(1);
-    // No person was notified of the notice: the requester's inbox has the hand-over's line in the task and Lodi's
+    // No person was notified of the notice: the requester's inbox has the hand-over's line in the task and Doki's
     // own answer.
     const inbox = await f.db.select().from(schema.notifications).where(eq(schema.notifications.userId, f.owner.id));
     expect(inbox.map((r) => r.kind).sort()).toEqual(["agent_reply", "issue_comment"]);
@@ -738,7 +738,7 @@ describe("keeping its word", () => {
       }),
     );
 
-  test("the block is in Lodi's DM prompt, lists only that person's reminders there, and goes with the switch", async () => {
+  test("the block is in Doki's DM prompt, lists only that person's reminders there, and goes with the switch", async () => {
     f = await setup({ rightHand: true });
     const bea = await addMember(f.db, f.org.id, "member", "bea");
     const mine = await lodiTurn(f.owner.id, "oi");

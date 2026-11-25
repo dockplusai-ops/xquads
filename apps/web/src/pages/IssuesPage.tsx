@@ -1013,7 +1013,7 @@ function CardFacts({
 }: {
   issue: Issue;
   fields: IssuesView["fields"];
-  /** "handed by Lodi" among the facts (the list says it after the title instead). */
+  /** "handed by Doki" among the facts (the list says it after the title instead). */
   handed?: boolean;
 }) {
   const { t, i18n } = useTranslation();
@@ -1083,7 +1083,7 @@ function CardFacts({
   return <FactLine className="issue-card__facts" facts={facts} />;
 }
 
-/** "handed by [face] Lodi": the agent that handed a task's work over. */
+/** "handed by [face] Doki": the agent that handed a task's work over. */
 function HandedBy({ agentId }: { agentId: string }) {
   const actors = useActors();
   const name = actors.name({ type: "agent", id: agentId });

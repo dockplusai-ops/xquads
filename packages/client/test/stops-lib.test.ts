@@ -21,29 +21,29 @@ describe("whom a stop's line names", () => {
   });
 
   test("the pill's sentence, web and phone alike: you, the right hand, someone else, or nobody to name", () => {
-    const names = { agent: (id: string) => (id === "lodi" ? "Lodi" : undefined), person: () => "João" };
+    const names = { agent: (id: string) => (id === "lodi" ? "Doki" : undefined), person: () => "João" };
     const line = (stop: { byUserId?: string | null; byAgentId?: string | null }) =>
       stopLine(t, "Ada", stopperOf(stop, "me"), names);
     expect(line({ byUserId: "me" })).toBe("Você parou a Ada");
-    expect(line({ byUserId: "me", byAgentId: "lodi" })).toBe("Lodi parou a Ada");
+    expect(line({ byUserId: "me", byAgentId: "lodi" })).toBe("Doki parou a Ada");
     expect(line({ byUserId: "joao" })).toBe("João parou a Ada");
     // Nobody stopped it, or the right hand isn't known: the caller's own words for the stop.
     expect(line({ byUserId: null })).toBeNull();
     expect(line({ byUserId: "me", byAgentId: "gone" })).toBeNull();
     expect(stopperName(stopperOf({ byUserId: "me" }, "me"), names)).toBeNull();
-    expect(stopperName(stopperOf({ byUserId: "ana", byAgentId: "lodi" }, "me"), names)).toBe("Lodi");
+    expect(stopperName(stopperOf({ byUserId: "ana", byAgentId: "lodi" }, "me"), names)).toBe("Doki");
   });
 
   test("the notice says the agent that stopped it; an older one reads as the person's", () => {
     const notice = (refs: Record<string, string>) => ({
       notice: { kind: "run_stopped", text: "x", refs: { runId: "r1", was: "working", label: "", ...refs } },
     });
-    expect(stoppedNoticeOf(notice({ byUserId: "me", byName: "Ana", byAgentId: "lodi", byAgentName: "Lodi" }))).toEqual({
+    expect(stoppedNoticeOf(notice({ byUserId: "me", byName: "Ana", byAgentId: "lodi", byAgentName: "Doki" }))).toEqual({
       runId: "r1",
       byUserId: "me",
       byName: "Ana",
       byAgentId: "lodi",
-      byAgentName: "Lodi",
+      byAgentName: "Doki",
       label: "",
       was: "working",
       reason: null,
@@ -58,7 +58,7 @@ describe("whom a stop's line names", () => {
 describe("a stopped reply's record", () => {
   test("who, the agent at their word, or the system's cause in the person's words", () => {
     expect(
-      splitCanceled("Lendo.\n\n_Stopped by Lodi for Ana._", {
+      splitCanceled("Lendo.\n\n_Stopped by Doki for Ana._", {
         canceled: { byUserId: "me", byAgentId: "lodi", text: "Lendo." },
       }),
     ).toEqual({ body: "Lendo.", canceled: true, byUserId: "me", byAgentId: "lodi", code: null });
@@ -97,14 +97,14 @@ describe("a stopped reply's record", () => {
 describe("how a task ended", () => {
   const ended = (stoppedBy: EndedTask["stoppedBy"], status: EndedTask["status"] = "canceled") =>
     ({ status, stoppedBy }) as Pick<EndedTask, "status" | "stoppedBy">;
-  const names = (id: string) => (id === "lodi" ? "Lodi" : undefined);
+  const names = (id: string) => (id === "lodi" ? "Doki" : undefined);
 
   test("'you stopped it' only for who stopped it: anyone else by name, the right hand by its name, nobody plainly", () => {
     expect(endedText(t, ended(null, "done"), "me")).toBe("Terminou");
     expect(endedText(t, ended(null, "failed"), "me")).toBe("Não conseguiu");
     expect(endedText(t, ended({ userId: "me", name: "Bia" }), "me")).toBe("Você parou");
     expect(endedText(t, ended({ userId: "ana", name: "Ana" }), "me")).toBe("Ana parou");
-    expect(endedText(t, ended({ userId: "me", name: "Bia", agentId: "lodi" }), "me", names)).toBe("Lodi parou");
+    expect(endedText(t, ended({ userId: "me", name: "Bia", agentId: "lodi" }), "me", names)).toBe("Doki parou");
     // The system stopped it: never "Você parou".
     expect(endedText(t, ended(null), "me")).toBe("Parada");
     expect(endedText(t, ended({ userId: "ana", name: "" }), "me")).toBe("Parada");

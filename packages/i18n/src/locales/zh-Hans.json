@@ -2820,7 +2820,7 @@
     "brain": {
       "unusable": {
         "title": "需要一台电脑",
-        "computerOnly": "属于 {{owner}}，仅在 {{computer}} 上登录。Lodi 使用以账号登录的方案思考。",
+        "computerOnly": "属于 {{owner}}，仅在 {{computer}} 上登录。Doki 使用以账号登录的方案思考。",
         "noComputer": "属于 {{owner}}。需要一台电脑，而工作区还没有连接任何电脑。",
         "away": "属于 {{owner}}，在 {{computer}} 上，该电脑当前离线。",
         "connect": "连接电脑",

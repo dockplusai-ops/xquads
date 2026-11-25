@@ -47,7 +47,7 @@ import { WhoTalksDialog } from "./WhoDialogs";
 /**
  * A cargo's Agentes (W7): which agents its people talk to, a checklist with who talks to each now. Narrowing saves at
  * once; widening asks today's questions first (someone's plan, a mailbox); an agent everyone talks to, or only its
- * owner, opens "Quem fala com…". Lodi isn't listed (everyone has Lodi), nor an archived agent.
+ * owner, opens "Quem fala com…". Doki isn't listed (everyone has Doki), nor an archived agent.
  */
 export function RoleAgents({
   role,

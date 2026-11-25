@@ -31,7 +31,7 @@ const GROUP_NAMES = { workspace: null, yours: "yours", others: "others", keys: "
 /**
  * The one "Quem pensa" choice on the phone (the web's `<AiChoice>`): Conta, Modelo and Esforço one under the other,
  * each opening its list in the app's sheet (Conta and Modelo searchable, the one in use lit, no column of checks).
- * Accounts that can't think for the target stay listed, faint, with why. The same for an agent, Lodi (`scope`, "A do
+ * Accounts that can't think for the target stay listed, faint, with why. The same for an agent, Doki (`scope`, "A do
  * workspace" first), a mission (no Esforço), several agents and a new agent: those two are the caller's (`value`,
  * `onChange`); the others save at once.
  */

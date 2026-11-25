@@ -135,7 +135,7 @@ test("a control stream reads the screen every 30 s as its agent; a watch stream 
 
 test("the screen read is the one the stream shows: a seat's, by the id its computer knows it by", async () => {
   const t = await screening();
-  const seat = { id: "0199a3a0-0000-7000-8000-0000000000aa", handle: "lodi", name: "Lodi (Ana)" };
+  const seat = { id: "0199a3a0-0000-7000-8000-0000000000aa", handle: "lodi", name: "Doki (Ana)" };
   await t.s.ready({ ...t.stream(), scope: seat });
   t.machine.answer("one");
   await t.time.advance(SESSION_SCREEN_MS);

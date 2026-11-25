@@ -1500,25 +1500,25 @@ With `--system`, what an agent clones or builds stays in its own home, which no 
 path handed from one agent to another leads nowhere. Hand work over as a git branch or pull request (each agent
 clones the repository itself), or put it in the shared folder (`~/shared`, below). Agents there are told so.
 
-**Lodi's computer.** Lodi, the built-in agent every member talks to, works on the workspace's own computer (this
+**Doki's computer.** Doki, the built-in agent every member talks to, works on the workspace's own computer (this
 server's own, This server as the agents' computer, below), where each person gets a place of their own. With
 `--system` that place is a separate user with its own files, browser, desktop and sign-ins, which only that
-person can watch or take control of, from Lodi's page. On a computer that runs every agent as one user (the
+person can watch or take control of, from Doki's page. On a computer that runs every agent as one user (the
 simple mode, a Mac) each place is a folder and a browser profile of that one user, as every agent's there is:
-Lodi keeps each person's work in their own place and is told never to look outside it, but other agents'
+Doki keeps each person's work in their own place and is told never to look outside it, but other agents'
 commands there can read it, and only the person who connected the computer takes control of its desktop or
-opens its terminal. Lodi's page says which of the two a place is. For places nobody else can read, set the
-server up with `--system`. A computer a person connected is never Lodi's. Turn its commands, browser or desktop
+opens its terminal. Doki's page says which of the two a place is. For places nobody else can read, set the
+server up with `--system`. A computer a person connected is never Doki's. Turn its commands, browser or desktop
 off for everyone on its page, under what it can use. The computer's shared folder is still shared: every agent
-and every person's Lodi reads and writes it. Without a computer of the workspace's own, Lodi has no computer,
+and every person's Doki reads and writes it. Without a computer of the workspace's own, Doki has no computer,
 and its page links here.
 
-Where others read what Lodi does (a channel, a dashboard widget, a routine that reports to a channel) it works in
-one more place, shared by the whole workspace: "Lodi (shared)" on that computer (a user of its own with `--system`). Nothing of a
-person's own place reaches it. A person's own place is used only for what that person asks Lodi in their own
+Where others read what Doki does (a channel, a dashboard widget, a routine that reports to a channel) it works in
+one more place, shared by the whole workspace: "Doki (shared)" on that computer (a user of its own with `--system`). Nothing of a
+person's own place reaches it. A person's own place is used only for what that person asks Doki in their own
 conversation with it: a routine that reports there, or anything else nobody asked for there, has no computer.
 Whoever may open any agent's computer (the admins of computers) opens it from the computer's page in Settings,
-Computers. Turning all three of Lodi's computer permissions off ends that place and stops what runs there, and
+Computers. Turning all three of Doki's computer permissions off ends that place and stops what runs there, and
 turning one back on starts an empty one. The ended place's files stay on the computer's disk under a user nothing
 runs as, until you delete that user.
 
@@ -1633,7 +1633,7 @@ restart. The app can install Claude Code there for you, but not Codex. Then sign
 - Every turn that can run commands runs inside Windows' own isolation (Microsoft Execution Containers),
   which needs **Windows 11 24H2 or newer** (`winver` shows yours). On an older Windows those turns fail with
   "This Windows computer can't isolate Codex's commands": update Windows, give that agent Claude or an API
-  key, or move it to a Linux computer. Lodi's turns run no commands, so they work on any Windows.
+  key, or move it to a Linux computer. Doki's turns run no commands, so they work on any Windows.
 - Nothing asks for approval there: what the isolation refuses stays refused, and it has no network, so
   `git push` or a package install doesn't run from Codex's own commands.
 - No background Codex tasks, and Codex doesn't do a mission's items there (Claude Code or the agent does).

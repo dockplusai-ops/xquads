@@ -3216,7 +3216,7 @@
     "manageHint": "Wer dieses Konto umbenennen, sich neu anmelden und es entfernen darf. Nur wer es verbunden hat, ändert das.",
     "use": "In Agenten nutzen",
     "useSub": "In Wer denkt auswählen",
-    "useHint": "Wessen Agenten mit diesem Konto denken dürfen, und wessen Lodi. Wer es verwaltet, ändert das.",
+    "useHint": "Wessen Agenten mit diesem Konto denken dürfen, und wessen Doki. Wer es verwaltet, ändert das.",
     "reply": "Allen antworten",
     "replySub": "Mit wem die Agenten sprechen",
     "replyHint": "Wem ein Agent auf diesem Konto neben seinem eigenen Besitzer antwortet. Die Bedingungen von Claude verlangen, dass ein Abo von der Person genutzt wird, die dafür zahlt: prüfe sie, bevor du es für alle öffnest.",

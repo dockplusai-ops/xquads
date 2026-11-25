@@ -34,7 +34,7 @@ export type TeamSourceChoice = ImportCard | "none";
 
 type Stage = "ask" | "start" | "template" | "import";
 
-/** What the import holds now, as the page's heading, Lodi's line and the preview read it (the views publish it). */
+/** What the import holds now, as the page's heading, Doki's line and the preview read it (the views publish it). */
 export interface TeamSourceFacts {
   /** The card being brought from (the import's own picker can change it). */
   card: ImportCard | null;
@@ -69,7 +69,7 @@ const NO_FACTS: TeamSourceFacts = {
 const replyCardOf = (choice: TeamSourceChoice | null): RequestCard | null => (choice === "grok-bot" ? choice : null);
 
 /**
- * The named apps that answer the export request (Grok Bot's answer pasted, ChatGPT dots' file dropped): Lodi says to
+ * The named apps that answer the export request (Grok Bot's answer pasted, ChatGPT dots' file dropped): Doki says to
  * copy it there. "Another app" has no name to say it with, and ends on the same drop as the file apps.
  */
 const asksFirst = (card: ImportCard | null) => card === "grok-bot" || card === "chatgpt-dots";
@@ -190,7 +190,7 @@ export function useTeamSource(
             }
           : null;
 
-  /** The step's heading and Lodi's line for the view on screen. */
+  /** The step's heading and Doki's line for the view on screen. */
   const head = (t: TFunction, _org: string): { title: string; lead: string; say: string } => {
     const app = facts.app ?? "";
     if (view === "bring")
@@ -263,7 +263,7 @@ const TeamSourceBody = lazy(() => import("./TeamSourceBody").then((m) => ({ defa
 const WAITING = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
 /**
- * The step's body for the question, bringing and what came; the page draws its heading, Lodi's line and Back from
+ * The step's body for the question, bringing and what came; the page draws its heading, Doki's line and Back from
  * `state`. `org`: the workspace's name.
  */
 export function TeamSource({

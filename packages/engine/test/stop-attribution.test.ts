@@ -164,15 +164,15 @@ describe("the right hand's stop at a person's word", () => {
 
   test("the notice with no name for the person still reads", () => {
     expect(
-      stoppedText({ runId: "r", byUserId: "u", byName: "", byAgentName: "Lodi", label: "", was: "queued" }),
-    ).toStartWith("Lodi, at a person's word, stopped your task before it started.");
+      stoppedText({ runId: "r", byUserId: "u", byName: "", byAgentName: "Doki", label: "", was: "queued" }),
+    ).toStartWith("Doki, at a person's word, stopped your task before it started.");
     // The right hand wrote the reason: it isn't passed off as the person's own words.
     expect(
       stoppedText({
         runId: "r",
         byUserId: "u",
         byName: "Ana",
-        byAgentName: "Lodi",
+        byAgentName: "Doki",
         label: "",
         was: "queued",
         reason: "Ana quer os logs como estão",

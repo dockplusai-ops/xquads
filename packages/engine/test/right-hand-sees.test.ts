@@ -49,7 +49,7 @@ const lodiOf = async () => {
   return lodi;
 };
 
-/** A run of Lodi on what `userId` wrote in `channelId` (their DM with it when left out). */
+/** A run of Doki on what `userId` wrote in `channelId` (their DM with it when left out). */
 async function lodiRun(userId: string, body = "como está o time?", channelId?: string): Promise<ToolContext> {
   const lodi = await lodiOf();
   const place = channelId ?? (await openPersonAgentDm(f.db, f.org.id, userId, lodi.id)).id;
@@ -777,7 +777,7 @@ describe("its prompt", () => {
     for (const name of ["team_status", "ask_agent", "tell_agent", "follow_up", "create_issue"])
       expect(first).toContain(name);
     expect(RIGHT_HAND_AUTO.instructions).toContain("the medium tier");
-    console.log(`Lodi's own block: ${text.length} chars`);
+    console.log(`Doki's own block: ${text.length} chars`);
   });
 
   test("lists what it handed on and hasn't heard back", async () => {

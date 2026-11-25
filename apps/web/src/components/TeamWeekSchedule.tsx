@@ -9,8 +9,8 @@ import { Button, Select } from "@agenteschat/ui";
 import { useTranslation } from "react-i18next";
 
 /**
- * When one of Lodi's cards comes: the weekly card's day and hour, or the daily card's hour, and "Parar de receber" on
- * the card's footer. Lodi's page has a switch at its row's end instead (`stop={false}`).
+ * When one of Doki's cards comes: the weekly card's day and hour, or the daily card's hour, and "Parar de receber" on
+ * the card's footer. Doki's page has a switch at its row's end instead (`stop={false}`).
  */
 export function TeamWeekSchedule({
   period,

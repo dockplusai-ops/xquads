@@ -3081,7 +3081,7 @@
     "manageHint": "Siapa yang boleh mengganti nama akun ini, masuk lagi, dan menghapusnya. Hanya yang menghubungkannya yang bisa mengubah ini.",
     "use": "Pakai di agen",
     "useSub": "Pilih di Siapa yang berpikir",
-    "useHint": "Agen milik siapa yang boleh berpikir dengan akun ini, dan Lodi milik siapa. Yang mengelolanya bisa mengubah ini.",
+    "useHint": "Agen milik siapa yang boleh berpikir dengan akun ini, dan Doki milik siapa. Yang mengelolanya bisa mengubah ini.",
     "reply": "Layani semua",
     "replySub": "Dengan siapa agen berbicara",
     "replyHint": "Siapa yang dijawab agen di akun ini selain pemiliknya sendiri. Ketentuan Claude meminta paket dipakai oleh orang yang membayarnya: periksa sebelum membukanya untuk semua.",

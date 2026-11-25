@@ -7308,7 +7308,7 @@
     "value": "Needs a computer"
   },
   "rightHand.brain.unusable.computerOnly": {
-    "value": "{{owner}}'s, signed in on {{computer}} only. Lodi thinks with a plan signed in as an account."
+    "value": "{{owner}}'s, signed in on {{computer}} only. Doki thinks with a plan signed in as an account."
   },
   "rightHand.brain.unusable.noComputer": {
     "value": "{{owner}}'s. It needs a computer, and the workspace has none connected."

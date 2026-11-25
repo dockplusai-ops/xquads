@@ -112,7 +112,7 @@ describe("aiChoiceRows: one list for every picker", () => {
     expect(rows.map((r) => [r.key, r.selected])).toEqual([["l2", true]]);
   });
 
-  test("Lodi: A do workspace first for the viewer's own, no keys there; the workspace's takes only accounts everyone uses", () => {
+  test("Doki: A do workspace first for the viewer's own, no keys there; the workspace's takes only accounts everyone uses", () => {
     const h = hub(
       [account("w1"), account("w2", { permissions: { manage: only, use: only, reply: only } })],
       [key("k1")],

@@ -2821,7 +2821,7 @@
     "brain": {
       "unusable": {
         "title": "Butuh komputer",
-        "computerOnly": "Milik {{owner}}, masuk hanya di {{computer}}. Lodi berpikir dengan paket yang masuk sebagai akun.",
+        "computerOnly": "Milik {{owner}}, masuk hanya di {{computer}}. Doki berpikir dengan paket yang masuk sebagai akun.",
         "noComputer": "Milik {{owner}}. Butuh komputer, dan workspace belum menghubungkan satu pun.",
         "away": "Milik {{owner}}, di {{computer}}, yang sedang tidak aktif.",
         "connect": "Hubungkan komputer",

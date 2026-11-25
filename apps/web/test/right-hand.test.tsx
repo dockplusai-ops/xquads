@@ -62,7 +62,7 @@ describe("the right hand's row in the sidebar", () => {
     expect(body?.firstElementChild).toBe(row);
     expect(nav().querySelector('[data-section="people"]')?.contains(row)).toBe(false);
     expect(row?.getAttribute("href")).toBe(`/org/${ORG_ID}/dm/agent/${LODI_ID}`);
-    expect(row?.querySelector(".sidebar__item-label")?.textContent).toBe("Lodi");
+    expect(row?.querySelector(".sidebar__item-label")?.textContent).toBe("Doki");
     expect(row?.querySelector(".sidebar__item-role")?.textContent).toBe("seu braço direito");
     expect(row?.querySelector(".sidebar__item-role")?.classList.contains("ac-tag")).toBe(true);
     const dms = [...nav().querySelectorAll<HTMLElement>("[data-agent-row]")].map((r) => r.dataset.agentRow);
@@ -135,7 +135,7 @@ describe("the right hand elsewhere", () => {
     const agents = within(column).getByRole("region", { name: "Agentes" });
     const names = [...agents.querySelectorAll(".members-side__label")].map((n) => n.textContent);
     expect(names.length).toBeGreaterThan(0);
-    expect(names).not.toContain("Lodi");
+    expect(names).not.toContain("Doki");
     expect(column.textContent).not.toContain("chame com @lodi");
   });
 
@@ -149,13 +149,13 @@ describe("the right hand elsewhere", () => {
     expect(header.querySelector(".channel__brain")).toBeNull();
     expect(header.textContent).not.toContain("Automático");
     expect(header.textContent).not.toContain("Computador");
-    expect(screen().getByRole("combobox", { name: "Mensagem para Lodi · nada muda sem você" })).toBeTruthy();
+    expect(screen().getByRole("combobox", { name: "Mensagem para Doki · nada muda sem você" })).toBeTruthy();
   });
 
   test("its greeting's paragraphs sit in a typed message's Markdown wrapper, so its first line is where any message's is", async () => {
     await go(withRightHand(seedState()), `dm/agent/${LODI_ID}`);
     const greeting = [...document.querySelectorAll(".ac-msg__text b")].find((b) =>
-      b.textContent?.startsWith("Oi, eu sou o Lodi"),
+      b.textContent?.startsWith("Oi, eu sou o Doki"),
     );
     const wrapper = greeting?.closest("p")?.parentElement;
     expect(wrapper?.className).toBe("md md--message");
@@ -165,15 +165,15 @@ describe("the right hand elsewhere", () => {
   test("its greeting's name opens the profile card, as any message's; in its DM no face, the sides say who spoke", async () => {
     await go(withRightHand(seedState()), `dm/agent/${LODI_ID}`);
     const greeting = [...document.querySelectorAll(".ac-msg")].find((m) =>
-      m.textContent?.includes("Oi, eu sou o Lodi"),
+      m.textContent?.includes("Oi, eu sou o Doki"),
     );
     expect(greeting?.querySelector(".ac-msg__avatar")).toBeNull();
     expect(greeting?.getAttribute("data-faces")).toBe("false");
     expect(document.querySelector(".channel__messages")?.getAttribute("data-faces")).toBe("false");
     const name = greeting?.querySelector(".profile-trigger--name") as HTMLElement;
-    expect(name.getAttribute("aria-label")).toBe("Perfil de Lodi");
+    expect(name.getAttribute("aria-label")).toBe("Perfil de Doki");
     await click(name);
-    expect(document.querySelector(".profile-card")?.textContent).toContain("Lodi");
+    expect(document.querySelector(".profile-card")?.textContent).toContain("Doki");
   });
 
   test("with a team and no card left, its greeting still ends with the way to build the team", async () => {
@@ -232,12 +232,12 @@ describe("the right hand elsewhere", () => {
     await settle(8);
     const text = () => document.querySelector(".channel__messages")?.textContent;
     // The intro lands with the rows, never alone over their skeleton.
-    expect(text()).not.toContain("Oi, eu sou o Lodi");
+    expect(text()).not.toContain("Oi, eu sou o Doki");
     expect(text()).not.toContain("Como prefere que eu fale com você?");
     expect(screen().queryByRole("button", { name: "Montar o time" })).toBeNull();
     await act(async () => arrive());
     await settle(8);
-    expect(text()).toContain("Oi, eu sou o Lodi");
+    expect(text()).toContain("Oi, eu sou o Doki");
     expect(text()).toContain("Você acabou de entrar na Acme.");
     expect(text()).not.toContain("Como prefere que eu fale com você?");
   });
@@ -246,7 +246,7 @@ describe("the right hand elsewhere", () => {
     const state = withRightHand(seedState());
     state.dms.push({
       channelId: "dm-lodi",
-      with: { type: "agent", id: LODI_ID, name: "Lodi", handle: "lodi" },
+      with: { type: "agent", id: LODI_ID, name: "Doki", handle: "lodi" },
       everRead: false,
     });
     state.channelMembers["dm-lodi"] = [
@@ -260,17 +260,17 @@ describe("the right hand elsewhere", () => {
     expect(state.calls).toContainEqual({ method: "dms.markRead", args: [ORG_ID, "dm-lodi"] });
     cleanup();
     await go(state, `dm/agent/${LODI_ID}`);
-    expect(document.querySelector(".ac-msg__text b")?.textContent).toStartWith("Oi, eu sou o Lodi");
+    expect(document.querySelector(".ac-msg__text b")?.textContent).toStartWith("Oi, eu sou o Doki");
     expect(document.querySelector('canvas[data-mood="wave"]')).toBeNull();
   });
 
-  test("Lodi's page: its name, the lock line and its audit link", async () => {
+  test("Doki's page: its name, the lock line and its audit link", async () => {
     await go(withRightHand(seedState()), `agents/${LODI_ID}`);
-    expect(screen().getByRole("heading", { name: "Lodi" })).toBeTruthy();
+    expect(screen().getByRole("heading", { name: "Doki" })).toBeTruthy();
     const body = document.querySelector(".page") as HTMLElement;
     expect(body.textContent).toContain("Na barra lateral ele aparece sempre como “seu braço direito”.");
-    expect(body.textContent).toContain("O Lodi não pode ser arquivado nem apagado.");
-    expect(within(body).getByRole("link", { name: "Ver o que o Lodi fez" }).getAttribute("href")).toBe(
+    expect(body.textContent).toContain("O Doki não pode ser arquivado nem apagado.");
+    expect(within(body).getByRole("link", { name: "Ver o que o Doki fez" }).getAttribute("href")).toBe(
       `/org/${ORG_ID}/settings/audit?agent=${LODI_ID}`,
     );
   });
@@ -287,7 +287,7 @@ describe("the right hand elsewhere", () => {
       if (mode) {
         const machines = fakeMachinesOf.get(api);
         machines?.pair({ id: "machine_1", name: "Servidor", os: "linux", mode });
-        machines?.setAgents("machine_1", [{ id: LODI_ID, name: "Lodi", handle: "lodi" }]);
+        machines?.setAgents("machine_1", [{ id: LODI_ID, name: "Doki", handle: "lodi" }]);
       }
       await renderApp(`/org/${ORG_ID}/agents/${LODI_ID}`, { api });
       await settle(8);
@@ -326,7 +326,7 @@ describe("the right hand elsewhere", () => {
 
   test("Mudar visual: the face and the choices in the dialog's body, Cancelar and Salvar in its footer", async () => {
     await go(withRightHand(seedState()), `agents/${LODI_ID}`);
-    await click(screen().getByRole("button", { name: "Mudar o visual do Lodi" }));
+    await click(screen().getByRole("button", { name: "Mudar o visual do Doki" }));
     const dialog = screen().getByRole("dialog", { name: "Mudar visual" });
     const body = dialog.querySelector(":scope > .ac-dialog__body") as HTMLElement;
     expect(body.querySelector(".rh-set__face")).not.toBeNull();
@@ -347,12 +347,12 @@ describe("the right hand elsewhere", () => {
     ]);
   });
 
-  test("nobody has a Lodi section in the settings", async () => {
+  test("nobody has a Doki section in the settings", async () => {
     const state = withRightHand(seedState());
     const org = state.me?.organizations[0];
     if (org) org.role = "member";
     await go(state, "settings/account");
     const settingsNav = screen().getByRole("navigation", { name: "Seções das configurações" });
-    expect(within(settingsNav).queryByRole("link", { name: "Lodi" })).toBeNull();
+    expect(within(settingsNav).queryByRole("link", { name: "Doki" })).toBeNull();
   });
 });

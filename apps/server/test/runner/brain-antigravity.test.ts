@@ -73,7 +73,7 @@ const ORG = "0193dddd-0000-7000-8000-000000000001";
 const FIRST = "c3b60000-0000-4000-8000-000000000001";
 const NOW = Date.parse("2026-11-04T12:00:00Z");
 
-test("command line: headless stream-json in the sandbox; work takes edits, plan doesn't, chat runs as Lodi's agent", () => {
+test("command line: headless stream-json in the sandbox; work takes edits, plan doesn't, chat runs as Doki's agent", () => {
   const work = antigravityTurnArgs({ prompt: "oi", model: "gemini-4-argon-high", chat: FIRST, effort: "max" });
   expect(work.slice(0, 4)).toEqual(["-p", "oi", "--output-format", "stream-json"]);
   expect(work.join(" ")).toContain("--sandbox --disable-slash-commands --mode accept-edits");
@@ -93,7 +93,7 @@ test("command line: headless stream-json in the sandbox; work takes edits, plan 
   expect(chat).not.toContain("accept-edits");
 });
 
-test("the account's home: what a turn planted goes, our settings, our server alone and Lodi's agent; the sign-in stays", () => {
+test("the account's home: what a turn planted goes, our settings, our server alone and Doki's agent; the sign-in stays", () => {
   const home = tempDir("agy-home-");
   dirs.push(home);
   for (const rel of [".gemini/config/hooks.json", ".gemini/GEMINI.md", AGY_SIGN_IN_FILE]) {
@@ -494,7 +494,7 @@ test.skipIf(!posix)(
 );
 
 test.skipIf(!posix)(
-  "a chat turn: Lodi's agent and our server alone; a tool of the CLI's own stops it, the agent's secrets never come",
+  "a chat turn: Doki's agent and our server alone; a tool of the CLI's own stops it, the agent's secrets never come",
   async () => {
     const root = tempDir("brain-agy-");
     dirs.push(root);

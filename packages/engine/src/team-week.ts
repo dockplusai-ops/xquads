@@ -58,10 +58,10 @@ import { channelReaderSql, taskSeenSql } from "./task-access";
 import { listWaiting } from "./waiting";
 
 /**
- * "Semana da equipe" (ADR 0137 §9): once a week Lodi posts one card in each admin's DM with it, from what the server
+ * "Semana da equipe" (ADR 0137 §9): once a week Doki posts one card in each admin's DM with it, from what the server
  * already stores (runs, approvals, budgets, channels, unanswered questions, requests repeated by hand, stalled steps),
  * with no model call. Each row is a fix applied as whoever clicks, through the paths the other cards use: a settings
- * proposal (budget, a channel), the approvals list, a routine, a message to Lodi or to a task's conversation.
+ * proposal (budget, a channel), the approvals list, a routine, a message to Doki or to a task's conversation.
  * "Resumo do dia" (ADR 0177 §2) is the same card for everyone, about the reader alone: what waits on them, what their
  * agents finished and what is stuck and why, only on a day with something new of theirs. When each comes is the
  * person's own choice (`right-hand-prefs.ts`).
@@ -76,7 +76,7 @@ export const TEAM_WEEK_JOB = "team_week.post";
  */
 export const TEAM_DAY_JOB = "team_day.post";
 export const TEAM_WEEK_CARD = "team_week";
-/** The tool through which a person tells Lodi to stop the card or move it. */
+/** The tool through which a person tells Doki to stop the card or move it. */
 export const SET_TEAM_WEEK_TOOL = "set_team_week";
 
 const HOUR_MS = 3_600_000;
@@ -182,7 +182,7 @@ export type TeamWeekRow =
   | { id: string; kind: "budget"; agentId: string; proposalId: string; stops: number; from: number; to: number }
   /** In no channel, so nobody talked to it: a settings proposal to add it to one. */
   | { id: string; kind: "channel"; agentId: string; proposalId: string; channelId: string }
-  /** People's questions nobody answered in a channel: Lodi is asked for an agent for them. */
+  /** People's questions nobody answered in a channel: Doki is asked for an agent for them. */
   | { id: string; kind: "unanswered"; channelId: string; count: number }
   /** The same request typed on several days: a daily routine at the hour it was asked. */
   | {
@@ -939,10 +939,10 @@ export async function buildTeamDay(
 }
 
 /**
- * A fresh settings proposal by Lodi for this person; null when the line can't be made or this person can't decide it
+ * A fresh settings proposal by Doki for this person; null when the line can't be made or this person can't decide it
  * (the card only offers what its reader applies). The same fix still open on an earlier week's card goes stale there:
  * a decision records its receipt (Undo) on the oldest card that lists the proposal, and last week's amount may be
- * outdated. Proposals Lodi made in a conversation stay as they are.
+ * outdated. Proposals Doki made in a conversation stay as they are.
  */
 async function settingsProposal(
   db: Database,
@@ -1169,7 +1169,7 @@ interface NearTeamWeek {
 }
 
 /**
- * The members a card may be due for at `now`, in open workspaces with a team and Lodi: who is within the hours after
+ * The members a card may be due for at `now`, in open workspaces with a team and Doki: who is within the hours after
  * their slot and has no job for that card yet (the dedupe keys of `teamWeekJobKey`, rebuilt here, each looked up by the
  * unique index). So a member comes back on the tick after their slot and not again that day, and a tick reads only
  * who it may queue. Who administers is asked only for those, on the day a week's card may be due.
@@ -1248,7 +1248,7 @@ export async function enqueueTeamWeeks(db: Database, now = new Date()) {
 }
 
 /**
- * The job: builds this person's card and posts it in their DM with Lodi. Returns the message id, or null (none in a
+ * The job: builds this person's card and posts it in their DM with Doki. Returns the message id, or null (none in a
  * workspace closed to changes since it was queued).
  */
 export async function postTeamWeek(
@@ -1275,7 +1275,7 @@ export async function postTeamWeek(
   if (!lodi) return null;
   const timezone = period === "day" ? member.dayTimezone : member.timezone;
   const span = new Date(slot.getTime() - teamWeekSpan(period));
-  // In their DM with Lodi alone, where every card of theirs is: not every message Lodi wrote in the workspace.
+  // In their DM with Doki alone, where every card of theirs is: not every message Doki wrote in the workspace.
   const mine = sql`channel_id = (select id from channels where org_id = ${orgId}
       and dm_key = ${personAgentDmKey(userId, lodi.id)})
     and meta->'actionCard'->>'kind' = ${TEAM_WEEK_CARD} and meta->'actionCard'->>'forUserId' = ${userId}
@@ -1325,7 +1325,7 @@ export async function postTeamWeek(
     posted,
     lodi,
   });
-  // Its fixes are Lodi's to weigh and apply (ADR 0219): the card shows what became of each, with Desfazer.
+  // Its fixes are Doki's to weigh and apply (ADR 0219): the card shows what became of each, with Desfazer.
   if (sent) await queueSettle(db, orgId, card.proposalIds, "agent");
   return sent;
 }
@@ -1334,7 +1334,7 @@ export async function postTeamWeek(
 
 /**
  * A row applied from the card as `actorId` (only the person it is for: it lives in their DM), or "Agora não"
- * (`dismiss`). Settings and approvals rows go through their own paths; here the routine is made, Lodi is asked for an
+ * (`dismiss`). Settings and approvals rows go through their own paths; here the routine is made, Doki is asked for an
  * agent, or the task's agent is told to go on (`text`: the person's own words, in their language). Returns the card.
  *
  * `skip` puts one suggestion away and leaves the card: archiving an agent or a smaller model is refused as the person

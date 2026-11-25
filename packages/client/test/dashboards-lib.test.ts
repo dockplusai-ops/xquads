@@ -291,13 +291,13 @@ describe("words", () => {
     // Its line, as the web and the phone say it: that it stopped, then the last failure's own words.
     const said = i18next.createInstance();
     void said.init({ lng: "pt-BR", resources, initAsync: false });
-    expect(widgetFailureText(said.t, stopped("missing_credential").failure, "Lodi")).toBe(
-      "Parou depois de 5 falhas seguidas. A última: Lodi está sem chave ou plano de IA para trabalhar.",
+    expect(widgetFailureText(said.t, stopped("missing_credential").failure, "Doki")).toBe(
+      "Parou depois de 5 falhas seguidas. A última: Doki está sem chave ou plano de IA para trabalhar.",
     );
     expect(
-      widgetFailureText(said.t, { code: "failing", detail: "A loja não respondeu.", cause: "agent_reported" }, "Lodi"),
+      widgetFailureText(said.t, { code: "failing", detail: "A loja não respondeu.", cause: "agent_reported" }, "Doki"),
     ).toBe("Parou depois de 5 falhas seguidas. A última: A loja não respondeu.");
-    expect(widgetFailureText(said.t, stopped().failure, "Lodi")).toBe("Falhou várias vezes seguidas e parou.");
+    expect(widgetFailureText(said.t, stopped().failure, "Doki")).toBe("Falhou várias vezes seguidas e parou.");
     const status = (state: "ready" | "no_ai" | "waiting") => ({ any: true, agents: [{ agentId: "theo", state }] });
     expect(widgetAiReady(waiting, status("ready"))).toBe(true);
     // Its computer away is no missing AI: the build waits for it as any run does.

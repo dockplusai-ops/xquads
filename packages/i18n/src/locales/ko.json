@@ -2821,7 +2821,7 @@
     "brain": {
       "unusable": {
         "title": "컴퓨터가 필요해요",
-        "computerOnly": "{{owner}}의 것, {{computer}}에서만 로그인됨. Lodi는 계정으로 로그인한 플랜으로 생각해요.",
+        "computerOnly": "{{owner}}의 것, {{computer}}에서만 로그인됨. Doki는 계정으로 로그인한 플랜으로 생각해요.",
         "noComputer": "{{owner}}의 것. 컴퓨터가 필요한데 워크스페이스에 연결된 컴퓨터가 없어요.",
         "away": "{{owner}}의 것, {{computer}}에 있지만 자리를 비웠어요.",
         "connect": "컴퓨터 연결",

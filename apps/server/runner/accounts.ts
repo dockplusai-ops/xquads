@@ -338,7 +338,7 @@ export const GROK_QUIET_ENV: Readonly<Record<string, string>> = {
   GROK_TELEMETRY_MIXPANEL_ENABLED: "false",
   GROK_FEEDBACK_ENABLED: "false",
   GROK_DISABLE_AUTOUPDATER: "1",
-  // Memory is shared by every turn on the account (several agents', Lodi's): forced off whatever a config says.
+  // Memory is shared by every turn on the account (several agents', Doki's): forced off whatever a config says.
   GROK_MEMORY: "0",
 };
 

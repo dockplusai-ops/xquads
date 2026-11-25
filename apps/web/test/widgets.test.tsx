@@ -338,7 +338,7 @@ describe("My Home as a mural (ADR 0135)", () => {
     };
     const { state } = await open(`/org/${ORG_ID}/home`, onPlan());
     const card = widget("Resumo");
-    expect(card.textContent).toContain("O plano de Lodi só atende o próprio dono, então não atualiza widgets.");
+    expect(card.textContent).toContain("O plano de Doki só atende o próprio dono, então não atualiza widgets.");
     expect(calls(state, "dashboards.refreshWidget")).toEqual([]);
     await click(within(card).getByRole("button", { name: "Conectar" }));
     expect(within(screen().getByRole("dialog", { name: /Conectar uma IA/ })).getByLabelText("Cole aqui")).toBeTruthy();
@@ -352,7 +352,7 @@ describe("My Home as a mural (ADR 0135)", () => {
     const locked = widget("Resumo");
     expect(within(locked).queryByRole("button", { name: "Conectar" })).toBeNull();
     expect(locked.textContent).toContain(
-      "Quem conecta a IA de Lodi: um admin, com uma chave de API, ou João, com o próprio plano.",
+      "Quem conecta a IA de Doki: um admin, com uma chave de API, ou João, com o próprio plano.",
     );
   });
 

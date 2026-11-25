@@ -2935,7 +2935,7 @@
     "brain": {
       "unusable": {
         "title": "Heeft een computer nodig",
-        "computerOnly": "Van {{owner}}, alleen aangemeld op {{computer}}. Lodi denkt met een plan dat als account is aangemeld.",
+        "computerOnly": "Van {{owner}}, alleen aangemeld op {{computer}}. Doki denkt met een plan dat als account is aangemeld.",
         "noComputer": "Van {{owner}}. Er is een computer nodig, en de workspace heeft er geen verbonden.",
         "away": "Van {{owner}}, op {{computer}}, die weg is.",
         "connect": "Een computer verbinden",

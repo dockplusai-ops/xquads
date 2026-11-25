@@ -398,7 +398,7 @@ export function stopperName(stopper: Stopper, names: StopperNames): string | nul
 }
 
 /**
- * A stop pill's sentence (web and phone, the chat's pill and the task panel): "You stopped Ada", "Lodi stopped Ada" or
+ * A stop pill's sentence (web and phone, the chat's pill and the task panel): "You stopped Ada", "Doki stopped Ada" or
  * "Ana stopped Ada"; null when there is no one to name, and the caller's own words for the stop say it.
  */
 export function stopLine(t: TFunction, agent: string, stopper: Stopper, names: StopperNames): string | null {

@@ -6653,7 +6653,7 @@ export interface AccountAudience {
 
 /**
  * An AI account's permissions. `manage` ("Gerenciar": rename, sign in again, remove), `use` ("Usar em agentes": whose
- * agents, by the agent's owner, and whose Lodi may think with it) and `reply` ("Atender todos": whom an agent on it
+ * agents, by the agent's owner, and whose Doki may think with it) and `reply` ("Atender todos": whom an agent on it
  * answers besides the agent's own owner; `owner` there reads "Só o dono do agente").
  */
 export interface AccountPermissions {
@@ -6671,7 +6671,7 @@ export interface AccountRights {
   canManage: boolean;
   /** Choose `manage`: its owner. */
   canSetManage: boolean;
-  /** The viewer's agents and Lodi may think with it; else `useReason`. */
+  /** The viewer's agents and Doki may think with it; else `useReason`. */
   canUse: boolean;
   useReason?: AccountUseReason;
   /** Choose `reply`: its owner or an administrator. */

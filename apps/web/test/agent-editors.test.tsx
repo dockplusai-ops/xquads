@@ -354,7 +354,7 @@ describe("Who can edit on the team's right hand", () => {
     expect(document.body.textContent).not.toContain("Quem pode editar");
     cleanup();
     await go("?tab=settings&sec=editors", state, LODI_ID);
-    expect(screen().queryByRole("region", { name: "Quem pode editar o Lodi" })).toBeNull();
+    expect(screen().queryByRole("region", { name: "Quem pode editar o Doki" })).toBeNull();
     expect(document.body.textContent).not.toContain("Quem pode editar");
   });
 });

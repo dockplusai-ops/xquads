@@ -3051,7 +3051,7 @@
     "brain": {
       "unusable": {
         "title": "Serve un computer",
-        "computerOnly": "Di {{owner}}, collegato solo su {{computer}}. Lodi pensa con un piano collegato come account.",
+        "computerOnly": "Di {{owner}}, collegato solo su {{computer}}. Doki pensa con un piano collegato come account.",
         "noComputer": "Di {{owner}}. Serve un computer, e il workspace non ne ha nessuno collegato.",
         "away": "Di {{owner}}, su {{computer}}, che non è raggiungibile.",
         "connect": "Collega un computer",

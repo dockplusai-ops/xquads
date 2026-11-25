@@ -3486,7 +3486,7 @@
     "manageHint": "Kto może zmienić nazwę tego konta, zalogować się do niego ponownie i je usunąć. Zmienia to tylko osoba, która je połączyła.",
     "use": "Używanie w agentach",
     "useSub": "Wybór w Kto myśli",
-    "useHint": "Czyi agenci mogą myśleć z tym kontem i czyj Lodi. Zmienia to osoba, która nim zarządza.",
+    "useHint": "Czyi agenci mogą myśleć z tym kontem i czyj Doki. Zmienia to osoba, która nim zarządza.",
     "reply": "Obsługa wszystkich",
     "replySub": "Z kim rozmawiają agenci",
     "replyHint": "Komu odpowiada agent na tym koncie oprócz swojego właściciela. Warunki Claude wymagają, by z planu korzystała osoba, która za niego płaci: sprawdź je, zanim otworzysz go dla wszystkich.",

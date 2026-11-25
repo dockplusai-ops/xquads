@@ -3170,7 +3170,7 @@
     "brain": {
       "unusable": {
         "title": "Potrzebny komputer",
-        "computerOnly": "Należy do {{owner}}, zalogowany tylko na {{computer}}. Lodi myśli z planem zalogowanym jako konto.",
+        "computerOnly": "Należy do {{owner}}, zalogowany tylko na {{computer}}. Doki myśli z planem zalogowanym jako konto.",
         "noComputer": "Należy do {{owner}}. Potrzebny jest komputer, a workspace nie ma żadnego podłączonego.",
         "away": "Należy do {{owner}}, na {{computer}}, który jest niedostępny.",
         "connect": "Podłącz komputer",

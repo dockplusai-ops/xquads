@@ -3056,7 +3056,7 @@
     "brain": {
       "unusable": {
         "title": "Besoin d'un ordinateur",
-        "computerOnly": "De {{owner}}, connecté seulement sur {{computer}}. Lodi réfléchit avec un forfait connecté en tant que compte.",
+        "computerOnly": "De {{owner}}, connecté seulement sur {{computer}}. Doki réfléchit avec un forfait connecté en tant que compte.",
         "noComputer": "De {{owner}}. Il faut un ordinateur, et l'espace de travail n'en a aucun de connecté.",
         "away": "De {{owner}}, sur {{computer}}, qui est absent.",
         "connect": "Connecter un ordinateur",

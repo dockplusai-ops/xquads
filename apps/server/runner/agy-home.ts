@@ -16,7 +16,7 @@ import { CODEX_MCP_SERVER } from "./mcp";
 const settingsFile = (home: string) => path.join(home, ".gemini", "antigravity-cli", "settings.json");
 const configDir = (home: string) => path.join(home, ".gemini", "config");
 
-/** The agent Lodi's turns run as (`--agent`): no built-in tool, our server's alone. */
+/** The agent Doki's turns run as (`--agent`): no built-in tool, our server's alone. */
 export const AGY_CHAT_AGENT = "agenteschat-chat";
 
 /** How the account signs in (`auth.type`): a personal Google account, or Gemini Enterprise. */
@@ -199,7 +199,7 @@ export function agyKeychain(
 export const agyRuntimeDir = (home: string) => path.join(home, ".run");
 
 /**
- * What a turn could leave in the account's home that a later turn (another agent's, or Lodi's) would load as its
+ * What a turn could leave in the account's home that a later turn (another agent's, or Doki's) would load as its
  * own, outside every tool and the chat guard: global rules, skills, agents, hooks, plugins and their lists, project
  * settings, the ADC switch, and the rules files `agy` reads beside `.gemini/config`. Removed before every turn; the
  * sandbox keeps a turn's commands out of the home anyway.
@@ -229,7 +229,7 @@ export function agyMcpConfig(command: string[] | undefined): string {
   return `${JSON.stringify({ mcpServers: { [CODEX_MCP_SERVER]: server } }, null, 2)}\n`;
 }
 
-/** Lodi's agent: none of the CLI's tools, no commands, never a subagent; it answers through our server. */
+/** Doki's agent: none of the CLI's tools, no commands, never a subagent; it answers through our server. */
 export const agyChatAgent = (): string =>
   [
     "---",
@@ -245,7 +245,7 @@ export const agyChatAgent = (): string =>
   ].join("\n");
 
 /**
- * Before a turn: what an earlier turn planted dropped, then our settings, our server alone and Lodi's agent written
+ * Before a turn: what an earlier turn planted dropped, then our settings, our server alone and Doki's agent written
  * (each only when it differs).
  */
 export function prepareAgyHome(home: string, command: string[] | undefined) {

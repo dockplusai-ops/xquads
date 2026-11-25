@@ -77,8 +77,8 @@ const TeamWeekAct = z
   .openapi("TeamWeekAct");
 
 /**
- * What Lodi does for me by itself (ADR 0137 §9): my daily and weekly cards' hours, or off, its other switches of mine,
- * and a row of my card applied as me ("Criar rotina", asking Lodi for an agent, telling a task's agent to go on) or
+ * What Doki does for me by itself (ADR 0137 §9): my daily and weekly cards' hours, or off, its other switches of mine,
+ * and a row of my card applied as me ("Criar rotina", asking Doki for an agent, telling a task's agent to go on) or
  * "Agora não".
  */
 export function teamWeekRoutes(deps: AppDeps) {

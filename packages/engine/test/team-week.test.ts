@@ -133,7 +133,7 @@ describe("when it comes", () => {
     await setLodiPrefs(f.db, f.org.id, f.owner.id, { off: true });
     expect(await enqueueTeamWeeks(f.db, new Date(at.getTime() + 7 * DAY))).toBe(0);
     await setLodiPrefs(f.db, f.org.id, f.owner.id, { off: false });
-    // No agent but Lodi: no team, no card.
+    // No agent but Doki: no team, no card.
     await f.db.update(schema.agents).set({ archivedAt: new Date() }).where(eq(schema.agents.id, f.agent.id));
     expect(await enqueueTeamWeeks(f.db, new Date(at.getTime() + 7 * DAY))).toBe(0);
   });
@@ -216,7 +216,7 @@ describe("the card", () => {
     return { m, card };
   };
 
-  test("posted in the admin's DM with Lodi from stored data, each fix a row, once a week", async () => {
+  test("posted in the admin's DM with Doki from stored data, each fix a row, once a week", async () => {
     f = await setup({ rightHand: true });
     const { lodi, lia, parent } = await busyWeek(f);
     const id = await postTeamWeek({ db: f.db, pubsub: f.pubsub }, f.org.id, {
@@ -313,7 +313,7 @@ describe("the card", () => {
     ).toBeNull();
   });
 
-  test("rows apply as whoever clicks: the budget with Undo on the card, a routine, Lodi asked, the task's agent told", async () => {
+  test("rows apply as whoever clicks: the budget with Undo on the card, a routine, Doki asked, the task's agent told", async () => {
     f = await setup({ rightHand: true });
     const { lodi, dm, parent } = await busyWeek(f);
     const id = (await postTeamWeek({ db: f.db, pubsub: f.pubsub }, f.org.id, {
@@ -348,7 +348,7 @@ describe("the card", () => {
     expect(routine?.rule).toMatchObject({ freq: "daily", times: ["18:00"], timezone: ZONE });
     await expect(actOnTeamWeek(deps, f.owner.id, f.org.id, id, { rowId: row("routine").id })).rejects.toThrow();
 
-    // Lodi asked for an agent, as the person, in their DM with it.
+    // Doki asked for an agent, as the person, in their DM with it.
     await actOnTeamWeek(deps, f.owner.id, f.org.id, id, {
       rowId: row("unanswered").id,
       text: "Proponha um agente para as perguntas de #general.",
@@ -409,7 +409,7 @@ describe("the card", () => {
     expect(receipt?.kind).toBe("agent.settings_changed");
   });
 
-  test("telling Lodi to stop it: set_team_week, for the person behind the run", async () => {
+  test("telling Doki to stop it: set_team_week, for the person behind the run", async () => {
     f = await setup({ rightHand: true });
     const lodi = await lodiOf(f);
     const dm = await openPersonAgentDm(f.db, f.org.id, f.owner.id, lodi.id);
@@ -749,7 +749,7 @@ describe("suggestions on the week's card", () => {
     const mine = await unanswered(f.owner.id, month);
     expect(mine.row).toMatchObject({ id: `unanswered:${f.general.id}`, count: 3 });
     const deps = { db: f.db, pubsub: f.pubsub };
-    // "Dispensar" mutes that channel for me. Lodi is not asked anything.
+    // "Dispensar" mutes that channel for me. Doki is not asked anything.
     const card = await actOnTeamWeek(deps, f.owner.id, f.org.id, mine.id, { rowId: mine.row?.id ?? "", skip: true });
     expect(card.skipped?.[mine.row?.id ?? ""]).toMatchObject({ byUserId: f.owner.id });
     expect(card.done).toEqual({});
@@ -1345,7 +1345,7 @@ describe("Resumo do dia", () => {
     expect(card.stats.waiting).toBe(4);
   });
 
-  test("asked of Lodi: set_team_week moves it for the person behind the run", async () => {
+  test("asked of Doki: set_team_week moves it for the person behind the run", async () => {
     f = await setup({ rightHand: true });
     const bia = await addMember(f.db, f.org.id, "member", "bia");
     const lodi = await lodiOf(f);
@@ -1378,7 +1378,7 @@ describe("Resumo do dia", () => {
   });
 });
 
-test("what Lodi posts unasked is on by default and named on its page in every language", () => {
+test("what Doki posts unasked is on by default and named on its page in every language", () => {
   expect(LODI_PREFS_DEFAULTS).toMatchObject({ weekOff: false, dayOff: false });
   for (const [code, strings] of Object.entries(STRINGS)) {
     const words = strings as { teamWeek?: { settings?: { label?: string; dayLabel?: string } } };

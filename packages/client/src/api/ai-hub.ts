@@ -118,7 +118,7 @@ const agentId = (t: AiChoiceTarget) => (t.kind === "agent" || t.kind === "lodi" 
 const missionId = (t: AiChoiceTarget) => (t.kind === "mission" ? t.missionId : null);
 
 /**
- * The one "Quem pensa" choice for any target: an agent, Lodi (`mine`, with "A do workspace" first, or `workspace`), a
+ * The one "Quem pensa" choice for any target: an agent, Doki (`mine`, with "A do workspace" first, or `workspace`), a
  * new agent, a mission, several agents ("Usar em outros agentes") or an Automático tier. Built from `useAiHub` and the
  * target's own view; `save` goes where each target's choice is kept.
  */
@@ -155,7 +155,7 @@ export function useAiChoice(orgId: string, target: AiChoiceTarget): AiChoiceStat
     target,
     viewerId,
     current,
-    // An agent's plan thinks on its computer; Lodi's on any.
+    // An agent's plan thinks on its computer; Doki's on any.
     ...(target.kind === "agent" ? { machineId: view?.computer?.machineId ?? null } : {}),
     ...(target.kind === "agent" && view
       ? { usable: new Set(view.accounts.filter((a) => a.usable ?? a.serves !== "owner").map((a) => a.id)) }
@@ -177,7 +177,7 @@ export function useAiChoice(orgId: string, target: AiChoiceTarget): AiChoiceStat
         case "lodi": {
           const scope = target.kind === "lodi" ? target.scope : undefined;
           // On the API the model is the agent's own field (`…/brain` refuses one for the API brain); a person's own
-          // Lodi on the API is the workspace's, whose model isn't theirs to change.
+          // Doki on the API is the workspace's, whose model isn't theirs to change.
           if (choice.brain === "model") {
             const { model, ...rest } = choice;
             const fields = {

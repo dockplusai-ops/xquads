@@ -2821,7 +2821,7 @@
     "brain": {
       "unusable": {
         "title": "コンピューターが必要です",
-        "computerOnly": "{{owner}}のもの。{{computer}}でのみサインインしています。Lodiはアカウントとしてサインインしたプランで考えます。",
+        "computerOnly": "{{owner}}のもの。{{computer}}でのみサインインしています。Dokiはアカウントとしてサインインしたプランで考えます。",
         "noComputer": "{{owner}}のもの。コンピューターが必要ですが、ワークスペースには接続されたものがありません。",
         "away": "{{owner}}のもの。{{computer}}上にありますが、離席中です。",
         "connect": "コンピューターを接続",

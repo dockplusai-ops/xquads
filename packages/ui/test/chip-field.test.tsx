@@ -204,8 +204,8 @@ describe("Token", () => {
         <Token state="soft" note="já convidado" onRemove={() => {}} removeLabel="Remover bia@example.com">
           bia@example.com
         </Token>
-        <Token fixed tip="Todo mundo tem o Lodi." onRemove={() => {}} removeLabel="Remover Lodi">
-          Lodi
+        <Token fixed tip="Todo mundo tem o Doki." onRemove={() => {}} removeLabel="Remover Doki">
+          Doki
         </Token>
         <Token fresh>suporte</Token>
       </>,
@@ -216,7 +216,7 @@ describe("Token", () => {
     expect(soft?.getAttribute("data-state")).toBe("soft");
     expect(soft?.querySelector(".ac-token__note")?.textContent).toBe("já convidado");
     expect(fixed?.querySelector(".ac-token__remove")).toBeNull();
-    expect(body().queryByRole("button", { name: "Remover Lodi" })).toBeNull();
+    expect(body().queryByRole("button", { name: "Remover Doki" })).toBeNull();
     expect(fresh?.hasAttribute("data-fresh")).toBe(true);
   });
 });

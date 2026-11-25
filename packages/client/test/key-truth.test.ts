@@ -33,9 +33,9 @@ test("a refused key points at the provider's keys page, and any other failure is
 });
 
 test("removing a key says what happens to the agents on it, before it happens", () => {
-  const key = { id: "k1", usedBy: [{ id: "a", name: "Lodi" }] };
+  const key = { id: "k1", usedBy: [{ id: "a", name: "Doki" }] };
   expect(keyRemovalText(t, { id: "k1", usedBy: [] }, [{ id: "k1" }], false)).toContain("No agent thinks with it");
-  expect(keyRemovalText(t, key, [{ id: "k1" }], false)).toContain("Lodi thinks with this key and has nothing else");
+  expect(keyRemovalText(t, key, [{ id: "k1" }], false)).toContain("Doki thinks with this key and has nothing else");
   expect(keyRemovalText(t, key, [{ id: "k1" }, { id: "k2" }], false)).toContain("moves to another key");
   expect(keyRemovalText(t, key, [{ id: "k1" }], true)).toContain("moves to another key");
   const two = { id: "k1", usedBy: [...key.usedBy, { id: "b", name: "Rio" }] };
@@ -43,11 +43,11 @@ test("removing a key says what happens to the agents on it, before it happens", 
 });
 
 test("the right hand's words say which of its AIs moved", () => {
-  expect(thinksWithLine(t, "workspace", "Lodi", "OpenAI")).toBe(
-    "Lodi now thinks with OpenAI for everyone without a plan of their own.",
+  expect(thinksWithLine(t, "workspace", "Doki", "OpenAI")).toBe(
+    "Doki now thinks with OpenAI for everyone without a plan of their own.",
   );
-  expect(thinksWithLine(t, "mine", "Lodi", "ChatGPT")).toBe(
-    "Your conversation with Lodi now thinks with ChatGPT. Only yours does.",
+  expect(thinksWithLine(t, "mine", "Doki", "ChatGPT")).toBe(
+    "Your conversation with Doki now thinks with ChatGPT. Only yours does.",
   );
   expect(thinksWithLine(t, undefined, "Rio", "OpenAI")).toBe("Rio now thinks with OpenAI.");
 });
@@ -55,7 +55,7 @@ test("the right hand's words say which of its AIs moved", () => {
 test("what a person without a plan reads names the key, or that there is none", () => {
   const ai = { brain: "model", ownerId: null, servesYou: true } as const;
   const say = (over: object, platform = false) =>
-    rightHandFallback(t, { ...ai, ...over }, "me", { name: "Lodi" }, () => undefined, platform);
+    rightHandFallback(t, { ...ai, ...over }, "me", { name: "Doki" }, () => undefined, platform);
   expect(say({ key: { provider: "openai", label: "OpenAI" } })).toContain("the workspace's key: OpenAI");
   expect(say({ key: null })).toContain("no API key yet");
   expect(say({ key: null }, true)).toContain("the workspace's API key");

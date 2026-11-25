@@ -872,7 +872,7 @@ export async function insertMessageWithRuns(
               and cm.channel_id = ${input.channelId}::uuid)
             or ${rightHandReaches(sql`a`, sql`${input.channelId}::uuid`)})
       ), everyone_agents as (
-        -- The agents that answer this person here (the others aren't "blocked": nobody named them), never Lodi, nor
+        -- The agents that answer this person here (the others aren't "blocked": nobody named them), never Doki, nor
         -- one held (standing.ts: its run would only fail, as the router leaves it out).
         select a.id from ${agents} a
         join ${channelMembers} cm on cm.agent_id = a.id and cm.channel_id = ${input.channelId}::uuid

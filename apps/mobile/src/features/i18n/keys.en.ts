@@ -3467,7 +3467,7 @@ export const featureKeysEn = {
       "Who may rename this account, sign in to it again and remove it. Only whoever connected it changes this.",
     use: "Use in agents",
     useSub: "Pick it in Who thinks",
-    useHint: "Whose agents may think with this account, and whose Lodi. Whoever manages it changes this.",
+    useHint: "Whose agents may think with this account, and whose Doki. Whoever manages it changes this.",
     reply: "Answer everyone",
     replySub: "Who the agents talk to",
     replyHint:
@@ -3499,7 +3499,7 @@ export const featureKeysEn = {
       yours: "Yours",
       others: "Team's",
       keys: "API keys",
-      /** Lodi's own AI: the workspace's, first. */
+      /** Doki's own AI: the workspace's, first. */
       workspace: "The workspace's",
       workspaceSub: "The workspace's API key",
       key: "API key",

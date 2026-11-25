@@ -17,7 +17,7 @@ import {
 import { renderApp, screen, settle } from "./render";
 
 /**
- * ADR 0137 §11: "Sua IA" is every person's, the workspace's AI is the admins', and every row of Lodi's settings has the
+ * ADR 0137 §11: "Sua IA" is every person's, the workspace's AI is the admins', and every row of Doki's settings has the
  * same structure. Its page opens docked beside its conversation, like a thread, with nothing dimmed.
  */
 
@@ -41,7 +41,7 @@ const planOf = (ownerId: string | undefined) =>
 const groups = () => [...document.querySelectorAll(".rh-group .ac-grouphead__title")].map((h) => h.textContent);
 const row = (name: RegExp) => screen().getByRole("button", { name });
 
-test("Lodi's old settings address opens Lodi's page: three groups, the face opens the look, the fallback AI is one row that opens", async () => {
+test("Doki's old settings address opens Doki's page: three groups, the face opens the look, the fallback AI is one row that opens", async () => {
   const state = withRightHand(seedState(), { brain: { kind: "claude_code", model: "Sonnet" } });
   const api = createFakeApi(state);
   let onPlan = true;
@@ -72,7 +72,7 @@ test("Lodi's old settings address opens Lodi's page: three groups, the face open
   const { router } = await renderApp(`/org/${ORG_ID}/settings/right_hand`, { api });
   await settle(8);
   expect(router.state.location.pathname).toBe(`/org/${ORG_ID}/agents/${LODI_ID}`);
-  expect(groups()).toEqual(["Só para você", "O que o Lodi faz por conta própria", "Para todo o workspace· só admins"]);
+  expect(groups()).toEqual(["Só para você", "O que o Doki faz por conta própria", "Para todo o workspace· só admins"]);
   expect(screen().queryByRole("button", { name: "Mudar visual" })).toBeNull();
   // Each card stops and starts with the switch at its row's end, its selects in a group named after it: no button
   // of words beside them.
@@ -81,7 +81,7 @@ test("Lodi's old settings address opens Lodi's page: three groups, the face open
     const selects = screen().getByRole("group", { name });
     expect(within(selects.closest(".settings-row") as HTMLElement).getByRole("switch", { name })).toBeTruthy();
   }
-  await act(async () => fireEvent.click(screen().getByRole("button", { name: "Mudar o visual do Lodi" })));
+  await act(async () => fireEvent.click(screen().getByRole("button", { name: "Mudar o visual do Doki" })));
   await settle(4);
   expect(screen().getByRole("dialog", { name: "Mudar visual" })).toBeTruthy();
   await act(async () => fireEvent.click(screen().getByRole("button", { name: "Cancelar" })));
@@ -99,12 +99,12 @@ test("Lodi's old settings address opens Lodi's page: three groups, the face open
   // The row opens the one "Quem pensa" in place: its Conta, Modelo and Esforço, for the workspace.
   await act(async () => fireEvent.click(ai));
   await settle(4);
-  const dialog = screen().getByRole("dialog", { name: "Quem pensa pelo Lodi no workspace" });
+  const dialog = screen().getByRole("dialog", { name: "Quem pensa pelo Doki no workspace" });
   expect(within(dialog).getByRole("combobox", { name: "Conta" })).toBeTruthy();
   expect(dialog.textContent).toContain("Vale para quem não tem plano próprio.");
 });
 
-test("a member's Lodi page has nothing of the workspace's: Sua IA is one row that opens, and adds their plan from its account list", async () => {
+test("a member's Doki page has nothing of the workspace's: Sua IA is one row that opens, and adds their plan from its account list", async () => {
   const state = withRightHand(seedState());
   const me = state.me?.organizations[0];
   if (me) me.role = "member";
@@ -119,7 +119,7 @@ test("a member's Lodi page has nothing of the workspace's: Sua IA is one row tha
     });
   await renderApp(`/org/${ORG_ID}/agents/${LODI_ID}`, { api });
   await settle(8);
-  expect(groups()).toEqual(["Só para você", "O que o Lodi faz por conta própria"]);
+  expect(groups()).toEqual(["Só para você", "O que o Doki faz por conta própria"]);
   expect(screen().queryByText("Nome e visual")).toBeNull();
   expect(screen().queryByText("Quem pode usar")).toBeNull();
   const mine = row(/^Sua IA/);
@@ -127,15 +127,15 @@ test("a member's Lodi page has nothing of the workspace's: Sua IA is one row tha
   expect(screen().queryByRole("button", { name: "Conectar meu plano" })).toBeNull();
   await act(async () => fireEvent.click(mine));
   await settle(4);
-  const dialog = screen().getByRole("dialog", { name: "Quem pensa pelo Lodi para você" });
+  const dialog = screen().getByRole("dialog", { name: "Quem pensa pelo Doki para você" });
   // Who it is for: the footer's line.
-  expect(dialog.textContent).toContain("Vale só para a sua conversa com o Lodi.");
+  expect(dialog.textContent).toContain("Vale só para a sua conversa com o Doki.");
   // "Adicionar conta" at the account list's foot: Connect, over which this dialog closes.
   await openSelect(within(dialog).getByRole("combobox", { name: "Conta" }));
   await act(async () => fireEvent.click(screen().getByRole("button", { name: /^Adicionar conta/ })));
   await settle(6);
-  expect(screen().queryByRole("dialog", { name: "Quem pensa pelo Lodi para você" })).toBeNull();
-  expect(screen().getByRole("dialog", { name: /Lodi/ })).toBeTruthy();
+  expect(screen().queryByRole("dialog", { name: "Quem pensa pelo Doki para você" })).toBeNull();
+  expect(screen().getByRole("dialog", { name: /Doki/ })).toBeTruthy();
 });
 
 /** Ana's Claude plan on the workspace's computer, as Contas de IA lists it. */
@@ -159,7 +159,7 @@ const openSelect = async (combobox: HTMLElement) => {
   return screen().getAllByRole("option");
 };
 
-test("Sua IA is the one picker: A do workspace first, then the plans; picking it hands Lodi back to the workspace's", async () => {
+test("Sua IA is the one picker: A do workspace first, then the plans; picking it hands Doki back to the workspace's", async () => {
   const state = withRightHand(seedState());
   const api = createFakeApi(state);
   fakeMachinesOf.get(api)?.setAiAccounts({
@@ -196,7 +196,7 @@ test("Sua IA is the one picker: A do workspace first, then the plans; picking it
   await settle(8);
   await act(async () => fireEvent.click(row(/^Sua IA/)));
   await settle(4);
-  const dialog = screen().getByRole("dialog", { name: "Quem pensa pelo Lodi para você" });
+  const dialog = screen().getByRole("dialog", { name: "Quem pensa pelo Doki para você" });
   const account = within(dialog).getByRole("combobox", { name: "Conta" });
   expect(account.querySelector(".aa-opt__name")?.textContent).toBe("Trabalho");
   const options = await openSelect(account);
@@ -204,7 +204,7 @@ test("Sua IA is the one picker: A do workspace first, then the plans; picking it
     "A do workspace",
     "Trabalho",
   ]);
-  // Lodi's own AI takes no key of the workspace's: "A do workspace" is it.
+  // Doki's own AI takes no key of the workspace's: "A do workspace" is it.
   expect(screen().queryByRole("group", { name: "Chaves de API" })).toBeNull();
   await act(async () => fireEvent.click(options[0] as HTMLElement));
   await settle(8);
@@ -247,7 +247,7 @@ test("the workspace's AI: Modelo and Esforço beside each other, each saved as i
   await settle(8);
   await act(async () => fireEvent.click(row(/^IA de quem não tem plano próprio/)));
   await settle(4);
-  const dialog = screen().getByRole("dialog", { name: "Quem pensa pelo Lodi no workspace" });
+  const dialog = screen().getByRole("dialog", { name: "Quem pensa pelo Doki no workspace" });
   const pair = dialog.querySelector(".aa-pair") as HTMLElement;
   const model = within(pair).getByRole("combobox", { name: "Modelo" });
   await act(async () =>
@@ -261,7 +261,7 @@ test("the workspace's AI: Modelo and Esforço beside each other, each saved as i
   expect(sent.at(-1)).toMatchObject({ scope: "workspace", effort: "high" });
 });
 
-test("Poderes do workspace is one row for everyone that opens what only Lodi does", async () => {
+test("Poderes do workspace is one row for everyone that opens what only Doki does", async () => {
   const state = withRightHand(seedState());
   const me = state.me?.organizations[0];
   if (me) me.role = "member";
@@ -280,11 +280,11 @@ test("Poderes do workspace is one row for everyone that opens what only Lodi doe
   ]);
 });
 
-test("Lodi's page has four tabs: its settings, what it may use on the agent page's own access tab, its skills, and what it keeps for the viewer", async () => {
+test("Doki's page has four tabs: its settings, what it may use on the agent page's own access tab, its skills, and what it keeps for the viewer", async () => {
   const state = withRightHand(seedState());
   await renderApp(`/org/${ORG_ID}/agents/${LODI_ID}`, { api: createFakeApi(state) });
   await settle(8);
-  const tabs = () => within(screen().getByRole("tablist", { name: "Seções do Lodi" })).getAllByRole("tab");
+  const tabs = () => within(screen().getByRole("tablist", { name: "Seções do Doki" })).getAllByRole("tab");
   expect(tabs().map((tab) => tab.textContent)).toEqual(["Configurações", "Ferramentas e acesso", "Skills", "Memória"]);
   expect(tabs()[0]?.getAttribute("aria-selected")).toBe("true");
   expect(row(/^Poderes do workspace/)).toBeTruthy();
