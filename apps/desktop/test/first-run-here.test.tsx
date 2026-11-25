@@ -439,7 +439,9 @@ describe("Install on a server or VPS", () => {
           "On the server, open the Terminal (or connect over SSH) and paste this",
           "At the end a link shows up. Open it here and that's it.",
         ]);
-        expect(el.querySelector(".dk-fr__ways code")?.textContent).toBe("curl -fsSL https://agents.xquads.com/install | sh");
+        expect(el.querySelector(".dk-fr__ways code")?.textContent).toBe(
+          "curl -fsSL https://agents.xquads.com/install | sh",
+        );
         await press("Copy the instructions");
         await until(() => button("Instructions copied"));
         expect(copied).toHaveLength(1);

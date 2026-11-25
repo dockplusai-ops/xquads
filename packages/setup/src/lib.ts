@@ -1592,9 +1592,7 @@ export function nextSteps(p: {
   } else if (p.network === "domain" || p.network === "proxy") {
     steps.push(`Open ${p.url} and ${account}.`);
     if (hasAppLink(p.url)) {
-      steps.push(
-        `Phone: point the camera at the QR code above, or on the xquads app's sign-in screen ${SCAN_IN_APP}.`,
-      );
+      steps.push(`Phone: point the camera at the QR code above, or on the xquads app's sign-in screen ${SCAN_IN_APP}.`);
     }
   } else {
     const port = new URL(p.url).port || "80";
