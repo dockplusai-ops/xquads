@@ -117,7 +117,6 @@ export function GalleryPage() {
       <Section title="Logo">
         <div className="row" style={{ gap: 32 }}>
           <Logo size={32} />
-          <Logo variant="expanded" size={32} />
           <Logo mono size={24} />
         </div>
       </Section>
