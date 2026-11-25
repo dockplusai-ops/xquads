@@ -2580,8 +2580,9 @@
         const s = style(row);
         if (!s.display.includes("flex") || s.flexDirection !== "row" || s.flexWrap !== "wrap" || s.direction === "rtl")
           continue;
-        const toEnd = ["flex-end", "end", "right"].includes(s.justifyContent);
-        if (!toEnd && !["normal", "flex-start", "start", "left"].includes(s.justifyContent)) continue;
+        // Newer Chrome reads `flex-end` back as `flow-end` (and `flex-start` as `flow-start`).
+        const toEnd = ["flex-end", "flow-end", "end", "right"].includes(s.justifyContent);
+        if (!toEnd && !["normal", "flex-start", "flow-start", "start", "left"].includes(s.justifyContent)) continue;
         const kids = flow(row);
         if (kids.length < 2) continue;
         const r = row.getBoundingClientRect();

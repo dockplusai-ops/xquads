@@ -1,9 +1,11 @@
 import { useAuthConfig } from "@agenteschat/client";
-import { HELP, type HelpBlock, helpDocument, helpInline, isHelpSlug } from "@agenteschat/i18n/help";
+import { type HelpBlock, helpInline, isHelpSlug } from "@agenteschat/i18n/help/core";
+import { loadHelpDocument } from "@agenteschat/i18n/help/load";
 import { isAppLocale } from "@agenteschat/i18n/locale";
 import { Logo, Select } from "@agenteschat/ui";
+import { useQuery } from "@tanstack/react-query";
 import { Link, Navigate, useNavigate } from "@tanstack/react-router";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { DEFAULT_LOCALE, type LocaleCode, locales, usePageT } from "@/i18n";
 import { useDocumentTitle } from "@/lib/desktop";
@@ -20,15 +22,28 @@ export function HelpPage({ slug, lang }: { slug: string; lang?: LocaleCode }) {
   const locale: LocaleCode = lang ?? (isAppLocale(i18n.language) ? i18n.language : DEFAULT_LOCALE);
   const t = usePageT(locale);
   const config = useAuthConfig().data;
-  const doc = isHelpSlug(slug) ? helpDocument(slug, locale) : null;
+  const known = isHelpSlug(slug);
+  // Only this language's pages load (and English where it has no translation): never all fourteen.
+  const page = useQuery({
+    queryKey: ["help", slug, locale],
+    queryFn: () => loadHelpDocument(slug as Parameters<typeof loadHelpDocument>[0], locale),
+    enabled: known,
+    staleTime: Number.POSITIVE_INFINITY,
+  });
+  const doc = page.data?.doc;
   useDocumentTitle(doc ? `${doc.title} · xquads` : undefined);
-  if (!doc) return <Navigate to="/" replace />;
+  // A link to a section (`#folders`): the browser looked for it before the page came, so it scrolls once it's here.
+  useEffect(() => {
+    if (!doc || !window.location.hash) return;
+    document.getElementById(decodeURIComponent(window.location.hash.slice(1)))?.scrollIntoView();
+  }, [doc]);
+  if (!known) return <Navigate to="/" replace />;
 
   // The page's language only (its link's `?lang=`): the app's own is picked in Settings.
   const switchTo = (code: LocaleCode) =>
     void navigate({ to: "/help/$slug", params: { slug }, search: { lang: code }, replace: true });
   // The page's own language: English where `locale` has no translation of it yet.
-  const shown = isHelpSlug(slug) && HELP[locale][slug] ? locale : DEFAULT_LOCALE;
+  const shown = page.data?.shown ?? locale;
   return (
     <div className="legal help" lang={shown}>
       <header className="legal__bar">
@@ -43,29 +58,34 @@ export function HelpPage({ slug, lang }: { slug: string; lang?: LocaleCode }) {
           options={locales.map((l) => ({ value: l.code, label: l.label }))}
         />
       </header>
-      <main className="page page--narrow">
-        <header className="legal__head">
-          <h1 className="page-title">{doc.title}</h1>
-          <p className="page-sub">{doc.summary}</p>
-        </header>
-        <article className="md help__doc">
-          {doc.sections.map((s) => (
-            <section key={s.id} id={s.id}>
-              <h2>{s.heading}</h2>
-              {s.blocks.map((b, i) => (
-                // biome-ignore lint/suspicious/noArrayIndexKey: the text is fixed, its order never changes
-                <Block key={i} block={b} />
-              ))}
-            </section>
-          ))}
-        </article>
-        {config?.termsUrl && config.privacyUrl && (
-          <footer className="legal__foot help__foot">
-            <a href={config.termsUrl}>{t("auth.terms")}</a>
-            <a href={config.privacyUrl}>{t("auth.privacy")}</a>
-          </footer>
-        )}
-      </main>
+      {!doc ? (
+        // The language's pages on their way (a few KB): the bar stays, the page comes in place.
+        <main className="page page--narrow" aria-busy="true" />
+      ) : (
+        <main className="page page--narrow">
+          <header className="legal__head">
+            <h1 className="page-title">{doc.title}</h1>
+            <p className="page-sub">{doc.summary}</p>
+          </header>
+          <article className="md help__doc">
+            {doc.sections.map((s) => (
+              <section key={s.id} id={s.id}>
+                <h2>{s.heading}</h2>
+                {s.blocks.map((b, i) => (
+                  // biome-ignore lint/suspicious/noArrayIndexKey: the text is fixed, its order never changes
+                  <Block key={i} block={b} />
+                ))}
+              </section>
+            ))}
+          </article>
+          {config?.termsUrl && config.privacyUrl && (
+            <footer className="legal__foot help__foot">
+              <a href={config.termsUrl}>{t("auth.terms")}</a>
+              <a href={config.privacyUrl}>{t("auth.privacy")}</a>
+            </footer>
+          )}
+        </main>
+      )}
     </div>
   );
 }

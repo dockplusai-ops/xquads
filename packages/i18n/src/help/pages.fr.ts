@@ -1,4 +1,4 @@
-import type { HelpSlug } from "./index";
+import type { HelpSlug } from "./core";
 import type { HelpDocument } from "./types";
 
 /** The help pages in fr: a page not here shows in English. */

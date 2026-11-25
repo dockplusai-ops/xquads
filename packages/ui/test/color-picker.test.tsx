@@ -46,10 +46,10 @@ describe("ColorPicker", () => {
       <ColorPicker value="amber" onChange={(h) => picked.push(h)} onDone={() => done++} labels={labels} />,
     );
     const hex = view.getByRole("textbox", { name: labels.hex }) as HTMLInputElement;
-    expect(hex.value).toBe("#c07d0b");
+    expect(hex.value).toBe("#d3c3b9");
     expect(picked).toEqual([]);
     await act(async () => fireEvent.keyDown(view.getByRole("slider", { name: labels.area }), { key: "Enter" }));
-    expect(picked).toEqual(["#c07d0b"]);
+    expect(picked).toEqual(["#d3c3b9"]);
     expect(done).toBe(1);
   });
 });

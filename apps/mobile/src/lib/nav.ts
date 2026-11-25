@@ -1,4 +1,5 @@
 import { light } from "@agenteschat/tokens";
+import { mixHex } from "@agenteschat/ui/agent/engine";
 
 /**
  * Pure helpers for the native navigation (tab bar, headers, sheets). No React Native imports, so the
@@ -28,7 +29,8 @@ export { contrastRatio } from "@agenteschat/ui/sky/math";
  * text in white (UIKit has no text color for tab badges), so the background must be dark enough for it;
  * the light theme's danger red is, and it stays legible on the dark bar too.
  */
-export const TAB_BADGE = { background: light.danger, text: "#ffffff" } as const;
+// xquads' danger (terracotta) darkened by 30%: white on it is AA (5.1:1).
+export const TAB_BADGE = { background: mixHex(light.danger, "#000000", 0.3), text: "#ffffff" } as const;
 
 /** A quick double tap's two presses fall within this. */
 export const AGAIN_MS = 600;

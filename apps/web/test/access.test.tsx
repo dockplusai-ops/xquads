@@ -300,7 +300,7 @@ describe("Criar agente → connector levels", () => {
     expect(within(github).getByRole("radio", { name: "Ler" }).getAttribute("aria-checked")).toBe("true");
     await click(within(github).getByRole("radio", { name: "Ler e escrever" }));
     await proceed(3);
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     const created = state.calls.find((c) => c.method === "agents.create");
     expect(created).toBeTruthy();
@@ -322,7 +322,7 @@ describe("Criar agente → connector levels", () => {
     await toTools(state);
     await click(within(githubLevels()).getByRole("radio", { name: "Sem acesso" }));
     await proceed(3);
-    await click(screen().getByRole("button", { name: "Criar Iris" }));
+    await click(screen().getByRole("button", { name: "Criar Duda" }));
     await settle(8);
     expect(state.calls.some((c) => c.method === "agents.create")).toBe(true);
     expect(state.calls.some((c) => c.method === "access.set")).toBe(false);

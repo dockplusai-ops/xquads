@@ -52,21 +52,8 @@ describe("profile photo", () => {
     expect(zoneHint?.textContent).toBe("Mostra a sua hora local no seu cartão de perfil.");
     await click(within(profile).getByRole("button", { name: "Trocar foto" }));
     await settle(2);
-    // The question comes first: build an avatar or upload a photo.
-    const ask = screen().getByRole("dialog", { name: "Como você quer aparecer?" });
-    expect(within(ask).getByRole("button", { name: /^Enviar uma foto/ })).toBeTruthy();
-    await click(within(ask).getByRole("button", { name: /^Criar um avatar/ }));
-    await settle(2);
-    // The builder: Masculine or Feminine, its tabs, and the photo one link away.
-    const builder = screen().getByRole("dialog", { name: "Seu avatar" });
-    expect(within(builder).getByRole("radio", { name: "Masculino" })).toBeTruthy();
-    expect(
-      within(builder)
-        .getAllByRole("tab")
-        .map((el) => el.textContent),
-    ).toEqual(["Rosto", "Cabelo", "Barba", "Marcas", "Acessórios", "Roupa", "Fundo"]);
-    await click(within(builder).getByRole("button", { name: "Enviar foto" }));
-    await settle(2);
+    // xquads has no avatar builder (`PORTRAITS`): the photo to upload, at once.
+    expect(screen().queryByRole("dialog", { name: "Como você quer aparecer?" })).toBeNull();
     const dialog = screen().getByRole("dialog", { name: "Foto do perfil" });
     expect(within(dialog).getByRole("button", { name: /Solte uma imagem aqui/ })).toBeTruthy();
     expect((within(dialog).getByRole("button", { name: "Salvar" }) as HTMLButtonElement).disabled).toBe(true);

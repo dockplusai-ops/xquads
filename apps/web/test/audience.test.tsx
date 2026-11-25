@@ -174,16 +174,16 @@ describe("Quem pode falar com a Ada", () => {
     const state = await go("agents/new");
     await startAs("PM");
     await proceed(3);
-    const group = screen().getByRole("radiogroup", { name: "Quem pode falar com o Theo" });
+    const group = screen().getByRole("radiogroup", { name: "Quem pode falar com o Enzo" });
     expect(
       within(group)
         .getByRole("radio", { name: /Todos do workspace/ })
         .getAttribute("aria-checked"),
     ).toBe("true");
     await click(within(group).getByRole("radio", { name: /Só o responsável/ }));
-    expect(document.body.textContent).toContain("Só Walter fala com o Theo.");
+    expect(document.body.textContent).toContain("Só Walter fala com o Enzo.");
     await proceed(2);
-    await click(screen().getByRole("button", { name: "Criar Theo" }));
+    await click(screen().getByRole("button", { name: "Criar Enzo" }));
     await settle(6);
     expect(
       (state.calls.find((c) => c.method === "agents.create")?.args[1] as { audience?: unknown } | undefined)?.audience,
@@ -194,12 +194,12 @@ describe("Quem pode falar com a Ada", () => {
     const state = await go("agents/new");
     await startAs("PM");
     await proceed(3);
-    const group = screen().getByRole("radiogroup", { name: "Quem pode falar com o Theo" });
+    const group = screen().getByRole("radiogroup", { name: "Quem pode falar com o Enzo" });
     await click(within(group).getByRole("radio", { name: /Só algumas pessoas/ }));
     expect(document.body.textContent).toContain("Só você, por enquanto");
     expect(document.body.textContent).not.toContain("sempre pode, como responsável");
     await proceed(2);
-    await click(screen().getByRole("button", { name: "Criar Theo" }));
+    await click(screen().getByRole("button", { name: "Criar Enzo" }));
     await settle(6);
     expect(
       (state.calls.find((c) => c.method === "agents.create")?.args[1] as { audience?: unknown } | undefined)?.audience,

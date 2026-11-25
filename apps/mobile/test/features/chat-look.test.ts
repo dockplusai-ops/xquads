@@ -36,7 +36,10 @@ describe("the bubbles' colors", () => {
     const deep = gradientOf("green")[1];
     expect(bubbleFill("green", "light", "#ffffff", false)).toBe(mixHex("#ffffff", deep, 0.2));
     expect(bubbleFill("green", "light", "#111110", true)).toBe(mixHex("#111110", deep, 0.3));
-    expect(bubbleFill("green", "strong", "#ffffff", false)).toBe(mixHex(deep, "#000000", 0.18));
+    // Strong: the deep color darkened just enough for white on it to be AA.
+    const strong = bubbleFill("green", "strong", "#ffffff", false);
+    expect(strong).not.toBe(deep);
+    expect(contrastOf("#ffffff", strong)).toBeGreaterThanOrEqual(4.5);
   });
 
   const colors = [...Object.keys(AGENT_GRADIENTS), "#ffff00", "#00ffff", "#ffffff"] as AgentColorName[];

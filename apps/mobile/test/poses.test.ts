@@ -30,13 +30,12 @@ test("seeds are stable and small", () => {
   expect(seedOf("agent-1")).toBeLessThan(8);
 });
 
-test("layout leaves room for an accessory at every size (the composer's and the bar's faces too)", () => {
-  expect(agentLayout(20, true).withAccessory).toBe(true);
-  expect(agentLayout(20, false).withAccessory).toBe(false);
-  const big = agentLayout(40, true);
-  expect(big.withAccessory).toBe(true);
-  expect(big.inner).toBeCloseTo(29.6);
-  expect(big.y + big.inner).toBeCloseTo(40);
+test("layout: xquads' flat face fills its box at every size, with no room kept for an accessory", () => {
+  for (const size of [20, 40]) {
+    const face = agentLayout(size, true);
+    expect(face.withAccessory).toBe(false);
+    expect(face).toMatchObject({ x: 0, y: 0, inner: size });
+  }
   expect(agentLayout(16, false).cells).toBe(9);
   expect(agentLayout(30, false).cells).toBe(12);
   expect(agentLayout(80, false).cells).toBeUndefined();
@@ -57,15 +56,10 @@ test("framed: list and chat faces get the sky tile, tiny faces and heroes don't 
   expect(framedByDefault(78)).toBe(false);
 });
 
-test("framed layout: the agent stands centered above the bottom edge, smaller with an accessory", () => {
-  const plain = framedLayout(50, false);
-  expect(plain.inner).toBeCloseTo(33);
-  expect(plain.x).toBeCloseTo(8.5);
-  expect(plain.y + plain.inner).toBeCloseTo(50 - 7);
-  const hat = framedLayout(50, true);
-  expect(hat.withAccessory).toBe(true);
-  expect(hat.inner).toBeLessThan(plain.inner);
-  expect(framedLayout(22, true).withAccessory).toBe(true);
+test("framed layout: in xquads the agent is the tile itself, an accessory or not", () => {
+  expect(framedLayout(50, false)).toMatchObject({ x: 0, y: 0, inner: 50, withAccessory: false });
+  expect(framedLayout(50, true)).toEqual(framedLayout(50, false));
+  expect(framedLayout(22, true).withAccessory).toBe(false);
 });
 
 test("the ink orbit: the head in full ink, a fading trail, the rest faint", () => {

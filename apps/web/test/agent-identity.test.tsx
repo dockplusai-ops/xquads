@@ -90,6 +90,12 @@ describe("the agent's identity as a card", () => {
     expect(document.activeElement === roleField()).toBe(true);
     // As it opens, every role "Criar agente" offers, the one it has highlighted and marked.
     expect(options().map((o) => o.textContent)).toEqual([
+      "Orçamentos",
+      "Agenda",
+      "Atendimento em inglês",
+      "Cobranças",
+      "Avaliações e redes",
+      "Equipe e rotas",
       "Devatual",
       "Ops",
       "QA",
@@ -104,12 +110,13 @@ describe("the agent's identity as a card", () => {
       "Pesquisa",
       "Assistente",
     ]);
-    expect(options()[0]?.getAttribute("aria-selected")).toBe("true");
-    expect(roleField().getAttribute("aria-activedescendant")).toBe(options()[0]?.id ?? "");
+    // Its own role highlighted, after xquads' six service roles.
+    expect(options()[6]?.getAttribute("aria-selected")).toBe("true");
+    expect(roleField().getAttribute("aria-activedescendant")).toBe(options()[6]?.id ?? "");
     // The arrows move, Enter picks; the focus goes back to the tag.
     await press(roleField(), "ArrowDown");
-    expect(options()[1]?.getAttribute("aria-selected")).toBe("true");
-    expect(roleField().getAttribute("aria-activedescendant")).toBe(options()[1]?.id ?? "");
+    expect(options()[7]?.getAttribute("aria-selected")).toBe("true");
+    expect(roleField().getAttribute("aria-activedescendant")).toBe(options()[7]?.id ?? "");
     await press(roleField(), "Enter");
     expect(roleButton().textContent).toBe("Ops");
     expect(document.activeElement === roleButton()).toBe(true);
@@ -117,9 +124,9 @@ describe("the agent's identity as a card", () => {
     // Typing filters and offers what was typed; Enter takes the highlighted one, the first.
     await click(roleButton());
     await typeIn(roleField(), "aten");
-    expect(options().map((o) => o.textContent)).toEqual(["Atendimento", "Usar “aten”"]);
+    expect(options().map((o) => o.textContent)).toEqual(["Atendimento em inglês", "Atendimento", "Usar “aten”"]);
     await press(roleField(), "Enter");
-    expect(roleButton().textContent).toBe("Atendimento");
+    expect(roleButton().textContent).toBe("Atendimento em inglês");
 
     // A role of its own, picked with a click.
     await click(roleButton());

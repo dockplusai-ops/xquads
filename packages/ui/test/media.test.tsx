@@ -97,42 +97,20 @@ function recorder() {
 }
 
 describe("the agents' stickers (ADR 0091)", () => {
-  test("seven moods, each drawn with the engine's subset only, the same frame for the same moment", () => {
+  test("seven moods, each drawn with the engine's subset only: in xquads the agent's still face, whatever the mood", () => {
     expect([...STICKER_MOODS]).toEqual(["celebrate", "love", "deal", "thinking", "wow", "dizzy", "wave"]);
-    const look = { color: "amber", eyes: "round", accessory: "beanie" };
-    for (const mood of STICKER_MOODS) {
-      const a = recorder();
-      drawSticker(a.ctx, look, mood, 1.3, 128);
-      expect(a.calls.filter((c) => c.startsWith("fillRect")).length).toBeGreaterThan(50);
-      const b = recorder();
-      drawSticker(b.ctx, look, mood, 1.3, 128);
-      expect(b.calls).toEqual(a.calls);
-    }
-    // It moves: another moment is another frame.
-    const now = recorder();
-    const later = recorder();
-    drawSticker(now.ctx, look, "celebrate", 0.2, 128);
-    drawSticker(later.ctx, look, "celebrate", 0.5, 128);
-    expect(later.calls).not.toEqual(now.calls);
-  });
-
-  test("the hearts fade with their color's alpha, in the agent's own tones (rose: #f58aa6, #c9406a)", () => {
-    const { ctx, calls } = recorder();
-    drawSticker(ctx, { color: "rose" }, "love", STICKER_STILL_T, 128);
-    const hearts = calls.filter((c) => /^fillStyle=rgba\((245, 138, 166|201, 64, 106), 0\.\d+\)$/.test(c));
-    expect(hearts.length).toBeGreaterThan(0);
-  });
-
-  test("the wave, a mood people and agents send, waves, rests on its still frame as long, then waves again", () => {
-    const frame = (t: number) => {
+    const frame = (mood: (typeof STICKER_MOODS)[number], t: number, color = "amber") => {
       const r = recorder();
-      drawSticker(r.ctx, { color: "teal" }, "wave", t, 128);
+      drawSticker(r.ctx, { color, eyes: "round", accessory: "beanie" }, mood, t, 128);
       return r.calls;
     };
-    const still = frame(STICKER_STILL_T);
-    expect(frame(0.1)).not.toEqual(still);
-    expect(frame(WAVE_SECONDS + 0.5)).toEqual(still);
-    expect(frame(WAVE_SECONDS * 2 + 0.1)).toEqual(frame(0.1));
+    const face = frame("celebrate", STICKER_STILL_T);
+    expect(face.length).toBeGreaterThan(0);
+    // No pixel props (hands, confetti, hearts) and no motion: every mood and moment draws the same face.
+    for (const mood of STICKER_MOODS)
+      for (const t of [0.1, 0.5, WAVE_SECONDS + 0.5]) expect(frame(mood, t)).toEqual(face);
+    // The agent's color still tells one from another.
+    expect(frame("love", STICKER_STILL_T, "rose")).not.toEqual(face);
   });
 
   test("a seed keeps stickers side by side out of step, the same one for the same agent", () => {
