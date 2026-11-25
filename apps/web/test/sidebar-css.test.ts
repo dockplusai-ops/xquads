@@ -236,9 +236,9 @@ test("New agent's empty face is the agents' own: their size token in each mode a
     "var(--sidebar-agent-face)",
     "var(--sidebar-agent-face)",
   ]);
-  // The framed tile's shape (radius 30% of the side), and as far from its name as an agent's face is from theirs.
+  // The framed agent's shape (`--radius-agent`), and as far from its name as an agent's face is from theirs.
   const kit = await Bun.file(join(import.meta.dir, "../../../packages/ui/src/styles/components.css")).text();
-  const framed = declarations(kit, ".ac-avatar.ac-avatar--framed").findLast(([p]) => p === "border-radius")?.[1];
+  const framed = declarations(kit, ".ac-avatar--framed.ac-avatar--agent").findLast(([p]) => p === "border-radius")?.[1];
   expect(value(tile, "border-radius")).toBe(framed);
   expect(value('.sidebar:not([data-rail="true"]) .sidebar__new-agent', "gap")).toBe("var(--sidebar-agent-gap)");
   expect(

@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { THEME_CHOICE } from "@agenteschat/tokens";
 import { accentPalette, accentSky } from "@agenteschat/tokens/accent";
 import { bodyTones, gradientOf } from "@agenteschat/ui/agent/engine";
 import { contrastRatio } from "../src/lib/nav";
@@ -7,7 +8,9 @@ import { ditherPaths } from "../src/ui/role-mark";
 
 describe("a workspace's accent on the phone (ADR 0193)", () => {
   test("its agent colors take the place of the theme's, in both themes, and nothing else moves", () => {
-    for (const scheme of ["light", "dark"] as const) {
+    // The schemes the app shows: dark alone while xquads hides the Theme choice (its native light sheet never opens).
+    const schemes = THEME_CHOICE ? (["light", "dark"] as const) : (["dark"] as const);
+    for (const scheme of schemes) {
       const base = appColors(scheme);
       const painted = withAccent(base, scheme, "#F97316");
       const want = accentPalette("#f97316")[scheme];

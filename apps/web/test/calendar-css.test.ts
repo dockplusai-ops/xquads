@@ -3,6 +3,7 @@ import path from "node:path";
 import { AGENT_COLORS } from "@agenteschat/ui";
 import { gradientOf } from "@agenteschat/ui/agent/engine";
 import { contrastRatio, mix } from "@agenteschat/ui/sky/math";
+import { THEME_CHOICE } from "../src/lib/theme";
 import { atRule, declarations, rules, topLevel } from "./built-css";
 
 const ROOT = path.join(import.meta.dir, "../../..");
@@ -198,7 +199,8 @@ describe("every item's words read on its fill", () => {
       }),
     ];
     const low: string[] = [];
-    for (const [theme, tokens] of Object.entries(t)) {
+    // The themes the app shows: dark alone while xquads hides the Theme choice.
+    for (const [theme, tokens] of Object.entries(t).filter(([name]) => THEME_CHOICE || name === "dark")) {
       for (const owner of owners) {
         const [accent, light] = owner.ends(tokens);
         const vars: Record<string, string> = { ...tokens, "cal-accent": accent, "cal-light": light };

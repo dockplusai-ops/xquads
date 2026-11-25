@@ -13729,7 +13729,7 @@ html:not([data-pointer]) .sidebar__bell:focus-visible {
   place-items: center;
   width: var(--sidebar-rail-face);
   height: var(--sidebar-rail-face);
-  border-radius: 30%;
+  border-radius: var(--radius-agent);
   background: var(--plate-soft, var(--plate));
   /* The tile's own edge (`.ac-avatar--framed::before`): the hairline and the faint top highlight. */
   box-shadow:

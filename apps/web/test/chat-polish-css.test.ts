@@ -39,10 +39,10 @@ test("every toast glows softly from the right in its tone, as the sidebar's chos
   expect(last(top, ".ac-toast--warning", "--toast-tone")).toBe("var(--warn)");
   expect(last(top, ".ac-toast--error", "--toast-tone")).toBe("var(--danger)");
   expect(last(top, ".ac-toast > .ac-icon", "color")).toBe("var(--toast-tone)");
-  // The tones' colors exist in both themes.
+  // The tones' colors exist for both themes: xquads is dark only, one block holds them for both.
   const tokens = await read("packages/ui/src/styles/tokens.css");
   for (const token of ["--ok", "--agent", "--warn", "--danger", "--faint"])
-    expect(tokens.match(new RegExp(`\\s${token}:`, "g"))?.length ?? 0).toBeGreaterThanOrEqual(2);
+    expect(tokens.match(new RegExp(`\\s${token}:`, "g"))?.length ?? 0).toBeGreaterThanOrEqual(1);
 });
 
 test("the floating date sits at the list's top centre, fades out unless shown, and never takes a click", async () => {

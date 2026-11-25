@@ -307,8 +307,9 @@ describe("the account card", () => {
     const layout = topLevel(await read("apps/web/src/layout.css"));
     const presence = topLevel(await read("apps/web/src/components/presence.css"));
     const tokens = await read("packages/ui/src/styles/tokens.css");
-    // `ex` follows the app's font-size-adjust; a line's capitals' top and middle sit that many ex over its middle.
-    const adjust = px(/--font-size-adjust:\s*([\d.]+)/.exec(await read("apps/web/src/styles.css"))?.[1]);
+    // `ex` follows the app's font-size-adjust, or with none the face's own x-height (Onest's, 0.527 of its size); a
+    // line's capitals' top and middle sit that many ex over its middle.
+    const adjust = px(/--font-size-adjust:\s*([\d.]+)/.exec(await read("apps/web/src/styles.css"))?.[1] ?? "0.527");
     const token = (name: string) => px(new RegExp(`${name}:\\s*([\\d.]+)ex`).exec(tokens)?.[1]);
     const capTop = token("--cap-top");
     const capMid = token("--cap-mid");
