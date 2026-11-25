@@ -7,6 +7,7 @@ import type {
   BrainMachine,
   MachineAccountKind,
   Model,
+  PlanSignIns,
   PlanUsage,
 } from "../api/types";
 import { accountChoices, accountTitle, ownSignInReady } from "./ai-accounts";
@@ -158,6 +159,7 @@ export function brainPickOptions(
     accounts,
     ownerIsMe,
     held = false,
+    plans: signIns,
   }: {
     /** `modelChoices(…)`. */
     api: [string, ModelChoice[]][];
@@ -169,6 +171,8 @@ export function brainPickOptions(
     ownerIsMe: boolean;
     /** A billing hold stops the plans (`planHoldOf`): that, not the computers, is why they are off. */
     held?: boolean;
+    /** The server's plan sign-ins (`AuthConfig.planSignIns`): with Claude's off, no Claude plan row. */
+    plans?: PlanSignIns;
   },
 ): BrainPickOption[] {
   const auto: BrainPickOption = {
@@ -191,7 +195,11 @@ export function brainPickOptions(
         .map((c) => c.login)
         .filter((a) => a.mine && a.status === "active" && (a.shared === true || a.usedBy.length === 0))
     : [];
-  const plans = PLAN_CHOICES.flatMap((choice): BrainPickOption[] => {
+  // With Claude's sign-ins off on the server, a Claude plan shows only for an account the person already has on it.
+  const listed = PLAN_CHOICES.filter(
+    (c) => c !== "claude" || signIns?.claude !== false || ready.some((a) => planOfAccount(a) === c),
+  );
+  const plans = listed.flatMap((choice): BrainPickOption[] => {
     const kind = kindOf(choice);
     const coding = planOf(choice);
     const name = thinksWith(t, choice, null);

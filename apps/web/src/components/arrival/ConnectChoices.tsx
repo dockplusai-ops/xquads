@@ -1,13 +1,11 @@
 import { joinNames } from "@agenteschat/client/lib/format";
-import { type AiChoice, PLAN_CHOICES, type PlanChoice, planLabel, planMark } from "@agenteschat/client/lib/no-ai";
+import { type AiChoice, offeredPlans, type PlanChoice, planLabel, planMark } from "@agenteschat/client/lib/no-ai";
 import { Icon, ProviderLogo } from "@agenteschat/ui";
 import { type ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-/** The two plans most people have, on top; OpenCode's free models last, as the way in without a plan. */
-const FIRST: readonly PlanChoice[] = ["claude", "chatgpt"];
+/** OpenCode's free models last, as the way in without a plan. */
 const FREE: PlanChoice = "zen";
-const OTHERS = PLAN_CHOICES.filter((c) => !FIRST.includes(c) && c !== FREE);
 
 /**
  * Which AI, as the first thing a new workspace's owner is asked (ADR 0160): one card each, in words, instead of the
@@ -31,6 +29,10 @@ export function ConnectChoices({
 }) {
   const { t } = useTranslation();
   const [others, setOthers] = useState(false);
+  // The two plans most people have on top (Claude's only where it's offered, `offeredPlans`).
+  const offered = offeredPlans().filter((c) => c !== FREE);
+  const firstPlans = offered.slice(0, 2);
+  const otherPlans = offered.slice(2);
   const card = (choice: AiChoice, lead: ReactNode, title: string, text: string, end?: ReactNode) => (
     <button key={choice} type="button" className="ac-option" onClick={() => onPick(choice)}>
       {lead}
@@ -53,13 +55,13 @@ export function ConnectChoices({
     );
   return (
     <div className="arrival-opts">
-      {FIRST.map(plan)}
+      {firstPlans.map(plan)}
       {others ? (
-        OTHERS.map(plan)
+        otherPlans.map(plan)
       ) : (
         <button type="button" className="ac-option" aria-expanded={false} onClick={() => setOthers(true)}>
           <span className="arrival-opts__tile arrival-opts__tile--four" aria-hidden="true">
-            {OTHERS.slice(0, 4).map((c) => (
+            {otherPlans.slice(0, 4).map((c) => (
               <ProviderLogo key={c} id={planMark(c)} size="xs" />
             ))}
           </span>
@@ -67,7 +69,7 @@ export function ConnectChoices({
             <span className="ac-option__title">{t("arrival.connect.others")}</span>
             <span className="ac-option__desc">
               {joinNames(
-                OTHERS.map((c) => planLabel(t, c)),
+                otherPlans.map((c) => planLabel(t, c)),
                 t,
               )}
             </span>

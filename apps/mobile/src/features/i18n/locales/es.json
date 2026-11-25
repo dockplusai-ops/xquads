@@ -2400,7 +2400,7 @@
   },
   "ai": {
     "yourPlan": "Tu plan de IA",
-    "plansSub": "Claude, ChatGPT, Gemini, GLM y otros",
+    "plansSub": "ChatGPT, Gemini, GLM y otros",
     "plansFoot": "Los agentes piensan con tu plan, sin clave de API. Inicia sesión en la computadora del agente.",
     "change": "Cambiar",
     "how": "Cómo conectar",

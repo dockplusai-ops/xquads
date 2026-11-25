@@ -2400,7 +2400,7 @@
   },
   "ai": {
     "yourPlan": "Il tuo piano di IA",
-    "plansSub": "Claude, ChatGPT, Gemini, GLM e altri",
+    "plansSub": "ChatGPT, Gemini, GLM e altri",
     "plansFoot": "Gli agenti pensano con il tuo piano, senza bisogno di una chiave API. L'accesso avviene sul computer dell'agente.",
     "change": "Cambia",
     "how": "Come collegare",

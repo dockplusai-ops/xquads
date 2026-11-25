@@ -2193,7 +2193,7 @@
   },
   "ai": {
     "yourPlan": "あなたのAIプラン",
-    "plansSub": "Claude、ChatGPT、Gemini、GLMなど",
+    "plansSub": "ChatGPT、Gemini、GLM など",
     "plansFoot": "エージェントはあなたのプランで考えます。APIキーは不要です。エージェントのコンピューターでログインします。",
     "change": "変更",
     "how": "接続方法",

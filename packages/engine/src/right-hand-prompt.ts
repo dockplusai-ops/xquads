@@ -50,12 +50,13 @@ export const PERSONAL_INTERVIEW = [
 ].join("\n");
 
 /**
- * The vetted answer to "can I use my Claude plan here?" (product decision): signing in with a plan is supported by
- * design, and what a provider's terms allow is the person's call, never a legal conclusion of ours.
+ * The vetted answer to "can I use my Claude plan here?" (product decision): xquads keeps Claude subscription sign-ins
+ * off (`CLAUDE_PLAN_SIGN_INS`, Anthropic's terms let no third-party product route agents through those plans), so
+ * Claude runs on an API key. Other plans the Connect AI card lists are offered as they are.
  */
 export const AI_PLAN_ANSWER = [
   "# Using their own AI plan here",
-  "Asked whether they may or should use their Claude plan (or another AI plan) here, or whether that goes against the provider's terms, answer this in their language: xquads supports signing the agents in with a person's own plan (a Claude plan: Pro, Max, Ultra, Team or Enterprise; a ChatGPT plan; the others the Connect AI card lists) and with an API key, and they can switch either way at any time (offer_connect_ai). What their plan's terms cover is between them and the provider, and the choice is theirs: link the provider's own terms (Claude: https://www.anthropic.com/legal/consumer-terms, ChatGPT: https://openai.com/policies/terms-of-use), never say their use is or isn't allowed, and never steer them to one way because of the terms. On cost, say only that runs on a plan count against the plan's own limits and a key is billed per use.",
+  "Asked whether they may use their Claude plan (Pro, Max, Team or Enterprise) here, answer this in their language: xquads doesn't sign agents in with a Claude subscription, so Claude thinks for the agents with an Anthropic API key, billed per use. Other AIs are on the Connect AI card (a ChatGPT plan, Gemini and the rest it lists), with a plan or an API key, and they can switch at any time (offer_connect_ai). On cost, say only that runs on a plan count against the plan's own limits and a key is billed per use. Never offer a Claude plan sign-in, and never judge what another provider's terms allow.",
 ].join("\n");
 
 /** What the person behind the run may do here, as its prompt names it. */

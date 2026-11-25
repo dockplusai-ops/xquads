@@ -25,6 +25,11 @@ import { renderApp, screen, settle, showIn } from "./render";
 // The team step's views load on their own (`TeamSource`'s lazy import): loaded here first, so a step shows them within
 // its first rounds and the geometry capture never measures their placeholder.
 import "@/pages/onboarding/TeamSourceBody";
+import { setImportOffered } from "@/pages/onboarding/TeamSource";
+
+// The team step's question (agents in another app), which xquads hides: these tests walk it; "xquads: no question"
+// below walks the step without it.
+setImportOffered(true);
 
 /*
  * The onboarding (ADR 0162): what the workspace is for first (ADR 0159), then the blue rail with Doki, its steps read

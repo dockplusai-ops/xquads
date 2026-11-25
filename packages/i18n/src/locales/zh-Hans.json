@@ -2826,7 +2826,7 @@
       "connect": {
         "title": "为团队连接 AI",
         "titlePersonal": "为你的智能体连接 AI",
-        "text": "用你的 Claude 或 ChatGPT 套餐登录，不需要 API 密钥。",
+        "text": "用你的 ChatGPT 套餐登录，或使用 API 密钥。",
         "hint": "智能体用工作区的 AI 思考。",
         "hintPersonal": "你的智能体用这个 AI 思考。",
         "action": "连接"
@@ -3205,7 +3205,7 @@
   "noAi": {
     "banner": {
       "org": "你的智能体还没有 AI。",
-      "orgHint": "你也可以直接在聊天中说，比如“用我的 Claude 套餐”。",
+      "orgHint": "你也可以在聊天里说，比如“用我的 ChatGPT 套餐”。",
       "orgAction": "连接 AI"
     },
     "agent": "{{name}} 不会回复，因为他还没有连接 AI。",
@@ -3266,7 +3266,7 @@
         "ended": "工作区重新订阅 xquads 后，我会在这里回复。"
       },
       "askAdmin": "管理员处理好 xquads 套餐后，我会在这里回复。",
-      "plan": "套餐包含智能体的电脑。AI 用的是你已经付费的：Claude、ChatGPT 等，或 API 密钥。",
+      "plan": "套餐提供智能体的电脑。AI 用你已经在付费的：ChatGPT、Gemini 等，或 API 密钥。",
       "activeTitle": "套餐已生效",
       "activeLine": "连接 AI 后，{{name}} 会在这里回复。",
       "receipt": "已保留",
@@ -10433,7 +10433,7 @@
       "noModel": "没有匹配的模型。",
       "empty": "还没有账号。",
       "add": "添加账号",
-      "addLine": "Claude、ChatGPT、Gemini 等，或 API 密钥",
+      "addLine": "ChatGPT、Gemini 等，或 API 密钥",
       "manage": "管理账号",
       "groups": {
         "yours": "你的账号",

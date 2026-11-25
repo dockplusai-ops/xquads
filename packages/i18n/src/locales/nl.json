@@ -2941,7 +2941,7 @@
       "connect": {
         "title": "Een AI voor het team koppelen",
         "titlePersonal": "Een AI voor je agents koppelen",
-        "text": "Log in met je Claude- of ChatGPT-abonnement, zonder API-sleutel.",
+        "text": "Meld je aan met je ChatGPT-abonnement of gebruik een API-sleutel.",
         "hint": "De agents denken met de AI van de workspace.",
         "hintPersonal": "Je agents denken met deze AI.",
         "action": "Koppelen"
@@ -3342,7 +3342,7 @@
   "noAi": {
     "banner": {
       "org": "Je agents hebben nog geen AI.",
-      "orgHint": "Je kunt het ook in de chat vragen, zoals „gebruik mijn Claude-abonnement”.",
+      "orgHint": "Je kunt het ook in de chat vragen, zoals ‘gebruik mijn ChatGPT-abonnement’.",
       "orgAction": "Een AI koppelen"
     },
     "agent": "{{name}} antwoordt niet omdat hij geen AI gekoppeld heeft.",
@@ -3415,7 +3415,7 @@
         "ended": "Ik antwoord hier zodra de workspace zich opnieuw op xquads abonneert."
       },
       "askAdmin": "Ik antwoord hier zodra een beheerder het xquads-abonnement heeft geregeld.",
-      "plan": "Het abonnement brengt de computer van de agents. De AI is die waarvoor je al betaalt: Claude, ChatGPT en andere, of een API-sleutel.",
+      "plan": "Het abonnement levert de computer van de agents. De AI is die waarvoor je al betaalt: ChatGPT, Gemini en meer, of een API-sleutel.",
       "activeTitle": "Abonnement actief",
       "activeLine": "Koppel een AI en {{name}} antwoordt hier.",
       "receipt": "Bewaard",
@@ -10868,7 +10868,7 @@
       "noModel": "Geen model gevonden.",
       "empty": "Nog geen account.",
       "add": "Account toevoegen",
-      "addLine": "Claude, ChatGPT, Gemini en meer, of een API-sleutel",
+      "addLine": "ChatGPT, Gemini en meer, of een API-sleutel",
       "manage": "Accounts beheren",
       "groups": {
         "yours": "Jouw accounts",

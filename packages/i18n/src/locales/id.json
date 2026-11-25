@@ -2827,7 +2827,7 @@
       "connect": {
         "title": "Hubungkan AI untuk tim",
         "titlePersonal": "Hubungkan AI untuk agenmu",
-        "text": "Masuk dengan paket Claude atau ChatGPT Anda, tanpa kunci API.",
+        "text": "Masuk dengan paket ChatGPT Anda, atau gunakan kunci API.",
         "hint": "Agen berpikir dengan AI workspace.",
         "hintPersonal": "Agenmu berpikir dengan AI ini.",
         "action": "Hubungkan"
@@ -3206,7 +3206,7 @@
   "noAi": {
     "banner": {
       "org": "Agenmu belum punya AI.",
-      "orgHint": "Kamu juga bisa meminta di chat, seperti “pakai paket Claude-ku”.",
+      "orgHint": "Anda juga bisa meminta di chat, seperti “pakai paket ChatGPT saya”.",
       "orgAction": "Hubungkan AI"
     },
     "agent": "{{name}} tidak akan membalas karena belum terhubung ke AI.",
@@ -3279,7 +3279,7 @@
         "ended": "Saya akan menjawab di sini setelah workspace berlangganan xquads lagi."
       },
       "askAdmin": "Saya akan menjawab di sini setelah admin membereskan paket xquads.",
-      "plan": "Paket ini membawa komputer agen. AI-nya yang sudah kamu bayar: Claude, ChatGPT dan lainnya, atau kunci API.",
+      "plan": "Paket ini menyediakan komputer agen. AI-nya adalah yang sudah Anda bayar: ChatGPT, Gemini, dan lainnya, atau kunci API.",
       "activeTitle": "Paket aktif",
       "activeLine": "Hubungkan AI dan {{name}} menjawab di sini.",
       "receipt": "Disimpan",
@@ -10444,7 +10444,7 @@
       "noModel": "Tidak ada model yang cocok.",
       "empty": "Belum ada akun.",
       "add": "Tambah akun",
-      "addLine": "Claude, ChatGPT, Gemini, dan lainnya, atau kunci API",
+      "addLine": "ChatGPT, Gemini, dan lainnya, atau kunci API",
       "manage": "Kelola akun",
       "groups": {
         "yours": "Akunmu",

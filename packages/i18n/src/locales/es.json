@@ -3057,7 +3057,7 @@
       "connect": {
         "title": "Conectar una IA para el equipo",
         "titlePersonal": "Conectar una IA para tus agentes",
-        "text": "Inicia sesión con tu plan de Claude o de ChatGPT, sin clave de API.",
+        "text": "Inicia sesión con tu plan de ChatGPT o usa una clave de API.",
         "hint": "Los agentes piensan con la IA del workspace.",
         "hintPersonal": "Tus agentes piensan con esta IA.",
         "action": "Conectar"
@@ -3480,7 +3480,7 @@
   "noAi": {
     "banner": {
       "org": "Tus agentes todavía no tienen una IA.",
-      "orgHint": "También puedes pedirlo en el chat, como “usa mi plan de Claude”.",
+      "orgHint": "También puedes pedirlo en el chat, como “usar mi plan de ChatGPT”.",
       "orgAction": "Conectar una IA"
     },
     "agent": "{{name}} no responderá porque no tiene una IA conectada.",
@@ -3541,7 +3541,7 @@
         "ended": "Responderé aquí cuando el workspace vuelva a suscribirse a xquads."
       },
       "askAdmin": "Responderé aquí cuando un admin resuelva el plan de xquads.",
-      "plan": "El plan trae el ordenador de los agentes. La IA es la que ya pagas: Claude, ChatGPT y otras, o una clave de API.",
+      "plan": "El plan trae el ordenador de los agentes. La IA es la que ya pagas: ChatGPT, Gemini y otras, o una clave de API.",
       "activeTitle": "Plan activo",
       "activeLine": "Conecta una IA y {{name}} responde aquí.",
       "receipt": "Guardado",
@@ -11169,7 +11169,7 @@
       "noModel": "Ningún modelo coincide.",
       "empty": "Todavía no hay ninguna cuenta.",
       "add": "Agregar cuenta",
-      "addLine": "Claude, ChatGPT, Gemini y otras, o una clave de API",
+      "addLine": "ChatGPT, Gemini y otras, o una clave de API",
       "manage": "Gestionar cuentas",
       "groups": {
         "yours": "Tus cuentas",

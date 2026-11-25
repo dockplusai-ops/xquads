@@ -4,7 +4,7 @@ import { type OnboardingStepId, stepIndex } from "@agenteschat/client/lib/onboar
 import { Skeleton } from "@agenteschat/ui";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { TFunction } from "i18next";
-import { lazy, Suspense, useCallback, useRef, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useApi } from "@/api/context";
 import type { PreviewAgent } from "./OnboardingPreview";
 import "@/components/import-flow.css";
@@ -33,6 +33,16 @@ export type TeamStartPick = "template" | "scratch";
 export type TeamSourceChoice = ImportCard | "none";
 
 type Stage = "ask" | "start" | "template" | "import";
+
+/**
+ * xquads asks no "agents in another app?" question: its home-services teams start from a template or from scratch, and
+ * a personal workspace's step is answered with no agents. The import stays in Settings › Import and export. The
+ * import's own tests turn the question back on (`setImportOffered`).
+ */
+let IMPORT_OFFERED = false;
+export const setImportOffered = (on: boolean) => {
+  IMPORT_OFFERED = on;
+};
 
 /** What the import holds now, as the page's heading, Doki's line and the preview read it (the views publish it). */
 export interface TeamSourceFacts {
@@ -110,7 +120,7 @@ export function useTeamSource(
   // Read from the stored step on every render, never once at mount: the page renders before `/me` arrives. A team's
   // "no agents yet" opens on how to start (the templates are a view of this visit only); a step left with no agents
   // ("agents" and on) opens on the question again, to bring or build a team after all.
-  const base: Stage = stage ?? (!o.personal && o.passed === "import" ? "start" : "ask");
+  const base: Stage = stage ?? (!o.personal && (o.passed === "import" || !IMPORT_OFFERED) ? "start" : "ask");
   // The report only once the apply settled and kept the step (`TeamSourceBody`'s `reporting`): a clean one stays on
   // what was found, its button pending, until the rail moves on.
   const view: TeamSourceView =
@@ -166,10 +176,17 @@ export function useTeamSource(
     mutationFn: () => saveStep("agents"),
     onSuccess: (saved) => {
       remember("agents", saved);
-      setStage("ask");
+      setStage(IMPORT_OFFERED ? "ask" : "start");
       hold(false);
     },
   });
+
+  // Without the question, a personal workspace's step answers itself: no agents yet.
+  const answerNone = !IMPORT_OFFERED && o.personal && orgId !== null && view === "ask" && none.isIdle;
+  const { mutate: answer } = none;
+  useEffect(() => {
+    if (answerNone) answer();
+  }, [answerNone, answer]);
 
   const ask = () => {
     resetFlow.current?.();
@@ -180,7 +197,7 @@ export function useTeamSource(
   const back =
     view === "template"
       ? () => setStage("start")
-      : view === "start" || view === "bring"
+      : (view === "start" && IMPORT_OFFERED) || view === "bring"
         ? ask
         : view === "found" && !facts.applying && !facts.report
           ? () => {

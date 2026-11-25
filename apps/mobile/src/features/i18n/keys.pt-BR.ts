@@ -2368,7 +2368,7 @@ export const featureKeysPtBR = {
   },
   ai: {
     yourPlan: "Seu plano de IA",
-    plansSub: "Claude, ChatGPT, Gemini, GLM e outros",
+    plansSub: "ChatGPT, Gemini, GLM e outros",
     plansFoot: "Os agentes pensam com o seu plano, sem chave de API. Ele entra pelo computador do agente.",
     change: "Trocar",
     how: "Como conectar",

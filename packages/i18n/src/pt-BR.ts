@@ -3040,7 +3040,7 @@ export const ptBR = {
       connect: {
         title: "Conectar uma IA para o time",
         titlePersonal: "Conectar uma IA para os seus agentes",
-        text: "Entre com o seu plano do Claude ou do ChatGPT, sem chave de API.",
+        text: "Entre com o seu plano do ChatGPT ou use uma chave de API.",
         hint: "Os agentes pensam com a IA do workspace.",
         hintPersonal: "Os seus agentes pensam com essa IA.",
         action: "Conectar",
@@ -3499,7 +3499,7 @@ export const ptBR = {
   noAi: {
     banner: {
       org: "Os agentes ainda não têm uma\u00a0IA.",
-      orgHint: "Você também pode pedir no chat, como “usar meu plano do Claude”.",
+      orgHint: "Você também pode pedir no chat, como “usar meu plano do ChatGPT”.",
       orgAction: "Conectar uma IA",
     },
     agent: "{{name}} não vai responder porque não tem uma IA\u00a0conectada.",
@@ -3603,7 +3603,7 @@ export const ptBR = {
         ended: "Respondo aqui quando o workspace assinar o xquads de novo.",
       },
       askAdmin: "Respondo aqui quando um admin resolver o plano do xquads.",
-      plan: "O plano traz o computador dos agentes. A IA é a que você já paga: Claude, ChatGPT e outras, ou uma chave de API.",
+      plan: "O plano traz o computador dos agentes. A IA é a que você já paga: ChatGPT, Gemini e outras, ou uma chave de API.",
       activeTitle: "Plano ativo",
       activeLine: "Conecte uma IA e {{name}} responde aqui.",
       receipt: "Guardada",
@@ -11255,7 +11255,7 @@ export const ptBR = {
       empty: "Nenhuma conta ainda.",
       /** The account list's foot, under every row. */
       add: "Adicionar conta",
-      addLine: "Claude, ChatGPT, Gemini e outras, ou uma chave de API",
+      addLine: "ChatGPT, Gemini e outras, ou uma chave de API",
       manage: "Gerenciar contas",
       groups: {
         yours: "Suas contas",

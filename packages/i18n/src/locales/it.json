@@ -3057,7 +3057,7 @@
       "connect": {
         "title": "Collega un’IA per il team",
         "titlePersonal": "Collega un'IA per i tuoi agenti",
-        "text": "Accedi con il tuo piano di Claude o di ChatGPT, senza chiave API.",
+        "text": "Accedi con il tuo piano ChatGPT o usa una chiave API.",
         "hint": "Gli agenti pensano con l’IA del workspace.",
         "hintPersonal": "I tuoi agenti pensano con questa IA.",
         "action": "Collega"
@@ -3480,7 +3480,7 @@
   "noAi": {
     "banner": {
       "org": "I tuoi agenti non hanno ancora un'IA.",
-      "orgHint": "Puoi anche chiederlo in chat, tipo “usa il mio piano Claude”.",
+      "orgHint": "Puoi anche chiederlo in chat, ad esempio “usa il mio piano ChatGPT”.",
       "orgAction": "Collega un'IA"
     },
     "agent": "{{name}} non risponderà perché non ha un'IA collegata.",
@@ -3553,7 +3553,7 @@
         "ended": "Risponderò qui quando il workspace si abbonerà di nuovo a xquads."
       },
       "askAdmin": "Risponderò qui quando un admin avrà sistemato il piano xquads.",
-      "plan": "Il piano porta il computer degli agenti. L'IA è quella che paghi già: Claude, ChatGPT e altre, o una chiave API.",
+      "plan": "Il piano porta il computer degli agenti. L'IA è quella che paghi già: ChatGPT, Gemini e altre, o una chiave API.",
       "activeTitle": "Piano attivo",
       "activeLine": "Collega un'IA e {{name}} risponde qui.",
       "receipt": "Conservato",
@@ -11245,7 +11245,7 @@
       "noModel": "Nessun modello corrisponde.",
       "empty": "Ancora nessun account.",
       "add": "Aggiungi account",
-      "addLine": "Claude, ChatGPT, Gemini e altri, o una chiave API",
+      "addLine": "ChatGPT, Gemini e altre, o una chiave API",
       "manage": "Gestisci account",
       "groups": {
         "yours": "I tuoi account",

@@ -6,6 +6,10 @@ setupDom();
 import { keys } from "@agenteschat/client";
 import { act, cleanup, fireEvent, within } from "@testing-library/react";
 import { connectRequest } from "@/pages/onboarding/AiStep";
+import { setImportOffered } from "@/pages/onboarding/TeamSource";
+
+// The team step's question, which xquads hides: these tests walk it.
+setImportOffered(true);
 import { createFakeApi, type FakeState, GENERAL_ID, LODI_ID, ORG_ID, seedState, withRightHand } from "./fake-api";
 import { shownText } from "./hint";
 import { renderApp, screen, settle } from "./render";

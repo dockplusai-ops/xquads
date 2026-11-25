@@ -2942,7 +2942,7 @@
       "connect": {
         "title": "Eine KI für das Team verbinden",
         "titlePersonal": "Eine KI für deine Agenten verbinden",
-        "text": "Melde dich mit deinem Claude- oder ChatGPT-Abo an, ohne API-Schlüssel.",
+        "text": "Melde dich mit deinem ChatGPT-Abo an oder nutze einen API-Schlüssel.",
         "hint": "Die Agenten denken mit der KI des Workspace.",
         "hintPersonal": "Deine Agenten denken mit dieser KI.",
         "action": "Verbinden"
@@ -3343,7 +3343,7 @@
   "noAi": {
     "banner": {
       "org": "Deine Agenten haben noch keine KI.",
-      "orgHint": "Du kannst auch im Chat fragen, etwa „nutze mein Claude-Abo“.",
+      "orgHint": "Du kannst auch im Chat fragen, etwa „nutze mein ChatGPT-Abo“.",
       "orgAction": "KI verbinden"
     },
     "agent": "{{name}} antwortet nicht, weil keine KI verbunden ist.",
@@ -3416,7 +3416,7 @@
         "ended": "Ich antworte hier, sobald der Workspace xquads wieder abonniert."
       },
       "askAdmin": "Ich antworte hier, sobald ein Admin den xquads-Tarif geklärt hat.",
-      "plan": "Der Tarif bringt den Computer der Agenten. Die KI ist die, für die du schon zahlst: Claude, ChatGPT und andere oder ein API-Schlüssel.",
+      "plan": "Der Tarif bringt den Computer der Agenten. Die KI ist die, für die du schon zahlst: ChatGPT, Gemini und andere oder ein API-Schlüssel.",
       "activeTitle": "Tarif aktiv",
       "activeLine": "Verbinde eine KI und {{name}} antwortet hier.",
       "receipt": "Aufgehoben",
@@ -10824,7 +10824,7 @@
       "noModel": "Kein Modell gefunden.",
       "empty": "Noch kein Konto.",
       "add": "Konto hinzufügen",
-      "addLine": "Claude, ChatGPT, Gemini und weitere, oder ein API-Schlüssel",
+      "addLine": "ChatGPT, Gemini und weitere, oder ein API-Schlüssel",
       "manage": "Konten verwalten",
       "groups": {
         "yours": "Deine Konten",

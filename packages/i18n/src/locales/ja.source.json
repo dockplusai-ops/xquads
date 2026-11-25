@@ -7338,7 +7338,7 @@
     "value": "Connect an AI for your agents"
   },
   "rightHand.intro.connect.text": {
-    "value": "Sign in with your Claude or ChatGPT plan, no API key needed."
+    "value": "Sign in with your ChatGPT plan, or use an API key."
   },
   "rightHand.intro.connect.hint": {
     "value": "The agents think with the workspace's AI."
@@ -8310,7 +8310,7 @@
     "value": "Your agents don't have an AI yet."
   },
   "noAi.banner.orgHint": {
-    "value": "You can also ask in the chat, like “use my Claude plan”."
+    "value": "You can also ask in the chat, like “use my ChatGPT plan”."
   },
   "noAi.banner.orgAction": {
     "value": "Connect an AI"
@@ -8453,7 +8453,7 @@
     "value": "I'll answer here once an admin sorts out the xquads plan."
   },
   "noAi.kept.plan": {
-    "value": "The plan brings the agents' computer. The AI is the one you already pay for: Claude, ChatGPT and more, or an API key."
+    "value": "The plan brings the agents' computer. The AI is the one you already pay for: ChatGPT, Gemini and more, or an API key."
   },
   "noAi.kept.activeTitle": {
     "value": "Plan active"
@@ -26270,7 +26270,7 @@
     "value": "Add account"
   },
   "aiHub.choice.addLine": {
-    "value": "Claude, ChatGPT, Gemini and more, or an API key"
+    "value": "ChatGPT, Gemini and more, or an API key"
   },
   "aiHub.choice.manage": {
     "value": "Manage accounts"

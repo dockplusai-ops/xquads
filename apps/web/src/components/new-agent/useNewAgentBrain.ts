@@ -1,5 +1,6 @@
 import {
   useAiAccounts,
+  useAuthConfig,
   useBrainMachines,
   useCredentials,
   useModels,
@@ -52,6 +53,7 @@ export function useNewAgentBrain(accountId?: string, picked: AiChoice | null = n
     usable,
     keys: credentials.data ?? [],
   });
+  const plans = useAuthConfig().data?.planSignIns;
   const options = useMemo(
     () =>
       brainPickOptions(t, i18n.language, {
@@ -60,8 +62,9 @@ export function useNewAgentBrain(accountId?: string, picked: AiChoice | null = n
         accounts: aiAccounts.data?.accounts ?? [],
         ownerIsMe: true,
         held,
+        plans,
       }),
-    [t, i18n.language, choices, brainMachines.data, aiAccounts.data, held],
+    [t, i18n.language, choices, brainMachines.data, aiAccounts.data, held, plans],
   );
   const asked = accountId ? planAccountOptionOf(options, accountId)?.pick : undefined;
   const last = asked ? null : start;

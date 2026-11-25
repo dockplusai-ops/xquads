@@ -445,7 +445,7 @@ describe("Conectar uma IA: one picker, plans first", () => {
     expect(scene.querySelector(".team-scene__cast")?.hasAttribute("data-awake")).toBe(false);
     expect(scene.querySelector(".ac-computer")?.getAttribute("data-state")).toBe("paused");
     const marks = () => Array.from(scene.querySelectorAll(".connect-scene__marks .ac-brand"));
-    expect(marks().map((m) => m.getAttribute("data-mark"))).toEqual(["claude", "openai", "gemini"]);
+    expect(marks().map((m) => m.getAttribute("data-mark"))).toEqual(["openai", "gemini", "grok"]);
     expect(marks().filter((m) => m.classList.contains("ac-brand--off"))).toEqual([]);
     // The pixels walk from the marks to the team: two trails, counted from the AI's side.
     const trails = Array.from(scene.querySelectorAll(".team-scene__trail"));
@@ -456,7 +456,7 @@ describe("Conectar uma IA: one picker, plans first", () => {
       ),
     ).toEqual(["9", "8", "7", "6", "5", "4", "3", "2", "1", "0"]);
     await choose("ChatGPT");
-    expect(marks().map((m) => m.classList.contains("ac-brand--off"))).toEqual([true, false, true]);
+    expect(marks().map((m) => m.classList.contains("ac-brand--off"))).toEqual([false, true, true]);
   });
 
   test("ChatGPT: first its settings, then a sign-in that starts only on its button; switching tiles starts nothing", async () => {

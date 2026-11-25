@@ -394,16 +394,17 @@ export function createSetupToolSource(deps: {
     {
       name: OFFER_CONNECT_AI_TOOL,
       description:
-        "Offer to connect an AI with a card in this conversation: its Connect button opens the app's own dialog at that step (a Claude plan, a ChatGPT plan or an API key) for the agents you name. Use it when a person asks to connect or switch an AI ('usar meu plano do Claude', 'add my OpenAI key'), or when an agent has none. A person connects it in the dialog: never ask for keys, passwords or sign-in codes in the chat.",
+        "Offer to connect an AI with a card in this conversation: its Connect button opens the app's own dialog at that step (a ChatGPT plan or an API key) for the agents you name. Use it when a person asks to connect or switch an AI ('usar meu plano do ChatGPT', 'add my OpenAI key'), or when an agent has none. xquads offers no Claude plan sign-in: Claude runs on an Anthropic API key. A person connects it in the dialog: never ask for keys, passwords or sign-in codes in the chat.",
       scope: SETUP_SCOPE,
       inputSchema: {
         type: "object",
         properties: {
           what: {
             type: "string",
-            enum: Object.keys(STEPS),
+            // No Claude plan step: xquads keeps `CLAUDE_PLAN_SIGN_INS` off (an older card that names one still opens).
+            enum: Object.keys(STEPS).filter((s) => s !== "claude"),
             description:
-              "A Claude plan (Pro, Max, Ultra, Team, Enterprise), a ChatGPT plan (Plus, Pro, Business, Enterprise) or an API key. Gemini works only with an API key: Google's plans can't be used in other products. Leave it out when the person didn't say: the card offers them all.",
+              "A ChatGPT plan (Plus, Pro, Business, Enterprise) or an API key. Gemini works only with an API key: Google's plans can't be used in other products. Leave it out when the person didn't say: the card offers them all.",
           },
           provider: {
             type: "string",

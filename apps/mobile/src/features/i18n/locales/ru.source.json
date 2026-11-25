@@ -5666,7 +5666,7 @@
     "value": "Your AI plan"
   },
   "ai.plansSub": {
-    "value": "Claude, ChatGPT, Gemini, GLM and others"
+    "value": "ChatGPT, Gemini, GLM and others"
   },
   "ai.plansFoot": {
     "value": "Agents think with your plan, no API key needed. It signs in on the agent's computer."

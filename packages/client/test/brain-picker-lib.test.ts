@@ -193,6 +193,18 @@ describe("Quem pensa as one list (the new agent's step)", () => {
     expect(found("claude code")).toContain("claude@m1/auto");
   });
 
+  test("with Claude's sign-ins off on the server, no Claude plan row; the coding plans stay", () => {
+    const options = brainPickOptions(t, "pt-BR", {
+      api: modelChoices(MODELS, [], false),
+      machines: [{ ...MAC, options: [claudeCode] }],
+      accounts: [goKey],
+      ownerIsMe: true,
+      plans: { hosted: false, claude: false },
+    });
+    expect(options.some((o) => o.value.startsWith("claude@") || o.value === "none:claude")).toBe(false);
+    expect(options.some((o) => o.value.startsWith("opencode@m1#acc-go/"))).toBe(true);
+  });
+
   test("the choice shows as its option, and a plan saves its account and model", () => {
     const options = build([goKey]);
     expect(brainPickValue(options, { kind: "model", model: AUTO })).toBe(AUTO);

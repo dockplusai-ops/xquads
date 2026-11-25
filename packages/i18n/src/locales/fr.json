@@ -3062,7 +3062,7 @@
       "connect": {
         "title": "Connecter une IA pour l’équipe",
         "titlePersonal": "Connecter une IA pour vos agents",
-        "text": "Connectez-vous avec votre abonnement Claude ou ChatGPT, sans clé API.",
+        "text": "Connectez-vous avec votre abonnement ChatGPT ou utilisez une clé API.",
         "hint": "Les agents réfléchissent avec l’IA du workspace.",
         "hintPersonal": "Vos agents réfléchissent avec cette IA.",
         "action": "Connecter"
@@ -3485,7 +3485,7 @@
   "noAi": {
     "banner": {
       "org": "Vos agents n'ont pas encore d'IA.",
-      "orgHint": "Vous pouvez aussi le demander dans la discussion, par exemple « utilise mon abonnement Claude ».",
+      "orgHint": "Vous pouvez aussi le demander dans le chat, par exemple « utiliser mon abonnement ChatGPT ».",
       "orgAction": "Connecter une IA"
     },
     "agent": "{{name}} ne répondra pas, car il n'a aucune IA connectée.",
@@ -3546,7 +3546,7 @@
         "ended": "Je répondrai ici dès que le workspace se réabonnera à xquads."
       },
       "askAdmin": "Je répondrai ici dès qu'un admin aura réglé l'abonnement xquads.",
-      "plan": "L'abonnement apporte l'ordinateur des agents. L'IA est celle que vous payez déjà : Claude, ChatGPT et d'autres, ou une clé API.",
+      "plan": "L'offre apporte l'ordinateur des agents. L'IA est celle que vous payez déjà : ChatGPT, Gemini et d'autres, ou une clé API.",
       "activeTitle": "Abonnement actif",
       "activeLine": "Connectez une IA et {{name}} répond ici.",
       "receipt": "Gardé",
@@ -11218,7 +11218,7 @@
       "noModel": "Aucun modèle ne correspond.",
       "empty": "Aucun compte pour l'instant.",
       "add": "Ajouter un compte",
-      "addLine": "Claude, ChatGPT, Gemini et d'autres, ou une clé d'API",
+      "addLine": "ChatGPT, Gemini et d'autres, ou une clé API",
       "manage": "Gérer les comptes",
       "groups": {
         "yours": "Vos comptes",

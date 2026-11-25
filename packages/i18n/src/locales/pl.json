@@ -3176,7 +3176,7 @@
       "connect": {
         "title": "Podłącz AI dla zespołu",
         "titlePersonal": "Podłącz AI dla swoich agentów",
-        "text": "Zaloguj się swoim planem Claude lub ChatGPT, bez klucza API.",
+        "text": "Zaloguj się planem ChatGPT albo użyj klucza API.",
         "hint": "Agenci myślą z AI workspace’u.",
         "hintPersonal": "Twoi agenci myślą z tym AI.",
         "action": "Podłącz"
@@ -3621,7 +3621,7 @@
   "noAi": {
     "banner": {
       "org": "Twoi agenci nie mają jeszcze AI.",
-      "orgHint": "Możesz też poprosić na czacie, na przykład „użyj mojego planu Claude”.",
+      "orgHint": "Możesz też poprosić na czacie, np. „użyj mojego planu ChatGPT”.",
       "orgAction": "Podłącz AI"
     },
     "agent": "{{name}} nie odpowie, bo nie ma podłączonego AI.",
@@ -3682,7 +3682,7 @@
         "ended": "Odpowiem tutaj, gdy workspace znów zasubskrybuje xquads."
       },
       "askAdmin": "Odpowiem tutaj, gdy administrator załatwi plan xquads.",
-      "plan": "Plan daje komputer agentów. AI to to, za które już płacisz: Claude, ChatGPT i inne albo klucz API.",
+      "plan": "Plan zapewnia komputer agentów. AI to ta, za którą już płacisz: ChatGPT, Gemini i inne albo klucz API.",
       "activeTitle": "Plan aktywny",
       "activeLine": "Podłącz AI, a {{name}} odpowie tutaj.",
       "receipt": "Zachowano",
@@ -11603,7 +11603,7 @@
       "noModel": "Brak pasującego modelu.",
       "empty": "Nie ma jeszcze żadnego konta.",
       "add": "Dodaj konto",
-      "addLine": "Claude, ChatGPT, Gemini i inne albo klucz API",
+      "addLine": "ChatGPT, Gemini i inne albo klucz API",
       "manage": "Zarządzaj kontami",
       "groups": {
         "yours": "Twoje konta",

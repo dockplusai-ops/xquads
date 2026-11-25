@@ -2827,7 +2827,7 @@
       "connect": {
         "title": "チームのAIを接続",
         "titlePersonal": "エージェントのAIを接続",
-        "text": "APIキーなしで、ClaudeまたはChatGPTのプランでログインできます。",
+        "text": "ChatGPT のプランでサインインするか、API キーを使います。",
         "hint": "エージェントはワークスペースのAIで考えます。",
         "hintPersonal": "エージェントはこのAIで考えます。",
         "action": "接続"
@@ -3206,7 +3206,7 @@
   "noAi": {
     "banner": {
       "org": "あなたのエージェントにはまだAIがありません。",
-      "orgHint": "チャットで「私のClaudeプランを使って」のように頼むこともできます。",
+      "orgHint": "チャットで「ChatGPT のプランを使って」のように頼むこともできます。",
       "orgAction": "AIを接続"
     },
     "agent": "{{name}}にはAIが接続されていないため、返信しません。",
@@ -3267,7 +3267,7 @@
         "ended": "ワークスペースがxquadsに再び登録したら、ここで返信します。"
       },
       "askAdmin": "管理者がxquadsのプランを整えたら、ここで返信します。",
-      "plan": "プランにはエージェントのコンピューターが含まれます。AIはすでに支払っているものを使えます。Claude、ChatGPTなど、またはAPIキーです。",
+      "plan": "プランにはエージェントのコンピューターが含まれます。AI はすでに払っているものを使えます: ChatGPT、Gemini など、または API キー。",
       "activeTitle": "プランが有効です",
       "activeLine": "AIを接続すると{{name}}がここで返信します。",
       "receipt": "保存済み",
@@ -10390,7 +10390,7 @@
       "noModel": "一致するモデルはありません。",
       "empty": "まだアカウントはありません。",
       "add": "アカウントを追加",
-      "addLine": "Claude、ChatGPT、Geminiなど、またはAPIキー",
+      "addLine": "ChatGPT、Gemini など、または API キー",
       "manage": "アカウントを管理",
       "groups": {
         "yours": "あなたのアカウント",

@@ -3175,7 +3175,7 @@ export const en = {
       connect: {
         title: "Connect an AI for the team",
         titlePersonal: "Connect an AI for your agents",
-        text: "Sign in with your Claude or ChatGPT plan, no API key needed.",
+        text: "Sign in with your ChatGPT plan, or use an API key.",
         /** Behind the card's ⓘ. */
         hint: "The agents think with the workspace's AI.",
         hintPersonal: "Your agents think with this AI.",
@@ -3638,7 +3638,7 @@ export const en = {
   noAi: {
     banner: {
       org: "Your agents don't have an AI\u00a0yet.",
-      orgHint: "You can also ask in the chat, like “use my Claude plan”.",
+      orgHint: "You can also ask in the chat, like “use my ChatGPT plan”.",
       orgAction: "Connect an AI",
     },
     agent: "{{name}} won't reply because he has no AI\u00a0connected.",
@@ -3722,7 +3722,7 @@ export const en = {
       /** The same for whoever can't pay. */
       askAdmin: "I'll answer here once an admin sorts out the xquads plan.",
       /** Behind the card's ⓘ on a first plan. */
-      plan: "The plan brings the agents' computer. The AI is the one you already pay for: Claude, ChatGPT and more, or an API key.",
+      plan: "The plan brings the agents' computer. The AI is the one you already pay for: ChatGPT, Gemini and more, or an API key.",
       /** The hold lifted: the plan is paid, an AI is what's left. */
       activeTitle: "Plan active",
       activeLine: "Connect an AI and {{name}} answers here.",
@@ -11291,7 +11291,7 @@ export const en = {
       empty: "No account yet.",
       /** The account list's foot, under every row. */
       add: "Add account",
-      addLine: "Claude, ChatGPT, Gemini and more, or an API key",
+      addLine: "ChatGPT, Gemini and more, or an API key",
       manage: "Manage accounts",
       groups: {
         yours: "Your accounts",

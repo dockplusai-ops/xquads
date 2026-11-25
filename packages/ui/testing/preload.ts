@@ -31,3 +31,8 @@ await import("react-dom/client");
 await import("radix-ui");
 await import("@testing-library/react");
 await import("@testing-library/user-event");
+
+// xquads offers no Claude plan sign-in (`setClaudePlanOffered` in `@agenteschat/client/lib/no-ai`); the inherited tests
+// walk the Claude plan's own steps, so it is on while they run. Tests of the xquads default turn it off themselves.
+const { setClaudePlanOffered } = await import("../../client/src/lib/no-ai");
+setClaudePlanOffered(true);

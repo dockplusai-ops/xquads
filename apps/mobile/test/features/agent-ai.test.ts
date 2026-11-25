@@ -574,7 +574,7 @@ describe("the agent's AI", () => {
     expect(home).toContain('onView({ page: "key" })');
     const plans = connect.slice(connect.indexOf("function Plans("), connect.indexOf("function Makers("));
     expect(plans).toContain("<PickList");
-    expect(plans).toContain("options={PLAN_CHOICES.map(");
+    expect(plans).toContain("options={offeredPlans().map(");
     expect(plans).toContain("onPick={(o) => onPlan(o.value)}");
     const makers = connect.slice(connect.indexOf("function Makers("));
     expect(makers).toContain("<PickList");

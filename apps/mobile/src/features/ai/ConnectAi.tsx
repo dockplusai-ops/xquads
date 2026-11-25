@@ -12,6 +12,7 @@ import { agentGrammar } from "@agenteschat/client/lib/grammar";
 import {
   aiStateOf,
   choiceOfIntent,
+  firstPlan,
   freePlanAccount,
   noAiLockedLine,
   PLAN_CHOICES,
@@ -182,7 +183,7 @@ export function ConnectAiStart() {
 export function ConnectAiPushed({ page }: { page: PushedPage["page"] }) {
   const { s, d, choice } = useLocalSearchParams<{ s?: string; d?: string; choice?: string }>();
   const view: FlowView =
-    page === "plan" ? { page, choice: PLAN_CHOICES.find((c) => c === choice) ?? "claude" } : { page };
+    page === "plan" ? { page, choice: PLAN_CHOICES.find((c) => c === choice) ?? firstPlan() } : { page };
   return <ConnectAiScreen flowId={s ?? ""} depth={Math.max(1, Number(d) || 1)} view={view} />;
 }
 

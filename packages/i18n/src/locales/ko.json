@@ -2827,7 +2827,7 @@
       "connect": {
         "title": "팀을 위한 AI 연결",
         "titlePersonal": "에이전트를 위한 AI 연결",
-        "text": "API 키 없이 Claude 또는 ChatGPT 요금제로 로그인하세요.",
+        "text": "ChatGPT 요금제로 로그인하거나 API 키를 사용하세요.",
         "hint": "에이전트는 워크스페이스의 AI로 생각해요.",
         "hintPersonal": "에이전트는 이 AI로 생각해요.",
         "action": "연결"
@@ -3206,7 +3206,7 @@
   "noAi": {
     "banner": {
       "org": "에이전트에 아직 AI가 없어요.",
-      "orgHint": "채팅에서 “내 Claude 요금제 써 줘”처럼 요청할 수도 있어요.",
+      "orgHint": "채팅에서 “내 ChatGPT 요금제 사용해 줘”처럼 요청할 수도 있어요.",
       "orgAction": "AI 연결"
     },
     "agent": "{{name}}은(는) 연결된 AI가 없어서 답하지 않아요.",
@@ -3265,7 +3265,7 @@
         "ended": "워크스페이스가 xquads을 다시 구독하면 여기에서 답할게요."
       },
       "askAdmin": "관리자가 xquads 요금제를 해결하면 여기에서 답할게요.",
-      "plan": "요금제에는 에이전트 컴퓨터가 포함돼요. AI는 이미 결제하고 있는 것을 써요. Claude, ChatGPT 등이나 API 키요.",
+      "plan": "요금제에는 에이전트의 컴퓨터가 포함돼요. AI는 이미 결제 중인 것을 쓰면 돼요: ChatGPT, Gemini 등, 또는 API 키.",
       "activeTitle": "요금제가 활성화됐어요",
       "activeLine": "AI를 연결하면 {{name}}이(가) 여기에서 답해요.",
       "receipt": "보관됨",
@@ -10384,7 +10384,7 @@
       "noModel": "일치하는 모델이 없습니다.",
       "empty": "아직 계정이 없어요.",
       "add": "계정 추가",
-      "addLine": "Claude, ChatGPT, Gemini 등 또는 API 키",
+      "addLine": "ChatGPT, Gemini 등, 또는 API 키",
       "manage": "계정 관리",
       "groups": {
         "yours": "내 계정",

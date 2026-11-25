@@ -299,12 +299,12 @@ describe("offer_connect_ai", () => {
   test("a card where the run replies: the step, the agents and the line the app's card shows", async () => {
     f = await setup();
     const lia = await addLia(f, f.owner.id);
-    const ctx = await runFor(f, f.owner.id, "quero usar meu plano do Claude na Lia");
+    const ctx = await runFor(f, f.owner.id, "quero usar meu plano do ChatGPT na Lia");
     const events = f.listen(f.general.id);
     const out = await call(f, ctx, "offer_connect_ai", {
-      what: "claude",
+      what: "chatgpt",
       agents: ["@Lia"],
-      why: "Você pediu para a Lia pensar com o seu plano do Claude.",
+      why: "Você pediu para a Lia pensar com o seu plano do ChatGPT.",
     });
     expect(out.isError).toBeUndefined();
     expect(out.content).toContain("for Lia");
@@ -314,13 +314,13 @@ describe("offer_connect_ai", () => {
       authorAgentId: f.agent.id,
       agentRunId: ctx.runId,
       threadId: replyThreadOf(ctx),
-      body: "Connect a Claude plan for Lia: Você pediu para a Lia pensar com o seu plano do Claude.",
+      body: "Connect a ChatGPT plan for Lia: Você pediu para a Lia pensar com o seu plano do ChatGPT.",
     });
     expect(card?.meta.bodyCode).toBe(CONNECT_AI_CARD);
     expect(card?.meta.actionCard).toEqual({
       kind: "connect_ai",
       forUserId: f.owner.id,
-      params: { what: "claude", agentIds: [lia.id], why: "Você pediu para a Lia pensar com o seu plano do Claude." },
+      params: { what: "chatgpt", agentIds: [lia.id], why: "Você pediu para a Lia pensar com o seu plano do ChatGPT." },
     } satisfies ActionCard);
     expect(events).toContainEqual(expect.objectContaining({ type: "message.created", messageId: card?.id }));
   });
@@ -338,14 +338,16 @@ describe("offer_connect_ai", () => {
     ]);
   });
 
-  test("its input is checked: an unknown step or provider, no line, unknown handles; Gemini only as a key", async () => {
+  test("its input is checked: an unknown step or provider, no line, unknown handles; Gemini only as a key; no Claude plan", async () => {
     f = await setup();
     const ctx = await runFor(f, f.owner.id, "conecta o gemini");
     for (const input of [
       { what: "gemini", why: "Conectar." },
       { what: "api_key", provider: "acme", why: "Conectar." },
-      { what: "claude" },
-      { what: "claude", why: "Conectar.", agents: Array.from({ length: 11 }, (_, i) => `@a${i}`) },
+      // xquads offers no Claude plan sign-in (`CLAUDE_PLAN_SIGN_INS` off).
+      { what: "claude", why: "Conectar." },
+      { what: "chatgpt" },
+      { what: "chatgpt", why: "Conectar.", agents: Array.from({ length: 11 }, (_, i) => `@a${i}`) },
     ]) {
       const out = await call(f, ctx, "offer_connect_ai", input);
       expect(out.isError).toBe(true);
@@ -573,7 +575,7 @@ describe("a consulted agent's cards", () => {
     await ask();
     for (const [name, input] of [
       ["offer_connect_app", { app: "linear", why: "Para ler as tarefas." }],
-      ["offer_connect_ai", { what: "claude", why: "Para pensar com o seu plano." }],
+      ["offer_connect_ai", { what: "chatgpt", why: "Para pensar com o seu plano." }],
       ["offer_invites", { emails: ["bia@example.com"], why: "Ela cuida das vendas." }],
     ] as const) {
       expect((await call(f, ctx, name, input)).isError).toBeUndefined();

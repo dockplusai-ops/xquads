@@ -2488,7 +2488,7 @@ export const featureKeysEn = {
   },
   ai: {
     yourPlan: "Your AI plan",
-    plansSub: "Claude, ChatGPT, Gemini, GLM and others",
+    plansSub: "ChatGPT, Gemini, GLM and others",
     plansFoot: "Agents think with your plan, no API key needed. It signs in on the agent's computer.",
     change: "Change",
     how: "How to connect",

@@ -11,6 +11,10 @@ import { createFakeApi, type FakeState, GENERAL_ID, ORG_ID, seedState, withRight
 import { renderApp, screen, settle } from "./render";
 // The step's views load on their own (`TeamSource`'s lazy import): loaded here first, so each test sees them at once.
 import "@/pages/onboarding/TeamSourceBody";
+import { setImportOffered } from "@/pages/onboarding/TeamSource";
+
+// The import in the team step, which xquads hides (`IMPORT_OFFERED`): its tests turn it back on.
+setImportOffered(true);
 
 /*
  * The onboarding's team step asking first whether the agents already live in another app, and bringing them inside the

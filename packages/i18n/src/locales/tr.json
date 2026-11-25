@@ -2938,7 +2938,7 @@
       "connect": {
         "title": "Ekip için bir yapay zeka bağla",
         "titlePersonal": "Ajanların için bir yapay zeka bağla",
-        "text": "Claude veya ChatGPT planınla giriş yap, API anahtarı gerekmez.",
+        "text": "ChatGPT planınla giriş yap ya da bir API anahtarı kullan.",
         "hint": "Ajanlar çalışma alanının yapay zekasıyla düşünür.",
         "hintPersonal": "Ajanların bu yapay zekayla düşünür.",
         "action": "Bağla"
@@ -3339,7 +3339,7 @@
   "noAi": {
     "banner": {
       "org": "Ajanlarınızın henüz bir yapay zekası yok.",
-      "orgHint": "Sohbette de isteyebilirsiniz, örneğin “Claude planımı kullan”.",
+      "orgHint": "Sohbette de isteyebilirsin, örneğin “ChatGPT planımı kullan”.",
       "orgAction": "Yapay zeka bağla"
     },
     "agent": "{{name}} yanıt vermeyecek çünkü bağlı bir yapay zekası yok.",
@@ -3400,7 +3400,7 @@
         "ended": "Çalışma alanı xquads'a yeniden abone olunca burada yanıtlayacağım."
       },
       "askAdmin": "Bir yönetici xquads planını çözünce burada yanıtlayacağım.",
-      "plan": "Plan, ajanların bilgisayarını getirir. Yapay zeka zaten ödediğindir: Claude, ChatGPT ve diğerleri ya da bir API anahtarı.",
+      "plan": "Plan, ajanların bilgisayarını sağlar. Yapay zekâ zaten ödediğin olur: ChatGPT, Gemini ve diğerleri ya da bir API anahtarı.",
       "activeTitle": "Plan etkin",
       "activeLine": "Bir yapay zeka bağla, {{name}} burada yanıtlasın.",
       "receipt": "Saklandı",
@@ -10763,7 +10763,7 @@
       "noModel": "Eşleşen model yok.",
       "empty": "Henüz hesap yok.",
       "add": "Hesap ekle",
-      "addLine": "Claude, ChatGPT, Gemini ve diğerleri ya da bir API anahtarı",
+      "addLine": "ChatGPT, Gemini ve diğerleri ya da bir API anahtarı",
       "manage": "Hesapları yönet",
       "groups": {
         "yours": "Hesaplarınız",

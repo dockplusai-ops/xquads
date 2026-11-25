@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { resources } from "@agenteschat/i18n";
 import { matchesWords } from "@agenteschat/ui/search";
 import i18next, { type TFunction } from "i18next";
@@ -42,6 +42,7 @@ import {
   noAiCardShown,
   noAiLineKey,
   noAiStatusKey,
+  offeredPlans,
   onlyOwnerReplies,
   ownSignInFor,
   PLAN_CHOICES,
@@ -58,6 +59,7 @@ import {
   planPickText,
   plansNotYoursOf,
   rightHandUnusable,
+  setClaudePlanOffered,
   signInAgainPlan,
   signsInOnce,
   signsInPerAgent,
@@ -457,15 +459,29 @@ describe("freePlanAccount: a plan account of theirs that thinks for one more age
   });
 });
 
+describe("the plans a picker offers (xquads: no Claude plan)", () => {
+  test("Claude's plan only when turned on; the first plan follows", () => {
+    setClaudePlanOffered(false);
+    expect(offeredPlans()).not.toContain("claude");
+    expect(offeredPlans()[0]).toBe("chatgpt");
+    setClaudePlanOffered(true);
+    expect(offeredPlans()[0]).toBe("claude");
+  });
+});
+
 describe("defaultChoice: what the picker opens on", () => {
   const ready: PlanGate = { state: "ready" };
+  // xquads' default: no Claude plan offered (the shared preload turns it on for the inherited tests).
+  beforeAll(() => setClaudePlanOffered(false));
+  afterAll(() => setClaudePlanOffered(true));
   test("an intent picks its option", () => {
     const picks: [Parameters<typeof defaultChoice>[0]["intent"], AiChoice][] = [
-      ["claude", "claude"],
+      // xquads offers no Claude plan: asked for, Claude opens on the key (an Anthropic API key).
+      ["claude", "key"],
       ["chatgpt", "chatgpt"],
       ["api_key", "key"],
-      ["any", "claude"],
-      ["task", "claude"],
+      ["any", "chatgpt"],
+      ["task", "chatgpt"],
     ];
     for (const [intent, choice] of picks) {
       expect(defaultChoice({ intent, ownsAgents: true, mayAddKey: true, claudeGate: ready })).toBe(choice);
@@ -477,11 +493,13 @@ describe("defaultChoice: what the picker opens on", () => {
     expect(defaultChoice({ ownsAgents: true, mayAddKey: true, claudeGate: { state: "missing" } })).toBe("key");
   });
 
-  test("Claude otherwise, even while its computer is prepared or the person may not add keys", () => {
-    expect(defaultChoice({ ownsAgents: false, mayAddKey: false, claudeGate: ready })).toBe("claude");
+  test("the first plan offered otherwise (ChatGPT: no Claude plan), even while its computer is prepared or the person may not add keys", () => {
+    expect(defaultChoice({ ownsAgents: false, mayAddKey: false, claudeGate: ready })).toBe("chatgpt");
     expect(
       defaultChoice({ ownsAgents: true, mayAddKey: true, claudeGate: { state: "preparing", view: setup() } }),
-    ).toBe("claude");
+    ).toBe("chatgpt");
+    // An agent on Claude's plan opens on the first plan offered.
+    expect(defaultChoice({ ownsAgents: true, mayAddKey: true, claudeGate: ready, plan: "claude" })).toBe("chatgpt");
   });
 
   test("for one agent on a plan brain, its own plan (`agentPlan`) instead of Claude; what was asked still wins", () => {
