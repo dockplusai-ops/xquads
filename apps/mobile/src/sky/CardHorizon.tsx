@@ -13,6 +13,13 @@ import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 import { rectsToSvg } from "@/agent/recorder";
 import { useTheme } from "@/ui/theme";
 
+/** xquads draws no pixel horizon (DESIGN.md: flat petrol surfaces, as `Dither`'s scenery): its place stays, empty. */
+const PIXEL_HORIZON = false;
+
+export function CardHorizon(props: Parameters<typeof PixelHorizon>[0]) {
+  return PIXEL_HORIZON ? <PixelHorizon {...props} /> : <View style={props.style} pointerEvents="none" />;
+}
+
 /**
  * The agents' horizon at the foot of a card with room to spare, as on the web (`CardHorizon` in the design system): a
  * low, still dither from the card's own ground into the sky's light tones. The card says how wide it is, how much room
@@ -20,7 +27,7 @@ import { useTheme } from "@/ui/theme";
  * it. `x`: where the card starts on its row, so cards side by side continue one wave. It sits at the bottom of its
  * parent, under whatever comes after it.
  */
-export function CardHorizon({
+function PixelHorizon({
   width,
   room,
   surface,

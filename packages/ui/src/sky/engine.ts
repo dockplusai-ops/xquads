@@ -244,6 +244,9 @@ export function setPixelSkies(on: boolean) {
   DRAW_SKIES = on;
 }
 
+/** Whether the pixel skies (and the cards' pixel horizon) draw: off in xquads. */
+export const pixelSkiesOn = () => DRAW_SKIES;
+
 export function startSky(canvas: HTMLCanvasElement, get: () => SkyOptions): () => void {
   // xquads draws no pixel sky anywhere (DESIGN.md: flat petrol surfaces): every caller, the desktop's cover included,
   // keeps its canvas empty.

@@ -61,11 +61,11 @@ describe("a card's horizon", () => {
 });
 
 describe("a widget on a board", () => {
-  test("is capped and has the horizon under its text", () => {
+  test("is capped, with no pixel horizon under its text (xquads: flat cards, DESIGN.md)", () => {
     const { container } = card({ kind: "text", items: ["All orders shipped."] }, { board: labels });
     const el = container.querySelector(".wg");
     expect(el?.hasAttribute("data-capped")).toBe(true);
-    expect(container.querySelector("canvas.ac-card-horizon")?.getAttribute("aria-hidden")).toBe("true");
+    expect(container.querySelector(".ac-card-horizon")).toBeNull();
   });
 
   test("a number with its trend keeps the trend at its foot, no horizon", () => {
