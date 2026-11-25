@@ -68,7 +68,7 @@
       }
     },
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDVCREU5NDA5OTVGNEMwNUEKUldSYXdQU1ZDWlRlVzU1RVZjUno1Y1B3cS9UODJQcFd5WkJnbGNsYW5TcUc4OWpZbzRJeHU2K20K",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEY2QTAwNUFEOEI0RjJGQkYKUldTL0wwK0xyUVdnOXM2QnUyS3dLdG1PQ1dwYStEMjYvWFcrYksvalptUGNsWlJKZ0E1UWQrVkYK",
       "endpoints": [
         "https://agents.xquads.com/api/desktop/update?target={{target}}&arch={{arch}}&current={{current_version}}&bundle={{bundle_type}}"
       ]
