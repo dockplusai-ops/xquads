@@ -1295,7 +1295,7 @@
         "see": "查看导入的内容"
       },
       "otherName": "其他应用",
-      "agenteschatName": "agentes.chat",
+      "agenteschatName": "xquads",
       "where": {
         "openbotrun": "拖入 openbot-import.json（来自 OpenBot 的 Migrator）或 openbot-transfer.json（来自实例迁移），或者包含它的 .zip。",
         "openmausbot": "在 OpenMausBot 中：右键点击团队 → 分享团队… → 保存文件。",

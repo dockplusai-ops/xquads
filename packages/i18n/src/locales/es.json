@@ -1372,7 +1372,7 @@
         "see": "Ver lo que llegó"
       },
       "otherName": "Otra app",
-      "agenteschatName": "agentes.chat",
+      "agenteschatName": "xquads",
       "where": {
         "openbotrun": "Suelta openbot-import.json (de Migrator by OpenBot) u openbot-transfer.json (de la transferencia de instancia), o el .zip en el que vino.",
         "openmausbot": "En OpenMausBot: clic derecho en el equipo → Share team… → Save file.",

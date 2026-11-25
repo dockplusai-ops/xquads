@@ -1295,7 +1295,7 @@
         "see": "Lihat yang sudah tiba"
       },
       "otherName": "Aplikasi lain",
-      "agenteschatName": "agentes.chat",
+      "agenteschatName": "xquads",
       "where": {
         "openbotrun": "Letakkan openbot-import.json (dari Migrator milik OpenBot) atau openbot-transfer.json (dari transfer instans), atau .zip tempat file itu berada.",
         "openmausbot": "Di OpenMausBot: klik kanan tim → Share team… → Save file.",

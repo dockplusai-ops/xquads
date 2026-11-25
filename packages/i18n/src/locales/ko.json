@@ -1295,7 +1295,7 @@
         "see": "가져온 것 보기"
       },
       "otherName": "다른 앱",
-      "agenteschatName": "agentes.chat",
+      "agenteschatName": "xquads",
       "where": {
         "openbotrun": "openbot-import.json(OpenBot의 Migrator에서 만든 파일)이나 openbot-transfer.json(인스턴스 이전에서 만든 파일), 또는 이 파일이 담긴 .zip을 끌어다 놓으세요.",
         "openmausbot": "OpenMausBot에서 팀을 오른쪽 클릭 → 팀 공유… → 파일 저장.",

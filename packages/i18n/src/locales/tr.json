@@ -1333,7 +1333,7 @@
         "see": "Gelenleri gör"
       },
       "otherName": "Başka bir uygulama",
-      "agenteschatName": "agentes.chat",
+      "agenteschatName": "xquads",
       "where": {
         "openbotrun": "openbot-import.json (OpenBot'un Migrator aracından) veya openbot-transfer.json (örnek aktarımından) dosyasını ya da geldiği .zip dosyasını bırakın.",
         "openmausbot": "OpenMausBot'ta: ekibe sağ tıklayın → Ekibi paylaş… → Dosyayı kaydet.",

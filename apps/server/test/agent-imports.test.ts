@@ -374,9 +374,7 @@ describe("imports and the export", () => {
     });
     const res = await b(`/api/app/organizations/${orgId}/export`);
     expect(res.status).toBe(200);
-    expect(res.headers.get("content-disposition")).toMatch(
-      /^attachment; filename="agentes-chat-\d{4}-\d{2}-\d{2}\.json"/,
-    );
+    expect(res.headers.get("content-disposition")).toMatch(/^attachment; filename="xquads-\d{4}-\d{2}-\d{2}\.json"/);
     const exported = (await res.json()) as typeof BUNDLE & { agents: { key: string; handle: string }[] };
     expect(exported.source).toMatchObject({ app: "agenteschat", ref: orgId, name: "Acme" });
     expect(exported.agents.map((a) => a.handle)).toEqual(["dev", "scout"]);

@@ -17,8 +17,8 @@
 /** What the app tells the page before the kit starts. `json` is already safe inside a script. */
 export const blockBoot = (json: string) => `window.__block=${json}`;
 
-export const BLOCK_KIT_CSS = `:root{--ink:#151514;--ink2:#2a2a28;--muted:#5c5c58;--faint:#6f6f6a;--line:rgba(23,23,22,.07);--line2:rgba(23,23,22,.12);--raised:#fff;--sunken:#f3f3f0;--well:#fbfbf9;--plate:rgba(127,127,127,.1);--plate2:rgba(127,127,127,.06);--ok:#1f7a45;--warn:#9a5b00;--danger:#b42a20;--cut:4px;--on-s:#fff;--focus:rgba(75,140,245,.35);--e1:0 1px 1px rgba(23,23,22,.04),0 2px 4px -1px rgba(23,23,22,.05),0 0 0 1px var(--line);--e2:0 1px 1px rgba(23,23,22,.04),0 6px 16px -4px rgba(23,23,22,.1),0 0 0 1px var(--line);--top:inset 0 1px 0 rgba(255,255,255,.9);--lit:rgba(255,255,255,.18);color-scheme:light}
-html[data-theme=dark]{--ink:#efefec;--ink2:#d6d6d2;--muted:#a3a39e;--faint:#8f8f89;--line:rgba(255,255,255,.1);--line2:rgba(255,255,255,.15);--raised:#1c1c1b;--sunken:#0a0a09;--well:#141413;--plate:rgba(127,127,127,.14);--plate2:rgba(127,127,127,.08);--ok:#5fc48a;--warn:#e0a84a;--danger:#f08a80;--focus:rgba(75,140,245,.45);--e1:0 1px 2px rgba(0,0,0,.5),0 0 0 1px var(--line);--e2:0 8px 20px -6px rgba(0,0,0,.6),0 0 0 1px var(--line);--top:inset 0 1px 0 rgba(255,255,255,.08);--lit:rgba(255,255,255,.12);color-scheme:dark}
+export const BLOCK_KIT_CSS = `:root{--ink:#ede6e1;--ink2:#d9d0ca;--muted:#beb5b0;--faint:#a39b97;--line:rgba(237,230,225,.1);--line2:rgba(237,230,225,.16);--raised:#15282f;--sunken:#0a161b;--well:#0e1c22;--plate:rgba(237,230,225,.08);--plate2:rgba(237,230,225,.05);--ok:#8fbb9c;--warn:#d9a55b;--danger:#e08476;--cut:4px;--on-s:#fff;--focus:rgba(199,157,112,.45);--e1:0 1px 2px rgba(0,0,0,.5),0 0 0 1px var(--line);--e2:0 8px 20px -6px rgba(0,0,0,.6),0 0 0 1px var(--line);--top:inset 0 1px 0 rgba(237,230,225,.08);--lit:rgba(255,255,255,.12);color-scheme:dark}
+html[data-theme=dark]{--ink:#ede6e1;--ink2:#d9d0ca;--muted:#beb5b0;--faint:#a39b97;--line:rgba(237,230,225,.1);--line2:rgba(237,230,225,.16);--raised:#15282f;--sunken:#0a161b;--well:#0e1c22;--plate:rgba(237,230,225,.08);--plate2:rgba(237,230,225,.05);--ok:#8fbb9c;--warn:#d9a55b;--danger:#e08476;--focus:rgba(199,157,112,.45);--e1:0 1px 2px rgba(0,0,0,.5),0 0 0 1px var(--line);--e2:0 8px 20px -6px rgba(0,0,0,.6),0 0 0 1px var(--line);--top:inset 0 1px 0 rgba(237,230,225,.08);--lit:rgba(255,255,255,.12);color-scheme:dark}
 *{box-sizing:border-box}
 html[data-theme-switching] *,html[data-theme-switching] *::before,html[data-theme-switching] *::after{transition:none!important}
 html{overflow:hidden auto;-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -172,9 +172,9 @@ var agentes=window.agentes={get state(){return view()},set:function(k,v){var j=j
   send:function(text,label,ready){post({type:"draft",text:text,label:label||L.send,ready:ready!==false})},
   draw:function(name,options){post({type:"draw",name:String(name),options:Array.prototype.slice.call(options||[]),used:used})},
   who:function(name){var c=who[name];return c?{name:c.name,at:c.at,drawn:!!c.drawn}:null}};
-var ramp=function(){return R.ramp||["#cfe2ff","#9ec5ff","#5aa8ff","#3d8bff","#0063d1","#00408a"]};
+var ramp=function(){return R.ramp||["#efe2d2","#e2c9ad","#d4b38e","#c79d70","#a87545","#7a5530"]};
 function theme(t,live){var d=document.documentElement,r=ramp();if(live){d.setAttribute("data-theme-switching","");requestAnimationFrame(function(){requestAnimationFrame(function(){d.removeAttribute("data-theme-switching")})})}d.dataset.theme=t;(t==="dark"?[r[3],r[5],r[4],r[2],r[1],r[0]]:[r[4],r[3],r[5],r[2],r[1],r[0]]).forEach(function(c,i){if(c)d.style.setProperty("--s"+(i+1),c)})}
-theme(R.theme||"light");
+theme(R.theme||"dark");
 if(R.ramp)document.documentElement.style.setProperty("--c",R.ramp[4]);
 var ink=function(){return document.documentElement.dataset.theme==="dark"?ramp()[2]:ramp()[4]};
 var B=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5].map(function(v){return(v+.5)/16}),bay=function(x,y){return B[((y&3)<<2)|(x&3)]};

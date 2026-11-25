@@ -1172,13 +1172,13 @@ const ourBundle = {
 
 describe("agentes.chat bundle", () => {
   test("our own shape is read like any other source: nothing in it is trusted", () => {
-    const b = parseImport([{ name: "agentes-chat-export.json", text: JSON.stringify(ourBundle) }], { models: MODELS });
+    const b = parseImport([{ name: "xquads-export.json", text: JSON.stringify(ourBundle) }], { models: MODELS });
     expect(b.source).toEqual({
       app: "agenteschat",
       // Every reply from one app is one package: the model's own `ref` changes from one export to the next.
       ref: "claude",
       name: "Dana's Claude",
-      files: ["agentes-chat-export.json"],
+      files: ["xquads-export.json"],
     });
     expect(
       b.agents.map((a) => [a.key, a.handle, a.model, a.skills, a.appearance.color, a.appearance.accessory]),
@@ -1224,7 +1224,7 @@ describe("agentes.chat bundle", () => {
       "A daily routine that reads the inbox, sums up the threads and tells the team in the channel. ".repeat(20);
     const b = parseImport([
       {
-        name: "agentes-chat-export.json",
+        name: "xquads-export.json",
         text: JSON.stringify({
           ...ourBundle,
           todo: [{ kind: "app", label: paragraph, agents: ["writer"] }],
@@ -1275,7 +1275,7 @@ describe("agentes.chat bundle", () => {
   test("our own export keeps its workspace and its keys", () => {
     const b = parseImport([
       {
-        name: "agentes-chat-export.json",
+        name: "xquads-export.json",
         text: JSON.stringify({
           ...ourBundle,
           source: { app: "agenteschat", ref: "org-1", name: "Acme", files: [] },

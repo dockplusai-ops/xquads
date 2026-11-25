@@ -1378,7 +1378,7 @@ export const ptBR = {
         see: "Ver o que chegou",
       },
       otherName: "Outro app",
-      agenteschatName: "agentes.chat",
+      agenteschatName: "xquads",
       where: {
         openbotrun:
           "Solte o openbot-import.json (do Migrator by OpenBot) ou o openbot-transfer.json (da transferência da instância), ou o .zip em que ele veio.",

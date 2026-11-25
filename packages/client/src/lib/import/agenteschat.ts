@@ -53,7 +53,7 @@ export const EXPORT_PROMPT = `Please export everything I set up with you, so I c
 
 Export all of my agents in this one file, not only the one I'm talking to now: every agent, bot or assistant in my account or workspace, each with its own instructions, skills and scheduled tasks. List them all first and read each one's setup with the tools you have, then write the file.
 
-Write one JSON file named agentes-chat-export.json and give it to me to download. If you can't make files, reply with the JSON in a single \`\`\`json code block and nothing else.
+Write one JSON file named xquads-export.json and give it to me to download. If you can't make files, reply with the JSON in a single \`\`\`json code block and nothing else.
 
 Use exactly this shape:
 
