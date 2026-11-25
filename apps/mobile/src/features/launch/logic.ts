@@ -116,15 +116,14 @@ export function ringCell(d: number, r: number, b: number): "splash" | "app" | 1 
   return idx === 0 ? "splash" : (idx as 1 | 2 | 3);
 }
 
-/** The ring's tones: the screen's background, then its sky from soft to bright (dusk: the lilac one). */
+/**
+ * The ring's tones: the screen's background, then camel from soft to full (xquads' one accent, DESIGN.md), the same
+ * for the Cloud and a server of one's own, in both themes.
+ */
 export function ringTones(bg: string, dark: boolean, dusk = false): [string, string, string, string] {
-  if (dusk)
-    return dark
-      ? [bg, mixHex(bg, "#4a40a8", 0.35), mixHex(bg, "#7b6fe0", 0.66), "#7b6fe0"]
-      : [bg, mixHex(bg, "#c9c0ff", 0.55), "#c9c0ff", "#aaa6f5"];
-  return dark
-    ? [bg, mixHex(bg, "#2b74e6", 0.35), mixHex(bg, "#4b93ff", 0.66), "#4b93ff"]
-    : [bg, mixHex(bg, "#a6cfff", 0.55), "#a6cfff", "#78b4ff"];
+  void dark;
+  void dusk;
+  return [bg, mixHex(bg, "#c79d70", 0.3), mixHex(bg, "#c79d70", 0.62), "#c79d70"];
 }
 
 /** Where the name starts below the agent's center (its top), and how far it reaches past that. */

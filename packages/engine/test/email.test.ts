@@ -395,7 +395,7 @@ describe("the look", () => {
       const { html } = renderEmail(sample, art);
       const card = html.slice(
         html.indexOf('<td class="card"'),
-        html.indexOf('\n</td></tr>\n<tr><td style="padding:24px 0 0">'),
+        html.indexOf('\n</td></tr>\n<tr><td style="padding:24px 0 40px">'),
       );
       const last = card.slice(card.lastIndexOf("\n") + 1);
       // 2 px under a line of text; 6 px under the button for its shadow, 4 in dark, where the shadow doesn't show.
@@ -457,12 +457,8 @@ describe("the picture over the headline", () => {
   const ada = { color: "green", eyes: "wide", accessory: "headphones" };
   const lia = { color: "rose", eyes: "dots", accessory: "flower" };
   const atlas = { color: "amber", eyes: "round", accessory: "antenna" };
-  const ONBOARDING = [
-    "agent-indigo-round-cap.png 36×46",
-    "agent-green-wide-headphones.png 36×46",
-    "agent-rose-dots-flower.png 36×46",
-    "agent-amber-round-antenna.png 36×46",
-  ];
+  // xquads' agents wear nothing: every look, the onboarding's own included, is its colour's face.
+  const ONBOARDING = ["face-indigo.png 32×32", "face-green.png 32×32", "face-rose.png 32×32", "face-amber.png 32×32"];
   const plain = (...colors: string[]) => colors.map((color) => ({ color, eyes: "round", accessory: "none" }));
   /** The pictures between the card's top and the headline, in order: file, size and alt text. */
   const scene = (t: EmailTemplate) => {
@@ -472,8 +468,8 @@ describe("the picture over the headline", () => {
       ...top.matchAll(/<img src="https:\/\/x\.test\/email\/([^"]+)" width="(\d+)" height="(\d+)" alt="([^"]*)"/g),
     ].map(([, file, width, height, alt = ""]) => `${file} ${width}×${height} ${alt.replaceAll("&#39;", "'")}`.trim());
   };
-  const faces = (...colors: string[]) => colors.map((c) => `agent-${c}.png 32×32`);
-  const shown = (crew: typeof ready.crew) => scene({ ...ready, crew }).filter((p) => p.startsWith("agent-"));
+  const faces = (...colors: string[]) => colors.map((c) => `face-${c}.png 32×32`);
+  const shown = (crew: typeof ready.crew) => scene({ ...ready, crew }).filter((p) => p.startsWith("face-"));
 
   test("the computer ready email: its computer in a well, the workspace's agents half on each side, oldest first", () => {
     const [teal, sky, computer, violet] = scene({ ...ready, crew: plain("teal", "sky", "violet") });
@@ -496,25 +492,14 @@ describe("the picture over the headline", () => {
     expect(shown([{ color: "#e0457b" }, { color: "#808080" }])).toEqual(faces("rose", "graphite"));
   });
 
-  test("an onboarding agent's look is drawn whole, eyes and accessory; any other look is its colour's face", () => {
+  test("every look is its colour's face: eyes and accessory are never drawn", () => {
     expect(shown([theo, ada, lia, atlas])).toEqual(ONBOARDING);
-    // Eyes left out are round, as the app draws them.
-    expect(shown([{ color: "indigo", accessory: "cap" }, { ...ada, eyes: "round" }, ...plain("rose")])).toEqual([
-      "agent-indigo-round-cap.png 36×46",
-      ...faces("green", "rose"),
-    ]);
-    // A whole look's room for its accessory comes out of the gap after it: the bodies keep their spacing.
-    const stage = renderEmail({ ...ready, crew: [theo, ...plain("indigo")] }, art).html;
-    expect(stage).toContain(
-      '<td valign="bottom" style="padding:0 0px 2px 4px"><img src="https://x.test/email/agent-indigo-round-cap.png" width="36" height="46"',
-    );
-    expect(stage).toContain(
-      '<td valign="bottom" style="padding:0 4px 2px 4px"><img src="https://x.test/email/agent-indigo.png" width="32" height="32"',
+    expect(shown([{ color: "indigo", accessory: "cap" }, { ...ada, eyes: "round" }, ...plain("rose")])).toEqual(
+      faces("indigo", "green", "rose"),
     );
     const invitation = EMAIL_SAMPLES["invitation.en"] as Extract<EmailTemplate, { kind: "invitation" }>;
-    const row = renderEmail({ ...invitation, crew: [lia] }, art).html;
-    expect(row).toContain(
-      '<td valign="bottom" style="padding:0 4px 0px 0px"><img src="https://x.test/email/agent-rose-dots-flower.png"',
+    expect(renderEmail({ ...invitation, crew: [lia] }, art).html).toContain(
+      '<img src="https://x.test/email/face-rose.png" width="32" height="32"',
     );
   });
 
@@ -525,7 +510,7 @@ describe("the picture over the headline", () => {
       "invitation.pt-BR": ONBOARDING,
       "early_access.en": ONBOARDING,
       "early_access_allowed.en": ONBOARDING,
-      "join_answer-joined.en": [...faces("graphite"), "agent-rose-dots-flower.png 36×46"],
+      "join_answer-joined.en": faces("graphite", "rose"),
       "join_answer-invited.en": ONBOARDING,
       "plan_waiting.pt-BR": ONBOARDING,
     };
@@ -549,7 +534,7 @@ describe("the picture over the headline", () => {
   test("the surface emails: the assistant beside a phone in a well, its screen on when linked and off when unlinked", () => {
     const linked = EMAIL_SAMPLES["surface_linked.en"] as Extract<EmailTemplate, { kind: "surface_linked" }>;
     const unlinked = EMAIL_SAMPLES["surface_unlinked.en"] as Extract<EmailTemplate, { kind: "surface_unlinked" }>;
-    const assistant = "agent-teal-happy-headset.png 36×46";
+    const assistant = "face-teal.png 32×32";
     const [theoWhole = "", , liaWhole = ""] = ONBOARDING;
     expect(scene(linked)).toEqual([
       theoWhole,
@@ -567,7 +552,7 @@ describe("the picture over the headline", () => {
       "phone.png 58×84 Seu assistente, agora também no seu celular",
     );
     // A look of its own: its colour's face beside the phone.
-    expect(scene({ ...unlinked, assistant: { color: "violet", eyes: "wide" } })[1]).toBe("agent-violet.png 32×32");
+    expect(scene({ ...unlinked, assistant: { color: "violet", eyes: "wide" } })[1]).toBe("face-violet.png 32×32");
     for (const t of [linked, unlinked]) {
       const { html, text } = renderEmail(t, art);
       expect(html.slice(html.indexOf('<td class="card"'), html.indexOf("<h1 "))).toContain('class="well"');
@@ -643,15 +628,8 @@ describe("where the pictures come from", () => {
     const teal = { color: "teal", eyes: "round", accessory: "none" };
     const { html, inline } = renderEmail({ ...ready, crew: [lia, lia, teal, { color: "rose" }] }, attached);
     expect(html).toContain('src="cid:computer@agentes.chat"');
-    expect(html).toContain('src="cid:agent-rose-dots-flower@agentes.chat"');
-    expect(inline.map((p) => p.filename)).toEqual([
-      "logo-bone.png",
-      "computer.png",
-      "sky-band.png",
-      "agent-rose.png",
-      "agent-teal.png",
-      "agent-rose-dots-flower.png",
-    ]);
+    expect(html).toContain('src="cid:face-rose@agentes.chat"');
+    expect(inline.map((p) => p.filename)).toEqual(["logo-bone.png", "computer.png", "face-rose.png", "face-teal.png"]);
   });
 
   test("linked from this server's /email/, with the web font", () => {
@@ -708,7 +686,7 @@ describe("where the pictures come from", () => {
       attached,
     );
     expect(html).toContain('src="cid:logo-bone@agentes.chat"');
-    expect(inline.map((p) => p.filename)).toEqual(["logo-bone.png", "sky-band.png", "agent-rose.png"]);
+    expect(inline.map((p) => p.filename)).toEqual(["logo-bone.png", "face-rose.png"]);
     expect(inline[0]).toMatchObject({ cid: "logo-bone@agentes.chat", contentType: "image/png" });
     expect([...(inline[0]?.content ?? []).slice(1, 4)].map((c) => String.fromCharCode(c)).join("")).toBe("PNG");
   });
@@ -804,7 +782,7 @@ describe("outbox delivery", () => {
     const sender = createFakeEmailSender();
     const attached: EmailArt = await emailArtFor("http://localhost:3000", WEB_DIR, "attach");
     await sendQueuedEmail(sender, { key: "k", to: ["a@b.c"], template: EMAIL_SAMPLES["verify_email.en"] }, attached);
-    expect(sender.sent[0]?.inline?.map((p) => p.cid)).toEqual(["logo-bone@agentes.chat", "sky-band@agentes.chat"]);
+    expect(sender.sent[0]?.inline?.map((p) => p.cid)).toEqual(["logo-bone@agentes.chat"]);
     await sendQueuedEmail(sender, { key: "k2", to: ["a@b.c"], template: EMAIL_SAMPLES["verify_email.en"] }, art);
     expect(sender.sent[1]).not.toHaveProperty("inline");
   });

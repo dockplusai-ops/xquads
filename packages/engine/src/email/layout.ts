@@ -129,24 +129,20 @@ export const wholeFile = (look: Required<Look>) => `agent-${look.color}-${look.e
 export const EMAIL_PICTURES = [
   "logo-bone.png",
   COMPUTER.file,
-  "sky-band.png",
-  ...AGENT_FACES.map((c) => `agent-${c}.png`),
-  ...ONBOARDING_CREW.map(wholeFile),
+  ...AGENT_FACES.map((c) => `face-${c}.png`),
   HANDSET.on,
   HANDSET.off,
-  wholeFile(ASSISTANT_LOOK),
 ];
 const FONT = "onest-latin.woff2";
 const LOGO = { width: 173, height: 36, alt: "xquads" } as const;
-const SKY = { width: 552, height: 27 } as const;
-/** An agent's face for its colour: a custom "#rrggbb" is the closest preset's, an unknown one is sky, as the app draws it. */
-const faceOf = (color: string) => `agent-${nearestPreset(color)}.png`;
-/** A look's picture: drawn whole when it is one of `WHOLE_LOOKS`, else its colour's face. */
-function pictureOf({ color = "sky", eyes = "round", accessory = "none" }: Look) {
-  const whole = WHOLE_LOOKS.find((o) => o.color === color && o.eyes === eyes && o.accessory === accessory);
-  return whole
-    ? { file: wholeFile(whole), width: WHOLE.width, height: WHOLE.height }
-    : { file: faceOf(color), width: 32, height: 32 };
+/**
+ * An agent's face for its colour (xquads' flat face, `face-<colour>.png`): a custom "#rrggbb" is the closest preset's,
+ * an unknown one is sky, as the app draws it.
+ */
+const faceOf = (color: string) => `face-${nearestPreset(color)}.png`;
+/** A look's picture: its colour's face (xquads' agents wear nothing, so every look is its face). */
+function pictureOf({ color = "sky" }: Look) {
+  return { file: faceOf(color), width: 32, height: 32 };
 }
 
 /** Classic Outlook has no rgba: hairlines are the solid color they show over their surface. */
@@ -215,7 +211,6 @@ const PHONE = [
   ".px{padding-left:16px!important;padding-right:16px!important}",
   ".card{padding:24px 20px!important}",
   ".h1{font-size:22px!important;line-height:28px!important}",
-  ".sky{width:100%!important;height:auto!important}",
 ];
 
 const esc = (s: string) =>
@@ -505,8 +500,7 @@ ${logo("logo-bone.png", "logo-bone", "block", L.ink)}
 ${doc.scene ? scene(doc.scene, src) : ""}<h1 class="h1 ink" style="margin:0 0 16px;${P};font-size:24px;line-height:30px;font-weight:600;letter-spacing:-0.01em;color:${L.ink}">${html(doc.headline)}</h1>
 ${body}
 </td></tr>
-<tr><td style="padding:24px 0 0"><img class="sky" src="${esc(src("sky-band.png"))}" width="${SKY.width}" height="${SKY.height}" alt="" style="display:block;border:0;outline:none;width:${SKY.width}px;max-width:100%;height:auto"></td></tr>
-<tr><td style="padding:16px 0 40px">
+<tr><td style="padding:24px 0 40px">
 ${doc.footer.map((f) => `<p class="fa" style="margin:0 0 6px;${PW};font-size:13px;line-height:19px;color:${L.faint}">${html(f)}</p>`).join("\n")}
 </td></tr>
 </table>
