@@ -1149,6 +1149,13 @@ textarea.ac-input:not(:hover, :focus-visible) {
   z-index: var(--z-lifted);
   line-height: 0;
 }
+/* A person is a circle: the badge sits on its edge at the bottom right (the 45° point, 14.6% in from the box's corner),
+   centred there whatever its size. */
+.ac-avatar[data-kind="person"] > .ac-avatar__badge {
+  right: 14.6%;
+  bottom: 14.6%;
+  translate: 50% 50%;
+}
 /*
  * A face pressed to change it (`MenuFace`): hover and focus lay a scrim with the photo glyph over the tile's hairline,
  * under the presence badge. The white glyph stays 3:1 over a white photo. Initials give way to it: a letter behind the
@@ -1158,7 +1165,7 @@ textarea.ac-input:not(:hover, :focus-visible) {
   position: relative;
   display: inline-grid;
   flex: none;
-  border-radius: 30%;
+  border-radius: 50%;
   cursor: pointer;
   outline: none;
 }
@@ -5551,8 +5558,8 @@ html:not([data-pointer]) .ac-btn:focus-visible {
   box-shadow: var(--focus-ring);
 }
 .ac-btn--primary {
-  color: var(--bg);
-  background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 82%, var(--bg)) 0%, var(--ink) 100%);
+  color: var(--on-action);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--action) 82%, var(--bg)) 0%, var(--action) 100%);
   box-shadow:
     inset 0 1px 0 var(--b1-light),
     inset 0 -1px 0 rgba(0, 0, 0, 0.3),
@@ -5560,7 +5567,7 @@ html:not([data-pointer]) .ac-btn:focus-visible {
     0 6px 14px -6px rgba(0, 0, 0, 0.45);
 }
 .ac-btn--primary:hover {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 82%, var(--bg)) 0%, var(--ink) 100%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--action) 82%, var(--bg)) 0%, var(--action) 100%);
   filter: brightness(1.08);
   box-shadow:
     inset 0 1px 0 var(--b1-light),
@@ -5708,7 +5715,7 @@ html:not([data-pointer]) .ac-btn--primary:focus-visible {
   box-shadow: var(--e1), var(--top);
 }
 .ac-btn--primary.ac-btn--loading:disabled {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 82%, var(--bg)) 0%, var(--ink) 100%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--action) 82%, var(--bg)) 0%, var(--action) 100%);
 }
 
 /* Kbd */
@@ -6628,12 +6635,13 @@ html:not([data-pointer]) .ac-hint:focus-visible {
   filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.22));
 }
 
-/* People: the tile (a rounded square, radius 30% of the side) in a neutral gradient with initials or a photo; presence badge on the corner */
+/* People: a circle (DESIGN.md: a person is a circle, an agent a rounded square) in a neutral gradient with initials or a
+   photo; presence badge on the edge */
 .ac-avatar {
   background: linear-gradient(160deg, var(--person-a), var(--person-b));
   color: var(--person-ink);
   font-weight: 650;
-  border-radius: 30%;
+  border-radius: 50%;
 }
 /* Agents: the living symbol, drawn by the agent engine on a canvas (Avatar); the box only holds its place. */
 .ac-avatar--agent {
@@ -6666,16 +6674,17 @@ html:not([data-pointer]) .ac-hint:focus-visible {
   border-bottom-left-radius: inherit;
 }
 /*
- * The tile, agents and people alike:
- * radius 30% of the side, an inset hairline and a faint top highlight. The
+ * The tile, agents and people alike: a circle for a person, the agent's rounded square,
+ * an inset hairline and a faint top highlight. The
  * agent's canvas is the tile itself (its own pixel sky, the agent standing in
  * it); the soft tint only shows until the first draw.
  */
 .ac-avatar.ac-avatar--framed {
-  border-radius: 30%;
+  border-radius: 50%;
 }
 .ac-avatar--framed.ac-avatar--agent {
   background: color-mix(in srgb, var(--av-top, var(--agent)) 14%, var(--raised));
+  border-radius: var(--radius-agent);
 }
 .ac-avatar--framed::before {
   content: "";
@@ -7485,8 +7494,8 @@ html:not([data-pointer]) .ac-react:focus-visible {
   font-size: var(--control-fs-sm);
   font-weight: 600;
   cursor: pointer;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 82%, var(--bg)) 0%, var(--ink) 100%);
-  color: var(--bg);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--action) 82%, var(--bg)) 0%, var(--action) 100%);
+  color: var(--on-action);
   box-shadow:
     inset 0 1px 0 var(--b1-light),
     0 1px 2px rgba(0, 0, 0, 0.18);
@@ -7513,8 +7522,8 @@ html:not([data-pointer]) .ac-react:focus-visible {
 }
 /* Off, it stays the primary square, only dimmed (not the generic disabled gray). */
 .ac-composer__send.ac-btn:disabled {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 82%, var(--bg)) 0%, var(--ink) 100%);
-  color: var(--bg);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--action) 82%, var(--bg)) 0%, var(--action) 100%);
+  color: var(--on-action);
 }
 .ac-composer__send:active:not(:disabled) {
   transform: scale(0.96);

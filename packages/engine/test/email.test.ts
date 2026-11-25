@@ -213,7 +213,7 @@ describe("the look", () => {
     const at = css.lastIndexOf(".ac-btn--primary {");
     const primary = css.slice(at, css.indexOf("}", at));
     expect(primary).toContain(
-      "linear-gradient(180deg, color-mix(in srgb, var(--ink) 82%, var(--bg)) 0%, var(--ink) 100%)",
+      "linear-gradient(180deg, color-mix(in srgb, var(--action) 82%, var(--bg)) 0%, var(--action) 100%)",
     );
     for (const layer of [
       "inset 0 1px 0 var(--b1-light)",
@@ -645,7 +645,7 @@ describe("where the pictures come from", () => {
     expect(html).toContain('src="cid:computer@agentes.chat"');
     expect(html).toContain('src="cid:agent-rose-dots-flower@agentes.chat"');
     expect(inline.map((p) => p.filename)).toEqual([
-            "logo-bone.png",
+      "logo-bone.png",
       "computer.png",
       "sky-band.png",
       "agent-rose.png",
@@ -708,11 +708,7 @@ describe("where the pictures come from", () => {
       attached,
     );
     expect(html).toContain('src="cid:logo-bone@agentes.chat"');
-    expect(inline.map((p) => p.filename)).toEqual([
-            "logo-bone.png",
-      "sky-band.png",
-      "agent-rose.png",
-    ]);
+    expect(inline.map((p) => p.filename)).toEqual(["logo-bone.png", "sky-band.png", "agent-rose.png"]);
     expect(inline[0]).toMatchObject({ cid: "logo-bone@agentes.chat", contentType: "image/png" });
     expect([...(inline[0]?.content ?? []).slice(1, 4)].map((c) => String.fromCharCode(c)).join("")).toBe("PNG");
   });
@@ -808,10 +804,7 @@ describe("outbox delivery", () => {
     const sender = createFakeEmailSender();
     const attached: EmailArt = await emailArtFor("http://localhost:3000", WEB_DIR, "attach");
     await sendQueuedEmail(sender, { key: "k", to: ["a@b.c"], template: EMAIL_SAMPLES["verify_email.en"] }, attached);
-    expect(sender.sent[0]?.inline?.map((p) => p.cid)).toEqual([
-            "logo-bone@agentes.chat",
-      "sky-band@agentes.chat",
-    ]);
+    expect(sender.sent[0]?.inline?.map((p) => p.cid)).toEqual(["logo-bone@agentes.chat", "sky-band@agentes.chat"]);
     await sendQueuedEmail(sender, { key: "k2", to: ["a@b.c"], template: EMAIL_SAMPLES["verify_email.en"] }, art);
     expect(sender.sent[1]).not.toHaveProperty("inline");
   });

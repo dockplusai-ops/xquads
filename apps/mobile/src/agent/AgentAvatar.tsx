@@ -1,3 +1,4 @@
+import { agentRadius } from "@agenteschat/tokens";
 import {
   bodyTones,
   drawAccessory,
@@ -208,7 +209,7 @@ function AgentAvatarView({
       style={[
         { width: size, height: size },
         tile && {
-          borderRadius: radius ?? size * 0.3,
+          borderRadius: radius ?? size * agentRadius[0],
           overflow: "hidden",
           borderWidth: StyleSheet.hairlineWidth,
           borderColor: c.line,

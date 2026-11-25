@@ -112,32 +112,19 @@ describe("buttons and kbd", () => {
     );
     type Vars = Map<string, string>;
     const chosen = (vars: Vars) => [...vars.keys()].filter((name) => name.startsWith("chosen-"));
-    // One recipe, in the block both themes share, and each theme gives it its face and its shadow.
+    // One recipe, in the block both themes share. xquads is dark only (DESIGN.md): one block gives both themes the
+    // chosen face and its shadow.
     const defining = blocks.filter((b) => chosen(b.vars).length > 0);
     expect(defining.map((b) => [b.selector, chosen(b.vars)])).toEqual([
-      [':root, [data-theme="light"]', ["chosen-bg", "chosen-press"]],
-      ['[data-theme="dark"]', ["chosen-bg", "chosen-press"]],
+      [':root, [data-theme="light"], [data-theme="dark"]', ["chosen-bg", "chosen-press"]],
       [":root, [data-theme]", ["chosen-shadow", "chosen-lift"]],
     ]);
-    const [light, dark, shared] = defining.map((b) => b.vars) as [Vars, Vars, Vars];
-    expect(light.get("chosen-bg")).toBe("var(--sunken)");
-    expect(light.get("chosen-press")).toBe(
-      "inset 0 2px 5px rgba(0, 0, 0, 0.16), inset 0 1px 1.5px rgba(0, 0, 0, 0.12)",
-    );
-    // A black press shows only on a face it can darken: dark's sits lighter than a card, as light as the faint words
-    // on a chosen option allow, as light's face does. Its shadow is light's, deeper.
+    const [theme, shared] = defining.map((b) => b.vars) as [Vars, Vars];
+    // A black press shows only on a face it can darken: the chosen face sits lighter than a card, as light as the faint
+    // words on a chosen option allow.
     const level = (hex = "") => Number.parseInt(hex.slice(1, 3), 16);
-    expect(level(dark.get("chosen-bg"))).toBeGreaterThan(level(dark.get("raised")));
-    for (const [theme, face] of [
-      [light, light.get("sunken")],
-      [dark, dark.get("chosen-bg")],
-    ] as const)
-      expect(contrastRatio(theme.get("faint") ?? "", face ?? "")).toBeGreaterThanOrEqual(4.5);
-    const shape = (press = "") => press.replace(/rgba\([^)]*\)/g, "");
-    expect(shape(dark.get("chosen-press"))).toBe(shape(light.get("chosen-press")));
-    const alphas = (press = "") => [...press.matchAll(/rgba\(0, 0, 0, ([\d.]+)\)/g)].map(([, a]) => Number(a));
-    const lightAlphas = alphas(light.get("chosen-press"));
-    expect(alphas(dark.get("chosen-press")).map((a, i) => a >= 3 * (lightAlphas[i] ?? 1))).toEqual([true, true]);
+    expect(level(theme.get("chosen-bg"))).toBeGreaterThan(level(theme.get("raised")));
+    expect(contrastRatio(theme.get("faint") ?? "", theme.get("chosen-bg") ?? "")).toBeGreaterThanOrEqual(4.5);
     expect(shared.get("chosen-shadow")).toBe("var(--chosen-press), inset 0 0 0 1px var(--line)");
     expect(shared.get("chosen-lift")).toBe("none");
   });

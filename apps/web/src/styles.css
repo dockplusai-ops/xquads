@@ -41,18 +41,14 @@
    needs nothing: Onest has Cyrillic. */
 :lang(ja) {
   --font-sans:
-    "Onest Variable", "Onest", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", Meiryo,
-    "Noto Sans JP", system-ui, sans-serif;
+    "Onest Variable", "Onest", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", Meiryo, "Noto Sans JP",
+    system-ui, sans-serif;
 }
 :lang(ko) {
-  --font-sans:
-    "Onest Variable", "Onest", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui,
-    sans-serif;
+  --font-sans: "Onest Variable", "Onest", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
 }
 :lang(zh-Hans) {
-  --font-sans:
-    "Onest Variable", "Onest", "PingFang SC", "Microsoft YaHei UI", "Noto Sans SC", system-ui,
-    sans-serif;
+  --font-sans: "Onest Variable", "Onest", "PingFang SC", "Microsoft YaHei UI", "Noto Sans SC", system-ui, sans-serif;
 }
 :lang(ja),
 :lang(ko),

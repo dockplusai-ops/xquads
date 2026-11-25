@@ -70,7 +70,7 @@ const xquads: ThemeColors = {
   pane: "#112229",
   glass: "rgba(21, 40, 47, 0.72)",
   glassSolid: "#15282f",
-  line: "rgba(237, 230, 225, 0.10)",
+  line: "rgba(237, 230, 225, 0.1)",
   line2: "rgba(237, 230, 225, 0.16)",
   lineStrong: "#6f8189",
   ink: "#ede6e1",
@@ -135,11 +135,11 @@ export type ShadowName = "e1" | "e2" | "e3" | "top";
 const xquadsShadows: Record<ShadowName, ShadowLayer[]> = {
   e1: [
     { x: 0, y: 1, blur: 2, spread: 0, color: "rgba(0, 0, 0, 0.5)" },
-    { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(237, 230, 225, 0.10)" },
+    { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(237, 230, 225, 0.1)" },
   ],
   e2: [
     { x: 0, y: 8, blur: 20, spread: -6, color: "rgba(0, 0, 0, 0.6)" },
-    { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(237, 230, 225, 0.10)" },
+    { x: 0, y: 0, blur: 0, spread: 1, color: "rgba(237, 230, 225, 0.1)" },
   ],
   e3: [
     { x: 0, y: 28, blur: 64, spread: -16, color: "rgba(0, 0, 0, 0.8)" },

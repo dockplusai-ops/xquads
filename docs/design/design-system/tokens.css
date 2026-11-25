@@ -13,7 +13,7 @@
   --side-chosen: color-mix(in srgb, var(--ink) 12%, var(--side));
   --glass: rgba(21, 40, 47, 0.72);
   --glass-solid: #15282f;
-  --line: rgba(237, 230, 225, 0.10);
+  --line: rgba(237, 230, 225, 0.1);
   --line2: rgba(237, 230, 225, 0.16);
   --line-strong: #6f8189;
   --ink: #ede6e1;
