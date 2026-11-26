@@ -1965,10 +1965,13 @@ const presetHex = (key: (typeof ACCENT_PRESETS)[keyof typeof ACCENT_PRESETS]) =>
   key === "sky" ? DEFAULT_ACCENT : AGENT_GRADIENTS[key][1];
 
 /** The stored accent `color` asks for: a preset's or a "#rrggbb", null for the default (camel is it), or why not. */
+/** What people call the default, as the agent passes it on. */
+const BACK_TO_DEFAULT = new Set(["default", "padrão", "padrao", "original", "reset"]);
+
 function accentOf(color: string): { accent: string | null } | string {
   const said = color.toLowerCase();
   const preset = ACCENT_PRESETS[said as keyof typeof ACCENT_PRESETS];
-  const hex = said === "default" ? DEFAULT_ACCENT : preset ? presetHex(preset) : said;
+  const hex = BACK_TO_DEFAULT.has(said) ? DEFAULT_ACCENT : preset ? presetHex(preset) : said;
   if (!isAccentHex(hex))
     return `"${color}" isn't a color: say one of ${Object.keys(ACCENT_PRESETS).join(", ")}, a "#rrggbb" or default.`;
   // Like the screen: the default's own color is no accent.
@@ -1992,7 +1995,7 @@ const orgLook = async (db: Database, orgId: string) =>
 
 const accentAction: WorkspaceAction = {
   id: "set_accent",
-  does: "Change the workspace's accent color (cor de destaque, the color of agents, mentions, links and selections in everyone's apps), or set it back to the default.",
+  does: "Change the workspace's accent color (cor de destaque, the color of agents, mentions, links and selections in everyone's apps), or set it back to the default (padrão, original, the brand's camel): color `default`.",
   input: {
     type: "object",
     properties: {
@@ -2000,7 +2003,7 @@ const accentAction: WorkspaceAction = {
         type: "string",
         minLength: 1,
         maxLength: 16,
-        description: `A suggested color by name (${Object.keys(ACCENT_PRESETS).join(", ")}; camel is the default), any "#rrggbb" (e.g. blue #2563eb), or default.`,
+        description: `A suggested color by name (${Object.keys(ACCENT_PRESETS).join(", ")}), any "#rrggbb" (e.g. blue #2563eb), or default: back to the default color (padrão, original), camel (${DEFAULT_ACCENT}).`,
       },
     },
     required: ["color"],
@@ -2095,7 +2098,7 @@ export async function findWorkspaceActions(ctx: ToolContext, person: string | nu
         `- ${a.id}: ${a.does} ${
           mayDo(membership, a)
             ? a.mode === "now"
-              ? `They may: it applies at once ${a.revert ? "with Undo" : "and can't be undone"}.`
+              ? `They may: it applies at once ${a.revert ? "(undo_change takes it back if they ask)" : "and can't be undone"}.`
               : "They may: a card they confirm."
             : "Their roles don't give it: unless its screen lets them anyway (their own channel or agent), a card for someone who may."
         } Input: ${JSON.stringify(a.input)}`,
@@ -2193,7 +2196,7 @@ export function workspaceActionTool(deps: { pubsub?: PubSub; server?: ServerLink
   return {
     name: WORKSPACE_ACTION_TOOL,
     description:
-      "Do anything else the app lets this person do, as them and never more: roles and what each may do, people's roles, a channel's settings, people and permissions, their own status, notifications and time zone, inviting people, invitations and requests to join, removing an API key, the workspace's settings and accent color (cor de destaque), stopping or continuing an agent's work. First call it with `find` (what they want, in a few words), then with `action`, its `input` and `why`. A change they may make, asked in their own words, applies at once with Undo; anything else, and always an invite or a key's removal, becomes a card for whoever may. The result says which: never say it is done before it does.",
+      "Do anything else the app lets this person do, as them and never more: roles and what each may do, people's roles, a channel's settings, people and permissions, their own status, notifications and time zone, inviting people, invitations and requests to join, removing an API key, the workspace's settings and accent color (cor de destaque), stopping or continuing an agent's work. First call it with `find` (what they want, in a few words), then with `action`, its `input` and `why`. A change they may make, asked in their own words, applies at once (undo_change takes it back if they ask); anything else, and always an invite or a key's removal, becomes a card for whoever may. The result says which: never say it is done before it does.",
     scope: "setup:write",
     inputSchema: {
       type: "object",
@@ -2237,7 +2240,7 @@ export function workspaceActionTool(deps: { pubsub?: PubSub; server?: ServerLink
           const done = await actNow(deps, ctx, person, a, resolved.input);
           if (!("refused" in done))
             return {
-              content: `Done at once${a.revert ? ", with Undo under your reply" : " (it can't be undone)"}: ${a.id} (${describe(done.words)}). Say it is done.`,
+              content: `Done at once${a.revert ? " (asked to undo it, use undo_change)" : " (it can't be undone)"}: ${a.id} (${describe(done.words)}). Say it is done.`,
             };
           // Refused by the engine's own rules (a role above theirs, a key they don't hold): someone who may decides.
           refused = done.refused;

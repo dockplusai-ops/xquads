@@ -118,6 +118,32 @@ conversation could cancel it, with no context. So:
   the run that set it, `refs.personId`), the agent's owner, and admins (who manage agents). Everyone else who reads the
   conversation sees it without the control. A return the system cancels at its time gets no inbox note for now.
 
+## Addendum 2026-11-26: agents undo on request; receipts stay without a button
+
+Since 2026-11-10 a receipt under an agent's reply is its sentence alone (no Desfazer, Refazer, Desfazer tudo or
+countdown): its bold target opens the item, where it is fixed. The prompts and tool results still told agents their
+changes showed "with Undo", so an agent sent the person to a button that doesn't exist instead of acting. Decision:
+
+- **The agent undoes its own changes when the person asks** ("desfaça isso", "volta como estava", "undo that"), with
+  `undo_change` (`workspace-tools.ts`, no scope, in the "more" group of tools on demand, so `find_tools` and the
+  group's label lead to it). By default it undoes every change of its latest reply in this conversation that made any
+  (or of the current run, before it replies); `action_id` takes one change, `message_id` all of one reply, and `list`
+  shows its recent changes here with their ids. "Its own" is the receipts of this agent in this channel and thread (a
+  settings card's receipts are the agent's that wrote the card).
+- **As the person who asked, through the same engine as the API:** each change goes through `undoAgentAction`, so who
+  may undo (`requireMayUndo`, checked for every open change before any is undone, as Desfazer tudo does),
+  `undoable_until`, a later change blocking an older one (`action.changed_since`, newest first) and "already undone"
+  are the same checks. The result names what was undone and what wasn't, and why, in words the agent can pass on
+  (too late: make the opposite change as a new one; changed since: undo the later one first or change it by hand).
+- **Who is behind the run:** nobody (a routine's run, an unattended one) means nothing is undone; the tool refuses, as
+  `workspace_action` does. The run policy classes it as an internal change (`undo_change`: area `undo`), so an agent
+  set to always ask asks first. Not in confidential threads (ADR 0190): its name isn't on the lock's list.
+- **Wording:** every prompt and tool result that said "with Undo" under the reply now says the person can ask the agent
+  to undo it (`undo_change`); the general rules and the right hand's say there is no Undo button under the reply and
+  never to point to one. Cards that have their own Undo (settings, archiving) keep saying so. `set_accent` says that
+  `default` (padrão, original) is the brand's camel, and takes those words.
+- **The apps don't change:** receipts keep no button; the API's undo and redo stay for the cards that use them.
+
 ## Later rounds
 
 - Measure it in production too: count `ask_user` calls and replies with no tool call before them on questions about code or errors (the behavior eval covers it before shipping).

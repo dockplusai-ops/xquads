@@ -9,8 +9,9 @@ const { agentActions, messages } = schema;
 /**
  * Act with undo (ADR 0037 round 2). Internal, reversible changes an agent
  * makes with its tools are done without asking; the run's reply carries a
- * receipt per change with "Desfazer" for this long. Every undo or redo
- * opens the window again from that moment.
+ * receipt per change, undone for this long when the person asks the agent
+ * (`undo_change`, addendum of 2026-11-26) or from a card that has its own
+ * Desfazer. Every undo or redo opens the window again from that moment.
  */
 export const UNDO_WINDOW_MS = 5 * 60_000;
 
@@ -49,7 +50,7 @@ export const AGENT_ACTION_KINDS = [
 ] as const;
 export type AgentActionKind = (typeof AGENT_ACTION_KINDS)[number];
 
-/** Built-in tools whose changes are receipts with Undo (no approval; "What you can do" lists them). */
+/** Built-in tools whose changes are undoable receipts (no approval; "What you can do" lists them). */
 export const UNDOABLE_TOOLS = new Set([
   "create_issue",
   "update_issue",

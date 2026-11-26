@@ -902,7 +902,7 @@ export function createContextToolSource(deps: ContextDeps): ToolSource {
     {
       name: "propose_instruction_change",
       description:
-        "When a person asks to change how agents work, propose it: your instructions (my_instructions), other agents' (agents: with their handles, all on one card), or what every agent should know now and later (org_context). Add a rule with change. To change or remove existing text, put the exact text in replaces and the new text in change (empty removes it). To rewrite them whole when the person asks, give the full new text in instructions, for yourself or one agent (read it first: read_agent). With target agents you can also give an agent a new role (roles) and turn an app on or off for it (access: a connected app by its name, or a built-in area such as browser:use; your own apps go through request_permission). When the person who asked may make the change and this turn read nothing from outside, it applies at once with Undo; else a quick review applies it in a moment if it makes sense, or leaves it out with why on its card. Nobody has to accept it. Never tell the person only they can make the change: propose it. Not for routines: a change to what a routine does ('a rotina', 'when a new error comes in…') is `update_routine`.",
+        "When a person asks to change how agents work, propose it: your instructions (my_instructions), other agents' (agents: with their handles, all on one card), or what every agent should know now and later (org_context). Add a rule with change. To change or remove existing text, put the exact text in replaces and the new text in change (empty removes it). To rewrite them whole when the person asks, give the full new text in instructions, for yourself or one agent (read it first: read_agent). With target agents you can also give an agent a new role (roles) and turn an app on or off for it (access: a connected app by its name, or a built-in area such as browser:use; your own apps go through request_permission). When the person who asked may make the change and this turn read nothing from outside, it applies at once (the person can ask you to undo it: undo_change); else a quick review applies it in a moment if it makes sense, or leaves it out with why on its card. Nobody has to accept it. Never tell the person only they can make the change: propose it. Not for routines: a change to what a routine does ('a rotina', 'when a new error comes in…') is `update_routine`.",
       scope: "memory:write",
       inputSchema: {
         type: "object",
@@ -1011,7 +1011,7 @@ export function createContextToolSource(deps: ContextDeps): ToolSource {
             words: await askedWords(ctx.db, ctx, requester),
           });
           const done = applied.length
-            ? `Applied ${applied.length} of it at once: the person sees it with Undo under your reply, so say it is done. `
+            ? `Applied ${applied.length} of it at once: the person sees it under your reply and can ask you to undo it (undo_change), so say it is done. `
             : "";
           const left = skipped.length ? ` Left off the card: ${skipped.join(" ")}` : "";
           const [first] = proposals;

@@ -665,7 +665,7 @@ export function createScheduleToolSource(deps: Omit<RoutineDeps, "db">): ToolSou
     {
       name: "create_routine",
       description:
-        'Create a routine: work you do on your own, in the background, on a schedule ("toda segunda às 9h", "dias úteis às 18h", "every hour") or when something happens (`trigger`). Each run gets `prompt` as its instructions and nobody watches it: it reports by handing its findings off to the conversation it reports to, where you then tell the people. It can do what you can (search the web, use your computer and browser, tell or ask other agents, post where the person can); in connected apps its ordinary writes run without asking, and a send, a delete, a payment or an invite asks a person first, except the ones its job needs that you list in `own_actions` (the person asked for them, so setting it up approves them). That is this conversation by default; set `channel` (its name, with or without #) when the person wants it in a channel ("manda no #general"). `report` says when it speaks. Choose who performs it: when the person wants a specific other agent to do the work ("faz o @theo postar…", "have @theo send…"), set `agent` to that agent, so the routine is its own work, never yours relaying the ask each run. When the person says "when a new email arrives" or "when a new error comes in", use `trigger` (an email filter or an event), never a schedule that checks again and again; "when another service calls it" or "by webhook" is a webhook trigger. A routine runs at most every 15 minutes. Only admins or your owner can create routines; the person sees it with Undo.',
+        'Create a routine: work you do on your own, in the background, on a schedule ("toda segunda às 9h", "dias úteis às 18h", "every hour") or when something happens (`trigger`). Each run gets `prompt` as its instructions and nobody watches it: it reports by handing its findings off to the conversation it reports to, where you then tell the people. It can do what you can (search the web, use your computer and browser, tell or ask other agents, post where the person can); in connected apps its ordinary writes run without asking, and a send, a delete, a payment or an invite asks a person first, except the ones its job needs that you list in `own_actions` (the person asked for them, so setting it up approves them). That is this conversation by default; set `channel` (its name, with or without #) when the person wants it in a channel ("manda no #general"). `report` says when it speaks. Choose who performs it: when the person wants a specific other agent to do the work ("faz o @theo postar…", "have @theo send…"), set `agent` to that agent, so the routine is its own work, never yours relaying the ask each run. When the person says "when a new email arrives" or "when a new error comes in", use `trigger` (an email filter or an event), never a schedule that checks again and again; "when another service calls it" or "by webhook" is a webhook trigger. A routine runs at most every 15 minutes. Only admins or your owner can create routines; the person sees it under your reply, and the person can ask you to undo it (undo_change).',
       scope: SCHEDULE_SCOPE,
       inputSchema: {
         type: "object",
@@ -864,7 +864,7 @@ export function createScheduleToolSource(deps: Omit<RoutineDeps, "db">): ToolSou
     {
       name: "update_routine",
       description:
-        'Change a routine (id from list_routines) when the person asks: yours, or another agent\'s when the person may manage it. `title` renames it, `channel` moves where it reports ("manda no #general" — then nothing comes to the old conversation), `prompt` replaces its instructions (that routine\'s only: a person\'s rule that holds beyond it, a permission or where to send things, is `remember` kind rule), `schedule` its time ("dias úteis às 9h", "weekdays at 9am") or `trigger` what starts it (an email filter, a webhook with the HTTP `methods` it answers, or an event instead of a schedule), `report` when it speaks, `own_actions` what it does in connected apps without asking, `active` pauses or resumes it, `agent` hands it to another agent that should do the work. Only who created it, the agent\'s owner or an admin can change it; the person sees it with Undo.',
+        'Change a routine (id from list_routines) when the person asks: yours, or another agent\'s when the person may manage it. `title` renames it, `channel` moves where it reports ("manda no #general" — then nothing comes to the old conversation), `prompt` replaces its instructions (that routine\'s only: a person\'s rule that holds beyond it, a permission or where to send things, is `remember` kind rule), `schedule` its time ("dias úteis às 9h", "weekdays at 9am") or `trigger` what starts it (an email filter, a webhook with the HTTP `methods` it answers, or an event instead of a schedule), `report` when it speaks, `own_actions` what it does in connected apps without asking, `active` pauses or resumes it, `agent` hands it to another agent that should do the work. Only who created it, the agent\'s owner or an admin can change it; the person sees it under your reply, and the person can ask you to undo it (undo_change).',
       scope: SCHEDULE_SCOPE,
       inputSchema: {
         type: "object",
@@ -1004,7 +1004,7 @@ export function createScheduleToolSource(deps: Omit<RoutineDeps, "db">): ToolSou
     {
       name: "delete_routine",
       description:
-        "Delete one of your routines (id from list_routines) when the person asks: it stops for good (its history stays). The person sees it with Undo. To stop it for a while, pause it instead (update_routine with active false).",
+        "Delete one of your routines (id from list_routines) when the person asks: it stops for good (its history stays). The person sees it under your reply, and the person can ask you to undo it (undo_change). To stop it for a while, pause it instead (update_routine with active false).",
       scope: SCHEDULE_SCOPE,
       inputSchema: {
         type: "object",
@@ -1029,7 +1029,9 @@ export function createScheduleToolSource(deps: Omit<RoutineDeps, "db">): ToolSou
               before: routineSnapshot(own.row),
             },
           ]);
-          return { content: `Deleted routine ${id} "${own.row.name}". Tell the person (they can undo it).` };
+          return {
+            content: `Deleted routine ${id} "${own.row.name}". Tell the person (they can ask you to undo it: undo_change).`,
+          };
         } catch (error) {
           return failed(error);
         }

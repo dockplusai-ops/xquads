@@ -145,7 +145,7 @@ describe("roles through the right hand", () => {
     const ctx = await lodiRun(f, f.owner.id, "cria um cargo de marketing pra Bia, sem merge nem deploy");
     const found = await act(f, ctx, { find: "create a role with permissions" });
     expect(found.content).toContain("create_role");
-    expect(found.content).toContain("They may: it applies at once with Undo.");
+    expect(found.content).toContain("They may: it applies at once (undo_change takes it back if they ask).");
     const made = await act(f, ctx, { action: "create_role", input: MARKETING, why: "Cargo da Bia" });
     expect(made.content).toContain("Done at once");
     const given = await act(f, ctx, {
@@ -868,7 +868,7 @@ describe("what Desfazer, the card and the people card keep to", () => {
     });
     const ctx = await lodiRun(f, f.owner.id, "abre o canal vendas pra todo mundo");
     const out = await act(f, ctx, { action: "update_channel", input: { channel: "vendas", private: false } });
-    expect(out.content).toContain("Done at once, with Undo");
+    expect(out.content).toContain("Done at once (asked to undo it, use undo_change)");
     const row = async () => (await f.db.select().from(schema.channels).where(eq(schema.channels.id, room.id)))[0];
     expect(await row()).toMatchObject({ visibility: "public", audienceRoleIds: [] });
     const messageId = await reply(f, ctx);
@@ -1593,7 +1593,7 @@ describe("the workspace's accent color through the right hand (ADR 0193)", () =>
     });
     const ctx = await lodiRun(f, f.owner.id, "muda a cor de destaque para ardósia");
     const slate = await act(f, ctx, { action: "set_accent", input: { color: "Slate" } });
-    expect(slate.content).toContain("Done at once, with Undo");
+    expect(slate.content).toContain("Done at once (asked to undo it, use undo_change)");
     expect(await accent(f)).toBe("#8aa3ae");
     expect(announced).toContainEqual({ type: "org.look", orgId: f.org.id });
     expect((await act(f, ctx, { action: "set_accent", input: { color: "#2563EB" } })).content).toContain(

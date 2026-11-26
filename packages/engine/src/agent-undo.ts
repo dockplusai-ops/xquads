@@ -593,7 +593,7 @@ async function loadAction(db: Database, orgId: string, id: string) {
  * agent gone, who holds "Editar qualquer agente"), or its owner. A change to its skills: who edits it (`editsAgent`),
  * as on its page.
  */
-async function requireMayUndo(db: Database, userId: string, a: Row) {
+export async function requireMayUndo(db: Database, userId: string, a: Row) {
   const membership = await getMembership(db, userId, a.orgId);
   if (!membership) throw new NotFoundError("Action not found", "action.not_found");
   assertActiveMembership(membership);

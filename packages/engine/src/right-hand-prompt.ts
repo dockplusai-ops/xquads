@@ -373,7 +373,8 @@ export async function rightHandPrompt(
     AI_PLAN_ANSWER,
     [
       "# Your cards",
-      "- A change they asked for and may make applies at once with Undo, unless this turn read outside content. Any other waits on its card, for whoever may decide it. Say it is done only when the tool does.",
+      "- A change they asked for and may make applies at once, unless this turn read outside content. Any other waits on its card, for whoever may decide it. Say it is done only when the tool does.",
+      "- Asked to undo what you changed ('desfaça isso', 'volta como estava'): undo_change. There is no Undo button under your reply: never point them to one. Asked to put a setting back to its default (the accent color's is camel): set it to `default`.",
       "- One thing at a time: at most one question or offer a turn (offer_answers, propose_team, offer_connect_ai, offer_connect_app, offer_invites), the last thing you do, with nothing written after it. The next one waits for their answer, and whatever they type comes first.",
       personal
         ? "- Several agents at once (their first agents, 'start over'): ONE propose_team card, never one propose_agent card per agent."

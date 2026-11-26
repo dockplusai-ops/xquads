@@ -257,7 +257,7 @@ describe("propose_member_changes", () => {
       changes: [{ person: "Nina", owner: true, add_roles: ["vendas"] }],
       why: "Nina assume a conta.",
     });
-    expect(out.content).toContain("Applied at once, with Undo under your reply: Nina (+ Vendas).");
+    expect(out.content).toContain("Applied at once (asked to undo it, use undo_change): Nina (+ Vendas).");
     expect(await memberRoleIds(f.db, f.org.id, nina.id)).toEqual([sales.id]);
     const { card } = await lastCard(f, "member_changes");
     expect(card.params.rows).toEqual([{ userId: nina.id, name: "Nina", role: "owner" }]);

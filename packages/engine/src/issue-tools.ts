@@ -501,7 +501,7 @@ export function createIssueToolSource(deps: ArtifactDeps): ToolSource {
     {
       name: "create_issue",
       description:
-        "Create a task on this workspace's board: task, tarefa or backlog mean this board, never GitHub or another tool unless the person names it (criar tarefa no backlog). It takes a title, a description and acceptance criteria (a checklist), and optionally a priority, labels, a project, assignees and a due date. No permission needed: when work should be tracked, create it; the person sees it with Undo.",
+        "Create a task on this workspace's board: task, tarefa or backlog mean this board, never GitHub or another tool unless the person names it (criar tarefa no backlog). It takes a title, a description and acceptance criteria (a checklist), and optionally a priority, labels, a project, assignees and a due date. No permission needed: when work should be tracked, create it; the person sees it under your reply, and the person can ask you to undo it (undo_change).",
       scope: "issues:write",
       inputSchema: {
         type: "object",
@@ -613,7 +613,7 @@ export function createIssueToolSource(deps: ArtifactDeps): ToolSource {
     {
       name: UPDATE_ISSUE_TOOL,
       description:
-        "Change an issue's status, priority, title, description, assignees, labels, project or due date, check acceptance criteria you met, attach files or link a pull request to it. Linking a PR moves the issue to review on its own. No permission needed: the person sees the change with Undo.",
+        "Change an issue's status, priority, title, description, assignees, labels, project or due date, check acceptance criteria you met, attach files or link a pull request to it. Linking a PR moves the issue to review on its own. No permission needed: the person sees the change under your reply, and the person can ask you to undo it (undo_change).",
       scope: "issues:write",
       inputSchema: {
         type: "object",

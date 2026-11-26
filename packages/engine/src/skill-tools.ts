@@ -494,7 +494,7 @@ export function createSkillToolSource(
     {
       name: UPDATE_SKILL_FROM_SOURCE_TOOL,
       description:
-        "Update the workspace's skills from the links they were installed from, when someone asks ('atualiza a skill deploy', 'update every skill'): `name` one skill, or `all` for every skill installed from a link. New text applies at once (the person sees it with Undo); an update that adds or changes scripts or other files that run waits for a person who manages skills, on a card. When the person who asked can't manage skills, the card goes to someone who can.",
+        "Update the workspace's skills from the links they were installed from, when someone asks ('atualiza a skill deploy', 'update every skill'): `name` one skill, or `all` for every skill installed from a link. New text applies at once (the person can ask you to undo it (undo_change)); an update that adds or changes scripts or other files that run waits for a person who manages skills, on a card. When the person who asked can't manage skills, the card goes to someone who can.",
       scope: "skills:read",
       inputSchema: {
         type: "object",

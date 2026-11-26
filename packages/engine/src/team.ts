@@ -487,7 +487,7 @@ export function createFindAgentToolSource(deps: { machines?: Pick<MachineCaller,
           agent.groupName ? `Department: ${agent.groupName}` : "",
           `Skills on: ${on.length ? on.map((s) => s.name).join(", ") : "none"}`,
           atOnce
-            ? "The person who asked edits this agent: a change they ask for applies at once with Undo."
+            ? "The person who asked edits this agent: a change they ask for applies at once, and you undo it with undo_change when they ask."
             : editsAgent(agent, person, membership)
               ? "Others also edit this agent, so a change after this read waits on its card for the person who asked to accept."
               : "The person who asked doesn't edit this agent: a change waits on its card for who does.",

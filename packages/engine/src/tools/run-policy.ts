@@ -92,7 +92,9 @@ export type InternalArea =
   | "desktop"
   | "dashboards"
   | "vault"
-  | "skills";
+  | "skills"
+  /** `undo_change`: puts back the agent's own changes, as the person who asked (it refuses when nobody did). */
+  | "undo";
 
 /** How much an agent asks before acting (`agents.approvals_level`, ADR 0173). */
 export const APPROVALS_LEVELS = ["always", "risky", "never"] as const;
@@ -278,6 +280,9 @@ const INTERNAL_BY_NAME: Readonly<Record<string, InternalArea>> = {
   create_dashboard: "dashboards",
   create_widget: "dashboards",
   share_dashboard: "dashboards",
+  // Undoing its own changes on a person's request (ADR 0037 addendum of 2026-11-26): the tool refuses a routine's and
+  // an unattended run, where nobody asked, as `workspace_action` does.
+  undo_change: "undo",
 };
 
 /** Built-in scopes of internal changes (`issues:write` → issues…). */
