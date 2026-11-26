@@ -24,7 +24,6 @@ import {
   Button,
   Checkbox,
   Chip,
-  CriteriaPixels,
   codeAndBold,
   cx,
   DatePicker,
@@ -520,7 +519,6 @@ function IssueCriteria({ issue: i, onSaved }: { issue: Issue; onSaved: () => voi
   const { org } = useOrg();
   const actors = useActors();
   const action = useIssueAction(org.id);
-  const color = useAssigneeColor();
   const [editing, setEditing] = useState<{ id: string; text: string } | null>(null);
   const [adding, setAdding] = useState("");
   const ref = useFocusAtEnd<HTMLInputElement>(editing !== null);
@@ -567,7 +565,6 @@ function IssueCriteria({ issue: i, onSaved }: { issue: Issue; onSaved: () => voi
         ) : undefined
       }
     >
-      {shown.length > 0 && <CriteriaPixels done={shown.map((c) => c.done)} color={color(i)} />}
       {shown.map((c) =>
         editing?.id === c.id ? (
           <div key={c.id} className="issue-new__criterion issue-criterion--edit" data-inplace="">

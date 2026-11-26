@@ -336,7 +336,6 @@ export {
   BrowserMark,
   type BrowserPixelKind,
   BrowserStrip,
-  CriteriaPixels,
   ExpiryFuse,
   type MonthDay,
   MonthRuns,

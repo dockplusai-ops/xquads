@@ -11161,10 +11161,6 @@ html:not([data-pointer]) .ac-run-bars__bar:focus-visible {
   height: 100%;
   image-rendering: pixelated;
 }
-.ac-crit-pixels {
-  display: block;
-  image-rendering: pixelated;
-}
 /* An agent at work: a 4px dithered line along the bottom of its holder. */
 .ac-work-sweep {
   position: absolute;

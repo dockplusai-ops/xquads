@@ -531,55 +531,6 @@ export function BrowserMark({
 }
 
 /**
- * Acceptance criteria as pixel blocks: one block per
- * criterion, done ones dithered in the assignee's tones (an agent's color;
- * a person or nobody: neutral ink), open ones a dotted outline.
- */
-export function CriteriaPixels({
-  done,
-  color,
-  className,
-}: {
-  done: boolean[];
-  color?: AgentColor | null;
-  className?: string;
-}) {
-  const W = 5;
-  const H = 4;
-  const G = 1;
-  const width = Math.max(1, done.length * (W + G) - G);
-  const ref = useCanvas((ctx, canvas) => {
-    const raised = token(canvas, "--raised", "#ffffff");
-    const ink = token(canvas, "--ink", "#151514");
-    const tones = color ? bodyTones(color) : null;
-    const t = (i: number) => tones?.[i] ?? "#888888";
-    const pal = tones
-      ? [t(1), t(2), t(3)]
-      : [mixHex(ink, raised, 0.1), mixHex(ink, raised, 0.3), mixHex(ink, raised, 0.5)];
-    // Open: a quiet solid block, so the row reads as slots to fill (not noise).
-    const open = mixHex(raised, ink, 0.1);
-    ctx.clearRect(0, 0, width, H);
-    done.forEach((d, k) => {
-      const x0 = k * (W + G);
-      if (d) column(ctx, x0, W, H, H - 1, pal);
-      else {
-        ctx.fillStyle = open;
-        ctx.fillRect(x0, 0, W, H);
-      }
-    });
-  }, false);
-  return (
-    <canvas
-      ref={ref}
-      className={cx("ac-crit-pixels", className)}
-      width={width}
-      height={H}
-      style={{ width: width * CELL, height: H * CELL }}
-    />
-  );
-}
-
-/**
  * An agent at work: a thin dithered sweep along the bottom of whatever holds
  * it (give the holder `position: relative`), in the agent's light tones.
  * `waiting` holds still and dim (it waits on a person).
