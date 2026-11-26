@@ -7937,6 +7937,12 @@
   "rightHand.action.set_action_check_off": {
     "value": "Turn off the check of what the team already did"
   },
+  "rightHand.action.set_accent": {
+    "value": "Change the workspace's accent color to <b>{{color}}</b>"
+  },
+  "rightHand.action.set_accent_default": {
+    "value": "Set the workspace's accent color back to the default"
+  },
   "rightHand.action.invite_people": {
     "value": "Invite <b>{{emails}}</b> to the workspace."
   },
@@ -9901,6 +9907,12 @@
   },
   "agentActions.workspace.changed_set_action_check_off": {
     "value": "Turned off the check of what the team already did"
+  },
+  "agentActions.workspace.changed_set_accent": {
+    "value": "Changed the workspace's accent color to <b>{{color}}</b>"
+  },
+  "agentActions.workspace.changed_set_accent_default": {
+    "value": "Set the workspace's accent color back to the default"
   },
   "agentActions.workspace.changed_invite_people": {
     "value": "Invited <b>{{invited}}</b> to the workspace"

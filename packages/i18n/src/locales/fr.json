@@ -3301,6 +3301,8 @@
       "update_workspace": "Modifier l'espace de travail <b>{{name}}</b>",
       "set_action_check_on": "Activer la vérification de ce que l'équipe a déjà fait",
       "set_action_check_off": "Désactiver la vérification de ce que l'équipe a déjà fait",
+      "set_accent": "Changer la couleur d’accent de l’espace de travail en <b>{{color}}</b>",
+      "set_accent_default": "Revenir à la couleur d’accent par défaut de l’espace de travail",
       "invite_people": "Inviter <b>{{emails}}</b> dans l'espace de travail.",
       "invite_roles_one": "Avec le rôle {{roles}}.",
       "invite_roles_many": "Avec les rôles {{roles}}.",
@@ -4188,6 +4190,8 @@
       "changed_update_workspace": "J'ai modifié l'espace de travail <b>{{name}}</b>",
       "changed_set_action_check_on": "J'ai activé la vérification de ce que l'équipe a déjà fait",
       "changed_set_action_check_off": "J'ai désactivé la vérification de ce que l'équipe a déjà fait",
+      "changed_set_accent": "J'ai changé la couleur d’accent de l’espace de travail en <b>{{color}}</b>",
+      "changed_set_accent_default": "Je suis revenu à la couleur d’accent par défaut de l’espace de travail",
       "changed_invite_people": "J'ai invité <b>{{invited}}</b> dans l'espace de travail",
       "changed_remove_ai_key": "J'ai supprimé la clé API <b>{{name}}</b>"
     },

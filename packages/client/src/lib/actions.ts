@@ -199,6 +199,8 @@ export function workspaceActionWords(action: string, words: Record<string, strin
     const key = words.availability === "auto" ? "online" : words.availability;
     return { ...words, what: t(`presence.lower.${key}` as never, { defaultValue: words.availability }) as string };
   }
+  if (action === "set_accent" && words.preset)
+    return { ...words, color: t(`look.colors.${words.preset}` as never, { defaultValue: words.color }) as string };
   if (action === "set_notifications" && words.category)
     return {
       ...words,

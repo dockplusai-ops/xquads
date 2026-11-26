@@ -3054,6 +3054,8 @@
       "update_workspace": "Ubah ruang kerja <b>{{name}}</b>",
       "set_action_check_on": "Nyalakan pemeriksaan atas apa yang sudah dilakukan tim",
       "set_action_check_off": "Matikan pemeriksaan atas apa yang sudah dilakukan tim",
+      "set_accent": "Ubah warna aksen ruang kerja menjadi <b>{{color}}</b>",
+      "set_accent_default": "Kembalikan warna aksen ruang kerja ke bawaan",
       "invite_people": "Undang <b>{{emails}}</b> ke ruang kerja.",
       "invite_roles_other": "Dengan peran {{roles}}.",
       "invite_people_sent_other": "Undangan terkirim ke <b>{{emails}}</b>.",
@@ -3896,6 +3898,8 @@
       "changed_update_workspace": "Mengubah ruang kerja <b>{{name}}</b>",
       "changed_set_action_check_on": "Menyalakan pemeriksaan atas apa yang sudah dilakukan tim",
       "changed_set_action_check_off": "Mematikan pemeriksaan atas apa yang sudah dilakukan tim",
+      "changed_set_accent": "Mengubah warna aksen ruang kerja menjadi <b>{{color}}</b>",
+      "changed_set_accent_default": "Mengembalikan warna aksen ruang kerja ke bawaan",
       "changed_invite_people": "Mengundang <b>{{invited}}</b> ke ruang kerja",
       "changed_remove_ai_key": "Menghapus kunci API <b>{{name}}</b>"
     },

@@ -3602,6 +3602,7 @@ export const WORKSPACE_ACTION_IDS = [
   "continue_work",
   "update_workspace",
   "set_action_check",
+  "set_accent",
   "invite_people",
   "remove_ai_key",
 ] as const;

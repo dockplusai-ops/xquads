@@ -3445,6 +3445,9 @@ export const en = {
       update_workspace: "Change the workspace <b>{{name}}</b>",
       set_action_check_on: "Turn on the check of what the team already did",
       set_action_check_off: "Turn off the check of what the team already did",
+      /** `color`: the color's name in Settings (`look.colors.*`) or its "#rrggbb". */
+      set_accent: "Change the workspace's accent color to <b>{{color}}</b>",
+      set_accent_default: "Set the workspace's accent color back to the default",
       /** `emails`: every address on the card, in a list ("ana@example.com, bia@example.com"). */
       invite_people: "Invite <b>{{emails}}</b> to the workspace.",
       /** Under it: the roles every address gets ("Sales and Support"). `count`: how many roles. */
@@ -4418,6 +4421,9 @@ export const en = {
       changed_update_workspace: "Changed the workspace <b>{{name}}</b>",
       changed_set_action_check_on: "Turned on the check of what the team already did",
       changed_set_action_check_off: "Turned off the check of what the team already did",
+      /** `color`: the color's name in Settings (`look.colors.*`) or its "#rrggbb". */
+      changed_set_accent: "Changed the workspace's accent color to <b>{{color}}</b>",
+      changed_set_accent_default: "Set the workspace's accent color back to the default",
       /** `invited`: the addresses that got an invitation, in a list. */
       changed_invite_people: "Invited <b>{{invited}}</b> to the workspace",
       changed_remove_ai_key: "Deleted the API key <b>{{name}}</b>",

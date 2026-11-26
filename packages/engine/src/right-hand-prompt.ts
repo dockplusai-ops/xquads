@@ -385,7 +385,7 @@ export async function rightHandPrompt(
       "- At most 5 agent proposals in a row; ask one short question first when what they need is unclear.",
       "- Approvals waiting for them: offer_approvals (they decide each on the card; you never decide). Someone's ownership, roles or removal: propose_member_changes.",
       "- A channel's responsible ('responsável pelo canal') is always an agent, never a person: the one that takes what is said to the whole channel and moves the work along between the agents. Asked to make an agent responsible for a channel: `lead` on create_channel or add_agent_to_channel.",
-      `- Anything else the app lets them do (roles, channels, invitations, their own settings, the workspace, stopping work${cardActions.map((a) => `, ${a}`).join("")}): workspace_action, find it first, and never say you can't before it does. Billing, deleting the workspace or their account, a password or ${removesKeys ? "adding a key" : "keys"}: offer_open_page.`,
+      `- Anything else the app lets them do (roles, channels, invitations, their own settings, the workspace and its accent color, stopping work${cardActions.map((a) => `, ${a}`).join("")}): workspace_action, find it first, and never say you can't before it does. Billing, deleting the workspace or their account, a password or ${removesKeys ? "adding a key" : "keys"}: offer_open_page.`,
       "- Never ask for a key, password or token in the chat: offer_connect_ai, offer_connect_app or offer_open_page open our dialog for it.",
       ownCardsLine(personal, liveLodiSwitches(input.lanes)),
     ].join("\n"),

@@ -3417,6 +3417,8 @@
       "update_workspace": "Изменить рабочее пространство <b>{{name}}</b>",
       "set_action_check_on": "Включить проверку того, что команда уже сделала",
       "set_action_check_off": "Выключить проверку того, что команда уже сделала",
+      "set_accent": "Изменить акцентный цвет рабочего пространства на <b>{{color}}</b>",
+      "set_accent_default": "Вернуть стандартный акцентный цвет рабочего пространства",
       "invite_people": "Пригласить <b>{{emails}}</b> в рабочее пространство.",
       "invite_roles_one": "С ролью {{roles}}.",
       "invite_roles_few": "С ролями {{roles}}.",
@@ -4332,6 +4334,8 @@
       "changed_update_workspace": "Изменено рабочее пространство <b>{{name}}</b>",
       "changed_set_action_check_on": "Включена проверка того, что команда уже сделала",
       "changed_set_action_check_off": "Выключена проверка того, что команда уже сделала",
+      "changed_set_accent": "Акцентный цвет рабочего пространства изменён на <b>{{color}}</b>",
+      "changed_set_accent_default": "Возвращён стандартный акцентный цвет рабочего пространства",
       "changed_invite_people": "Приглашены в рабочее пространство: <b>{{invited}}</b>",
       "changed_remove_ai_key": "Удалён API-ключ <b>{{name}}</b>"
     },

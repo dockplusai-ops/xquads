@@ -95,3 +95,17 @@ by hand.
   could disagree. One hex and one shared function keep every app on the same rule.
 - Setting the variables on the shell's own element: dialogs and menus are portaled to `<body>` and would show the
   default blue inside a workspace painted in another color.
+
+## Addendum (2026-11-26): the right hand changes it at the person's word
+
+Asked for "the blue" as the accent, the right hand had no way to change it and could only open Settings. The accent
+is now an action of the right hand's catalog (ADR 0137), `set_accent` in `packages/engine/src/workspace-actions.ts`:
+a suggested color by the name Settings shows (camel, slate, mist, clay, sand, sage, graphite: the same presets
+`WorkspaceAccent.tsx` builds from `AGENT_GRADIENTS`, teal left out), any `#rrggbb`, or `default`. Camel and `default`
+store no accent, as the screen does.
+
+- It runs `setOrgAccent` as the person who asked, so the screen's key (`configure`), the audit entry and the `org.look`
+  announcement are the same as a click in Settings.
+- Asked in their own words by someone who may, it applies at once with a receipt and Undo (the accent before and
+  after); Undo is refused once the accent moved since. Anyone else gets the catalog's card, for whoever may.
+- The route's rate limit (20 changes an hour) is not applied here; the catalog's own cap of 10 changes a turn is.

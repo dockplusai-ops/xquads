@@ -3175,6 +3175,8 @@
       "update_workspace": "Workspace <b>{{name}}</b> ändern",
       "set_action_check_on": "Die Prüfung, was das Team schon getan hat, einschalten",
       "set_action_check_off": "Die Prüfung, was das Team schon getan hat, ausschalten",
+      "set_accent": "Akzentfarbe des Workspace auf <b>{{color}}</b> ändern",
+      "set_accent_default": "Akzentfarbe des Workspace auf den Standard zurücksetzen",
       "invite_people": "<b>{{emails}}</b> in den Workspace einladen.",
       "invite_roles_one": "Mit der Rolle {{roles}}.",
       "invite_roles_other": "Mit den Rollen {{roles}}.",
@@ -4044,6 +4046,8 @@
       "changed_update_workspace": "Workspace <b>{{name}}</b> geändert",
       "changed_set_action_check_on": "Die Prüfung, was das Team schon getan hat, eingeschaltet",
       "changed_set_action_check_off": "Die Prüfung, was das Team schon getan hat, ausgeschaltet",
+      "changed_set_accent": "Akzentfarbe des Workspace auf <b>{{color}}</b> geändert",
+      "changed_set_accent_default": "Akzentfarbe des Workspace auf den Standard zurückgesetzt",
       "changed_invite_people": "<b>{{invited}}</b> in den Workspace eingeladen",
       "changed_remove_ai_key": "API-Schlüssel <b>{{name}}</b> gelöscht"
     },

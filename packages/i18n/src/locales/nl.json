@@ -3174,6 +3174,8 @@
       "update_workspace": "Werkruimte <b>{{name}}</b> wijzigen",
       "set_action_check_on": "De check van wat het team al deed aanzetten",
       "set_action_check_off": "De check van wat het team al deed uitzetten",
+      "set_accent": "Accentkleur van de werkruimte wijzigen in <b>{{color}}</b>",
+      "set_accent_default": "Accentkleur van de werkruimte terugzetten naar de standaard",
       "invite_people": "<b>{{emails}}</b> uitnodigen voor de werkruimte.",
       "invite_roles_one": "Met de rol {{roles}}.",
       "invite_roles_other": "Met de rollen {{roles}}.",
@@ -4044,6 +4046,8 @@
       "changed_update_workspace": "Werkruimte <b>{{name}}</b> gewijzigd",
       "changed_set_action_check_on": "De check van wat het team al deed aangezet",
       "changed_set_action_check_off": "De check van wat het team al deed uitgezet",
+      "changed_set_accent": "Accentkleur van de werkruimte gewijzigd in <b>{{color}}</b>",
+      "changed_set_accent_default": "Accentkleur van de werkruimte teruggezet naar de standaard",
       "changed_invite_people": "<b>{{invited}}</b> uitgenodigd voor de werkruimte",
       "changed_remove_ai_key": "API-sleutel <b>{{name}}</b> verwijderd"
     },

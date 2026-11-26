@@ -3171,6 +3171,8 @@
       "update_workspace": "<b>{{name}}</b> çalışma alanını değiştir",
       "set_action_check_on": "Ekibin zaten yaptıklarının kontrolünü aç",
       "set_action_check_off": "Ekibin zaten yaptıklarının kontrolünü kapat",
+      "set_accent": "Çalışma alanının vurgu rengini <b>{{color}}</b> yap",
+      "set_accent_default": "Çalışma alanının vurgu rengini varsayılana döndür",
       "invite_people": "Çalışma alanına davet et: <b>{{emails}}</b>.",
       "invite_roles_one": "{{roles}} rolüyle.",
       "invite_roles_other": "{{roles}} rolleriyle.",
@@ -4024,6 +4026,8 @@
       "changed_update_workspace": "<b>{{name}}</b> çalışma alanını değiştirdim",
       "changed_set_action_check_on": "Ekibin zaten yaptıklarının kontrolünü açtım",
       "changed_set_action_check_off": "Ekibin zaten yaptıklarının kontrolünü kapattım",
+      "changed_set_accent": "Çalışma alanının vurgu rengini <b>{{color}}</b> yaptım",
+      "changed_set_accent_default": "Çalışma alanının vurgu rengini varsayılana döndürdüm",
       "changed_invite_people": "Çalışma alanına davet ettim: <b>{{invited}}</b>",
       "changed_remove_ai_key": "<b>{{name}}</b> API anahtarını sildim"
     },

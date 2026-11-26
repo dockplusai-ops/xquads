@@ -3054,6 +3054,8 @@
       "update_workspace": "ワークスペース<b>{{name}}</b>を変更",
       "set_action_check_on": "チームの過去の対応の確認をオンにする",
       "set_action_check_off": "チームの過去の対応の確認をオフにする",
+      "set_accent": "ワークスペースのアクセントカラーを<b>{{color}}</b>に変更",
+      "set_accent_default": "ワークスペースのアクセントカラーをデフォルトに戻す",
       "invite_people": "<b>{{emails}}</b>をワークスペースに招待します。",
       "invite_roles_other": "{{roles}}のロールで招待します。",
       "invite_people_sent_other": "<b>{{emails}}</b>に招待を送信しました。",
@@ -3880,6 +3882,8 @@
       "changed_update_workspace": "ワークスペース<b>{{name}}</b>を変更しました",
       "changed_set_action_check_on": "チームの過去の対応の確認をオンにしました",
       "changed_set_action_check_off": "チームの過去の対応の確認をオフにしました",
+      "changed_set_accent": "ワークスペースのアクセントカラーを<b>{{color}}</b>に変更しました",
+      "changed_set_accent_default": "ワークスペースのアクセントカラーをデフォルトに戻しました",
       "changed_invite_people": "<b>{{invited}}</b>をワークスペースに招待しました",
       "changed_remove_ai_key": "APIキー<b>{{name}}</b>を削除しました"
     },

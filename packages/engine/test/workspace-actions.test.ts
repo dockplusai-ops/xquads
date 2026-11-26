@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, test } from "bun:test";
-import { channelTopic } from "@agenteschat/adapters";
+import { channelTopic, orgTopic } from "@agenteschat/adapters";
 import { and, eq, schema } from "@agenteschat/db";
 import {
   actionsFor,
@@ -32,6 +32,7 @@ import {
   PROPOSE_MEMBER_CHANGES_TOOL,
   postPersonMessage,
   RIGHT_HAND,
+  rankTools,
   setMemberRoles,
   setMyStatus,
   setRowHolders,
@@ -1564,5 +1565,104 @@ describe("cards that must be read: inviting people and removing an API key", () 
     expect(out.content).toContain("a key's name stays out of conversations others read");
     expect(await lastCard(f)).toBeNull();
     expect(await keys(f)).toHaveLength(2);
+  });
+});
+
+describe("the workspace's accent color through the right hand (ADR 0193)", () => {
+  const accent = async (fx: Fixture) =>
+    (await fx.db.select().from(schema.organizations).where(eq(schema.organizations.id, fx.org.id)))[0]?.accent;
+
+  test("found by what people call it, in the catalog and among the tools", async () => {
+    f = await setup({ rightHand: true });
+    const ctx = await lodiRun(f, f.owner.id, "Prefiro o azul");
+    for (const find of ["cor", "cor de destaque", "destaque", "accent", "accent color", "color", "change the color"]) {
+      const out = await act(f, ctx, { find });
+      expect({ find, first: String(out.content).split(":")[0] }).toEqual({ find, first: "- set_accent" });
+    }
+    const tools = await createSetupToolSource({ pubsub: f.pubsub, server: SERVER }).tools(ctx);
+    for (const query of ["cor de destaque", "accent color"])
+      expect(rankTools(tools, "", query)[0]?.name).toBe(WORKSPACE_ACTION_TOOL);
+  });
+
+  test("a preset and a hex at once, announced, each undone back to the one before", async () => {
+    f = await setup({ rightHand: true });
+    const deps = { db: f.db, pubsub: f.pubsub };
+    const announced: unknown[] = [];
+    f.pubsub.subscribe(orgTopic(f.org.id), (e) => {
+      if (e.type === "org.broadcast") announced.push(e.event);
+    });
+    const ctx = await lodiRun(f, f.owner.id, "muda a cor de destaque para ardósia");
+    const slate = await act(f, ctx, { action: "set_accent", input: { color: "Slate" } });
+    expect(slate.content).toContain("Done at once, with Undo");
+    expect(await accent(f)).toBe("#8aa3ae");
+    expect(announced).toContainEqual({ type: "org.look", orgId: f.org.id });
+    expect((await act(f, ctx, { action: "set_accent", input: { color: "#2563EB" } })).content).toContain(
+      "Done at once",
+    );
+    expect(await accent(f)).toBe("#2563eb");
+    const again = await act(f, ctx, { action: "set_accent", input: { color: "#2563eb" } });
+    expect(again).toMatchObject({ isError: true });
+    expect(again.content).toContain("already is that color");
+    const [first, second] = await f.db
+      .select()
+      .from(schema.agentActions)
+      .where(eq(schema.agentActions.runId, ctx.runId))
+      .orderBy(schema.agentActions.createdAt);
+    expect(first?.params).toEqual({ action: "set_accent", color: "#8aa3ae", preset: "indigo" });
+    expect(second?.params).toEqual({ action: "set_accent", color: "#2563eb" });
+    // The older one can't jump over the newer: the accent moved since.
+    await expect(undoAgentAction(deps, f.owner.id, f.org.id, first?.id ?? "")).rejects.toThrow();
+    await undoAgentAction(deps, f.owner.id, f.org.id, second?.id ?? "");
+    expect(await accent(f)).toBe("#8aa3ae");
+    await undoAgentAction(deps, f.owner.id, f.org.id, first?.id ?? "");
+    expect(await accent(f)).toBeNull();
+  });
+
+  test("default (and camel, the default's own color) clears it, with Undo", async () => {
+    f = await setup({ rightHand: true });
+    const deps = { db: f.db, pubsub: f.pubsub };
+    await f.db.update(schema.organizations).set({ accent: "#2563eb" }).where(eq(schema.organizations.id, f.org.id));
+    const ctx = await lodiRun(f, f.owner.id, "volta a cor padrão");
+    expect((await act(f, ctx, { action: "set_accent", input: { color: "camel" } })).content).toContain("Done at once");
+    expect(await accent(f)).toBeNull();
+    const messageId = await reply(f, ctx);
+    const [receipt] = (await actionsFor(f.db, f.org.id, [messageId])).get(messageId) ?? [];
+    expect(receipt?.params).toEqual({ action: "set_accent", color: "", variant: "default" });
+    expect((await undoMessageActions(deps, f.owner.id, f.org.id, messageId)).failed).toEqual([]);
+    expect(await accent(f)).toBe("#2563eb");
+    expect((await act(f, ctx, { action: "set_accent", input: { color: "default" } })).content).toContain(
+      "Done at once",
+    );
+    expect(await accent(f)).toBeNull();
+  });
+
+  test("a member without the workspace's settings changes nothing: a card for whoever may", async () => {
+    f = await setup({ rightHand: true });
+    const bia = await addMember(f.db, f.org.id, "member", "Bia Teste");
+    const out = await act(f, await lodiRun(f, bia.id, "Prefiro o azul"), {
+      action: "set_accent",
+      input: { color: "#2563eb" },
+    });
+    expect(out.content).toContain("They can't make this change");
+    expect(out.content).toContain("Nothing has changed yet");
+    expect(await accent(f)).toBeNull();
+    const posted = await lastCard(f);
+    expect(posted?.card.params).toMatchObject({ action: "set_accent", input: { accent: "#2563eb" }, refused: true });
+    await expect(
+      decideWorkspaceAction({ db: f.db, pubsub: f.pubsub }, bia.id, f.org.id, posted?.id ?? "", "apply"),
+    ).rejects.toThrow();
+    expect(await accent(f)).toBeNull();
+  });
+
+  test("anything but a preset, a #rrggbb or default is refused", async () => {
+    f = await setup({ rightHand: true });
+    const ctx = await lodiRun(f, f.owner.id, "muda a cor");
+    for (const color of ["azul", "teal", "#12345", "#1234567", "rgb(0,0,255)"]) {
+      const out = await act(f, ctx, { action: "set_accent", input: { color } });
+      expect({ color, isError: out.isError }).toEqual({ color, isError: true });
+    }
+    expect((await act(f, ctx, { action: "set_accent", input: {} })).content).toContain("Wrong input");
+    expect(await accent(f)).toBeNull();
+    expect(await lastCard(f)).toBeNull();
   });
 });

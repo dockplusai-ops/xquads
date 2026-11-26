@@ -3314,6 +3314,8 @@ export const ptBR = {
       update_workspace: "Mudar o workspace <b>{{name}}</b>",
       set_action_check_on: "Ligar a conferência do que o time já fez",
       set_action_check_off: "Desligar a conferência do que o time já fez",
+      set_accent: "Mudar a cor de destaque do workspace para <b>{{color}}</b>",
+      set_accent_default: "Voltar a cor de destaque do workspace para a padrão",
       invite_people: "Convidar <b>{{emails}}</b> para o workspace.",
       /** Under it: the roles every address gets ("Vendas e Suporte"). `count`: how many roles. */
       invite_roles_one: "Com o cargo {{roles}}.",
@@ -4284,6 +4286,8 @@ export const ptBR = {
       changed_update_workspace: "Mudei o workspace <b>{{name}}</b>",
       changed_set_action_check_on: "Liguei a conferência do que o time já fez",
       changed_set_action_check_off: "Desliguei a conferência do que o time já fez",
+      changed_set_accent: "Mudei a cor de destaque do workspace para <b>{{color}}</b>",
+      changed_set_accent_default: "Voltei a cor de destaque do workspace para a padrão",
       changed_invite_people: "Convidei <b>{{invited}}</b> para o workspace",
       changed_remove_ai_key: "Apaguei a chave de API <b>{{name}}</b>",
     },

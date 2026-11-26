@@ -1,6 +1,8 @@
 import { holdEvents, type PubSub } from "@agenteschat/adapters";
 import { and, asc, type Database, desc, eq, gt, inArray, isNotNull, isNull, schema, sql } from "@agenteschat/db";
 import { isKnownProvider, PROVIDERS } from "@agenteschat/providers";
+import { DEFAULT_ACCENT, isAccentHex } from "@agenteschat/tokens/accent";
+import { AGENT_GRADIENTS } from "@agenteschat/ui/agent/engine";
 import {
   type ActionRecord,
   type AgentActionTarget,
@@ -11,6 +13,7 @@ import {
 import type { AgentDeletionDeps } from "./agent-deletion";
 import { agentsByHandle } from "./agents";
 import { recordAudit } from "./audit";
+import { setOrgAccent } from "./avatars";
 import { cancelRun } from "./cancel";
 import { deleteChannel } from "./channel-deletion";
 import { setChannelOverride } from "./channel-permissions";
@@ -1945,6 +1948,92 @@ const actionCheckAction: WorkspaceAction = {
   },
 };
 
+/**
+ * The accent's suggestions by the names Settings shows (`look.colors.*`): the agent presets' own tones, teal left out
+ * and camel the default, as `WorkspaceAccent.tsx` builds them from `AGENT_GRADIENTS`.
+ */
+const ACCENT_PRESETS = {
+  camel: "sky",
+  slate: "indigo",
+  mist: "violet",
+  clay: "rose",
+  sand: "amber",
+  sage: "green",
+  graphite: "graphite",
+} as const;
+const presetHex = (key: (typeof ACCENT_PRESETS)[keyof typeof ACCENT_PRESETS]) =>
+  key === "sky" ? DEFAULT_ACCENT : AGENT_GRADIENTS[key][1];
+
+/** The stored accent `color` asks for: a preset's or a "#rrggbb", null for the default (camel is it), or why not. */
+function accentOf(color: string): { accent: string | null } | string {
+  const said = color.toLowerCase();
+  const preset = ACCENT_PRESETS[said as keyof typeof ACCENT_PRESETS];
+  const hex = said === "default" ? DEFAULT_ACCENT : preset ? presetHex(preset) : said;
+  if (!isAccentHex(hex))
+    return `"${color}" isn't a color: say one of ${Object.keys(ACCENT_PRESETS).join(", ")}, a "#rrggbb" or default.`;
+  // Like the screen: the default's own color is no accent.
+  return { accent: hex === DEFAULT_ACCENT ? null : hex };
+}
+
+/** Its words: the color, with the preset's key when it is one (each app names it in its language), or the default. */
+const accentWords = (accent: string | null): Record<string, string> => {
+  if (!accent) return { color: "", variant: "default" };
+  const preset = Object.values(ACCENT_PRESETS).find((k) => presetHex(k) === accent);
+  return { color: accent, ...(preset ? { preset } : {}) };
+};
+
+const orgLook = async (db: Database, orgId: string) =>
+  (
+    await db
+      .select({ name: schema.organizations.name, accent: schema.organizations.accent })
+      .from(schema.organizations)
+      .where(eq(schema.organizations.id, orgId))
+  )[0];
+
+const accentAction: WorkspaceAction = {
+  id: "set_accent",
+  does: "Change the workspace's accent color (cor de destaque, the color of agents, mentions, links and selections in everyone's apps), or set it back to the default.",
+  input: {
+    type: "object",
+    properties: {
+      color: {
+        type: "string",
+        minLength: 1,
+        maxLength: 16,
+        description: `A suggested color by name (${Object.keys(ACCENT_PRESETS).join(", ")}; camel is the default), any "#rrggbb" (e.g. blue #2563eb), or default.`,
+      },
+    },
+    required: ["color"],
+    additionalProperties: false,
+  },
+  mode: "now",
+  // The screen's key: `setOrgAccent` checks it again.
+  needs: "configure",
+  async resolve(_ctx, _person, input) {
+    const wanted = accentOf(str(input.color));
+    if (typeof wanted === "string") return wanted;
+    return { input: wanted, words: accentWords(wanted.accent) };
+  },
+  async run(deps, actorId, orgId, input) {
+    const before = await orgLook(deps.db, orgId);
+    if (!before) throw new NotFoundError("No workspace with this id");
+    const { accent } = await setOrgAccent(deps, actorId, orgId, typeof input.accent === "string" ? input.accent : null);
+    if (before.accent === accent) throw new ValidationError("The workspace's accent already is that color");
+    return {
+      target: { type: "workspace", id: orgId, title: before.name },
+      words: accentWords(accent),
+      before: { accent: before.accent },
+      after: { accent },
+    };
+  },
+  async revert(deps, actorId, a, direction, changedSince) {
+    const [from, to] = direction === "undo" ? [obj(a.after), obj(a.before)] : [obj(a.before), obj(a.after)];
+    if ((await orgLook(deps.db, a.orgId))?.accent !== (from.accent ?? null)) throw changedSince();
+    await setOrgAccent(deps, actorId, a.orgId, typeof to.accent === "string" ? to.accent : null);
+    return undefined;
+  },
+};
+
 // ── The catalog ──────────────────────────────────────────────────────────────
 
 export const WORKSPACE_ACTIONS: readonly WorkspaceAction[] = [
@@ -1970,6 +2059,7 @@ export const WORKSPACE_ACTIONS: readonly WorkspaceAction[] = [
   continueWorkAction,
   updateWorkspaceAction,
   actionCheckAction,
+  accentAction,
   invitePeopleAction,
   removeAiKeyAction,
 ];
@@ -2103,7 +2193,7 @@ export function workspaceActionTool(deps: { pubsub?: PubSub; server?: ServerLink
   return {
     name: WORKSPACE_ACTION_TOOL,
     description:
-      "Do anything else the app lets this person do, as them and never more: roles and what each may do, people's roles, a channel's settings, people and permissions, their own status, notifications and time zone, inviting people, invitations and requests to join, removing an API key, the workspace's settings, stopping or continuing an agent's work. First call it with `find` (what they want, in a few words), then with `action`, its `input` and `why`. A change they may make, asked in their own words, applies at once with Undo; anything else, and always an invite or a key's removal, becomes a card for whoever may. The result says which: never say it is done before it does.",
+      "Do anything else the app lets this person do, as them and never more: roles and what each may do, people's roles, a channel's settings, people and permissions, their own status, notifications and time zone, inviting people, invitations and requests to join, removing an API key, the workspace's settings and accent color (cor de destaque), stopping or continuing an agent's work. First call it with `find` (what they want, in a few words), then with `action`, its `input` and `why`. A change they may make, asked in their own words, applies at once with Undo; anything else, and always an invite or a key's removal, becomes a card for whoever may. The result says which: never say it is done before it does.",
     scope: "setup:write",
     inputSchema: {
       type: "object",

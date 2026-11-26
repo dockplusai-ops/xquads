@@ -3421,6 +3421,8 @@
       "update_workspace": "Zmień przestrzeń roboczą <b>{{name}}</b>",
       "set_action_check_on": "Włącz sprawdzanie, co zespół już zrobił",
       "set_action_check_off": "Wyłącz sprawdzanie, co zespół już zrobił",
+      "set_accent": "Zmień kolor akcentu przestrzeni roboczej na <b>{{color}}</b>",
+      "set_accent_default": "Przywróć domyślny kolor akcentu przestrzeni roboczej",
       "invite_people": "Zaproś <b>{{emails}}</b> do przestrzeni roboczej.",
       "invite_roles_one": "Z rolą {{roles}}.",
       "invite_roles_few": "Z rolami {{roles}}.",
@@ -4333,6 +4335,8 @@
       "changed_update_workspace": "Zmieniono przestrzeń roboczą <b>{{name}}</b>",
       "changed_set_action_check_on": "Włączono sprawdzanie, co zespół już zrobił",
       "changed_set_action_check_off": "Wyłączono sprawdzanie, co zespół już zrobił",
+      "changed_set_accent": "Zmieniono kolor akcentu przestrzeni roboczej na <b>{{color}}</b>",
+      "changed_set_accent_default": "Przywrócono domyślny kolor akcentu przestrzeni roboczej",
       "changed_invite_people": "Zaproszono <b>{{invited}}</b> do przestrzeni roboczej",
       "changed_remove_ai_key": "Usunięto klucz API <b>{{name}}</b>"
     },

@@ -195,6 +195,11 @@ describe("receipt sentence values", () => {
     const away = action({ ...made, params: { action: "set_my_status", what: "", availability: "auto" } });
     const keyOnly = ((key: string) => key) as unknown as TFunction;
     expect(actionTextValues(away, keyOnly).what).toBe("presence.lower.online");
+    // A suggested accent by the name Settings gives it; any other color by its "#rrggbb".
+    const slate = action({ ...made, params: { action: "set_accent", color: "#8aa3ae", preset: "indigo" } });
+    expect(actionTextValues(slate, keyOnly)).toMatchObject({ color: "look.colors.indigo", context: "set_accent" });
+    const blue = action({ ...made, params: { action: "set_accent", color: "#2563eb" } });
+    expect(actionTextValues(blue, keyOnly).color).toBe("#2563eb");
   });
 
   test("every kind the app knows has its own case (the default gives no values)", () => {

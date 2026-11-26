@@ -3296,6 +3296,8 @@
       "update_workspace": "Cambiar el espacio de trabajo <b>{{name}}</b>",
       "set_action_check_on": "Activar la revisión de lo que el equipo ya hizo",
       "set_action_check_off": "Desactivar la revisión de lo que el equipo ya hizo",
+      "set_accent": "Cambiar el color de acento del espacio de trabajo a <b>{{color}}</b>",
+      "set_accent_default": "Volver al color de acento predeterminado del espacio de trabajo",
       "invite_people": "Invitar a <b>{{emails}}</b> al espacio de trabajo.",
       "invite_roles_one": "Con el rol {{roles}}.",
       "invite_roles_many": "Con los roles {{roles}}.",
@@ -4183,6 +4185,8 @@
       "changed_update_workspace": "Cambié el espacio de trabajo <b>{{name}}</b>",
       "changed_set_action_check_on": "Activé la revisión de lo que el equipo ya hizo",
       "changed_set_action_check_off": "Desactivé la revisión de lo que el equipo ya hizo",
+      "changed_set_accent": "Cambié el color de acento del espacio de trabajo a <b>{{color}}</b>",
+      "changed_set_accent_default": "Volví al color de acento predeterminado del espacio de trabajo",
       "changed_invite_people": "Invité a <b>{{invited}}</b> al espacio de trabajo",
       "changed_remove_ai_key": "Eliminé la clave de API <b>{{name}}</b>"
     },
