@@ -26,7 +26,8 @@
         "APP_VARIANT": "preview"
       },
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease --max-workers=2 -Dorg.gradle.jvmargs=-Xmx4g -Pkotlin.daemon.jvmargs=-Xmx2g -PreactNativeArchitectures=arm64-v8a"
       }
     },
     "production": {
