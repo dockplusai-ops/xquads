@@ -69,6 +69,8 @@ describe("an agent's look", () => {
       const next = shuffleLook(now, rand);
       expect(sameLook(next, now)).toBe(false);
       expect(AGENT_COLORS).toContain(next.color);
+      // Teal draws the same sage as green: never drawn by lot, as the pickers leave it out.
+      expect(next.color).not.toBe("teal");
       expect(AGENT_EYES).toContain(next.eyes);
       expect(AGENT_ACCESSORIES).toContain(next.accessory);
     }

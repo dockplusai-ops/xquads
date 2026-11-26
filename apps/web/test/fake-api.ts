@@ -1374,7 +1374,7 @@ export function createFakeHttpApi(state: FakeState): Omit<HttpApi, FakedParts> {
         .map((a) => a.id),
     })),
     areas: structuredClone(PERMISSION_AREAS),
-    colors: ["indigo", "violet", "rose", "amber", "green", "teal", "graphite"],
+    colors: ["indigo", "violet", "rose", "amber", "green", "graphite"],
     icons: ["shield", "code", "wallet", "mail", "bolt", "flag", "book", "chart", "bulb", "globe", "person"],
   });
   // What each membership may do, as the server resolves it (ADR 0085): an owner everything, a member what their

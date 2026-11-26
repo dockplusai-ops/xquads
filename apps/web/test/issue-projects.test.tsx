@@ -82,16 +82,17 @@ describe("Tarefas: projects", () => {
     const dialog = screen().getByRole("dialog", { name: "Novo projeto" });
     const create = within(dialog).getByRole("button", { name: "Criar projeto" });
     expect(create.hasAttribute("disabled")).toBe(true);
-    // Seven colours, the first one no project wears already chosen.
+    // Six colours (teal draws green's sage, so it isn't offered twice), the first one no project wears chosen.
     const swatches = within(dialog).getAllByRole("radio");
-    expect(swatches).toHaveLength(7);
-    expect(swatches.map((s) => s.getAttribute("aria-checked"))).toEqual(["true", ...Array(6).fill("false")]);
-    await click(swatches[5] as HTMLElement);
+    expect(swatches).toHaveLength(6);
+    expect(swatches.some((s) => /teal/.test(s.getAttribute("aria-label") ?? ""))).toBe(false);
+    expect(swatches.map((s) => s.getAttribute("aria-checked"))).toEqual(["true", ...Array(5).fill("false")]);
+    await click(swatches[4] as HTMLElement);
     await type(within(dialog).getByLabelText("Nome"), "  Mercado Ana ");
     await click(create);
     await settle(6);
     const made = (await api.issues.projects(ORG_ID)).projects;
-    expect(made).toMatchObject([{ name: "Mercado Ana", color: "teal" }]);
+    expect(made).toMatchObject([{ name: "Mercado Ana", color: "green" }]);
     expect(screen().queryByRole("dialog", { name: "Novo projeto" })).toBeNull();
     // Its own board: its URL, its name as the title, nothing in it yet and one way to add.
     expect(projectOf(router)).toBe(made[0]?.id);
@@ -268,7 +269,8 @@ describe("Tarefas: projects", () => {
     await settle(3);
     const edit = screen().getByRole("dialog", { name: "Editar projeto" });
     expect((within(edit).getByLabelText("Nome") as HTMLInputElement).value).toBe("Clínica Teo");
-    expect(within(edit).getByRole("radio", { name: /teal/ }).getAttribute("aria-checked")).toBe("true");
+    // A project stored as teal stays so, and shows the sage it draws as chosen.
+    expect(within(edit).getByRole("radio", { name: /green/ }).getAttribute("aria-checked")).toBe("true");
     await type(within(edit).getByLabelText("Nome"), "Clínica Teo e Filhos");
     await click(within(edit).getByRole("button", { name: "Salvar" }));
     await settle(8);

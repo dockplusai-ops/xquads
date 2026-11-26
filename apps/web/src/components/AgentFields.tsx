@@ -24,6 +24,7 @@ import {
   PICKED_AGENT_COLORS,
   Popover,
   ProviderLogo,
+  pickedSwatch,
   RoleMark,
   SearchSelect,
   Select,
@@ -299,7 +300,7 @@ function ColorChoices({ look, onPick, onPreview }: LookPickProps) {
             className="newag__swatch"
             aria-label={t(`look.colors.${c}`)}
             title={t(`look.colors.${c}`)}
-            aria-pressed={look.color === c}
+            aria-pressed={pickedSwatch(look.color) === c}
             style={{ "--a": top, "--b": bottom } as CSSProperties}
             onClick={() => onPick({ color: c })}
             {...tryOn(onPreview, { color: c })}

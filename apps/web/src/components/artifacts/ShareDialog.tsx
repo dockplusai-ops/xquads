@@ -41,7 +41,11 @@ export function useFileShare() {
       else
         void copyText(artifactLink(window.location.origin, org.id, a.id, version), () => toast.show(t("share.copied")));
     },
-    dialog: target ? <ShareDialog key={target.id} artifact={target} onClose={() => setTarget(null)} /> : null,
+    // Its own key, never the bare file id: beside the viewer's file (keyed by that id) a twin key had React keep two
+    // viewers once the dialog closed, the second without its picture.
+    dialog: target ? (
+      <ShareDialog key={`share:${target.id}`} artifact={target} onClose={() => setTarget(null)} />
+    ) : null,
   };
 }
 

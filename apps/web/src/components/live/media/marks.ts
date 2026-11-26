@@ -143,6 +143,20 @@ const blobOf = (canvas: HTMLCanvasElement, type: string, quality: number) =>
     }
   });
 
+/**
+ * A JPEG has no transparency: a see-through pixel comes out black, so a picture with a transparent background (a logo,
+ * a window's screenshot with its shadow) made a black crop. Such a picture stays a PNG; an opaque one a small JPEG.
+ */
+function pictureType(g: CanvasRenderingContext2D, w: number, h: number) {
+  try {
+    const px = g.getImageData(0, 0, w, h).data;
+    for (let i = 3; i < px.length; i += 4) if ((px[i] ?? 255) < 255) return "image/png";
+  } catch {
+    // A tainted canvas: `toBlob` refuses it too.
+  }
+  return "image/jpeg";
+}
+
 /** The mark drawn on the whole picture: white with a dark edge, readable on any picture. */
 function drawMark(g: CanvasRenderingContext2D, mark: Mark, w: number, h: number) {
   const line = Math.max(2, Math.round(Math.min(w, h) / 220));
@@ -199,7 +213,9 @@ export async function takeMarkPictures(
   } catch {
     return null;
   }
+  const cropType = pictureType(cg, crop.width, crop.height);
+  const frameType = pictureType(fg, frame.width, frame.height);
   drawMark(fg, mark, frame.width, frame.height);
-  const [cropBlob, frameBlob] = await Promise.all([blobOf(crop, "image/jpeg", 0.86), blobOf(frame, "image/jpeg", 0.8)]);
+  const [cropBlob, frameBlob] = await Promise.all([blobOf(crop, cropType, 0.86), blobOf(frame, frameType, 0.8)]);
   return cropBlob && frameBlob ? { crop: cropBlob, frame: frameBlob } : null;
 }

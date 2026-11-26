@@ -35,7 +35,7 @@ const projects = [
 
 describe("task projects", () => {
   test("a project takes the roles' seven colours, never sky, and a name of 80 characters at most", () => {
-    expect(PROJECT_COLORS).toEqual(["indigo", "violet", "rose", "amber", "green", "teal", "graphite"]);
+    expect(PROJECT_COLORS).toEqual(["indigo", "violet", "rose", "amber", "green", "graphite"]);
     expect(LONG).toHaveLength(PROJECT_NAME_MAX);
   });
 

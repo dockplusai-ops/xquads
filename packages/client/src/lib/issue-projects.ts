@@ -1,12 +1,15 @@
-import { AGENT_COLORS } from "@agenteschat/tokens/look";
+import { PICKED_AGENT_COLORS } from "@agenteschat/tokens/look";
 import type { IssueProject, IssueProjectRef } from "../api/types";
 import { isUuid } from "./format";
 
 /** A project's name holds at most this (mirror of `PROJECT_NAME_MAX`, packages/engine/src/issue-projects.ts). */
 export const PROJECT_NAME_MAX = 80;
 
-/** The colors a project can take: the roles' (mirror of `ROLE_COLORS`, packages/engine/src/permissions.ts). */
-export const PROJECT_COLORS = AGENT_COLORS.filter((c) => c !== "sky");
+/**
+ * The colors the project picker offers: the roles' (`ROLE_COLORS`, packages/engine/src/permissions.ts) without teal,
+ * which draws the same sage as green since the rebrand. A project stored as teal stays valid on the server.
+ */
+export const PROJECT_COLORS = PICKED_AGENT_COLORS.filter((c) => c !== "sky");
 
 /** In a project filter and its URL: the tasks with no project. */
 export const NO_PROJECT = "none";

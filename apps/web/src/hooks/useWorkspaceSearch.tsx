@@ -70,6 +70,8 @@ export function useWorkspaceSearch(lazy = false) {
   const channels = useChannels(org.id);
   const dms = useDms(org.id);
   const dir = useDirectory(org.id);
+  // The people, agents and places a typed filter may name have answered (or failed): a search from a link reads now.
+  const named = !channels.isPending && !dms.isPending && !dir.loading;
   const words = useMemo(() => searchWords(t), [t]);
   const places = useMemo<SearchPlace[]>(
     () => [
@@ -123,6 +125,7 @@ export function useWorkspaceSearch(lazy = false) {
     words,
     places,
     directory,
+    named,
     recent,
     saveRecent,
     chips,

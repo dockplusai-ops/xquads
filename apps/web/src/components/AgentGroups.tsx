@@ -17,6 +17,7 @@ import {
   MenuItem,
   MenuRadioGroup,
   MenuSeparator,
+  pickedSwatch,
 } from "@agenteschat/ui";
 import { type DragEvent, type ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -96,7 +97,7 @@ export function GroupNameDialog({ purpose, onClose }: { purpose: GroupDialogFor;
                       key={c}
                       type="button"
                       role="radio"
-                      aria-checked={color === c}
+                      aria-checked={pickedSwatch(color) === c}
                       aria-label={t("rolesPage.colorOf", { color: c })}
                       className="roles-color"
                       style={{ backgroundImage: `url("${ditherUrl(c as "graphite", 8)}")` }}

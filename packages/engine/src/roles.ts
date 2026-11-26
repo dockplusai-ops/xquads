@@ -37,6 +37,7 @@ import {
   isRolePermission,
   PERMISSION_AREAS,
   PERMISSION_ROWS,
+  PICKED_ROLE_COLORS,
   ROLE_COLORS,
   ROLE_ICONS,
   type RoleColor,
@@ -167,7 +168,7 @@ export async function listRoles(db: Database, actorId: string, orgId: string) {
     givable: r.kind === "custom" && outranks(actor, r.position) && holdsAll(actor, r.permissions),
     ...reach(r),
   }));
-  return { roles, areas: PERMISSION_AREAS, colors: ROLE_COLORS, icons: ROLE_ICONS };
+  return { roles, areas: PERMISSION_AREAS, colors: PICKED_ROLE_COLORS, icons: ROLE_ICONS };
 }
 
 /**

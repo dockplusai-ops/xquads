@@ -129,6 +129,8 @@ export const EVERYONE_DEFAULTS: readonly RolePermission[] = [
 
 /** The roles' look: one of the agents' colors but sky (the agents' own) and one of the apps' role icons. */
 export const ROLE_COLORS = ["indigo", "violet", "rose", "amber", "green", "teal", "graphite"] as const;
+/** What the roles' and groups' pickers offer: teal draws the same sage as green since the rebrand, so it stays valid but isn't offered twice. */
+export const PICKED_ROLE_COLORS = ROLE_COLORS.filter((c) => c !== "teal");
 export const ROLE_ICONS = [
   "shield",
   "code",

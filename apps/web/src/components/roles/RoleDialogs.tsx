@@ -32,6 +32,7 @@ import {
   type IconName,
   Input,
   Locked,
+  pickedSwatch,
   RoleMark,
   Select,
   SettingRow,
@@ -182,7 +183,7 @@ export function LookDialog({
                   key={c}
                   type="button"
                   role="radio"
-                  aria-checked={draft.color === c}
+                  aria-checked={pickedSwatch(draft.color) === c}
                   aria-label={t("rolesPage.colorOf", { color: c })}
                   className="roles-color"
                   style={{ backgroundImage: `url("${ditherUrl(c as AgentColor, 8)}")` }}

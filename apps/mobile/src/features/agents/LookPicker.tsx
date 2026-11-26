@@ -1,3 +1,4 @@
+import { pickedSwatch } from "@agenteschat/tokens/look";
 import { gradientOf, isHexColor } from "@agenteschat/ui/agent/engine";
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -109,7 +110,7 @@ function Swatches({
     <View style={styles.swatchRow} accessibilityRole="radiogroup" accessibilityLabel={t("look.color")}>
       {PICKED_AGENT_COLORS.map((color) => {
         const [top, bottom] = gradientOf(color);
-        const on = look.color === color;
+        const on = pickedSwatch(look.color) === color;
         return (
           <PressScale
             key={color}

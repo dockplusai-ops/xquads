@@ -1,12 +1,12 @@
 import type { AgentAudience, AgentInput } from "@agenteschat/client";
 import {
   AGENT_ACCESSORIES,
-  AGENT_COLORS,
   AGENT_EYES,
   type AgentAccessory,
   type AgentColor,
   type AgentEyes,
   colorOf,
+  PICKED_AGENT_COLORS,
 } from "../shared/logic";
 
 /**
@@ -40,10 +40,10 @@ export const sameLook = (a: FullLook, b: FullLook) =>
 export function shuffleLook(current: FullLook, rand: () => number = Math.random): FullLook {
   const one = <T>(list: readonly T[]) => list[Math.floor(rand() * list.length)] as T;
   for (let i = 0; i < 6; i++) {
-    const next = { color: one(AGENT_COLORS), eyes: one(AGENT_EYES), accessory: one(AGENT_ACCESSORIES) };
+    const next = { color: one(PICKED_AGENT_COLORS), eyes: one(AGENT_EYES), accessory: one(AGENT_ACCESSORIES) };
     if (!sameLook(next, current)) return next;
   }
-  return { ...current, color: AGENT_COLORS.find((c) => c !== current.color) ?? current.color };
+  return { ...current, color: PICKED_AGENT_COLORS.find((c) => c !== current.color) ?? current.color };
 }
 
 export type AgentEditField = "name" | "role" | "instructions" | "look" | "consultable";

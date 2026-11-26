@@ -5,6 +5,8 @@ export const AGENT_COLORS = ["sky", "indigo", "violet", "rose", "amber", "green"
 export type AgentColor = (typeof AGENT_COLORS)[number] | `#${string}`;
 /** What the pickers offer: since xquads' colors (DESIGN.md) `teal` draws the same sálvia as `green`, so it stays valid on agents that have it but isn't offered twice. */
 export const PICKED_AGENT_COLORS = AGENT_COLORS.filter((c) => c !== "teal");
+/** The swatch a picker shows chosen for a stored color: teal is offered as green, the sálvia it draws. */
+export const pickedSwatch = (color: string) => (color === "teal" ? "green" : color);
 
 /** Mirrors `isHexColor` in packages/ui/src/agent/engine.js, which imports nothing so plain pages can load it. */
 const HEX_COLOR = /^#[0-9a-f]{6}$/i;

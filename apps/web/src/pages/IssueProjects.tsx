@@ -19,6 +19,7 @@ import {
   type FilterOption,
   Input,
   Locked,
+  pickedSwatch,
 } from "@agenteschat/ui";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -98,7 +99,7 @@ export function ProjectDialog({
                   key={c}
                   type="button"
                   role="radio"
-                  aria-checked={color === c}
+                  aria-checked={pickedSwatch(color) === c}
                   aria-label={t("rolesPage.colorOf", { color: c })}
                   className="roles-color"
                   style={{ backgroundImage: `url("${ditherUrl(c, 8)}")` }}

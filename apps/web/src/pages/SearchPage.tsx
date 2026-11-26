@@ -1,7 +1,13 @@
 import type { SearchHit } from "@agenteschat/client";
 import { relativeTime } from "@agenteschat/client/lib/format";
 import { hitText } from "@agenteschat/client/lib/media";
-import { formatSearch, groupByChannel, SEARCH_SORTS } from "@agenteschat/client/lib/search-filters";
+import {
+  dedupe,
+  formatSearch,
+  groupByChannel,
+  parseSearch,
+  SEARCH_SORTS,
+} from "@agenteschat/client/lib/search-filters";
 import { Button, EmptyState, List, PageHeader, Select, TabPanel, Tabs } from "@agenteschat/ui";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
@@ -16,9 +22,18 @@ import { groupHits, hitLink, SEARCH_PAGE, useWorkspaceSearch } from "@/hooks/use
  * "Buscar no workspace" (`GET …/search`, ADR 0123): words and filter chips (`from:`, `in:`, `has:`, `mentions:`,
  * dates, author type, pinned), recent searches, results by channel with a sort, each opening at its message.
  * Without chips it also finds the team's actions and context items, by kind. `scope`: opened from a channel or DM,
- * which starts as an `in:` chip.
+ * which starts as an `in:` chip. `query`: the search the address holds (`?q=`), read once; `onQuery` gets the search as
+ * it runs, to keep the address in step.
  */
-export function SearchPage({ scope }: { scope?: string }) {
+export function SearchPage({
+  scope,
+  query,
+  onQuery,
+}: {
+  scope?: string;
+  query?: string;
+  onQuery?: (text: string) => void;
+}) {
   const { t } = useTranslation();
   const { org } = useOrg();
   const ws = useWorkspaceSearch();
@@ -33,6 +48,26 @@ export function SearchPage({ scope }: { scope?: string }) {
     scoped.current = true;
     setChips((cs) => (cs.some((c) => c.op === "in") ? cs : [{ op: "in", place }, ...cs]));
   }, [scope, places, setChips]);
+
+  // The address's search, once the people and places its filters may name are known, so they come back as chips.
+  const pending = useRef(query);
+  const { named, directory, words, setInput } = ws;
+  useEffect(() => {
+    if (pending.current === undefined || !named) return;
+    const parsed = parseSearch(pending.current, directory, words);
+    pending.current = undefined;
+    setChips((cs) => dedupe([...cs, ...parsed.chips]));
+    setInput(parsed.text);
+  }, [named, directory, words, setChips, setInput]);
+  // And back: the search as it runs goes to the address, once that was read and the words caught up with the box
+  // (they run a beat after the last key), so a link's words never leave the address for a moment.
+  const asRun = formatSearch(chips, q);
+  const caughtUp = parseSearch(ws.input, directory, words).text === q;
+  const onQueryRef = useRef(onQuery);
+  onQueryRef.current = onQuery;
+  useEffect(() => {
+    if (pending.current === undefined && caughtUp) onQueryRef.current?.(asRun);
+  }, [asRun, caughtUp]);
 
   const results = (
     <>

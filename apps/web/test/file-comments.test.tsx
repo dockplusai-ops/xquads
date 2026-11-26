@@ -382,6 +382,29 @@ describe("a picture's comments in the viewer", () => {
     await waitFor(() => expect(panel()).toBeTruthy());
   });
 
+  test("Compartilhar and its close leave the viewer as it was: one picture, its pins, its conversation", async () => {
+    const { api, file } = await pictureWithTalk({ comments: THREE });
+    const { dialog } = await openViewer(api, file.id);
+    await openComments(dialog);
+    await waitFor(() => expect(pins()).toHaveLength(2));
+    await click(within(dialog).getByRole("button", { name: "Compartilhar" }));
+    await settle(8);
+    const share = screen().getByRole("dialog", { name: "Compartilhar banner.png" });
+    // The foot's button (the head's × has the same name).
+    await click(
+      within(share)
+        .getAllByRole("button", { name: /^(Cancelar|Fechar)$/ })
+        .at(-1) as HTMLElement,
+    );
+    await settle(8);
+    expect(screen().queryByRole("dialog", { name: "Compartilhar banner.png" })).toBeNull();
+    // The share dialog once took the file's id as its key, the viewer's own: React then kept two viewers.
+    expect(document.querySelectorAll(".izoom")).toHaveLength(1);
+    expect(document.querySelectorAll("aside.viewer-talk")).toHaveLength(1);
+    expect(document.querySelector(".izoom__img")?.getAttribute("data-ready")).toBe("true");
+    expect(pinNames()).toEqual(["Comentário 1 de João", "Comentário 2 de Ada"]);
+  });
+
   test("one with no comments opens alone, Comentários not pressed", async () => {
     const { api, file } = await pictureWithTalk({ comments: [] });
     const { dialog } = await openViewer(api, file.id);

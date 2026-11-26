@@ -14,6 +14,7 @@ import {
   type MadeIconLook,
   PHONE_APP_ICON,
 } from "@agenteschat/client/lib/app-icons";
+import { pickedSwatch } from "@agenteschat/tokens/look";
 import { drawAccessory, drawAgent, drawnKey, gradientOf } from "@agenteschat/ui/agent/engine";
 import { Canvas, createPicture, Picture } from "@shopify/react-native-skia";
 import { LinearGradient } from "expo-linear-gradient";
@@ -270,8 +271,9 @@ function AppIconMaker({ current, set }: { current: PhoneIcon; set: (icon: PhoneI
       <GroupedHeader>{t("look.color")}</GroupedHeader>
       <GroupedList>
         <View style={styles.colors} accessibilityRole="radiogroup" accessibilityLabel={t("look.color")}>
-          {MADE_ICON_COLORS.map((color) => {
-            const on = !ready && made.color === color;
+          {/* Teal draws the same sage as green: its icons stay built and valid, the picker offers the color once. */}
+          {MADE_ICON_COLORS.filter((color) => color !== "teal").map((color) => {
+            const on = !ready && pickedSwatch(made.color) === color;
             return (
               <Choice key={color} on={on} label={t(`look.colors.${color}`)} onPress={() => make({ color })} slop={7}>
                 <LinearGradient colors={gradientOf(color)} style={styles.color}>

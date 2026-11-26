@@ -166,6 +166,33 @@ describe("search filters (ADR 0123)", () => {
     expect(screen().queryByRole("button", { name: "Remover em: #eng" })).toBeNull();
   });
 
+  test("?q= opens with its words and filters searched, and the address follows the search", async () => {
+    const state = seedState();
+    const api = createFakeApi(state);
+    const { router } = await renderApp(`/org/${ORG_ID}/search?q=${encodeURIComponent("from:@ada orçamento")}`, {
+      api,
+    });
+    await settle(6);
+    await act(() => new Promise((r) => setTimeout(r, 300)));
+    await settle(4);
+    expect(box().value).toBe("orçamento");
+    expect(screen().getByRole("button", { name: "Remover de: Ada" })).toBeTruthy();
+    expect(lastSearch(state)).toEqual({
+      q: "orçamento",
+      kinds: ["message"],
+      limit: 100,
+      filters: { fromAgents: [ADA_ID], sort: "relevance" },
+    } as never);
+    expect(router.state.location.search).toEqual({ q: "from:@ada orçamento" });
+
+    await typeIn("deploy");
+    expect(router.state.location.search).toEqual({ q: "from:@ada deploy" });
+    await act(async () => fireEvent.click(screen().getByRole("button", { name: "Remover de: Ada" })));
+    await typeIn("");
+    await settle(4);
+    expect(router.state.location.search).toEqual({});
+  });
+
   test("the empty box's filters and recent searches are picked from the keyboard", async () => {
     const state = seedState();
     const api = createFakeApi(state);

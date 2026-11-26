@@ -18,6 +18,7 @@ export {
   type AgentEyes,
   normalizeAppearance,
   PICKED_AGENT_COLORS,
+  pickedSwatch,
 } from "@agenteschat/tokens/look";
 
 /** A random look ("Aleatório"), different from `current` when possible. */

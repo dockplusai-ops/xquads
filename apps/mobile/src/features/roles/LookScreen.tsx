@@ -1,6 +1,7 @@
 import type { OrgRole } from "@agenteschat/client";
 import { ApiError, useCreateRole, useUpdateRole } from "@agenteschat/client";
 import { isEveryone, newRoleInput, ROLE_TEMPLATES, roleLock, roleName } from "@agenteschat/client/lib/roles";
+import { pickedSwatch } from "@agenteschat/tokens/look";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, View } from "react-native";
@@ -105,7 +106,7 @@ function ColorPick({
   return (
     <View style={styles.swatches} accessibilityRole="radiogroup" accessibilityLabel={t("rolesPage.color")}>
       {colors.map((color) => {
-        const on = color === value;
+        const on = color === pickedSwatch(value);
         return (
           <Pressable
             key={color}

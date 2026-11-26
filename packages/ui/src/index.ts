@@ -90,6 +90,7 @@ export {
   appearanceStyle,
   normalizeAppearance,
   PICKED_AGENT_COLORS,
+  pickedSwatch,
   randomAppearance,
 } from "./components/AgentLook";
 export { AgentSticker, type AgentStickerProps } from "./components/AgentSticker";
