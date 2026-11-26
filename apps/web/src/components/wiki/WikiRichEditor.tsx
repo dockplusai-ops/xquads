@@ -13,6 +13,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { markdownFromRich, pastedHtml, pastedText, richFromMarkdown, wikiLinkHtml } from "@/lib/wiki-rich";
 
@@ -375,7 +376,20 @@ export const WikiRichEditor = forwardRef<
     setMenu(null);
     if (menu.kind === "link") {
       const page = linkOptions[i];
-      if (page) insert(`${wikiLinkHtml(page.title, page.title)}&nbsp;`);
+      const sel = getSelection();
+      if (page && sel?.rangeCount) {
+        // Put in place, not with insertHTML: Chrome moves an inline link typed at a paragraph's end out of it.
+        const range = sel.getRangeAt(0);
+        const link = document.createElement("template");
+        link.innerHTML = `${wikiLinkHtml(page.title, page.title)}&nbsp;`;
+        const after = link.content.lastChild;
+        range.insertNode(link.content);
+        if (after) range.setStartAfter(after);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        lastRange.current = range.cloneRange();
+      }
       emit();
     } else {
       const b = blockOptions[i];
@@ -586,74 +600,83 @@ export const WikiRichEditor = forwardRef<
           </Button>
         </div>
       )}
-      {selection && onAsk && !menu && (
-        <div className="wiki-rich__float ac-glass" style={{ left: selection.x, top: selection.y }}>
-          <Button
-            size="sm"
-            variant="ghost"
-            icon="agent"
-            onMouseDown={keep}
-            onClick={() => onAsk(getSelection()?.toString().trim() ?? "")}
+      {/* Both floats are placed in the window's coordinates, so they live on the body: the page around the editor
+          (`.shell__main`, the page's entrance) is a transformed box, which would make it their frame instead. */}
+      {selection &&
+        onAsk &&
+        !menu &&
+        createPortal(
+          <div className="wiki-rich__float ac-glass" style={{ left: selection.x, top: selection.y }}>
+            <Button
+              size="sm"
+              variant="ghost"
+              icon="agent"
+              onMouseDown={keep}
+              onClick={() => onAsk(getSelection()?.toString().trim() ?? "")}
+            >
+              {t("wiki.ask.button")}
+            </Button>
+          </div>,
+          document.body,
+        )}
+      {menu &&
+        count > 0 &&
+        createPortal(
+          <div
+            className="ac-menu wiki-suggest wiki-suggest--float"
+            role="listbox"
+            id={listId}
+            aria-label={menu.kind === "link" ? t("wiki.editor.suggest") : t("wiki.rich.blockLabel")}
+            ref={listRef}
           >
-            {t("wiki.ask.button")}
-          </Button>
-        </div>
-      )}
-      {menu && count > 0 && (
-        <div
-          className="ac-menu wiki-suggest wiki-suggest--float"
-          role="listbox"
-          id={listId}
-          aria-label={menu.kind === "link" ? t("wiki.editor.suggest") : t("wiki.rich.blockLabel")}
-          ref={listRef}
-        >
-          {menu.kind === "link"
-            ? linkOptions.map((p, i) => (
-                <div
-                  key={p.slug}
-                  role="option"
-                  tabIndex={-1}
-                  aria-selected={i === current}
-                  data-active={i === current || undefined}
-                  className="ac-menu__item"
-                  onPointerDown={(e) => {
-                    e.preventDefault();
-                    pick(i);
-                  }}
-                  onKeyDown={() => {}}
-                >
-                  <span className="ac-menu__label">
-                    <span>{p.title}</span>
-                    {p.folder && <span className="ac-menu__desc">{p.folder}</span>}
-                  </span>
-                  {i === current && <Kbd>↵</Kbd>}
-                </div>
-              ))
-            : blockOptions.map((b, i) => (
-                <div
-                  key={b.cmd}
-                  role="option"
-                  tabIndex={-1}
-                  aria-selected={i === current}
-                  data-active={i === current || undefined}
-                  className="ac-menu__item"
-                  onPointerDown={(e) => {
-                    e.preventDefault();
-                    pick(i);
-                  }}
-                  onKeyDown={() => {}}
-                >
-                  <span className="ac-menu__leading" aria-hidden="true">
-                    <Icon name={b.icon} size={16} />
-                  </span>
-                  <span className="ac-menu__label">
-                    <span>{t(`wiki.rich.blocks.${b.key}`)}</span>
-                  </span>
-                  {i === current && <Kbd>↵</Kbd>}
-                </div>
-              ))}
-        </div>
-      )}
+            {menu.kind === "link"
+              ? linkOptions.map((p, i) => (
+                  <div
+                    key={p.slug}
+                    role="option"
+                    tabIndex={-1}
+                    aria-selected={i === current}
+                    data-active={i === current || undefined}
+                    className="ac-menu__item"
+                    onPointerDown={(e) => {
+                      e.preventDefault();
+                      pick(i);
+                    }}
+                    onKeyDown={() => {}}
+                  >
+                    <span className="ac-menu__label">
+                      <span>{p.title}</span>
+                      {p.folder && <span className="ac-menu__desc">{p.folder}</span>}
+                    </span>
+                    {i === current && <Kbd>↵</Kbd>}
+                  </div>
+                ))
+              : blockOptions.map((b, i) => (
+                  <div
+                    key={b.cmd}
+                    role="option"
+                    tabIndex={-1}
+                    aria-selected={i === current}
+                    data-active={i === current || undefined}
+                    className="ac-menu__item"
+                    onPointerDown={(e) => {
+                      e.preventDefault();
+                      pick(i);
+                    }}
+                    onKeyDown={() => {}}
+                  >
+                    <span className="ac-menu__leading" aria-hidden="true">
+                      <Icon name={b.icon} size={16} />
+                    </span>
+                    <span className="ac-menu__label">
+                      <span>{t(`wiki.rich.blocks.${b.key}`)}</span>
+                    </span>
+                    {i === current && <Kbd>↵</Kbd>}
+                  </div>
+                ))}
+          </div>,
+          document.body,
+        )}
     </div>
   );
 });
