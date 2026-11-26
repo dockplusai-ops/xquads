@@ -264,7 +264,7 @@ import { agentRepositoryList, repositoriesPrompt } from "./git/repos";
 import { askVerdict, handOffHolds, repeatedAsk, saysNeedsNothing } from "./hand-off";
 import { announceIntent } from "./intent-line";
 import { UPDATE_ISSUE_TOOL } from "./issue-tools";
-import { linkRunToIssue, mirrorReplyToIssue } from "./issues";
+import { linkRunToIssue, mirrorReplyToIssue, taskRunDone } from "./issues";
 import { type Judge, JudgeGroup, judgeCallOf, TURN_END_CHECK_BUDGET_MS, withJudgeBudget } from "./judge";
 import {
   KEY_LINE_PERSON_MINUTES,
@@ -1655,6 +1655,8 @@ async function executeRunInner(
         if (ended) await endWork(workDeps, ended, status).catch(() => {});
       }
     }
+    // A task's agent that finished it hands it to review (`taskRunDone`).
+    if (status === "done") await taskRunDone({ db, pubsub: deps.pubsub }, run).catch(() => {});
     // Its line ends with the run (checked on read); the apps refresh now (ADR 0084 §11).
     await announceAgentStatus(deps.pubsub, run.orgId, run.agentId).catch(() => {});
     // Ended or waiting: so does the Live Activity of the person behind it (ADR 0210).

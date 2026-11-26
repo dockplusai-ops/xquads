@@ -28,9 +28,9 @@ import { mayContinuePause } from "./usage-pause";
 /**
  * The task manager (ADR 0128): every task the caller may see, what each one uses right now, each agent's activity
  * over the last hour and what ended since `since`. Who sees what is `seesRunSql`: the conversations the caller is in
- * (`listWorkingRuns`), plus what no person is a member of (routines' background runs, agents' private conversations)
- * for who manages that agent (`managesAgent`, ADR 0085 addendum of 2026-11-17) and for its owner. The rest only
- * counts (`hidden`). No cost: people stop work here, they don't audit spend.
+ * (`listWorkingRuns`), a task's or a live file's conversation for who reads it (ADR 0145, ADR 0199), plus what no
+ * person is a member of (routines' background runs, agents' private conversations) for who manages that agent
+ * (`managesAgent`, ADR 0085 addendum of 2026-11-17) and for its owner. The rest only counts (`hidden`). No cost: people stop work here, they don't audit spend.
  */
 
 const {
@@ -46,6 +46,24 @@ const {
   threads,
   users,
 } = schema;
+
+/**
+ * The conversations whose runs are listed: channels and DMs, and the ones no person is a member of by design, a task's
+ * (ADR 0145) and a live file's (ADR 0199), which `seesRunSql` opens to who reads them.
+ */
+const LISTED_KINDS = sql.raw(`('channel', 'dm', 'task', 'file')`);
+
+/** A listed conversation's kind. */
+export type TaskPlaceKind = "channel" | "dm" | "task" | "file";
+
+/**
+ * A run's conversation's name: a channel's, a task's title for a task's conversation, a file's for a file's (their
+ * channels' own names are internal).
+ */
+const PLACE_NAME = sql`(case c.kind
+  when 'task' then (select pi.title from ${schema.issues} pi where pi.conversation_channel_id = c.id)
+  when 'file' then (select pf.title from ${schema.artifacts} pf where pf.conversation_channel_id = c.id)
+  else c.name end)`;
 
 /** Tasks listed at most, and ended ones. */
 export const TASK_MANAGER_MAX = 100;
@@ -116,8 +134,8 @@ export interface ManagedTask {
   runId: string;
   agentId: string;
   channelId: string;
-  channelKind: "channel" | "dm";
-  /** Null for a DM (and a routine's room). */
+  channelKind: TaskPlaceKind;
+  /** Null for a DM (and a routine's room); a task's or a file's title for its conversation. */
   channelName: string | null;
   /** A conversation only agents are in: nobody can open it, its steps say what happens there. */
   betweenAgents: boolean;
@@ -204,7 +222,7 @@ export interface EndedTask {
   runId: string;
   agentId: string;
   channelId: string;
-  channelKind: "channel" | "dm";
+  channelKind: TaskPlaceKind;
   channelName: string | null;
   betweenAgents: boolean;
   threadId: string | null;
@@ -267,8 +285,8 @@ type Row = {
   created_at: string | Date;
   finished_at: string | Date | null;
   error: string | null;
-  kind: "channel" | "dm";
-  name: string;
+  kind: TaskPlaceKind;
+  name: string | null;
   dm_key: string | null;
   title: string | null;
   pending: string[] | string | null;
@@ -387,7 +405,7 @@ async function visibleRuns(
   return rowsOf<Row>(
     await db.execute(sql`select r.id, r.agent_id, r.channel_id, ${shownStatusSql} as status, r.thread_root_id, r.trigger_message_id,
         r.reply_in_thread,
-        r.started_at, r.created_at, r.finished_at, r.error, c.kind, c.name, c.dm_key, t.title,
+        r.started_at, r.created_at, r.finished_at, r.error, c.kind, ${PLACE_NAME} as name, c.dm_key, t.title,
         array_to_json(r.pending_message_ids || r.after_message_ids) as pending, r.background, r.brain,
         a.owner_user_id, a.owner_role_id, a.machine_id, mc.name as machine_name,
         trig.author_user_id as requester_id, ru.name as requester_name, trig.author_agent_id as asker_agent_id,
@@ -412,7 +430,7 @@ async function visibleRuns(
         ${which.active ? HANDED_AT : sql`null`} as handed_at
       from ${agentRuns} r
       join ${channels} c on c.id = r.channel_id and c.org_id = ${orgId}::uuid
-        and c.archived_at is null and c.kind in ('channel', 'dm')
+        and c.archived_at is null and c.kind in ${LISTED_KINDS}
       join ${agents} a on a.id = r.agent_id and a.org_id = ${orgId}::uuid
       left join ${machines} mc on mc.org_id = ${orgId}::uuid and mc.id = a.machine_id
       left join ${schema.agentWorks} w on w.id = r.work_id
@@ -457,7 +475,7 @@ async function doneSince(db: Database, userId: string, orgId: string, since: Dat
     await db.execute(sql`select count(*) as n
       from ${agentRuns} r
       join ${channels} c on c.id = r.channel_id and c.org_id = ${orgId}::uuid
-        and c.archived_at is null and c.kind in ('channel', 'dm')
+        and c.archived_at is null and c.kind in ${LISTED_KINDS}
       join ${agents} a on a.id = r.agent_id and a.org_id = ${orgId}::uuid
       where r.org_id = ${orgId}::uuid and r.status = 'done' and r.finished_at >= ${since.toISOString()}::timestamptz
         and ${seesSql(userId, orgId)}`),
@@ -473,7 +491,7 @@ async function hiddenTasks(db: Database, userId: string, orgId: string): Promise
       join ${channels} c on c.id = r.channel_id and c.org_id = ${orgId}::uuid
       join ${agents} a on a.id = r.agent_id and a.org_id = ${orgId}::uuid
       where r.org_id = ${orgId}::uuid and r.status in ('queued', 'running', 'waiting_approval', 'waiting_input')
-        and (c.archived_at is not null or c.kind not in ('channel', 'dm')
+        and (c.archived_at is not null or c.kind not in ${LISTED_KINDS}
           or not ${seesSql(userId, orgId)})
       group by r.agent_id`),
   );
@@ -921,7 +939,7 @@ export async function taskSteps(
   const [run] = rowsOf<{ created_at: string | Date; finished_at: string | Date | null }>(
     await db.execute(sql`select r.created_at, r.finished_at
       from ${agentRuns} r
-      join ${channels} c on c.id = r.channel_id and c.org_id = ${orgId}::uuid and c.kind in ('channel', 'dm')
+      join ${channels} c on c.id = r.channel_id and c.org_id = ${orgId}::uuid and c.kind in ${LISTED_KINDS}
       join ${agents} a on a.id = r.agent_id and a.org_id = ${orgId}::uuid
       where r.org_id = ${orgId}::uuid and r.id = ${runId}::uuid and ${seesSql(userId, orgId)}`),
   );

@@ -4,9 +4,11 @@ import {
   ACCESS_COLUMNS,
   addChannelMember,
   addRunStep,
+  askAgentToImplement,
   cancelRun,
   continuePausedRuns,
   createAgent,
+  createIssue,
   createRole,
   createRoutine,
   drainOutbox,
@@ -19,6 +21,7 @@ import {
   openPersonAgentDm,
   postPersonMessage,
   sendNote,
+  setIssueAudience,
   setMemberRoles,
   setStopReason,
   taskManager,
@@ -599,6 +602,38 @@ describe("the task manager", () => {
     const view = await taskManager(f.db, outsider.id, f.org.id, { doneToday: true });
     expect(view.tasks).toHaveLength(0);
     expect(view.doneToday).toBe(0);
+  });
+
+  test("work in a task's own conversation shows to who sees the task, by its title; never as hidden", async () => {
+    f = await setup();
+    const owner = { type: "person" as const, userId: f.owner.id };
+    const task = await createIssue(deps(), owner, f.org.id, {
+      title: "Pesquisar 3 concorrentes",
+      criteria: ["Três nomes", "Um link de cada"],
+      assignees: [{ type: "agent", id: f.agent.id }],
+    });
+    await askAgentToImplement(deps(), f.owner.id, f.org.id, task.id, f.agent.id);
+    const [run] = await runs();
+    if (!run) throw new Error("no run");
+    await f.db.update(schema.agentRuns).set({ status: "running" });
+
+    // No person is ever a member of a task's conversation (ADR 0145): who sees the task sees its work.
+    const bia = await addMember(f.db, f.org.id, "member", "bia");
+    for (const reader of [f.owner.id, bia.id]) {
+      const view = await taskManager(f.db, reader, f.org.id);
+      expect(view.tasks.map((t) => [t.runId, t.channelKind, t.channelName])).toEqual([
+        [run.id, "task", "Pesquisar 3 concorrentes"],
+      ]);
+      expect(view.hidden).toEqual({ total: 0, working: 0, byAgent: {} });
+      expect((await taskSteps(f.db, reader, f.org.id, run.id)).steps).toEqual([]);
+    }
+
+    // Limited to its creator: anyone else only counts it.
+    await setIssueAudience(deps(), owner, f.org.id, task.id, { mode: "people", userIds: [f.owner.id] });
+    const theirs = await taskManager(f.db, bia.id, f.org.id);
+    expect(theirs.tasks).toEqual([]);
+    expect(theirs.hidden).toEqual({ total: 1, working: 1, byAgent: { [f.agent.id]: 1 } });
+    expect((await taskManager(f.db, f.owner.id, f.org.id)).tasks.map((t) => t.runId)).toEqual([run.id]);
   });
 
   test("done today counts every task done, past the ended list's cut; not the failed, nor what others can't see", async () => {

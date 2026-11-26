@@ -22,6 +22,7 @@ import { requirePermission } from "./organizations";
 import { enqueue } from "./outbox";
 import { runState } from "./run-state";
 import { RUN_STALE_MS, replyThreadOf } from "./runs";
+import { conversationReaderSql } from "./task-access";
 
 const { agentRuns, agents, channelMembers, channels, messages } = schema;
 
@@ -337,12 +338,14 @@ const agentsOnlySql = (kind: SQL, dmKey: SQL) =>
   sql<boolean>`(${kind} = 'dm' and ${dmKey} is not null and ${dmKey} not like '%u:%')`;
 
 /**
- * Who sees a run's work, for a select naming its columns: the members of its conversation and, for work no person is
- * a member of (a routine's background run, two agents' private conversation), who manages the agent (`manages`: a
- * value, or SQL per run such as `managesAgentSql`, ADR 0085 addendum of 2026-11-17) and the agent's owner (`owns`:
- * `ownsAgentSql` for the viewer, its owner role's holders too, ADR 0085 addendum of 2026-11-21). Other people's DMs
- * stay theirs. The task manager, a task's steps and the rows of the line read it. Never NULL: an agent with no owner
- * would make it so, and `not` of that drops the run from the hidden counts too.
+ * Who sees a run's work, for a select naming its columns: the members of its conversation; for a conversation no person
+ * is ever a member of by design, who reads it by what it stands for (a task's, ADR 0145, read by who sees the task; a
+ * live file's, ADR 0199, by who reads the file: `conversationReaderSql`); and, for work no person is a member of (a
+ * routine's background run, two agents' private conversation), who manages the agent (`manages`: a value, or SQL per
+ * run such as `managesAgentSql`, ADR 0085 addendum of 2026-11-17) and the agent's owner (`owns`: `ownsAgentSql` for the
+ * viewer, its owner role's holders too, ADR 0085 addendum of 2026-11-21). Other people's DMs stay theirs. The task
+ * manager, a task's steps and the rows of the line read it. Never NULL: an agent with no owner would make it so, and
+ * `not` of that drops the run from the hidden counts too.
  */
 export const seesRunSql = (
   run: { channelId: SQL; kind: SQL; dmKey: SQL; background: SQL; owns: SQL<boolean> },
@@ -351,6 +354,7 @@ export const seesRunSql = (
   manages: boolean | SQL<boolean>,
 ) => sql<boolean>`coalesce(exists (select 1 from ${channelMembers} cm
     where cm.org_id = ${orgId}::uuid and cm.channel_id = ${run.channelId} and cm.user_id = ${userId})
+  or (${run.kind} in ('task', 'file') and ${conversationReaderSql(run.channelId, sql`${userId}::text`)})
   or ((${run.background} or ${agentsOnlySql(run.kind, run.dmKey)}) and (${manages} or ${run.owns})), false)`;
 
 /** A running turn's estimated end is never sooner than this from now: an estimate never reads as "any second". */

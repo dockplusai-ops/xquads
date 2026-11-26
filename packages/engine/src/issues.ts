@@ -1886,6 +1886,61 @@ export async function linkRunToIssue(
   await startedWork(deps, issue, run.agentId, [run.id]);
 }
 
+/**
+ * A task's status moves on its own as its agent works (the brief's "its status moves on its own"): an assigned agent's
+ * run that ended done, with every acceptance criterion checked, moves the task from in progress to in review, where a
+ * person looks at it, as a linked PR does. Left in progress while another of its runs is still on (ADR 0188: one
+ * agent's end never hides another's work), or a criterion is open: the task shows the work stalled, to be continued.
+ * A task with no criteria stays too: a turn that ends done may be a mere reply in its conversation ("e aí?"), and only
+ * the criteria say the work is met. Long work moves its own card (`setWorkIssueState`).
+ */
+export async function taskRunDone(deps: IssueDeps, run: { id: string; orgId: string; agentId: string }) {
+  const { db } = deps;
+  const [ended] = await db
+    .select({ issueId: agentRuns.issueId, workId: agentRuns.workId })
+    .from(agentRuns)
+    .where(eq(agentRuns.id, run.id));
+  if (!ended?.issueId || ended.workId) return;
+  const [current] = await db
+    .select()
+    .from(issues)
+    .where(and(eq(issues.id, ended.issueId), eq(issues.orgId, run.orgId)));
+  if (current?.status !== "in_progress" || !current.criteria.length || current.criteria.some((c) => !c.done)) return;
+  if (!(await isAssigned(db, current.id, { type: "agent", id: run.agentId }))) return;
+  const [other] = await db
+    .select({ id: agentRuns.id })
+    .from(agentRuns)
+    .where(
+      and(
+        eq(agentRuns.issueId, current.id),
+        inArray(agentRuns.status, ["queued", "running", "waiting_approval", "waiting_input"]),
+        sql`${agentRuns.id} <> ${run.id}::uuid`,
+      ),
+    )
+    .limit(1);
+  if (other) return;
+  const author: WorkActor = { type: "agent", id: run.agentId };
+  const row = await db.transaction(async (tx) => {
+    const [updated] = await tx
+      .update(issues)
+      .set({ status: "in_review", columnId: null, boardRank: topRank(), updatedAt: new Date() })
+      .where(and(eq(issues.id, current.id), eq(issues.status, "in_progress")))
+      .returning();
+    if (!updated) return null;
+    await addActivity(tx, updated, {
+      kind: "event",
+      author,
+      text: `changed the status to ${STATUS_WORDS.in_review} (automatic: the agent finished)`,
+      event: "status_changed",
+      data: { from: "in_progress", to: "in_review", auto: true },
+    });
+    return updated;
+  });
+  if (!row) return;
+  await announce(deps, row.orgId, await one(db, row), "issue.updated");
+  await notifyIssueChanged(deps, author, current, row).catch(() => {});
+}
+
 const OPEN_TASKS_SHOWN = 5;
 
 /**

@@ -2,6 +2,7 @@ import { afterEach, describe, expect, test } from "bun:test";
 import { eq, schema } from "@agenteschat/db";
 import {
   addChannelMember,
+  askAgentToImplement,
   commentIssue,
   createAgent,
   createChannel,
@@ -23,6 +24,7 @@ import {
   postPersonMessage,
   replyPolicyFor,
   requireChannelAccess,
+  setCriterion,
   unreadTaskConversations,
   updateIssue,
 } from "../src";
@@ -438,5 +440,40 @@ describe("a task's conversation (ADR 0145)", () => {
     expect(
       (await f.db.select().from(schema.outbox)).filter((o) => JSON.stringify(o.payload).includes(at.rootId)),
     ).toEqual([]);
+  });
+});
+
+describe("a task's status follows its agent's run", () => {
+  /** A task with two criteria, given to @dev from the task's page ("Pedir ao"), `checked` of them met. */
+  async function asked(checked: number) {
+    const deps = { db: f.db, pubsub: f.pubsub };
+    const owner = person(f.owner.id);
+    const task = await createIssue(deps, owner, f.org.id, {
+      title: "Pesquisar 3 concorrentes",
+      criteria: ["Três nomes", "Um link de cada"],
+      assignees: [{ type: "agent", id: f.agent.id }],
+    });
+    await askAgentToImplement(deps, f.owner.id, f.org.id, task.id, f.agent.id);
+    for (const c of task.criteria.slice(0, checked)) await setCriterion(deps, owner, f.org.id, task.id, c.id, true);
+    await drainOutbox(f.db, f.handlers);
+    const [run] = await f.db.select().from(schema.agentRuns);
+    expect(run?.status).toBe("done");
+    return getIssue(f.db, owner, f.org.id, { id: task.id });
+  }
+
+  test("done with every criterion met: in review, with no stalled work to continue", async () => {
+    f = await setup({ reply: () => ({ chunks: ["Concorrentes: A, B e C, com os links."] }) });
+    const task = await asked(2);
+    expect(task.status).toBe("in_review");
+    expect(task.work).toBeNull();
+    const activity = await listIssueActivity(f.db, person(f.owner.id), f.org.id, task.id);
+    expect(activity.some((e) => e.event === "status_changed" && e.auto && e.text.includes("In review"))).toBe(true);
+  });
+
+  test("done with a criterion still open: in progress, its work stalled for a person to continue", async () => {
+    f = await setup({ reply: () => ({ chunks: ["Achei dois até agora."] }) });
+    const task = await asked(1);
+    expect(task.status).toBe("in_progress");
+    expect(task.work?.state).toBe("stalled");
   });
 });

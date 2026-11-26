@@ -470,8 +470,11 @@ const stepData = (data: Record<string, unknown>) => {
 /** Management screens: settings, people, invitations, credential rotation, agent detail, runs and usage. */
 const Where = {
   channelId: z.uuid(),
-  channelKind: z.enum(["channel", "dm"]),
-  channelName: z.string().nullable().openapi({ description: "Null for a DM (and a routine's room)." }),
+  channelKind: z.enum(["channel", "dm", "task", "file"]),
+  channelName: z
+    .string()
+    .nullable()
+    .openapi({ description: "Null for a DM (and a routine's room); a task's or a file's title for its conversation." }),
   betweenAgents: z.boolean().openapi({ description: "A conversation only agents are in: nobody can open it." }),
   threadId: z.uuid().nullable().openapi({ description: "Null: the main timeline." }),
 };

@@ -7938,8 +7938,8 @@ export interface ManagedTask {
   runId: string;
   agentId: string;
   channelId: string;
-  channelKind: "channel" | "dm";
-  /** Null for a DM (and a routine's room). */
+  channelKind: "channel" | "dm" | "task" | "file";
+  /** Null for a DM (and a routine's room); a task's or a file's title for its conversation. */
   channelName: string | null;
   /** A conversation only agents are in: nobody can open it, its steps say what happens there. */
   betweenAgents?: boolean;
@@ -8036,7 +8036,7 @@ export interface EndedTask {
   runId: string;
   agentId: string;
   channelId: string;
-  channelKind: "channel" | "dm";
+  channelKind: "channel" | "dm" | "task" | "file";
   channelName: string | null;
   betweenAgents?: boolean;
   threadId: string | null;

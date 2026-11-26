@@ -427,6 +427,8 @@ export function taskWhere(
   }
   if (task.betweenAgents) return t("chat.consultPanel.whereDm");
   if (task.channelKind === "dm") return t("taskManager.where.dm");
+  // A task's or a file's own conversation: called by the task or the file.
+  if (task.channelKind === "task" || task.channelKind === "file") return task.channelName ?? "";
   return `#${task.channelName ?? ""}`;
 }
 
