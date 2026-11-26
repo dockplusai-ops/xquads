@@ -1,10 +1,10 @@
 /**
  * The agents' desktop wallpaper, drawn by the pixel sky engine itself: one still frame of `startSky` (seeded,
- * no pointer light, the loop stopped after the first frame) with the expanded logo over it. render.sh bundles
+ * no pointer light, the loop stopped after the first frame) with the xquads logo over it. render.sh bundles
  * this file and screenshots wall.html.
  */
-import { bodyPath, bodySvg, eyeShapes } from "../../../packages/ui/src/agent/engine.js";
-import { drawSprite, type SkyFrame, startSky } from "../../../packages/ui/src/sky/engine";
+import { AGENTS as SYMBOL_AGENTS, NAME, NAME_AT, NAME_BOX, PERSON } from "../../../packages/ui/src/components/Logo";
+import { drawSprite, type SkyFrame, setPixelSkies, startSky } from "../../../packages/ui/src/sky/engine";
 import { pixelOf, SKY_TONES, spriteTone } from "../../../packages/ui/src/sky/math";
 
 const W = 1280;
@@ -55,11 +55,11 @@ const AGENTS: { x: number; y: number; body: "navy" | "ghost"; closed?: boolean }
 
 /**
  * The logo at the bottom left, on the pale band, centered on the dock's line (the dock spans y 844–893): below
- * 840, where a maximized window ends, so it shows whatever is open. ".chat" in the sprites' solid navy and Doto's
- * heaviest dots (wall.html): the computer dialog shows the desktop at about 0.6, where the app's lighter ink and
- * smaller dots thin out to a haze.
+ * 840, where a maximized window ends, so it shows whatever is open. The agents and the name in the sprites' solid
+ * navy (the computer dialog shows the desktop at about 0.6, where a lighter ink thins out to a haze), the person in
+ * the logo's dark camel for light grounds (components.css .ac-logo__person).
  */
-const LOGO = { left: 36, bottom: 15, size: 26, ink: "rgba(4, 32, 63, 0.8)", chat: "#04203f" };
+const LOGO = { left: 36, bottom: 15, size: 26, ink: "#04203f", person: "#a87545" };
 
 function seeded(seed: number) {
   let a = seed >>> 0;
@@ -72,7 +72,7 @@ function seeded(seed: number) {
   };
 }
 
-/** The expanded logo (packages/ui Logo): the mark in the sky's dither with white eyes, "agentes" and ".chat". */
+/** The xquads logo (packages/ui Logo): the symbol and the name as outlines, in the kit's horizontal lockup. */
 function logo(): HTMLElement {
   const el = document.createElement("span");
   el.className = "logo";
@@ -80,31 +80,21 @@ function logo(): HTMLElement {
   el.style.left = `${LOGO.left}px`;
   el.style.bottom = `${LOGO.bottom}px`;
   el.style.color = LOGO.ink;
-  const body = bodyPath(2, 2, 28);
-  const dither = `data:image/svg+xml,${encodeURIComponent(bodySvg("sky", 12))}`;
-  const eyes = eyeShapes("round")
-    .map(
-      (e) =>
-        `<rect x="${2 + e.x * 28}" y="${2 + e.y * 28}" width="${e.w * 28}" height="${e.h * 28}" rx="${(e.w * 28) / 2}"/>`,
-    )
-    .join("");
   el.innerHTML =
-    `<svg viewBox="0 0 32 32" aria-hidden="true"><defs><clipPath id="b"><path d="${body}"/></clipPath></defs>` +
-    `<path d="${body}" fill="#0063d1"/><image href="${dither}" x="2" y="2" width="28" height="28" preserveAspectRatio="none" clip-path="url(#b)"/>` +
-    `<g fill="#ffffff">${eyes}</g></svg>` +
-    `<span class="word"><span>agentes</span><span class="chat" style="color:${LOGO.chat}">.chat</span></span>`;
+    `<svg class="mark" viewBox="0 0 256 256" aria-hidden="true"><path fill="${LOGO.person}" d="${PERSON}"/>` +
+    `<path d="${SYMBOL_AGENTS}"/></svg>` +
+    `<svg class="word" viewBox="${NAME_BOX.x} ${NAME_BOX.y} ${NAME_BOX.w} ${NAME_BOX.h}" aria-hidden="true">` +
+    `<path transform="${NAME_AT}" d="${NAME}"/></svg>`;
   return el;
 }
 
-async function main() {
+function main() {
   const host = document.querySelector<HTMLElement>(".wall");
   const canvas = host?.querySelector("canvas");
   if (!host || !canvas) return;
   host.append(logo());
-  const faces = [`300 ${LOGO.size}px "Funnel Display"`, `900 ${LOGO.size}px "Doto"`];
-  await Promise.all(faces.map((face) => document.fonts.load(face, "agentes.chat")));
-  // Without the brand's fonts the logo would come out in a fallback face: the image stays black instead.
-  if (!faces.every((face) => document.fonts.check(face, "agentes.chat"))) return;
+  // The app keeps pixel skies off (DESIGN.md); this picture is one of the engine's frames, so it turns them on.
+  setPixelSkies(true);
   // The engine starts at a random time and spawns its own agents at random: a fixed seed keeps one frame.
   Math.random = seeded(7);
   const levels = SKY_TONES.length - 1;
@@ -127,4 +117,4 @@ async function main() {
   stop();
 }
 
-void main();
+main();

@@ -39,9 +39,11 @@ test("the start page is one self-contained file: no network, no other file, the 
   expect(html).toContain('<meta name="google" content="notranslate">');
   expect(html).toContain('aria-hidden="true"');
   expect(html).not.toMatch(/<a\b|<button\b/);
-  // The desktop's band right below the window shows the agentes.chat logo: the page carries no second one, and
-  // fades into that band's tone (desktop-look.ts's backdrop, 0.81 0.90 1.00).
+  // The desktop's band right below the window shows the xquads logo: the page carries no second one (its portrait
+  // is the symbol alone, drawn inline), and fades into that band's tone (desktop-look.ts's backdrop, 0.81 0.90 1.00).
   expect(html).not.toContain("agentes<b>.chat");
+  expect(html).not.toMatch(/agentes\.chat|xquads/);
+  expect(html).toContain('<div class="portrait"><svg viewBox="0 0 256 256"');
   expect(html).not.toContain("wallpaper.png");
   expect(html).toContain("linear-gradient(transparent,#cfe6ff)");
   // The same details: the file isn't written again. New ones: it is.
