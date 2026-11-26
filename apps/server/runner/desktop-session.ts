@@ -1329,7 +1329,7 @@ export class DesktopSessions {
           );
         }
         const preparedAt = this.now();
-        // The agentes.chat look (desktop-look.ts), as the agent, while the screen server starts: it writes only
+        // The xquads look (desktop-look.ts), as the agent, while the screen server starts: it writes only
         // into HOME, which XFCE reads and Xtigervnc doesn't. Without it the desktop starts as its HOME has it.
         const look = lookCommand(user.home, this.lookOptions(agent, user, files.passwd));
         const looking = this.step(
