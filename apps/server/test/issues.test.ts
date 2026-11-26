@@ -44,7 +44,8 @@ test("issues API: create, by number, patch, criteria, comments, activity, ask ag
   const activity = (await (await api(`/issues/${issue.id}/activity`)).json()) as {
     activity: { kind: string; event?: string; author: { type: string }; text: string }[];
   };
-  // Comments are the task's conversation now (ADR 0145): the activity keeps its events.
+  // Comments are the task's conversation now (ADR 0145): the activity keeps its events. The agent's run ended done
+  // with every criterion checked, so the task went to review on its own (`taskRunDone`).
   expect(activity.activity.map((a) => a.event ?? a.kind)).toEqual([
     "created",
     "status_changed",
@@ -53,7 +54,9 @@ test("issues API: create, by number, patch, criteria, comments, activity, ask ag
     "criterion_checked",
     "assigned",
     "agent_asked",
+    "status_changed",
   ]);
+  expect(await (await api(`/issues/${issue.id}`)).json()).toMatchObject({ status: "in_review" });
 
   // The conversation: opened once (the same thread again), read and written through the chat's own routes.
   const at = (await (await api(`/issues/${issue.id}/conversation`, { json: {} })).json()) as {
