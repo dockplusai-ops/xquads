@@ -192,40 +192,40 @@ test("the dock with docklike: Browser, Files and Terminal pinned, each app's win
   }
 });
 
-test("the dock's CSS: glass and a hairline rounded at both ends, a mark under each app with windows", () => {
+test("the dock's CSS: raised petrol and a hairline rounded at both ends, a mark under each app with windows", () => {
   const css = textOf("/home/ag-01a142cb", look({ dock: "docklike" }), ".config/gtk-3.0/gtk.css");
   expect(textOf("/home/ag-01a142cb", look(), ".config/gtk-3.0/gtk.css")).toBe(css);
   // docklike's window fills the dock's right end inside its 1 px frame: its corners' radius is the dock's less that
-  // pixel, and the ring around them is where the frame's hairline goes, in the tone the frame shows: the ink at 0.18
-  // over the glass's white at 0.88 is one colour, at 1 - 0.12 × 0.82 ≈ 0.9 alpha. docklike's launchers carry
-  // `open_group` while their app has windows and `active_group` while one of them is active; the panel's own dock
-  // has a button for each window instead, checked while it is active.
-  expect([4, 32, 63].map((ink) => Math.round((ink * 0.18 + 255 * 0.88 * 0.82) / (1 - 0.12 * 0.82)))).toEqual([
-    205, 210, 217,
+  // pixel, and the ring around them is where the frame's hairline goes, in the tone the frame shows: the sand ink at
+  // 0.16 over the dock's raised petrol (#15282f) is one colour. docklike's launchers carry `open_group` while their
+  // app has windows and `active_group` while one of them is active; the panel's own dock has a button for each
+  // window instead, checked while it is active.
+  expect([237, 230, 225].map((ink, i) => Math.round(ink * 0.16 + ([21, 40, 47][i] as number) * 0.84))).toEqual([
+    56, 70, 75,
   ]);
   expect(
     css,
-  ).toBe(`/* The dock: the design system's glass, rounded, with a hairline that still shows on the sky's pale band. */
+  ).toBe(`/* The dock: the design system's raised petrol, rounded, with its hairline and the top light (--top). */
 .xfce4-panel.background {
-  background-color: rgba(255, 255, 255, 0.88);
+  background-color: #15282f;
   background-image: none;
-  border: 1px solid rgba(4, 32, 63, 0.18);
+  border: 1px solid rgba(237, 230, 225, 0.16);
   border-radius: 16px;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.9);
+  box-shadow: inset 0 1px rgba(237, 230, 225, 0.08);
 }
 
 /*
  * docklike draws in a window of its own process that fills the dock's right end inside the frame's 1 px, and the
- * dock's own drawing never shows under it: there that window is the dock. The glass and its light, no frame of its
+ * dock's own drawing never shows under it: there that window is the dock. The ground and its light, no frame of its
  * own; its right corners rounded like the dock's, and the hairline around them a 1 px ring outside it (only the
- * corners fall inside the window; the dock draws the straight edges itself), in the hairline's tone over the glass,
+ * corners fall inside the window; the dock draws the straight edges itself), in the hairline's tone over the ground,
  * since the ring lies on the wallpaper. GTK's CSS can't tell docklike's window from another plugin's that runs in a
  * process of its own: one added to the dock gets these corners too.
  */
 #XfcePanelWindowWrapper.xfce4-panel.background {
   border: none;
   border-radius: 0 15px 15px 0;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.9), 0 0 0 1px rgba(205, 210, 217, 0.9);
+  box-shadow: inset 0 1px rgba(237, 230, 225, 0.08), 0 0 0 1px rgb(56, 70, 75);
 }
 
 .xfce4-panel.background button {
@@ -239,17 +239,17 @@ test("the dock's CSS: glass and a hairline rounded at both ends, a mark under ea
 }
 
 .xfce4-panel.background button:hover {
-  background-color: rgba(4, 32, 63, 0.07);
+  background-color: rgba(237, 230, 225, 0.07);
 }
 
 .xfce4-panel.background button:active,
 .xfce4-panel.background button:checked,
 .xfce4-panel.background button.active_group {
-  background-color: rgba(4, 32, 63, 0.11);
+  background-color: rgba(237, 230, 225, 0.11);
 }
 
 #separator-2 {
-  color: rgba(4, 32, 63, 0.16);
+  color: rgba(237, 230, 225, 0.16);
 }
 
 /* A minimized window's icon as bright as the others' (faded, it reads as disabled). */
@@ -258,12 +258,12 @@ test("the dock's CSS: glass and a hairline rounded at both ends, a mark under ea
 }
 
 /*
- * A short bar under the icon of each app with windows, a longer, darker one under the active window's: docklike's
+ * A short bar under the icon of each app with windows, a longer, brighter one under the active window's: docklike's
  * launchers say which by their classes, the panel's own dock has a button for each window.
  */
 .xfce4-panel.background .tasklist button,
 .xfce4-panel.background button.open_group {
-  background-image: linear-gradient(rgba(4, 32, 63, 0.65), rgba(4, 32, 63, 0.65));
+  background-image: linear-gradient(rgba(237, 230, 225, 0.65), rgba(237, 230, 225, 0.65));
   background-size: 8px 3px;
   background-repeat: no-repeat;
   background-position: 50% 100%;
@@ -271,7 +271,7 @@ test("the dock's CSS: glass and a hairline rounded at both ends, a mark under ea
 
 .xfce4-panel.background .tasklist button:checked,
 .xfce4-panel.background button.active_group {
-  background-image: linear-gradient(rgb(4, 32, 63), rgb(4, 32, 63));
+  background-image: linear-gradient(rgb(237, 230, 225), rgb(237, 230, 225));
   background-size: 16px 3px;
 }
 `);
@@ -604,8 +604,8 @@ test("files that change come with a new LOOK_VERSION: desktops that have the loo
   }
   // Changed the look on purpose? Bump LOOK_VERSION and put the new hash here.
   expect({ version: LOOK_VERSION, files: hash.digest("hex").slice(0, 16) }).toEqual({
-    version: 10,
-    files: "668e99e788002784",
+    version: 11,
+    files: "428e4191650192d4",
   });
 });
 
@@ -767,7 +767,7 @@ test("its settings for a running session: every property its channels give a val
     "/backdrop/screen0/monitorVNC-0/workspace0/rgba1",
     "-n",
     "-a",
-    ...["0.811765", "0.901961", "1.000000", "1.000000"].flatMap((v) => ["-t", "double", "-s", v]),
+    ...["0.054902", "0.109804", "0.133333", "1.000000"].flatMap((v) => ["-t", "double", "-s", v]),
   ]);
   expect(settings).toContainEqual(set("xfwm4", "/general/theme", "string", "Orchis-Light"));
   expect(settings).toContainEqual(set("xfwm4", "/general/margin_bottom", "int", "60"));

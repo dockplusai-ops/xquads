@@ -1,6 +1,6 @@
 #!/bin/sh
 # Renders what the agents' desktops show (apps/server/runner/desktop-look.ts):
-#   desktop-wallpaper.png  wall.ts bundled with the sky engine, one headless Chromium screenshot of wall.html at
+#   desktop-wallpaper.png  wall.ts bundled (petrol and the logo), one headless Chromium screenshot of wall.html at
 #                          1280×900 (DESKTOP_SIZE), scale 1, sRGB
 #   desktop-mark.png       the favicon (apps/web/public/favicon.svg) at 32 px, the dock's icon size
 # into apps/server/runner/assets/, each with its base64 text (`.png.b64`), which the runner embeds. Needs bun,

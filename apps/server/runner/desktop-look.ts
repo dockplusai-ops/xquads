@@ -34,7 +34,7 @@ import { xmlEscape, xmlUnescape } from "./xml";
  */
 
 /** Bumped whenever what `lookFiles` writes changes. */
-export const LOOK_VERSION = 10;
+export const LOOK_VERSION = 11;
 
 /** Orchis's light theme (GTK and xfwm4), else GTK's Adwaita and xfwm4's Default. */
 export type LookTheme = "orchis" | "stock";
@@ -118,15 +118,17 @@ const WALLPAPER = Buffer.from(WALLPAPER_BASE64, "base64");
 /** The favicon at the dock's icon size: the same mark as the wallpaper's logo. */
 const MARK = Buffer.from(MARK_BASE64, "base64");
 
-/** The ink of the sky's agents (the wallpaper's logo): the dock's lines and its window bars. */
-const INK = "4, 32, 63";
+/** The design system's sand (`ink`, the wallpaper's logo): the dock's lines and the bars under its icons. */
+const INK = "237, 230, 225";
+/** The dock's ground: the design system's `raised`, one step lighter than the wallpaper's `bg` petrol. */
+const DOCK_GROUND = "#15282f";
 /** The dock's rounded ends; its frame is 1 px. */
 const DOCK_RADIUS = 16;
 /**
- * The dock's hairline as it shows on its glass, in one colour: the ink at 0.18 over white at 0.88. Where a ring
- * draws it on nothing (docklike's corners), it lands on the wallpaper in the same tone as the dock's own frame.
+ * The dock's hairline (`line2`, the ink at 0.16) as it shows on its ground, in one colour. Where a ring draws it on
+ * nothing (docklike's corners), it lands on the wallpaper in the same tone as the dock's own frame.
  */
-const HAIRLINE_ON_GLASS = "rgba(205, 210, 217, 0.9)";
+const HAIRLINE_ON_GROUND = "rgb(56, 70, 75)";
 
 /** Browser, Files and Terminal, in the dock's and the menu's order. */
 interface DockApp {
@@ -299,7 +301,7 @@ indicatorStyle=5
 inactiveIndicatorStyle=5
 `;
 
-/** One workspace, the wallpaper zoomed (an image of the screen's size: 1:1) over the bottom band's tone, no icons. */
+/** One workspace, the wallpaper zoomed (an image of the screen's size: 1:1) over its own petrol (`bg`), no icons. */
 const backdrop = (home: string) => `<?xml version="1.0" encoding="UTF-8"?>
 
 <channel name="xfce4-desktop" version="1.0">
@@ -312,9 +314,9 @@ const backdrop = (home: string) => `<?xml version="1.0" encoding="UTF-8"?>
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="rgba1" type="array">
-            <value type="double" value="0.811765"/>
-            <value type="double" value="0.901961"/>
-            <value type="double" value="1.000000"/>
+            <value type="double" value="0.054902"/>
+            <value type="double" value="0.109804"/>
+            <value type="double" value="0.133333"/>
             <value type="double" value="1.000000"/>
           </property>
           <property name="image-style" type="int" value="5"/>
@@ -443,27 +445,27 @@ const keeperAutostart = (home: string) =>
     "",
   ].join("\n");
 
-const GTK_CSS = `/* The dock: the design system's glass, rounded, with a hairline that still shows on the sky's pale band. */
+const GTK_CSS = `/* The dock: the design system's raised petrol, rounded, with its hairline and the top light (--top). */
 .xfce4-panel.background {
-  background-color: rgba(255, 255, 255, 0.88);
+  background-color: ${DOCK_GROUND};
   background-image: none;
-  border: 1px solid rgba(${INK}, 0.18);
+  border: 1px solid rgba(${INK}, 0.16);
   border-radius: ${DOCK_RADIUS}px;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.9);
+  box-shadow: inset 0 1px rgba(${INK}, 0.08);
 }
 
 /*
  * docklike draws in a window of its own process that fills the dock's right end inside the frame's 1 px, and the
- * dock's own drawing never shows under it: there that window is the dock. The glass and its light, no frame of its
+ * dock's own drawing never shows under it: there that window is the dock. The ground and its light, no frame of its
  * own; its right corners rounded like the dock's, and the hairline around them a 1 px ring outside it (only the
- * corners fall inside the window; the dock draws the straight edges itself), in the hairline's tone over the glass,
+ * corners fall inside the window; the dock draws the straight edges itself), in the hairline's tone over the ground,
  * since the ring lies on the wallpaper. GTK's CSS can't tell docklike's window from another plugin's that runs in a
  * process of its own: one added to the dock gets these corners too.
  */
 #XfcePanelWindowWrapper.xfce4-panel.background {
   border: none;
   border-radius: 0 ${DOCK_RADIUS - 1}px ${DOCK_RADIUS - 1}px 0;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.9), 0 0 0 1px ${HAIRLINE_ON_GLASS};
+  box-shadow: inset 0 1px rgba(${INK}, 0.08), 0 0 0 1px ${HAIRLINE_ON_GROUND};
 }
 
 .xfce4-panel.background button {
@@ -496,7 +498,7 @@ const GTK_CSS = `/* The dock: the design system's glass, rounded, with a hairlin
 }
 
 /*
- * A short bar under the icon of each app with windows, a longer, darker one under the active window's: docklike's
+ * A short bar under the icon of each app with windows, a longer, brighter one under the active window's: docklike's
  * launchers say which by their classes, the panel's own dock has a button for each window.
  */
 .xfce4-panel.background .tasklist button,
