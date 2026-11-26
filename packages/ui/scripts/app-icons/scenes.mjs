@@ -319,7 +319,10 @@ function bands(bx, by_, bs, tones) {
     return pick(set, Math.floor((0.92 - 0.75 * v - 0.12 * u) * set.length));
   };
 }
-/** Eyes on whole pixels and mirrored around the body's middle, so both are the same. */
+/**
+ * Eyes on whole pixels and mirrored around the body's middle, so both are the same. The favicons keep the default oval:
+ * at 16 px it is 1 × 2 pixels (another eye style, now drawn as its own size, would blur or crowd the face there).
+ */
 function snapEyes(bx, by_, bs, { style = "round", look = [0, 0] } = {}) {
   const base = EYE_STYLES[style];
   const W = Math.max(1, Math.round(base.w * bs));
@@ -359,7 +362,7 @@ export const SCENES = {
     favicon: (N) =>
       N === 32
         ? [tile(32, 7, NAVY_TILE), body(5, 5, 22, dith(5, 5, 22, 2, SKY_T)), snapEyes(5, 5, 22)]
-        : [tile(16, 3.5, NAVY_TILE), body(2, 2, 12, bands(2, 2, 12, SKY_T)), snapEyes(2, 2, 12, { style: "wide" })],
+        : [tile(16, 3.5, NAVY_TILE), body(2, 2, 12, bands(2, 2, 12, SKY_T)), snapEyes(2, 2, 12)],
   },
   /** Lua: a pixel moon in the corner and the agent looking up at it. */
   moon: {
@@ -395,7 +398,7 @@ export const SCENES = {
               "#e8f2ff",
             ),
             body(2, 3, 12, bands(2, 3, 12, SKY_T)),
-            snapEyes(2, 3, 12, { style: "wide", ...LOOK_UP_RIGHT }),
+            snapEyes(2, 3, 12, LOOK_UP_RIGHT),
           ],
   },
   /** Céu: the landing's sky by day, two pixel clouds and the navy agent of the sky's sprites; at night, the night. */
@@ -410,7 +413,7 @@ export const SCENES = {
     favicon: (N) =>
       N === 32
         ? [tile(32, 7, skyTile32), body(5, 6, 22, dith(5, 6, 22, 2, NAVY_T)), snapEyes(5, 6, 22)]
-        : [tile(16, 3.5, "#8cc3ff"), body(2, 3, 12, SPRITE_NAVY), snapEyes(2, 3, 12, { style: "wide" })],
+        : [tile(16, 3.5, "#8cc3ff"), body(2, 3, 12, SPRITE_NAVY), snapEyes(2, 3, 12)],
   },
   /** Espiando à noite: the agent big, coming up from the bottom edge and looking up, under the night's stars. */
   peekNight: {

@@ -74,17 +74,23 @@ describe("app icons (ADR 0179)", () => {
     );
     const leaning = picture({ sky: "night", color: "rose", look: "heart", pose: "peek" });
     expect(leaning).not.toBe(picture({ sky: "night", color: "rose", look: "heart" }));
-    // xquads draws one face: a look no longer changes it.
-    expect(leaning).toBe(picture({ sky: "night", color: "rose", look: "round", pose: "peek" }));
+    // Its face is the one picked: hearts are not the default oval.
+    expect(leaning).not.toBe(picture({ sky: "night", color: "rose", look: "round", pose: "peek" }));
     expect(leaning).not.toBe(picture({ sky: "night", color: "teal", look: "heart", pose: "peek" }));
     expect(leaning).not.toBe(picture({ sky: "sky", color: "rose", look: "heart", pose: "peek" }));
   });
 
-  test("a made icon draws xquads' one face: no look changes it", () => {
-    const picture = (look: string) =>
-      [...render(64, madeScene({ sky: "night", color: "rose", look }), { k: 16 }).px].join();
-    const round = picture("round");
-    for (const look of MADE_FACES) expect(picture(look)).toBe(round);
+  test("a made icon draws the face picked, each its own, the oval by default", () => {
+    for (const pose of ["front", "peek"]) {
+      const picture = (look: string) =>
+        [...render(64, madeScene({ sky: "night", color: "rose", look, pose }), { k: 16 }).px].join();
+      // Every eye style and expression draws its own picture, standing or leaning.
+      expect(new Set(MADE_FACES.map(picture)).size).toBe(MADE_FACES.length);
+    }
+    // The default face is the shipped icon's oval: the Night's agent in its own color is the Night icon.
+    expect([...render(64, madeScene({ sky: "night", color: "sky", look: "round" }), { k: 16 }).px].join()).toBe(
+      [...render(64, SCENES.night.light(), { k: 16 }).px].join(),
+    );
   });
 
   test("the peeking agent leans to the left: its right eye sits higher than its left", () => {
@@ -117,7 +123,7 @@ describe("app icons (ADR 0179)", () => {
     let white = 0;
     for (let i = 0; i < px.length; i += 4)
       if (px[i] === 255 && px[i + 1] === 255 && px[i + 2] === 255 && px[i + 3] === 1) white++;
-    // xquads' face: two eyes of 1 × 2 pixels, fully white, nothing half covered.
+    // The default oval: two eyes of 1 × 2 pixels, fully white, nothing half covered.
     expect(white).toBe(4);
   });
 });
