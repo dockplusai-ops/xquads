@@ -7,8 +7,9 @@
  *
  * Coordinates are fractions of the body's box (0..1, y down). The body is
  * xquads' agent (DESIGN.md): a flat square with radius 28% in the agent's
- * color, two oval eyes and a smile in petrol. It only blinks, and its eyes turn
- * to dashes while it writes.
+ * color, two oval eyes (or the agent's chosen eyes) and a smile in petrol. Idle
+ * it only blinks; its eyes turn to dashes while it writes, and an expression
+ * (a sticker's mood, a reaction) draws in the same ink.
  */
 
 /**
@@ -63,17 +64,18 @@ export const BODY_RADIUS = 0.28;
 export const BODY_CUT = 0.28;
 
 /**
- * Eye centers (x) and each eye style: size and vertical center, the brand's ovals (`brand/assets/agentes/avatares`).
- * Every stored style draws the same eyes: xquads' agents have one face.
+ * Eye centers (x) and each eye style: size and vertical center. `round` is the brand's oval
+ * (`brand/assets/agentes/avatares`), the default; the others are the agent's chosen eyes in the same petrol ink:
+ * `dots` small round dots, `wide` big ovals, `arc` = happy (∩), `lid` = sleepy (half).
  */
 export const EYE_X = [0.359, 0.641];
 const OVAL = { w: 0.102, h: 0.141, cy: 0.453 };
 export const EYE_STYLES = {
   round: OVAL,
-  dots: OVAL,
-  wide: OVAL,
-  happy: OVAL,
-  sleepy: OVAL,
+  dots: { w: 0.085, h: 0.085, cy: 0.46 },
+  wide: { w: 0.13, h: 0.2, cy: 0.44 },
+  happy: { w: 0.15, h: 0.09, cy: 0.45, kind: "arc" },
+  sleepy: { w: 0.13, h: 0.07, cy: 0.5, kind: "lid" },
 };
 
 /** The smile under the eyes: a quadratic curve and its stroke, in body fractions. */
@@ -319,7 +321,7 @@ export const EXPRESSIONS = {
   cross: { w: 0.16, h: 0.16, cy: 0.465, kind: "cross" },
   surprised: { w: 0.17, h: 0.23, cy: 0.46, kind: "ring" },
   angry: { w: 0.12, h: 0.22, cy: 0.48, kind: "slant" },
-  wink: { w: 0.093, h: 0.27, cy: 0.465, kind: "pill", right: { w: 0.17, h: 0.08, cy: 0.5, kind: "cup" } },
+  wink: { ...OVAL, kind: "pill", right: { w: 0.17, h: 0.08, cy: 0.5, kind: "cup" } },
 };
 
 /**
@@ -331,8 +333,8 @@ export const EXPRESSIONS = {
  * the eyes slide toward the turn and the far one narrows (pseudo-3D).
  */
 export function eyeShapes(style = "round", pose = {}) {
-  // One face: a passing expression shows only as closed eyes (resting), never the original's hearts or stars.
-  const ex = pose.writing || pose.expression !== "closed" ? null : EXPRESSIONS.closed;
+  // An expression (a sticker's mood, a reaction, a sleeping agent) replaces the eyes; the idle agent shows none.
+  const ex = pose.writing ? null : EXPRESSIONS[pose.expression];
   const base = pose.writing ? { ...WRITING_EYE, kind: "pill" } : (ex ?? EYE_STYLES[style] ?? EYE_STYLES.round);
   const [lx, ly] = pose.look ?? [0, 0];
   const [tx, ty] = pose.turn ?? [0, 0];
