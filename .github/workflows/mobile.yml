@@ -48,7 +48,39 @@ jobs:
           eas-version: 25.3.0
           token: ${{ secrets.EXPO_TOKEN }}
           packager: bun
+      # The iOS workflow's App Store Connect key, when set: EAS signs with it in CI (makes or repairs the
+      # certificate and profiles) and a production iOS build goes on to TestFlight (eas.json's submit profile).
+      - name: App Store Connect key
+        if: env.EXPO_TOKEN != ''
+        env:
+          ASC_API_KEY_P8: ${{ secrets.ASC_API_KEY_P8 }}
+          ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+          ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_TEAM_TYPE: ${{ vars.APPLE_TEAM_TYPE || 'INDIVIDUAL' }}
+        run: |
+          [ -n "$ASC_API_KEY_P8" ] || exit 0
+          printf '%s\n' "$ASC_API_KEY_P8" > "$RUNNER_TEMP/AuthKey.p8"
+          chmod 600 "$RUNNER_TEMP/AuthKey.p8"
+          {
+            echo "EXPO_ASC_API_KEY_PATH=$RUNNER_TEMP/AuthKey.p8"
+            echo "EXPO_ASC_KEY_ID=$ASC_API_KEY_ID"
+            echo "EXPO_ASC_ISSUER_ID=$ASC_API_ISSUER_ID"
+            echo "EXPO_APPLE_TEAM_ID=$APPLE_TEAM_ID"
+            echo "EXPO_APPLE_TEAM_TYPE=$APPLE_TEAM_TYPE"
+            echo "ASC_API_KEY_PATH=$RUNNER_TEMP/AuthKey.p8"
+            echo "ASC_API_KEY_ID=$ASC_API_KEY_ID"
+            echo "ASC_API_ISSUER_ID=$ASC_API_ISSUER_ID"
+          } >> "$GITHUB_ENV"
       - name: EAS build
         if: env.EXPO_TOKEN != ''
         working-directory: apps/mobile
-        run: eas build --profile "${{ inputs.profile || 'preview' }}" --platform "${{ inputs.platform || 'all' }}" --non-interactive --no-wait
+        run: |
+          submit=""
+          if [ "${{ inputs.profile }}" = production ] && [ "${{ inputs.platform }}" = ios ] && [ -n "$EXPO_ASC_API_KEY_PATH" ]; then
+            submit="--auto-submit"
+          fi
+          eas build --profile "${{ inputs.profile || 'preview' }}" --platform "${{ inputs.platform || 'all' }}" --non-interactive --no-wait $submit
+      - name: Remove the App Store Connect key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/AuthKey.p8"
