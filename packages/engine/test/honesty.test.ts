@@ -4,6 +4,7 @@ import { type ModelRequest, textOf } from "@agenteschat/providers";
 import { addRunStep, cancelRun, drainOutbox, postPersonMessage } from "../src";
 import {
   advance,
+  claimsChange,
   continuationVerdict,
   decideTurnEnd,
   onlySafetyRefusals,
@@ -192,4 +193,72 @@ test("a permission prompt that let a command run is no call of its own; one that
   expect(ruled).toHaveLength(1);
   expect(ruled[0]?.startsWith(RULE_TAG)).toBe(true);
   expect(onlySafetyRefusals(ruled)).toBe(true);
+});
+
+test("a change claimed in reply to a request to make it, with no call that worked, is unbacked without the judge", async () => {
+  const asked: JudgeRequest[] = [];
+  const saysDone: Judge = {
+    name: "fake",
+    ask: async (request) => {
+      asked.push(request);
+      return { verdict: { choice: "done", probabilities: { done: 1 } } };
+    },
+  };
+  const input = {
+    orgId: "o",
+    agentId: "a",
+    runId: "r",
+    request: "Desfaça isso.",
+    reply: "Desfiz a última mudança: a cor de destaque do workspace voltou ao sálvia, que estava antes do azul.",
+    means: [],
+    tried: [] as string[],
+    runKind: "conversation" as const,
+  };
+  expect(await continuationVerdict(saysDone, input)).toBe("unbacked");
+  expect(await continuationVerdict(saysDone, { ...input, tried: ["undo_change → failed: nothing to undo"] })).toBe(
+    "unbacked",
+  );
+  expect(asked).toHaveLength(0);
+  // A call that worked, a reply that says it didn't, a question about the past, a routine: the judge reads them.
+  expect(await continuationVerdict(saysDone, { ...input, tried: ["undo_change → Undone: did set_accent"] })).toBe(
+    "done",
+  );
+  expect(await continuationVerdict(saysDone, { ...input, reply: "Não desfiz nada: não achei mudança sua aqui." })).toBe(
+    "done",
+  );
+  expect(
+    await continuationVerdict(saysDone, {
+      ...input,
+      request: "Qual é a cor agora?",
+      reply: "Mudei ontem para sálvia.",
+    }),
+  ).toBe("done");
+  expect(await continuationVerdict(saysDone, { ...input, runKind: "routine" })).toBe("done");
+  // The judge is told in words that the run made no call.
+  expect(asked.at(-1)?.state.tried).toEqual(["(none: this run made no tool call)"]);
+
+  expect(claimsChange("Pronto, a cor agora é sálvia.")).toBe(true);
+  expect(claimsChange("I've changed the accent to sage.")).toBe(true);
+  expect(claimsChange("Quer que eu mude a cor?")).toBe(false);
+  expect(claimsChange("I couldn't change it: you need to be an admin.")).toBe(false);
+});
+
+test("a run asked to undo that claims it did with no call is told to do it; only its honest reply is posted", async () => {
+  f = await setup({
+    judge: (kind) => (kind === "follow_through" ? "done" : undefined),
+    reply: (_request, call) => ({
+      chunks: [
+        call === 1
+          ? "Desfiz a última mudança: a cor de destaque voltou ao sálvia."
+          : "Não encontrei nenhuma mudança minha para desfazer aqui.",
+      ],
+    }),
+  });
+  await postPersonMessage({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, f.general.id, {
+    body: "@dev desfaça isso",
+  });
+  await drainOutbox(f.db, f.handlers);
+  expect(f.provider.calls.length).toBe(2);
+  expect(lastUserText(f.provider.calls[1]?.request as ModelRequest)).toBe(UNBACKED_NUDGE);
+  expect(await agentBodies(f)).toEqual(["Não encontrei nenhuma mudança minha para desfazer aqui."]);
 });

@@ -1591,7 +1591,8 @@ describe("the workspace's accent color through the right hand (ADR 0193)", () =>
     f.pubsub.subscribe(orgTopic(f.org.id), (e) => {
       if (e.type === "org.broadcast") announced.push(e.event);
     });
-    const ctx = await lodiRun(f, f.owner.id, "muda a cor de destaque para ardósia");
+    // The person writes the hex: a brand color they named never takes its place (ADR 0193, amended 2026-11-26).
+    const ctx = await lodiRun(f, f.owner.id, "muda a cor de destaque para ardósia, depois para #2563eb");
     const slate = await act(f, ctx, { action: "set_accent", input: { color: "Slate" } });
     expect(slate.content).toContain("Done at once (asked to undo it, use undo_change)");
     expect(await accent(f)).toBe("#8aa3ae");

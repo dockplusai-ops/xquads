@@ -12,8 +12,10 @@ import {
 import { CODING_PLANS, planModel } from "@agenteschat/providers/plans";
 import fixture from "../../providers/test/fixtures/openrouter-models.json";
 import {
+  actingFloor,
   agentBrainLines,
   answerQuestion,
+  asksToAct,
   autoApplied,
   autoModelFor,
   autoWanted,
@@ -157,6 +159,41 @@ test("keptAutoChoice: a conversation keeps its tier and effort for the hour; a s
   expect(keptAutoChoice(judged("small", "low"), null, now)).toEqual(judged("small", "low"));
   expect(keptAutoChoice(judged("small", "low"), prev("small", "low"), now).source).toBe("judge");
   expect(keptAutoChoice(judged("small", "low"), { updatedAt: new Date(now), autoModel: null }, now).tier).toBe("small");
+});
+
+test("asksToAct: requests to change something, in Portuguese and English; chit-chat and questions are not", () => {
+  for (const m of [
+    "Mude a cor de destaque para sálvia.",
+    "Desfaça isso.",
+    "Deixe o Proteus como responsável do canal #vendas no lugar da Ana.",
+    "@doki por favor, troca o nome do canal",
+    "Obrigado! Agora remove o Ivo do #geral",
+    "você pode criar um canal #vendas?",
+    "Can you undo that?",
+    "Please set the accent to sage",
+  ])
+    expect({ m, acts: asksToAct(m) }).toEqual({ m, acts: true });
+  for (const m of [
+    "Obrigado!",
+    "Oi, tudo bem?",
+    "Qual é a cor de destaque agora?",
+    "valeu",
+    "What changed?",
+    "Marcos chegou",
+  ])
+    expect({ m, acts: asksToAct(m) }).toEqual({ m, acts: false });
+});
+
+test("actingFloor: small becomes medium for a request to change something with tools, nothing else moves", () => {
+  const small = { tier: "small" as const, effort: "low" as const, reason: "r", source: "judge" as const };
+  expect(actingFloor(small, { message: "Desfaça isso.", tools: true })).toMatchObject({
+    tier: "medium",
+    effort: "low",
+  });
+  expect(actingFloor(small, { message: "Desfaça isso.", tools: false })).toBe(small);
+  expect(actingFloor(small, { message: "valeu", tools: true })).toBe(small);
+  const large = { ...small, tier: "large" as const };
+  expect(actingFloor(large, { message: "Desfaça isso.", tools: true })).toBe(large);
 });
 
 describe("one decision, mapped per brain", () => {
@@ -534,6 +571,34 @@ describe("a run of an agent on Automático", () => {
     answer.tier = "medium";
     answer.effort = "low";
     expect(await ask("@dev revisa o PR")).not.toContain("# A quick turn");
+  });
+
+  test("a request to change something never thinks on the small tier, whatever the judge said; chit-chat does", async () => {
+    f = await setup({
+      askUser: true,
+      judge: (kind, id) => (kind === "auto_model" ? (id === "tier" ? "small" : "low") : undefined),
+      reply: () => ({ chunks: ["Ok."] }),
+    });
+    await updateAgent(f.db, f.owner.id, f.org.id, f.agent.id, { model: AUTO_MODEL });
+    const ask = async (body: string) => {
+      await postPersonMessage({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, f.general.id, { body });
+      await drainOutbox(f.db, f.handlers);
+      const request = f.provider.calls.at(-1)?.request;
+      return {
+        model: request?.model,
+        effort: request?.effort,
+        quick: systemText(request?.system ?? "").includes("# A quick turn"),
+      };
+    };
+    for (const body of ["@dev Desfaça isso.", "@dev Mude a cor de destaque para sálvia."]) {
+      expect({ body, ...(await ask(body)) }).toEqual({ body, model: "claude-sonnet-5-5", effort: "low", quick: false });
+    }
+    expect(await ask("@dev obrigado!")).toEqual({ model: "claude-haiku-5-5", effort: "low", quick: true });
+    const steps = await f.db.select().from(schema.agentRunSteps).where(eq(schema.agentRunSteps.kind, "context"));
+    expect(steps.find((s) => s.data.autoModel)?.data.autoModel).toMatchObject({
+      tier: "medium",
+      reason: "A request to change something: medium tier (asked: small tier, low effort).",
+    });
   });
 
   test("the judge fails: the run still answers, on the medium tier with medium effort, and says why", async () => {

@@ -4,6 +4,7 @@ import type { ModelMessage } from "@agenteschat/providers";
 import { type Agent, getAgentCached } from "./agents";
 import { answersOthers, audienceOf } from "./audience";
 import { accountablePerson, runAuthority } from "./authority";
+import { asksToAct } from "./auto-model";
 import { isComputerBrain } from "./brains/types";
 import { endsAsking } from "./brakes";
 import { CONFIDENTIAL_NOT_SHOWN, CONFIDENTIAL_OUTBOUND } from "./confidential";
@@ -366,6 +367,40 @@ export const verdictRecord = (v: ContinuationVerdict) =>
   v === "continue" || v === "untried" || v === "unbacked" ? "unkept" : v === "ask" || v === "secret" ? "waiting" : v;
 
 /**
+ * A sentence of the reply says, in the first person, that it changed, undid, made or sent something ("Desfiz a última
+ * mudança", "Mudei a cor", "Pronto, …", "I've changed it"), accents dropped. A sentence with a negation is no claim.
+ */
+// ponytail: a word list, not a parser. It only spares the judge a sure case (`unbackedByWords`); the judge's
+// `unbacked` reads every other wording.
+const CLAIM =
+  /^(?:pronto|feito|done|all set)\b|\b(?:desfiz|mudei|troquei|alterei|coloquei|deixei|criei|adicionei|removi|apaguei|enviei|mandei|ativei|desativei|defini|configurei|renomeei|agendei|convidei|movi|arquivei|reverti|corrigi|atualizei|fiz|salvei|publiquei|marquei|tirei|restaurei|voltei)\b|\bi(?:'ve| have)? (?:just |already )?(?:changed|undone|undid|reverted|set|updated|made|created|added|removed|deleted|sent|moved|renamed|assigned|switched|replaced|restored|turned|enabled|disabled|fixed|scheduled|invited|archived)\b/;
+const NEGATED = /\b(?:nao|nunca|nem|not|never|couldn't|can't|didn't|wasn't|unable)\b/;
+
+export function claimsChange(reply: string): boolean {
+  return reply
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+    .replace(/[\u2018\u2019]/g, "'")
+    .split(/[.!?;:\n]+/)
+    .map((s) => s.trim().replace(/^[^\p{L}]+/u, ""))
+    .some((s) => CLAIM.test(s) && !NEGATED.test(s));
+}
+
+/**
+ * The sure case of `unbacked`, read without the judge: asked to change something (`asksToAct`), the reply says it did
+ * (`claimsChange`) while no call of this run worked (none, or every one failed). A small judge read such a reply as
+ * done ("Desfiz a última mudança…" after no call at all).
+ */
+export function unbackedByWords(input: { request: string; reply: string; tried: string[] }): boolean {
+  return (
+    input.tried.every((line) => line.includes("→ failed: ") || line.startsWith(SAFETY_TAG)) &&
+    asksToAct(input.request) &&
+    claimsChange(input.reply)
+  );
+}
+
+/**
  * Above the other verdicts' 0.45: a false "unbacked" holds back a true reply and costs a turn, and agents learn to pad
  * every reply against it.
  */
@@ -419,6 +454,13 @@ export async function continuationVerdict(
     onLearnFailed?: (error: unknown) => void;
   },
 ): Promise<ContinuationVerdict> {
+  // Unbacked holds only where the judge sees every call of a conversation's run: a routine's record reaches nobody, a
+  // notice of a result already said it, and a call list cut to its newest lines may hide the one that did it.
+  const unbackedHolds = input.runKind !== "routine" && !input.resultNotice && input.tried.length <= TRIED_SHOWN;
+  if (unbackedHolds && unbackedByWords(input)) {
+    input.onLearn?.("none");
+    return "unbacked";
+  }
   const ask = (learn: boolean) =>
     judge.ask({
       orgId: input.orgId,
@@ -429,7 +471,8 @@ export async function continuationVerdict(
         request: cutText(input.request, 2000),
         reply: cutTextEnd(input.reply, 3000),
         means: input.means,
-        tried: shownTried(input.tried),
+        // Said, not left to an empty list: the judge read `[]` past a reply claiming a change.
+        tried: input.tried.length > 0 ? shownTried(input.tried) : ["(none: this run made no tool call)"],
         runKind: input.runKind,
         ...(input.previousRecord ? { previous_record: cutTextEnd(input.previousRecord, 1500) } : {}),
         ...(input.unreached ? { unreached: input.unreached } : {}),
@@ -452,7 +495,7 @@ export async function continuationVerdict(
             secret:
               "It asks a person to type or paste a secret into the chat (a password, an API key, a token, a private key), or the work `request` asked it to do can't go on without one only a person has and it hasn't asked for it through a secure request (`tried` has no request_secret call). Not when it only names the key a step it offers would need.",
             unbacked:
-              "Its reply says it made, sent, created, posted, saved or did something (an image, a file, a message or an email sent, a task opened, a change made, 'done', 'here it is') that plainly no call in `tried` did. A command, script or code run in `tried` that would produce it (a render, a conversion, a file written, an upload) did it. Not when `tried` starts with earlier calls not shown (one of those may have done it), nor when the reply only plans, offers or asks, says plainly it couldn't, or reports what a teammate, an earlier turn or `request` says was done. Work a subagent or a workflow of its own did (an Agent, Task or Workflow call in `tried`) is backed: their report is the call that did it.",
+              "Its reply says it made, sent, created, posted, saved or did something (an image, a file, a message or an email sent, a task opened, a change made, 'done', 'here it is') that plainly no call in `tried` did. A command, script or code run in `tried` that would produce it (a render, a conversion, a file written, an upload) did it. Not when `tried` starts with earlier calls not shown (one of those may have done it), nor when the reply only plans, offers or asks, says plainly it couldn't, or reports what a teammate, an earlier turn or `request` says was done. A reply in the first person to a request to change something ('Desfiz…', 'Mudei…', 'I've changed…') claims this turn's work, not an earlier turn's. Work a subagent or a workflow of its own did (an Agent, Task or Workflow call in `tried`) is backed: their report is the call that did it.",
           },
         },
         ...(learn ? { learn: input.personal ? LEARN_QUESTION_PERSONAL : LEARN_QUESTION } : {}),
@@ -475,9 +518,6 @@ export async function continuationVerdict(
     input.onLearn(LEARN_SIGNALS.includes(choice as LearnSignal) ? (choice as LearnSignal) : "none");
   }
   const a = answers.verdict;
-  // Unbacked holds only where the judge sees every call of a conversation's run: a routine's record reaches nobody, a
-  // notice of a result already said it, and a call list cut to its newest lines may hide the one that did it.
-  const unbackedHolds = input.runKind !== "routine" && !input.resultNotice && input.tried.length <= TRIED_SHOWN;
   const p = (k: ContinuationVerdict) =>
     k === "unbacked" && !unbackedHolds ? 0 : (a?.probabilities?.[k] ?? (a?.choice === k ? 1 : 0));
   const verdict: ContinuationVerdict =

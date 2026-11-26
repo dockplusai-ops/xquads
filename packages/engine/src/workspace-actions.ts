@@ -1997,6 +1997,27 @@ function accentOf(color: string): { accent: string | null } | string {
   return { accent: hex === DEFAULT_ACCENT ? null : hex };
 }
 
+/**
+ * The brand colors the person's message names (`ACCENT_PRESETS`' keys, in English or Portuguese, accents dropped), and
+ * whether it writes `hex` itself.
+ */
+async function presetsSaid(ctx: ToolContext, hex: string): Promise<{ named: string[]; wroteHex: boolean }> {
+  const [trigger] = await ctx.db
+    .select({ body: schema.messages.body })
+    .from(schema.messages)
+    .where(and(eq(schema.messages.orgId, ctx.orgId), eq(schema.messages.id, ctx.triggerMessageId)));
+  const words = (trigger?.body ?? "")
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase();
+  const named = new Set<string>();
+  for (const word of words.match(/\p{L}+/gu) ?? []) {
+    const key = ACCENT_PRESETS_PT[word] ?? word;
+    if (key in ACCENT_PRESETS) named.add(key);
+  }
+  return { named: [...named], wroteHex: words.includes(hex) };
+}
+
 /** A stored accent as the agent says it: "sage (#8fbb9c)", the default, or its hex. */
 const accentName = (accent: unknown) => {
   if (typeof accent !== "string" || !accent) return `the default, camel (${DEFAULT_ACCENT})`;
@@ -2038,9 +2059,17 @@ const accentAction: WorkspaceAction = {
   mode: "now",
   // The screen's key: `setOrgAccent` checks it again.
   needs: "configure",
-  async resolve(_ctx, _person, input) {
-    const wanted = accentOf(str(input.color));
+  async resolve(ctx, _person, input) {
+    let wanted = accentOf(str(input.color));
     if (typeof wanted === "string") return wanted;
+    // A hex of its own for a brand color the person named (one copied from an earlier reply): the person's words win.
+    const hex = wanted.accent;
+    if (hex && !Object.values(ACCENT_PRESETS).some((k) => presetHex(k) === hex)) {
+      const { named, wroteHex } = await presetsSaid(ctx, hex);
+      if (!wroteHex && named.length > 1)
+        return `"${str(input.color)}" isn't the brand color they named: pass its name (${named.join(", ")}), not a hex.`;
+      if (!wroteHex && named.length === 1) wanted = accentOf(named[0] as string) as { accent: string | null };
+    }
     return { input: wanted, words: accentWords(wanted.accent) };
   },
   async run(deps, actorId, orgId, input) {

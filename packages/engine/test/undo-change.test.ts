@@ -214,6 +214,22 @@ describe("undo_change", () => {
     expect(await accent(f)).toBeNull();
   });
 
+  test("a hex of the agent's own for a brand color the person named gives way to that preset", async () => {
+    f = await setup({ rightHand: true });
+    await setAccent(f, await lodiRun(f, f.owner.id, "Mude a cor de destaque para sálvia."), "#9caf88");
+    expect(await accent(f)).toBe("#8fbb9c");
+    // Two names: which one is the agent's to say, by name.
+    const both = await setAccent(f, await lodiRun(f, f.owner.id, "troca de sálvia para areia"), "#9caf88");
+    expect(both).toMatchObject({ isError: true });
+    expect(both.content).toContain("pass its name (sage, sand)");
+    expect(await accent(f)).toBe("#8fbb9c");
+    // A hex the person wrote, or no brand color named, stands.
+    await setAccent(f, await lodiRun(f, f.owner.id, "sálvia mais escura, #9caf88"), "#9caf88");
+    expect(await accent(f)).toBe("#9caf88");
+    await setAccent(f, await lodiRun(f, f.owner.id, "cor de destaque azul"), "#2563eb");
+    expect(await accent(f)).toBe("#2563eb");
+  });
+
   test("the accent goes back to the default with `default` and the words people use", async () => {
     f = await setup({ rightHand: true });
     for (const color of ["default", "padrão", "original"]) {

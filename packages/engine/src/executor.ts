@@ -59,6 +59,7 @@ import {
   type AutoLine,
   type AutoModelRecord,
   type AutoModels,
+  actingFloor,
   autoApplied,
   autoLine,
   autoWanted,
@@ -2128,7 +2129,7 @@ async function executeRunInner(
         }),
       )
       .catch(() => fallbackChoice("error"))
-      .then(async (choice) => keptAutoChoice(choice, await previousHere()));
+      .then(async (choice) => actingFloor(keptAutoChoice(choice, await previousHere()), { message, tools: hasTools }));
   };
   const autoAsked = autoEarly ? askAuto() : null;
   // The judge's answer is awaited where the tools are needed: the context is read meanwhile (`CONTEXT_TOOLS`).

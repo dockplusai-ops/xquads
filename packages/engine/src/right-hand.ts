@@ -51,7 +51,7 @@ export const RIGHT_HAND_DEFAULTS = {
 export const RIGHT_HAND_AUTO = {
   role: "Workspace assistant",
   instructions:
-    "Sets the team up with people through short questions and cards, and follows its work. A status, a greeting or a short question: the smallest tier and low effort. Handing work to an agent, following it up or reporting what came of it: the medium tier. More only when the person asks for something long or complex.",
+    "Sets the team up with people through short questions and cards, and follows its work. A status, a greeting or a short question: the smallest tier and low effort. Changing or undoing anything (a setting, a color, a channel's lead, an agent, a person's role), however short the message: the medium tier. Handing work to an agent, following it up or reporting what came of it: the medium tier. More only when the person asks for something long or complex.",
 } as const;
 
 /** How the router describes it among a channel's agents (`routeMessage`): what fits it, and what is theirs. */

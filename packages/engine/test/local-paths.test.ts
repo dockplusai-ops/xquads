@@ -358,7 +358,7 @@ describe("a run that cites one to people", () => {
     await f.close();
 
     f = await setup({ reply: () => ({ chunks: [answer] }) });
-    await ask(f, "@dev atualiza as notas dos planos");
+    await ask(f, "@dev e as notas dos planos?");
     await drainOutbox(f.db, f.handlers);
     expect(f.provider.calls.length).toBe(1);
     expect(await agentBodies(f)).toEqual([answer]);

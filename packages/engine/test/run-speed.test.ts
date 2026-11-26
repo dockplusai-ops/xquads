@@ -136,7 +136,7 @@ test("the small model judging without Jev: the questions lead as a cached prefix
   const judgeRequests: ModelRequest[] = [];
   f = await setup({
     reply: (request) => {
-      if (!request.outputSchema) return { chunks: ["Pronto: está salvo."] };
+      if (!request.outputSchema) return { chunks: ["Está tudo certo por aqui."] };
       judgeRequests.push(request);
       // Longer than the judge waits, and cut by its signal as a real request is: the turn goes on without the verdict.
       const slow = new Promise<void>((resolve) => {
@@ -156,14 +156,14 @@ test("the small model judging without Jev: the questions lead as a cached prefix
   });
   const started = performance.now();
   await postPersonMessage({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, f.general.id, {
-    body: "@dev salva isso",
+    body: "@dev confere isso",
   });
   await drainOutbox(f.db, f.handlers);
 
   const [run] = await f.db.select().from(schema.agentRuns);
   expect(run?.status).toBe("done");
   const posted = (await f.db.select().from(schema.messages)).filter((m) => m.authorType === "agent");
-  expect(posted.map((m) => m.body)).toContain("Pronto: está salvo.");
+  expect(posted.map((m) => m.body)).toContain("Está tudo certo por aqui.");
   // Every judgment gave up at its timeout, far before the model's 2 s.
   expect(performance.now() - started).toBeLessThan(2_000);
   const followThrough = judgeRequests.find((r) => systemText(r.system).includes('"verdict"'));
@@ -175,11 +175,11 @@ test("the small model judging without Jev: the questions lead as a cached prefix
   // A small model that fails is no platform cap: the turn ends as done, with no self-check turn.
   expect(steps.some((s) => (s.data.continuation as { rule?: string } | undefined)?.rule === "judge_error")).toBe(true);
   expect(steps.filter((s) => s.data.nudged === "unchecked")).toHaveLength(0);
-  expect(posted.filter((m) => m.body === "Pronto: está salvo.")).toHaveLength(1);
+  expect(posted.filter((m) => m.body === "Está tudo certo por aqui.")).toHaveLength(1);
 });
 
 test("a turn end's checks share one wait: a checker that never answers holds the reply TURN_END_CHECK_BUDGET_MS, not its own timeout", async () => {
-  f = await setup({ reply: () => ({ chunks: ["Pronto: está salvo."] }) });
+  f = await setup({ reply: () => ({ chunks: ["Está tudo certo por aqui."] }) });
   const base = f.context.judge;
   if (!base) throw new Error("the fixture has a judge");
   f.context.judge = {
@@ -188,7 +188,7 @@ test("a turn end's checks share one wait: a checker that never answers holds the
   };
   const started = performance.now();
   await postPersonMessage({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, f.general.id, {
-    body: "@dev salva isso",
+    body: "@dev confere isso",
   });
   await drainOutbox(f.db, f.handlers);
   const elapsed = performance.now() - started;
@@ -196,7 +196,7 @@ test("a turn end's checks share one wait: a checker that never answers holds the
   const [run] = await f.db.select().from(schema.agentRuns);
   expect(run?.status).toBe("done");
   const posted = (await f.db.select().from(schema.messages)).filter((m) => m.authorType === "agent");
-  expect(posted.map((m) => m.body)).toContain("Pronto: está salvo.");
+  expect(posted.map((m) => m.body)).toContain("Está tudo certo por aqui.");
   expect(elapsed).toBeGreaterThanOrEqual(TURN_END_CHECK_BUDGET_MS - 50);
   expect(elapsed).toBeLessThan(TURN_END_CHECK_BUDGET_MS + 3_000);
   const steps = await f.db.select().from(schema.agentRunSteps);
@@ -256,8 +256,8 @@ test("continuationVerdict: past the turn end's wait it neither asks again withou
       orgId: "o",
       agentId: "a",
       runId: "r",
-      request: "salva isso",
-      reply: "Pronto.",
+      request: "confere isso",
+      reply: "Está tudo certo.",
       means: [],
       tried: [],
       runKind: "conversation",

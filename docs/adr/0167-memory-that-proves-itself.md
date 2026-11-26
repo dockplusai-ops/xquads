@@ -160,3 +160,18 @@ and agents read its first 240 characters, which never reached the coffee.
 3. **Items saved before.** No migration: an item with `quote` and no `words` shows its title to people (`itemWords`
    through `shownContent`) and its message's matching lines to agents (`quotedWords`). A person's edit drops the
    quote from the evidence: their own text is what both read.
+
+## Addendum (2026-11-26): an unbacked change, caught without the judge
+
+Asked "Desfaça isso.", the right hand on the small tier made no call and replied "Desfiz a última mudança…"; without
+Jev, the small model judging the turn's end read it as done (it answers with probability 1 for its one choice). Two
+changes in `continuation.ts`:
+
+1. **The sure case skips the judge.** `unbackedByWords`: the request asks for a change (`asksToAct` in
+   `auto-model.ts`: a sentence opens with one of a short list of Portuguese and English verbs), the reply says in
+   the first person that it did it (`claimsChange`: "Desfiz", "Mudei", "Pronto, …", "I've changed…", a sentence with a
+   negation excluded), and no call of the run worked (none, or every one failed or was refused). That is `unbacked`,
+   with its one nudge, wherever the judge's `unbacked` would hold (a person's conversation, every call shown). Every
+   other wording is still the judge's.
+2. **The judge is told.** An empty `tried` is sent as "(none: this run made no tool call)", and `unbacked`'s criterion
+   says a first-person reply to a request to change something claims this turn's work, not an earlier turn's.

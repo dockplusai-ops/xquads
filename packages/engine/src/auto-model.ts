@@ -248,6 +248,59 @@ export function keptAutoChoice(
   };
 }
 
+/**
+ * Verbs that open a request to change something, as people write them to an agent (accents dropped): Portuguese
+ * imperatives and infinitives, English imperatives. A sentence may start with a greeting word, "por favor", "pode",
+ * "can you"… before it.
+ */
+// ponytail: a word list, not a parser. A request worded around it ("o ideal seria trocar…") still goes to the judge's
+// tier; widen the list when a run shows one.
+const ACT_VERBS =
+  "mude|muda|mudar|troque|troca|trocar|altere|altera|alterar|desfaca|desfaz|desfazer|volte|volta|voltar|deixe|deixa|" +
+  "coloque|coloca|colocar|ponha|poe|bote|bota|crie|cria|criar|adicione|adiciona|adicionar|inclua|remova|remove|" +
+  "remover|apague|apaga|apagar|exclua|exclui|excluir|delete|deleta|envie|envia|enviar|mande|manda|mandar|ative|ativa|" +
+  "ativar|desative|desativa|desativar|defina|define|definir|configure|configura|configurar|renomeie|renomeia|renomear|" +
+  "atribua|atribui|agende|convide|convida|mova|mover|arquive|arquiva|reverta|reverte|reverter|corrija|corrige|" +
+  "atualize|atualiza|atualizar|faca|salve|salva|publique|marque|tire|tira|substitua|substitui|restaure|restaura|" +
+  "change|set|undo|revert|make|create|add|send|put|turn|enable|disable|rename|assign|move|update|schedule|" +
+  "invite|archive|fix|switch|replace|restore";
+const ACT_LEAD =
+  "(?:(?:oi|ola|ok|okay|beleza|certo|entao|agora|e|tambem|por favor|pfv|hey|hi|now|then|also|and|so|please)[\\s,]+)*" +
+  "(?:(?:voce |vc |tu )?(?:pode|poderia|consegue|da pra|quero que|preciso que)\\s+|" +
+  "(?:can|could|would|will) you\\s+|(?:i want|i need) you to\\s+)?(?:me\\s+)?(?:please\\s+)?";
+const ACTS = new RegExp(`^${ACT_LEAD}(?:${ACT_VERBS})\\b`);
+
+/**
+ * The message asks the agent to change something (do, change, undo, send, create…): a sentence of it opens with one of
+ * `ACT_VERBS`. Mentions are skipped. Chit-chat, thanks and questions about a state don't.
+ */
+export function asksToAct(message: string): boolean {
+  const plain = message
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+    .replace(/@[\w.-]+/g, " ");
+  return plain
+    .split(/[.!?;\n]+/)
+    .map((s) => s.trim().replace(/^[^\p{L}]+/u, ""))
+    .some((s) => ACTS.test(s));
+}
+
+/**
+ * Never the small tier for a run with tools that is asked to change something (`asksToAct`), whatever the judge, the
+ * conversation's kept choice or a fallback said: the smallest models answer such a turn from the history, without the
+ * tool, and may claim a change nobody made. It thinks on the medium tier with the effort it had.
+ */
+export function actingFloor(choice: AutoChoice, input: { message: string; tools: boolean }): AutoChoice {
+  if (choice.tier !== "small" || !input.tools || !asksToAct(input.message)) return choice;
+  return {
+    tier: "medium",
+    effort: choice.effort,
+    reason: `A request to change something: medium tier (asked: small tier, ${choice.effort} effort).`,
+    source: choice.source,
+  };
+}
+
 // ── One decision, mapped per brain ───────────────────────────────────────────
 
 type AutoAgent = Pick<Agent, "model" | "brain" | "brainModel" | "brainEffort"> & { builtin?: string | null };

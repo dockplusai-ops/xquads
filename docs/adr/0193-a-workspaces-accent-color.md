@@ -109,3 +109,7 @@ store no accent, as the screen does.
 - Asked in their own words by someone who may, it applies at once with a receipt and Undo (the accent before and
   after); Undo is refused once the accent moved since. Anyone else gets the catalog's card, for whoever may.
 - The route's rate limit (20 changes an hour) is not applied here; the catalog's own cap of 10 changes a turn is.
+- *Amended 2026-11-26:* a small model passed a hex of its own for a brand color (copied from an earlier reply) though
+  the person named the preset. When `set_accent` gets a hex that is no preset's, it reads the message that started the
+  run: one brand color named there (in English or Portuguese) and no hex written by the person, the preset is applied;
+  two or more, the call is refused with the names to pass. A hex the person wrote stands.
