@@ -1,5 +1,5 @@
 import type { PubSub } from "@agenteschat/adapters";
-import { and, type Database, desc, type Executor, eq, gte, isNull, lt, ne, schema, sql } from "@agenteschat/db";
+import { and, type Database, desc, type Executor, eq, gt, gte, isNull, lt, ne, schema, sql } from "@agenteschat/db";
 import { runAuthorityById } from "./authority";
 import { readableChannelIds, requireChannelAccess } from "./channels";
 import { findMember, plainName } from "./chat-tools";
@@ -11,7 +11,8 @@ import { hasQuestionMark } from "./format";
 import type { ResourcefulDeps } from "./hand-off";
 import { notifyQuestion, resolveQuestionNotifications } from "./notification-producers";
 import { enqueue } from "./outbox";
-import type { ToolDefinition, ToolSource } from "./tools/types";
+import { replyThreadOf } from "./runs";
+import type { ToolContext, ToolDefinition, ToolSource } from "./tools/types";
 
 const { agentQuestions, channelMembers, messages, notifications, organizationMembers, users } = schema;
 
@@ -150,6 +151,8 @@ export function createAskUserToolSource(deps: ResourcefulDeps = {}): ToolSource 
         ? [...new Set((input.choices as unknown[]).map((c) => String(c).trim()).filter(Boolean))]
         : [];
       if (!hasQuestionMark(text) && choices.length < 2) return { content: NOT_A_QUESTION, isError: true };
+      const open = await openQuestionHere(ctx, channel?.kind === "dm");
+      if (open) return { content: alreadyAsked(open), isError: true };
       // Loaded here: the check pulls in the controller, which imports most of the engine.
       const held = await (await import("./hand-off")).holdAsk(deps, ctx, text);
       if (held) return { content: held, data: { held: true } };
@@ -161,6 +164,35 @@ export function createAskUserToolSource(deps: ResourcefulDeps = {}): ToolSource 
   };
   return { name: "questions", tools: async () => [tool] };
 }
+
+/**
+ * The agent's question still waiting on an answer where this run would ask (another run's: a run asks one at a time).
+ * A person sees one card from it at a time there: a DM is one conversation, a channel's are its threads. Another run
+ * asking again (a later turn raising the same thing) would pile a duplicate card on the one still open.
+ */
+async function openQuestionHere(ctx: ToolContext, dm: boolean) {
+  const thread = replyThreadOf(ctx);
+  const [row] = await ctx.db
+    .select({ id: agentQuestions.id, text: agentQuestions.text })
+    .from(agentQuestions)
+    .where(
+      and(
+        eq(agentQuestions.orgId, ctx.orgId),
+        eq(agentQuestions.agentId, ctx.agentId),
+        eq(agentQuestions.channelId, ctx.channelId),
+        eq(agentQuestions.status, "open"),
+        gt(agentQuestions.expiresAt, new Date()),
+        ne(agentQuestions.runId, ctx.runId),
+        ...(dm ? [] : [thread ? eq(agentQuestions.threadId, thread) : isNull(agentQuestions.threadId)]),
+      ),
+    )
+    .orderBy(desc(agentQuestions.createdAt))
+    .limit(1);
+  return row ?? null;
+}
+
+const alreadyAsked = (q: { id: string; text: string }) =>
+  `Not asked: your question "${q.text}" is still open here, waiting on an answer. Don't ask it again or write it out in your reply; at most say in a few words that it still waits. If it no longer fits or you need to ask something else instead, withdraw it first with withdraw_request (${q.id}).`;
 
 /** The people of a conversation a question's text names: by @handle, full name or first name, as whole words. */
 async function peopleNamedIn(db: Executor, orgId: string, channelId: string, text: string) {

@@ -477,6 +477,29 @@ describe("create_channel", () => {
     expect(await channelNamed(f, "x")).toBeUndefined();
   });
 
+  test("its responsible agent in `lead`: it joins and leads; an agent named as a person is pointed to `agents` and `lead`", async () => {
+    f = await setup();
+    const lia = await addLia(f, f.owner.id);
+    const ctx = await runFor(f, f.owner.id, "crie o #vendas e coloque a Lia como responsável do canal");
+    expect(await call(f, ctx, "create_channel", { name: "vendas", people: ["Lia"] })).toMatchObject({
+      isError: true,
+      content:
+        'No one called "Lia" in this organization. Lia (@lia) is an agent: put it in `agents`, or in `lead` to make it the channel\'s responsible agent.',
+    });
+    expect(await call(f, ctx, "create_channel", { name: "vendas", topic: "Propostas", lead: "@lia" })).toMatchObject({
+      content: "Created #vendas with @lia. @lia is its responsible agent.",
+    });
+    const vendas = await channelNamed(f, "vendas");
+    expect(vendas?.leadAgentId).toBe(lia.id);
+    const members = await f.db
+      .select()
+      .from(schema.channelMembers)
+      .where(eq(schema.channelMembers.channelId, vendas?.id ?? ""));
+    expect(members.some((m) => m.agentId === lia.id)).toBe(true);
+    // One receipt: Undo archives the channel, its lead with it.
+    expect((await f.db.select().from(schema.agentActions)).map((a) => a.kind)).toEqual(["channel.created"]);
+  });
+
   test(`at most ${MAX_CHANNELS_PER_RUN} channels per run`, async () => {
     f = await setup();
     const ctx = await runFor(f, f.owner.id, "cria seis canais");

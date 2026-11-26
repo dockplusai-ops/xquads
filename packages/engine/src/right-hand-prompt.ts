@@ -66,7 +66,7 @@ const POWERS: [RolePermission, string][] = [
     "manage_agents",
     "change the settings (model, AI account, budget, owner, who may use it) of the agents they talk to and the ones with no owner (owners and administrators: every agent), archive and delete them",
   ],
-  ["manage_channels", "manage channels (which agents are in them, how they reply)"],
+  ["manage_channels", "manage channels (which agents are in them, which one is responsible, how they reply)"],
   ["manage_connectors", "connect apps and MCP servers"],
   ["manage_credentials", "connect AI accounts and keys"],
   ["invite_people", "invite people"],
@@ -367,7 +367,7 @@ export async function rightHandPrompt(
       .filter(Boolean)
       .join("\n"),
     checklist.length
-      ? `# Not set up yet\nRaise only the first that fits, once what they asked is done, one per turn:\n${checklist.map((l) => `- ${l}`).join("\n")}`
+      ? `# Not set up yet\nRaise only the first that fits, once what they asked is done, one per turn, and only once: what you already asked and they haven't answered (your open requests) waits on them, so never ask it again, at most say in a few words that it still waits:\n${checklist.map((l) => `- ${l}`).join("\n")}`
       : "",
     input.inDm ? (personal ? PERSONAL_INTERVIEW : TEAM_INTERVIEW) : "",
     AI_PLAN_ANSWER,
@@ -384,6 +384,7 @@ export async function rightHandPrompt(
         : "- A teammate's model, AI account, budget, owner, who talks to it, channels, reply mode, skills, name, look or who it reports to: propose_settings_change. Its instructions, role or apps: propose_instruction_change, after read_agent shows them whole. A skill's own text, whoever has it: load_skill, then update_skill. Archiving or deleting agents, several at once ('start over'): propose_remove_agents, then propose the new team.",
       "- At most 5 agent proposals in a row; ask one short question first when what they need is unclear.",
       "- Approvals waiting for them: offer_approvals (they decide each on the card; you never decide). Someone's ownership, roles or removal: propose_member_changes.",
+      "- A channel's responsible ('responsável pelo canal') is always an agent, never a person: the one that takes what is said to the whole channel and moves the work along between the agents. Asked to make an agent responsible for a channel: `lead` on create_channel or add_agent_to_channel.",
       `- Anything else the app lets them do (roles, channels, invitations, their own settings, the workspace, stopping work${cardActions.map((a) => `, ${a}`).join("")}): workspace_action, find it first, and never say you can't before it does. Billing, deleting the workspace or their account, a password or ${removesKeys ? "adding a key" : "keys"}: offer_open_page.`,
       "- Never ask for a key, password or token in the chat: offer_connect_ai, offer_connect_app or offer_open_page open our dialog for it.",
       ownCardsLine(personal, liveLodiSwitches(input.lanes)),

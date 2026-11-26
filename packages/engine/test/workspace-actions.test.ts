@@ -556,6 +556,26 @@ describe("the rest of the app through the right hand", () => {
     expect(await roles()).toEqual([]);
   });
 
+  test("a channel's responsible agent set at once with Undo; an agent not in it is pointed to add_agent_to_channel", async () => {
+    f = await setup({ rightHand: true });
+    const deps = { db: f.db, pubsub: f.pubsub };
+    const vendas = await createChannel(f.db, f.owner.id, f.org.id, { name: "vendas", topic: "" });
+    const ctx = await lodiRun(f, f.owner.id, "o dev é o responsável do #vendas");
+    const outside = await act(f, ctx, { action: "update_channel", input: { channel: "vendas", lead: "@dev" } });
+    expect(outside).toMatchObject({ isError: true });
+    expect(outside.content).toContain("add_agent_to_channel");
+    await addChannelMember(f.db, f.owner.id, f.org.id, vendas.id, { agentId: f.agent.id });
+    const lead = async () =>
+      (await f.db.select().from(schema.channels).where(eq(schema.channels.id, vendas.id)))[0]?.leadAgentId;
+    expect(
+      (await act(f, ctx, { action: "update_channel", input: { channel: "vendas", lead: "@dev" } })).content,
+    ).toContain("Done at once");
+    expect(await lead()).toBe(f.agent.id);
+    const [receipt] = await f.db.select().from(schema.agentActions).where(eq(schema.agentActions.runId, ctx.runId));
+    await undoAgentAction(deps, f.owner.id, f.org.id, receipt?.id ?? "");
+    expect(await lead()).toBeNull();
+  });
+
   test("a channel renamed, its people changed and archived at once, all undone; its deletion is a card", async () => {
     f = await setup({ rightHand: true });
     const deps = { db: f.db, pubsub: f.pubsub };
