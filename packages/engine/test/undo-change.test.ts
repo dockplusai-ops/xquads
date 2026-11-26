@@ -47,12 +47,18 @@ const lodiOf = async (fx: Fixture) => {
 };
 
 /** A run of the right hand on what `userId` wrote in their DM with it, in their own words. */
-async function lodiRun(fx: Fixture, userId: string, body: string): Promise<ToolContext> {
+async function lodiRun(fx: Fixture, userId: string, body: string, outside = false): Promise<ToolContext> {
   const lodi = await lodiOf(fx);
   const dm = await openPersonAgentDm(fx.db, fx.org.id, userId, lodi.id);
   // The run before has ended: this message starts a run of its own.
   await fx.db.update(schema.agentRuns).set({ status: "done" }).where(eq(schema.agentRuns.orgId, fx.org.id));
   const trigger = await postPersonMessage({ db: fx.db, pubsub: fx.pubsub }, userId, fx.org.id, dm.id, { body });
+  // `outside`: their message relays outside content (sent through an AI app, ADR 0119).
+  if (outside)
+    await fx.db
+      .update(schema.messages)
+      .set({ meta: { readOutside: true } })
+      .where(eq(schema.messages.id, trigger.id));
   const [run] = await fx.db.select().from(schema.agentRuns).where(eq(schema.agentRuns.triggerMessageId, trigger.id));
   if (!run) throw new Error("no run");
   return {
@@ -152,6 +158,30 @@ describe("undo_change", () => {
     expect(again).toMatchObject({ isError: true });
     expect(again.content).toContain("already undone");
     expect(await accent(f)).toBe("#2563eb");
+  });
+
+  test("the person's own request undoes; a turn that read outside content undoes nothing", async () => {
+    f = await setup({ rightHand: true });
+    await f.db.update(schema.organizations).set({ accent: "#2563eb" }).where(eq(schema.organizations.id, f.org.id));
+    const first = await lodiRun(f, f.owner.id, "muda a cor de destaque para ardósia");
+    await setAccent(f, first, "slate");
+    await reply(f, first);
+    const own = await invoke(f, await lodiRun(f, f.owner.id, "desfaça isso"), UNDO_CHANGE_TOOL, {});
+    expect(own.content).toContain("Undone:");
+    expect(await accent(f)).toBe("#2563eb");
+
+    const second = await lodiRun(f, f.owner.id, "agora ardósia de novo");
+    await setAccent(f, second, "slate");
+    await reply(f, second);
+    // Their message relays outside content (sent through an AI app): no undo from this turn.
+    const relayed = await lodiRun(f, f.owner.id, "desfaça isso", true);
+    const refused = await invoke(f, relayed, UNDO_CHANGE_TOOL, {});
+    expect(refused).toMatchObject({ isError: true });
+    expect(refused.content).toContain("read content from outside");
+    expect(await accent(f)).toBe("#8aa3ae");
+    // Looking stays open: the list undoes nothing.
+    expect((await invoke(f, relayed, UNDO_CHANGE_TOOL, { list: true })).content).toContain("(can be undone)");
+    expect(await accent(f)).toBe("#8aa3ae");
   });
 
   test("the accent goes back to the default with `default` and the words people use", async () => {

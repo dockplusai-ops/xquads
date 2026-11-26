@@ -136,7 +136,9 @@ changes showed "with Undo", so an agent sent the person to a button that doesn't
   are the same checks. The result names what was undone and what wasn't, and why, in words the agent can pass on
   (too late: make the opposite change as a new one; changed since: undo the later one first or change it by hand).
 - **Who is behind the run:** nobody (a routine's run, an unattended one) means nothing is undone; the tool refuses, as
-  `workspace_action` does. The run policy classes it as an internal change (`undo_change`: area `undo`), so an agent
+  `workspace_action` does. Like a catalog action done at once, it undoes only on the person's own words (`ownWords`):
+  a turn that read outside content or others' words undoes nothing and says so (undo has no card; the person asks
+  again in a message of their own), while `list` still answers. The run policy classes it as an internal change (`undo_change`: area `undo`), so an agent
   set to always ask asks first. Not in confidential threads (ADR 0190): its name isn't on the lock's list.
 - **Wording:** every prompt and tool result that said "with Undo" under the reply now says the person can ask the agent
   to undo it (`undo_change`); the general rules and the right hand's say there is no Undo button under the reply and

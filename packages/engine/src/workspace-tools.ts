@@ -6,6 +6,7 @@ import { currentHandles } from "./agents";
 import { invalidateOrg } from "./cache";
 import { addChannelMember } from "./channels";
 import { getChannelCached } from "./context";
+import { ownWords } from "./context/learn";
 import { personBehindCall } from "./requester";
 import { replyThreadOf } from "./runs";
 import { noAgentText } from "./team";
@@ -314,6 +315,14 @@ function undoChangeTool(deps: { pubsub?: PubSub }): ToolDefinition {
               : "You made no changes in this conversation.",
           };
         }
+        // As `workspace_action` acts at once (ADR 0092 §5): only on the person's own words, never after this turn read
+        // outside content or others' words. Undo has no card, so it refuses and the person asks again.
+        if ((await ownWords(ctx)) !== person)
+          return {
+            content:
+              "Nothing was undone: this turn read content from outside or someone else's words, so an undo waits for the person's own request. Ask them to say it again in a new message of their own.",
+            isError: true,
+          };
         let group: ActionRow[];
         if (actionId) group = await select(eq(agentActions.id, actionId), 1);
         else if (messageId) group = await select(eq(agentActions.messageId, messageId), 100);
