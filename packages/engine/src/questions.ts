@@ -7,14 +7,15 @@ import { consultedFor, NO_PERSON_READS } from "./consultations";
 import { isAgentOnlyDm } from "./dms";
 import { ConflictError, ForbiddenError, NotFoundError, ValidationError } from "./errors";
 import { publishChannelEvent } from "./events";
-import { hasQuestionMark } from "./format";
+import { cutText, hasQuestionMark } from "./format";
 import type { ResourcefulDeps } from "./hand-off";
+import type { Judge } from "./judge";
 import { notifyQuestion, resolveQuestionNotifications } from "./notification-producers";
 import { enqueue } from "./outbox";
 import { replyThreadOf } from "./runs";
 import type { ToolContext, ToolDefinition, ToolSource } from "./tools/types";
 
-const { agentQuestions, channelMembers, messages, notifications, organizationMembers, users } = schema;
+const { agentQuestions, agentRuns, channelMembers, messages, notifications, organizationMembers, users } = schema;
 
 export type AgentQuestionRow = typeof agentQuestions.$inferSelect;
 
@@ -335,6 +336,8 @@ async function closeByPerson(
   deps: { db: Database; pubsub?: PubSub },
   current: AgentQuestionRow,
   set: { status: "answered" | "dismissed"; answer?: string; answeredByUserId: string },
+  /** What else changes with it, in its transaction. */
+  also?: (tx: Executor, row: AgentQuestionRow) => Promise<unknown>,
 ): Promise<AgentQuestion> {
   const closed = await deps.db.transaction(async (tx) => {
     const [row] = await tx
@@ -349,6 +352,7 @@ async function closeByPerson(
       )
       .returning();
     if (!row) return null;
+    await also?.(tx, row);
     await syncQuestionMessage(tx, row);
     await enqueue(tx, resumeJob(row));
     return row;
@@ -357,6 +361,78 @@ async function closeByPerson(
   await publishQuestion(deps.pubsub, closed, "question.answered");
   await resolveQuestionNotifications(deps, closed.orgId, closed.id).catch(() => {});
   return questionView(closed);
+}
+
+/** How sure the judge must be that a message answers the question: below, it gets a run of its own. */
+export const ANSWER_SURE = 0.6;
+
+/**
+ * A person wrote in a DM where the agent's run waits on its question (ADR 0008 addendum of 2026-11-26): does the
+ * message answer it, or is it something else (a new request, another topic)? Any language. False when unsure: a new
+ * request taken as the answer derails the run, while an answer handed to a run of its own is still read there, with
+ * the card still open.
+ */
+export async function answersQuestion(
+  judge: Judge,
+  input: { orgId: string; agentId: string; runId: string; question: AgentQuestionRow; text: string },
+): Promise<boolean> {
+  const text = input.text.trim();
+  if (!text) return false;
+  const answers = await judge.ask({
+    orgId: input.orgId,
+    agentId: input.agentId,
+    runId: input.runId,
+    kind: "question_reply",
+    state: {
+      agent_asked: input.question.text,
+      ...(input.question.choices?.length ? { choices: input.question.choices } : {}),
+      person_wrote: cutText(text, 2000),
+    },
+    questions: {
+      intent: {
+        type: "choice",
+        instructions:
+          "An AI agent asked a person `agent_asked` in a chat and waits for the answer. The person then wrote `person_wrote` in the same chat. Is it the answer to that question?",
+        criteria: {
+          answer:
+            "It answers the question, in full or in part, or declines to answer it ('não sei', 'tanto faz', 'skip').",
+          other:
+            "Something else: a new request or instruction, another topic, a question of their own, or unrelated to what was asked.",
+        },
+      },
+    },
+  });
+  const a = answers.intent;
+  return a?.choice === "answer" && (a.probabilities?.answer ?? 1) >= ANSWER_SURE;
+}
+
+/**
+ * A person's message answers the question it reached (`answersQuestion` said so): the question closes with its text,
+ * as a reply on the card would, and the waiting run reads it as the answer, not again as a message (out of its inbox).
+ * False when the question closed meanwhile.
+ */
+export async function answerWithMessage(
+  deps: { db: Database; pubsub?: PubSub },
+  q: AgentQuestionRow,
+  message: { id: string; body: string; authorUserId: string | null },
+): Promise<boolean> {
+  if (!message.authorUserId) return false;
+  return closeByPerson(
+    deps,
+    q,
+    { status: "answered", answer: message.body, answeredByUserId: message.authorUserId },
+    (tx, row) =>
+      tx
+        .update(agentRuns)
+        .set({ pendingMessageIds: sql`array_remove(${agentRuns.pendingMessageIds}, ${message.id}::uuid)` })
+        .where(and(eq(agentRuns.id, row.runId), eq(agentRuns.orgId, row.orgId))),
+  ).then(
+    () => true,
+    (error: unknown) => {
+      if (error instanceof ConflictError) return false;
+      throw error;
+    },
+  );
 }
 
 /** A person skips a question: it closes without an answer and the run goes on. Whoever may answer it may skip it. */

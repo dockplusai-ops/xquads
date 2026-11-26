@@ -1,9 +1,9 @@
-import { and, type Executor, eq, inArray, schema } from "@agenteschat/db";
+import { and, type Executor, eq, gt, inArray, isNull, or, schema } from "@agenteschat/db";
 import { isDeviceWaitId } from "./device-waits";
 import type { StoredTranscript } from "./run-resume";
 import type { AgentRun } from "./runs";
 
-const { agentConsultations, agentQuestions, agentRuns, browserHandoffs } = schema;
+const { agentConsultations, agentQuestions, agentRuns, browserHandoffs, channels } = schema;
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -13,7 +13,9 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
  * the agent stays responsive meanwhile, so whatever arrives (another agent's question, a notice, a
  * person's message) gets a run of its own. A run waiting on a question to people, another agent's answer,
  * help in its browser or its computer still takes them (the message answers, wakes or resumes it), unless the
- * question is for one person and `from`, the person writing, is someone else: their message answers nothing here.
+ * question is for one person and `from`, the person writing, is someone else: their message answers nothing here. Nor
+ * does a question asked in a DM's main timeline take `from`'s message: there it may as well be a new request, so
+ * steering hands it on unless the judge is sure it answers (`dmQuestionOf`, ADR 0008 addendum of 2026-11-26).
  * `transcript` left out: read here when it matters (only for `waiting_input`).
  */
 export async function holdsMessages(
@@ -39,7 +41,7 @@ export async function holdsMessages(
   if (t?.waitingForBrain) return false;
   const calls = (t?.pending?.calls ?? []).filter((c) => !c.result);
   if (calls.some((c) => c.approvalId || c.secretRequestId)) return true;
-  const asked = from ? calls.flatMap((c) => (c.questionId ? [c.questionId] : [])) : [];
+  const asked = from ? pendingQuestionIds(t) : [];
   if (asked.length > 0) {
     const open = await db
       .select({ forUserId: agentQuestions.requestedForUserId })
@@ -48,6 +50,7 @@ export async function holdsMessages(
         and(eq(agentQuestions.orgId, run.orgId), inArray(agentQuestions.id, asked), eq(agentQuestions.status, "open")),
       );
     if (open.length > 0 && open.every((q) => q.forUserId && q.forUserId !== from)) return true;
+    if (from && (await dmQuestionOf(db, asked, run.orgId, from))) return true;
   }
   // A call's `waitId` (not a question's): a browser handoff, an `ask_agent` consultation, else a mission's own wait. A
   // wait for a device takes messages: "use the other phone" moves it on (`onMessageWhileWaiting`).
@@ -74,4 +77,35 @@ export async function holdsMessages(
   ]);
   const known = new Set([...consulted.map((c) => c.waitId), ...handoffs.map((h) => h.id)]);
   return waitIds.some((id) => !known.has(id));
+}
+
+/** The open questions a run's pending calls wait on (`questionId`). */
+export const pendingQuestionIds = (transcript: unknown) =>
+  ((transcript as StoredTranscript | null)?.pending?.calls ?? []).flatMap((c) =>
+    !c.result && c.questionId ? [c.questionId] : [],
+  );
+
+/**
+ * The open question among `ids` asked in a DM's main timeline that `from` may answer. A message there answered it on
+ * insert only when it quoted the card or picked one of its choices (`insertMessageWithRuns`); anything else reaches the
+ * waiting run, and steering asks the judge whether it answers (`answersQuestion`), else hands it on.
+ */
+export async function dmQuestionOf(db: Executor, ids: string[], orgId: string, from: string) {
+  if (ids.length === 0) return null;
+  const [row] = await db
+    .select({ question: agentQuestions })
+    .from(agentQuestions)
+    .innerJoin(channels, and(eq(channels.id, agentQuestions.channelId), eq(channels.kind, "dm")))
+    .where(
+      and(
+        eq(agentQuestions.orgId, orgId),
+        inArray(agentQuestions.id, ids),
+        eq(agentQuestions.status, "open"),
+        gt(agentQuestions.expiresAt, new Date()),
+        isNull(agentQuestions.threadId),
+        or(isNull(agentQuestions.requestedForUserId), eq(agentQuestions.requestedForUserId, from)),
+      ),
+    )
+    .limit(1);
+  return row?.question ?? null;
 }

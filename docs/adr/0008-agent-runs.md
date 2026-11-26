@@ -101,3 +101,23 @@ on the way jumped to minutes, as if it had been thinking all along.
   listens to a conversation only while it is open). A row made from the read counts from `workingMs`; a server from
   before it gives only the first start, as before.
 - `startedAt` on a live row still places it in the timeline, and a read of the server still corrects it.
+
+## Addendum (2026-11-26): in a DM, a new request is not the answer
+
+A DM's main timeline is one conversation, and the message insert took whatever the person wrote there next as the
+answer to the agent's open question. A run that asked "what does the company sell?" and waited got "The person
+answered: create a #vendas channel", did that, asked the same question again on a new card, and took the next request
+as its answer too, for a day, until someone pressed Skip.
+
+- **On insert, only what is surely an answer** (`insertMessageWithRuns`): a reply in the question's thread or in the
+  thread under its card, a quote of the card, or one of its choices word for word answers it, as before, with no
+  judgment. In a channel's main timeline the rule is unchanged (who it is for, who asked the agent, or whoever
+  addresses it).
+- **Anything else written in a DM's main timeline reaches the waiting run**, which holds it (`holdsMessages`,
+  `dmQuestionOf`): steering asks the judge whether it answers the question (`answersQuestion`, kind
+  `question_reply`). Sure it does (`ANSWER_SURE`, 0.6): the question closes with the message's text, as a reply on
+  the card would, and the run resumes with it, the message out of its inbox (`answerWithMessage`). Not sure, a new
+  request, a judge that fails or no judge at all: the message gets a run of its own (`handOnMessages`) and the card
+  stays open, answered on the card or expiring as any question does. A new request taken as an answer derails the
+  run; an answer handed to a run of its own is still read there.
+- A "stop" the triage judges cancels the waiting run as before.

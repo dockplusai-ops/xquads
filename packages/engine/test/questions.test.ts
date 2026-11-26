@@ -8,6 +8,7 @@ import {
   ConflictError,
   cancelRun,
   createAgent,
+  createFakeJudge,
   dismissQuestion,
   drainOutbox,
   expireQuestions,
@@ -15,6 +16,7 @@ import {
   listMessages,
   openDm,
   postPersonMessage,
+  stopChecksSettled,
   ValidationError,
 } from "../src";
 import { listNotifications } from "../src/notifications";
@@ -215,6 +217,83 @@ describe("ask_user", () => {
     const timeline = await listMessages(f.db, f.owner.id, f.org.id, dm.id);
     expect(timeline.map((m) => m.body)).toEqual(["deploy it", "Qual ambiente?", "staging", "Ok: staging"]);
     expect(timeline.every((m) => m.threadId === null)).toBe(true);
+  });
+
+  // ADR 0008 addendum of 2026-11-26: a new request in a DM was taken as the answer, the run did it and asked again.
+  describe("in a DM, a new message is the answer only when it is one", () => {
+    const dmWithQuestion = async () => {
+      f = await setup({ askUser: true, reply });
+      const dm = await openDm(f.db, f.owner.id, f.org.id, { agentId: f.agent.id });
+      await post("deploy it", undefined, dm.id);
+      await drainOutbox(f.db, f.handlers);
+      const [q] = await questions();
+      expect(q?.status).toBe("open");
+      return { dm, q: q as NonNullable<typeof q> };
+    };
+    const postWith = (dmId: string, body: string, judged: "answer" | "other") =>
+      postPersonMessage(
+        {
+          db: f.db,
+          pubsub: f.pubsub,
+          judge: createFakeJudge((kind) => (kind === "question_reply" ? judged : undefined)),
+        },
+        f.owner.id,
+        f.org.id,
+        dmId,
+        { body },
+      );
+
+    test("no judge: an unrelated message gets a run of its own, the question stays open, the card still answers", async () => {
+      const { dm, q } = await dmWithQuestion();
+      const sent = await post("Crie um canal #vendas", undefined, dm.id);
+      expect(sent.meta.answersQuestionId).toBeUndefined();
+      await drainOutbox(f.db, f.handlers);
+      expect((await questions())[0]).toMatchObject({ status: "open", answer: null });
+      const [asker, other] = (await runs()).sort((a, b) => +a.createdAt - +b.createdAt);
+      expect(asker?.status).toBe("waiting_input");
+      expect(other).toMatchObject({ status: "done", triggerMessageId: sent.id });
+
+      await answerQuestion({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, q.id, { choice: "staging" });
+      await drainOutbox(f.db, f.handlers);
+      expect((await runs()).map((r) => r.status)).toEqual(["done", "done"]);
+      expect(lastText(f.provider.calls.at(-1)?.request as ModelRequest)).toContain("The person answered: staging");
+    });
+
+    test("a quote of the card or one of its choices answers it without a judge", async () => {
+      const { dm, q } = await dmWithQuestion();
+      const quoted = await postPersonMessage({ db: f.db, pubsub: f.pubsub }, f.owner.id, f.org.id, dm.id, {
+        body: "vai de production",
+        replyTo: q.messageId ?? "",
+      });
+      expect(quoted.meta.answersQuestionId).toBe(q.id);
+      await drainOutbox(f.db, f.handlers);
+      expect((await runs()).map((r) => r.status)).toEqual(["done"]);
+    });
+
+    test("judged its answer: the run resumes with it and no other run starts", async () => {
+      const { dm, q } = await dmWithQuestion();
+      await postWith(dm.id, "acho que production, pode ser", "answer");
+      await stopChecksSettled();
+      expect((await questions())[0]).toMatchObject({ status: "answered", answer: "acho que production, pode ser" });
+      await drainOutbox(f.db, f.handlers);
+      const all = await runs();
+      expect(all.map((r) => r.status)).toEqual(["done"]);
+      expect(all[0]?.pendingMessageIds).toEqual([]);
+      const told = lastText(f.provider.calls.at(-1)?.request as ModelRequest);
+      expect(told).toContain("The person answered: acho que production, pode ser");
+      expect(q.id).toBe((await questions())[0]?.id ?? "");
+    });
+
+    test("judged something else: a run of its own answers it and the question waits", async () => {
+      const { dm } = await dmWithQuestion();
+      const sent = await postWith(dm.id, "Coloque o Proteus no #vendas", "other");
+      await stopChecksSettled();
+      await drainOutbox(f.db, f.handlers);
+      expect((await questions())[0]?.status).toBe("open");
+      const [asker, other] = (await runs()).sort((a, b) => +a.createdAt - +b.createdAt);
+      expect(asker?.status).toBe("waiting_input");
+      expect(other).toMatchObject({ status: "done", triggerMessageId: sent.id });
+    });
   });
 
   test("a simple request is answered directly; the prompt tells when to ask, the tool what not to ask", async () => {

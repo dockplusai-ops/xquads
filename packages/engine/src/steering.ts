@@ -10,7 +10,8 @@ import { deliverLive } from "./live-steer";
 import type { Message } from "./messages";
 import { missionOfThread } from "./missions";
 import { enqueue } from "./outbox";
-import { holdsMessages } from "./run-hold";
+import { answersQuestion, answerWithMessage } from "./questions";
+import { dmQuestionOf, holdsMessages, pendingQuestionIds } from "./run-hold";
 import { handOnMessages, markTriage, queueAfterRun, releaseFromRun } from "./run-inbox";
 import { type AgentRun, addRunStep, computerWaitOf, replyThreadOf, runAtWork } from "./runs";
 import { sayNowApplies } from "./say-now";
@@ -49,7 +50,8 @@ export const ROUTE_RELEASED_JOB = "message.route_released";
  *    computer: look again now. Waiting on something the message can't move
  *    (a secret, a mission's decision, a question for someone else;
  *    `holdsMessages`): the message leaves it for a run of its own; an approval
- *    never takes it at all.
+ *    never takes it at all. Its question in a DM: the message answers it when
+ *    the judge is sure it does (`answersQuestion`), else it leaves it too.
  * 5. The fast reply (`talker.ts`): when the run can't answer soon (waiting, or
  *    deep in a long turn), or the triage says a quick question or a separate request, the agent's conversation layer
  *    may answer in a second or two, or pass. A correction or an addition the triage was sure of is the agent's own to
@@ -184,11 +186,14 @@ export async function afterSteered(deps: SteeringDeps, input: SteeredInput) {
     // inbox already (the run handed it on as it paused, or read it first): the run that has it answers, so
     // nothing here speaks for this one either.
     const holds = waiting && (await holdsMessages(deps.db, active, userId));
+    // Its question in a DM's main timeline (ADR 0008 addendum of 2026-11-26): the message is its answer only when the
+    // judge is sure it is; anything else, or no judge, gets a run of its own and the card stays open.
+    const question = holds ? await dmQuestionOf(deps.db, pendingQuestionIds(active.transcript), orgId, userId) : null;
     // In a channel others share, the triage first says whether it is for this agent at all: a run of its own for a
     // line to someone else would answer it.
     const shared = deps.judge ? await sharedConversation(deps.db, input, active).catch(() => null) : null;
     const handOn = () => handOnMessages(deps.db, deps.pubsub, active, [message.id]).catch(() => null);
-    if (holds && !shared) await handOn();
+    if (holds && !shared && !(question && deps.judge)) await handOn();
     // At work (it called a tool), or only talking so far: a run that only talks answers the person itself in a moment,
     // in one message with what they add, so nothing speaks for it meanwhile (ADR 0112 addendum of 2026-11-19).
     const talking = active.status === "running" && !computerWaitOf(active) && !(await runAtWork(deps.db, runId));
@@ -223,6 +228,11 @@ export async function afterSteered(deps: SteeringDeps, input: SteeredInput) {
     // then what that does to the task, then its wait and the fast reply.
     trackStopCheck(
       (async () => {
+        const answers = question
+          ? answersQuestion(judge, { orgId, agentId: active.agentId, runId, question, text: message.body }).catch(
+              () => false,
+            )
+          : null;
         let judged: SteerHandling;
         let sure = false;
         try {
@@ -240,6 +250,10 @@ export async function afterSteered(deps: SteeringDeps, input: SteeredInput) {
           if (shared) await markTriage(deps.db, message, false).catch(() => undefined);
         }
         if (judged === "stop") return noteTriage(deps.db, active, message.id, judged, sure, false);
+        if (question) {
+          if (!((await answers) && (await answerWithMessage(deps, question, message)))) await handOn();
+          return noteTriage(deps.db, active, message.id, judged, sure, false);
+        }
         // Held for the triage: for this agent after all, so a run of its own answers it.
         if (holds && shared) await handOn();
         // Only a task has an after: while the run only talks, a quick question or another request is part of the

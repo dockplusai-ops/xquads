@@ -776,6 +776,9 @@ export async function insertMessageWithRuns(
   // A quote reply to an agent's message is for that agent (`replyRefFor` wrote it, never the client).
   const quoted = person ? (input.meta?.replyTo as ReplyRef | undefined)?.author : undefined;
   const quotedAgentId = quoted?.type === "agent" && quoted.id && UUID.test(quoted.id) ? quoted.id : null;
+  // The quoted message itself: a quote of a question's card answers it.
+  const quotedId = person ? (input.meta?.replyTo as ReplyRef | undefined)?.messageId : undefined;
+  const quotedMessageId = quotedId && UUID.test(quotedId) ? quotedId : null;
   /**
    * SQL: the message is for another agent than `agent`: it doesn't mention it, and mentions others or quotes another
    * agent's message (a mention wins: "@dev see what Theo said" quoting Theo is for Dev). Then no task in progress of
@@ -891,8 +894,8 @@ export async function insertMessageWithRuns(
               and exists (select 1 from ${channels} mc where mc.id = ${input.channelId}::uuid and mc.kind = 'channel')
               and ${maySql(sql`om.org_id`, sql`om.user_id`, "administrator")}))
       ), answered as (
-        -- A person's reply where an agent asked something (same channel and thread) answers it, unless it is for
-        -- someone else.
+        -- A person's reply where an agent asked something (same channel and thread, or the thread under its card)
+        -- answers it, unless it is for someone else.
         update ${agentQuestions} q set status = 'answered', answer = ${body}, answered_by_user_id = ${userId},
           answered_at = now()
         where ${deliver}::boolean and q.status = 'open' and not exists (select 1 from archived)
@@ -900,16 +903,24 @@ export async function insertMessageWithRuns(
             select oq.id from ${agentQuestions} oq
             where oq.org_id = ${input.orgId}::uuid and oq.channel_id = ${input.channelId}::uuid
               and oq.status = 'open' and oq.expires_at > now()
-              and oq.thread_id is not distinct from ${threadId}::uuid
+              and (oq.thread_id is not distinct from ${threadId}::uuid or oq.message_id = ${threadId}::uuid)
               and (oq.requested_for_user_id is null or oq.requested_for_user_id = ${userId})
-              -- In a channel's main timeline many talk at once: who it is for or who asked the agent answers it,
-              -- or whoever addresses it.
-              and (${threadId}::uuid is not null or oq.requested_for_user_id = ${userId}
-                or not exists (select 1 from ${channels} c where c.id = ${input.channelId}::uuid and c.kind = 'channel')
-                -- Named: a mention of everyone is no answer to whatever each agent asked.
-                or oq.agent_id in (select id from named)
-                or exists (select 1 from ${agentRuns} ar join ${messages} tm on tm.id = ar.trigger_message_id
-                  where ar.id = oq.run_id and tm.author_user_id = ${userId}))
+              and (${threadId}::uuid is not null
+                -- A quote of its card, or one of its choices word for word, answers it anywhere.
+                or oq.message_id = ${quotedMessageId}::uuid
+                or lower(btrim(${body}::text)) in (select lower(btrim(oc)) from unnest(oq.choices) oc)
+                -- A DM's main timeline is one conversation, so anything else written there may as well be a new
+                -- request: it reaches the waiting run, and steering judges whether it answers (ADR 0008 addendum of
+                -- 2026-11-26).
+                or (not exists (select 1 from ${channels} dc where dc.id = ${input.channelId}::uuid and dc.kind = 'dm')
+                  -- In a channel's main timeline many talk at once: who it is for or who asked the agent answers it,
+                  -- or whoever addresses it.
+                  and (oq.requested_for_user_id = ${userId}
+                    or not exists (select 1 from ${channels} c where c.id = ${input.channelId}::uuid and c.kind = 'channel')
+                    -- Named: a mention of everyone is no answer to whatever each agent asked.
+                    or oq.agent_id in (select id from named)
+                    or exists (select 1 from ${agentRuns} ar join ${messages} tm on tm.id = ar.trigger_message_id
+                      where ar.id = oq.run_id and tm.author_user_id = ${userId}))))
             order by oq.created_at desc limit 1)
           and not ${forAnother(sql`q.agent_id`)}
           and q.agent_id not in (select agent_id from muted)
