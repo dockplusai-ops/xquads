@@ -1353,6 +1353,9 @@ function PlanSteps({
 
   // The steps stay in view while they wait (their computer actions off); a reason alone otherwise.
   const steps = ready || gate.state === "preparing" || (gate.state === "offline" && signingIn);
+  // OpenCode's free models need no key (ADR 0132 §6): its key steps never show while the computer is on its way, and
+  // once it is ready the free models come first, a key only on request.
+  const keyWaits = kind === "opencode" && !ready;
   // The sign-in asked for: a row's, or one more login of the account with `email`; never the agent's own then.
   const hint: Pick<ExistingSignIn, "again" | "email"> | undefined = login ?? (email ? { email } : undefined);
   const ownable = ready && !hint && ownSignInFor(choice, view, gates.row);
@@ -1447,7 +1450,7 @@ function PlanSteps({
           />
         </GroupedList>
       ) : null}
-      {steps && (!choosing || other) ? (
+      {steps && !keyWaits && (!choosing || other) ? (
         <AddAccount
           machineId={view?.computer?.machineId ?? ""}
           kind={kind}

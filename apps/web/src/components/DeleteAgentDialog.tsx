@@ -2,7 +2,7 @@ import { keys } from "@agenteschat/client";
 import { errorText } from "@agenteschat/client/lib/errors";
 import { agentGrammar } from "@agenteschat/client/lib/grammar";
 import { matchesName } from "@agenteschat/client/lib/text";
-import { Button, Dialog, DialogBody, DialogFooter, Field, Icon, Input, Locked } from "@agenteschat/ui";
+import { Button, Dialog, DialogBody, DialogFooter, Field, Icon, Input, Locked, NOT_A_LOGIN } from "@agenteschat/ui";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -80,7 +80,7 @@ export function DeleteAgentDialog({
               id="agp-delete-name"
               error={purge.error ? errorText(t, purge.error) : undefined}
             >
-              <Input value={typed} autoComplete="off" spellCheck={false} onChange={(e) => setTyped(e.target.value)} />
+              <Input value={typed} {...NOT_A_LOGIN} onChange={(e) => setTyped(e.target.value)} />
             </Field>
           </DialogBody>
         </Locked>

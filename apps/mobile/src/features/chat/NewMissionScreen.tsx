@@ -1,4 +1,11 @@
-import { type MissionEligibleAgent, useCreateMission, useEligibleAgents, useMe } from "@agenteschat/client";
+import {
+  type MissionEligibleAgent,
+  useComputerSetup,
+  useCreateMission,
+  useEligibleAgents,
+  useMe,
+} from "@agenteschat/client";
+import { setupView } from "@agenteschat/client/lib/computer";
 import { modeKey } from "@agenteschat/client/lib/workspace-mode";
 import type { TFunction } from "i18next";
 import { useState } from "react";
@@ -32,7 +39,7 @@ export function NewMissionScreen({
   const orgId = useOrgId();
   const toast = useToast();
   const eligible = useEligibleAgents(orgId);
-  // On the Cloud missions wait for the workspace's own computer: nobody connects one.
+  // On the Cloud missions wait for the workspace's own computer while it is being prepared: nobody connects one.
   const waitCloud = useCloudMissionWait();
   const cloud = useEdition() === "cloud";
   const names = useNamesComputers();
@@ -108,14 +115,16 @@ export function NewMissionScreen({
 }
 
 /**
- * "Missions start once Acme's computer is ready." on the Cloud (a personal workspace's: once your agents' computer is,
- * ADR 0159); null elsewhere.
+ * "Missions start once Acme's computer is ready." on the Cloud while that computer is still being prepared (a
+ * personal workspace's: once your agents' computer is, ADR 0159); null elsewhere and once it is ready.
  */
 function useCloudMissionWait() {
   const { t } = useTranslation();
   const orgId = useOrgId();
   const org = useMe().data?.organizations.find((o) => o.id === orgId);
-  if (useEdition() !== "cloud") return null;
+  const setupQ = useComputerSetup(orgId);
+  const setup = setupView(setupQ.data, setupQ.dataUpdatedAt);
+  if (!setup || setup.phase === "ready") return null;
   return t("missions.waitingCloud", {
     computer: t(modeKey(org, "computerSetup.titleInSentence"), { org: org?.name ?? "" }),
   });

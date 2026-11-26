@@ -2,7 +2,17 @@ import type { Channel } from "@agenteschat/client";
 import { useDeleteChannel } from "@agenteschat/client";
 import { errorText } from "@agenteschat/client/lib/errors";
 import { matchesName } from "@agenteschat/client/lib/text";
-import { AffixInput, Button, Dialog, DialogBody, DialogFooter, Field, Icon, Locked } from "@agenteschat/ui";
+import {
+  AffixInput,
+  Button,
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  Field,
+  Icon,
+  Locked,
+  NOT_A_LOGIN,
+} from "@agenteschat/ui";
 import { useNavigate, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -88,13 +98,7 @@ export function DeleteChannelDialog({
               id="channel-delete-name"
               error={remove.error ? errorText(t, remove.error) : undefined}
             >
-              <AffixInput
-                prefix="#"
-                value={typed}
-                autoComplete="off"
-                spellCheck={false}
-                onChange={(e) => setTyped(e.target.value)}
-              />
+              <AffixInput prefix="#" value={typed} {...NOT_A_LOGIN} onChange={(e) => setTyped(e.target.value)} />
             </Field>
           </DialogBody>
         </Locked>

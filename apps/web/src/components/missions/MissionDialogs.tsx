@@ -17,6 +17,7 @@ import { errorText } from "@agenteschat/client/lib/errors";
 import { agentGrammar } from "@agenteschat/client/lib/grammar";
 import { executorName } from "@agenteschat/client/lib/missions";
 import { can } from "@agenteschat/client/lib/permissions";
+import { isRightHand } from "@agenteschat/client/lib/right-hand";
 import { isPersonal, modeKey } from "@agenteschat/client/lib/workspace-mode";
 import {
   Button,
@@ -49,7 +50,7 @@ import { ActorAvatar, AgentAvatar } from "@/components/AgentAvatar";
 import { MachineIcon } from "@/components/machine-bits";
 import { useOrg } from "@/components/org-context";
 import { ThisMacButton } from "@/components/ThisMac";
-import { useComputerEdition, useNamesComputers } from "@/components/WorkspaceComputer";
+import { useComputerEdition, useNamesComputers, useSetupView } from "@/components/WorkspaceComputer";
 import { useDirectory } from "@/hooks/useDirectory";
 import { useTextLimit } from "@/hooks/useTextLimit";
 import { useToast } from "@/lib/toast";
@@ -83,8 +84,11 @@ export function NewMissionDialog({
 }) {
   const { t } = useTranslation();
   const { org } = useOrg();
-  // On the Cloud every agent works on the workspace's own computer: missions wait for it, nobody connects one.
+  // On the Cloud every agent works on the workspace's own computer: nobody connects one, and while it is still
+  // being prepared an agent without one waits for it. Once it is ready, an agent without it says so like anywhere.
   const cloud = useComputerEdition(org.id) === "cloud";
+  const setup = useSetupView(org.id);
+  const waiting = setup !== null && setup.phase !== "ready";
   const waitWords = t("missions.waitingCloud", {
     computer: t(modeKey(org, "computerSetup.titleInSentence"), { org: org.name }),
   });
@@ -133,9 +137,11 @@ export function NewMissionDialog({
   const [picked, setPicked] = useState<MissionExecutor | null>(null);
   const executor: MissionExecutor | undefined =
     agent && picked && agent.executors.includes(picked) ? picked : (agent?.defaultExecutor ?? undefined);
-  // Nobody can run one yet: where to connect a computer (an agent I can talk to, mine first).
+  // Nobody can run one yet: where to connect a computer (an agent I can talk to, mine first; never the right hand,
+  // which is on no computer).
   const setupAgent =
-    dir.agentById.get(blocked.find((a) => a.canManage)?.id ?? "") ?? dir.agents.find((a) => canTalk(a));
+    dir.agentById.get(blocked.find((a) => a.canManage)?.id ?? "") ??
+    dir.agents.find((a) => canTalk(a) && !isRightHand(a));
   const none = eligible.isSuccess && agents.length === 0;
   const goalId = useId();
   const submit = async () => {
@@ -207,10 +213,10 @@ export function NewMissionDialog({
                 <Icon name="computer" size={14} />
                 <b>{t("missions.new.noEligibleTitle")}</b>
               </span>
-              <span>{cloud ? waitWords : t("missions.new.noEligibleText")}</span>
+              <span>{waiting ? waitWords : t("missions.new.noEligibleText")}</span>
               {/* agentes for Mac: this Mac first, then the agent points at it (ADR 0036). */}
               {!cloud && <ThisMacButton orgId={org.id} canPair={can(org, "pair_computers")} folders={false} />}
-              {setupAgent && !cloud && (
+              {setupAgent && !waiting && (
                 <Link
                   className="ac-link mi-lnk"
                   to="/org/$orgId/agents/$agentId"
@@ -246,7 +252,7 @@ export function NewMissionDialog({
                           : a.machine.online
                             ? undefined
                             : t("missions.computerOffline")
-                        : cloud && (a.reason ?? "no_computer") === "no_computer"
+                        : waiting && (a.reason ?? "no_computer") === "no_computer"
                           ? waitWords
                           : t(`missions.new.reason.${a.reason ?? "no_computer"}`, {
                               computer: computerNameOf(t, org.name, a.machine?.name ?? "", isPersonal(org)),
@@ -280,13 +286,13 @@ export function NewMissionDialog({
                       <b>{a.name}</b>
                     </span>
                     <span className="ac-mediarow__body mi-blocked__text">
-                      {cloud && (a.reason ?? "no_computer") === "no_computer"
+                      {waiting && (a.reason ?? "no_computer") === "no_computer"
                         ? waitWords
                         : t(`missions.new.reason.${a.reason ?? "no_computer"}`, {
                             computer: computerNameOf(t, org.name, a.machine?.name ?? "", isPersonal(org)),
                           })}
                     </span>
-                    {!cloud && (
+                    {!waiting && (
                       <span className="ac-mediarow__end">
                         <Link
                           className="ac-link mi-lnk"

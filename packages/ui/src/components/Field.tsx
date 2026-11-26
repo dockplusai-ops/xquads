@@ -134,6 +134,30 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input({ c
 });
 
 /**
+ * What a field that is no sign-in takes (a name typed to confirm a deletion): password managers read the text field
+ * before a password as its username and fill in the person's email. Off for the browser's own (`autoComplete`, and a
+ * `name` no username heuristic matches) and for 1Password, LastPass, Bitwarden and Dashlane. A password beside it
+ * also needs its username given, hidden (`HiddenUsername`), or Chrome still picks this one.
+ */
+export const NOT_A_LOGIN = {
+  autoComplete: "off",
+  name: "typed-confirmation",
+  spellCheck: false,
+  "data-1p-ignore": "true",
+  "data-lpignore": "true",
+  "data-bwignore": "true",
+  "data-form-type": "other",
+} as const;
+
+/**
+ * The account a password field belongs to, for password managers only: given here, they never take a field the
+ * person types in for the username (ADR 0088's proof beside a name typed to confirm). Not shown, not focusable.
+ */
+export function HiddenUsername({ value }: { value: string }) {
+  return <input type="text" autoComplete="username" value={value} readOnly hidden tabIndex={-1} aria-hidden="true" />;
+}
+
+/**
  * Fields under each other: every field, note and group the same `--form-gap` apart, more than a field's label and
  * help sit from its control (`--field-gap`). A dialog's `DialogBody` keeps the same rhythm.
  */
