@@ -19,6 +19,7 @@ import {
   learnTrust,
   listAgentMemoryRows,
   memoriesFor,
+  modelBody,
   normalizeSubject,
   openPersonAgentDm,
   postPersonMessage,
@@ -449,9 +450,9 @@ describe("agents learn on their own (ADR 0120)", () => {
     ]);
     const all = await items();
     expect(all.length).toBe(4);
-    // What the person asked is theirs to vouch for (ADR 0167): kept in their own words, never in the page's.
+    // What the person asked is theirs to vouch for (ADR 0167): agents read it in their own words, never the page's.
     const said = all.find((i) => i.createdByKind === "person");
-    expect([said?.trust, said?.content]).toEqual(["high", "@dev read the vendor page and keep what matters"]);
+    expect([said?.trust, said && modelBody(said)]).toEqual(["high", "@dev read the vendor page and keep what matters"]);
     expect(
       all.filter((i) => i !== said).every((i) => i.trust === "low" && !i.verified && i.agentId === f.agent.id),
     ).toBe(true);
@@ -803,8 +804,8 @@ describe("learning guards", () => {
       .where(eq(schema.agentRuns.id, harness.id));
     expect(await trust(harness)).toBe("low");
     await invoke(harness, "remember", { kind: "fact", content: "The vendor API is on v9.", basis: "person_said" });
-    // The person's own words are theirs to vouch for (ADR 0167); what the fetch said never becomes the memory.
-    expect((await items()).map((i) => [i.trust, i.content])).toEqual([["high", "@dev look into the vendor"]]);
+    // The person's own words are theirs to vouch for (ADR 0167); what the fetch said is never what agents read.
+    expect((await items()).map((i) => [i.trust, modelBody(i)])).toEqual([["high", "@dev look into the vendor"]]);
 
     // A screen read: the envelope is stripped from the step, only the gateway's `outside` mark is left.
     const { run: screen } = await personRun("@dev check the dashboard");

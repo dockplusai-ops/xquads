@@ -319,6 +319,41 @@ test("the server's own lessons reach people without their template, a proposal's
   expect(await reasons()).toMatchObject([{ why: "", whyCode: "seen", evidence: [] }]);
 });
 
+test("the memory page shows the fact, not the person's message a quote rests on (ADR 0167)", async () => {
+  t = await createTestServer();
+  const owner = browser(t);
+  await signUp(owner, "owner@example.com");
+  const { orgId, agentId } = await seedOrg(owner);
+  const [me] = await t.db.select().from(schema.organizationMembers).where(eq(schema.organizationMembers.orgId, orgId));
+  const message = "Faça cada item:\n1) crie uma planilha\n7) lembre que meu café favorito é espresso";
+  const quoted = (words?: string) => ({
+    orgId,
+    kind: "fact" as const,
+    scopeType: "agent" as const,
+    scopeId: agentId,
+    agentId,
+    trust: "high" as const,
+    verified: true,
+    createdByKind: "person" as const,
+    createdById: me?.userId ?? null,
+    evidence: [{ type: "human" as const, ref: crypto.randomUUID(), at: new Date().toISOString(), quote: true, words }],
+  });
+  await t.db.insert(schema.contextItems).values([
+    {
+      ...quoted("7) lembre que meu café favorito é espresso"),
+      subjectKey: "coffee favorite",
+      title: "Café favorito: espresso",
+      content: "Gustavo's favorite coffee is espresso.",
+    },
+    // Saved before `words`: its content is the whole message, its title the fact.
+    { ...quoted(), subjectKey: "tea favorite", title: "Chá favorito: mate", content: message },
+  ]);
+  const { memories } = (await (await owner(`/api/app/organizations/${orgId}/agents/${agentId}/memories`)).json()) as {
+    memories: { text: string }[];
+  };
+  expect(memories.map((m) => m.text).sort()).toEqual(["Chá favorito: mate", "Gustavo's favorite coffee is espresso."]);
+});
+
 test("the team week's reasons reach people as codes, and the list ends an inbox row with nothing left to decide", async () => {
   t = await createTestServer();
   const owner = browser(t);

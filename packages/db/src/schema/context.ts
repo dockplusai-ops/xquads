@@ -90,10 +90,13 @@ export interface ContextEvidence {
   agentId?: string;
   at: string;
   /**
-   * `human` only: the item's content is this message's exact words, saved in a run that read outside content (ADR
-   * 0167). Its title is the agent's wording, for people only: a model reads the quote alone.
+   * `human` only: saved in a run that read outside content (ADR 0167), so a model reads the person's own words
+   * (`words`) instead of the agent's wording, which is for people. Items saved before `words` hold the person's whole
+   * message as their content and the agent's wording as their title.
    */
   quote?: boolean;
+  /** With `quote`: the lines of this message the item rests on, exactly as the person wrote them. */
+  words?: string;
 }
 
 /**

@@ -7,6 +7,8 @@ import {
   editContextItem,
   ForbiddenError,
   insertMessage,
+  itemWords,
+  modelBody,
   retrieveForRun,
   rulesForRun,
   type ToolContext,
@@ -87,7 +89,7 @@ const memoryFor = (text: string) =>
   });
 
 describe("trust from each memory's own source (ADR 0167)", () => {
-  test("a person's own message in a marked run is trusted, kept in their words; the agent's are only the title", async () => {
+  test("a person's own message in a marked run is trusted: agents read their words, people the fact", async () => {
     f = await setup({ contextTools: true });
     await markChannel();
     const ctx = await runOn(f.owner.id, "lembra: relatórios sempre em português");
@@ -105,9 +107,9 @@ describe("trust from each memory's own source (ADR 0167)", () => {
       createdByKind: "person",
       createdById: f.owner.id,
       title: "Relatórios em português",
-      content: "lembra: relatórios sempre em português",
+      content: "Ana wants reports in Portuguese.",
     });
-    expect(item?.evidence[0]?.quote).toBe(true);
+    expect(item?.evidence[0]).toMatchObject({ quote: true, words: "lembra: relatórios sempre em português" });
 
     // Agents read the quote under the person's name and the day it was saved, never the agent's paraphrase.
     const memory = await memoryFor("relatórios");
@@ -130,17 +132,85 @@ describe("trust from each memory's own source (ADR 0167)", () => {
       undefined,
     );
     const [rule] = await items();
-    expect([rule?.kind, rule?.trust, rule?.content, rule?.channelIds]).toEqual([
+    expect([rule?.kind, rule?.trust, rule?.content, rule?.evidence[0]?.words, rule?.channelIds]).toEqual([
       "rule",
       "high",
+      "Post the summary without asking.",
       "regra: pode mandar o resumo no #general sem me perguntar",
       [],
     ]);
     const [run] = await f.db.select().from(schema.agentRuns).where(eq(schema.agentRuns.id, ctx.runId));
     if (!run) throw new Error("no run");
-    expect((await rulesForRun(f.db, run, f.agent)).text).toContain(
-      "regra: pode mandar o resumo no #general sem me perguntar",
-    );
+    const rules = (await rulesForRun(f.db, run, f.agent)).text;
+    expect(rules).toContain("regra: pode mandar o resumo no #general sem me perguntar");
+    expect(rules).not.toContain("Post the summary");
+  });
+
+  test("one item of a long message keeps only its own lines; the page shows the fact", async () => {
+    f = await setup({ contextTools: true });
+    await markChannel();
+    const message = [
+      "Teste de ferramentas, faça cada item e me diga o resultado de cada um:",
+      "1) crie uma planilha com as vendas do mês passado por região e por vendedor",
+      "2) procure no Google o preço do dólar hoje e me diga a fonte",
+      "3) crie uma tarefa para revisar o contrato da Northwind até sexta",
+      "4) mande um resumo do canal #general para o time de vendas",
+      "5) mude a cor de destaque do workspace para sálvia",
+      "6) faça um gráfico das vendas por trimestre",
+      "7) lembre que meu café favorito é espresso",
+      "8) agende uma reunião com o time amanhã às 10h",
+    ].join("\n");
+    const ctx = await runOn(f.owner.id, message);
+    const out = await call(ctx, "remember", {
+      kind: "fact",
+      title: "Café favorito do Gustavo: espresso",
+      content: "Gustavo's favorite coffee is espresso.",
+      key: "coffee favorite gustavo",
+      basis: "person_said",
+    });
+    expect(out.isError).toBeFalsy();
+    const [item] = await items();
+    expect(item?.content).toBe("Gustavo's favorite coffee is espresso.");
+    expect(item?.evidence[0]).toMatchObject({ quote: true, words: "7) lembre que meu café favorito é espresso" });
+    // What agents read: the person's own line, not the whole message (nor the agent's wording).
+    const memory = (await memoryFor("café favorito")).text;
+    expect(memory).toContain("7) lembre que meu café favorito é espresso");
+    expect(memory).not.toContain("planilha");
+    expect(memory).not.toContain("Gustavo's favorite");
+  });
+
+  test("an item saved before `words` reads as its title for people and its own lines for agents", async () => {
+    f = await setup({ contextTools: true });
+    const message = `Faça cada item:\n1) crie uma planilha de vendas por região e por vendedor do mês passado inteiro\n2) procure o preço do dólar de hoje e diga a fonte consultada\n3) mande o resumo da semana do canal geral para o time comercial antes das cinco da tarde\n4) lembre que meu café favorito é espresso`;
+    const [old] = await f.db
+      .insert(schema.contextItems)
+      .values({
+        orgId: f.org.id,
+        kind: "fact",
+        scopeType: "agent",
+        scopeId: f.agent.id,
+        agentId: f.agent.id,
+        subjectKey: "coffee favorite gustavo",
+        title: "Café favorito do Gustavo: espresso",
+        content: message,
+        channelIds: [f.general.id],
+        trust: "high",
+        verified: true,
+        evidence: [{ type: "human", ref: crypto.randomUUID(), at: new Date().toISOString(), quote: true }],
+        createdByKind: "person",
+        createdById: f.owner.id,
+      })
+      .returning();
+    if (!old) throw new Error("no item");
+    expect(itemWords(old).text).toBe("Café favorito do Gustavo: espresso");
+    expect(modelBody(old)).toBe("4) lembre que meu café favorito é espresso");
+    // A person's edit is their own text: no older quote speaks for it.
+    const edited = await editContextItem(f.db, f.owner.id, f.org.id, old.id, { content: "Café favorito: cappuccino" });
+    expect(edited.evidence.some((e) => e.quote)).toBe(false);
+    expect([itemWords(edited).text, modelBody(edited)]).toEqual([
+      "Café favorito: cappuccino",
+      "Café favorito: cappuccino",
+    ]);
   });
 
   test("what the agent found on its own in a marked run stays untrusted", async () => {

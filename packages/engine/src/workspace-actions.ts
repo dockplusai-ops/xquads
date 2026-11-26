@@ -204,6 +204,8 @@ export interface WorkspaceAction {
     direction: "undo" | "redo",
     changedSince: () => Error,
   ): Promise<Record<string, unknown> | undefined>;
+  /** What it is in `state` (a receipt's `before`), in words, for the agent to say after an undo. */
+  restored?(state: Record<string, unknown>): string;
 }
 
 const str = (v: unknown) => (typeof v === "string" ? v.trim() : "");
@@ -1964,19 +1966,43 @@ const ACCENT_PRESETS = {
 const presetHex = (key: (typeof ACCENT_PRESETS)[keyof typeof ACCENT_PRESETS]) =>
   key === "sky" ? DEFAULT_ACCENT : AGENT_GRADIENTS[key][1];
 
-/** The stored accent `color` asks for: a preset's or a "#rrggbb", null for the default (camel is it), or why not. */
-/** What people call the default, as the agent passes it on. */
-const BACK_TO_DEFAULT = new Set(["default", "padrão", "padrao", "original", "reset"]);
+/** The presets by the names Settings shows in Portuguese, accents dropped (`accentOf` drops them from what it reads). */
+const ACCENT_PRESETS_PT: Record<string, keyof typeof ACCENT_PRESETS> = {
+  camelo: "camel",
+  ardosia: "slate",
+  nevoa: "mist",
+  argila: "clay",
+  areia: "sand",
+  salvia: "sage",
+  grafite: "graphite",
+};
+/** The presets as the agent reads them, in both languages. */
+const PRESET_NAMES =
+  "camel (camelo), slate (ardósia), mist (névoa), clay (argila), sand (areia), sage (sálvia), graphite (grafite)";
 
+/** What people call the default, as the agent passes it on (accents dropped). */
+const BACK_TO_DEFAULT = new Set(["default", "padrao", "original", "reset"]);
+
+/** The stored accent `color` asks for: a preset's or a "#rrggbb", null for the default (camel is it), or why not. */
 function accentOf(color: string): { accent: string | null } | string {
-  const said = color.toLowerCase();
-  const preset = ACCENT_PRESETS[said as keyof typeof ACCENT_PRESETS];
+  const said = color
+    .trim()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase();
+  const preset = ACCENT_PRESETS[(ACCENT_PRESETS_PT[said] ?? said) as keyof typeof ACCENT_PRESETS];
   const hex = BACK_TO_DEFAULT.has(said) ? DEFAULT_ACCENT : preset ? presetHex(preset) : said;
-  if (!isAccentHex(hex))
-    return `"${color}" isn't a color: say one of ${Object.keys(ACCENT_PRESETS).join(", ")}, a "#rrggbb" or default.`;
+  if (!isAccentHex(hex)) return `"${color}" isn't a color: say one of ${PRESET_NAMES}, a "#rrggbb" or default.`;
   // Like the screen: the default's own color is no accent.
   return { accent: hex === DEFAULT_ACCENT ? null : hex };
 }
+
+/** A stored accent as the agent says it: "sage (#8fbb9c)", the default, or its hex. */
+const accentName = (accent: unknown) => {
+  if (typeof accent !== "string" || !accent) return `the default, camel (${DEFAULT_ACCENT})`;
+  const name = Object.entries(ACCENT_PRESETS).find(([, key]) => presetHex(key) === accent)?.[0];
+  return name ? `${name} (${accent})` : accent;
+};
 
 /** Its words: the color, with the preset's key when it is one (each app names it in its language), or the default. */
 const accentWords = (accent: string | null): Record<string, string> => {
@@ -2003,7 +2029,7 @@ const accentAction: WorkspaceAction = {
         type: "string",
         minLength: 1,
         maxLength: 16,
-        description: `A suggested color by name (${Object.keys(ACCENT_PRESETS).join(", ")}), any "#rrggbb" (e.g. blue #2563eb), or default: back to the default color (padrão, original), camel (${DEFAULT_ACCENT}).`,
+        description: `A brand color by its name, in English or Portuguese: ${PRESET_NAMES}; never a hex of your own for one of these. A "#rrggbb" only for a color outside this list (e.g. blue #2563eb). Or default: back to the default color (padrão, original), camel (${DEFAULT_ACCENT}).`,
       },
     },
     required: ["color"],
@@ -2029,6 +2055,7 @@ const accentAction: WorkspaceAction = {
       after: { accent },
     };
   },
+  restored: (state) => `the accent is ${accentName(state.accent)}`,
   async revert(deps, actorId, a, direction, changedSince) {
     const [from, to] = direction === "undo" ? [obj(a.after), obj(a.before)] : [obj(a.before), obj(a.after)];
     if ((await orgLook(deps.db, a.orgId))?.accent !== (from.accent ?? null)) throw changedSince();
@@ -2561,6 +2588,18 @@ export async function askWorkspaceAction(deps: ActionDeps, userId: string, orgId
 }
 
 /** Undo or Redo of a catalog action's receipt, as `userId` (`agent-undo.ts`). */
+/**
+ * What an undo of a workspace change put back, in words: the action's own (`restored`), else its snapshot's plain
+ * values, so the agent says what it is now instead of guessing from the conversation. Null when nothing says it.
+ */
+export function restoredWords(a: Pick<ActionRow, "params" | "before">): string | null {
+  const state = obj(a.before);
+  const entry = workspaceAction(obj(a.params).action);
+  if (entry?.restored) return entry.restored(state);
+  const plain = Object.entries(state).filter(([, v]) => v === null || typeof v !== "object");
+  return plain.length ? plain.map(([k, v]) => `${k}: ${v === null || v === "" ? "none" : String(v)}`).join(", ") : null;
+}
+
 export async function revertWorkspaceAction(
   deps: ActionDeps,
   a: ActionRow,

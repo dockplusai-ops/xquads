@@ -56,6 +56,7 @@ import {
   type ContextItem,
   checkPermissionText,
   consolidateItem,
+  excerptOf,
   getContextItems,
   howToChannels,
   howToSql,
@@ -67,6 +68,7 @@ import {
   isTeamWide,
   learnedQuietly,
   mayEditItem,
+  modelBody,
   personMayRead,
   personSaid,
   RECHECK_AFTER_DAYS,
@@ -119,7 +121,7 @@ export function itemLabel(
 }
 
 /** An item as a model reads it after its label: a quote's words alone (`isQuote`), else its title and content. */
-export const itemText = (item: Pick<ContextItem, "title" | "content" | "evidence">, content = item.content) =>
+export const itemText = (item: Pick<ContextItem, "title" | "content" | "evidence">, content = modelBody(item)) =>
   `${item.title && !isQuote(item) ? `${item.title}: ` : ""}${content}`;
 
 /** The names of the people whose own words these trusted items are (`personSaid`), by item id: one query. */
@@ -691,8 +693,9 @@ export function createContextToolSource(deps: ContextDeps): ToolSource {
           // A rule's authority is the person who wrote this run's message: another agent's or a page's words give none.
           if (rule && !said) return { content: NOT_THEIR_RULE, isError: true };
           // Trust comes from the item's own source (ADR 0167): the person's own message vouches for it, also in a run
-          // that read outside content, where their exact words are what agents read and the agent's only the title.
-          const quote = said && outside ? quoteOf(author?.body ?? "") : null;
+          // that read outside content, where the lines of their message it rests on are what agents read (evidence
+          // `words`). The item's content stays the fact as the agent wrote it, what people read.
+          const quote = said && outside ? excerptOf(author?.body ?? "", `${str(input.title)}\n${content}`) : null;
           // Another agent's words carry no person's (ADR 0167): a copy kept here would hold only in this DM.
           if (!said && input.basis !== "found" && (await triggerFromAgent(ctx)))
             return { content: RELAYED_SAVE, isError: true };
@@ -701,10 +704,10 @@ export function createContextToolSource(deps: ContextDeps): ToolSource {
             return saveForTeam(deps, ctx, {
               person,
               kind: str(input.kind),
-              title: quote ? str(input.title) || cutText(content, 200) : str(input.title),
+              title: str(input.title),
               subject: str(input.key).trim() || str(input.title) || content.slice(0, 120),
-              content: quote ?? content,
-              quoted: quote !== null,
+              content,
+              quote,
               everywhere: input.everywhere !== false,
               words: author?.body ?? "",
             });
@@ -719,9 +722,9 @@ export function createContextToolSource(deps: ContextDeps): ToolSource {
               scopeType: theirsAlone ? "person" : "agent",
               scopeId: theirsAlone ? (kept.person ?? person) : ctx.agentId,
               agentId: ctx.agentId,
-              title: quote ? str(input.title) || cutText(content, 200) : str(input.title),
+              title: str(input.title),
               subject: str(input.key).trim() || str(input.title) || content.slice(0, 120),
-              content: quote ?? content,
+              content,
               sourceIds: [ctx.triggerMessageId],
               // A rule about the agent's own conduct holds in every conversation: no channel keeps it out of a run.
               // Only when a person said it. What the right hand keeps for a person stays in their DM with it.
@@ -734,7 +737,7 @@ export function createContextToolSource(deps: ContextDeps): ToolSource {
                       type: "human",
                       ref: ctx.triggerMessageId,
                       at: new Date().toISOString(),
-                      ...(quote ? { quote: true } : {}),
+                      ...(quote ? { quote: true, words: quote } : {}),
                     },
                   ]
                 : [{ type: "self", ref: ctx.triggerMessageId, agentId: ctx.agentId, at: new Date().toISOString() }],
@@ -806,11 +809,13 @@ export function createContextToolSource(deps: ContextDeps): ToolSource {
               words: asked?.body ?? "",
             });
           const trust = requester ? ("high" as const) : learned.trust;
-          // Like `remember` (ADR 0167): after outside content, the person's own message is the new text, after the old
-          // one when that was a person's words too (a rule's change reads with the rule it changes).
+          // Like `remember` (ADR 0167): after outside content, agents read the lines of the person's own message it rests
+          // on, after the old words when those were a person's too (a rule's change reads with the rule it changes).
           const author = learned.outside ? asked : null;
-          const said = author?.id === requester ? quoteOf(author.body) : null;
-          const quote = said && item.trust === "high" && personSaid(item) ? `${item.content}\n${said}` : said;
+          const said =
+            author?.id === requester ? excerptOf(author.body, `${str(input.title)}\n${str(input.content)}`) : null;
+          const before = modelBody(item);
+          const quote = said && item.trust === "high" && personSaid(item) ? `${before}\n${said}` : said;
           const next = await ctx.db.transaction(async (tx) => {
             const row = await supersede(tx, item, {
               orgId: ctx.orgId,
@@ -820,8 +825,8 @@ export function createContextToolSource(deps: ContextDeps): ToolSource {
               agentId: item.agentId,
               subject: item.subjectKey,
               // A title describing the old text would be shown above the new one: none rather than a stale one.
-              title: quote ? str(input.title).trim() || cutText(str(input.content), 200) : str(input.title).trim(),
-              content: quote ?? str(input.content),
+              title: str(input.title).trim(),
+              content: str(input.content),
               sourceIds: [...item.sourceIds, ctx.triggerMessageId],
               channelIds: item.kind === "rule" ? [] : [...new Set([...item.channelIds, ctx.channelId])],
               trust,
@@ -831,7 +836,7 @@ export function createContextToolSource(deps: ContextDeps): ToolSource {
                       type: "human",
                       ref: ctx.triggerMessageId,
                       at: new Date().toISOString(),
-                      ...(quote ? { quote: true } : {}),
+                      ...(quote ? { quote: true, words: cutText(quote, 2000) } : {}),
                     },
                   ]
                 : [{ type: "self", ref: ctx.triggerMessageId, agentId: ctx.agentId, at: new Date().toISOString() }],
@@ -1211,9 +1216,6 @@ const notRequested = {
   isError: true,
 };
 
-/** A person's message as a memory's text (ADR 0167): their words as written, within an item's length. */
-const quoteOf = (body: string) => cutText(body.trim(), 2000);
-
 /** The message this run answers is another agent's (`tell_agent`, `ask_agent`, a mention). */
 async function triggerFromAgent(ctx: ToolContext) {
   const [m] = await ctx.db
@@ -1272,7 +1274,8 @@ async function saveForTeam(
     title: string;
     subject: string;
     content: string;
-    quoted: boolean;
+    /** After outside content: the lines of the person's message agents read for it (evidence `words`). */
+    quote: string | null;
     everywhere: boolean;
     /** The person's message it is saved from. */
     words: string;
@@ -1327,7 +1330,7 @@ async function saveForTeam(
           type: "human",
           ref: ctx.triggerMessageId,
           at: new Date().toISOString(),
-          ...(input.quoted ? { quote: true } : {}),
+          ...(input.quote ? { quote: true, words: input.quote } : {}),
         },
       ],
       confidence: 0.95,
@@ -1678,7 +1681,7 @@ export async function retrieveForRun(
     // Context on demand (ADR 0043): a long item goes in cut short; `expand` opens it in full by its id.
     // A how-to's method is the point: it gets the room a pinned item does.
     const room = item.pinned || isHowTo(item) ? 600 : MEMORY_ITEM_CHARS;
-    const content = item.content.replace(/\s+/g, " ");
+    const content = modelBody(item).replace(/\s+/g, " ");
     const shown = content.length > room ? `${cutText(content, room)}… [more with expand]` : content;
     const line = `- ${itemLabel(item, speakers.get(item.id))}${item.pinned ? " (pinned)" : ""} ${itemText(item, shown)} (id ${item.id})`;
     if (used + line.length > budget && !core.has(item.id)) continue;
@@ -1733,7 +1736,7 @@ export async function teamMemoryForPrompt(db: Database, orgId: string): Promise<
   const rest: ContextItem[] = [];
   let used = 0;
   for (const item of items) {
-    const line = `- ${itemLabel(item, speakers.get(item.id))} ${itemText(item, cutText(item.content.replace(/\s+/g, " "), 600))} (id ${item.id})`;
+    const line = `- ${itemLabel(item, speakers.get(item.id))} ${itemText(item, cutText(modelBody(item).replace(/\s+/g, " "), 600))} (id ${item.id})`;
     if (used + line.length > TEAM_PROMPT_CHARS) rest.push(item);
     else {
       lines.push(line);
@@ -1754,7 +1757,7 @@ export async function teamMemoryForPrompt(db: Database, orgId: string): Promise<
 const TEAM_PROMPT_CHARS = 1500;
 
 /** An item named in one line: its title, or a quote's own words (`isQuote`: its title is the agent's, for people). */
-const nameOf = (i: ContextItem) => (isQuote(i) ? i.content : i.title || i.content).replace(/\s+/g, " ");
+const nameOf = (i: ContextItem) => (isQuote(i) ? modelBody(i) : i.title || i.content).replace(/\s+/g, " ");
 
 const filterAsync = async <T>(list: T[], keep: (item: T) => Promise<boolean>) => {
   const kept = await Promise.all(list.map(keep));

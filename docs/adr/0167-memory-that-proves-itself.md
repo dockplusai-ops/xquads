@@ -144,3 +144,19 @@ still matches word for word, and keys cover only the languages written and only 
 Checked offline: 24 made-up memories, Portuguese requests for English ones and the reverse, among lookalikes that
 share their words, with a fake model that gives a translation its original's vector: every one is in the top 5 of
 the hybrid ranking, almost none by words alone. A real model is checked in production.
+
+## Addendum (2026-11-26): the fact for people, the person's own lines for agents
+
+A person asked for eight things in one message, the seventh "lembre que meu café favorito é espresso", in a run that
+had read outside content. §1 stored the whole message as the memory: its page showed the eight requests as the fact,
+and agents read its first 240 characters, which never reached the coffee.
+
+1. **Content is the fact.** `remember` (its team save too) and `update_memory` store the agent's statement as the
+   item's content, what people read. The person's words go on the `human` evidence as `words` beside `quote: true`.
+2. **Agents still read the person's own words, only their part.** `excerptOf` keeps the lines, sentences or numbered
+   items of the message that share the most words with the agent's title and text; a message of up to 280
+   characters, or one where nothing matches, is kept whole (cut at 2,000). `modelBody` is what a model reads of an
+   item: the run's memory block, `expand`, team memory, "# Rules people gave you" and the search index body.
+3. **Items saved before.** No migration: an item with `quote` and no `words` shows its title to people (`itemWords`
+   through `shownContent`) and its message's matching lines to agents (`quotedWords`). A person's edit drops the
+   quote from the evidence: their own text is what both read.

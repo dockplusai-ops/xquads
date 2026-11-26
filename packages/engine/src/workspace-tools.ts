@@ -12,7 +12,7 @@ import { replyThreadOf } from "./runs";
 import { noAgentText } from "./team";
 import { closeThread, getThread, updateThread } from "./threads";
 import type { ToolContext, ToolDefinition, ToolOutput, ToolSource } from "./tools/types";
-import { actNow, updateChannelAction } from "./workspace-actions";
+import { actNow, restoredWords, updateChannelAction, WORKSPACE_ACTION_KIND } from "./workspace-actions";
 
 export const ADD_TO_CHANNEL_TOOL = "add_agent_to_channel";
 export const UPDATE_THREAD_TOOL = "update_thread";
@@ -359,7 +359,9 @@ function undoChangeTool(deps: { pubsub?: PubSub }): ToolDefinition {
         for (const a of group) {
           try {
             await undoAgentAction({ db: ctx.db, pubsub: deps.pubsub }, person, ctx.orgId, a.id);
-            undone.push(describeAction(actionView(a)));
+            // What it is now, from the receipt's snapshot: the agent says that, not a guess from the conversation.
+            const now = a.kind === WORKSPACE_ACTION_KIND ? restoredWords(a) : null;
+            undone.push(`${describeAction(actionView(a))}${now ? ` (now ${now})` : ""}`);
           } catch (error) {
             kept.push(`${describeAction(actionView(a))}: ${whyNot(a, error)}`);
           }

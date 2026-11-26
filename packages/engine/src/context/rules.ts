@@ -4,6 +4,7 @@ import { type AuthorityRun, type RunAuthority, runAuthority } from "../authority
 import { caches, rulesPresenceKey } from "../cache";
 import { cutText } from "../format";
 import { routineCreatorOf } from "../requester";
+import { modelBody } from "./items";
 
 const { contextItems, users } = schema;
 
@@ -54,7 +55,9 @@ export async function rulesForPerson(
   const rows = await db
     .select({
       id: contextItems.id,
+      title: contextItems.title,
       content: contextItems.content,
+      evidence: contextItems.evidence,
       by: contextItems.createdById,
       at: contextItems.createdAt,
       name: users.name,
@@ -102,7 +105,7 @@ export async function rulesForRun(
   if (rules.length === 0) return { text: "", itemIds: [] };
   const lines = rules.map(
     (r) =>
-      `- ${r.name ?? "A person"}, ${r.at.toISOString().slice(0, 10)}: ${cutText(r.content.replace(/\s+/g, " "), RULE_CHARS)} (id ${r.id})`,
+      `- ${r.name ?? "A person"}, ${r.at.toISOString().slice(0, 10)}: ${cutText(modelBody(r).replace(/\s+/g, " "), RULE_CHARS)} (id ${r.id})`,
   );
   return {
     text: [

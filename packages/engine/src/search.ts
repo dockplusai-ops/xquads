@@ -26,7 +26,7 @@ import type { EmbeddingResult } from "@agenteschat/providers";
 import { agentIdsSeen, isPlaybook } from "./audience";
 import { caches } from "./cache";
 import { CONFIDENTIAL_STUB, isConfidential } from "./confidential";
-import { ACCESS_WORD, HOW_TO_WORD } from "./context/items";
+import { ACCESS_WORD, HOW_TO_WORD, modelBody } from "./context/items";
 import { personAgentDmKey } from "./dms";
 import { cutText } from "./format";
 import type { ModelGateway } from "./gateway";
@@ -84,7 +84,8 @@ registerDocumentBuilder("context_item", async (db, orgId, id) => {
     sourceId: c.id,
     channelIds: c.channelIds,
     title: `${c.kind}${c.title ? `: ${c.title}` : ""}`,
-    body: c.content,
+    // A quote is read in the person's own words (ADR 0167), here too.
+    body: modelBody(c),
     // Its key is English (`KEY_DESCRIPTION`): a request in another language still finds it by those words (ADR 0167).
     keywords: c.subjectKey
       .split(" ")

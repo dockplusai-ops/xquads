@@ -281,7 +281,9 @@ async function memoryViews(db: Database, items: ContextItem[], visible: readonly
   const replaced = await db
     .select({
       supersededBy: schema.contextItems.supersededBy,
+      title: schema.contextItems.title,
       content: schema.contextItems.content,
+      evidence: schema.contextItems.evidence,
       channelIds: schema.contextItems.channelIds,
     })
     .from(schema.contextItems)

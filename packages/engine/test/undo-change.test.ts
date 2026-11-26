@@ -152,6 +152,7 @@ describe("undo_change", () => {
     const out = await invoke(f, asked, UNDO_CHANGE_TOOL, {});
     expect(out.isError).toBeFalsy();
     expect(out.content).toContain("Undone: did set_accent");
+    expect(out.content).toContain("(now the accent is #2563eb)");
     expect(await accent(f)).toBe("#2563eb");
 
     const again = await invoke(f, asked, UNDO_CHANGE_TOOL, {});
@@ -182,6 +183,35 @@ describe("undo_change", () => {
     // Looking stays open: the list undoes nothing.
     expect((await invoke(f, relayed, UNDO_CHANGE_TOOL, { list: true })).content).toContain("(can be undone)");
     expect(await accent(f)).toBe("#8aa3ae");
+  });
+
+  test("the presets' Portuguese names are the presets, and the undo says what the accent is now", async () => {
+    f = await setup({ rightHand: true });
+    const names: Record<string, string | null> = {
+      camelo: null,
+      ardósia: "#8aa3ae",
+      ardosia: "#8aa3ae",
+      Névoa: "#a9b3ce",
+      argila: "#cf9580",
+      areia: "#d3c3b9",
+      sálvia: "#8fbb9c",
+      salvia: "#8fbb9c",
+      grafite: "#6f8189",
+    };
+    for (const [color, hex] of Object.entries(names)) {
+      await f.db.update(schema.organizations).set({ accent: "#2563eb" }).where(eq(schema.organizations.id, f.org.id));
+      await setAccent(f, await lodiRun(f, f.owner.id, `cor de destaque ${color}`), color);
+      expect({ color, accent: await accent(f) }).toEqual({ color, accent: hex });
+    }
+
+    await f.db.update(schema.organizations).set({ accent: null }).where(eq(schema.organizations.id, f.org.id));
+    const sage = await lodiRun(f, f.owner.id, "muda a cor de destaque para sálvia");
+    await setAccent(f, sage, "sálvia");
+    await reply(f, sage);
+    expect(await accent(f)).toBe("#8fbb9c");
+    const out = await invoke(f, await lodiRun(f, f.owner.id, "desfaça isso"), UNDO_CHANGE_TOOL, {});
+    expect(out.content).toContain("(now the accent is the default, camel (#c79d70))");
+    expect(await accent(f)).toBeNull();
   });
 
   test("the accent goes back to the default with `default` and the words people use", async () => {

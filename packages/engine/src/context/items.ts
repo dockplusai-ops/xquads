@@ -20,6 +20,7 @@ import { agentIdsSeen, isPlaybook, ownsAgent, readsPlaybook, seesAgentDetails } 
 import { caches, rulesPresenceKey } from "../cache";
 import { isAgentOnlyDm, personAgentDmKey } from "../dms";
 import { ForbiddenError, NotFoundError, ValidationError } from "../errors";
+import { cutText } from "../format";
 import { type Judge, triesToChangePermissions } from "../judge";
 import { can, getMembership, type Membership, requirePermission } from "../organizations";
 import { hasContact } from "../outside";
@@ -45,10 +46,12 @@ const CORRECTION = /^A person corrected ".*?": (.*)$/s;
  * `correctAgentMessage`): the words it is about, and how they came for the apps to say in the person's language. The
  * template around them is for the agent's prompt only.
  */
-export function itemWords({ content }: Pick<ContextItem, "content">): {
+export function itemWords(i: Pick<ContextItem, "content"> & Partial<Pick<ContextItem, "title" | "evidence">>): {
   text: string;
   how: "refused" | "corrected" | null;
 } {
+  const content =
+    i.evidence && i.title !== undefined ? shownContent({ ...i, title: i.title, evidence: i.evidence }) : i.content;
   if (content.startsWith(REFUSED_CHANGE))
     return { text: content.replace(REFUSED_CHANGE_MARKS, "").replace(/^removing "(.*)"$/s, "$1"), how: "refused" };
   const approval = REFUSED_APPROVAL.exec(content);
@@ -159,9 +162,50 @@ export function mergeEvidence(a: Evidence[], b: Evidence[]) {
   return [...a, ...b.filter((e) => !seen.has(`${e.type}:${e.ref}`))];
 }
 
-/** Its content is a person's exact words (`quote` evidence): a model reads them without the agent's title (ADR 0167). */
+/** A person's exact words back it (`quote` evidence): a model reads them, not the agent's wording (ADR 0167). */
 export const isQuote = (i: Pick<ContextItem, "evidence">) =>
   i.evidence.some((e) => e.type === "human" && e.quote === true);
+
+/** Saved before `words`: the person's whole message is its content, the agent's wording its title. */
+const oldQuote = (i: Pick<ContextItem, "evidence">) => isQuote(i) && !i.evidence.some((e) => e.quote && e.words);
+
+/** A quote's person's words, as a model reads them (`isQuote`): the lines of their message it rests on. */
+export function quotedWords(i: Pick<ContextItem, "title" | "content" | "evidence">) {
+  if (oldQuote(i)) return excerptOf(i.content, i.title);
+  return [...new Set(i.evidence.flatMap((e) => (e.quote && e.words ? [e.words] : [])))].join("\n");
+}
+
+/** What a model reads of an item's body: a quote's person's words (`quotedWords`), else its content. */
+export const modelBody = (i: Pick<ContextItem, "title" | "content" | "evidence">) =>
+  isQuote(i) ? quotedWords(i) : i.content;
+
+/** What people read as its text: its content, or an item saved before `words`' title (its content is the message). */
+export const shownContent = (i: Pick<ContextItem, "title" | "content" | "evidence">) =>
+  oldQuote(i) && i.title.trim() ? i.title.trim() : i.content;
+
+/** A message this long or shorter is kept whole as what an item rests on: it is about one thing. */
+const SHORT_MESSAGE = 280;
+
+/**
+ * The lines of a person's message an item is about, in their own words (ADR 0167): one message often asks several
+ * things ("1) … 7) lembre que meu café favorito é espresso"), and an item rests on its own part. The parts (lines,
+ * sentences, numbered items) sharing the most words with `about` (the agent's wording); the whole message when it is
+ * short or nothing matches.
+ * ponytail: shared words, no model; a part worded wholly apart from the agent's text falls back to the whole message.
+ */
+export function excerptOf(message: string, about: string, max = 2000) {
+  const text = message.trim();
+  if (text.length <= SHORT_MESSAGE) return text;
+  const parts = text
+    .split(/\n+|(?<=[.!?;])\s+|\s+(?=\d{1,2}[).]\s)/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+  const wanted = new Set(wordList(about).filter((w) => w.length > 2));
+  const scores = parts.map((p) => new Set(wordList(p).filter((w) => wanted.has(w))).size);
+  const best = Math.max(0, ...scores);
+  if (best === 0) return cutText(text, max);
+  return cutText(parts.filter((_, i) => (scores[i] ?? 0) * 2 >= best).join("\n"), max);
+}
 
 /**
  * Words of a fact about where and how things run (servers, hosts, addresses, deploys): such facts go stale, so past
@@ -816,7 +860,11 @@ export async function editContextItem(
         sourceIds: item.sourceIds,
         channelIds: item.channelIds,
         trust: "high",
-        evidence: mergeEvidence(item.evidence, [{ type: "human", ref: actorId, at: new Date().toISOString() }]),
+        // The person's own text now: no older quote speaks for it (`quotedWords`).
+        evidence: mergeEvidence(
+          item.evidence.map(({ quote: _quote, words: _words, ...e }) => e),
+          [{ type: "human", ref: actorId, at: new Date().toISOString() }],
+        ),
         confidence: Math.max(item.confidence, 0.9),
         pinned: input.pinned ?? item.pinned,
         createdByKind: "person",
