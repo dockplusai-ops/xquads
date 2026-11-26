@@ -10,6 +10,7 @@ import { replyThreadOf } from "./runs";
 import { noAgentText } from "./team";
 import { closeThread, getThread, updateThread } from "./threads";
 import type { ToolContext, ToolDefinition, ToolOutput, ToolSource } from "./tools/types";
+import { actNow, updateChannelAction } from "./workspace-actions";
 
 export const ADD_TO_CHANNEL_TOOL = "add_agent_to_channel";
 export const UPDATE_THREAD_TOOL = "update_thread";
@@ -39,7 +40,7 @@ export function createWorkspaceToolSource(deps: { pubsub?: PubSub }): ToolSource
     {
       name: ADD_TO_CHANNEL_TOOL,
       description:
-        "Add an agent (by handle, e.g. @lia) to a channel (by name; default: this one) when the person asks or the work needs it there. Works with the rights of the person who asked (the channel's creator or an admin, and the agent's owner or an admin). No permission needed: the person sees it with Undo.",
+        "Add an agent (by handle, e.g. @lia) to a channel (by name; default: this one) when the person asks or the work needs it there, and with `lead` make it the channel's responsible agent. Works with the rights of the person who asked (the channel's creator or an admin, and the agent's owner or an admin). No permission needed: the person sees it with Undo.",
       scope: "",
       inputSchema: {
         type: "object",
@@ -49,6 +50,11 @@ export function createWorkspaceToolSource(deps: { pubsub?: PubSub }): ToolSource
           auto_reply: {
             type: "boolean",
             description: "It may answer there without being mentioned (default true)",
+          },
+          lead: {
+            type: "boolean",
+            description:
+              "Make it the channel's responsible agent ('responsável pelo canal', always an agent): it takes what is said to the whole channel and moves the work along between the agents. Also for an agent already there.",
           },
         },
         required: ["agent"],
@@ -98,24 +104,42 @@ export function createWorkspaceToolSource(deps: { pubsub?: PubSub }): ToolSource
             .select({ id: channelMembers.id })
             .from(channelMembers)
             .where(and(eq(channelMembers.channelId, channel.id), eq(channelMembers.agentId, agent.id)));
-          if (present) return { content: `@${agent.handle} is already in #${channel.name}.` };
-          const autoReply = input.auto_reply !== false;
-          const events = holdEvents(deps.pubsub);
-          await actWithUndo(
-            ctx,
-            (db) => addChannelMember(db, requester, ctx.orgId, channel.id, { agentId: agent.id, autoReply }, events),
-            () => ({
-              kind: "channel.agent_added",
-              target: { type: "channel", id: channel.id, title: channel.name },
-              params: { agentId: agent.id, agentName: agent.name, agentHandle: agent.handle, channel: channel.name },
-              before: null,
-              after: { agentId: agent.id, autoReply },
-            }),
-          );
-          // Cleared inside the transaction too: a run reading in between may have cached the channel as it was.
+          const added = present
+            ? `@${agent.handle} is already in #${channel.name}.`
+            : `Added @${agent.handle} to #${channel.name}.`;
+          if (!present) {
+            const autoReply = input.auto_reply !== false;
+            const events = holdEvents(deps.pubsub);
+            await actWithUndo(
+              ctx,
+              (db) => addChannelMember(db, requester, ctx.orgId, channel.id, { agentId: agent.id, autoReply }, events),
+              () => ({
+                kind: "channel.agent_added",
+                target: { type: "channel", id: channel.id, title: channel.name },
+                params: { agentId: agent.id, agentName: agent.name, agentHandle: agent.handle, channel: channel.name },
+                before: null,
+                after: { agentId: agent.id, autoReply },
+              }),
+            );
+            // Cleared inside the transaction too: a run reading in between may have cached the channel as it was.
+            invalidateOrg(ctx.orgId);
+            await events.flush();
+          }
+          if (input.lead !== true) return { content: added };
+          const [now] = await ctx.db
+            .select({ leadAgentId: channels.leadAgentId })
+            .from(channels)
+            .where(eq(channels.id, channel.id));
+          if (now?.leadAgentId === agent.id) return { content: `${added} It already is its responsible agent.` };
+          // The channel screen's own change, as the catalog makes it: the person's rights, a receipt with Undo.
+          const done = await actNow(deps, ctx, requester, updateChannelAction, {
+            channelId: channel.id,
+            leadAgentId: agent.id,
+          });
           invalidateOrg(ctx.orgId);
-          await events.flush();
-          return { content: `Added @${agent.handle} to #${channel.name}.` };
+          return "refused" in done
+            ? { content: `${added} It is not its responsible agent: ${done.refused}`, isError: true }
+            : { content: `${added} @${agent.handle} is now its responsible agent.` };
         } catch (error) {
           return failed(error);
         }

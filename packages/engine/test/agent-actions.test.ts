@@ -429,4 +429,53 @@ describe("act with undo: memory, routines, channels, wiki, threads", () => {
     await redoAgentAction(deps(f), f.owner.id, f.org.id, renamed?.id ?? "");
     expect((await thread()).title).toBe("Organização");
   });
+
+  test("an agent made a channel's responsible with `lead`: added and made lead, each with Undo; already there, made lead alone", async () => {
+    f = await setup();
+    const ctx = await runContext(f, "coloca a Ana no #vendas como responsável do canal");
+    const [ana] = await f.db
+      .insert(schema.agents)
+      .values({
+        orgId: f.org.id,
+        name: "Ana",
+        handle: "ana",
+        role: "Orçamentos",
+        instructions: "",
+        model: "claude-sonnet-5-5",
+        ownerUserId: f.owner.id,
+      })
+      .returning();
+    const vendas = await createChannel(f.db, f.owner.id, f.org.id, { name: "vendas" });
+    const lead = async () =>
+      (await f.db.select().from(schema.channels).where(eq(schema.channels.id, vendas.id)))[0]?.leadAgentId ?? null;
+    const call = await toolsOf([createWorkspaceToolSource({ pubsub: f.pubsub })], ctx);
+    expect((await call("add_agent_to_channel", { agent: "@ana", channel: "#vendas", lead: true })).content).toBe(
+      "Added @ana to #vendas. @ana is now its responsible agent.",
+    );
+    expect(await lead()).toBe(ana?.id ?? "");
+    expect((await call("add_agent_to_channel", { agent: "@ana", channel: "#vendas", lead: true })).content).toBe(
+      "@ana is already in #vendas. It already is its responsible agent.",
+    );
+    const m = await reply(f, ctx);
+    const [added, made] = (await actionsFor(f.db, f.org.id, [m.id])).get(m.id) ?? [];
+    expect(added?.kind).toBe("channel.agent_added");
+    expect(made).toMatchObject({ kind: "workspace.changed", params: { action: "update_channel", channel: "vendas" } });
+
+    await undoAgentAction(deps(f), f.owner.id, f.org.id, made?.id ?? "");
+    expect(await lead()).toBeNull();
+    await redoAgentAction(deps(f), f.owner.id, f.org.id, made?.id ?? "");
+    expect(await lead()).toBe(ana?.id ?? "");
+    // Out of the channel, it is responsible for it no more.
+    await undoAgentAction(deps(f), f.owner.id, f.org.id, added?.id ?? "");
+    expect(await lead()).toBeNull();
+
+    // Already a member: `lead` alone makes it responsible.
+    await redoAgentAction(deps(f), f.owner.id, f.org.id, added?.id ?? "");
+    const again = await runContext(f, "a Ana é a responsável do #vendas");
+    const callAgain = await toolsOf([createWorkspaceToolSource({ pubsub: f.pubsub })], again);
+    expect((await callAgain("add_agent_to_channel", { agent: "ana", channel: "vendas", lead: true })).content).toBe(
+      "@ana is already in #vendas. @ana is now its responsible agent.",
+    );
+    expect(await lead()).toBe(ana?.id ?? "");
+  });
 });

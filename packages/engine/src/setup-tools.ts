@@ -36,6 +36,7 @@ import {
 import type { ContextDeps } from "./context/summaries";
 import { publishMessageCreated } from "./events";
 import { firstOf } from "./format";
+import { updateChannel } from "./management";
 import { insertMessage, messageView, parseMentionHandles } from "./messages";
 import { can, getMembership } from "./organizations";
 import type { RolePermission } from "./permissions";
@@ -313,6 +314,26 @@ const noAgents = async (ctx: ToolContext, missing: string[]): Promise<ToolOutput
   isError: true,
 });
 
+/** No person by that name: when an agent has it, say so, since an agent named as a person was the mix-up. */
+async function notAPerson(ctx: ToolContext, who: string) {
+  const name = who.trim().replace(/^@/, "").toLowerCase();
+  const [agent] = await ctx.db
+    .select({ name: schema.agents.name, handle: schema.agents.handle })
+    .from(schema.agents)
+    .where(
+      and(
+        eq(schema.agents.orgId, ctx.orgId),
+        isNull(schema.agents.archivedAt),
+        or(sql`lower(${schema.agents.name}) = ${name}`, eq(schema.agents.handle, name)),
+      ),
+    )
+    .limit(1);
+  const none = `No one called "${who}" in this organization.`;
+  return agent
+    ? `${none} ${agent.name} (@${agent.handle}) is an agent: put it in \`agents\`, or in \`lead\` to make it the channel's responsible agent.`
+    : none;
+}
+
 export async function hopOf(ctx: ToolContext) {
   const [run] = await ctx.db.select({ hop: agentRuns.hop }).from(agentRuns).where(eq(agentRuns.id, ctx.runId));
   return run?.hop ?? 0;
@@ -476,7 +497,7 @@ export function createSetupToolSource(deps: {
     {
       name: CREATE_CHANNEL_TOOL,
       description:
-        "Create a channel when a person asks for one, with their rights, and add people (@handle, email or name) and agents (@handles) to it; the person who asked is always in it. No permission needed: the person sees it under your reply with Undo.",
+        "Create a channel when a person asks for one, with their rights, and add people (@handle, email or name) and agents (@handles) to it; the person who asked is always in it. A channel's responsible ('responsável pelo canal') is always an agent: put it in `lead`. No permission needed: the person sees it under your reply with Undo.",
       scope: SETUP_SCOPE,
       inputSchema: {
         type: "object",
@@ -494,6 +515,13 @@ export function createSetupToolSource(deps: {
             items: { type: "string", minLength: 1, maxLength: 64 },
             maxItems: 10,
             description: "Include yourself if you should be there.",
+          },
+          lead: {
+            type: "string",
+            minLength: 1,
+            maxLength: 64,
+            description:
+              "@handle of the agent responsible for the channel ('responsável pelo canal'): it takes what is said to the whole channel and moves the work along between the agents. It joins the channel too.",
           },
         },
         required: ["name"],
@@ -516,12 +544,18 @@ export function createSetupToolSource(deps: {
           if ((made?.n ?? 0) >= MAX_CHANNELS_PER_RUN) {
             return { content: `You already created ${MAX_CHANNELS_PER_RUN} channels in this turn.`, isError: true };
           }
-          const agents = await agentsByHandle(ctx.db, ctx.orgId, input.agents);
+          // The responsible agent joins with the others (`updateChannel` takes only a member).
+          const leadHandle = str(input.lead).trim();
+          const agents = await agentsByHandle(ctx.db, ctx.orgId, [
+            ...(Array.isArray(input.agents) ? input.agents : []),
+            ...(leadHandle ? [leadHandle] : []),
+          ]);
           if (agents.missing.length > 0) return noAgents(ctx, agents.missing);
+          const lead = leadHandle ? agents.rowOf(leadHandle) : undefined;
           const people = new Map<string, string>();
           for (const who of Array.isArray(input.people) ? input.people.map(str) : []) {
             const matches = await findMember(ctx, who);
-            if (matches.length === 0) return { content: `No one called "${who}" in this organization.`, isError: true };
+            if (matches.length === 0) return { content: await notAPerson(ctx, who), isError: true };
             if (matches.length > 1) {
               const names = matches.map((m) => (m.handle ? `${m.name} (@${m.handle})` : m.name)).join(", ");
               return { content: `Several people match "${who}": ${names}. Ask which one.`, isError: true };
@@ -548,6 +582,8 @@ export function createSetupToolSource(deps: {
               for (const userId of people.keys()) {
                 await addChannelMember(db, requester, ctx.orgId, created.id, { userId }, events);
               }
+              // Undo archives the whole channel, its lead with it: no receipt of its own.
+              if (lead) await updateChannel(db, requester, ctx.orgId, created.id, { leadAgentId: lead.id }, events);
               return created;
             },
             (created) => ({
@@ -561,7 +597,7 @@ export function createSetupToolSource(deps: {
           await events.flush();
           const members = [...people.values(), ...agents.rows.map((a) => `@${a.handle}`)];
           return {
-            content: `Created #${channel.name}${members.length ? ` with ${members.join(", ")}` : ""}.`,
+            content: `Created #${channel.name}${members.length ? ` with ${members.join(", ")}` : ""}.${lead ? ` @${lead.handle} is its responsible agent.` : ""}`,
             data: { channel: { id: channel.id, name: channel.name } },
           };
         } catch (error) {
