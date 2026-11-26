@@ -300,10 +300,11 @@ test("it waves on the person's first visit only: its DM never read by them, on a
   expect(intro).toContain('importantForAccessibility="no-hide-descendants"');
 });
 
-test("its wave is xquads' still face: every moment the same frame, so stopping shows no jump", () => {
+test("its wave moves, and ends on the still face, so stopping shows no jump", () => {
   const look = { color: "teal", eyes: "happy", accessory: "headset" };
   const still = JSON.stringify(stickerFrame(look, "wave", 110, STICKER_STILL_T));
-  expect(JSON.stringify(stickerFrame(look, "wave", 110, 0.1))).toBe(still);
+  const frames = [0.1, 0.25, 0.4, 0.6].map((t) => JSON.stringify(stickerFrame(look, "wave", 110, t)));
+  expect(frames.some((f) => f !== still)).toBe(true);
   expect(JSON.stringify(stickerFrame(look, "wave", 110, WAVE_SECONDS))).toBe(still);
 });
 
