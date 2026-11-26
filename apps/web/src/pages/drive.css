@@ -506,7 +506,8 @@ html:not([data-pointer]) .drive-row:has(.drive-hit:focus-visible) {
 
 @media (prefers-reduced-motion: no-preference) {
   .drive-group {
-    animation: drive-in 0.3s var(--out) both;
+    /* Backwards, not both: a fill kept after it lands leaves the box a containing block for fixed children. */
+    animation: drive-in 0.3s var(--out) backwards;
   }
   .drive-dropzone {
     animation: drive-in 0.18s var(--out) both;

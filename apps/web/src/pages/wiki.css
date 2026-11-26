@@ -388,7 +388,8 @@ html:not([data-pointer]) .wiki-tag:focus-visible {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  animation: wiki-in 0.3s var(--out) both;
+  /* Backwards, not both: a fill kept after it lands leaves the box a containing block for fixed children. */
+  animation: wiki-in 0.3s var(--out) backwards;
 }
 .wiki-home__sec {
   display: flex;
@@ -672,7 +673,8 @@ html:not([data-pointer]) .wiki-minigraph:focus-visible {
 .wiki-doc {
   /* The page's bar: 40px controls and the room under them; the editor's toolbar sticks right under it. */
   --wiki-top-h: 50px;
-  animation: wiki-in 0.25s var(--out) both;
+  /* Backwards, not both: a fill kept after it lands leaves the box a containing block for fixed children. */
+  animation: wiki-in 0.25s var(--out) backwards;
 }
 .wiki-doc__main {
   min-width: 0;

@@ -1628,7 +1628,8 @@ html:not([data-pointer]) .ac-msg__time--details:focus-visible {
 /* New rows slide in a little (opacity/transform only) */
 @media (prefers-reduced-motion: no-preference) {
   .ac-msg--enter {
-    animation: ac-msg-enter 180ms ease-out both;
+    /* Backwards, not both: a fill kept after it lands leaves the box a containing block for fixed children. */
+    animation: ac-msg-enter 180ms ease-out backwards;
   }
 }
 @keyframes ac-msg-enter {

@@ -9592,7 +9592,8 @@ html:not([data-pointer]) .onb__step:focus-visible {
 }
 @media (prefers-reduced-motion: no-preference) {
   .newag__content > * {
-    animation: newag-in var(--dur-base) var(--out) both;
+    /* Backwards, not both: a fill kept after it lands leaves the box a containing block for fixed children. */
+    animation: newag-in var(--dur-base) var(--out) backwards;
   }
 }
 @keyframes newag-in {
@@ -10991,7 +10992,8 @@ html:not([data-pointer]) .agp-cell:focus-visible {
 }
 @media (prefers-reduced-motion: no-preference) {
   .agp-view {
-    animation: agp-in var(--dur-base) var(--out) both;
+    /* Backwards, not both: a fill kept after it lands leaves the box a containing block for fixed children. */
+    animation: agp-in var(--dur-base) var(--out) backwards;
   }
 }
 @keyframes agp-in {

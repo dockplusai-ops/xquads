@@ -99,7 +99,8 @@
   height: var(--onb-h, 100dvh);
   padding: 38px 0 16px;
   box-sizing: border-box;
-  animation: newag-in 0.32s var(--out) both;
+  /* Backwards, not both: a fill kept after it lands leaves the box a containing block for fixed children. */
+  animation: newag-in 0.32s var(--out) backwards;
 }
 .newag__cap {
   display: flex;
