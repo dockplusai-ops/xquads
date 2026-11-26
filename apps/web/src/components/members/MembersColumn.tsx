@@ -100,6 +100,8 @@ export function MembersSheet({
         type="button"
         className="members-sheet__scrim"
         tabIndex={-1}
+        // A scrim's name is for screen readers, never a tooltip over the page under it.
+        data-no-tip=""
         aria-label={t("common.close")}
         onClick={onClose}
       />

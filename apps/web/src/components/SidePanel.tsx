@@ -50,6 +50,8 @@ export function SidePanel({
         type="button"
         className="thread-panel__scrim"
         tabIndex={-1}
+        // The whole window around the pane: its name is for screen readers, never a tooltip over the page under it.
+        data-no-tip=""
         aria-label={t("common.close")}
         onClick={onClose}
       />

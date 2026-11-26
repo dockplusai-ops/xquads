@@ -7975,13 +7975,13 @@ html:not([data-pointer]) .run-continue:focus-visible {
 }
 
 /* ---------- The pixel sky in the app ----------
- * The sky is the agents' world: the same blue in both themes, ink on it is
- * the deep sky ink. It shows only where the subject is the agents. */
+ * The sky's place is where the subject is the agents. xquads draws no sky there (`PIXEL_SKIES`): the place is a
+ * flat petrol surface, so what sits on it takes the theme's ink, glass and line, never the old light sky's. */
 :root {
-  --sky-ink: #04203f;
-  --sky-ink2: rgba(4, 32, 63, 0.78);
-  --sky-glass: rgba(241, 248, 255, 0.74);
-  --sky-line: rgba(4, 32, 63, 0.12);
+  --sky-ink: var(--ink);
+  --sky-ink2: var(--muted);
+  --sky-glass: var(--glass);
+  --sky-line: var(--line2);
 }
 /* A label on a sky (a name, a state): the kit's chip in the sky's glass and ink, readable on every tone of the sky's
    dither in both themes. */
@@ -8062,11 +8062,10 @@ html:not([data-pointer]) .run-continue:focus-visible {
   cursor: pointer;
   box-shadow: 0 0 0 1px var(--sky-line);
 }
-/* The sky's own ink on its light sky, in both themes. */
 html:not([data-pointer]) .sky-welcome__close:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px #fff,
+    0 0 0 2px var(--raised),
     0 0 0 4px var(--sky-ink);
 }
 @media (max-width: 640px) {

@@ -2105,19 +2105,19 @@ function CreatedMoment({
         </p>
         <div className="newag__born-actions">
           {first && (
-            <Button asChild variant="primary" className="newag__on-sky">
+            <Button asChild variant="primary">
               <Link to="/org/$orgId/c/$channelId" params={{ orgId: org.id, channelId: first.id }}>
                 {t("newAgent.goTo", { channel: first.name })}
                 <Icon name="arrowRight" size={16} />
               </Link>
             </Button>
           )}
-          <Button asChild variant={first ? "default" : "primary"} className="newag__on-sky">
+          <Button asChild variant={first ? "default" : "primary"}>
             <Link to="/org/$orgId/agents/$agentId" params={{ orgId: org.id, agentId: agent.id }}>
               {t("newAgent.openProfile")}
             </Link>
           </Button>
-          <Button icon="plus" className="newag__on-sky" onClick={onAgain}>
+          <Button icon="plus" onClick={onAgain}>
             {t("newAgent.createAnother")}
           </Button>
         </div>

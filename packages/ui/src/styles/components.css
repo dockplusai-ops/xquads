@@ -5322,6 +5322,11 @@ html:not([data-pointer]) .ac-switch:focus-visible {
   .ac-hint__bubble[data-state="closed"] {
     animation: ac-fade-out var(--dur-fast) ease-out forwards;
   }
+  /* A select's list goes at once: while a fading list stays, Radix keeps its layer over the form, so the click into the
+     next field is lost and the keys typed there go to the list's type-ahead (picking an agent, then "What to do"). */
+  .ac-menu--select[data-state="closed"] {
+    animation: none;
+  }
   /* A toast rises in, and a new one coming fast picks up from where the last one was (a transition, not keyframes). */
   .ac-toast {
     transition:

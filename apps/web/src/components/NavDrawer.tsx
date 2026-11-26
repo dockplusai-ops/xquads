@@ -211,6 +211,8 @@ export function NavScrim() {
       type="button"
       className="shell__scrim"
       tabIndex={-1}
+      // A scrim's name is for screen readers, never a tooltip over the page under it.
+      data-no-tip=""
       aria-label={t("shell.closeNav")}
       onClick={() => drawer.close({ restoreFocus: true })}
     />
