@@ -53,7 +53,7 @@ import { type AgentAi, agentAiState, noAiReasonOf, ownNotSignedIn } from "./ai-s
 import { heldBehind, markNotRun, notRunAfter, notRunText, wakeLine } from "./approval-order";
 import { deciderName, publishApproval } from "./approvals";
 import { withFileFacts } from "./artifacts";
-import { accountablePerson, fedByRoutine, personOfMessage, runAuthority } from "./authority";
+import { accountablePerson, fedByRoutine, personOfMessage, runAuthority, runChain } from "./authority";
 import {
   type AutoChoice,
   type AutoLine,
@@ -3673,6 +3673,14 @@ async function executeRunInner(
   let triggerText = trigger?.body ?? topTrigger?.body ?? "";
   if (plan.kind !== "model" && !triggerText) {
     triggerText = (await getMessage(db, run.orgId, run.triggerMessageId))?.body ?? "";
+  }
+  // Woken by what a colleague sent back (`consult_reply`): this turn finishes the person's request the chain started
+  // from (`REST_OF_REQUEST`), so its checks hold the reply to that request too, not to the answer alone. Judged
+  // against the answer only, a relay that dropped a part of the request read as done (ADR 0095, ADR 0097).
+  if (triggerNotice === "consult_reply" && transcript.request === undefined) {
+    const chain = await runChain(db, run.orgId, run.id).catch(() => null);
+    const asked = chain?.rootMessageId ? (await getMessage(db, run.orgId, chain.rootMessageId))?.body : undefined;
+    if (asked) transcript.request = [asked, triggerMessage?.body ?? triggerText].filter(Boolean).join("\n\n");
   }
   /** What a computer brain reads next when it isn't the trigger: results after a pause, new messages. */
   // A prompt saved by a claim that parked before its turn already holds the cut turn's words and the trigger.
