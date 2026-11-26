@@ -22,11 +22,13 @@ import {
   DialogBody,
   DialogFooter,
   Field,
+  HiddenUsername,
   Icon,
   type IconName,
   InfoHint,
   Input,
   Locked,
+  NOT_A_LOGIN,
 } from "@agenteschat/ui";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
@@ -138,7 +140,7 @@ export function DeleteWorkspaceDialog({
               />
             </p>
             <Field label={t("deleteOrg.type", { name: org.name })}>
-              <Input value={name} onChange={(e) => setName(e.target.value)} autoComplete="off" spellCheck={false} />
+              <Input value={name} onChange={(e) => setName(e.target.value)} {...NOT_A_LOGIN} />
             </Field>
             <DeletionProofField proof={proof} />
             {proof.alert && <Alert>{errorText(t, del.error)}</Alert>}
@@ -204,7 +206,7 @@ export function ResetWorkspaceDialog({
         <Locked when={pending}>
           <DialogBody>
             <Field label={t("deleteOrg.type", { name: org.name })}>
-              <Input value={name} onChange={(e) => setName(e.target.value)} autoComplete="off" spellCheck={false} />
+              <Input value={name} onChange={(e) => setName(e.target.value)} {...NOT_A_LOGIN} />
             </Field>
             <DeletionProofField proof={proof} />
             {proof.alert && <Alert>{errorText(t, reset.error)}</Alert>}
@@ -367,6 +369,7 @@ export function DeletionProofField({ proof }: { proof: DeletionProofState }) {
   if (proof.kind === "password")
     return (
       <Field label={t("proof.password")} error={said}>
+        <HiddenUsername value={proof.email} />
         <Input
           type="password"
           autoComplete="current-password"

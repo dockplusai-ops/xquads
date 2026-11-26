@@ -25,6 +25,7 @@ import {
   decideSuggestion,
   drainOutbox,
   eligibleMissionAgents,
+  ensureRightHand,
   getMission,
   getMissionFiles,
   getTaskOutput,
@@ -1063,6 +1064,9 @@ describe("missions (ADR 0029)", () => {
         commandApproval: "low_risk_auto",
       },
     ]);
+    // The right hand is on no computer (ADR 0137): never listed, so it never reads as waiting for one.
+    expect(await ensureRightHand(f.db, f.org.id)).not.toBeNull();
+    expect((await elig()).map((a) => a.agentId)).toEqual([f.agent.id]);
     const paired = await pairedMachine();
     const runner = missionRunner(f.machineHub as MachineHub);
     await runner.hello(paired.token);

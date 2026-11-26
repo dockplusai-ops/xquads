@@ -3334,7 +3334,8 @@ export interface EligibleAgent {
  * "Nova missão": every agent of the organization, each saying whether it can
  * run a mission for the caller: a connected computer that allows commands
  * with a runner on protocol 14 or later (ADR 0044), and the caller in its audience.
- * The others carry the reason. Eligible first. One query.
+ * The others carry the reason. Eligible first. One query. The right hand is left out: it is on no computer
+ * (ADR 0137), so it could only ever read as waiting for one.
  */
 export async function eligibleMissionAgents(deps: Pick<MissionDeps, "db">, userId: string, orgId: string) {
   await requirePermission(deps.db, userId, orgId, "read");
@@ -3367,7 +3368,7 @@ export async function eligibleMissionAgents(deps: Pick<MissionDeps, "db">, userI
         mc.exec_allowed, mc.executors, mc.os
       from ${schema.agents} agents
       left join ${machines} mc on mc.id = agents.machine_id and mc.org_id = agents.org_id and mc.deleted_at is null
-      where agents.org_id = ${orgId}::uuid and agents.archived_at is null
+      where agents.org_id = ${orgId}::uuid and agents.archived_at is null and agents.builtin is null
       order by agents.name`),
   );
   const list = rows.map((r): EligibleAgent => {

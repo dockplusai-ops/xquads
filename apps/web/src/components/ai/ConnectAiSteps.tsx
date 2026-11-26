@@ -1347,6 +1347,9 @@ function PlanSteps({
 
   // The steps stay in view while they wait (their computer actions off); a reason alone otherwise.
   const steps = ready || gate.state === "preparing" || (gate.state === "offline" && (hostConnecting || signingIn));
+  // OpenCode's free models need no key (ADR 0132 §6): its key steps never show while the computer is on its way, and
+  // once it is ready the free models come first, a key only on request.
+  const keyWaits = kind === "opencode" && !ready;
   const ownable = ready && !login && ownSignInFor(choice, view, gates.row);
   // The shared sign-in's plan, where the computer says it ("Claude Max").
   const ownPlan = planWordOf(gates.row?.own?.[kind]?.plan ?? null);
@@ -1570,7 +1573,7 @@ function PlanSteps({
           </OptionCard>
         </div>
       )}
-      {steps && (!choosing || otherChosen) && (
+      {steps && !keyWaits && (!choosing || otherChosen) && (
         <AddAccount
           key={turn?.id ?? login?.from}
           machineId={view?.computer?.machineId ?? ""}
