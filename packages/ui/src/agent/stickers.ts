@@ -70,26 +70,18 @@ export function stickerSeed(key: string): number {
   return (h % 1000) / 100;
 }
 
-/**
- * One frame of a sticker: the agent in its mood (pose and face), its shadow on the floor and the mood's pixel props
- * in the agent's tones. `S` is the square's side in canvas pixels; `t` seconds (a seed added keeps neighbors apart).
- */
-/** Whether stickers draw the original's pixel props (hand, confetti, hearts, floor shadow): off in xquads. */
+/** Whether stickers draw the original's pixel props (hand, confetti, hearts, floor shadow): off in xquads (DESIGN.md: no pixel art). */
 const STICKER_PROPS = false;
 
+/**
+ * One frame of a sticker: the agent in its mood (pose and face) and, with `STICKER_PROPS`, its shadow on the floor and
+ * the mood's pixel props in the agent's tones. Without props the mood is the face alone (stars, hearts, a wink…) and
+ * its motion, the agent's own flat face centred. `S` is the square's side in canvas pixels; `t` seconds (a seed added
+ * keeps neighbors apart).
+ */
 export function drawSticker(ctx: Ctx2D, look: StickerLook, mood: StickerMood, t: number, S: number): void {
-  if (!STICKER_PROPS) {
-    // xquads: a sticker is the agent's own flat face, centred, whatever the mood (DESIGN.md: no pixel art).
-    void mood;
-    void t;
-    const side = Math.round(S * 0.72);
-    drawAgent(ctx, Math.round((S - side) / 2), Math.round((S - side) / 2), side, {
-      color: look.color as AgentColorName | undefined,
-    });
-    return;
-  }
   const [c1, c2] = gradientOf(look.color);
-  const s = Math.round(S * 0.56);
+  const s = Math.round(S * (STICKER_PROPS ? 0.56 : 0.72));
   const cell = S / 64;
   let bounce = 0;
   let ox = 0;
@@ -121,16 +113,19 @@ export function drawSticker(ctx: Ctx2D, look: StickerLook, mood: StickerMood, t:
       pose = { expression: "dizzy", turn: [Math.cos(t * 3) * 0.8, Math.sin(t * 3) * 0.4] };
       break;
     case "wave":
-      pose = { expression: "happy", turn: [0.2 + lean * 0.15, 0] };
+      // Without the hand, the hello is a wink.
+      pose = { expression: STICKER_PROPS ? "happy" : "wink", turn: [0.2 + lean * 0.15, 0] };
       break;
   }
   const x0 = Math.round((S - s) / 2 + ox);
-  const y0 = Math.round(S - s - S * 0.06 - bounce);
-  // Its shadow on the floor, smaller while it is up in the air.
-  ctx.fillStyle = "rgba(0, 0, 0, 0.14)";
-  ctx.beginPath();
-  ctx.ellipse(S / 2, S - S * 0.055, s * 0.42 * (1 - bounce / S), S * 0.025, 0, 0, Math.PI * 2);
-  ctx.fill();
+  const y0 = Math.round((STICKER_PROPS ? S - s - S * 0.06 : (S - s) / 2) - bounce);
+  if (STICKER_PROPS) {
+    // Its shadow on the floor, smaller while it is up in the air.
+    ctx.fillStyle = "rgba(0, 0, 0, 0.14)";
+    ctx.beginPath();
+    ctx.ellipse(S / 2, S - S * 0.055, s * 0.42 * (1 - bounce / S), S * 0.025, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
   const accessory = look.accessory && look.accessory !== "none" ? look.accessory : undefined;
   drawAgent(ctx, x0, y0, s, {
     color: look.color as AgentColorName | undefined,
@@ -138,6 +133,7 @@ export function drawSticker(ctx: Ctx2D, look: StickerLook, mood: StickerMood, t:
     pose,
     after: accessory ? (g, side, frame) => drawAccessory(g, side, accessory, frame, t) : undefined,
   });
+  if (!STICKER_PROPS) return;
   switch (mood) {
     case "celebrate":
       // Confetti of its two tones going round.

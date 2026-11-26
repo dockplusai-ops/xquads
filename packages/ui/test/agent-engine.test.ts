@@ -41,6 +41,24 @@ describe("agent engine: one agent everywhere", () => {
     }
   });
 
+  test("each eye style is its own (the brand's oval by default), and an expression replaces it", () => {
+    const shapes = Object.keys(EYE_STYLES).map((style) => JSON.stringify(eyeShapes(style)));
+    expect(new Set(shapes).size).toBe(Object.keys(EYE_STYLES).length);
+    expect(eyeShapes("happy")[0]?.kind).toBe("arc");
+    expect(eyeShapes("sleepy")[0]?.kind).toBe("lid");
+    for (const [expression, kind] of [
+      ["star", "star"],
+      ["heart", "heart"],
+      ["surprised", "ring"],
+      ["dizzy", "spiral"],
+      ["happy", "arc"],
+      ["closed", "cup"],
+    ] as const)
+      expect(eyeShapes("round", { expression })[0]?.kind).toBe(kind);
+    const [left, right] = eyeShapes("round", { expression: "wink" });
+    expect([left?.kind, right?.kind]).toEqual(["pill", "cup"]);
+  });
+
   test("writing turns any style into short dashes; blinking closes them", () => {
     const [dash] = eyeShapes("happy", { writing: true });
     expect(dash?.kind).toBe("pill");

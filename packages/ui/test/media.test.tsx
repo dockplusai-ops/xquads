@@ -97,20 +97,26 @@ function recorder() {
 }
 
 describe("the agents' stickers (ADR 0091)", () => {
-  test("seven moods, each drawn with the engine's subset only: in xquads the agent's still face, whatever the mood", () => {
+  test("seven moods, each drawn with the engine's subset only: the agent's flat face in its mood, moving", () => {
     expect([...STICKER_MOODS]).toEqual(["celebrate", "love", "deal", "thinking", "wow", "dizzy", "wave"]);
-    const frame = (mood: (typeof STICKER_MOODS)[number], t: number, color = "amber") => {
+    const frame = (mood: (typeof STICKER_MOODS)[number], t: number, color = "amber", eyes = "round") => {
       const r = recorder();
-      drawSticker(r.ctx, { color, eyes: "round", accessory: "beanie" }, mood, t, 128);
+      drawSticker(r.ctx, { color, eyes, accessory: "beanie" }, mood, t, 128);
       return r.calls;
     };
-    const face = frame("celebrate", STICKER_STILL_T);
-    expect(face.length).toBeGreaterThan(0);
-    // No pixel props (hands, confetti, hearts) and no motion: every mood and moment draws the same face.
-    for (const mood of STICKER_MOODS)
-      for (const t of [0.1, 0.5, WAVE_SECONDS + 0.5]) expect(frame(mood, t)).toEqual(face);
-    // The agent's color still tells one from another.
-    expect(frame("love", STICKER_STILL_T, "rose")).not.toEqual(face);
+    const stills = STICKER_MOODS.map((mood) => frame(mood, STICKER_STILL_T).join("|"));
+    // Every mood reads apart at its still frame (stars, hearts, a nod, a look up, a gasp, spirals, a wink).
+    expect(new Set(stills).size).toBe(STICKER_MOODS.length);
+    for (const mood of STICKER_MOODS) {
+      const still = frame(mood, STICKER_STILL_T);
+      // No pixel props (hands, confetti, hearts): xquads draws no pixel art.
+      expect(still.some((c) => c.startsWith("fillRect("))).toBe(false);
+      // The loop moves: another moment draws another frame.
+      expect([0.1, 0.85, WAVE_SECONDS + 0.5].some((t) => frame(mood, t).join("|") !== still.join("|"))).toBe(true);
+    }
+    // The agent's color and its own eyes still tell one from another.
+    expect(frame("thinking", STICKER_STILL_T, "rose")).not.toEqual(frame("thinking", STICKER_STILL_T));
+    expect(frame("thinking", STICKER_STILL_T, "amber", "wide")).not.toEqual(frame("thinking", STICKER_STILL_T));
   });
 
   test("a seed keeps stickers side by side out of step, the same one for the same agent", () => {
