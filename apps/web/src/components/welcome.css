@@ -1,6 +1,6 @@
 /*
- * The welcome on a small sky: the onboarding's last step and a newcomer's first #general (ADR 0090). The sky is the
- * same blue in both themes, so its ink is the deep sky ink; buttons on it are the sky's glass.
+ * The welcome on a small sky: the onboarding's last step and a newcomer's first #general (ADR 0090). xquads draws no
+ * sky: the card is a flat raised surface in the theme's ink, and its buttons are the kit's own.
  */
 .welcome-card {
   position: relative;
@@ -68,23 +68,6 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 20px;
-}
-.welcome-card__acts > .ac-btn,
-.welcome-card__close.ac-btn {
-  background: var(--sky-glass);
-  color: var(--sky-ink);
-  box-shadow: 0 0 0 1px var(--sky-line);
-}
-.welcome-card__acts > .ac-btn:hover,
-.welcome-card__close.ac-btn:hover {
-  background: rgba(255, 255, 255, 0.86);
-}
-html:not([data-pointer]) .welcome-card__acts > .ac-btn:focus-visible,
-html:not([data-pointer]) .welcome-card__close.ac-btn:focus-visible {
-  outline: none;
-  box-shadow:
-    0 0 0 2px #fff,
-    0 0 0 4px var(--sky-ink);
 }
 .welcome-card__acts > .ac-btn .ac-avatar {
   flex: none;
