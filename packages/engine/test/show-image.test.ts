@@ -191,9 +191,39 @@ describe("show_image", () => {
     const second = await tool.execute({ images: urls.slice(SHOW_IMAGE_LIMITS.perCall).map((url) => ({ url })) }, ctx);
     expect(filesOf(second.data)).toHaveLength(SHOW_IMAGE_LIMITS.perRun - SHOW_IMAGE_LIMITS.perCall);
     expect(second.content).toContain(`over ${SHOW_IMAGE_LIMITS.perRun} pictures in one turn`);
-    const third = await tool.execute({ images: [{ url: urls[0] }] }, ctx);
+    const third = await tool.execute({ images: [{ url: urls.at(-1) }] }, ctx);
     expect(third.isError).toBe(true);
     expect(third.content).toContain("give the others as links");
+    // One already shown is no new picture: past the limit it still answers with its file.
+    const shownAgain = await tool.execute({ images: [{ url: urls[0] }] }, ctx);
+    expect(filesOf(shownAgain.data).map((x) => x.id)).toEqual([filesOf(first.data)[0]?.id as string]);
+  });
+
+  test("the same address twice in a run is one file, once on the reply (2026-11-26: two celebration.gif)", async () => {
+    const gif = "https://media.example.com/party/celebration.gif";
+    const w = web({ [gif]: () => picture(PNG) });
+    const ctx = await runWith();
+    const tool = await toolOf(w.source, ctx);
+    const first = await tool.execute({ images: [{ url: gif, title: "celebration" }, { url: gif }] }, ctx);
+    const second = await tool.execute({ images: [{ url: gif, title: "celebration" }] }, ctx);
+    const [file] = filesOf(first.data);
+    expect(filesOf(first.data)).toHaveLength(1);
+    expect(filesOf(second.data)).toEqual([file as Shown]);
+    expect(second.content).toContain("already shown in this turn");
+    expect(w.asked).toEqual([gif]);
+    const saved = await f.db.select().from(schema.artifacts).where(eq(schema.artifacts.title, "celebration"));
+    expect(saved.map((r) => r.id)).toEqual([file?.id as string]);
+    const effects: Parameters<typeof absorbToolData>[0] = {};
+    absorbToolData(effects, first.data);
+    absorbToolData(effects, second.data);
+    expect(effects.artifacts?.map((a) => a.id)).toEqual([file?.id as string]);
+    // Another run shows it again as its own file.
+    const other = await runWith();
+    const again = await (await toolOf(w.source, other)).execute(
+      { images: [{ url: gif, title: "celebration" }] },
+      other,
+    );
+    expect(filesOf(again.data)[0]?.id).not.toBe(file?.id);
   });
 
   test("offered only where its pictures can be saved; every agent's, listed in every run, speaking here", async () => {

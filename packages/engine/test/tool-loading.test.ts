@@ -260,6 +260,32 @@ test("chooseToolGroups: one calibrated question per group, the threshold, and th
   });
 });
 
+test("no judge's answer: the groups the message names by their tools' names load anyway", async () => {
+  // A server with no Jev key (2026-11-26): "crie um widget" left create_widget behind find_tools, and the agent
+  // told its owner it hadn't made the widget, with no reason.
+  const input = {
+    orgId: "o",
+    agent: { name: "Proteus", role: "Assistant", instructions: "" },
+    message: "crie um widget no meu painel My Home com o número de tarefas abertas, e uma página na wiki",
+    recent: [],
+    tools: [...tools(), tool("list_dashboards", ""), tool("create_widget", "")],
+  };
+  const jevOff: Judge = { name: "jev", ask: () => Promise.reject(new JevOffError()) };
+  const off = await chooseToolGroups(jevOff, input);
+  expect([...off.groups].sort()).toEqual(["dashboards", "wiki"]);
+  expect(off).toMatchObject({ source: "error", kept: [] });
+  // Kept groups first, never twice; a message that names no tool loads nothing more.
+  expect((await chooseToolGroups(jevOff, { ...input, keep: ["wiki"] })).groups).toEqual(["wiki", "dashboards"]);
+  expect((await chooseToolGroups(jevOff, { ...input, message: "oi, tudo bem?" })).groups).toEqual([]);
+  // A slow judge with the previous run's groups adds the named ones to them.
+  const slow: Judge = { name: "slow", ask: () => new Promise(() => {}) };
+  const late = await chooseToolGroups(slow, { ...input, previous: ["browser"], timeoutMs: 5 });
+  expect([...late.groups].sort()).toEqual(["browser", "dashboards", "wiki"]);
+  // A judge that answers decides alone.
+  const judge = createFakeJudge(() => 0);
+  expect((await chooseToolGroups(judge, input)).groups).toEqual([]);
+});
+
 test("a run lists what the judge expects it to need, keeps it for the whole run, and reaches the rest on demand", async () => {
   let step = 0;
   f = await setup({

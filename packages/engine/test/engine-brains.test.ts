@@ -3181,9 +3181,10 @@ test("a computer brain with the GIF and sticker tools is told an empty reply aft
   });
   await post(f, "@dev oi");
   await drainOutbox(f.db, handlers);
-  // No GIF search on this server: the note names only the sticker, and no reaction note without `react`.
+  // No GIF search on this server: the note names only the sticker (`send_gif` there only says GIFs are off), and no
+  // reaction note without `react`.
   expect(systems[0]).toContain(computerMediaNote(["send_sticker"]));
-  expect(systems[0]).not.toContain("`send_gif`");
+  expect(systems[0]).not.toContain(computerMediaNote(["send_gif", "send_sticker"]));
   expect(systems[0]).not.toContain(COMPUTER_REACT_NOTE);
 });
 
