@@ -44,3 +44,7 @@ which is why every address a run asks for goes through the outbound check.
   Drive like any file of the conversation.
 - The apps still never load anything from an address in a message.
 - The tool's definition is in every run's tool list (about 200 tokens).
+
+## Addendum (2026-11-26): one address, one file per run
+
+An agent showed the same GIF twice in one reply, and the Drive got two files of it. The tool now keeps, per run, the file each address became: the same address again (in the same call or a later one) answers with that file, which the reply carries once (its cards are by file id), and says it was already shown; it counts once toward the run's limit. Kept in the process's memory, as the limit already was: a run resumed by another process could save an address twice.

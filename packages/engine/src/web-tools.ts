@@ -531,14 +531,18 @@ export function createWebToolSource(deps: WebToolDeps = {}): ToolSource {
     },
   };
 
-  /** Pictures each run has shown (`SHOW_IMAGE_LIMITS.perRun`), for the newest runs this process served. */
-  const shownByRun = new Map<string, number>();
-  const shownIn = (runId: string) => shownByRun.get(runId) ?? 0;
-  const countShown = (runId: string, n: number) => {
-    const now = shownIn(runId) + n;
+  /**
+   * The pictures each run has shown, by the address it asked for, for the newest runs this process served: the same
+   * address again in a run is the file it already made, never a second one (`SHOW_IMAGE_LIMITS.perRun` counts them).
+   * In memory, as the limit was: a run resumed by another process could save one address twice.
+   */
+  const shownByRun = new Map<string, Map<string, ShownPicture>>();
+  const shownIn = (runId: string) => {
+    const shown = shownByRun.get(runId) ?? new Map<string, ShownPicture>();
     shownByRun.delete(runId);
     if (shownByRun.size >= SHOWN_RUNS) shownByRun.delete(shownByRun.keys().next().value as string);
-    shownByRun.set(runId, now);
+    shownByRun.set(runId, shown);
+    return shown;
   };
 
   const showImage = (artifacts: ArtifactDeps): ToolDefinition => ({
@@ -576,8 +580,8 @@ export function createWebToolSource(deps: WebToolDeps = {}): ToolSource {
     async execute(input, ctx) {
       const asked = askedPictures(input).slice(0, SHOW_IMAGE_LIMITS.perCall);
       if (asked.length === 0) return { content: "Give at least one picture's address.", isError: true };
-      const room = SHOW_IMAGE_LIMITS.perRun - shownIn(ctx.runId);
-      if (room <= 0) {
+      const shown = shownIn(ctx.runId);
+      if (shown.size >= SHOW_IMAGE_LIMITS.perRun && !asked.some((p) => shown.has(p.url))) {
         return {
           content: `You already showed ${SHOW_IMAGE_LIMITS.perRun} pictures in this turn: give the others as links.`,
           isError: true,
@@ -590,10 +594,19 @@ export function createWebToolSource(deps: WebToolDeps = {}): ToolSource {
         threadId: replyThreadOf(ctx),
         runId: ctx.runId,
       };
-      const files: { id: string; version: number; title: string; width?: number; height?: number }[] = [];
+      const files: ShownPicture[] = [];
       const failed: string[] = [];
+      let made = 0;
+      let again = 0;
       for (const [index, p] of asked.entries()) {
-        if (files.length >= room) {
+        // Already shown in this run (this call or an earlier one): the same file, once on the reply.
+        const before = shown.get(p.url);
+        if (before) {
+          again++;
+          if (!files.includes(before)) files.push(before);
+          continue;
+        }
+        if (shown.size >= SHOW_IMAGE_LIMITS.perRun) {
           failed.push(`${p.url}: over ${SHOW_IMAGE_LIMITS.perRun} pictures in one turn`);
           continue;
         }
@@ -617,22 +630,26 @@ export function createWebToolSource(deps: WebToolDeps = {}): ToolSource {
             note: `From ${new URL(got.url).host}`,
           });
           const content = file.content.kind === "file" ? file.content : null;
-          files.push({ id: file.id, version: file.version, title: file.title, ...pictureSize(content ?? {}) });
+          const entry = { id: file.id, version: file.version, title: file.title, ...pictureSize(content ?? {}) };
+          shown.set(p.url, entry);
+          files.push(entry);
+          made++;
         } catch (error) {
           failed.push(`${p.url.slice(0, 200)}: ${errorText(error)}`);
         }
       }
-      if (files.length > 0) {
-        countShown(ctx.runId, files.length);
-        await record(ctx, "show-image");
-      }
+      if (made > 0) await record(ctx, "show-image");
       const missed =
         failed.length > 0
           ? `\nNot shown (give these as links, or try the picture's own address):\n${failed.join("\n")}`
           : "";
+      const repeated =
+        again > 0
+          ? ` ${again === 1 ? "One was" : `${again} were`} already shown in this turn: it stays once on your reply, so don't show it again.`
+          : "";
       if (files.length === 0) return { content: `No picture was shown.${missed}`, isError: true };
       return {
-        content: `${files.length === 1 ? "The picture goes" : `${files.length} pictures go`} on your reply, in this order, as pictures people see in the chat (file ids: ${files.map((f) => f.id).join(", ")}). Don't paste their addresses again or describe them at length.${missed}`,
+        content: `${files.length === 1 ? "The picture goes" : `${files.length} pictures go`} on your reply, in this order, as pictures people see in the chat (file ids: ${files.map((f) => f.id).join(", ")}). Don't paste their addresses again or describe them at length.${repeated}${missed}`,
         data: { artifacts: files },
       };
     },
@@ -646,6 +663,9 @@ export function createWebToolSource(deps: WebToolDeps = {}): ToolSource {
 
 /** Runs whose shown pictures are counted at once: past it the oldest count is dropped. */
 const SHOWN_RUNS = 500;
+
+/** A picture `show_image` saved, as it goes on the reply (`data.artifacts`). */
+type ShownPicture = { id: string; version: number; title: string; width?: number; height?: number };
 
 const PICTURE_EXTENSIONS: Record<string, string> = {
   "image/png": "png",

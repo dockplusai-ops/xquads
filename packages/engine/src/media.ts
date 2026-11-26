@@ -15,6 +15,11 @@ export const SEND_GIF_TOOL = "send_gif";
 export const SEND_STICKER_TOOL = "send_sticker";
 /** Both, by name. */
 export const MEDIA_TOOLS: ReadonlySet<string> = new Set([SEND_GIF_TOOL, SEND_STICKER_TOOL]);
+/** How `send_gif`'s description starts where GIFs are off: that one posts nothing (`gifsOffTool` in `media-tools.ts`). */
+export const GIFS_OFF = "GIFs are off here: this sends nothing.";
+/** One of `MEDIA_TOOLS` that posts something now. */
+export const sendsMedia = (tool: { name: string; description: string }) =>
+  MEDIA_TOOLS.has(tool.name) && !tool.description.startsWith(GIFS_OFF);
 
 /** The agents' stickers: one animation of the agent per mood. */
 export const STICKER_MOODS = ["celebrate", "love", "deal", "thinking", "wow", "dizzy", "wave"] as const;

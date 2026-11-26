@@ -5,6 +5,7 @@ import { getAgentCached } from "./agents";
 import { getChannelCached } from "./context";
 import { publishMessageCreated } from "./events";
 import {
+  GIFS_OFF,
   type GifMedia,
   type GifRating,
   isStickerMood,
@@ -25,9 +26,9 @@ import type { ToolContext, ToolDefinition, ToolOutput, ToolSource } from "./tool
  * The agent's own GIF and sticker tools (ADR 0091, addendum 2026-10-31): `send_gif` and `send_sticker`, for when
  * someone asks for one or a light moment clearly invites it. Built in like `react` (no scope: the conversation's
  * group, always listed), and listed only where they can send: the sticker with the workspace's stickers on, the GIF
- * with the server's GIF search and the workspace's GIFs on, both with the agent's own switch (`agents.media_replies`)
- * and in a chat channel or a DM with a person. The workspace's level (`agent_media`) is only the post-reply step's
- * (`agent-media.ts`), never these tools'.
+ * with the server's GIF search and the workspace's GIFs on (else a `send_gif` that only says GIFs are off,
+ * `gifsOffTool`), both with the agent's own switch (`agents.media_replies`) and in a chat channel or a DM with a
+ * person. The workspace's level (`agent_media`) is only the post-reply step's (`agent-media.ts`), never these tools'.
  *
  * What they post is part of the agent's answer: a message of the run, in its conversation, with no text. Like any
  * GIF or sticker alone it routes to nobody and starts no run (`insertMessageWithRuns`); unlike the post-reply step's
@@ -306,11 +307,35 @@ function gifTool(deps: MediaToolDeps, gifs: GifProvider, options: { sticker: boo
   };
 }
 
+/**
+ * `send_gif` with no GIF to send (no GIF search on the server, or the workspace's GIFs off): it only says so. Without
+ * it an agent asked for "um GIF de comemoração" found a GIF on the web and showed it as a picture (2026-11-26).
+ */
+function gifsOffTool(options: { sticker: boolean }): ToolDefinition {
+  // In every run's list: its description stays short, its answer says the rest.
+  const instead = options.sticker ? "Send your sticker (send_sticker) instead" : "Just reply";
+  return {
+    name: SEND_GIF_TOOL,
+    description: `${GIFS_OFF} ${instead}; never a GIF from the web (show_image).`,
+    scope: "",
+    inputSchema: { type: "object" },
+    describe: () => ({ title: "Send a GIF" }),
+    execute: async () => ({
+      content: `No GIF sent: GIFs are off here (no GIF search on this server, or the workspace turned them off). ${
+        options.sticker
+          ? "Send your sticker with send_sticker instead, and don't say you can't send GIFs."
+          : "Just reply in words: GIFs are off here."
+      } Never look for a GIF on the web or show one as a picture (image_search, show_image).`,
+      isError: true,
+    }),
+  };
+}
+
 /** `send_sticker`: the calling agent's own sticker, in one of its moods. */
 function stickerTool(deps: MediaToolDeps): ToolDefinition {
   return {
     name: SEND_STICKER_TOOL,
-    description: `Send one of your own animated stickers in this conversation (you, in a mood) ${WHEN} If someone asks for a GIF and you have no \`send_gif\` tool, GIFs are off here: send your sticker instead, and never say you can't send GIFs. ${AFTER}`,
+    description: `Send one of your own animated stickers in this conversation (you, in a mood) ${WHEN} If someone asks for a GIF and GIFs are off here (\`send_gif\` says so), send your sticker instead, and never say you can't send GIFs. ${AFTER}`,
     scope: "",
     inputSchema: {
       type: "object",
@@ -359,7 +384,8 @@ export function createMediaToolSource(deps: MediaToolDeps): ToolSource {
       if (!agent || agent.archivedAt || !agent.mediaReplies || channelSkip(channel)) return [];
       const sticker = settings.agentStickers;
       const gifs = deps.gifs?.available() && settings.gifs ? deps.gifs : null;
-      return [...(gifs ? [gifTool(deps, gifs, { sticker })] : []), ...(sticker ? [stickerTool(deps)] : [])];
+      const gif = gifs ? gifTool(deps, gifs, { sticker }) : gifsOffTool({ sticker });
+      return [gif, ...(sticker ? [stickerTool(deps)] : [])];
     },
   };
 }

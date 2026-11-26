@@ -6,7 +6,7 @@ import { JevOffError } from "./jev-key";
 import type { Judge, JudgeGroup } from "./judge";
 import { inChannelRun } from "./run-scope";
 import { replyThreadOf } from "./runs";
-import { deferrableGroups, type ToolGroup, toolGroupKey } from "./tools/directory";
+import { deferrableGroups, namedToolGroups, type ToolGroup, toolGroupKey } from "./tools/directory";
 import type { ToolDefinition } from "./tools/types";
 
 /**
@@ -60,7 +60,8 @@ const describeGroup = (g: ToolGroup) =>
  * and in a confidential thread, where no run is ever judged. When the judge refuses or fails, every group: a
  * judge that is down (or refused for the month) would otherwise leave each run
  * with only what the previous one used, its other tools a search it may not
- * think of. A run another agent started (`lean`) keeps to `keep` then, as on a timeout.
+ * think of. A run another agent started (`lean`) keeps to `keep` then, as on a timeout. Whenever no judge answered,
+ * the groups the message names by their tools' names come as well (`namedToolGroups`), but for a `lean` run.
  */
 export async function chooseToolGroups(
   judge: Judge,
@@ -90,7 +91,15 @@ export async function chooseToolGroups(
   const all = deferrableGroups(input.tools);
   const kept = all.filter((g) => input.keep?.includes(g.key)).map((g) => g.key);
   const groups = all.filter((g) => !kept.includes(g.key));
-  const none = (source: ToolGroupChoice["source"]): ToolGroupChoice => ({ groups: kept, scores: {}, source, kept });
+  // With no judge's answer, the groups the message names by their tools' names come too: on a server with no Jev key
+  // every run is such a run, and "crie um widget" left `create_widget` behind a search the model never made.
+  const named = () => namedToolGroups(input.message, groups);
+  const none = (source: ToolGroupChoice["source"]): ToolGroupChoice => ({
+    groups: [...kept, ...(input.lean ? [] : named())],
+    scores: {},
+    source,
+    kept,
+  });
   if (groups.length === 0) {
     input.group?.skip("tool_groups");
     return none("none");
@@ -137,7 +146,7 @@ export async function chooseToolGroups(
     if (answers === "timeout") {
       const had = all.some((g) => input.previous?.includes(g.key));
       const more = groups.filter((g) => !had || input.previous?.includes(g.key)).map((g) => g.key);
-      return { groups: [...kept, ...more], scores: {}, source: "timeout", kept };
+      return { groups: [...new Set([...kept, ...more, ...named()])], scores: {}, source: "timeout", kept };
     }
     const scores: Record<string, number> = {};
     const chosen = [...kept];

@@ -288,7 +288,7 @@ import {
 import { computerBackSoon, type MachineCaller } from "./machine-hub";
 import { TASK_OFFLINE_GRACE_MS } from "./machine-tasks";
 import { getMachine } from "./machines";
-import { MEDIA_TOOLS } from "./media";
+import { sendsMedia } from "./media";
 import { PLACE_KEPT_MS } from "./message-place";
 import {
   getMessage,
@@ -6964,7 +6964,7 @@ function brainTurnOf(
       // (ADR 0137 §4) has only ours, so it is never told of a computer's.
       const computer = isRightHand(agent) ? `${text}\n\n${COMPUTER_SECTIONS_LINE}` : forComputerBrain(text);
       // It also sees `react` as an MCP tool and tends to echo the emoji as its final text; a GIF or a sticker, too.
-      const media = tools.filter((d) => MEDIA_TOOLS.has(d.name)).map((d) => d.name);
+      const media = tools.filter(sendsMedia).map((d) => d.name);
       return [
         computer,
         tools.some((d) => d.name === REACT_TOOL) ? COMPUTER_REACT_NOTE : "",

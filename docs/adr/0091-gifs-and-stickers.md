@@ -105,3 +105,7 @@ Asked in a DM to message another person with a GIF, an agent sent the text with 
 
 - **The same rules as `post_message`'s:** listed where the agent may send a GIF (`AgentGifPoster.offered`), the call checks again; for a person's request, or a routine writing to its creator (the only DM a routine sends); found before any file is copied or anything is sent, skipping the GIFs posted lately in that DM; stored as §1 says without a URL; the answer says "with a GIF", never its title (§6).
 - **One message:** the GIF goes in `meta.media` of the DM's message, with its text or alone, next to `meta.agentDm`; `send_dm`'s own checks (who the routine may write to, the DMs per run) are unchanged. `send_gif`'s description points to `send_dm` for a person's DM.
+
+## Addendum (2026-11-26): `send_gif` says when GIFs are off
+
+With no GIF search on the server (or the workspace's GIFs off) `send_gif` wasn't listed, and `send_sticker`, which said what to do then, is loaded on demand (ADR 0043). Asked for "um GIF de comemoração", an agent found one on the web and showed it with `show_image`. Where the agent's switch and the place allow media, `send_gif` is now always listed: with GIFs off it sends nothing, and its description and its answer say GIFs are off here, to send the sticker instead (or, with stickers off, to reply in words), and never to look for a GIF on the web or show one as a picture. `send_sticker`'s description points to it. Tested in `media-tools.test.ts`.

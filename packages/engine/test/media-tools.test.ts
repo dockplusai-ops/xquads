@@ -142,6 +142,9 @@ const tools = () => {
 /** The GIF and sticker tools a run lists. */
 const mediaListed = async (ctx: ToolContext) =>
   (await tools().list(ctx)).map((t) => t.name).filter((name) => name === "send_gif" || name === "send_sticker");
+/** Whether the run's `send_gif` is the one that only says GIFs are off. */
+const gifsOff = async (ctx: ToolContext) =>
+  (await tools().list(ctx)).find((t) => t.name === "send_gif")?.description.startsWith("GIFs are off here") === true;
 const call = (ctx: ToolContext, name: string, input: Record<string, unknown>) =>
   tools().invoke(ctx, { toolUseId: `tu_${name}_${crypto.randomUUID()}`, name, input });
 
@@ -150,10 +153,14 @@ describe("which runs list them", () => {
     f = await setup({ mediaTools: true, gifs: createFakeGifs() });
     const { ctx } = await personRun();
     expect(await mediaListed(ctx)).toEqual(["send_gif", "send_sticker"]);
+    expect(await gifsOff(ctx)).toBe(false);
+    // The workspace's GIFs off: `send_gif` only says so.
     await settings({ gifs: false });
-    expect(await mediaListed(ctx)).toEqual(["send_sticker"]);
+    expect(await mediaListed(ctx)).toEqual(["send_gif", "send_sticker"]);
+    expect(await gifsOff(ctx)).toBe(true);
     await settings({ gifs: true, agentStickers: false });
     expect(await mediaListed(ctx)).toEqual(["send_gif"]);
+    expect(await gifsOff(ctx)).toBe(false);
     // How often agents send one on their own is the step after a reply's: at Nunca, asked, they still send one.
     await settings({ agentStickers: true, agentMedia: "never" });
     expect(await mediaListed(ctx)).toEqual(["send_gif", "send_sticker"]);
@@ -162,22 +169,45 @@ describe("which runs list them", () => {
     expect(await mediaListed(ctx)).toEqual([]);
   });
 
-  test("no GIF search on the server: only the sticker, which says to send it when asked for a GIF", async () => {
+  test("no GIF search on the server: send_gif says GIFs are off and to send the sticker, never a web picture", async () => {
+    // 2026-11-26: with no send_gif listed, an agent asked for a GIF showed one from the web with show_image.
     f = await setup({ mediaTools: true });
     const { ctx } = await personRun();
-    expect(await mediaListed(ctx)).toEqual(["send_sticker"]);
-    const sticker = (await tools().list(ctx)).find((t) => t.name === "send_sticker");
+    expect(await mediaListed(ctx)).toEqual(["send_gif", "send_sticker"]);
+    const listed = await tools().list(ctx);
+    const gif = listed.find((t) => t.name === "send_gif");
+    expect(gif?.description).toContain("GIFs are off here");
+    expect(gif?.description).toContain(
+      "Send your sticker (send_sticker) instead; never a GIF from the web (show_image)",
+    );
+    expect(await call(ctx, "send_gif", { search: "celebration" })).toMatchObject({
+      type: "result",
+      output: { isError: true, content: expect.stringContaining("Send your sticker with send_sticker instead") },
+    });
+    expect(await call(ctx, "send_gif", {})).toMatchObject({
+      output: { content: expect.stringContaining("Never look for a GIF on the web or show one as a picture") },
+    });
+    expect(await agentMessages()).toEqual([]);
+    const sticker = listed.find((t) => t.name === "send_sticker");
     expect(sticker?.scope).toBe("");
     expect(sticker?.description).toContain(
-      "If someone asks for a GIF and you have no `send_gif` tool, GIFs are off here: send your sticker instead",
+      "If someone asks for a GIF and GIFs are off here (`send_gif` says so), send your sticker instead",
     );
     expect(sticker?.description).toContain("never say you can't send GIFs");
+    // Stickers off too: it says to reply in words.
+    await settings({ agentStickers: false });
+    expect(await mediaListed(ctx)).toEqual(["send_gif"]);
+    expect(await call(ctx, "send_gif", {})).toMatchObject({
+      output: { isError: true, content: expect.stringContaining("Just reply in words") },
+    });
   });
 
   test("a GIF search with no key for now is none", async () => {
     const keyless: GifProvider = { ...createFakeGifs(), available: () => false };
     f = await setup({ mediaTools: true, gifs: keyless });
-    expect(await mediaListed((await personRun()).ctx)).toEqual(["send_sticker"]);
+    const { ctx } = await personRun();
+    expect(await mediaListed(ctx)).toEqual(["send_gif", "send_sticker"]);
+    expect(await gifsOff(ctx)).toBe(true);
   });
 
   test("only where people read: a chat channel or a DM with a person, never two agents' DM", async () => {

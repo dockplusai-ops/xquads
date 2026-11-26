@@ -623,6 +623,23 @@ const words = (s: string) =>
 /** A singular-ish stem, so "ads" finds "ad" and "campaigns" finds "campaign". */
 const stem = (w: string) => (w.length > 3 && w.endsWith("s") && !w.endsWith("ss") ? w.slice(0, -1) : w);
 
+/**
+ * The groups whose tools a message names: a word of it (4 letters or more) that is a word of a tool's name past its
+ * first (`create_widget` → widget, `list_dashboards` → dashboard), so "crie um widget" loads the dashboards' tools.
+ * No model call: what a run loads when no judge answered (`chooseToolGroups`). Names only, so a group
+ * named in another language (painel) isn't found here; it stays one `find_tools` away.
+ */
+export function namedToolGroups(message: string, groups: readonly ToolGroup[]): string[] {
+  const said = new Set(
+    words(message)
+      .filter((w) => w.length >= 4)
+      .map(stem),
+  );
+  if (said.size === 0) return [];
+  const names = (t: ToolDefinition) => words(t.name).slice(1).map(stem);
+  return groups.filter((g) => g.tools.some((t) => names(t).some((w) => said.has(w)))).map((g) => g.key);
+}
+
 /** What the search reads in a tool: its name (twice: it matters most), description and input's names and descriptions. */
 function docOf(t: ToolDefinition, prefix: string) {
   const name = t.name.startsWith(`${prefix}_`) ? t.name.slice(prefix.length + 1) : t.name;
