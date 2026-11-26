@@ -292,7 +292,7 @@ export function createAskAgentToolSource(
       return {
         content: between
           ? `Asked @${handle}. Your answer goes back once @${handle} has answered, together with it: do your own part now, then end your turn saying what you asked.`
-          : `Asked @${handle}. Its answer will reach you as a message in this conversation, even after this turn ends. Meanwhile do what you can yourself and tell the person what you asked and what you found so far; if there's nothing else to do now, say so and end your turn.`,
+          : `Asked @${handle}. Its answer will reach you as a message in this conversation, even after this turn ends. Meanwhile do now every other part of what you were asked that doesn't need its answer, and tell the person what you asked and what you found so far; if there's nothing else to do now, say so and end your turn.`,
         data: { consultation: { id: created.id, agentId: target.id } },
       };
     },

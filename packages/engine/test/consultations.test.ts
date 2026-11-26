@@ -48,6 +48,7 @@ import {
   type ToolContext,
   wakesLater,
 } from "../src";
+import { REST_OF_REQUEST } from "../src/notices";
 import { type Fixture, setup } from "./fixtures";
 import { fakeRunner, pairMachine, RUNNER } from "./machine-fixtures";
 import { ALL_GITHUB_SCOPES, fakeGithub } from "./tool-fixtures";
@@ -168,6 +169,59 @@ describe("ask_agent", () => {
     expect(events).toContainEqual(
       expect.objectContaining({ type: "agent.consulted", agentId: f.agent.id, consultedAgentId: infra.id }),
     );
+  });
+
+  test("a request in two parts, one asked of a colleague: the relay turn is held to the whole request, so the other part isn't lost", async () => {
+    // The asker asks @infra and ends its turn without the other part; the answer wakes it and it only relays. The
+    // relay reads that the request's other parts are its own now, and its turn-end check reads the person's request,
+    // not only the answer: the dropped part is judged left, and the next turn answers it.
+    const relays: string[] = [];
+    const checked: string[] = [];
+    f = await setup({
+      askAgent: true,
+      judge: (kind, id, state) => {
+        if (kind !== "follow_through" || id !== "verdict") return undefined;
+        checked.push(String(state.request));
+        return String(state.request).includes("uptime") && !String(state.reply).includes("Up 3 days")
+          ? "untried"
+          : "done";
+      },
+      reply: (req) => {
+        if (inAgentDm(req)) return answer("A 5-page site: R$ 4.000.");
+        const last = lastText(req);
+        const heard = /your question to @infra\]: ([^"\\]+)/.exec(last);
+        if (heard) {
+          relays.push(last);
+          return { chunks: [`@infra says: ${heard[1]?.trim()}`] };
+        }
+        if (last.includes("Posted: they have read your reply above")) return { chunks: ["Up 3 days, 4 hours."] };
+        if (last.includes("tool_result")) return { chunks: ["Asked @infra for the quote; I'll bring it."] };
+        if (last.includes("uptime"))
+          return {
+            chunks: [],
+            toolUses: [{ name: "ask_agent", input: { agent: "@infra", question: "Quote a simple 5-page site." } }],
+          };
+        return { chunks: ["ok"] };
+      },
+    });
+    await addInfra();
+    await post(
+      "@dev two things: 1) ask @infra for a quote of a 5-page site; 2) run uptime and tell me how long it's up",
+    );
+    await drainOutbox(f.db, f.handlers);
+
+    // The turn the answer woke reads that the rest of the request is its own.
+    expect(relays).toHaveLength(1);
+    expect(relays[0]).toContain(JSON.stringify(REST_OF_REQUEST).slice(1, -1));
+    // Its check reads the person's request, both parts, with the answer.
+    const relayCheck = checked.find((r) => r.includes("R$ 4.000"));
+    expect(relayCheck).toContain("2) run uptime");
+    // The quote was relayed and the uptime answered: nothing the person asked was dropped.
+    const said = (await listMessages(f.db, f.owner.id, f.org.id, f.general.id))
+      .filter((m) => m.author.id === f.agent.id && !m.meta.notice)
+      .map((m) => m.body);
+    expect(said).toContain("@infra says: A 5-page site: R$ 4.000.");
+    expect(said.at(-1)).toBe("Up 3 days, 4 hours.");
   });
 
   test("the consulted run and the asker's relay are told the person's language, though agents asked in English", async () => {

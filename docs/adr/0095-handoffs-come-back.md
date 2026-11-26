@@ -144,3 +144,11 @@ An agent answering another agent in their DM that handed part of the work on (a 
 - **No judge, or a judge that can't answer** for the workspace or run (no Jev key and no small model, platform cap, confidential thread, a hold): no wake, as before. Other judge failures wake. Past the stretch's limits (ADR 0089) it isn't woken either: the answer goes back as before, with no pause card for a run nothing would wait for.
 - **Nothing is lost on a failure:** a run that fails or is stopped while owing an answer closes it as failed with why, followed by what its colleagues had sent back.
 - `tell_agent` from an agents' DM says the agent is woken there first when what comes back needs a step from it.
+
+## Addendum (2026-11-26): the turn that relays finishes the whole request
+
+A person asked an agent for two things in one message, one of them for another agent (`ask_agent`). The agent asked and ended its turn without the other part. Its turn end didn't judge that: something it set up brings it back (`wakesLater` in `follow-through.ts`: what it handed off is still out), so it waits (ADR 0097). The answer woke it, it relayed the answer, and its turn-end check read the answer as the request (the run's trigger is the notice). The other part was never done and never flagged.
+
+- **The relay turn is held to the person's request.** A run woken by what a colleague sent back (`consult_reply`, a question's answer or handed work) starts with `transcript.request` set to the message the chain started from (`runChain`) followed by the notice: every turn-end check of that run reads both (`executor.ts`).
+- **It reads that the rest is its own.** Under a question's answer that woke the run, and under the relay guidance of handed work, one line (`REST_OF_REQUEST` in `notices.ts`): a part of the request it hasn't done yet is done now, in the same message, since nothing else brings it back to it. This holds with no judge on the server.
+- `ask_agent`'s result asks for every other part that doesn't need the answer in the same turn.
