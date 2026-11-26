@@ -137,7 +137,7 @@ test("over the agent's page with unsaved edits, a click on the scrim or leaving 
   await settle(2);
   await click(within(screen().getByRole("menu", { name: "Mais" })).getByRole("menuitem", { name: /^Configurações/ }));
   await settle(4);
-  await click(within(within(side).getByRole("group", { name: "Cor" })).getByRole("button", { name: "Rosa" }));
+  await click(within(within(side).getByRole("group", { name: "Cor" })).getByRole("button", { name: "Argila" }));
   await click(side.previousElementSibling as HTMLElement);
   await settle(2);
   expect(document.querySelector(".thread-panel--wide")).toBeTruthy();

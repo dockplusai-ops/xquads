@@ -10,6 +10,8 @@ import { type AgentColorName, isHexColor } from "@agenteschat/ui/agent/engine";
 
 /** The preset colors; a custom "#rrggbb" ("Personalizar") is a color too. */
 export const AGENT_COLORS = ["sky", "indigo", "violet", "rose", "amber", "green", "teal", "graphite"] as const;
+/** What the pickers offer: since xquads' colors (DESIGN.md) `teal` draws the same sálvia as `green`, so it stays valid on agents that have it but isn't offered twice. */
+export const PICKED_AGENT_COLORS = AGENT_COLORS.filter((c) => c !== "teal");
 export type AgentColor = AgentColorName;
 export const AGENT_EYES = ["round", "dots", "wide", "happy", "sleepy"] as const;
 export type AgentEyes = (typeof AGENT_EYES)[number];

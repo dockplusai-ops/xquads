@@ -61,7 +61,7 @@ describe("the agent's look", () => {
     await settle(8);
     // In place: the colors, then the eyes and what it wears as one sliding row each.
     const page = screen();
-    await click(within(page.getByRole("group", { name: "Cor" })).getByRole("button", { name: "Rosa" }));
+    await click(within(page.getByRole("group", { name: "Cor" })).getByRole("button", { name: "Argila" }));
     await click(within(page.getByRole("group", { name: "Olhos" })).getByRole("button", { name: /Felizes/ }));
     await click(within(page.getByRole("group", { name: "Acessório" })).getByRole("button", { name: /Coroa/ }));
     expect(document.querySelector(".ac-carousel")).not.toBeNull();
@@ -69,7 +69,7 @@ describe("the agent's look", () => {
     const cover = document.querySelector(".agp-face .ac-avatar") as HTMLElement;
     expect(cover.getAttribute("data-eyes")).toBe("happy");
     expect(cover.getAttribute("data-accessory")).toBe("crown");
-    expect(document.body.textContent).toContain("Antes: Céu · Redondos");
+    expect(document.body.textContent).toContain("Antes: Camelo · Redondos");
     const bar = screen().getByRole("region", { name: "Alterações não salvas" });
     await click(within(bar).getByRole("button", { name: /^Salvar/ }));
     await settle(6);

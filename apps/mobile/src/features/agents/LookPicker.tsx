@@ -6,7 +6,7 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AgentAvatar, GroupedHeader, GroupedList, GroupedRow, Icon, PressScale, useTheme } from "@/ui";
 import { router } from "@/ui/navigation";
-import { AGENT_ACCESSORIES, AGENT_COLORS, AGENT_EYES } from "../shared/logic";
+import { AGENT_ACCESSORIES, type AGENT_COLORS, AGENT_EYES, PICKED_AGENT_COLORS } from "../shared/logic";
 import { goBack, PushedHeader, tapHaptic } from "../shared/parts";
 import { ColorSheet } from "./ColorSheet";
 import { type FullLook, shuffleLook } from "./edit";
@@ -107,7 +107,7 @@ function Swatches({
   const slop = 7;
   return (
     <View style={styles.swatchRow} accessibilityRole="radiogroup" accessibilityLabel={t("look.color")}>
-      {AGENT_COLORS.map((color) => {
+      {PICKED_AGENT_COLORS.map((color) => {
         const [top, bottom] = gradientOf(color);
         const on = look.color === color;
         return (

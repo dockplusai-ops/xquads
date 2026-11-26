@@ -487,7 +487,7 @@ describe("agent page: who edits what", () => {
     expect(screen().queryByLabelText("Nome")).toBeNull();
     expect(document.body.textContent).toContain("Você é responsável da Ada");
     // The look is right on the page: colors, then the eyes and what it wears as sliding rows.
-    await click(within(screen().getByRole("group", { name: "Cor" })).getByRole("button", { name: "Rosa" }));
+    await click(within(screen().getByRole("group", { name: "Cor" })).getByRole("button", { name: "Argila" }));
     expect(saveBar()?.textContent).toContain("1 alteração");
     // Its owner edits how it works (ADR 0085 addendum of 2026-11-17): the instructions are theirs to change.
     await openTab(/^Instruções/);

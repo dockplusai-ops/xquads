@@ -213,7 +213,7 @@ describe("Criar agente: steps", () => {
     expect(title()).toBe("Quem é");
     expect((screen().getByLabelText("Nome") as HTMLInputElement).value).toBe("Duda");
     expect((screen().getByLabelText("No chat") as HTMLInputElement).value).toBe("duda");
-    expect(screen().getByRole("button", { name: "Violeta" }).getAttribute("aria-pressed")).toBe("true");
+    expect(screen().getByRole("button", { name: "Névoa" }).getAttribute("aria-pressed")).toBe("true");
     expect(
       screen()
         .getByRole("button", { name: /^Headset/ })

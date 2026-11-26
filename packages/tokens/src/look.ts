@@ -3,6 +3,8 @@
 /** The agent symbol's preset colors (sky is the default identity); a custom "#rrggbb" is allowed too. */
 export const AGENT_COLORS = ["sky", "indigo", "violet", "rose", "amber", "green", "teal", "graphite"] as const;
 export type AgentColor = (typeof AGENT_COLORS)[number] | `#${string}`;
+/** What the pickers offer: since xquads' colors (DESIGN.md) `teal` draws the same sálvia as `green`, so it stays valid on agents that have it but isn't offered twice. */
+export const PICKED_AGENT_COLORS = AGENT_COLORS.filter((c) => c !== "teal");
 
 /** Mirrors `isHexColor` in packages/ui/src/agent/engine.js, which imports nothing so plain pages can load it. */
 const HEX_COLOR = /^#[0-9a-f]{6}$/i;

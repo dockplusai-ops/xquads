@@ -140,12 +140,12 @@ describe("Configurações › Workspace › Cor de destaque", () => {
     expect(screen().queryByRole("button", { name: "Usar a padrão" })).toBeNull();
     await click(screen().getByRole("button", { name: "Trocar cor" }));
     const save = () => within(popover()).getByRole("button", { name: "Salvar cor" }) as HTMLButtonElement;
-    // The default (camelo, still named Céu) is the first suggestion, picked; nothing to save yet.
+    // The default (camelo) is the first suggestion, picked; nothing to save yet.
     const suggestions = within(popover()).getAllByRole("button", { pressed: true });
-    expect(suggestions.map((b) => b.getAttribute("aria-label"))).toEqual(["Céu"]);
+    expect(suggestions.map((b) => b.getAttribute("aria-label"))).toEqual(["Camelo"]);
     expect(save().disabled).toBe(true);
 
-    await click(within(popover()).getByRole("button", { name: "Violeta" }));
+    await click(within(popover()).getByRole("button", { name: "Névoa" }));
     const sample = popover().querySelector<HTMLElement>("[data-testid=accent-sample]");
     expect(sample?.style.getPropertyValue("--agent")).toBe(accentPalette("#a9b3ce").light.agent);
     expect(sample?.textContent).toContain("@Agente");
@@ -172,7 +172,7 @@ describe("Configurações › Workspace › Cor de destaque", () => {
     await click(within(popover()).getByRole("button", { name: "Salvar cor" }));
     expect((within(popover()).getByRole("button", { name: "Salvar cor" }) as HTMLButtonElement).disabled).toBe(true);
     expect((screen().getByRole("button", { name: "Usar a padrão" }) as HTMLButtonElement).disabled).toBe(true);
-    for (const b of within(popover()).getAllByRole("button", { name: /Céu|Violeta/ }))
+    for (const b of within(popover()).getAllByRole("button", { name: /Camelo|Névoa/ }))
       expect((b as HTMLButtonElement).disabled).toBe(true);
     await act(async () => release());
     await settle(6);

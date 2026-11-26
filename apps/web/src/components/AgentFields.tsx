@@ -7,7 +7,6 @@ import { isPersonal } from "@agenteschat/client/lib/workspace-mode";
 import {
   AffixInput,
   AGENT_ACCESSORIES,
-  AGENT_COLORS,
   AGENT_EYES,
   type AgentAppearance,
   Avatar,
@@ -22,6 +21,7 @@ import {
   type IconName,
   isHexColor,
   matchesWords,
+  PICKED_AGENT_COLORS,
   Popover,
   ProviderLogo,
   RoleMark,
@@ -290,7 +290,7 @@ function ColorChoices({ look, onPick, onPreview }: LookPickProps) {
   return (
     // biome-ignore lint/a11y/useSemanticElements: pressable swatches, not a native fieldset
     <div className="newag__swatches" role="group" aria-label={t("look.color")}>
-      {AGENT_COLORS.map((c) => {
+      {PICKED_AGENT_COLORS.map((c) => {
         const [top, bottom] = agentGradient(c);
         return (
           <button
