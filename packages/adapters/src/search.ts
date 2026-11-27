@@ -1,6 +1,10 @@
 import { and, asc, type Database, desc, eq, gte, inArray, lt, rowsOf, schema, sql } from "@agenteschat/db";
 import { contentWords } from "./stopwords";
 
+const FOLD = new Map([...schema.SEARCH_FOLD_FROM].map((c, i) => [c, schema.SEARCH_FOLD_TO[i] as string]));
+/** The query's letters as the index reads them (`SEARCH_FOLD_FROM` → `SEARCH_FOLD_TO`, the same table). */
+export const foldSearch = (s: string) => [...s].map((c) => FOLD.get(c) ?? c).join("");
+
 export type SearchKind = "message" | "context_item" | "issue" | "file" | "wiki" | "action";
 
 export interface SearchDocument {
@@ -238,7 +242,7 @@ export function createPostgresSearchResolver(db: Database): SearchIndexResolver 
         },
         async query(q) {
           const limit = Math.min(q.limit ?? 20, 100);
-          const text = q.text.trim();
+          const text = foldSearch(q.text.trim());
           const filtered = Boolean(q.messages || q.after || q.before);
           if (!text && !q.embedding && !filtered) return [];
           const issues = q.visibleIssueScopes?.length
@@ -285,7 +289,7 @@ export function createPostgresSearchResolver(db: Database): SearchIndexResolver 
           // titles ("empresa") doesn't lift a page that barely mentions it.
           const density = sql`ts_rank_cd(${t.tsv}, ${tsQuery}, 2|32)`;
           // "Pasta/Título" would parse as one path token: the slash goes, so the title's first word counts.
-          const inTitle = sql`(to_tsvector('simple', replace(${t.title}, '/', ' ')) @@ ${tsQuery})`;
+          const inTitle = sql`(to_tsvector('simple', translate(replace(${t.title}, '/', ' '), ${schema.SEARCH_FOLD_FROM}, ${schema.SEARCH_FOLD_TO})) @@ ${tsQuery})`;
           const anyRank = sql`(${density} * (1 + ${inTitle}::int))`;
           const relevant =
             useAny && q.minTextRank

@@ -2353,6 +2353,13 @@
       "when": 1795550171282,
       "tag": "0340_channel_lead",
       "breakpoints": true
+    },
+    {
+      "idx": 338,
+      "version": "7",
+      "when": 1795742653089,
+      "tag": "0341_search_fold_accents",
+      "breakpoints": true
     }
   ]
 }

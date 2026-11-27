@@ -155,6 +155,16 @@ describe("search filters (ADR 0123)", () => {
     expect(await find("", {})).toEqual([]);
   });
 
+  test("accents don't matter either way: 'saude clinicas' finds 'Saúde & Clínicas', 'clínica' finds 'clinica'", async () => {
+    f = await setup();
+    await message(f, { body: "Saúde & Clínicas: agendamentos manuais" });
+    await message(f, { body: "a clinica nova abriu", at: day("2026-10-16") });
+    const find = async (text: string) =>
+      bodies(await describeHits(f.db, f.org.id, await searchForUser(deps(f), f.owner.id, f.org.id, { text })));
+    expect(await find("saude clinicas")).toEqual(["Saúde & Clínicas: agendamentos manuais"]);
+    expect(await find("clínica")).toEqual(["a clinica nova abriu"]);
+  });
+
   test("a voice message is found by its words and comes back as audio; a GIF says what it was (ADR 0100)", async () => {
     f = await setup();
     await message(f, {

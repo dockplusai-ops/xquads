@@ -26,6 +26,13 @@ import { organizations } from "./tenancy";
 const tsvector = customType<{ data: string }>({ dataType: () => "tsvector" });
 
 /**
+ * Accented letters and the plain ones the search index reads them as (Postgres' `translate`, built in everywhere:
+ * no extension), so "clinica" finds "Clínicas" and "saude" finds "Saúde". The query goes through the same table.
+ */
+export const SEARCH_FOLD_FROM = "áàâãäåéèêëíìîïóòôõöúùûüçñýÿÁÀÂÃÄÅÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇÑÝ";
+export const SEARCH_FOLD_TO = "aaaaaaeeeeiiiiooooouuuucnyyAAAAAAEEEEIIIIOOOOOUUUUCNY";
+
+/**
  * The core search index (docs/adr/0017-search-and-context.md):
  * one row per searchable thing (message, context item, issue,
  * file), fed by the outbox. Hybrid: full-text (`tsv`, `simple` config so
@@ -45,7 +52,11 @@ export const searchDocuments = pgTable(
     channelIds: uuid().array().notNull().default(sql`'{}'::uuid[]`),
     title: text().notNull().default(""),
     body: text().notNull(),
-    tsv: tsvector().generatedAlwaysAs(sql`to_tsvector('simple', coalesce(title, '') || ' ' || coalesce(body, ''))`),
+    tsv: tsvector().generatedAlwaysAs(
+      sql.raw(
+        `to_tsvector('simple', translate(coalesce(title, '') || ' ' || coalesce(body, ''), '${SEARCH_FOLD_FROM}', '${SEARCH_FOLD_TO}'))`,
+      ),
+    ),
     embedding: vector({ dimensions: 1024 }),
     embeddingModel: text(),
     /** When the source was created (recency ranking). */
