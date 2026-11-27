@@ -3,7 +3,7 @@ import { setupDom } from "../testing/dom";
 
 setupDom();
 
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { Composer } from "../src/components/Composer";
 
 afterEach(cleanup);
@@ -46,5 +46,41 @@ describe("the composer's placeholder", () => {
     render(box());
     expect(screen.getByRole("textbox").getAttribute("placeholder")).toBe("Mensagem para #geral");
     narrow();
+  });
+});
+
+describe("the next message suggested (ADR 0220)", () => {
+  const suggesting = (value: string, onChange: (v: string) => void) => (
+    <Composer
+      value={value}
+      onChange={onChange}
+      onSend={() => {}}
+      label="Mensagem para Lodi"
+      placeholder="Mensagem para Lodi"
+      sendLabel="Enviar"
+      suggestion="Pode enviar a proposta"
+    />
+  );
+
+  test("grey in the empty box with its key; Tab or → puts it in the box; once typed, the placeholder is back", () => {
+    const restore = sized(600);
+    let typed = "";
+    const view = render(suggesting("", (v) => (typed = v)));
+    const field = screen.getByRole("textbox");
+    expect(field.getAttribute("placeholder")).toBe("Pode enviar a proposta · Tab");
+    fireEvent.keyDown(field, { key: "Tab" });
+    expect(typed).toBe("Pode enviar a proposta");
+    typed = "";
+    fireEvent.keyDown(field, { key: "ArrowRight" });
+    expect(typed).toBe("Pode enviar a proposta");
+    // Shift+Tab still leaves the box.
+    typed = "";
+    fireEvent.keyDown(field, { key: "Tab", shiftKey: true });
+    expect(typed).toBe("");
+    view.rerender(suggesting("ok", (v) => (typed = v)));
+    expect(field.getAttribute("placeholder")).toBe("Mensagem para Lodi");
+    fireEvent.keyDown(field, { key: "Tab" });
+    expect(typed).toBe("");
+    restore();
   });
 });

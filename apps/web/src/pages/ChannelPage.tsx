@@ -158,6 +158,7 @@ import {
   parseMissionCommand,
   taskNoticeOf,
 } from "@agenteschat/client/lib/missions";
+import { composerSuggestion } from "@agenteschat/client/lib/next-prompt";
 import { noAiCardOf } from "@agenteschat/client/lib/no-ai";
 import { isTalkerReply, noticeOf, routineReportText, talkerWaited } from "@agenteschat/client/lib/notices";
 import { brainUnavailableOf, isOfflineNotice } from "@agenteschat/client/lib/outages";
@@ -901,6 +902,11 @@ function ChannelView({
   const messages = thread ? threadMessages : channelMessages;
   // Our notifications ask, under the message it follows in the channel's own list (never a thread's, never read only).
   const topLevel = useMemo(() => channelMessages.data?.filter((m) => !m.threadId), [channelMessages.data]);
+  // In a DM with an agent, its reply may suggest my next message (ADR 0220): grey in the empty composer, Tab takes it.
+  const suggestion = useMemo(
+    () => (thread || !chrome?.dmAgentId ? null : composerSuggestion(topLevel?.at(-1), me.user.id, "")),
+    [thread, chrome?.dmAgentId, topLevel, me.user.id],
+  );
   const pushAsk = usePushAsk(thread || !isMember ? undefined : topLevel);
   // Read from the server (a thread's root the channel held stands in until then: its replies are still unknown).
   const serverRead = messages.isSuccess && !messages.isPlaceholderData;
@@ -3093,6 +3099,7 @@ function ChannelView({
                           ) : (
                             <>
                               <DraftComposer
+                                suggestion={suggestion}
                                 draft={draft}
                                 handed={handed}
                                 uploading={uploading}

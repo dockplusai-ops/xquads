@@ -2907,6 +2907,7 @@ export const en = {
     quoteGone: "Original message deleted",
     quoteNoWords: "Message with no text",
     replyingTo: "Replying to {{name}}",
+    useSuggestion: "Use the suggestion: {{text}}",
     cancelReply: "Cancel reply",
     jumpMissing: "That message isn't available. It may have been deleted, or you can't see it.",
     emoji: "Emoji",
@@ -18627,6 +18628,9 @@ export const en = {
       ratings: { g: "Any age", pg: "Up to 13" },
       stickers: "Agents' stickers",
       stickersHelp: "Made from each agent's look, nothing to upload.",
+      nextPrompts: "Suggest the next message",
+      nextPromptsHelp:
+        "After an agent replies in a DM, a likely next message shows in the empty box. Tab takes it on the web, a tap on the phone.",
       agentsTitle: "Agents",
       level: "Agents send one on their own",
       levelHelp: "Only in a light conversation. If someone asks, they send one even at Never.",

@@ -6710,6 +6710,9 @@
   "channel.replyingTo": {
     "value": "Replying to {{name}}"
   },
+  "channel.useSuggestion": {
+    "value": "Use the suggestion: {{text}}"
+  },
   "channel.cancelReply": {
     "value": "Cancel reply"
   },
@@ -44360,6 +44363,12 @@
   },
   "settings.media.stickersHelp": {
     "value": "Made from each agent's look, nothing to upload."
+  },
+  "settings.media.nextPrompts": {
+    "value": "Suggest the next message"
+  },
+  "settings.media.nextPromptsHelp": {
+    "value": "After an agent replies in a DM, a likely next message shows in the empty box. Tab takes it on the web, a tap on the phone."
   },
   "settings.media.agentsTitle": {
     "value": "Agents"

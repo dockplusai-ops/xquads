@@ -17,7 +17,7 @@ import { SettingsPage } from "./parts";
 const RATINGS: GifRating[] = ["g", "pg"];
 const LEVELS: AgentMediaLevel[] = ["never", "sometimes", "often"];
 
-type MediaPatch = Partial<Pick<OrgSettings, "gifs" | "gifRating" | "agentStickers" | "agentMedia">>;
+type MediaPatch = Partial<Pick<OrgSettings, "gifs" | "gifRating" | "agentStickers" | "agentMedia" | "nextPrompts">>;
 
 /**
  * GIFs e figurinhas (ADR 0091), as the web's: what people can send (GIFs and their rating, the agents' stickers), how
@@ -91,6 +91,18 @@ export function MediaSettingsScreen() {
             toggle={shown.agentStickers}
             disabled={!editable}
             onPress={() => save({ agentStickers: !shown.agentStickers })}
+          />
+          {/* The next message suggested in a DM with an agent (ADR 0220): one small-model call per reply. */}
+          <GroupedRow
+            icon="bulb"
+            label={t("settings.media.nextPrompts")}
+            hint={{
+              name: t("common.about", { label: t("settings.media.nextPrompts") }),
+              text: t("settings.media.nextPromptsHelp"),
+            }}
+            toggle={shown.nextPrompts !== false}
+            disabled={!editable}
+            onPress={() => save({ nextPrompts: shown.nextPrompts === false })}
           />
         </GroupedList>
         <GroupedHeader

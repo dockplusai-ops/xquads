@@ -63,6 +63,7 @@ import {
   createLiveFileToolSource,
   createLiveImages,
   createLlmIntentWriter,
+  createLlmNextPromptWriter,
   createLlmJudge,
   createMachineHub,
   createMailToolSource,
@@ -107,6 +108,7 @@ import {
   getAgentCached,
   hubBrainLink,
   type IntentWriter,
+  type NextPromptWriter,
   isAgentesCloud,
   isRightHand,
   type JobDeps,
@@ -183,6 +185,8 @@ export interface EngineOptions {
   judge?: Judge;
   /** Tests: a fake writer of the working line's first words, or null for none (no model call at a run's start). */
   intents?: IntentWriter | null;
+  /** Tests: a fake writer of the next message suggested in a DM, or null for none (no model call after a reply). */
+  nextPrompts?: NextPromptWriter | null;
   /** Tests: a fake schedule reader (no model calls for "toda segunda às 9h" and the like). */
   schedules?: ScheduleReader;
   /** Tests: fake S3 server and DNS for org buckets. */
@@ -299,6 +303,10 @@ export function buildEngine(o: EngineOptions) {
       () => jevKey.usable(),
     );
   }
+  context.nextPrompts =
+    o.nextPrompts === undefined
+      ? createLlmNextPromptWriter({ gateway, resolveModel: (orgId) => smallModelFor({ db, gateway }, orgId, smallModels) })
+      : (o.nextPrompts ?? undefined);
   context.intents =
     o.intents === undefined
       ? createLlmIntentWriter({ gateway, resolveModel: (orgId) => smallModelFor({ db, gateway }, orgId, smallModels) })

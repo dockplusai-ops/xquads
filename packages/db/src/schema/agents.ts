@@ -424,6 +424,8 @@ export const organizationSettings = pgTable("organization_settings", {
    * for themselves, `organization_members.right_hand_learns`). Off: only what people ask it to remember. On without a row.
    */
   rightHandLearns: boolean().notNull().default(true),
+  /** The next message suggested in a person's DM with an agent (ADR 0220, `next-prompt.ts`): off for the workspace. */
+  nextPrompts: boolean().notNull().default(true),
   /**
    * How much the workspace's agents ask before acting (ADR 0173 addendum 2026-11-15): what every agent without its
    * own choice (`agents.approvals_level_own`) uses. A workspace with no row here is at `risky`.

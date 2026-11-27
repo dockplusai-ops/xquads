@@ -332,6 +332,10 @@ function applyToCache(qc: QueryClient, orgId: string, channelId: string, event: 
     case "message.resolved":
       cacheResolved(qc, orgId, event.channelId, event.messageId, event.resolved);
       break;
+    // The next message suggested for the person in a DM (ADR 0220): kept on the reply, read by the composer.
+    case "message.suggestion":
+      cacheMessageMeta(qc, orgId, event.channelId, event.messageId, () => ({ nextPrompt: event.nextPrompt }));
+      break;
     case "agent.run":
     case "run.finished":
       // "Working now" on Home, and the task manager (an agent's DM header counts its tasks here too), paced with the

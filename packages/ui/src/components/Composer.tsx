@@ -173,6 +173,11 @@ export interface ComposerProps {
   /** Accessible name of the text box, e.g. "Mensagem para #eng". */
   label: string;
   placeholder?: string;
+  /**
+   * The next message suggested (ADR 0220): shown in the empty box in the placeholder's grey, with its key; Tab or →
+   * puts it in the box to edit or send, typing anything leaves it.
+   */
+  suggestion?: string | null;
   sendLabel: string;
   attachLabel?: string;
   onAttach?: () => void;
@@ -537,7 +542,8 @@ export function Composer({
   onChange,
   onSend,
   label,
-  placeholder,
+  placeholder: given,
+  suggestion,
   sendLabel,
   attachLabel,
   onAttach,
@@ -569,6 +575,9 @@ export function Composer({
   const locked = useLocked();
   const disabled = off || locked;
   const ref = useRef<HTMLTextAreaElement>(null);
+  // A suggestion stands in the placeholder's place while the box is empty; its key is the tip that drops when narrow.
+  const suggested = !value && suggestion ? suggestion : null;
+  const placeholder = suggested ? `${suggested} · Tab` : given;
   const shownPlaceholder = useOneLinePlaceholder(ref, placeholder);
   const wave = useRef<HTMLCanvasElement>(null);
   // The take's keys (Space, Enter, Esc) are the box's while the focus is in it with text there.
@@ -837,6 +846,19 @@ export function Composer({
     // focus here. It is spent: it stops no agent, and the page's own Esc (an inbox reply closes on it) never sees it.
     if (e.key === "Escape" && e.defaultPrevented) {
       e.stopPropagation();
+      return;
+    }
+    // Tab or → in the empty box takes the suggestion: it becomes the box's text, to edit or send.
+    if (
+      suggested &&
+      !e.shiftKey &&
+      !e.altKey &&
+      !e.metaKey &&
+      !e.ctrlKey &&
+      (e.key === "Tab" || e.key === "ArrowRight")
+    ) {
+      e.preventDefault();
+      onChange(suggested);
       return;
     }
     const kind = format ? formatShortcut(e) : null;

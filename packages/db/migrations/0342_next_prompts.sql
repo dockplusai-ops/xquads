@@ -1,0 +1,1 @@
+ALTER TABLE "organization_settings" ADD COLUMN "next_prompts" boolean DEFAULT true NOT NULL;

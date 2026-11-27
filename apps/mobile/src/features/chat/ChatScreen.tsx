@@ -1,5 +1,6 @@
 import { isMediaKind, MESSAGES_PAGE, useAiStatus, useApi } from "@agenteschat/client";
 import { workIsOver } from "@agenteschat/client/lib/long-work";
+import { composerSuggestion } from "@agenteschat/client/lib/next-prompt";
 import { pinsIn } from "@agenteschat/client/lib/pins";
 import { CodeConversation } from "@agenteschat/client/lib/work-context";
 import type { LegendListRef } from "@legendapp/list/react-native";
@@ -30,13 +31,14 @@ import { AskProbes, AskStoreProvider, useAwayAsk } from "./asks";
 import { ChannelHello } from "./ChannelHello";
 import { ChatSkeleton } from "./ChatSkeleton";
 import { ChatWallpaper, WallpaperBand } from "./ChatWallpaper";
-import { takeComposerRequest, useComposerRequest } from "./composer-request";
+import { requestComposerText, takeComposerRequest, useComposerRequest } from "./composer-request";
 import { openingDockHeight, rememberDockHeight } from "./dock-height";
 import { FirstDay } from "./FirstDay";
 import { useListEnd } from "./list-end";
 import { endsOnNoAiCard, noAiBanner } from "./no-ai-banner";
 import { placeKey, placeMessage, takeHandedPlace, useReadingPlace } from "./reading-place";
 import { ConversationRowData } from "./row-data";
+import { SuggestionBar } from "./SuggestionBar";
 import { ChatDock } from "./screen/ChatDock";
 import { ChatHeader, useChatTitle } from "./screen/ChatHeader";
 import { ChatList, useListPlacement } from "./screen/ChatList";
@@ -428,6 +430,20 @@ function Chat({
   useEffect(() => {
     if (prefill) takeComposerRequest(prefill.at);
   }, [prefill]);
+  // In a DM with an agent, its reply may suggest my next message (ADR 0220): a bar over the field, a tap fills it.
+  const suggestion = !isThread && dmAgentId ? composerSuggestion(list.at(-1), meId, "") : null;
+  const [usedSuggestion, setUsedSuggestion] = useState<string | null>(null);
+  const shownBanner =
+    composerBanner ??
+    (suggestion && suggestion !== usedSuggestion ? (
+      <SuggestionBar
+        text={suggestion}
+        onUse={() => {
+          setUsedSuggestion(suggestion);
+          requestComposerText(channelId, suggestion);
+        }}
+      />
+    ) : undefined);
 
   // The composer floats over the list's bottom and rides the keyboard (KeyboardStickyView, on the keyboard library's
   // values and nothing else); the list ends where the composer starts (`useListEnd`, below).
@@ -888,7 +904,7 @@ function Chat({
                 prefill={prefill}
                 captionBack={captionBack}
                 replyAt={replyAt}
-                composerBanner={composerBanner}
+                composerBanner={shownBanner}
                 composerAttachments={composerAttachments}
                 pending={pending}
                 canAttach={canAttach}

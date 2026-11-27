@@ -264,6 +264,7 @@ import { type CodeSetup, codeStart } from "./git/machine";
 import { agentRepositoryList, repositoriesPrompt } from "./git/repos";
 import { askVerdict, handOffHolds, repeatedAsk, saysNeedsNothing } from "./hand-off";
 import { announceIntent } from "./intent-line";
+import { suggestNextPrompt } from "./next-prompt";
 import { UPDATE_ISSUE_TOOL } from "./issue-tools";
 import { linkRunToIssue, mirrorReplyToIssue, taskRunDone } from "./issues";
 import { type Judge, JudgeGroup, judgeCallOf, TURN_END_CHECK_BUDGET_MS, withJudgeBudget } from "./judge";
@@ -1658,6 +1659,10 @@ async function executeRunInner(
     }
     // A task's agent that finished it hands it to review (`taskRunDone`).
     if (status === "done") await taskRunDone({ db, pubsub: deps.pubsub }, run).catch(() => {});
+    // A reply in a person's DM: what they'd likely send next, as grey text in their composer (ADR 0220).
+    const nextPrompts = deps.context?.nextPrompts;
+    if (status === "done" && nextPrompts && !run.background && !run.workId && !isConfidentialRun(run.id))
+      void suggestNextPrompt({ db, pubsub: deps.pubsub, writer: nextPrompts }, run).catch(() => {});
     // Its line ends with the run (checked on read); the apps refresh now (ADR 0084 §11).
     await announceAgentStatus(deps.pubsub, run.orgId, run.agentId).catch(() => {});
     // Ended or waiting: so does the Live Activity of the person behind it (ADR 0210).

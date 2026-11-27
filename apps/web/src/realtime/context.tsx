@@ -910,6 +910,10 @@ export function useChannelRealtime(orgId: string, channelId: string, enabled: bo
       if (event.type === "message.resolved") {
         cacheResolved(qc, orgId, event.channelId, event.messageId, event.resolved);
       }
+      // The next message suggested for the person in a DM (ADR 0220): kept on the reply, read by the composer.
+      if (event.type === "message.suggestion") {
+        cacheMessageMeta(qc, orgId, event.channelId, event.messageId, () => ({ nextPrompt: event.nextPrompt }));
+      }
       // A suggested code session was opened, kept here, or waits again (ADR 0215 §11): its card under the reply.
       if (event.type === "code.suggestion") {
         cacheCodeSuggestion(qc, orgId, event.channelId, event.messageId, event.suggestion);

@@ -173,6 +173,7 @@ export * from "./hosts";
 export * from "./id-refs";
 export * from "./imports";
 export * from "./intent-line";
+export * from "./next-prompt";
 export * from "./invite-choices";
 export * from "./invite-requests";
 export * from "./issue-assignees";

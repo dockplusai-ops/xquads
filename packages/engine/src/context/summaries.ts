@@ -4,6 +4,7 @@ import { isConfidential } from "../confidential";
 import { cutText, cutTextEnd } from "../format";
 import type { ModelGateway } from "../gateway";
 import type { IntentWriter } from "../intent-line";
+import type { NextPromptWriter } from "../next-prompt";
 import { createLlmJudge, type Judge } from "../judge";
 import type { Message } from "../messages";
 import { cheapModelForOrg } from "../router";
@@ -32,6 +33,8 @@ export interface ContextDeps {
   schedules?: ScheduleReader;
   /** The working line's first words at a run's start (`intent-line.ts`); absent: none. */
   intents?: IntentWriter;
+  /** The next message suggested after a reply in a DM (`next-prompt.ts`); absent: none. */
+  nextPrompts?: NextPromptWriter;
   /** Where learning's failures are reported (ADR 0104, `reportLearnFailure`); absent: not reported. */
   errors?: ErrorReporter;
 }

@@ -632,6 +632,8 @@ export type ChannelEvent =
     }
   /** Someone reacted or took a reaction back: the message's reactions now (replace, don't merge). */
   | { type: "message.reactions"; channelId: string; messageId: string; reactions: ReactionCount[] }
+  /** The next message suggested for the person in a DM, kept on the agent's reply (`next-prompt.ts`, ADR 0220). */
+  | { type: "message.suggestion"; channelId: string; messageId: string; nextPrompt: { text: string; forUserId: string } }
   /** A vote came in or the poll closed (ADR 0113). */
   | { type: "poll.updated"; channelId: string; poll: PollView }
   /** Someone changed what a live block shows, for everyone (ADR 0113): the newest `rev` wins. */

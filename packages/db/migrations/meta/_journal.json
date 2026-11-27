@@ -2360,6 +2360,13 @@
       "when": 1795742653089,
       "tag": "0341_search_fold_accents",
       "breakpoints": true
+    },
+    {
+      "idx": 339,
+      "version": "7",
+      "when": 1795748694205,
+      "tag": "0342_next_prompts",
+      "breakpoints": true
     }
   ]
 }

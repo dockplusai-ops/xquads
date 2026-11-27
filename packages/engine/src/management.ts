@@ -98,6 +98,8 @@ export interface OrgSettings extends MediaSettings {
   welcomePeople: boolean;
   /** The right hand learns from conversations on its own (each person may also turn it off for themselves). On by default. */
   rightHandLearns: boolean;
+  /** The next message suggested in a person's DM with an agent (ADR 0220). On by default. */
+  nextPrompts: boolean;
   /** What agents without their own choice ask before acting (ADR 0173). Set with `setWorkspaceApprovalsLevel`. */
   approvalsLevel: ApprovalsLevel;
 }
@@ -127,6 +129,7 @@ export async function getOrgSettings(db: Database, actorId: string, orgId: strin
     teamWatch: s?.teamWatch ?? true,
     welcomePeople: s?.welcomePeople ?? true,
     rightHandLearns: s?.rightHandLearns ?? true,
+    nextPrompts: s?.nextPrompts ?? true,
     approvalsLevel: s?.approvalsLevel ?? DEFAULT_APPROVALS_LEVEL,
     ...mediaSettingsFrom(s),
   };
@@ -263,6 +266,7 @@ export async function updateOrgSettings(
       ...(input.teamWatch !== undefined ? { teamWatch: input.teamWatch } : {}),
       ...(input.welcomePeople !== undefined ? { welcomePeople: input.welcomePeople } : {}),
       ...(input.rightHandLearns !== undefined ? { rightHandLearns: input.rightHandLearns } : {}),
+      ...(input.nextPrompts !== undefined ? { nextPrompts: input.nextPrompts } : {}),
       ...(input.autoModels !== undefined
         ? { autoModels: mergeAutoModels(await storedAutoModels(), input.autoModels) }
         : {}),

@@ -14,7 +14,7 @@ import { useOrg } from "@/components/org-context";
 const RATINGS: GifRating[] = ["g", "pg"];
 const LEVELS: AgentMediaLevel[] = ["never", "sometimes", "often"];
 
-type MediaPatch = Partial<Pick<OrgSettings, "gifs" | "gifRating" | "agentStickers" | "agentMedia">>;
+type MediaPatch = Partial<Pick<OrgSettings, "gifs" | "gifRating" | "agentStickers" | "agentMedia" | "nextPrompts">>;
 
 /**
  * Configurações › GIFs e figurinhas (ADR 0091): what people can send (GIFs and their rating, the agents' stickers),
@@ -99,6 +99,21 @@ export function MediaSettingsSection() {
                 onCheckedChange={(on) => save({ agentStickers: on })}
                 disabled={!editable}
                 aria-label={t("settings.media.stickers")}
+              />
+            }
+          />
+          {/* The next message suggested in a DM with an agent (ADR 0220): one small-model call per reply. */}
+          <PrefRow
+            id="media-next"
+            icon="edit"
+            label={t("settings.media.nextPrompts")}
+            hint={t("settings.media.nextPromptsHelp")}
+            control={
+              <Switch
+                checked={shown.nextPrompts !== false}
+                onCheckedChange={(on) => save({ nextPrompts: on })}
+                disabled={!editable}
+                aria-label={t("settings.media.nextPrompts")}
               />
             }
           />

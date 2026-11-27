@@ -2777,6 +2777,7 @@ export const ptBR = {
     quoteGone: "Mensagem original apagada",
     quoteNoWords: "Mensagem sem texto",
     replyingTo: "Respondendo a {{name}}",
+    useSuggestion: "Usar a sugestão: {{text}}",
     cancelReply: "Cancelar resposta",
     jumpMissing: "Essa mensagem não está disponível. Ela pode ter sido apagada ou não estar visível para você.",
     emoji: "Emoji",
@@ -18470,6 +18471,9 @@ export const ptBR = {
       ratings: { g: "Qualquer idade", pg: "Até 13 anos" },
       stickers: "Figurinhas dos agentes",
       stickersHelp: "Feitas do visual de cada agente, sem upload.",
+      nextPrompts: "Sugerir a próxima mensagem",
+      nextPromptsHelp:
+        "Depois da resposta de um agente na DM, uma próxima mensagem provável aparece no campo vazio. No web, o Tab usa a sugestão, no celular, um toque.",
       agentsTitle: "Agentes",
       level: "Agentes mandam por conta própria",
       levelHelp: "Só em conversa leve. Se alguém pedir, mandam mesmo em Nunca.",
