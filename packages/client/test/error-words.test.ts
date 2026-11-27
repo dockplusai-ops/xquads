@@ -396,6 +396,11 @@ test("a provider refused this server's own OAuth app: what's wrong and who fixes
  * hit goes in `KNOWN` instead.
  */
 const PLAIN_LINE = new Set([
+  // Editing and deleting a message (ADR 0221): the apps offer them only on one's own message (deleting anyone's only to
+  // an administrator) and never save empty words; a failure says the apps' own line (`channel.editMessageFailed`).
+  "message.empty_edit",
+  "message.not_editable",
+  "message.not_yours",
   // A code session (ADR 0215): the apps start one only with words in the field and rename one only to a name, build
   // its git and file requests themselves, never offer removing who must stay, and retry only a failed worktree.
   "code_session.empty",

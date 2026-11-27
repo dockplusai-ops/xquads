@@ -99,6 +99,8 @@ describe("message action bars", () => {
       "Copiar link da mensagem",
       "Fixar mensagem",
       "Salvar na wiki",
+      // As an administrator, anyone's message (ADR 0221).
+      "Apagar mensagem",
     ]);
   });
 
@@ -305,6 +307,7 @@ describe("message action bars", () => {
         "Copiar link da mensagem",
         "Fixar mensagem",
         "Salvar na wiki",
+        "Apagar mensagem",
       ]);
       expect(document.querySelector('article[data-message-id="m-1"]')?.getAttribute("data-menu-open")).toBe("true");
       await click(within(reactions).getByRole("menuitem", { name: "Adicionar reação" }));
