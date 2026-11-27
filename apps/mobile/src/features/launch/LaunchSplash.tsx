@@ -1,22 +1,19 @@
-import { bodyTones, drawAgent, type Pose, spriteGrid } from "@agenteschat/ui/agent/engine";
+import { spriteGrid } from "@agenteschat/ui/agent/engine";
 import {
   Canvas,
-  createPicture,
   Fill,
   Group,
   Path,
-  Picture,
   Shader,
   Skia,
   type SkPath,
-  type SkPicture,
   useClock,
   usePathValue,
 } from "@shopify/react-native-skia";
 import { useNetworkState } from "expo-network";
 import { memo, type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text as RNText, StyleSheet, useWindowDimensions, View } from "react-native";
+import { Image, Text as RNText, StyleSheet, useWindowDimensions, View } from "react-native";
 import Animated, {
   Easing,
   makeMutable,
@@ -30,34 +27,23 @@ import Animated, {
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { scheduleOnRN } from "react-native-worklets";
-import { frameClock } from "@/agent/clock";
-import { useFrameTime } from "@/agent/live";
-import { asCtx, compile, RecordingContext, rectsToSvg } from "@/agent/recorder";
-import { replay } from "@/agent/skia-ctx";
+import { rectsToSvg } from "@/agent/recorder";
 import { effectOf } from "@/sky/Dither";
 import { paletteUniform } from "@/sky/math";
 import { Text } from "@/ui";
-import { fonts, useReducedMotion, useTheme } from "@/ui/theme";
+import { fonts, useReducedMotion } from "@/ui/theme";
 import { markRevealed } from "./launched";
 import {
   burstCells,
   burstDrift,
   EXIT,
   EXIT_TOTAL,
-  GATHER_FRAMES,
-  gatherFrame,
-  gatherPose,
   LAUNCH,
   LOGO,
-  LOGO_LOOK,
   launchesAtOnce,
-  launchPose,
   launchSkyTones,
+  NATIVE_IMAGE,
   nameUnderRing,
-  OPENING_END,
-  OPENING_FPS,
-  OPENING_FRAMES,
-  openingFrame,
   panelOut,
   ringRadius,
   ringTones,
@@ -78,7 +64,11 @@ const PX = 4;
 const SPRITE_CELLS = 9;
 /** The agent's pixels as it comes apart, and their tones (the same every launch). */
 const BURST = burstCells();
-const BURST_TONES = bodyTones(LOGO_LOOK.color);
+const BURST_TONES = ["#c79d70", "#ede6e0"];
+/** The native launch's ground (app.config.ts, expo-splash-screen), in both themes: the splash starts on it. */
+const GROUND = "#0E1C22";
+const INK = "#EDE6E0";
+const LOGO_IMAGE = require("../../../assets/images/splash-icon.png");
 
 /**
  * The app under the splash settles from a little larger as the ring opens it (`EXIT.appFrom`): the root's scale,
@@ -89,14 +79,6 @@ const settle = makeMutable(1);
 /** The style the app's root takes for that (`settle`): a scale of 1 except while the splash leaves. */
 export function useLaunchSettle() {
   return useAnimatedStyle(() => ({ transform: [{ scale: settle.value }] }));
-}
-
-/** The logo agent in `pose`, drawn once by the shared engine. */
-function agentPicture(pose: Pose): SkPicture {
-  const rec = new RecordingContext();
-  drawAgent(asCtx(rec), PAD, PAD, LOGO, { color: LOGO_LOOK.color, eyes: LOGO_LOOK.eyes, pose });
-  const ops = compile(rec.commands);
-  return createPicture((canvas) => replay(canvas, ops), { width: BOX, height: BOX });
 }
 
 export interface LaunchSplashProps {
@@ -113,7 +95,7 @@ export interface LaunchSplashProps {
    * The agent goes up, the sky with it, and this comes in at the bottom; the splash still leaves once ready.
    */
   waiting?: ReactNode;
-  /** The agent's eyes closed (nothing is happening; open while it checks again). */
+  /** Kept for callers; the logo has no eyes to close. */
   eyesClosed?: boolean;
   /** The sky at dusk: the app waits on a team's own server, not the Cloud (its sky says which fell silent). */
   dusk?: boolean;
@@ -131,17 +113,8 @@ export interface LaunchSplashProps {
  * above the panel that comes in at the bottom, and the splash stays until the app is ready. Reduced motion: the logo
  * still, a short fade.
  */
-export function LaunchSplash({
-  ready,
-  fontsReady,
-  onShown,
-  onDone,
-  waiting,
-  eyesClosed,
-  dusk = false,
-}: LaunchSplashProps) {
+export function LaunchSplash({ ready, fontsReady, onShown, onDone, waiting, dusk = false }: LaunchSplashProps) {
   const { t } = useTranslation();
-  const { colors: c, scheme } = useTheme();
   const reduced = useReducedMotion();
   const { width, height } = useWindowDimensions();
   const insets = useSafeAreaInsets();
@@ -152,28 +125,22 @@ export function LaunchSplash({
   // Its own timers (the agents' clock can start paused): the minimum, the end of the drawn opening, and when to say
   // why it waits.
   const [played, setPlayed] = useState(reduced);
-  const [idling, setIdling] = useState(false);
   const [late, setLate] = useState(false);
   const [startedAt] = useState(() => Date.now());
   useEffect(() => {
     const min = setTimeout(() => setPlayed(true), LAUNCH.min * 1000);
-    const idle = setTimeout(() => setIdling(true), OPENING_END * 1000);
     const why = setTimeout(() => setLate(true), LAUNCH.lineAfter * 1000);
     return () => {
       clearTimeout(min);
-      clearTimeout(idle);
       clearTimeout(why);
     };
   }, []);
   // Once it starts leaving it goes, whatever happens next. Ready within its first frames (the session and the workspace
   // kept from last time), it leaves at once; later, its rise is under way and plays its minimum.
   const [leaving, setLeaving] = useState(false);
-  // Where the agent's choreography stops as it leaves (the pose it gathers itself from).
-  const [heldAt, setHeldAt] = useState(0);
   useEffect(() => {
     if (leaving || !ready) return;
     if (!played && !launchesAtOnce(Date.now() - startedAt)) return;
-    setHeldAt(frameClock.time());
     setLeaving(true);
   }, [ready, played, leaving, startedAt]);
   const asking = Boolean(waiting) && !leaving;
@@ -218,43 +185,6 @@ export function LaunchSplash({
     floor.value = withTiming(asking ? Math.min(0.95, above) : 0.95, move);
   }, [asking, leaving, reduced, panelTop, height, up, level, floor]);
 
-  // The agent's opening, drawn ahead a few frames at a time (the first now: the native image's twin), and shown by
-  // the UI thread on its own clock.
-  const [first] = useState(() => agentPicture(reduced ? {} : launchPose(0)));
-  const frames = useSharedValue<SkPicture[]>([first]);
-  useEffect(() => {
-    if (reduced) return;
-    const list = [first];
-    let timer: ReturnType<typeof setTimeout> | null = null;
-    const step = () => {
-      for (let n = 0; n < 3 && list.length < OPENING_FRAMES; n++)
-        list.push(agentPicture(launchPose(list.length / OPENING_FPS)));
-      frames.value = [...list];
-      timer = list.length < OPENING_FRAMES ? setTimeout(step, 0) : null;
-    };
-    timer = setTimeout(step, 0);
-    return () => {
-      if (timer) clearTimeout(timer);
-    };
-  }, [reduced, first, frames]);
-
-  // Past the opening, while it still waits (a slow network, a server that doesn't answer), the agent idles, drawn as
-  // it goes: the app has nothing to load on the JS thread then.
-  const now = useFrameTime(!reduced && idling && !leaving, heldAt);
-  const [t0] = useState(() => frameClock.time());
-  const idlePicture = useMemo(
-    () =>
-      idling && !reduced
-        ? agentPicture(launchPose(Math.max(OPENING_END, now - t0), { offline: offline || Boolean(eyesClosed) }))
-        : null,
-    [idling, reduced, now, t0, offline, eyesClosed],
-  );
-  const idle = useSharedValue<SkPicture | null>(null);
-  useEffect(() => {
-    idle.value = idlePicture;
-  }, [idlePicture, idle]);
-  const gather = useSharedValue<SkPicture[]>([]);
-
   const done = useRef(onDone);
   done.current = onDone;
   const finish = useCallback(() => done.current(), []);
@@ -269,10 +199,8 @@ export function LaunchSplash({
       shown.value = withTiming(0, { duration: LAUNCH.reducedExit * 1000 }, end);
       return;
     }
-    // The handover into the app, one gesture on the UI thread (`EXIT`): the agent gathers itself from the pose it
-    // was in, then comes apart as the ring opens the app. The app is in view from here.
-    const held = launchPose(Math.max(0, heldAt - t0), { offline: offline || Boolean(eyesClosed) });
-    gather.value = Array.from({ length: GATHER_FRAMES }, (_, j) => agentPicture(gatherPose(held, j)));
+    // The handover into the app, one gesture on the UI thread (`EXIT`): the logo comes apart as the ring opens the
+    // app. The app is in view from here.
     markRevealed();
     settle.value = withSequence(
       withTiming(EXIT.appFrom, { duration: 0 }),
@@ -298,18 +226,6 @@ export function LaunchSplash({
   // Where the agent stands (its center), and the ring's edge from there.
   const agentY = useDerivedValue(() => height / 2 - LAUNCH.lift * lift.value - raise * up.value);
   const ringEdge = useDerivedValue(() => (exiting.value ? ringRadius(exit.value, agentY.value, width, height) : 0));
-  const clock = useClock();
-  const agentNow = useDerivedValue(() => {
-    if (exiting.value) {
-      const g = gather.value;
-      if (g.length > 0) return g[gatherFrame(exit.value)] as SkPicture;
-    }
-    const list = frames.value;
-    const i = openingFrame(clock.value / 1000, list.length);
-    if (i >= 0) return list[i] as SkPicture;
-    return idle.value ?? (list[list.length - 1] as SkPicture);
-  });
-
   const overlay = useAnimatedStyle(() => ({ opacity: shown.value }));
   // The splash's own ground until the ring starts: the sky's canvas paints the whole screen (its top is this ground's
   // tone) and is cut by the ring from there.
@@ -326,11 +242,8 @@ export function LaunchSplash({
   };
   const nameStyle = useAnimatedStyle(() => ({ opacity: under(name.value) }));
   const lineStyle = useAnimatedStyle(() => ({ opacity: under(lineIn.value) }));
-  const tones = useMemo(() => launchSkyTones(c.bg, scheme === "dark", dusk), [c.bg, scheme, dusk]);
-  const ringPal = useMemo(
-    () => paletteUniform(ringTones(c.bg, scheme === "dark", dusk)).pal.slice(0, 16),
-    [c.bg, scheme, dusk],
-  );
+  const tones = useMemo(() => launchSkyTones(GROUND, true, dusk), [dusk]);
+  const ringPal = useMemo(() => paletteUniform(ringTones(GROUND, true, dusk)).pal.slice(0, 16), [dusk]);
   const lineText = line ? t(`mobile.splash.${line}`) : "";
   const cutting = leaving && ring !== null;
 
@@ -344,7 +257,7 @@ export function LaunchSplash({
       accessibilityLabel={lineText ? `xquads. ${lineText}` : "xquads"}
       accessibilityLiveRegion="polite"
     >
-      <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: c.bg }, ground]} />
+      <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: GROUND }, ground]} />
       {reduced ? null : (
         <LaunchSky
           width={width}
@@ -363,22 +276,17 @@ export function LaunchSplash({
         pointerEvents="none"
       >
         <Animated.View style={[styles.agent, agentStyle]}>
-          <Canvas style={styles.agent}>
-            <Picture picture={agentNow} />
-          </Canvas>
+          <Image source={LOGO_IMAGE} style={styles.logo} accessibilityIgnoresInvertColors />
         </Animated.View>
         {fontsReady ? (
           <Animated.View style={[styles.name, reduced ? styles.still : nameStyle]}>
-            <RNText allowFontScaling={false} style={[styles.word, { color: c.ink }]}>
-              agentes
-              <RNText allowFontScaling={false} style={styles.dot}>
-                .chat
-              </RNText>
+            <RNText allowFontScaling={false} style={[styles.word, { color: INK }]}>
+              xquads
             </RNText>
           </Animated.View>
         ) : null}
         <Animated.View style={[styles.line, lineStyle]}>
-          <Text variant="callout" tone="muted" style={styles.center}>
+          <Text variant="callout" style={[styles.center, styles.lineInk]}>
             {lineText}
           </Text>
         </Animated.View>
@@ -623,13 +531,16 @@ function Sprite({
 
 const styles = StyleSheet.create({
   mark: { position: "absolute", width: BOX, height: BOX },
-  agent: { width: BOX, height: BOX },
+  agent: { width: BOX, height: BOX, alignItems: "center", justifyContent: "center" },
+  // The native launch image's twin: the same file at the same 120 pt, so the handover doesn't show.
+  logo: { width: NATIVE_IMAGE, height: NATIVE_IMAGE },
   // Under the body (the canvas has room around it), centered on the agent.
   name: { position: "absolute", top: PAD + LOGO + 18, left: BOX / 2 - 160, width: 320, alignItems: "center" },
   word: { fontFamily: fonts.display, fontSize: 30, lineHeight: 38 },
-  dot: { fontFamily: fonts.dot, fontSize: 27 },
   line: { position: "absolute", top: PAD + LOGO + 64, left: BOX / 2 - 160, width: 320, alignItems: "center" },
   center: { textAlign: "center" },
+  // On the brand ground in both themes, so the theme's muted ink doesn't sink into it.
+  lineInk: { color: INK, opacity: 0.72 },
   panel: { position: "absolute", left: 0, right: 0, bottom: 0, paddingHorizontal: 24 },
   still: { opacity: 1 },
 });

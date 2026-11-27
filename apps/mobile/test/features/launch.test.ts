@@ -7,19 +7,11 @@ import {
   burstDrift,
   EXIT,
   EXIT_TOTAL,
-  GATHER_FRAMES,
-  gatherFrame,
-  gatherPose,
   LAUNCH,
   LOGO,
   launchesAtOnce,
-  launchPose,
   launchSkyTones,
   nameUnderRing,
-  OPENING_END,
-  OPENING_FPS,
-  OPENING_FRAMES,
-  openingFrame,
   panelOut,
   ringCell,
   ringRadius,
@@ -41,17 +33,6 @@ describe("launch splash", () => {
     expect(waitLine(false, true)).toBeNull();
     expect(waitLine(true, false)).toBe("slow");
     expect(waitLine(true, true)).toBe("offline");
-  });
-
-  test("the agent looks down at the sky, back up, smiles; closes its eyes offline; smiles leaving", () => {
-    // Native frame: facing ahead, eyes open, like the launch image.
-    expect(launchPose(0)).toEqual({ turn: [0, 0], blink: false });
-    expect(launchPose(0.4).turn?.[1]).toBeGreaterThan(0.5);
-    expect(launchPose(0.89).turn?.[1]).toBeLessThan(0);
-    expect(launchPose(1.2).expression).toBe("happy");
-    expect(launchPose(LAUNCH.lineAfter + 0.1, { offline: true }).expression).toBe("closed");
-    expect(launchPose(1, { offline: true }).expression).not.toBe("closed");
-    expect(launchPose(3, { offline: true, leaving: true }).expression).toBe("happy");
   });
 
   test("the sprites stay inside the sky as they rise, and wait while it is low", () => {
@@ -101,32 +82,6 @@ describe("launch splash", () => {
     expect(source("src/features/launch/LaunchSplash.tsx")).toContain(
       "if (!played && !launchesAtOnce(Date.now() - startedAt)) return;",
     );
-  });
-
-  test("the agent's opening is drawn ahead and shown by the UI thread; past it, it idles drawn as it goes", () => {
-    expect(OPENING_FRAMES).toBe(Math.round(OPENING_END * OPENING_FPS) + 1);
-    // The frame for each moment, never past what is drawn so far; none past the opening.
-    expect(openingFrame(0, 1)).toBe(0);
-    expect(openingFrame(0.5, 4)).toBe(3);
-    expect(openingFrame(0.5, OPENING_FRAMES)).toBe(15);
-    expect(openingFrame(OPENING_END, OPENING_FRAMES)).toBe(-1);
-    const splash = source("src/features/launch/LaunchSplash.tsx");
-    expect(splash).toContain("list.push(agentPicture(launchPose(list.length / OPENING_FPS)));");
-    expect(splash).toContain("const i = openingFrame(clock.value / 1000, list.length);");
-    // No frames of it on the JS thread during the opening (the app loads there), nor while it leaves.
-    expect(splash).toContain("const now = useFrameTime(!reduced && idling && !leaving, heldAt);");
-  });
-
-  test("leaving, the agent gathers itself: faces front from where it was, smiles and squashes", () => {
-    const held = launchPose(0.4);
-    const last = gatherPose(held, GATHER_FRAMES - 1);
-    expect(last.turn).toEqual([0, 0]);
-    expect(last.expression).toBe("happy");
-    expect(last.squash).toBeCloseTo(EXIT.squash, 5);
-    expect(gatherPose(held, 0).turn?.[1]).toBeGreaterThan(0);
-    expect(gatherFrame(0)).toBe(0);
-    expect(gatherFrame(EXIT.gather)).toBe(GATHER_FRAMES - 1);
-    expect(EXIT_TOTAL).toBeCloseTo(EXIT.gather + EXIT.wave, 5);
   });
 
   test("the ring starts just outside the agent and ends past every corner of any screen", () => {

@@ -1,4 +1,4 @@
-import { ditherCells, idlePose, inBody, mixHex, type Pose, toneAt } from "@agenteschat/ui/agent/engine";
+import { ditherCells, inBody, mixHex, toneAt } from "@agenteschat/ui/agent/engine";
 import { bayerAt } from "@agenteschat/ui/sky/math";
 
 /**
@@ -36,8 +36,6 @@ export const LAUNCH = {
 export const NATIVE_IMAGE = 120;
 /** So the agent's body there is this wide, centered on the screen: the splash starts exactly on it. */
 export const LOGO = (NATIVE_IMAGE * 400) / 512;
-/** The agent in the logo (the same as the app icon). */
-export const LOGO_LOOK = { color: "sky", eyes: "round" } as const;
 
 /**
  * Leaving into the app (motion on): the agent faces front, smiles and squashes (`gather`), then comes apart into its
@@ -183,36 +181,6 @@ export function burstDrift(cell: BurstCell, k: number): number | null {
   return 1 + cell.drift * outQuint(k / EXIT.burst);
 }
 
-/**
- * The agent's opening, drawn ahead (`OPENING_FPS` frames a second up to `OPENING_END`) and shown by the UI thread:
- * the app loads on the JS thread under it, and an agent drawn there stuttered.
- */
-export const OPENING_FPS = 30;
-/** Where its choreography ends (`launchPose`): past it the agent idles, drawn as it goes. */
-export const OPENING_END = 0.9;
-export const OPENING_FRAMES = Math.round(OPENING_END * OPENING_FPS) + 1;
-
-/** The frame for `a` seconds into the opening, of the `count` drawn so far; -1 past the opening. */
-export function openingFrame(a: number, count: number): number {
-  "worklet";
-  if (a >= OPENING_END) return -1;
-  return Math.max(0, Math.min(count - 1, Math.floor(a * OPENING_FPS)));
-}
-
-/** The gather's frames: the pose it left in, turned to face front, smiling and squashing. */
-export const GATHER_FRAMES = 4;
-export function gatherPose(held: Pose, j: number): Pose {
-  const g = smooth01((j + 1) / GATHER_FRAMES);
-  const [tx, ty] = held.turn ?? [0, 0];
-  return { turn: [tx * (1 - g), ty * (1 - g)], expression: "happy", squash: EXIT.squash * g };
-}
-
-/** The gather frame for `e` seconds after leaving. */
-export function gatherFrame(e: number): number {
-  "worklet";
-  return Math.max(0, Math.min(GATHER_FRAMES - 1, Math.floor((e / EXIT.gather) * GATHER_FRAMES)));
-}
-
 /** Whether the app, ready `readyMs` after the splash came up, skips its minimum (`LAUNCH.quick`). */
 export const launchesAtOnce = (readyMs: number) => readyMs <= LAUNCH.quick * 1000;
 
@@ -220,28 +188,6 @@ export const launchesAtOnce = (readyMs: number) => readyMs <= LAUNCH.quick * 100
 export function waitLine(late: boolean, offline: boolean): "offline" | "slow" | null {
   if (!late) return null;
   return offline ? "offline" : "slow";
-}
-
-const ease = (x: number) => {
-  const k = Math.min(1, Math.max(0, x));
-  return k * k * (3 - 2 * k);
-};
-
-/**
- * The logo agent `a` seconds in: it looks down at the sky coming up, back up, smiles, then idles. Without a
- * network, after a while, it closes its eyes; leaving, it smiles.
- */
-export function launchPose(a: number, opts: { offline?: boolean; leaving?: boolean } = {}): Pose {
-  let pose: Pose;
-  if (a < 0.5) pose = { turn: [0, 0.75 * ease(a / 0.3)], blink: a > 0.08 && a < 0.16 };
-  else if (a < 0.9) pose = { turn: [0, 0.75 - 0.95 * ease((a - 0.5) / 0.4)] };
-  else {
-    pose = { ...idlePose(a, 1.4, { every: 4.5, expressions: ["happy"] }), turn: [Math.sin(a * 0.9) * 0.35, -0.2] };
-    if (a < 1.5) pose.expression = "happy";
-  }
-  if (opts.leaving) return { ...pose, expression: "happy", blink: false };
-  if (opts.offline && a > LAUNCH.lineAfter) return { ...pose, expression: "closed" };
-  return pose;
 }
 
 /** The little pixel agents going up through the sky: a column each, their own pace and start. */
@@ -274,7 +220,7 @@ export function spriteBlinks(sprite: (typeof SPRITES)[number], t: number): boole
 }
 
 /** The sprites' body color (deep navy, white eyes: the sky's agents). */
-export const SPRITE_BODY = "#04203f";
+export const SPRITE_BODY = "#0e1c22";
 
 /**
  * The sky's tones, deep to light from the screen's background. `dusk`: the sky of a team's own server (lilac, as
@@ -290,17 +236,17 @@ export function launchSkyTones(bg: string, dark: boolean, dusk = false): string[
   if (dark)
     return [
       bg,
-      mixHex(bg, "#2b74e6", 0.14),
-      mixHex(bg, "#2b74e6", 0.3),
-      mixHex(bg, "#2b74e6", 0.48),
-      mixHex(bg, "#4b93ff", 0.66),
+      mixHex(bg, "#c79d70", 0.14),
+      mixHex(bg, "#c79d70", 0.3),
+      mixHex(bg, "#c79d70", 0.48),
+      mixHex(bg, "#d9b48c", 0.66),
     ];
   return [
     bg,
-    mixHex(bg, "#a6cfff", 0.22),
-    mixHex(bg, "#a6cfff", 0.48),
-    mixHex(bg, "#a6cfff", 0.78),
-    "#a6cfff",
-    "#78b4ff",
+    mixHex(bg, "#e2c6a6", 0.22),
+    mixHex(bg, "#e2c6a6", 0.48),
+    mixHex(bg, "#e2c6a6", 0.78),
+    "#e2c6a6",
+    "#c79d70",
   ];
 }
