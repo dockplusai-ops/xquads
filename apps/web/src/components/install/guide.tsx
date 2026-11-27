@@ -1,5 +1,5 @@
 import type { DesktopRelease } from "@agenteschat/client";
-import { type Platform, platformOf } from "@agenteschat/client/lib/machines";
+import type { Platform } from "@agenteschat/client/lib/machines";
 import { Button, Icon } from "@agenteschat/ui";
 import { type CSSProperties, useLayoutEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
@@ -51,11 +51,6 @@ export function appImageCommand(url: string): string {
   return `chmod +x ./${file} && ./${file}`;
 }
 
-/** What `xattr` clears on a Mac when the button never shows: the mark every browser download carries. */
-export const QUARANTINE_FIX = "xattr -dr com.apple.quarantine /Applications/xquads.app";
-/** System Settings › Privacy & Security, scrolled to Security (a Mac's browser asks before it opens it). */
-const MAC_SECURITY = "x-apple.systempreferences:com.apple.preference.security?Security";
-
 interface Step {
   scene: SceneId;
   /** The step in one line (under the frames). */
@@ -66,8 +61,6 @@ interface Step {
   /** `sub` for the frames, where there's room for less. */
   short?: string;
   cmd?: string;
-  /** Offer to open System Settings there (on a Mac only). */
-  settings?: boolean;
 }
 
 /** The line over the frames: the app is in beta, so the system asks once (`<b>` marks the first sentence). */
@@ -80,21 +73,7 @@ function useSteps(system: InstallSystem, file: string): { why: WhyKey; steps: St
       why: "install.mac.why",
       steps: [
         { scene: "macDrag", text: t("install.mac.drag"), long: t("install.mac.dragLong") },
-        { scene: "macBlocked", text: t("install.mac.blocked"), sub: t("install.mac.blockedSub") },
-        {
-          scene: "macSettings",
-          text: t("install.mac.settings"),
-          long: t("install.mac.settingsLong"),
-          sub: t("install.mac.settingsSub"),
-          short: t("install.mac.settingsShort"),
-          settings: true,
-        },
-        {
-          scene: "macConfirm",
-          text: t("install.mac.confirm"),
-          long: t("install.mac.confirmLong"),
-          sub: t("install.mac.done"),
-        },
+        { scene: "macOpen", text: t("install.mac.open"), long: t("install.mac.openLong"), sub: t("install.mac.done") },
       ],
     };
   if (system === "windows")
@@ -174,9 +153,7 @@ function FitScene({ id, version, file, zoom = 1 }: { id: SceneId; version: strin
 /** How close each frame looks at its drawing. */
 const ZOOM: Record<SceneId, number> = {
   macDrag: 1,
-  macBlocked: 1.25,
-  macSettings: 1.3,
-  macConfirm: 1.05,
+  macOpen: 1.25,
   winKeep: 1.2,
   winMore: 1.1,
   winRun: 1.1,
@@ -303,7 +280,6 @@ export function InstallSteps({ build, release }: { build: InstallBuild; release:
   const version = release?.version ?? "";
   const file = fileOf(build, release);
   const { steps } = useSteps(system, file);
-  const onMac = typeof navigator !== "undefined" && platformOf(navigator.userAgent) === "mac";
   return (
     <>
       <ol className="ist">
@@ -315,14 +291,6 @@ export function InstallSteps({ build, release }: { build: InstallBuild; release:
                 <p className="ist__line">{s.long ?? s.text}</p>
                 {s.sub && <p className="ist__sub">{s.sub}</p>}
                 {s.cmd && <CommandBlock command={s.cmd} copied={t("install.copied")} />}
-                {s.settings && onMac && (
-                  <Button asChild size="sm">
-                    <a href={MAC_SECURITY}>
-                      <Icon name="settings" />
-                      {t("install.mac.openSettings")}
-                    </a>
-                  </Button>
-                )}
               </div>
             </div>
             <div className="ist__shot">
@@ -331,16 +299,6 @@ export function InstallSteps({ build, release }: { build: InstallBuild; release:
           </li>
         ))}
       </ol>
-      {system === "mac" && (
-        <div className="ist__stuck ac-iconline">
-          <Icon name="question" />
-          <div>
-            <p className="ist__line">{t("install.mac.stuckTitle")}</p>
-            <p className="ist__sub">{t("install.mac.stuckText")}</p>
-            <CommandBlock command={QUARANTINE_FIX} copied={t("install.copied")} />
-          </div>
-        </div>
-      )}
       {/* A distribution that takes no deb (Arch, Fedora…): the same release's AppImage, when it has one. */}
       {system === "linux" && release?.appImage && (
         <div className="ist__stuck ac-iconline">

@@ -7,16 +7,7 @@ import { useTranslation } from "react-i18next";
  * translations, stay sharp and follow the theme. Decorative: the step's words beside them say the same.
  */
 
-export type SceneId =
-  | "macDrag"
-  | "macBlocked"
-  | "macSettings"
-  | "macConfirm"
-  | "winKeep"
-  | "winMore"
-  | "winRun"
-  | "linuxApt"
-  | "linuxOpen";
+export type SceneId = "macDrag" | "macOpen" | "winKeep" | "winMore" | "winRun" | "linuxApt" | "linuxOpen";
 
 /** A scene's natural size; boxes scale it (`FitScene`). */
 export const SCENE_W = 400;
@@ -26,7 +17,6 @@ const APP = "xquads";
 const ICON = "/icon-512.png";
 const CLOCK = "9:41";
 /** Names the systems show as they are, in every language. */
-const FILEVAULT = "FileVault";
 const DOWNLOADS = "~/Downloads";
 
 function Pointer({ drag = false }: { drag?: boolean }) {
@@ -177,98 +167,19 @@ export function Scene({ id, version, file }: { id: SceneId; version: string; fil
           </div>
         </Mac>
       );
-    case "macBlocked":
+    // The Mac app is signed with Developer ID and notarized: the first open asks once, as macOS does for any download.
+    case "macOpen":
       return (
         <Mac app dock={false}>
           <div className="isc-alert">
             <span className="isc-badge">
               <AppIcon />
             </span>
-            <b>{t("install.scene.notOpened", { app: APP })}</b>
-            <p>{t("install.scene.notOpenedText", { app: APP })}</p>
+            <b>{t("install.scene.downloaded", { app: APP })}</b>
             <span className="isc-alert__btns">
-              <Hit className="isc-capsule isc-capsule--default">{t("install.scene.done")}</Hit>
-              <span className="isc-capsule isc-off">{t("install.scene.moveToTrash")}</span>
+              <span className="isc-capsule isc-off">{t("install.scene.cancel")}</span>
+              <Hit className="isc-capsule isc-capsule--default">{t("install.scene.open")}</Hit>
             </span>
-          </div>
-        </Mac>
-      );
-    case "macSettings":
-      return (
-        <Mac app>
-          <div className="isc-win isc-settings">
-            <div className="isc-settings__side">
-              <Lights />
-              <span className="isc-settings__search">{t("install.scene.search")}</span>
-              <span className="isc-settings__me">
-                <i />
-                {t("install.scene.account")}
-              </span>
-              <SideItem color="#8e8e93">{t("install.scene.general")}</SideItem>
-              <SideItem color="#1c1c1e">{t("install.scene.appearance")}</SideItem>
-              <SideItem color="#0a84ff">{t("install.scene.accessibility")}</SideItem>
-              <SideItem color="#0a84ff" on>
-                {t("install.scene.privacy")}
-              </SideItem>
-              <SideItem color="#1c1c1e">{t("install.scene.desktopDock")}</SideItem>
-              <SideItem color="#30b0c7">{t("install.scene.displays")}</SideItem>
-            </div>
-            <div className="isc-settings__main">
-              <div className="isc-settings__top">
-                <em>‹ ›</em>
-                {t("install.scene.privacy")}
-              </div>
-              <div className="isc-settings__body">
-                <span className="isc-settings__label">{t("install.scene.security")}</span>
-                <div className="isc-group">
-                  <div className="isc-row">
-                    <span>{t("install.scene.allowFrom")}</span>
-                    <span className="isc-row__value">{t("install.scene.allowValue")} ⌃⌄</span>
-                  </div>
-                  <div className="isc-row">
-                    <span>{t("install.scene.blocked", { app: APP })}</span>
-                    <Hit className="isc-capsule isc-capsule--small">{t("install.scene.openAnyway")}</Hit>
-                  </div>
-                </div>
-                <div className="isc-group">
-                  <div className="isc-row">
-                    <span>{FILEVAULT}</span>
-                    <span className="isc-toggle" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Mac>
-      );
-    case "macConfirm":
-      return (
-        <Mac app dock={false}>
-          <div className="isc-pair">
-            <div className="isc-alert isc-alert--narrow">
-              <span className="isc-badge">
-                <AppIcon />
-              </span>
-              <b>{t("install.scene.confirmTitle", { app: APP })}</b>
-              <p>{t("install.scene.confirmText")}</p>
-              <span className="isc-alert__btns">
-                <Hit className="isc-capsule isc-capsule--default">{t("install.scene.openAnyway")}</Hit>
-                <span className="isc-capsule isc-off">{t("install.scene.moveToTrash")}</span>
-                <span className="isc-capsule isc-off">{t("install.scene.done")}</span>
-              </span>
-            </div>
-            <div className="isc-touchid">
-              <svg viewBox="0 0 34 34" aria-hidden="true">
-                <path d="M9 11.5a10 10 0 0 1 16 0" />
-                <path d="M7 17a10 10 0 0 1 20 0v2" />
-                <path d="M11 25a7 7 0 0 1-1-4v-4a7 7 0 0 1 14 0v4" />
-                <path d="M14 27a4.5 4.5 0 0 1-1-3v-7a4 4 0 0 1 8 0v6" />
-                <path d="M17 17v8" />
-              </svg>
-              <b>{t("install.scene.touchIdTitle")}</b>
-              <span>{t("install.scene.touchIdText")}</span>
-              <span className="isc-touchid__field">{t("install.scene.password")}</span>
-            </div>
           </div>
         </Mac>
       );
@@ -368,13 +279,4 @@ export function Scene({ id, version, file }: { id: SceneId; version: string; fil
         </Linux>
       );
   }
-}
-
-function SideItem({ color, on = false, children }: { color: string; on?: boolean; children: ReactNode }) {
-  return (
-    <span className={on ? "isc-side isc-side--on" : "isc-side"}>
-      <i style={{ "--c": color } as CSSProperties} />
-      <span>{children}</span>
-    </span>
-  );
 }

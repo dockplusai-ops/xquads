@@ -4656,13 +4656,22 @@
     "value": "Copied. Paste it in the terminal."
   },
   "install.mac.why": {
-    "value": "<b>The app is in beta.</b> So the first time, your Mac asks you to confirm:"
+    "value": "<b>Signed and notarized by Apple.</b> The first time, your Mac only asks you to confirm:"
   },
   "install.mac.drag": {
     "value": "Drag xquads to Applications."
   },
   "install.mac.dragLong": {
     "value": "Open the downloaded file and drag xquads to Applications."
+  },
+  "install.mac.open": {
+    "value": "Open xquads and click Open."
+  },
+  "install.mac.openLong": {
+    "value": "Open xquads from Applications. When your Mac asks whether to open an app downloaded from the internet, click Open."
+  },
+  "install.mac.done": {
+    "value": "Done: from now on it opens straight away."
   },
   "install.mac.blocked": {
     "value": "Open the app and click Done."
@@ -4690,9 +4699,6 @@
   },
   "install.mac.confirmLong": {
     "value": "Click Open Anyway again and confirm with Touch ID or your Mac's password."
-  },
-  "install.mac.done": {
-    "value": "Done: from now on it opens straight away."
   },
   "install.mac.stuckTitle": {
     "value": "Still no button, or your Mac says the app is damaged?"
@@ -4785,7 +4791,7 @@
     "value": "Why does my computer ask to confirm?"
   },
   "install.page.whyText": {
-    "value": "xquads is in beta: the Mac version isn't notarized by Apple yet, and the Windows installer doesn't carry a Microsoft certificate yet. Without them, your computer asks once before it opens an app downloaded from the internet. After that, it opens straight away and updates itself. Before the beta ends, this step goes away."
+    "value": "The Mac version is signed and notarized by Apple, so your Mac only confirms once that you want to open it. The Windows installer doesn't carry a Microsoft certificate yet, so Windows asks once before it opens it. After that, the app opens straight away and updates itself."
   },
   "install.page.openSource": {
     "value": "Open source"
@@ -4813,6 +4819,63 @@
   },
   "install.scene.applications": {
     "value": "Applications"
+  },
+  "install.scene.downloaded": {
+    "value": "“{{app}}” is an app downloaded from the Internet. Are you sure you want to open it?"
+  },
+  "install.scene.open": {
+    "value": "Open"
+  },
+  "install.scene.cancel": {
+    "value": "Cancel"
+  },
+  "install.scene.downloads": {
+    "value": "Downloads"
+  },
+  "install.scene.rare": {
+    "value": "This file isn't commonly downloaded. Make sure you trust it before you open it."
+  },
+  "install.scene.delete": {
+    "value": "Delete"
+  },
+  "install.scene.keep": {
+    "value": "Keep"
+  },
+  "install.scene.protectedTitle": {
+    "value": "Windows protected your PC"
+  },
+  "install.scene.protectedText": {
+    "value": "Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk."
+  },
+  "install.scene.protectedShort": {
+    "value": "Microsoft Defender SmartScreen prevented an unrecognized app from starting."
+  },
+  "install.scene.moreInfo": {
+    "value": "More info"
+  },
+  "install.scene.dontRun": {
+    "value": "Don't run"
+  },
+  "install.scene.appLabel": {
+    "value": "App:"
+  },
+  "install.scene.publisher": {
+    "value": "Publisher:"
+  },
+  "install.scene.unknownPublisher": {
+    "value": "Unknown publisher"
+  },
+  "install.scene.runAnyway": {
+    "value": "Run anyway"
+  },
+  "install.scene.activities": {
+    "value": "Activities"
+  },
+  "install.scene.readingLists": {
+    "value": "Reading package lists... Done"
+  },
+  "install.scene.settingUp": {
+    "value": "Setting up agentes-chat ({{version}}) ..."
   },
   "install.scene.notOpened": {
     "value": "“{{app}}” Not Opened"
@@ -4879,54 +4942,6 @@
   },
   "install.scene.password": {
     "value": "Password"
-  },
-  "install.scene.downloads": {
-    "value": "Downloads"
-  },
-  "install.scene.rare": {
-    "value": "This file isn't commonly downloaded. Make sure you trust it before you open it."
-  },
-  "install.scene.delete": {
-    "value": "Delete"
-  },
-  "install.scene.keep": {
-    "value": "Keep"
-  },
-  "install.scene.protectedTitle": {
-    "value": "Windows protected your PC"
-  },
-  "install.scene.protectedText": {
-    "value": "Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk."
-  },
-  "install.scene.protectedShort": {
-    "value": "Microsoft Defender SmartScreen prevented an unrecognized app from starting."
-  },
-  "install.scene.moreInfo": {
-    "value": "More info"
-  },
-  "install.scene.dontRun": {
-    "value": "Don't run"
-  },
-  "install.scene.appLabel": {
-    "value": "App:"
-  },
-  "install.scene.publisher": {
-    "value": "Publisher:"
-  },
-  "install.scene.unknownPublisher": {
-    "value": "Unknown publisher"
-  },
-  "install.scene.runAnyway": {
-    "value": "Run anyway"
-  },
-  "install.scene.activities": {
-    "value": "Activities"
-  },
-  "install.scene.readingLists": {
-    "value": "Reading package lists... Done"
-  },
-  "install.scene.settingUp": {
-    "value": "Setting up agentes-chat ({{version}}) ..."
   },
   "appIcon.title": {
     "value": "App icon"
