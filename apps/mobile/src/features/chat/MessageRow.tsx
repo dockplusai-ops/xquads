@@ -47,6 +47,7 @@ import { brainUnavailableOf, messageToolOff } from "@agenteschat/client/lib/mach
 import { isMediaAfterReply, messageMediaOf } from "@agenteschat/client/lib/media";
 import { memberRoleColor } from "@agenteschat/client/lib/member-groups";
 import { serverBody } from "@agenteschat/client/lib/message-body";
+import { withEditedMark } from "@agenteschat/client/lib/message-edits";
 import { missionSetupOf } from "@agenteschat/client/lib/missions";
 import { isStandInLine, noAiCardOf } from "@agenteschat/client/lib/no-ai";
 import { isTalkerReply, routineReportText, talkerWaited } from "@agenteschat/client/lib/notices";
@@ -335,7 +336,7 @@ function RowBody({
   const said = meta?.deleted
     ? `_${t("channel.deletedMessage")}_`
     : m.editedAt && written
-      ? `${written} ${t("channel.edited")}`
+      ? withEditedMark(written, t("channel.edited"))
       : written;
   // A long work's anchor once it's over: no promise left, and dimmed (its line says how it ended).
   // The right hand's stand-in line is its pill's sentence (`NoAiCard`): no text above it too.

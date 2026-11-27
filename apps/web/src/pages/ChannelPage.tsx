@@ -145,6 +145,7 @@ import { supersededBrainNotices } from "@agenteschat/client/lib/machine-outages"
 import { hasWideBlock } from "@agenteschat/client/lib/markdown";
 import { isMediaAfterReply, isMediaAlone, messageMediaOf, quoteText } from "@agenteschat/client/lib/media";
 import { serverBody } from "@agenteschat/client/lib/message-body";
+import { withEditedMark } from "@agenteschat/client/lib/message-edits";
 import { answerIds, joinDrafts, tooLongToSend } from "@agenteschat/client/lib/message-length";
 import {
   isOpenMission,
@@ -4553,7 +4554,9 @@ export const TimelineMessage = memo(function TimelineMessage({
     [t, m.body, m.meta, i18n.language],
   );
   // A voice message's own text is what was typed beside its recording: its words are in the player.
-  const said = reminderBody(listedText(stopped.body, m.meta), m.meta);
+  const written = reminderBody(listedText(stopped.body, m.meta), m.meta);
+  // Edited by its author (ADR 0221): "(editada)" after its words, on every row's look.
+  const said = m.editedAt && written ? withEditedMark(written, t("channel.edited")) : written;
   // A long work's anchor once it's over: no promise left, and dimmed (its line says how it ended).
   const body = m.longWork ? workAnchorBody(t, said, m.meta, m.longWork) : said;
   const workOver = Boolean(m.longWork && workIsOver(m.longWork));
@@ -4893,8 +4896,6 @@ export const TimelineMessage = memo(function TimelineMessage({
           ) : (
             <>
               <time dateTime={m.createdAt}>{formatTime(i18n.language, m.createdAt)}</time>
-              {/* Edited by its author (ADR 0221). */}
-              {m.editedAt && <span className="muted"> {t("channel.edited")}</span>}
             </>
           )
         }
