@@ -63,8 +63,8 @@ import {
   createLiveFileToolSource,
   createLiveImages,
   createLlmIntentWriter,
-  createLlmNextPromptWriter,
   createLlmJudge,
+  createLlmNextPromptWriter,
   createMachineHub,
   createMailToolSource,
   createMediaToolSource,
@@ -108,7 +108,6 @@ import {
   getAgentCached,
   hubBrainLink,
   type IntentWriter,
-  type NextPromptWriter,
   isAgentesCloud,
   isRightHand,
   type JobDeps,
@@ -118,6 +117,7 @@ import {
   type McpConnect,
   messageRouter,
   missionTurnPermissions,
+  type NextPromptWriter,
   notifyOwnerOnBudget,
   OpencodeBrain,
   officeLiveExporter,
@@ -305,7 +305,10 @@ export function buildEngine(o: EngineOptions) {
   }
   context.nextPrompts =
     o.nextPrompts === undefined
-      ? createLlmNextPromptWriter({ gateway, resolveModel: (orgId) => smallModelFor({ db, gateway }, orgId, smallModels) })
+      ? createLlmNextPromptWriter({
+          gateway,
+          resolveModel: (orgId) => smallModelFor({ db, gateway }, orgId, smallModels),
+        })
       : (o.nextPrompts ?? undefined);
   context.intents =
     o.intents === undefined

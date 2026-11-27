@@ -264,7 +264,6 @@ import { type CodeSetup, codeStart } from "./git/machine";
 import { agentRepositoryList, repositoriesPrompt } from "./git/repos";
 import { askVerdict, handOffHolds, repeatedAsk, saysNeedsNothing } from "./hand-off";
 import { announceIntent } from "./intent-line";
-import { suggestNextPrompt } from "./next-prompt";
 import { UPDATE_ISSUE_TOOL } from "./issue-tools";
 import { linkRunToIssue, mirrorReplyToIssue, taskRunDone } from "./issues";
 import { type Judge, JudgeGroup, judgeCallOf, TURN_END_CHECK_BUDGET_MS, withJudgeBudget } from "./judge";
@@ -302,6 +301,7 @@ import {
   unreachedPeople,
 } from "./messages";
 import { missionAsksPerson, missionReportSince, scheduleKeepGoing } from "./missions-engine";
+import { suggestNextPrompt } from "./next-prompt";
 import { type NoAiCardReason, postNoAiCard, postStandInLine } from "./no-ai";
 import {
   notifyCatchUpClosed,

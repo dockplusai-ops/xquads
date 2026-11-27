@@ -1912,7 +1912,12 @@ export type ChannelEvent =
   /** Someone reacted or took it back: the message's reactions now (replace). */
   | { type: "message.reactions"; channelId: string; messageId: string; reactions: ReactionCount[] }
   /** The next message suggested for the person in this DM, kept on the agent's reply (ADR 0220). */
-  | { type: "message.suggestion"; channelId: string; messageId: string; nextPrompt: { text: string; forUserId: string } }
+  | {
+      type: "message.suggestion";
+      channelId: string;
+      messageId: string;
+      nextPrompt: { text: string; forUserId: string };
+    }
   /** A vote came in or the poll closed (ADR 0113). */
   | { type: "poll.updated"; channelId: string; poll: Poll }
   /** Someone changed what a live block shows, for everyone (ADR 0113): keep the newest `rev`. */

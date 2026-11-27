@@ -20,9 +20,7 @@ const suggestions = (events: { type: string }[]) =>
   (events as SuggestionEvent[]).filter((e) => e.type === "message.suggestion");
 
 test("the suggestion is one short line: quotes go, a long one is cut at a word, nothing is none", () => {
-  expect(nextPromptText('  "Pode enviar a proposta para o cliente?"  ')).toBe(
-    "Pode enviar a proposta para o cliente?",
-  );
+  expect(nextPromptText('  "Pode enviar a proposta para o cliente?"  ')).toBe("Pode enviar a proposta para o cliente?");
   expect(nextPromptText("Manda o\nrelatório")).toBe("Manda o relatório");
   expect(nextPromptText("")).toBeNull();
   expect(nextPromptText(null)).toBeNull();
@@ -53,7 +51,10 @@ test("after a reply in my DM, my next message is suggested, kept on the reply an
   expect(asked[0]?.conversation.map((m) => m.from)).toEqual(["person", "agent"]);
   const [event] = suggestions(events);
   expect(event?.nextPrompt).toEqual({ text: "Pode enviar para o cliente", forUserId: f.owner.id });
-  const [reply] = await f.db.select().from(schema.messages).where(eq(schema.messages.id, event?.messageId ?? ""));
+  const [reply] = await f.db
+    .select()
+    .from(schema.messages)
+    .where(eq(schema.messages.id, event?.messageId ?? ""));
   expect(reply?.authorType).toBe("agent");
   expect(reply?.meta.nextPrompt).toEqual({ text: "Pode enviar para o cliente", forUserId: f.owner.id });
 });

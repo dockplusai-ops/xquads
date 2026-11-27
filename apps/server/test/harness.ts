@@ -35,8 +35,8 @@ import {
   type FakeScheduleAnswers,
   type FetchAppDocument,
   type IntentWriter,
-  type NextPromptWriter,
   type McpConnect,
+  type NextPromptWriter,
   type ResolveHost,
   type ToolSource,
 } from "@agenteschat/engine";
