@@ -438,6 +438,8 @@ export function WikiImportDialog({
   const read = async (f: Promise<VaultFile[]>, n?: string, source?: WikiImportSource) => {
     const r = await reader.read(f, n, source);
     if (r) setPick(new Set(r.folders.map((x) => x.name)));
+    // Its own folder is named after what came in (the vault, the repository, the folder or .zip), else the source.
+    setInto(n?.trim() || t(`wiki.import.source.${source ?? "obsidian"}`));
   };
   const readLink = async () => {
     const link = url.trim();
@@ -548,7 +550,8 @@ export function WikiImportDialog({
     }
   };
 
-  const agents = dir.agents.slice(0, 2);
+  // Every agent reads the wiki: all are named, two faces stand for them.
+  const agents = dir.agents;
   const missing = done ? done.failures.length + done.skipped.length : 0;
   // A retry is an import again: its progress (and Stop) shows, not the report it started from with its buttons.
   const shown = importing ? null : done;
@@ -622,7 +625,7 @@ export function WikiImportDialog({
       <div className="vault-done">
         <WikiSky variant="glow" />
         <div className="vault-done__crew">
-          {agents.map((a) => (
+          {agents.slice(0, 2).map((a) => (
             <AgentAvatar key={a.id} agentId={a.id} name={a.name} size="lg" />
           ))}
         </div>
