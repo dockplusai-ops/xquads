@@ -1924,6 +1924,7 @@ export function createHttpApi(options: TransportOptions = {}): HttpApi {
       get: (orgId, slug) => request<WikiPage>(`${org(orgId)}/wiki/pages/${enc(slug)}`),
       search: async (orgId, q) =>
         (await request<{ pages: WikiPageSummary[] }>(`${org(orgId)}/wiki/search`, { query: { q } })).pages,
+      find: async (orgId, q) => (await request<{ ids: string[] }>(`${org(orgId)}/wiki/find`, { query: { q } })).ids,
       create: (orgId, input) => request<WikiPage>(`${org(orgId)}/wiki/pages`, { json: input }),
       update: (orgId, slug, input) =>
         request<WikiPage>(`${org(orgId)}/wiki/pages/${enc(slug)}`, { method: "PUT", json: input }),

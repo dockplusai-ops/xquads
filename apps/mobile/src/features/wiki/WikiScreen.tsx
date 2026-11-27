@@ -14,7 +14,7 @@ import { capitalize, relativeTime } from "@agenteschat/client/lib/format";
 import { can } from "@agenteschat/client/lib/permissions";
 import { titleOfSlug, toggleTask, wikiImportOf } from "@agenteschat/client/lib/wiki";
 import { type DiffLine, diffLines } from "@agenteschat/ui/diff";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFocusEffect } from "expo-router";
 import { useHeaderHeight } from "expo-router/react-navigation";
 import { memo, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
@@ -139,9 +139,17 @@ export function WikiScreen({ folder = "" }: { folder?: string }) {
   const search = useDeferredValue(q.trim());
   const pages = useMemo(() => tree.data ?? [], [tree.data]);
   const home = useMemo(() => wikiHome(pages, folder), [pages, folder]);
+  // The pages' text too, as the agents search it (the server's index).
+  const api = useApi();
+  const inText = useQuery({
+    queryKey: ["wiki", orgId, "find", search],
+    queryFn: () => api.wiki.find(orgId, search),
+    enabled: search.length >= 2,
+    staleTime: 30_000,
+  });
   const found = useMemo(
-    () => searchWiki(folder ? pages.filter((p) => inFolder(p, folder)) : pages, search),
-    [pages, folder, search],
+    () => searchWiki(folder ? pages.filter((p) => inFolder(p, folder)) : pages, search, inText.data ?? []),
+    [pages, folder, search, inText.data],
   );
   const map = useMemo(() => (graph.data ? pagesMap(graph.data) : null), [graph.data]);
   // The home's sky keeps the most linked pages (the whole graph is one tap away); it opens on the most linked of

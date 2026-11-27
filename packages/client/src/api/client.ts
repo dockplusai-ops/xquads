@@ -1822,6 +1822,8 @@ export interface ApiClient {
     get(orgId: string, slug: string): Promise<WikiPage>;
     /** Title prefix search (the `[[` autocomplete, ⌘K). */
     search(orgId: string, q: string): Promise<WikiPageSummary[]>;
+    /** Pages whose text matches `q` (ids, best first), for the wiki's search. */
+    find(orgId: string, q: string): Promise<string[]>;
     create(orgId: string, input: WikiPageInput): Promise<WikiPage>;
     update(orgId: string, slug: string, input: WikiUpdateInput): Promise<WikiPage>;
     /** New title (and slug); links to it follow. */

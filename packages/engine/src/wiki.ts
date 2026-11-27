@@ -2928,6 +2928,14 @@ export async function wikiPageHeld(db: Database, actor: WikiActor, orgId: string
 }
 
 /** `searchWiki` for a run: what it may read, and whether the best match is kept from this conversation only. */
+/**
+ * The pages whose text matches, for the wiki's own search (the person's sidebar): the agents' search, held to what
+ * this person may read, best first.
+ */
+export async function findWikiPageIds(deps: WikiDeps, actor: WikiActor, orgId: string, text: string, limit = 30) {
+  return (await searchWiki(deps, actor, orgId, text, limit)).map((p) => p.id);
+}
+
 export async function searchWikiForRun(deps: WikiDeps, actor: WikiActor, orgId: string, text: string, limit = 8) {
   const hits = await searchWiki(deps, withoutConversation(actor), orgId, text, limit);
   const seen = await visibleIds(

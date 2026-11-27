@@ -6,6 +6,7 @@ import {
   deleteWikiPage,
   deleteWikiPages,
   diffWikiVersions,
+  findWikiPageIds,
   getWikiFolderAudience,
   getWikiPage,
   getWikiVersion,
@@ -270,6 +271,23 @@ export function wikiRoutes(deps: AppDeps) {
       const { orgId } = c.req.valid("param");
       const pages = await suggestWikiPages(db, person(c.get("user").id), orgId, c.req.valid("query").q);
       return c.json({ pages }, 200);
+    },
+  );
+
+  app.openapi(
+    createRoute({
+      method: "get",
+      path: "/organizations/{orgId}/wiki/find",
+      tags,
+      security,
+      summary: "Pages whose text matches (the wiki's search): ids, best first, only pages the person may read",
+      request: { params: OrgParams, query: z.object({ q: z.string().max(200).default("") }) },
+      responses: { 200: json(z.object({ ids: z.array(z.string()) })), ...errors },
+    }),
+    async (c) => {
+      const { orgId } = c.req.valid("param");
+      const ids = await findWikiPageIds(wiki(), person(c.get("user").id), orgId, c.req.valid("query").q);
+      return c.json({ ids }, 200);
     },
   );
 

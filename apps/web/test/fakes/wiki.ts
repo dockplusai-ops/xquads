@@ -130,6 +130,13 @@ export function createFakeWiki(ctx: MockContext, log: (method: string, ...args: 
   return {
     tree: async (orgId) => (await store(orgId)).map(summary),
     get: async (orgId, slug) => withBacklinks(orgId, await find(orgId, slug)),
+    // The server's text search: pages whose body has every word.
+    find: async (orgId, q) => {
+      const words = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+      return (await store(orgId))
+        .filter((s) => words.every((w) => s.page.body.toLowerCase().includes(w)))
+        .map((s) => s.page.id);
+    },
     search: async (orgId, q) => {
       const query = q.trim().toLowerCase();
       return (await store(orgId))

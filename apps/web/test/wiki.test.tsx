@@ -190,9 +190,19 @@ describe("the wiki", () => {
       "Nenhum agente consultou ainda",
     );
     // Search filters the tree.
-    await type(screen().getByRole("searchbox", { name: "Buscar páginas" }), "glos");
+    const search = screen().getByRole("searchbox", { name: "Buscar páginas" });
+    await type(search, "glos");
     expect(within(tree).queryByRole("link", { name: "Onboarding" })).toBeNull();
     expect(within(tree).getByRole("link", { name: "Glossário" })).toBeTruthy();
+    // Without the accent too.
+    await type(search, "glossario");
+    expect(within(tree).getByRole("link", { name: "Glossário" })).toBeTruthy();
+    // And the pages' text, a moment after typing stops: "pequena" is only in Onboarding's last line.
+    await type(search, "pequena");
+    await act(() => new Promise((r) => setTimeout(r, 300)));
+    await settle();
+    expect(within(tree).getByRole("link", { name: "Onboarding" })).toBeTruthy();
+    expect(within(tree).queryByRole("link", { name: "Glossário" })).toBeNull();
   });
 
   test("a missing [[link]] → a new page written in place, with the title → the new page", async () => {

@@ -15,7 +15,7 @@ import {
   PageHeader,
   SearchField,
 } from "@agenteschat/ui";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import type { TFunction } from "i18next";
 import { Fragment, type ReactNode, useEffect, useId, useMemo, useState } from "react";
@@ -209,6 +209,9 @@ export function WikiPage({ slug, newTitle }: { slug?: string; newTitle?: string 
   );
 }
 
+/** Lower case without accents, so "clinica" finds "Clínicas". */
+const fold = (text: string) => text.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+
 /** Left pane: search, home and graph, pinned pages, the folder tree, tags, Obsidian import. */
 function WikiNav({
   pages,
@@ -290,16 +293,30 @@ function WikiNav({
         run: () => void copyText(`[[${p.title}]]`, () => toast.show(t("wiki.linkCopied", { title: p.title }))),
       },
     ]);
-  const query = q.trim().toLowerCase();
+  const query = fold(q.trim());
   const filtering = Boolean(query || tag);
+  // The pages' text too, as the agents search it (the server's index), a moment after typing stops.
+  const api = useApi();
+  const [asked, setAsked] = useState("");
+  useEffect(() => {
+    const id = setTimeout(() => setAsked(query.length >= 2 ? q.trim() : ""), 250);
+    return () => clearTimeout(id);
+  }, [query, q]);
+  const inText = useQuery({
+    queryKey: ["wiki", org.id, "find", asked],
+    queryFn: () => api.wiki.find(org.id, asked),
+    enabled: Boolean(asked),
+    staleTime: 30_000,
+  });
+  const textHits = useMemo(() => new Set(asked ? (inText.data ?? []) : []), [asked, inText.data]);
   const shown = useMemo(
     () =>
       pages.filter(
         (p) =>
-          (!query || `${p.title} ${p.folder} ${p.excerpt ?? ""}`.toLowerCase().includes(query)) &&
+          (!query || fold(`${p.title} ${p.folder} ${p.excerpt ?? ""}`).includes(query) || textHits.has(p.id)) &&
           (!tag || p.tags.includes(tag)),
       ),
-    [pages, query, tag],
+    [pages, query, tag, textHits],
   );
   const root = useMemo(() => wikiTree(shown), [shown]);
   const tags = useMemo(() => [...new Set(pages.flatMap((p) => p.tags))].sort(), [pages]);

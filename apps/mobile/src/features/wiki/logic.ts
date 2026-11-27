@@ -53,18 +53,24 @@ const byTitle = (a: WikiPageSummary, b: WikiPageSummary) => a.title.localeCompar
 
 const fold = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 
-/** Pages whose title, folder, tags or opening text have every word typed (case and accents ignored). */
-export function searchWiki(pages: WikiPageSummary[], q: string): WikiPageSummary[] {
+/**
+ * Pages whose title, folder, tags or opening text have every word typed (case and accents ignored), then those the
+ * server found in their text (`inText`, ids best first): titles first, then the rest, then the text's matches.
+ */
+export function searchWiki(pages: WikiPageSummary[], q: string, inText: readonly string[] = []): WikiPageSummary[] {
   const words = fold(q).split(/\s+/).filter(Boolean);
   if (words.length === 0) return [];
   const hay = (p: WikiPageSummary) => fold([p.title, p.folder, p.tags.join(" "), p.excerpt ?? ""].join(" "));
   const titleHit = (p: WikiPageSummary) => words.every((w) => fold(p.title).includes(w));
+  const named = (p: WikiPageSummary) => {
+    const h = hay(p);
+    return words.every((w) => h.includes(w));
+  };
+  const rank = new Map(inText.map((id, i) => [id, i]));
+  const textRank = (p: WikiPageSummary) => (named(p) ? -1 : (rank.get(p.id) ?? Number.MAX_SAFE_INTEGER));
   return pages
-    .filter((p) => {
-      const h = hay(p);
-      return words.every((w) => h.includes(w));
-    })
-    .sort((a, b) => Number(titleHit(b)) - Number(titleHit(a)) || byTitle(a, b));
+    .filter((p) => named(p) || rank.has(p.id))
+    .sort((a, b) => Number(titleHit(b)) - Number(titleHit(a)) || textRank(a) - textRank(b) || byTitle(a, b));
 }
 
 /** Pages whose title starts with (then contains) what follows `[[`, for the editor's suggestions. */

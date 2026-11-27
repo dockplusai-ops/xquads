@@ -84,6 +84,20 @@ describe("wiki search", () => {
     expect(searchWiki(pages, "  ")).toEqual([]);
   });
 
+  test("the server's text matches come after the named ones, in its order", () => {
+    const ids = pages.map((p) => p.id);
+    // "agendamento" is in no title nor opening: only the server's text search finds it.
+    expect(searchWiki(pages, "agendamento", [ids[2] as string, ids[0] as string]).map((p) => p.title)).toEqual([
+      "Férias",
+      "Como fazer deploy",
+    ]);
+    expect(searchWiki(pages, "deploy", [ids[2] as string]).map((p) => p.title)).toEqual([
+      "Como fazer deploy",
+      "Onboarding",
+      "Férias",
+    ]);
+  });
+
   test("the editor's [[ suggestions: titles that start with it, then those that have it", () => {
     expect(suggestPages(pages, "o").map((p) => p.title)).toEqual(["Onboarding", "Como fazer deploy"]);
     expect(suggestPages(pages, "fer").map((p) => p.title)).toEqual(["Férias"]);
