@@ -324,6 +324,7 @@ describe("message action bars", () => {
         "Responder",
         "Copiar link da mensagem",
         "Fixar mensagem",
+        "Apagar mensagem",
       ]);
       await act(async () => fireEvent.keyDown(screen().getByRole("menu"), { key: "Escape" }));
       expect(screen().queryByRole("menu")).toBeNull();
