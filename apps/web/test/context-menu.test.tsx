@@ -120,6 +120,8 @@ describe("right click on a message", () => {
       "Copiar link da mensagem",
       "Fixar mensagem",
       "Salvar na wiki",
+      // An administrator deletes anyone's message (ADR 0221); editing is only for its author.
+      "Apagar mensagem",
     ]);
 
     await act(async () => fireEvent.click(within(menu).getByRole("menuitem", { name: "Copiar link da mensagem" })));
@@ -170,6 +172,48 @@ describe("right click on a message", () => {
     const before = copied.length;
     await act(async () => win().__agentesContextMenu?.(String((asked?.token ?? 0) - 1), "copy-text"));
     expect(copied.length).toBe(before);
+  });
+
+  test("Apagar mensagem asks once, then the message goes for everyone (ADR 0221)", async () => {
+    inTheApp();
+    const api = createFakeApi(seedState());
+    await renderApp(`/org/${ORG_ID}/c/${ENG_ID}`, { api });
+    await settle(8);
+    await act(async () =>
+      fireEvent.contextMenu(messageOf("o login está devolvendo 401"), { clientX: 40, clientY: 60 }),
+    );
+    await settle(2);
+    const menu = screen().getByRole("menu", { name: "Ações" });
+    await act(async () => fireEvent.click(within(menu).getByRole("menuitem", { name: "Apagar mensagem" })));
+    await settle(2);
+    const dialog = screen().getByRole("dialog", { name: "Apagar mensagem?" });
+    expect(dialog.textContent).toContain("auditoria");
+    await act(async () => fireEvent.click(within(dialog).getByRole("button", { name: "Apagar" })));
+    await settle(4);
+    expect(screen().queryByText(/o login está devolvendo 401/)).toBeNull();
+  });
+
+  test('Editar mensagem on my own: the new words, "(editada)" beside its time (ADR 0221)', async () => {
+    inTheApp();
+    const state = seedState();
+    const joao = state.messages[0];
+    if (!joao) throw new Error("no seeded message");
+    state.messages.push({ ...joao, id: "m-mine", author: { type: "person", id: "u-walter" }, body: "deploy às 9h" });
+    await renderApp(`/org/${ORG_ID}/c/${ENG_ID}`, { api: createFakeApi(state) });
+    await settle(8);
+    await act(async () => fireEvent.contextMenu(messageOf("deploy às 9h"), { clientX: 40, clientY: 60 }));
+    await settle(2);
+    const menu = screen().getByRole("menu", { name: "Ações" });
+    await act(async () => fireEvent.click(within(menu).getByRole("menuitem", { name: "Editar mensagem" })));
+    await settle(2);
+    const dialog = screen().getByRole("dialog", { name: "Editar mensagem" });
+    const box = within(dialog).getByRole("textbox");
+    await act(async () => fireEvent.change(box, { target: { value: "deploy às 10h" } }));
+    await act(async () => fireEvent.click(within(dialog).getByRole("button", { name: "Salvar" })));
+    await settle(4);
+    const edited = messageOf("deploy às 10h");
+    expect(edited.textContent).toContain("(editada)");
+    expect(screen().queryByText("deploy às 9h")).toBeNull();
   });
 
   test("in the browser: a message gets our menu too; empty space keeps the browser's", async () => {

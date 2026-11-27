@@ -1102,6 +1102,13 @@ export interface ApiClient {
      * no-AI card or the person's message. 409 `ai.still_missing` while there's still no AI.
      */
     answerNow(orgId: string, messageId: string): Promise<{ runs: { agentId: string; runId: string }[] }>;
+    /** Edits the words of my own message (ADR 0221): nothing runs again. 403 `message.not_yours`. */
+    editMessage(orgId: string, messageId: string, body: string): Promise<{ body: string; editedAt: string }>;
+    /**
+     * Deletes a person's message, mine or anyone's as an administrator (ADR 0221). `kept`: a thread's root with
+     * replies stays as "Mensagem apagada".
+     */
+    deleteMessage(orgId: string, messageId: string): Promise<{ kept: boolean }>;
     /** The returns agents set in a conversation, still to come, the soonest first (`[]` while the server lacks it). */
     followUps(orgId: string, channelId: string): Promise<PendingReturn[]>;
     /**

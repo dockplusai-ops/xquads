@@ -132,6 +132,29 @@ export function QuoteBar({ name, onCancel }: { name: string; onCancel: () => voi
   );
 }
 
+/** "Editando mensagem" over the field (ADR 0221): sending saves the words; its × keeps the message as it was. */
+export function EditBar({ onCancel }: { onCancel: () => void }) {
+  const { t } = useTranslation();
+  const c = useColors();
+  return (
+    <View style={[styles.bar, { backgroundColor: c.sunken }]}>
+      <Icon name="pen" size={16} color={c.muted} />
+      <Text variant="footnote" tone="ink2" numberOfLines={1} style={styles.barName}>
+        {t("channel.editMessage")}
+      </Text>
+      <Pressable
+        onPress={onCancel}
+        accessibilityRole="button"
+        accessibilityLabel={t("common.cancel")}
+        hitSlop={(TOUCH - X) / 2}
+        style={({ pressed }) => pressed && styles.pressed}
+      >
+        <Icon name="x" size={X} color={c.muted} />
+      </Pressable>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   line: { flexDirection: "row", alignItems: "center", gap: 5, minHeight: LINE },
   pressed: { opacity: 0.6 },

@@ -256,6 +256,8 @@ function Chat({
     longFromField,
     mentionCard,
     onRecording,
+    onDelete,
+    onEdit,
     onReply,
     onResend,
     onRetry,
@@ -333,6 +335,8 @@ function Chat({
     personDm,
     leavePlace,
     onReply,
+    onEdit,
+    onDelete,
     openNewMission,
     openRemind,
     follow,
@@ -413,8 +417,8 @@ function Chat({
   // What every message row is handed alike (`ChatMessage`), each keeping its identity across the screen's redraws.
   const onOfferDone = useCallback(() => setOfferAt(OFFER_DONE), []);
   const hands = useMemo<RowHands>(
-    () => ({ onReply, onMission, onRemind, onLongPress, onRetry, onQuote, onResend, onOfferDone }),
-    [onReply, onMission, onRemind, onLongPress, onRetry, onQuote, onResend, onOfferDone],
+    () => ({ onReply, onMission, onRemind, onLongPress, onRetry, onQuote, onResend, onOfferDone, onEdit, onDelete }),
+    [onReply, onMission, onRemind, onLongPress, onRetry, onQuote, onResend, onOfferDone, onEdit, onDelete],
   );
 
   // Pushes about this conversation stay quiet while it is on screen (no banner, no buzz), and so does the island.

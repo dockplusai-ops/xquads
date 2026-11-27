@@ -67,7 +67,7 @@ registerDocumentBuilder("message", async (db, orgId, id) => {
     .where(and(eq(messages.id, id), eq(messages.orgId, orgId)));
   // A notice only its agent reads, or one written for the agent that is never news, is nobody's to find. Nor is a
   // message of a confidential thread (ADR 0190): the job that asks for it deletes what was indexed before the mark.
-  if (!m || m.deletedAt || isQuietNotice(m.meta) || isConfidential(m.meta)) return null;
+  if (!m || m.deletedAt || m.meta?.deleted || isQuietNotice(m.meta) || isConfidential(m.meta)) return null;
   return { orgId, kind: "message", sourceId: m.id, channelIds: [m.channelId], body: m.body, createdAt: m.createdAt };
 });
 

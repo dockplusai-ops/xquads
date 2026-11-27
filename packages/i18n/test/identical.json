@@ -638,6 +638,7 @@
       "onboarding.import.agenteschatName"
     ],
     "fr": [
+      "channel.editMessageLabel",
       "hosting.cloud.name",
       "contextMenu.lookOurs",
       "agentPage.facts.budget",

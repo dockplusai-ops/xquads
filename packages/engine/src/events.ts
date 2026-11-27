@@ -632,6 +632,17 @@ export type ChannelEvent =
     }
   /** Someone reacted or took a reaction back: the message's reactions now (replace, don't merge). */
   | { type: "message.reactions"; channelId: string; messageId: string; reactions: ReactionCount[] }
+  /** A person edited their message's words (ADR 0221): the apps show the new text and "(editada)". */
+  | {
+      type: "message.edited";
+      channelId: string;
+      threadId: string | null;
+      messageId: string;
+      body: string;
+      editedAt: string;
+    }
+  /** A message was deleted (ADR 0221): it goes, or stays as "Mensagem apagada" (`kept`, a thread's root). */
+  | { type: "message.deleted"; channelId: string; threadId: string | null; messageId: string; kept: boolean }
   /** The next message suggested for the person in a DM, kept on the agent's reply (`next-prompt.ts`, ADR 0220). */
   | {
       type: "message.suggestion";

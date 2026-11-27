@@ -1,4 +1,4 @@
-import { type Message, usePinMessage } from "@agenteschat/client";
+import { type Message, useMe, usePinMessage } from "@agenteschat/client";
 import { messagePath } from "@agenteschat/client/lib/message-links";
 import { can } from "@agenteschat/client/lib/permissions";
 import { listedText } from "@agenteschat/client/lib/voice";
@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useChannelActions } from "@/components/channel-actions";
 import { MenuEntries } from "@/components/DesktopMenus";
 import { ResolveButton } from "@/components/live/media/ResolveBits";
+import { DeleteMessageDialog, EditMessageDialog } from "@/components/MessageEdits";
 import { useOrg } from "@/components/org-context";
 import { PinToDashboard } from "@/components/widgets/PinToDashboard";
 import {
@@ -119,6 +120,14 @@ export function useMessageMenu(
     [message.author.type, message.author.id, message.local, message.body, options.readOnly],
   );
   const [pinningChart, setPinningChart] = useState(false);
+  // Editar and Apagar (ADR 0221): my own message's words, and deleting mine or, as an administrator, anyone's.
+  const meId = useMe().data?.user.id;
+  const [editing, setEditing] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const personMessage = message.author.type === "person" && !message.meta?.deleted;
+  const mine = personMessage && message.author.id === meId;
+  const editable = mine && !options.readOnly && message.body.trim() !== "";
+  const deletable = personMessage && !options.readOnly && (mine || can(org, "administrator"));
   const entries = (selected: string, touch = false): MenuEntry[] => {
     if (message.local) return [];
     const copy = (text: string, id: string, label: string): MenuEntry => ({
@@ -215,6 +224,24 @@ export function useMessageMenu(
           ] satisfies MenuEntry[])
         : []),
       ...(words ? [wiki(text)] : []),
+      ...(editable || deletable ? ([{ kind: "separator" }] satisfies MenuEntry[]) : []),
+      ...(editable
+        ? ([
+            { kind: "item", id: "edit", label: t("channel.editMessage"), icon: "edit", run: () => setEditing(true) },
+          ] satisfies MenuEntry[])
+        : []),
+      ...(deletable
+        ? ([
+            {
+              kind: "item",
+              id: "delete",
+              label: t("channel.deleteMessage"),
+              icon: "trash",
+              danger: true,
+              run: () => setDeleting(true),
+            },
+          ] satisfies MenuEntry[])
+        : []),
     ];
   };
   const onContextMenu = contextMenuHandler((e) => entries(selectedTextAt(e.target)));
@@ -240,6 +267,8 @@ export function useMessageMenu(
           onClose={() => setPinningChart(false)}
         />
       )}
+      {editing && <EditMessageDialog message={message} onClose={() => setEditing(false)} />}
+      {deleting && <DeleteMessageDialog message={message} mine={mine} onClose={() => setDeleting(false)} />}
       {correcting && (
         <CorrectionDialog
           open

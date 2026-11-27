@@ -3475,6 +3475,28 @@ export function createFakeHttpApi(state: FakeState): Omit<HttpApi, FakedParts> {
       correct: async (orgId, messageId, body) => {
         log("chat.correct", orgId, messageId, body);
       },
+      editMessage: async (orgId, messageId, body) => {
+        log("chat.editMessage", orgId, messageId, body);
+        const m = state.messages.find((x) => x.id === messageId);
+        if (!m) throw new ApiError(404, "not_found", "Message not found");
+        m.body = body.trim();
+        m.editedAt = new Date().toISOString();
+        return { body: m.body, editedAt: m.editedAt };
+      },
+      deleteMessage: async (orgId, messageId) => {
+        log("chat.deleteMessage", orgId, messageId);
+        const kept = state.messages.some((x) => x.threadId === messageId);
+        const i = state.messages.findIndex((x) => x.id === messageId);
+        if (i < 0) throw new ApiError(404, "not_found", "Message not found");
+        if (kept)
+          state.messages[i] = {
+            ...state.messages[i],
+            body: "",
+            meta: { deleted: { at: new Date().toISOString() } },
+          } as never;
+        else state.messages.splice(i, 1);
+        return { kept };
+      },
       answerNow: async (orgId, messageId) => {
         log("chat.answerNow", orgId, messageId);
         if (state.answerNowError) throw state.answerNowError;

@@ -25,6 +25,9 @@ export interface RowHands {
   onQuote: (reply: ReplyRef) => void;
   onResend: (m: Message) => Promise<unknown> | undefined;
   onOfferDone: () => void;
+  /** "Editar mensagem" and "Apagar mensagem" on my own message (ADR 0221); absent where nothing can be written. */
+  onEdit?: (m: Message) => void;
+  onDelete?: (m: Message) => void;
 }
 
 /**
@@ -87,7 +90,7 @@ export const ChatMessage = memo(function ChatMessage({
   const m = item.message;
   const c = useColors();
   const dir = useRowDirectory();
-  const { onReply, onMission, onRemind } = hands;
+  const { onReply, onMission, onRemind, onEdit, onDelete } = hands;
   const reply = useCallback(() => onReply(m), [onReply, m]);
   const menu = useMemo<MessageActionsContext>(
     () => ({
@@ -98,8 +101,10 @@ export const ChatMessage = memo(function ChatMessage({
       onMission,
       onRemind,
       onReply: canReply ? onReply : undefined,
+      onEdit: canReply ? onEdit : undefined,
+      onDelete: canReply ? onDelete : undefined,
     }),
-    [m, canMission, isThread, menuThread, onMission, onRemind, canReply, onReply],
+    [m, canMission, isThread, menuThread, onMission, onRemind, canReply, onReply, onEdit, onDelete],
   );
   const row = (
     <MessageRow

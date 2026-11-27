@@ -2207,6 +2207,71 @@ export function cacheMessageMeta(
   });
 }
 
+/** A message's new words (ADR 0221, `message.edited` or my own edit): that message in every loaded list of its channel. */
+export function cacheMessageEdited(
+  qc: ReturnType<typeof useQueryClient>,
+  orgId: string,
+  channelId: string,
+  messageId: string,
+  body: string,
+  editedAt: string,
+) {
+  qc.setQueriesData({ queryKey: ["org", orgId, "channel", channelId] }, (data: unknown) => {
+    if (!Array.isArray(data)) return data;
+    const list = data as Message[];
+    if (!list.some((m) => m && m.id === messageId)) return data;
+    return list.map((m) => (m.id === messageId ? { ...m, body, editedAt } : m));
+  });
+}
+
+/**
+ * A message deleted (ADR 0221, `message.deleted` or my own delete): out of every loaded list of its channel, or, a
+ * thread's root with replies (`kept`), its words and files gone and "Mensagem apagada" in their place.
+ */
+export function cacheMessageDeleted(
+  qc: ReturnType<typeof useQueryClient>,
+  orgId: string,
+  channelId: string,
+  messageId: string,
+  kept: boolean,
+) {
+  qc.setQueriesData({ queryKey: ["org", orgId, "channel", channelId] }, (data: unknown) => {
+    if (!Array.isArray(data)) return data;
+    const list = data as Message[];
+    if (!list.some((m) => m && m.id === messageId)) return data;
+    return kept
+      ? list.map((m) =>
+          m.id === messageId ? { ...m, body: "", meta: { deleted: { at: new Date().toISOString() } } } : m,
+        )
+      : list.filter((m) => m.id !== messageId);
+  });
+}
+
+/** Editing my own message: the new words show at once, the old ones come back if it is refused. */
+export function useEditMessage(orgId: string, channelId: string) {
+  const api = useApi();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (input: { messageId: string; body: string; before: string; beforeEditedAt?: string }) =>
+      api.chat.editMessage(orgId, input.messageId, input.body),
+    onMutate: (input) =>
+      cacheMessageEdited(qc, orgId, channelId, input.messageId, input.body.trim(), new Date().toISOString()),
+    onError: (_e, input) =>
+      cacheMessageEdited(qc, orgId, channelId, input.messageId, input.before, input.beforeEditedAt ?? ""),
+    onSuccess: (r, input) => cacheMessageEdited(qc, orgId, channelId, input.messageId, r.body, r.editedAt),
+  });
+}
+
+/** Deleting a message (mine, or anyone's as an administrator): it goes once the server says how. */
+export function useDeleteMessage(orgId: string, channelId: string) {
+  const api = useApi();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (messageId: string) => api.chat.deleteMessage(orgId, messageId),
+    onSuccess: (r, messageId) => cacheMessageDeleted(qc, orgId, channelId, messageId, r.kept),
+  });
+}
+
 /**
  * A comment on a picture, a video or a PDF was resolved or opened again (ADR 0208, `message.resolved`): its
  * `meta.resolved` in every loaded list of its channel (the file's conversation and its pins read the same thread).

@@ -20,6 +20,8 @@ import {
   cacheDmRead,
   cacheMessage,
   cacheMessageActions,
+  cacheMessageDeleted,
+  cacheMessageEdited,
   cacheMessageMeta,
   cacheMessageWork,
   cachePinned,
@@ -331,6 +333,13 @@ function applyToCache(qc: QueryClient, orgId: string, channelId: string, event: 
     // A comment on a picture, a video or a PDF was resolved or opened again (ADR 0208): its line and its pin follow.
     case "message.resolved":
       cacheResolved(qc, orgId, event.channelId, event.messageId, event.resolved);
+      break;
+    // A message edited or deleted (ADR 0221): its words, or it goes (a thread's root stays as "Mensagem apagada").
+    case "message.edited":
+      cacheMessageEdited(qc, orgId, event.channelId, event.messageId, event.body, event.editedAt);
+      break;
+    case "message.deleted":
+      cacheMessageDeleted(qc, orgId, event.channelId, event.messageId, event.kept);
       break;
     // The next message suggested for the person in a DM (ADR 0220): kept on the reply, read by the composer.
     case "message.suggestion":

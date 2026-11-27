@@ -73,6 +73,10 @@ export interface MessageActionsContext {
   onRemind: (m: Message) => void;
   /** "Responder": the next message answers this one, in the conversation (a quote). Absent where nothing can be written. */
   onReply?: ((m: Message) => void) | undefined;
+  /** "Editar mensagem" on my own message (ADR 0221); absent where nothing can be written. */
+  onEdit?: ((m: Message) => void) | undefined;
+  /** "Apagar mensagem" on my own message (ADR 0221). */
+  onDelete?: ((m: Message) => void) | undefined;
 }
 
 /** One action of a message's menu: the sheet's row, with the system's symbol for the native menu. */
@@ -302,7 +306,42 @@ export function messageActionsOf(context: MessageActionsContext, close: () => vo
         ]
       : []),
   ];
-  const groups = [answer, keep, rest].filter((g) => g.length > 0);
+  // My own words (ADR 0221): edit them (a message with words) or delete the message.
+  const mineNow = m.author.type === "person" && m.author.id === meId && !m.local && !m.meta?.deleted;
+  const own: MessageAction[] = mineNow
+    ? [
+        ...(context.onEdit && m.body.trim()
+          ? [
+              {
+                key: "edit",
+                icon: "pen" as const,
+                symbol: "pencil" as const,
+                label: t("channel.editMessage"),
+                onPress: () => {
+                  close();
+                  context.onEdit?.(m);
+                },
+              },
+            ]
+          : []),
+        ...(context.onDelete
+          ? [
+              {
+                key: "delete",
+                icon: "trash" as const,
+                symbol: "trash" as const,
+                label: t("channel.deleteMessage"),
+                danger: true,
+                onPress: () => {
+                  close();
+                  context.onDelete?.(m);
+                },
+              },
+            ]
+          : []),
+      ]
+    : [];
+  const groups = [answer, keep, rest, own].filter((g) => g.length > 0);
   return { text, react, groups };
 }
 

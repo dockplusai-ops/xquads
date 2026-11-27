@@ -60,6 +60,8 @@ export function useConversationActions({
   personDm,
   leavePlace,
   onReply,
+  onEdit,
+  onDelete,
   openNewMission,
   openRemind,
   follow,
@@ -84,6 +86,9 @@ export function useConversationActions({
   personDm: string | null;
   leavePlace: () => void;
   onReply: (m: Message) => void;
+  /** "Editar mensagem" and "Apagar mensagem" on my own message (ADR 0221). */
+  onEdit: (m: Message) => void;
+  onDelete: (m: Message) => void;
   openNewMission: (goal?: string, homeThreadId?: string | null) => void;
   openRemind: (input?: { text?: string; message?: Message }) => void;
   follow: Pick<FollowEnd, "aimAt" | "letGo" | "listRef" | "shownRows" | "toEnd">;
@@ -146,6 +151,8 @@ export function useConversationActions({
         onMission={onMission}
         onRemind={onRemind}
         onReply={canReply ? onReply : undefined}
+        onEdit={canReply ? onEdit : undefined}
+        onDelete={canReply ? onDelete : undefined}
       />,
     ),
   );

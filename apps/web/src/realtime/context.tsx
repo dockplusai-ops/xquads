@@ -48,6 +48,8 @@ import {
   cacheDmRead,
   cacheMessage,
   cacheMessageActions,
+  cacheMessageDeleted,
+  cacheMessageEdited,
   cacheMessageMeta,
   cacheMessageWork,
   cachePinned,
@@ -910,6 +912,11 @@ export function useChannelRealtime(orgId: string, channelId: string, enabled: bo
       if (event.type === "message.resolved") {
         cacheResolved(qc, orgId, event.channelId, event.messageId, event.resolved);
       }
+      // A message edited or deleted (ADR 0221): its words, or it goes (a thread's root stays as "Mensagem apagada").
+      if (event.type === "message.edited")
+        cacheMessageEdited(qc, orgId, event.channelId, event.messageId, event.body, event.editedAt);
+      if (event.type === "message.deleted")
+        cacheMessageDeleted(qc, orgId, event.channelId, event.messageId, event.kept);
       // The next message suggested for the person in a DM (ADR 0220): kept on the reply, read by the composer.
       if (event.type === "message.suggestion") {
         cacheMessageMeta(qc, orgId, event.channelId, event.messageId, () => ({ nextPrompt: event.nextPrompt }));

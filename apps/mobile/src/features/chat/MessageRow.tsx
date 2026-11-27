@@ -328,9 +328,15 @@ function RowBody({
   // What the server wrote itself is said in the person's language; a stopped reply drops the server's note. Where a
   // task ran is said only where the workspace has more than one computer.
   const names = useRowNamesComputers();
-  const said = hidesBody(m)
+  const written = hidesBody(m)
     ? ""
     : reminderBody(splitCanceled(serverBody(t, listedText(m.body, meta), meta, i18n.language, names), meta).body, meta);
+  // Edited by its author: "(editada)" after its words; deleted with replies under it: "Mensagem apagada" (ADR 0221).
+  const said = meta?.deleted
+    ? `_${t("channel.deletedMessage")}_`
+    : m.editedAt && written
+      ? `${written} ${t("channel.edited")}`
+      : written;
   // A long work's anchor once it's over: no promise left, and dimmed (its line says how it ended).
   // The right hand's stand-in line is its pill's sentence (`NoAiCard`): no text above it too.
   const body = isStandInLine(meta) ? "" : m.longWork ? workAnchorBody(t, said, meta, m.longWork) : said;

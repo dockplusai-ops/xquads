@@ -6713,6 +6713,42 @@
   "channel.useSuggestion": {
     "value": "Use the suggestion: {{text}}"
   },
+  "channel.editMessage": {
+    "value": "Edit message"
+  },
+  "channel.deleteMessage": {
+    "value": "Delete message"
+  },
+  "channel.editMessageTitle": {
+    "value": "Edit message"
+  },
+  "channel.editMessageLabel": {
+    "value": "Message"
+  },
+  "channel.editMessageFailed": {
+    "value": "Couldn't save the edit. The message is back as it was."
+  },
+  "channel.deleteMessageTitle": {
+    "value": "Delete message?"
+  },
+  "channel.deleteMessageBody": {
+    "value": "It goes for everyone in the conversation. This can't be undone."
+  },
+  "channel.deleteMessageBodyOther": {
+    "value": "You're deleting someone else's message as an administrator. It goes for everyone and is recorded in the audit log."
+  },
+  "channel.deleteMessageAction": {
+    "value": "Delete"
+  },
+  "channel.deleteMessageFailed": {
+    "value": "Couldn't delete the message."
+  },
+  "channel.edited": {
+    "value": "(edited)"
+  },
+  "channel.deletedMessage": {
+    "value": "Message deleted"
+  },
   "channel.cancelReply": {
     "value": "Cancel reply"
   },

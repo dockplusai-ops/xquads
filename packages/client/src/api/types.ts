@@ -1634,6 +1634,8 @@ export interface Message {
   agentRunId: string | null;
   /** Attachments, e.g. `{ approvalId }` on an approval card. */
   meta?: Record<string, unknown>;
+  /** When its author last edited its words (ADR 0221): "(editada)" beside its time. */
+  editedAt?: string;
   /** Echo of the id the client sent, to reconcile an optimistic message (expected from the backend). */
   clientId?: string | null;
   /** Agent receipts on a person's message (expected from the backend). */
@@ -1911,6 +1913,17 @@ export type ChannelEvent =
     }
   /** Someone reacted or took it back: the message's reactions now (replace). */
   | { type: "message.reactions"; channelId: string; messageId: string; reactions: ReactionCount[] }
+  /** A person edited their message's words (ADR 0221). */
+  | {
+      type: "message.edited";
+      channelId: string;
+      threadId: string | null;
+      messageId: string;
+      body: string;
+      editedAt: string;
+    }
+  /** A message was deleted (ADR 0221): it goes, or stays as "Mensagem apagada" (`kept`). */
+  | { type: "message.deleted"; channelId: string; threadId: string | null; messageId: string; kept: boolean }
   /** The next message suggested for the person in this DM, kept on the agent's reply (ADR 0220). */
   | {
       type: "message.suggestion";

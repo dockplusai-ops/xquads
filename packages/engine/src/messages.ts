@@ -125,6 +125,8 @@ export interface MessageView {
   handedWorks?: WorkView[];
   /** `meta.liveRef` as the chat reads it (ADR 0199): the live file the message is about and what was selected in it. */
   liveRef?: LiveRef;
+  /** When its author last edited its words (ADR 0221). */
+  editedAt?: string;
   createdAt: string;
 }
 
@@ -211,6 +213,7 @@ export const messageView = (stored: Message): MessageView => {
     meta: m.meta,
     clientId: typeof m.meta.clientId === "string" ? m.meta.clientId : null,
     ...(liveRef ? { liveRef } : {}),
+    ...(m.editedAt ? { editedAt: m.editedAt.toISOString() } : {}),
     createdAt: m.createdAt.toISOString(),
   };
 };

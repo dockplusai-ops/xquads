@@ -1141,6 +1141,13 @@ export function createHttpApi(options: TransportOptions = {}): HttpApi {
       correct: async (orgId, messageId, body) => {
         await request<unknown>(`${org(orgId)}/messages/${enc(messageId)}/correction`, { json: { body } });
       },
+      editMessage: (orgId, messageId, body) =>
+        request<{ body: string; editedAt: string }>(`${org(orgId)}/messages/${enc(messageId)}`, {
+          method: "PATCH",
+          json: { body },
+        }),
+      deleteMessage: (orgId, messageId) =>
+        request<{ kept: boolean }>(`${org(orgId)}/messages/${enc(messageId)}`, { method: "DELETE" }),
       answerNow: (orgId, messageId) =>
         request<{ runs: { agentId: string; runId: string }[] }>(`${org(orgId)}/messages/${enc(messageId)}/answer-now`, {
           json: {},

@@ -9,6 +9,8 @@ import {
   sendHelpers,
   type useApi,
   useCreateMission,
+  useDeleteMessage,
+  useEditMessage,
   useMissionControl,
   usePostMessage,
   useSettings,
@@ -32,7 +34,7 @@ import { Directory, File, Paths } from "expo-file-system";
 import * as ImagePicker from "expo-image-picker";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { useTranslation } from "react-i18next";
-import { Linking } from "react-native";
+import { Alert, Linking } from "react-native";
 import type { ComposerProps, SendHow, useToast } from "@/ui";
 import { router } from "@/ui/navigation";
 import { handKeyToConnectAi } from "../../ai/connect-flow";
@@ -53,13 +55,14 @@ import { vaultHref } from "../../vault/logic";
 import { retryVoice, type VoiceRefusal } from "../../voice/outbox";
 import { AttachmentStrip, MAX_PENDING, type PendingFile } from "../AttachmentStrip";
 import { ChannelPicker } from "../ChannelPicker";
+import { requestComposerText } from "../composer-request";
 import { KeyGuardSheet } from "../KeyGuardSheet";
 import { handKeyToVault } from "../key-guard";
 import { parseSlash, runInConversation } from "../logic";
 import { MediaPickerSheet } from "../MediaPickerSheet";
 import { MentionPicker } from "../MentionPicker";
 import { newMissionHref } from "../new-mission";
-import { QuoteBar } from "../QuoteLine";
+import { EditBar, QuoteBar } from "../QuoteLine";
 import { datedBehind } from "../send-order";
 import { MissionSummaryView, PlusActions, type PlusPick } from "../sheets";
 import { useLatest } from "./hooks";
@@ -186,9 +189,38 @@ export function useChatSend({
   const [quote, setQuote] = useState<Message | null>(null);
   const [replyAt, setReplyAt] = useState(0);
   const onReply = useCallback((m: Message) => {
+    setEditing(null);
     setQuote(m);
     setReplyAt(Date.now());
   }, []);
+  // "Editar mensagem" (ADR 0221): my message's words back in the field under "Editando mensagem"; sending saves them.
+  const [editing, setEditing] = useState<Message | null>(null);
+  const editMessage = useEditMessage(orgId, channelId);
+  const deleteMessage = useDeleteMessage(orgId, channelId);
+  const onEdit = useCallback(
+    (m: Message) => {
+      setQuote(null);
+      setEditing(m);
+      requestComposerText(channelId, m.body);
+    },
+    [channelId],
+  );
+  // "Apagar mensagem": asked once, gone for everyone.
+  const onDelete = useCallback(
+    (m: Message) =>
+      Alert.alert(t("channel.deleteMessageTitle"), t("channel.deleteMessageBody"), [
+        { text: t("common.cancel"), style: "cancel" },
+        {
+          text: t("channel.deleteMessageAction"),
+          style: "destructive",
+          onPress: () =>
+            deleteMessage.mutate(m.id, {
+              onError: () => toast({ title: t("channel.deleteMessageFailed"), icon: "x" }),
+            }),
+        },
+      ]),
+    [t, deleteMessage, toast],
+  );
   // In a live file's conversation (ADR 0199), what the person had selected in the file (the quote over the field)
   // rides on the next message as `meta.liveRef`, once.
   const about = useTalkAbout(isThread ? channelId : "");
@@ -360,6 +392,16 @@ export function useChatSend({
       return;
     }
     // Photos or files waiting above the field: they go with the words, which are their caption (or with none).
+    if (editing) {
+      const m = editing;
+      setEditing(null);
+      if (text && text !== m.body.trim())
+        editMessage.mutate(
+          { messageId: m.id, body: text, before: m.body, beforeEditedAt: m.editedAt },
+          { onError: () => toast({ title: t("channel.editMessageFailed"), icon: "x" }) },
+        );
+      return;
+    }
     if (pending.length > 0) {
       sendWithFiles(text, how);
       return;
@@ -792,12 +834,14 @@ export function useChatSend({
   // Whom it answers, over the field; in a live file's conversation, else what the person had selected in the file.
   const composerBanner = useMemo(
     () =>
-      quoteName !== null ? (
+      editing ? (
+        <EditBar onCancel={() => setEditing(null)} />
+      ) : quoteName !== null ? (
         <QuoteBar name={quoteName} onCancel={cancelQuote} />
       ) : about ? (
         <LiveQuoteBar liveRef={about} onDrop={dropAbout} />
       ) : undefined,
-    [quoteName, cancelQuote, about, dropAbout],
+    [editing, quoteName, cancelQuote, about, dropAbout],
   );
   // Photos and files waiting to go, inside the field over their caption.
   const composerAttachments = useMemo(
@@ -837,6 +881,8 @@ export function useChatSend({
     mentionCard,
     onRecording,
     onReply,
+    onEdit,
+    onDelete,
     onResend,
     onRetry,
     onSend,

@@ -4745,6 +4745,8 @@ export const TimelineMessage = memo(function TimelineMessage({
       : keptAll;
   // What's in a `MessageText`, for the bubbles: the name opens the first, the time ends the last (a row with none keeps
   // them above its cards). At work, nothing: its words show whole once posted.
+  // A thread's root deleted with replies under it (ADR 0221): "Mensagem apagada" in its words' place.
+  const deletedMark = Boolean(m.meta?.deleted);
   const bodyShown = live
     ? false
     : !missionCard &&
@@ -4886,7 +4888,15 @@ export const TimelineMessage = memo(function TimelineMessage({
           )
         }
         time={
-          live ? <RunClock run={live} /> : <time dateTime={m.createdAt}>{formatTime(i18n.language, m.createdAt)}</time>
+          live ? (
+            <RunClock run={live} />
+          ) : (
+            <>
+              <time dateTime={m.createdAt}>{formatTime(i18n.language, m.createdAt)}</time>
+              {/* Edited by its author (ADR 0221). */}
+              {m.editedAt && <span className="muted"> {t("channel.edited")}</span>}
+            </>
+          )
         }
         gutterTime={live ? undefined : <time dateTime={m.createdAt}>{formatClock(i18n.language, m.createdAt)}</time>}
         meta={m.local || live ? undefined : details}
@@ -4970,28 +4980,34 @@ export const TimelineMessage = memo(function TimelineMessage({
         ) : (
           <Parts resetKey={m}>
             {routine && report && reportOpen && <RoutineReport text={report} />}
-            {bodyShown && (
-              <MessageText key="body" style={workOver ? { opacity: 0.6 } : undefined}>
-                <ClippedBody id={m.id} addressed={answer || mentionsMe} lead={talk?.lead}>
-                  {(clip, lead) => (
-                    <MessageBody
-                      className={clip}
-                      body={lead ?? body}
-                      resolveMention={dir.mentionName}
-                      mentionTone={dir.mentionTone}
-                      renderMention={renderMention}
-                      wikiLink={wikiLink}
-                      channelRefs={channelRefsOf(m.meta)}
-                      accent={colorOf(agent)}
-                      pinFrom={
-                        m.author.type === "agent" && m.author.id && !m.local && !readOnly
-                          ? { messageId: m.id, agentId: m.author.id }
-                          : null
-                      }
-                    />
-                  )}
-                </ClippedBody>
+            {deletedMark ? (
+              <MessageText key="body">
+                <em className="muted">{t("channel.deletedMessage")}</em>
               </MessageText>
+            ) : (
+              bodyShown && (
+                <MessageText key="body" style={workOver ? { opacity: 0.6 } : undefined}>
+                  <ClippedBody id={m.id} addressed={answer || mentionsMe} lead={talk?.lead}>
+                    {(clip, lead) => (
+                      <MessageBody
+                        className={clip}
+                        body={lead ?? body}
+                        resolveMention={dir.mentionName}
+                        mentionTone={dir.mentionTone}
+                        renderMention={renderMention}
+                        wikiLink={wikiLink}
+                        channelRefs={channelRefsOf(m.meta)}
+                        accent={colorOf(agent)}
+                        pinFrom={
+                          m.author.type === "agent" && m.author.id && !m.local && !readOnly
+                            ? { messageId: m.id, agentId: m.author.id }
+                            : null
+                        }
+                      />
+                    )}
+                  </ClippedBody>
+                </MessageText>
+              )
             )}
             {choiceReply && (
               <p className="choice-reply">

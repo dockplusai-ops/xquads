@@ -7,6 +7,8 @@ import {
   consultationConversation,
   consultationsIn,
   createChannel,
+  deleteMessage,
+  editMessage,
   idRef,
   joinChannel,
   listChannelMembers,
@@ -779,6 +781,48 @@ export function chatRoutes(deps: AppDeps) {
       );
       deps.wakeWorkers?.();
       return c.json(result, 200);
+    },
+  );
+
+  app.openapi(
+    createRoute({
+      method: "patch",
+      path: "/organizations/{orgId}/messages/{messageId}",
+      tags,
+      security,
+      summary: "Edits the words of my own message",
+      description:
+        "Only its author, only a person's message with words (ADR 0221). The text changes and `editedAt` says when; nothing runs again: no agent is woken and nobody mentioned is told again. Live: `message.edited`. 403 `message.not_yours`, 400 `message.empty_edit` (no words, or a message with none to edit).",
+      request: {
+        params: OrgParams.extend({ messageId: z.uuid() }),
+        body: body(z.object({ body: z.string().max(MAX_MESSAGE_LENGTH) })),
+      },
+      responses: { 200: json(z.object({ body: z.string(), editedAt: z.string() })), ...errors },
+    }),
+    async (c) => {
+      const { orgId, messageId } = c.req.valid("param");
+      const result = await editMessage({ db, pubsub: adapters.pubsub }, c.get("user").id, orgId, messageId, {
+        body: c.req.valid("json").body,
+      });
+      return c.json(result, 200);
+    },
+  );
+
+  app.openapi(
+    createRoute({
+      method: "delete",
+      path: "/organizations/{orgId}/messages/{messageId}",
+      tags,
+      security,
+      summary: "Deletes a person's message: my own, or anyone's as an administrator",
+      description:
+        "ADR 0221. A message nobody replied to goes; a thread's root with replies stays as \"Mensagem apagada\" (`kept`). The files it carried stay in the Drive. An administrator deleting someone else's is in the audit log. Live: `message.deleted`. 403 `message.not_yours`.",
+      request: { params: OrgParams.extend({ messageId: z.uuid() }) },
+      responses: { 200: json(z.object({ kept: z.boolean() })), ...errors },
+    }),
+    async (c) => {
+      const { orgId, messageId } = c.req.valid("param");
+      return c.json(await deleteMessage({ db, pubsub: adapters.pubsub }, c.get("user").id, orgId, messageId), 200);
     },
   );
 
