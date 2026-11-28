@@ -19,47 +19,31 @@ describe("legal pages", () => {
   }
 });
 
-describe("the privacy policy says where Workspace Content passes through our network provider", () => {
-  // agentes.chat Cloud is behind a network provider that decrypts its traffic at the data center nearest to each device:
-  // the list of where Workspace Content leaves our servers ("and only in them") and the countries of §9 must say so.
-  // Product decision: the legal pages name no infrastructure provider (network, hosting), in any language.
-  test("en", () => {
-    const section = (id: string) => JSON.stringify(legalDocuments.privacy.en.sections.find((s) => s.id === id)?.blocks);
-    expect(section("agents")).toContain("our network provider");
-    expect(section("transfers")).toContain("our network provider");
-  });
-});
-
-describe("the privacy policy covers every model provider a workspace may choose, without naming one", () => {
-  // §9's US claim covers only the providers the policy names, so a provider a workspace picks (and the model's maker
-  // or host it passes calls on to) falls under the §9 exception, and a new provider in the product needs no edit here.
+describe("the privacy policy names the AI providers that receive what people write to agents", () => {
+  // The App Store asks an app to say, plainly and where it is easy to find, which third-party AI gets people's data.
+  // A provider a workspace connects with its own key or plan is named only as an example (Section 2).
   const section = (locale: "en" | "pt-BR", id: string) =>
     JSON.stringify(legalDocuments.privacy[locale].sections.find((s) => s.id === id)?.blocks);
-  test("en", () => {
-    expect(section("en", "agents")).toContain("Some providers pass the call on to the company that makes or hosts");
-    expect(section("en", "transfers")).toContain(
-      "except the model providers and connected services a workspace chooses, and the companies they pass calls on to",
-    );
-  });
-  test("pt-BR", () => {
-    expect(section("pt-BR", "agents")).toContain("Alguns provedores repassam a chamada à empresa que faz ou hospeda");
-    expect(section("pt-BR", "transfers")).toContain(
-      "exceto os provedores de modelo e os serviços conectados que um workspace escolhe",
-    );
-  });
-  test("no language names a provider a workspace picks", () => {
+  for (const locale of ["en", "pt-BR"] as const)
+    test(locale, () => {
+      expect(legalDocuments.privacy[locale].sections[1]?.id).toBe("ai-providers");
+      for (const name of ["OpenAI", "TypeSafe"]) {
+        expect(section(locale, "ai-providers")).toContain(name);
+        expect(section(locale, "transfers")).toContain(name);
+      }
+    });
+  test("no language names a provider the platform does not use", () => {
     for (const [code, doc] of Object.entries(legalDocuments.privacy))
-      expect({
-        code,
-        named: JSON.stringify(doc).match(/\b(?:OpenRouter|Command Code|DeepSeek|Kimi|MiniMax|Z\.ai)\b/g),
-      }).toEqual({
-        code,
-        named: null,
-      });
+      expect({ code, named: JSON.stringify(doc).match(/\b(?:OpenRouter|Command Code|Kimi|MiniMax|Z\.ai)\b/g) }).toEqual(
+        {
+          code,
+          named: null,
+        },
+      );
   });
 });
 
-describe("agentes.chat Cloud's restriction lines cite the Terms this server serves", () => {
+describe("xquads's restriction lines cite the Terms this server serves", () => {
   // The section each line rests on, by its id: when the Terms are renumbered, this fails until the lines follow.
   const RESTS_ON = {
     review: "acceptable-use",
@@ -89,39 +73,30 @@ describe("agentes.chat Cloud's restriction lines cite the Terms this server serv
 
 describe("legalInline", () => {
   test("bold, emails and links", () => {
-    expect(legalInline("**Railway:** hosting. Write to privacy@agentes.chat, or see https://agentes.chat/en.")).toEqual(
-      [
-        { kind: "bold", text: "Railway:" },
-        { kind: "text", text: " hosting. Write to " },
-        { kind: "link", text: "privacy@agentes.chat", href: "mailto:privacy@agentes.chat" },
-        { kind: "text", text: ", or see " },
-        { kind: "link", text: "https://agentes.chat/en", href: "https://agentes.chat/en" },
-        { kind: "text", text: "." },
-      ],
-    );
+    expect(legalInline("**Hostinger:** hosting. Write to support@xquads.com, or see https://xquads.com/en.")).toEqual([
+      { kind: "bold", text: "Hostinger:" },
+      { kind: "text", text: " hosting. Write to " },
+      { kind: "link", text: "support@xquads.com", href: "mailto:support@xquads.com" },
+      { kind: "text", text: ", or see " },
+      { kind: "link", text: "https://xquads.com/en", href: "https://xquads.com/en" },
+      { kind: "text", text: "." },
+    ]);
   });
 });
 
 describe("legal pages in every language", () => {
   for (const [kind, byLocale] of Object.entries(legalDocuments)) {
-    test(`${kind}: each translation has English's sections and date, and says English prevails`, () => {
-      const english = byLocale.en;
-      for (const [code, doc] of Object.entries(byLocale)) {
-        if (!doc) continue;
-        expect({ code, ids: doc.sections.map((s) => s.id) }).toEqual({ code, ids: english.sections.map((s) => s.id) });
-        expect({ code, updated: doc.updated }).toEqual({ code, updated: english.updated });
-        // pt-BR predates the notice (open question for the owner); every newer translation carries it.
-        if (code !== "en" && code !== "pt-BR")
-          expect({ code, courtesy: !!doc.courtesy?.trim() }).toEqual({ code, courtesy: true });
-      }
-      expect(legalDocument(kind as LegalKind, "ja")).toBe(byLocale.ja ?? english);
+    test(`${kind}: Portuguese prevails, English says so, and every other language reads English`, () => {
+      expect(Object.keys(byLocale).sort()).toEqual(["en", "pt-BR"]);
+      expect(byLocale["pt-BR"].courtesy).toBeUndefined();
+      expect(byLocale.en.courtesy).toContain("the Portuguese version prevails");
+      expect(legalDocument(kind as LegalKind, "ja")).toBe(byLocale.en);
+      expect(legalDocument(kind as LegalKind, "pt")).toBe(byLocale["pt-BR"]);
     });
   }
 });
 
-// Semicolons only, not plain-marks' em dash: Russian legal style writes "далее — «Условия»". The landing's copy test
-// runs the same check on its copy of these pages.
-test("legal pages in every language: no semicolon", () => {
-  const found = leaves(legalDocuments).filter(([, text]) => typeof text === "string" && /[;；]/.test(text));
+test("legal pages: no semicolon and no em dash", () => {
+  const found = leaves(legalDocuments).filter(([, text]) => typeof text === "string" && /[;；—]/.test(text));
   expect(found).toEqual([]);
 });

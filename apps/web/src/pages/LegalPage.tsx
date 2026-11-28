@@ -9,9 +9,9 @@ import { useDocumentTitle } from "@/lib/desktop";
 import "./legal.css";
 
 /**
- * agentes.chat Cloud's Terms of Use and Privacy Policy (`/terms`, `/privacy` on the Cloud): public pages, the same
- * text as the landing page's (`@agenteschat/i18n/legal`). They open in English wherever the reader is, and the
- * switch shows Portuguese here only.
+ * xquads Cloud's Terms of Use and Privacy Policy (`/terms`, `/privacy` on the Cloud): public pages
+ * (`@agenteschat/i18n/legal`). They open in English wherever the reader is, the switch shows the Portuguese
+ * version (the one that prevails), and every other language reads the English page.
  */
 export function LegalPage({ kind }: { kind: LegalKind }) {
   const [lang, setLang] = useState<LocaleCode>("en");

@@ -2,14 +2,14 @@ import type { LegalDocument } from "./types";
 
 export const termsPtBR: LegalDocument = {
   title: "Termos de uso",
-  summary: "O acordo para usar o agentes.chat: o seu workspace, os seus agentes e pelo que cada lado responde.",
-  updated: "2026-11-20",
+  summary: "O acordo para usar o xquads: o seu workspace, os seus agentes e pelo que cada lado responde.",
+  updated: "2026-11-28",
   sections: [
     {
       id: "agreement",
       heading: "1. Acordo",
       blocks: [
-        'Estes Termos de uso (os "Termos") são um acordo vinculante entre a AGENTESCHAT, LLC, sociedade de responsabilidade limitada do estado de Delaware (EUA) que atua sob o nome agentes.chat ("agentes.chat", "nós"), e a pessoa ou entidade que cria uma conta ou um workspace ("você"). Ao criar uma conta, entrar num workspace ou usar de outra forma o agentes.chat na web, no app de Mac ou no app de celular (o "Serviço"), você aceita estes Termos e a nossa Política de privacidade. Se você usa o Serviço em nome de uma empresa ou outra entidade, declara que tem poderes para obrigá-la.',
+        'Estes Termos de uso (os "Termos") são um acordo vinculante entre a Carvalho-Karsten Tecnologia Ltda, empresa brasileira que atua sob o nome DockPlus AI (CNPJ 40.402.200/0001-95, "nós"), e a pessoa ou entidade que cria uma conta ou um workspace ("você"). Ao criar uma conta, entrar num workspace ou usar de outra forma o xquads na web em https://agents.xquads.com, no app de Mac ou nos apps de celular para iPhone e Android (o "Serviço"), você aceita estes Termos e a nossa Política de privacidade. Se você usa o Serviço em nome de uma empresa ou outra entidade, declara que tem poderes para obrigá-la.',
         "Para usar o Serviço, você precisa ter pelo menos 18 anos e capacidade para firmar contratos.",
       ],
     },
@@ -25,7 +25,7 @@ export const termsPtBR: LegalDocument = {
       id: "accounts",
       heading: "3. Contas e workspaces",
       blocks: [
-        "Você responde pela exatidão dos dados da sua conta, pela segurança das suas credenciais e por toda atividade na sua conta. Os donos e administradores de um workspace decidem quem entra nele, com quais cargos, quais agentes existem e o que esses agentes podem fazer. Quando estes Termos dizem que um workspace é dono de algo, decide algo ou responde por algo, falam da pessoa ou entidade que o criou, ou em nome de quem ele foi criado, agindo pelos donos e administradores dele. Avise-nos logo em security@agentes.chat se achar que uma conta, uma chave ou um computador conectado foi comprometido.",
+        "Você responde pela exatidão dos dados da sua conta, pela segurança das suas credenciais e por toda atividade na sua conta. Os donos e administradores de um workspace decidem quem entra nele, com quais cargos, quais agentes existem e o que esses agentes podem fazer. Quando estes Termos dizem que um workspace é dono de algo, decide algo ou responde por algo, falam da pessoa ou entidade que o criou, ou em nome de quem ele foi criado, agindo pelos donos e administradores dele. Avise-nos logo em support@xquads.com se achar que uma conta, uma chave ou um computador conectado foi comprometido.",
       ],
     },
     {
@@ -62,15 +62,16 @@ export const termsPtBR: LegalDocument = {
       blocks: [
         '"Conteúdo do Workspace" é o que você e as outras pessoas do seu workspace colocam no Serviço e o que os seus agentes produzem nele. O seu workspace é dono do Conteúdo do Workspace dele e, entre você e nós, o que os agentes produzem para você é seu, sujeito aos termos do provedor de modelo que o produziu. O que um modelo produz pode ser parecido com o que ele produz para outras pessoas.',
         "Você nos concede os direitos limitados necessários para operar o Serviço: armazenar, tratar, transmitir e exibir o Conteúdo do Workspace para fazer funcionar o seu workspace e os seus agentes, enviá-lo aos provedores que os seus agentes usam e às empresas que o tratam para nós, conforme a Política de privacidade, prestar suporte, manter o Serviço funcionando e seguro, fazer cumprir estes Termos e cumprir a lei. Não vendemos o Conteúdo do Workspace e não o usamos para treinar modelos de aprendizado de máquina.",
-        "O seu workspace é o controlador dos dados pessoais no Conteúdo do Workspace dele, e nós tratamos esses dados conforme as instruções dele, como operador, nos termos da Política de privacidade e do Acordo de Tratamento de Dados. Para confiança e segurança, para a segurança do Serviço e para o que a lei exige de nós, agimos como controlador por conta própria, como descreve a Seção 6 da Política de privacidade.",
+        "O seu workspace é o controlador dos dados pessoais no Conteúdo do Workspace dele, e nós tratamos esses dados conforme as instruções dele, como operador, nos termos da Política de privacidade. Para confiança e segurança, para a segurança do Serviço e para o que a lei exige de nós, agimos como controlador por conta própria, como descreve a Seção 7 da Política de privacidade.",
       ],
     },
     {
       id: "third-parties",
       heading: "7. Provedores de modelo, conectores e as suas próprias contas",
       blocks: [
-        "Os agentes rodam em modelos de IA de terceiros (como a Anthropic, que faz o Claude, e a OpenAI), por uma chave de API que o seu workspace adiciona ou por um plano de IA, como o do Claude ou o do ChatGPT, que alguém do seu workspace conecta. O uso dessa chave ou desse plano também segue o seu contrato com o provedor dele, e você responde por seguir os termos dele e pelas cobranças dele.",
-        "Os conectores dão aos agentes acesso a outros serviços (como GitHub, Google, Linear, Sentry ou uma caixa de e-mail). Esses serviços são prestados por terceiros sob os próprios termos. A disponibilidade deles e o que fazem com os dados estão fora do nosso controle.",
+        "Os agentes rodam em modelos de IA de terceiros. Os modelos próprios da plataforma são da OpenAI, e um serviço de roteamento, a TypeSafe, lê um trecho curto de cada mensagem nova para decidir qual agente responde. Para produzir as respostas, o Serviço envia a esses provedores o que as pessoas escrevem aos agentes, e os arquivos e o contexto de que os agentes precisam. A Seção 2 da Política de privacidade descreve isso por completo.",
+        "Um workspace também pode conectar a própria chave de API ou o próprio plano de IA com outro provedor, por exemplo a Anthropic, que faz o Claude, a OpenAI, o Google ou a DeepSeek. O uso dessa chave ou desse plano também segue o seu contrato com o provedor dele, e você responde por seguir os termos dele e pelas cobranças dele.",
+        "Os conectores dão aos agentes acesso a outros serviços (como GitHub, Google ou uma caixa de e-mail). Esses serviços são prestados por terceiros sob os próprios termos. A disponibilidade deles e o que fazem com os dados estão fora do nosso controle.",
       ],
     },
     {
@@ -84,24 +85,17 @@ export const termsPtBR: LegalDocument = {
       id: "data-protection",
       heading: "9. Proteção de dados",
       blocks: [
-        "Quando a LGPD, o GDPR ou o UK GDPR se aplicarem a dados pessoais no seu Conteúdo do Workspace, cada parte cumprirá as suas obrigações sob essa lei. Um Acordo de Tratamento de Dados (DPA) com as Cláusulas Contratuais Padrão da Comissão Europeia e termos equivalentes da LGPD está disponível e, quando assinado, passa a fazer parte destes Termos. Peça em legal@agentes.chat. A lista atual de suboperadores está na Política de privacidade. Um pedido de suporte que um membro do seu workspace nos envia é a instrução do seu workspace para lermos aquilo de que o pedido trata.",
+        "Cada parte cumprirá as suas obrigações pela LGPD quanto aos dados pessoais no seu Conteúdo do Workspace, e pelo GDPR ou pelo UK GDPR quando eles também se aplicarem. Um workspace pode pedir um Acordo de Tratamento de Dados (DPA) em support@xquads.com. A lista atual das empresas que tratam dados para nós está na Política de privacidade. Um pedido de suporte que um membro do seu workspace nos envia é a instrução do seu workspace para lermos aquilo de que o pedido trata.",
       ],
     },
     {
       id: "fees",
-      heading: "10. Planos, pagamentos e uso justo",
+      heading: "10. Sem cobrança, uso justo e orçamentos",
       blocks: [
-        "Cada workspace paga o próprio plano do agentes.chat. Estas regras valem para todos os planos:",
+        "O Serviço não tem plano pago, e não cobramos pelo uso dele. Valem estas regras:",
         {
           list: [
-            "**Vendedora.** Toda compra é feita da AGENTESCHAT, LLC, empresa dos Estados Unidos constituída em Delaware, e cobrada por ela.",
-            "**Preços.** Os planos do agentes.chat e os preços deles estão na nossa página de preços. Os preços são em dólares americanos, e os impostos são somados onde se aplicam. O seu banco ou meio de pagamento pode cobrar as próprias tarifas em compras do exterior, como o IOF no Brasil.",
-            "**Renovação.** O plano do agentes.chat se renova sozinho a cada mês ou a cada ano, conforme o período escolhido, até ser cancelado. Avisamos antes de um plano anual se renovar.",
-            "**Cancelamento.** Você pode cancelar a qualquer momento, e o cancelamento vale no fim do período já pago. Depois disso, os agentes do workspace param, o computador dele é apagado 7 dias depois, e as conversas e os arquivos ficam disponíveis para ler e baixar por 90 dias e depois são apagados.",
-            "**Sem reembolso.** Cada plano gera custos de operação desde o momento da compra, como o uso de modelos de IA, os servidores e o computador do workspace. Por isso, as compras são definitivas e não são reembolsadas, nem no todo nem em parte, inclusive pelo resto de um período depois de um cancelamento.",
-            "**Pagamento recusado.** Se um pagamento falhar, tentamos de novo nos dias seguintes. Se continuar falhando, o workspace fica bloqueado: os agentes param, e as pessoas continuam podendo ler e escrever nele. O computador fica guardado por 7 dias e depois é liberado e apagado. Pagar traz o workspace de volta, num computador novo se o antigo já tiver sido liberado.",
-            "**Mudança de preço.** Podemos mudar os preços para clientes novos a qualquer momento. O preço de um plano do agentes.chat que você já tem só muda por causa de impostos novos, a partir da próxima renovação, com pelo menos 30 dias de aviso.",
-            "**Uso justo.** Alguns recursos rodam em serviços de IA que oferecemos sem custo a mais, como escolher qual agente responde, avaliar memórias e ações, e achar onde clicar numa tela. Podemos limitá-los num workspace cujo uso esteja muito acima do normal.",
+            "**Uso justo.** Alguns recursos rodam em serviços de IA que oferecemos sem custo, como os modelos próprios da plataforma e a escolha de qual agente responde. Podemos limitá-los num workspace cujo uso esteja muito acima do normal.",
             "**Orçamentos.** Os orçamentos definidos por workspace e por agente param o uso de modelos pelos agentes quando são atingidos. Eles fazem parte do Serviço, não são um defeito dele. O que um provedor cobra pela sua própria chave ou plano de IA é entre você e esse provedor.",
           ],
         },
@@ -111,7 +105,7 @@ export const termsPtBR: LegalDocument = {
       id: "ip",
       heading: "11. Propriedade intelectual e sugestões",
       blocks: [
-        "Exceto pelo seu Conteúdo do Workspace, nós e os nossos licenciantes mantemos todos os direitos sobre o Serviço, incluindo o software, o design e o nome e as marcas agentes.chat. Sugestões que você decidir nos enviar podem ser usadas sem obrigação com você.",
+        "O software do Serviço é de código aberto, sob a GNU Affero General Public License, versão 3 (AGPL-3.0), que rege os seus direitos sobre esse código. Exceto pelo seu Conteúdo do Workspace e pelos direitos que essa licença concede, nós e os nossos licenciantes mantemos todos os direitos sobre o Serviço, incluindo o nome e as marcas xquads. Sugestões que você decidir nos enviar podem ser usadas sem obrigação com você.",
       ],
     },
     {
@@ -125,14 +119,14 @@ export const termsPtBR: LegalDocument = {
       id: "disclaimers",
       heading: "13. Isenções",
       blocks: [
-        'O Serviço, incluindo tudo o que os agentes produzem e fazem, é fornecido "no estado em que se encontra" e "conforme disponível". Não garantimos que o Serviço ou os agentes funcionarão sem interrupções, sem erros, com exatidão ou de forma adequada aos seus fins. Na máxima extensão permitida pela lei, afastamos todas as garantias implícitas, incluindo comerciabilidade, adequação a um fim específico e não violação.',
+        'O Serviço, incluindo tudo o que os agentes produzem e fazem, é fornecido "no estado em que se encontra" e "conforme disponível". Não garantimos que o Serviço ou os agentes funcionarão sem interrupções, sem erros, com exatidão ou de forma adequada aos seus fins. Na medida em que a lei permite, não damos garantias além das que estes Termos preveem.',
       ],
     },
     {
       id: "liability",
       heading: "14. Limitação de responsabilidade",
       blocks: [
-        "Na máxima extensão permitida pela lei, nenhuma das partes responde por danos indiretos, incidentais, especiais, consequenciais ou punitivos, nem por lucros cessantes, perda de receita ou de dados. Na mesma extensão, a nossa responsabilidade total decorrente do Serviço fica limitada ao que você nos pagou nos doze meses anteriores ao fato que deu origem ao pedido (ou USD 100 se você não pagou nada). Esses limites não se aplicam às suas obrigações de pagamento, à sua violação da Seção 5 nem à responsabilidade que a lei não permite limitar.",
+        "Na medida em que a lei permite, nenhuma das partes responde por danos indiretos, nem por lucros cessantes, perda de receita ou de dados. Na mesma medida, a nossa responsabilidade total decorrente do Serviço fica limitada ao que você nos pagou pelo Serviço nos doze meses anteriores ao fato que deu origem ao pedido. Esses limites não se aplicam à sua violação da Seção 5 nem à responsabilidade que a lei não permite limitar, inclusive pelo Código de Defesa do Consumidor (Lei 8.078/1990), quando ele se aplica.",
       ],
     },
     {
@@ -146,21 +140,21 @@ export const termsPtBR: LegalDocument = {
       id: "law",
       heading: "16. Lei aplicável",
       blocks: [
-        "Estes Termos, e toda compra feita com base neles, são regidos pelas leis dos Estados Unidos e do estado de Delaware, sem as suas regras de conflito de leis, e as partes se submetem à jurisdição exclusiva dos tribunais estaduais e federais de Delaware.",
+        "Estes Termos são regidos pelas leis do Brasil. Fica eleito o foro da comarca de São João Batista, Santa Catarina, Brasil, para qualquer disputa sobre eles, exceto quando a lei dá ao consumidor o direito de propor a ação no foro do próprio domicílio.",
       ],
     },
     {
       id: "changes",
       heading: "17. Mudanças nestes Termos",
       blocks: [
-        "Podemos atualizar estes Termos. Mudanças relevantes serão anunciadas por e-mail ou no app pelo menos 14 dias antes de entrarem em vigor. Continuar usando depois dessa data significa aceitá-las. A versão atual fica sempre nesta página. Se uma tradução divergir da versão em inglês, prevalece a versão em inglês, exceto quando a lei exigir outra coisa.",
+        "Podemos atualizar estes Termos. Mudanças relevantes serão anunciadas por e-mail ou no app pelo menos 14 dias antes de entrarem em vigor. Continuar usando depois dessa data significa aceitá-las. A versão atual fica sempre nesta página. Estes Termos são escritos em português. Se a versão em inglês divergir, prevalece a versão em português.",
       ],
     },
     {
       id: "contact",
       heading: "18. Contato",
       blocks: [
-        "AGENTESCHAT, LLC, que atua sob o nome agentes.chat. Endereço para notificações: 2810 North Church Street, Ste 91038, Wilmington, DE 19802, EUA · legal@agentes.chat · Ajuda com o Serviço: support@agentes.chat · Para o resto: hello@agentes.chat",
+        "Carvalho-Karsten Tecnologia Ltda (DockPlus AI), CNPJ 40.402.200/0001-95, Rua Leoberto Leal, 243, Sala 02, Escritório 22, Centro, São João Batista/SC, Brasil. Para notificações legais, ajuda com o Serviço ou qualquer outro assunto, escreva para support@xquads.com. Site público: https://xquads.com.",
       ],
     },
   ],

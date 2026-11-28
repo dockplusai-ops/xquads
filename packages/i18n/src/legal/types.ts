@@ -1,9 +1,7 @@
 /**
- * A legal page (Terms of Use, Privacy Policy) as data, so the app and the
- * landing page render the same text: the app at `/terms` and `/privacy`, the
- * landing at `/terms`, `/pt/termos`… (its `src/i18n/legal` is a copy of
- * this folder). Inline text may carry `**bold**`; email addresses and
- * `https://` links become links when rendered (`legalInline`).
+ * A legal page (Terms of Use, Privacy Policy) as data, rendered by the app at
+ * `/terms` and `/privacy`. Inline text may carry `**bold**`; email addresses
+ * and `https://` links become links when rendered (`legalInline`).
  */
 export type LegalBlock = string | { list: string[] };
 
@@ -20,10 +18,10 @@ export interface LegalDocument {
   summary: string;
   /**
    * A translation's notice at the top, in its language: "This is a courtesy translation. If it differs from the
-   * English version, the English version prevails." English has none.
+   * Portuguese version, the Portuguese version prevails." Portuguese, the version that prevails, has none.
    */
   courtesy?: string;
-  /** ISO date of the last change (`2026-10-23`). */
+  /** ISO date of the last change (`2026-11-28`). */
   updated: string;
   sections: LegalSection[];
 }

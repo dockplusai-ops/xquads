@@ -1,53 +1,22 @@
 /**
- * Terms of Use and Privacy Policy, in English (the version that prevails) and the languages that translated them.
- * The landing page keeps a copy of this folder (`src/i18n/legal`); change both together.
+ * xquads's Terms of Use and Privacy Policy. Portuguese prevails (the operator is a Brazilian company), English is a
+ * courtesy translation that says so, and every other language shows the English page.
  */
 import { type AppLocale, appLocale } from "../locale";
-import { legalDe } from "./de";
-import { legalEs } from "./es";
-import { legalFr } from "./fr";
-import { legalId } from "./id";
-import { legalIt } from "./it";
-import { legalJa } from "./ja";
-import { legalKo } from "./ko";
-import { legalNl } from "./nl";
-import { legalPl } from "./pl";
 import { privacyEn } from "./privacy.en";
 import { privacyPtBR } from "./privacy.pt-BR";
-import { legalRu } from "./ru";
 import { termsEn } from "./terms.en";
 import { termsPtBR } from "./terms.pt-BR";
-import { legalTr } from "./tr";
 import type { LegalDocument, LegalKind } from "./types";
-import { legalZhHans } from "./zh-Hans";
 
 export type { LegalBlock, LegalDocument, LegalKind, LegalSection } from "./types";
 
-const BY_LOCALE: Record<AppLocale, Partial<Record<LegalKind, LegalDocument>>> = {
-  en: { terms: termsEn, privacy: privacyEn },
-  "pt-BR": { terms: termsPtBR, privacy: privacyPtBR },
-  es: legalEs,
-  fr: legalFr,
-  de: legalDe,
-  it: legalIt,
-  nl: legalNl,
-  ja: legalJa,
-  ko: legalKo,
-  "zh-Hans": legalZhHans,
-  id: legalId,
-  tr: legalTr,
-  pl: legalPl,
-  ru: legalRu,
-};
+type ByLocale = Partial<Record<AppLocale, LegalDocument>> & Record<"en" | "pt-BR", LegalDocument>;
 
-/** Each page in every language that has it (English always). */
-export const legalDocuments = {
-  terms: Object.fromEntries(
-    Object.entries(BY_LOCALE).flatMap(([code, docs]) => (docs.terms ? [[code, docs.terms]] : [])),
-  ) as Partial<Record<AppLocale, LegalDocument>> & Record<"en" | "pt-BR", LegalDocument>,
-  privacy: Object.fromEntries(
-    Object.entries(BY_LOCALE).flatMap(([code, docs]) => (docs.privacy ? [[code, docs.privacy]] : [])),
-  ) as Partial<Record<AppLocale, LegalDocument>> & Record<"en" | "pt-BR", LegalDocument>,
+/** Each page in every language that has it (English and Portuguese). */
+export const legalDocuments: Record<LegalKind, ByLocale> = {
+  terms: { en: termsEn, "pt-BR": termsPtBR },
+  privacy: { en: privacyEn, "pt-BR": privacyPtBR },
 };
 
 /** The page in `locale`, or in English where that language has none. */
