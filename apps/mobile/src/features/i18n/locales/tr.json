@@ -3258,5 +3258,13 @@
     "codeText": "Orada açılan mesajı gönderin, sonra buraya dönün.",
     "openFailed": "{{surface}} bu telefonda açılamadı. Bunun yerine aşağıdaki kodu oraya gönderin.",
     "orType": "Ya da bu kodu oraya gönderin"
+  },
+  "aiConsent": {
+    "title": "Ajanlar yapay zekâyı nasıl kullanır",
+    "lead": "xquads ajanları başka şirketlerin yapay zekâ modelleriyle yanıt verir. Bir ajana yazdıklarınız, gönderdiğiniz dosyalar ve etrafındaki konuşma, yanıt verebilmeleri için bu sağlayıcılara gider.",
+    "providers": "Platformun modelleri OpenAI'dandır. Bir yönlendirme hizmeti olan Typesafe, hangi ajanın yanıt vereceğini seçmek için mesajların bir kısmını okur. Çalışma alanınız Claude veya Gemini gibi başka sağlayıcıları kendi anahtarlarıyla bağlayabilir.",
+    "choice": "Ajanları kullanmak için Kabul et'e dokunun. Bunun yerine oturumu kapatabilirsiniz, o zaman hiçbir şey gönderilmez.",
+    "privacy": "Gizlilik Politikasını okuyun",
+    "agree": "Kabul et ve devam et"
   }
 }

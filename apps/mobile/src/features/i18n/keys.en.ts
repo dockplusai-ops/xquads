@@ -3518,6 +3518,15 @@ export const featureKeysEn = {
     openFailed: "Couldn't open {{surface}} on this phone. Send it the code below instead.",
     orType: "Or send this code there",
   },
+  aiConsent: {
+    title: "How the agents use AI",
+    lead: "xquads agents answer with AI models from other companies. What you write to an agent, the files you send it and the conversation around it go to those providers so they can answer.",
+    providers:
+      "The platform's models come from OpenAI. A routing service, Typesafe, reads parts of messages to choose which agent answers. Your workspace may connect other providers, such as Claude or Gemini, with its own keys.",
+    choice: "Tap Agree to use the agents. You can sign out instead, and nothing is sent.",
+    privacy: "Read the Privacy Policy",
+    agree: "Agree and continue",
+  },
 };
 
 /** Every language of these strings has this shape (English is the source). */

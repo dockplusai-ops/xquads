@@ -3121,5 +3121,13 @@
     "codeText": "Kirim pesan yang terbuka di sana, lalu kembali ke sini.",
     "openFailed": "Tidak bisa membuka {{surface}} di ponsel ini. Kirim kode di bawah ke sana.",
     "orType": "Atau kirim kode ini di sana"
+  },
+  "aiConsent": {
+    "title": "Cara agen memakai AI",
+    "lead": "Agen xquads menjawab dengan model AI dari perusahaan lain. Apa yang Anda tulis ke agen, file yang Anda kirim, dan percakapan di sekitarnya dikirim ke penyedia tersebut agar mereka bisa menjawab.",
+    "providers": "Model platform berasal dari OpenAI. Layanan perutean, Typesafe, membaca sebagian pesan untuk memilih agen yang menjawab. Workspace Anda dapat menghubungkan penyedia lain, seperti Claude atau Gemini, dengan kuncinya sendiri.",
+    "choice": "Ketuk Setuju untuk memakai agen. Anda juga bisa keluar, dan tidak ada yang dikirim.",
+    "privacy": "Baca Kebijakan Privasi",
+    "agree": "Setuju dan lanjutkan"
   }
 }

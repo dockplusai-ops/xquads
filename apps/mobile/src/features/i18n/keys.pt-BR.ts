@@ -3348,4 +3348,13 @@ export const featureKeysPtBR = {
     openFailed: "Não deu para abrir o {{surface}} neste celular. Envie o código abaixo para ele.",
     orType: "Ou envie este código lá",
   },
+  aiConsent: {
+    title: "Como os agentes usam IA",
+    lead: "Os agentes do xquads respondem com modelos de IA de outras empresas. O que você escreve a um agente, os arquivos que envia e a conversa em volta vão para esses provedores gerarem a resposta.",
+    providers:
+      "Os modelos da plataforma são da OpenAI. Um serviço de roteamento, a Typesafe, lê trechos das mensagens para escolher qual agente responde. O seu workspace pode conectar outros provedores, como Claude ou Gemini, com chaves próprias.",
+    choice: "Toque em Concordar para usar os agentes. Se preferir, saia da conta, e nada é enviado.",
+    privacy: "Ler a Política de privacidade",
+    agree: "Concordar e continuar",
+  },
 } satisfies LocaleStrings;

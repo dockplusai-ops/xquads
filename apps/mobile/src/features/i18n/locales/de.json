@@ -3258,5 +3258,13 @@
     "codeText": "Sende die Nachricht, die sich dort öffnet, und komm dann hierher zurück.",
     "openFailed": "{{surface}} ließ sich auf diesem Telefon nicht öffnen. Sende stattdessen den Code unten dorthin.",
     "orType": "Oder sende diesen Code dort"
+  },
+  "aiConsent": {
+    "title": "Wie die Agenten KI nutzen",
+    "lead": "Die Agenten von xquads antworten mit KI-Modellen anderer Unternehmen. Was Sie einem Agenten schreiben, die Dateien, die Sie senden, und die Unterhaltung drumherum gehen an diese Anbieter, damit sie antworten können.",
+    "providers": "Die Modelle der Plattform stammen von OpenAI. Ein Routing-Dienst, Typesafe, liest Teile der Nachrichten, um zu entscheiden, welcher Agent antwortet. Ihr Workspace kann weitere Anbieter wie Claude oder Gemini mit eigenen Schlüsseln verbinden.",
+    "choice": "Tippen Sie auf Zustimmen, um die Agenten zu nutzen. Sie können sich stattdessen abmelden, dann wird nichts gesendet.",
+    "privacy": "Datenschutzerklärung lesen",
+    "agree": "Zustimmen und weiter"
   }
 }

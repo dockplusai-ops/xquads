@@ -3382,5 +3382,13 @@
     "codeText": "Invia il messaggio che si apre lì, poi torna qui.",
     "openFailed": "Impossibile aprire {{surface}} su questo telefono. Invia lì il codice qui sotto.",
     "orType": "Oppure invia questo codice lì"
+  },
+  "aiConsent": {
+    "title": "Come gli agenti usano l'IA",
+    "lead": "Gli agenti di xquads rispondono con modelli di IA di altre aziende. Quello che scrivi a un agente, i file che gli invii e la conversazione intorno vanno a questi fornitori perché possano rispondere.",
+    "providers": "I modelli della piattaforma sono di OpenAI. Un servizio di instradamento, Typesafe, legge parti dei messaggi per scegliere quale agente risponde. Il tuo workspace può collegare altri fornitori, come Claude o Gemini, con le proprie chiavi.",
+    "choice": "Tocca Accetta per usare gli agenti. Puoi anche uscire, e non viene inviato nulla.",
+    "privacy": "Leggi l'Informativa sulla privacy",
+    "agree": "Accetta e continua"
   }
 }

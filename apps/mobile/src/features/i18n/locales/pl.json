@@ -3532,5 +3532,13 @@
     "codeText": "Wyślij wiadomość, która się tam otworzy, a potem wróć tutaj.",
     "openFailed": "Nie udało się otworzyć {{surface}} na tym telefonie. Zamiast tego wyślij tam kod poniżej.",
     "orType": "Albo wyślij tam ten kod"
+  },
+  "aiConsent": {
+    "title": "Jak agenci używają AI",
+    "lead": "Agenci xquads odpowiadają za pomocą modeli AI innych firm. To, co piszesz do agenta, wysyłane pliki i rozmowa wokół trafiają do tych dostawców, aby mogli odpowiedzieć.",
+    "providers": "Modele platformy pochodzą od OpenAI. Usługa routingu, Typesafe, czyta fragmenty wiadomości, aby wybrać agenta, który odpowie. Twój workspace może połączyć innych dostawców, takich jak Claude czy Gemini, własnymi kluczami.",
+    "choice": "Stuknij Zgadzam się, aby korzystać z agentów. Możesz też się wylogować i nic nie zostanie wysłane.",
+    "privacy": "Przeczytaj Politykę prywatności",
+    "agree": "Zgadzam się i dalej"
   }
 }

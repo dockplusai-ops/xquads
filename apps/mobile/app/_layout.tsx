@@ -41,6 +41,7 @@ import { AppProviders } from "@/providers/AppProviders";
 import { useAppFonts } from "@/providers/fonts";
 import { useOrgGate } from "@/providers/org";
 import { useSession } from "@/providers/session";
+import { AiConsent } from "@/ui/auth/AiConsent";
 import { DeletingAccount } from "@/ui/auth/DeletingAccount";
 import { SuspendedWorkspace } from "@/ui/auth/SuspendedWorkspace";
 import { coverBarOptions, router, useNavigationTheme, usePushedOptions, useSideInsets } from "@/ui/navigation";
@@ -249,6 +250,8 @@ function Gate() {
       {entering ? <Entering org={org.state?.org?.name ?? null} /> : null}
       {org.state && suspended && suspendedShown ? <SuspendedWorkspace state={org.state} suspended={suspended} /> : null}
       {accountDeletion ? <DeletingAccount dueAt={accountDeletion.dueAt} /> : null}
+      {/* Mounted again for each person signed in, so it reads their answer on this phone. */}
+      {ready && signedIn ? <AiConsent key={userId ?? "me"} /> : null}
       {launching ? (
         <LaunchSplash
           ready={ready}

@@ -7917,5 +7917,23 @@
   },
   "surface.orType": {
     "value": "Or send this code there"
+  },
+  "aiConsent.title": {
+    "value": "How the agents use AI"
+  },
+  "aiConsent.lead": {
+    "value": "xquads agents answer with AI models from other companies. What you write to an agent, the files you send it and the conversation around it go to those providers so they can answer."
+  },
+  "aiConsent.providers": {
+    "value": "The platform's models come from OpenAI. A routing service, Typesafe, reads parts of messages to choose which agent answers. Your workspace may connect other providers, such as Claude or Gemini, with its own keys."
+  },
+  "aiConsent.choice": {
+    "value": "Tap Agree to use the agents. You can sign out instead, and nothing is sent."
+  },
+  "aiConsent.privacy": {
+    "value": "Read the Privacy Policy"
+  },
+  "aiConsent.agree": {
+    "value": "Agree and continue"
   }
 }

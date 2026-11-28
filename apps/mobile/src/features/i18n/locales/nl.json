@@ -3258,5 +3258,13 @@
     "codeText": "Stuur het bericht dat daar opent en kom dan hier terug.",
     "openFailed": "{{surface}} kon niet openen op deze telefoon. Stuur de code hieronder er zelf heen.",
     "orType": "Of stuur deze code daar"
+  },
+  "aiConsent": {
+    "title": "Hoe de agents AI gebruiken",
+    "lead": "De agents van xquads antwoorden met AI-modellen van andere bedrijven. Wat je een agent schrijft, de bestanden die je stuurt en het gesprek eromheen gaan naar die aanbieders, zodat ze kunnen antwoorden.",
+    "providers": "De modellen van het platform komen van OpenAI. Een routeringsdienst, Typesafe, leest delen van berichten om te kiezen welke agent antwoordt. Je workspace kan andere aanbieders, zoals Claude of Gemini, met eigen sleutels koppelen.",
+    "choice": "Tik op Akkoord om de agents te gebruiken. Je kunt ook uitloggen, dan wordt er niets verstuurd.",
+    "privacy": "Privacybeleid lezen",
+    "agree": "Akkoord en doorgaan"
   }
 }

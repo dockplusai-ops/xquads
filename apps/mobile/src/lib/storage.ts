@@ -98,6 +98,8 @@ export const STORED = {
   voiceSpeed: "voice-speed",
   /** The person held the send button to stop an agent and send once: the composer's hint is over ("1"). */
   stopSendTaught: "stop-send-taught",
+  /** The person signed in agreed that the agents' AI providers receive what they send them ("1"; ui/auth/AiConsent). */
+  aiConsent: "ai-consent",
 } as const;
 
 export async function clearStoredValues(): Promise<void> {
